@@ -1,3 +1,3 @@
-# sona-flutter
+# Sona
 
-Sona is an educational app made with Flutter.
+Sona makes remembering easier. Sona is made with Flutter, and is free and open source.
