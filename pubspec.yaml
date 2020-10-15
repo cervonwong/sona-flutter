@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
+  equatable: ^1.2.5
   flutter:
     sdk: flutter
 
