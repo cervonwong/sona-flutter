@@ -40,6 +40,54 @@ void main() {
   );
 
   test(
+    'Card when constructed with null parameters '
+    'should fail asserts',
+    () {
+      const id = 9;
+      const noteId = 10;
+      const isStarred = false;
+      const isHidden = true;
+
+      expect(
+        () => Card(
+          id: null,
+          noteId: noteId,
+          isStarred: isStarred,
+          isHidden: isHidden,
+        ),
+        throwsAssertionError,
+      );
+      expect(
+        () => Card(
+          id: id,
+          noteId: null,
+          isStarred: isStarred,
+          isHidden: isHidden,
+        ),
+        throwsAssertionError,
+      );
+      expect(
+        () => Card(
+          id: id,
+          noteId: noteId,
+          isStarred: null,
+          isHidden: isHidden,
+        ),
+        throwsAssertionError,
+      );
+      expect(
+        () => Card(
+          id: id,
+          noteId: noteId,
+          isStarred: isStarred,
+          isHidden: null,
+        ),
+        throwsAssertionError,
+      );
+    },
+  );
+
+  test(
     'Card copyWith '
     'should return Card with new fields',
     () {
