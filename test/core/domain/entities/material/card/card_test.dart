@@ -21,45 +21,53 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 
 void main() {
-  test('Card with default fields', () {
-    const id = 1;
-    const noteId = 2;
-    final card = Card(
-      id: id,
-      noteId: noteId,
-    );
+  test(
+    'Card when constructed without optional parameters, '
+    'should have expected default fields',
+    () {
+      const id = 1;
+      const noteId = 2;
+      final card = Card(
+        id: id,
+        noteId: noteId,
+      );
 
-    expect(card.id, id);
-    expect(card.noteId, noteId);
-    expect(card.isStarred, false);
-    expect(card.isHidden, false);
-  });
+      expect(card.id, id);
+      expect(card.noteId, noteId);
+      expect(card.isStarred, false);
+      expect(card.isHidden, false);
+    },
+  );
 
-  test('Card copyWith', () {
-    const id = 6;
-    const noteId = 7;
-    const isStarred = true;
-    const isHidden = false;
-    final card = Card(
-      id: id,
-      noteId: noteId,
-      isStarred: isStarred,
-      isHidden: isHidden,
-    );
+  test(
+    'Card copyWith '
+    'should return Card with new fields',
+    () {
+      const id = 6;
+      const noteId = 7;
+      const isStarred = true;
+      const isHidden = false;
+      final card = Card(
+        id: id,
+        noteId: noteId,
+        isStarred: isStarred,
+        isHidden: isHidden,
+      );
 
-    expect(card.id, id);
-    expect(card.noteId, noteId);
-    expect(card.isStarred, isStarred);
-    expect(card.isHidden, isHidden);
+      expect(card.id, id);
+      expect(card.noteId, noteId);
+      expect(card.isStarred, isStarred);
+      expect(card.isHidden, isHidden);
 
-    const newIsStarred = false;
-    const newIsHidden = true;
-    final newCard = card.copyWith(
-      isStarred: newIsStarred,
-      isHidden: newIsHidden,
-    );
+      const newIsStarred = false;
+      const newIsHidden = true;
+      final newCard = card.copyWith(
+        isStarred: newIsStarred,
+        isHidden: newIsHidden,
+      );
 
-    expect(newCard.isStarred, newIsStarred);
-    expect(newCard.isHidden, newIsHidden);
-  });
+      expect(newCard.isStarred, newIsStarred);
+      expect(newCard.isHidden, newIsHidden);
+    },
+  );
 }
