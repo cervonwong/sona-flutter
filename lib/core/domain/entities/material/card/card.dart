@@ -23,7 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class Card extends Equatable with Diagnosticable {
+class Card extends Equatable {
   final int id;
   final int noteId;
 
@@ -54,22 +54,4 @@ class Card extends Equatable with Diagnosticable {
 
   @override
   List<Object> get props => [id, noteId];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-
-    properties.add(IntProperty('id', id));
-    properties.add(IntProperty('noteId', noteId));
-    properties.add(FlagProperty(
-      'isStarred',
-      value: isStarred,
-      ifTrue: 'starred',
-    ));
-    properties.add(FlagProperty(
-      'isHidden',
-      value: isHidden,
-      ifTrue: 'hidden',
-    ));
-  }
 }
