@@ -21,7 +21,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 
 void main() {
-  test('default fields', () {
+  test('Card with default fields', () {
     const id = 1;
     const noteId = 2;
     final card = Card(
@@ -35,7 +35,7 @@ void main() {
     expect(card.isHidden, false);
   });
 
-  test('copyWith', () {
+  test('Card copyWith', () {
     const id = 6;
     const noteId = 7;
     const isStarred = true;
