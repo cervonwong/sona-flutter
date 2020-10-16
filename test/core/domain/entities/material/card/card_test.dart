@@ -25,15 +25,13 @@ void main() {
     'Card when constructed without optional parameters, '
     'should have expected default fields',
     () {
-      const id = 1;
-      const noteId = 2;
       final card = Card(
-        id: id,
-        noteId: noteId,
+        id: 1,
+        noteId: 2,
       );
 
-      expect(card.id, id);
-      expect(card.noteId, noteId);
+      expect(card.id, 1);
+      expect(card.noteId, 2);
       expect(card.isStarred, false);
       expect(card.isHidden, false);
     },
@@ -43,43 +41,32 @@ void main() {
     'Card when constructed with null parameters '
     'should fail asserts',
     () {
-      const id = 9;
-      const noteId = 10;
-      const isStarred = false;
-      const isHidden = true;
-
       expect(
         () => Card(
           id: null,
-          noteId: noteId,
-          isStarred: isStarred,
-          isHidden: isHidden,
+          noteId: 1,
         ),
         throwsAssertionError,
       );
       expect(
         () => Card(
-          id: id,
+          id: 1,
           noteId: null,
-          isStarred: isStarred,
-          isHidden: isHidden,
         ),
         throwsAssertionError,
       );
       expect(
         () => Card(
-          id: id,
-          noteId: noteId,
+          id: 1,
+          noteId: 2,
           isStarred: null,
-          isHidden: isHidden,
         ),
         throwsAssertionError,
       );
       expect(
         () => Card(
-          id: id,
-          noteId: noteId,
-          isStarred: isStarred,
+          id: 1,
+          noteId: 2,
           isHidden: null,
         ),
         throwsAssertionError,
@@ -91,31 +78,58 @@ void main() {
     'Card copyWith '
     'should return Card with new fields',
     () {
-      const id = 6;
-      const noteId = 7;
-      const isStarred = true;
-      const isHidden = false;
-      final card = Card(
-        id: id,
-        noteId: noteId,
-        isStarred: isStarred,
-        isHidden: isHidden,
+      final card1 = Card(
+        id: 123,
+        noteId: 456,
+        isStarred: false,
+        isHidden: true,
       );
+      expect(card1.id, 123);
+      expect(card1.noteId, 456);
+      expect(card1.isStarred, false);
+      expect(card1.isHidden, true);
 
-      expect(card.id, id);
-      expect(card.noteId, noteId);
-      expect(card.isStarred, isStarred);
-      expect(card.isHidden, isHidden);
+      final card2 = card1.copyWith(isStarred: true);
+      expect(card2.id, 123);
+      expect(card2.noteId, 456);
+      expect(card2.isStarred, true);
+      expect(card2.isHidden, true);
 
-      const newIsStarred = false;
-      const newIsHidden = true;
-      final newCard = card.copyWith(
-        isStarred: newIsStarred,
-        isHidden: newIsHidden,
-      );
+      final card3 = card2.copyWith(isHidden: false);
+      expect(card3.id, 123);
+      expect(card3.noteId, 456);
+      expect(card3.isStarred, true);
+      expect(card3.isHidden, false);
+    },
+  );
 
-      expect(newCard.isStarred, newIsStarred);
-      expect(newCard.isHidden, newIsHidden);
+  test(
+    'Card when equating logically equal Cards'
+    'should return true',
+    () {
+      final card1 = Card(id: 1001, noteId: 1002);
+      final card2 = card1.copyWith(isStarred: true);
+      final card3 = card1.copyWith(isHidden: true);
+      final card4 = card1.copyWith(isStarred: true, isHidden: true);
+
+      expect(card1, card2);
+      expect(card1, card3);
+      expect(card1, card4);
+      expect(card2, card3);
+    },
+  );
+
+  test(
+    'Card when equating logically unequal Cards'
+    'should return false',
+    () {
+      final card1 = Card(id: 111, noteId: 222);
+      final card2 = Card(id: 110, noteId: 222);
+      final card3 = Card(id: 111, noteId: 221);
+
+      expect(card1, isNot(card2));
+      expect(card1, isNot(card3));
+      expect(card2, isNot(card1));
     },
   );
 }
