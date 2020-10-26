@@ -38,7 +38,7 @@ void main() {
   );
 
   test(
-    'Card when constructed with null parameters '
+    'Card when constructed with null parameters, '
     'should fail asserts',
     () {
       expect(
@@ -48,6 +48,7 @@ void main() {
         ),
         throwsAssertionError,
       );
+
       expect(
         () => Card(
           id: 1,
@@ -55,6 +56,7 @@ void main() {
         ),
         throwsAssertionError,
       );
+
       expect(
         () => Card(
           id: 1,
@@ -63,6 +65,7 @@ void main() {
         ),
         throwsAssertionError,
       );
+
       expect(
         () => Card(
           id: 1,
@@ -104,7 +107,7 @@ void main() {
   );
 
   test(
-    'Card when equating logically equal Cards'
+    'Card when equating logically equal Cards, '
     'should return true',
     () {
       final card1 = Card(id: 1001, noteId: 1002);
@@ -120,7 +123,7 @@ void main() {
   );
 
   test(
-    'Card when equating logically unequal Cards'
+    'Card when equating logically unequal Cards, '
     'should return false',
     () {
       final card1 = Card(id: 111, noteId: 222);
