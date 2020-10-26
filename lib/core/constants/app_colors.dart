@@ -39,6 +39,11 @@ const Color kAccentPurpleColor = Color(0xffbf4acc);
 const Color kAccentGrayColor = Color(0xff34495e);
 const Color kAccentBrownColor = Color(0xffb17e22);
 
+// Denotative Colors
+const Color kErrorColor = kAccentRedColor;
+const Color kWarningColor = kAccentOrangeColor;
+const Color kSuccessColor = kAccentGreenColor;
+
 // Text Fill Colors
 const Color kTextFillRedColor = Color(0xffe03e3e);
 const Color kTextFillOrangeColor = Color(0xffd9730d);
