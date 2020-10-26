@@ -58,11 +58,11 @@ const Color kTextHighlightBlueColor = Color(0xffcae4f6);
 const Color kTextHighlightPurpleColor = Color(0xffeedbf6);
 
 // Neutrals
-const Color kNeutral8 = Color(0xFF14142B);
-const Color kNeutral7 = Color(0xFF4E4B66);
-const Color kNeutral6 = Color(0xFF6E7191);
-const Color kNeutral5 = Color(0xFFA0A3BD);
-const Color kNeutral4 = Color(0xFFD6D8E7);
-const Color kNeutral3 = Color(0xFFEFF0F6);
-const Color kNeutral2 = Color(0XFFF7F7FC);
-const Color kNeutral1 = Color(0xFFFCFCFC);
+const Color kNeutralColor8 = Color(0xFF14142B);
+const Color kNeutralColor7 = Color(0xFF4E4B66);
+const Color kNeutralColor6 = Color(0xFF6E7191);
+const Color kNeutralColor5 = Color(0xFFA0A3BD);
+const Color kNeutralColor4 = Color(0xFFD6D8E7);
+const Color kNeutralColor3 = Color(0xFFEFF0F6);
+const Color kNeutralColor2 = Color(0XFFF7F7FC);
+const Color kNeutralColor1 = Color(0xFFFCFCFC);
