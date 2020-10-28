@@ -22,6 +22,7 @@ import 'dart:ui';
 // Primary Colors
 const Color kPrimaryColor = Color(0xff7b68ee);
 const Color kPrimaryLightColor = Color(0xffdfdbfb);
+const Color kPrimaryDarkColor = Color(0xff5c4dbc);
 
 // Secondary Colors
 const Color kSecondaryCyanColor = Color(0xff49ccf9);
