@@ -23,45 +23,59 @@ import 'package:sona_flutter/core/presentation/bottom_navigation/bottom_navigati
 import 'package:sona_flutter/features/deck_view/presentation/widgets/destination/deck_view_destination.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
+  static final List<BottomNavigationDestinationData> _allDestinations = _createAllDestinations();
+
+  static List<BottomNavigationDestinationData> _createAllDestinations() {
+    var decksData = BottomNavigationDestinationData(
+      widget: DeckViewDestination(),
+      label: 'Decks',
+      icon: Icon(FluentIcons.dictionary_24_regular),
+      activeIcon: Icon(FluentIcons.dictionary_24_filled),
+    );
+
+    var searchData = BottomNavigationDestinationData(
+      widget: Placeholder(),
+      label: 'Search',
+      icon: Icon(FluentIcons.search_24_regular),
+      activeIcon: Icon(FluentIcons.search_24_filled),
+    );
+
+    var reviewData = BottomNavigationDestinationData(
+      widget: Placeholder(),
+      label: 'Review',
+      icon: Icon(FluentIcons.flash_on_24_regular),
+      activeIcon: Icon(FluentIcons.flash_on_24_filled),
+    );
+
+    var progressData = BottomNavigationDestinationData(
+      widget: Placeholder(),
+      label: 'Progress',
+      icon: Icon(FluentIcons.data_pie_24_regular),
+      activeIcon: Icon(FluentIcons.data_pie_24_filled),
+    );
+
+    var settingsData = BottomNavigationDestinationData(
+      widget: Placeholder(),
+      label: 'Settings',
+      icon: Icon(FluentIcons.settings_24_regular),
+      activeIcon: Icon(FluentIcons.settings_24_filled),
+    );
+
+    return [
+      decksData,
+      searchData,
+      reviewData,
+      progressData,
+      settingsData,
+    ];
+  }
+
   @override
   _BottomNavigationScreenState createState() => _BottomNavigationScreenState();
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   int _currentIndex = 0;
-
-  final List<BottomNavigationDestinationData> _allDestinations = [
-    BottomNavigationDestinationData(
-      widget: DeckViewDestination(),
-      label: 'Decks',
-      icon: Icon(FluentIcons.dictionary_24_regular),
-      activeIcon: Icon(FluentIcons.dictionary_24_filled),
-    ),
-    BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Search',
-      icon: Icon(FluentIcons.search_24_regular),
-      activeIcon: Icon(FluentIcons.search_24_filled),
-    ),
-    BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Learn',
-      icon: Icon(FluentIcons.flash_on_24_regular),
-      activeIcon: Icon(FluentIcons.flash_on_24_filled),
-    ),
-    BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Stats',
-      icon: Icon(FluentIcons.data_pie_24_regular),
-      activeIcon: Icon(FluentIcons.data_pie_24_filled),
-    ),
-    BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Settings',
-      icon: Icon(FluentIcons.settings_24_regular),
-      activeIcon: Icon(FluentIcons.settings_24_filled),
-    ),
-  ];
 
   void _onTap(index) {
     setState(() {
@@ -71,7 +85,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _items = _allDestinations.map((destinationData) {
+    var _items = BottomNavigationScreen._allDestinations.map((destinationData) {
       return BottomNavigationBarItem(
         label: destinationData.label,
         icon: destinationData.icon,
@@ -83,7 +97,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       body: SafeArea(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
-          child: _allDestinations[_currentIndex].widget,
+          child: BottomNavigationScreen._allDestinations[_currentIndex].widget,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
