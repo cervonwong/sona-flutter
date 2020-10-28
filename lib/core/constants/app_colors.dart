@@ -31,19 +31,19 @@ const Color kSecondaryYellowColor = Color(0xffffc800);
 const Color kSecondaryGreenColor = Color(0xff67cb48);
 
 // Accent Colors
-const Color kAccentRedColor = Color(0xfffc575e);
-const Color kAccentOrangeColor = Color(0xffff8600);
-const Color kAccentYellowColor = Color(0xfffcb410);
-const Color kAccentGreenColor = Color(0xff27ae60);
-const Color kAccentBlueColor = Color(0xff528ccb);
-const Color kAccentPurpleColor = Color(0xffbf4acc);
-const Color kAccentGrayColor = Color(0xff34495e);
-const Color kAccentBrownColor = Color(0xffb17e22);
+const Color _kAccentRedColor = Color(0xfffc575e);
+const Color _kAccentOrangeColor = Color(0xffff8600);
+const Color _kAccentYellowColor = Color(0xfffcb410);
+const Color _kAccentGreenColor = Color(0xff27ae60);
+const Color _kAccentBlueColor = Color(0xff528ccb);
+const Color _kAccentPurpleColor = Color(0xffbf4acc);
+const Color _kAccentGrayColor = Color(0xff34495e);
+const Color _kAccentBrownColor = Color(0xffb17e22);
 
 // Denotative Colors
-const Color kErrorColor = kAccentRedColor;
-const Color kWarningColor = kAccentOrangeColor;
-const Color kSuccessColor = kAccentGreenColor;
+const Color kErrorColor = _kAccentRedColor;
+const Color kWarningColor = _kAccentOrangeColor;
+const Color kSuccessColor = _kAccentGreenColor;
 
 // Text Fill Colors
 const Color kTextFillRedColor = Color(0xffe03e3e);
