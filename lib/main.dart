@@ -19,6 +19,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sona_flutter/core/presentation/bottom_navigation/bottom_navigation_screen.dart';
+
 import 'core/constants/app_colors.dart';
 
 void main() {
@@ -31,7 +33,7 @@ class SonaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sona',
       theme: _createThemeData(),
-      home: null,
+      home: BottomNavigationScreen(),
     );
   }
 }
@@ -44,6 +46,7 @@ ThemeData _createThemeData() {
     primaryColorDark: kPrimaryDarkColor,
     accentColor: kSecondaryCyanColor,
     textTheme: _createTextTheme(),
+    bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
   );
 }
 
@@ -51,68 +54,77 @@ TextTheme _createTextTheme() {
   return GoogleFonts.workSansTextTheme(
     const TextTheme(
       headline1: TextStyle(
-          fontSize: 102,
-          fontWeight: FontWeight.w300,
-          letterSpacing: -1.5
+        fontSize: 102,
+        fontWeight: FontWeight.w300,
+        letterSpacing: -1.5,
       ),
       headline2: TextStyle(
-          fontSize: 64,
-          fontWeight: FontWeight.w300,
-          letterSpacing: -0.5
+        fontSize: 64,
+        fontWeight: FontWeight.w300,
+        letterSpacing: -0.5,
       ),
       headline3: TextStyle(
-          fontSize: 51,
-          fontWeight: FontWeight.w400
+        fontSize: 51,
+        fontWeight: FontWeight.w400,
       ),
       headline4: TextStyle(
-          fontSize: 36,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 0.25
+        fontSize: 36,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
       ),
       headline5: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w400
+        fontSize: 25,
+        fontWeight: FontWeight.w400,
       ),
       headline6: TextStyle(
-          fontSize: 21,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.15
+        fontSize: 21,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
       ),
       subtitle1: TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 0.15
+        fontSize: 17,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.15,
       ),
       subtitle2: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.1
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
       ),
       bodyText1: TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 0.5
+        fontSize: 17,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
       ),
       bodyText2: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 0.25
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
       ),
       button: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 1.25
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 1.25,
       ),
       caption: TextStyle(
-          fontSize: 13,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 0.4
+        fontSize: 13,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
       ),
       overline: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 1.5
+        fontSize: 11,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 1.5,
       ),
     ),
+  );
+}
+
+BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
+  return BottomNavigationBarThemeData(
+    backgroundColor: Colors.white,
+    elevation: 8.0,
+    selectedItemColor: kPrimaryColor,
+    unselectedItemColor: kNeutralColor8.withOpacity(0.6),
   );
 }
