@@ -26,9 +26,13 @@ const Color kPrimaryDarkColor = Color(0xff5c4dbc);
 
 // Secondary Colors
 const Color kSecondaryCyanColor = Color(0xff49ccf9);
+const Color kSecondaryCyanDarkColor = Color(0xff27a4ce);
 const Color kSecondaryPinkColor = Color(0xfffd71af);
+const Color kSecondaryPinkDarkColor = Color(0xffd44988);
 const Color kSecondaryYellowColor = Color(0xffffc800);
+const Color kSecondaryYellowDarkColor = Color(0xffd19b1f);
 const Color kSecondaryGreenColor = Color(0xff67cb48);
+const Color kSecondaryGreenDarkColor = Color(0xff58a540);
 
 // Accent Colors
 const Color _kAccentRedColor = Color(0xfffc575e);
