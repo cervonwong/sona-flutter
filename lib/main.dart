@@ -23,9 +23,7 @@ import 'package:sona_flutter/core/presentation/bottom_navigation/bottom_navigati
 
 import 'core/constants/app_colors.dart';
 
-void main() {
-  runApp(SonaApp());
-}
+void main() => runApp(SonaApp());
 
 class SonaApp extends StatelessWidget {
   @override
