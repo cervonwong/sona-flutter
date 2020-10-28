@@ -38,6 +38,7 @@ class SonaApp extends StatelessWidget {
 
 ThemeData _createThemeData() {
   return _createBaseThemeData().copyWith(
+    colorScheme: _createColorScheme(),
     textTheme: _createTextTheme(),
     bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
   );
@@ -45,17 +46,35 @@ ThemeData _createThemeData() {
 
 ThemeData _createBaseThemeData() {
   return ThemeData(
+    scaffoldBackgroundColor: kNeutralColor2,
+  );
+}
+
+ColorScheme _createColorScheme() {
+  return ColorScheme(
     brightness: Brightness.light,
 
-    // Primary + Secondary
-    primaryColor: kPrimaryColor,
-    primaryColorLight: kPrimaryLightColor,
-    primaryColorDark: kPrimaryDarkColor,
-    accentColor: kSecondaryCyanColor,
+    // Primary
+    primary: kPrimaryColor,
+    primaryVariant: kPrimaryDarkColor,
+    onPrimary: Colors.white,
 
-    // Backgrounds
-    backgroundColor: kNeutralColor2,
-    scaffoldBackgroundColor: kNeutralColor2,
+    // Secondary
+    secondary: kSecondaryCyanColor,
+    secondaryVariant: kSecondaryCyanDarkColor,
+    onSecondary: Colors.white,
+
+    // Surface
+    surface: Colors.white,
+    onSurface: kNeutralColor8,
+
+    // Background
+    background: kNeutralColor2,
+    onBackground: kNeutralColor8,
+
+    // Error
+    error: kErrorColor,
+    onError: Colors.white,
   );
 }
 
