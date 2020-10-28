@@ -39,14 +39,25 @@ class SonaApp extends StatelessWidget {
 }
 
 ThemeData _createThemeData() {
+  return _createBaseThemeData().copyWith(
+    textTheme: _createTextTheme(),
+    bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
+  );
+}
+
+ThemeData _createBaseThemeData() {
   return ThemeData(
     brightness: Brightness.light,
+
+    // Primary + Secondary
     primaryColor: kPrimaryColor,
     primaryColorLight: kPrimaryLightColor,
     primaryColorDark: kPrimaryDarkColor,
     accentColor: kSecondaryCyanColor,
-    textTheme: _createTextTheme(),
-    bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
+
+    // Backgrounds
+    backgroundColor: kNeutralColor2,
+    scaffoldBackgroundColor: kNeutralColor2,
   );
 }
 
