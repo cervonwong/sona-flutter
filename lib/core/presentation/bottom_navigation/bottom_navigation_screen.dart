@@ -81,7 +81,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: _allDestinations[_currentIndex].widget,
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: _allDestinations[_currentIndex].widget,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
