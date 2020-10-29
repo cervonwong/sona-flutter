@@ -40,7 +40,7 @@ void main() {
   );
 
   test(
-    'Entry when constructed with null parameters,'
+    'Entry when constructed with null parameters, '
     'should fail asserts',
     () {
       expect(
@@ -124,7 +124,7 @@ void main() {
   );
 
   test(
-    'Entry when equating logically equal Entrys, '
+    'Entry when equating logically equal Entries, '
     'should return true',
     () {
       final entry1 = Entry(id: 1, deckName: 'A deck', entryTypeId: 2);
