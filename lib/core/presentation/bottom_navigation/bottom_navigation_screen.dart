@@ -17,58 +17,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/core/presentation/bottom_navigation/bottom_navigation_destination_data.dart';
-import 'package:sona_flutter/features/deck_view/presentation/widgets/destination/deck_view_destination.dart';
+import 'package:sona_flutter/features/deck_view/presentation/widgets/destination/deck_view_bot_nav_destination.dart';
+import 'package:sona_flutter/features/settings/presentation/settings_bot_nav_destination.dart';
+
+import 'bot_nav_destination.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
-  static final List<BottomNavigationDestinationData> _allDestinations = _createAllDestinations();
-
-  static List<BottomNavigationDestinationData> _createAllDestinations() {
-    var decksData = BottomNavigationDestinationData(
-      widget: DeckViewDestination(),
-      label: 'Decks',
-      icon: Icon(FluentIcons.dictionary_24_regular),
-      activeIcon: Icon(FluentIcons.dictionary_24_filled),
-    );
-
-    var searchData = BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Search',
-      icon: Icon(FluentIcons.search_24_regular),
-      activeIcon: Icon(FluentIcons.search_24_filled),
-    );
-
-    var reviewData = BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Review',
-      icon: Icon(FluentIcons.flash_on_24_regular),
-      activeIcon: Icon(FluentIcons.flash_on_24_filled),
-    );
-
-    var progressData = BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Progress',
-      icon: Icon(FluentIcons.data_pie_24_regular),
-      activeIcon: Icon(FluentIcons.data_pie_24_filled),
-    );
-
-    var settingsData = BottomNavigationDestinationData(
-      widget: Placeholder(),
-      label: 'Settings',
-      icon: Icon(FluentIcons.settings_24_regular),
-      activeIcon: Icon(FluentIcons.settings_24_filled),
-    );
-
-    return [
-      decksData,
-      searchData,
-      reviewData,
-      progressData,
-      settingsData,
-    ];
-  }
+  static final List<BotNavDestination> _allDestinations = [
+    DeckViewBotNavDestination(),
+    SettingsBotNavDestination(),
+  ];
 
   @override
   _BottomNavigationScreenState createState() => _BottomNavigationScreenState();
@@ -93,12 +52,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       );
     }).toList();
 
+    var currentDestination =
+        BottomNavigationScreen._allDestinations[_currentIndex];
+
     return Scaffold(
+      appBar: currentDestination.appBar,
       body: SafeArea(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: BottomNavigationScreen._allDestinations[_currentIndex].widget,
-        ),
+        child: currentDestination,
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,

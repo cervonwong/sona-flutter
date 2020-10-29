@@ -17,21 +17,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:sona_flutter/core/presentation/bottom_navigation/bot_nav_destination.dart';
 
-class BottomNavigationDestinationData {
-  final Widget widget;
-  final String label;
-  final Widget icon;
-  final Widget activeIcon;
+class SettingsBotNavDestination extends BotNavDestination {
+  SettingsBotNavDestination()
+      : super(
+          appBar: AppBar(
+            title: Text('Settings'),
+            centerTitle: true,
+          ),
+          label: 'Settings',
+          icon: Icon(FluentIcons.settings_24_regular),
+          activeIcon: Icon(FluentIcons.settings_24_filled),
+        );
 
-  BottomNavigationDestinationData({
-    @required this.widget,
-    @required this.label,
-    @required this.icon,
-    activeIcon,
-  })  : assert(widget != null),
-        assert(label != null),
-        assert(icon != null),
-        activeIcon = activeIcon ?? icon;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Settings',
+        style: Theme.of(context).textTheme.headline3,
+      ),
+    );
+  }
 }

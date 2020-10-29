@@ -19,11 +19,18 @@
 
 import 'package:flutter/material.dart';
 
-class DeckViewDestination extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Placeholder(),
-    );
-  }
+abstract class BotNavDestination extends StatelessWidget {
+  final AppBar appBar;
+  final String label;
+  final Widget icon;
+  final Widget activeIcon;
+
+  BotNavDestination({
+    @required this.appBar,
+    @required this.label,
+    @required this.icon,
+    activeIcon,
+  })  : assert(label != null),
+        assert(icon != null),
+        activeIcon = activeIcon ?? icon;
 }
