@@ -62,6 +62,8 @@ ThemeData _createBaseThemeData() {
     errorColor: kErrorColor,
     scaffoldBackgroundColor: kNeutralColor2,
     cursorColor: kPrimaryColor,
+    textSelectionColor: kPrimaryLightColor,
+    textSelectionHandleColor: kPrimaryColor
   );
 }
 
