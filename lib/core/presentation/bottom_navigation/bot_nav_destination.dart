@@ -26,10 +26,10 @@ abstract class BotNavDestination extends StatelessWidget {
   final Widget activeIcon;
 
   BotNavDestination({
-    @required this.appBar,
+    this.appBar,
     @required this.label,
     @required this.icon,
-    activeIcon,
+    Widget activeIcon,
   })  : assert(label != null),
         assert(icon != null),
         activeIcon = activeIcon ?? icon;

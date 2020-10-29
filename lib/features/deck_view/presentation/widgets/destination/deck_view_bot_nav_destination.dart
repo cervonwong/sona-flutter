@@ -24,9 +24,6 @@ import 'package:sona_flutter/core/presentation/bottom_navigation/bot_nav_destina
 class DeckViewBotNavDestination extends BotNavDestination {
   DeckViewBotNavDestination()
       : super(
-          appBar: AppBar(
-            title: Text('Deck View Destination'),
-          ),
           label: 'Decks',
           icon: Icon(FluentIcons.dictionary_24_regular),
           activeIcon: Icon(FluentIcons.dictionary_24_filled),
