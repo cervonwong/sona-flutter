@@ -79,7 +79,7 @@ ColorScheme _createColorScheme() {
     onSecondary: Colors.white,
 
     // Surface
-    surface: Colors.white,
+    surface: kNeutralColor1,
     onSurface: kNeutralColor8,
 
     // Background
@@ -260,7 +260,7 @@ TextTheme _createPrimaryAndAccentTextTheme() {
 
 BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
   return BottomNavigationBarThemeData(
-    backgroundColor: Colors.white,
+    backgroundColor: kNeutralColor1,
     elevation: 8.0,
     selectedItemColor: kPrimaryColor,
     unselectedItemColor: kNeutralColor8.withOpacity(0.6),
