@@ -64,7 +64,7 @@ ThemeData _createBaseThemeData() {
     scaffoldBackgroundColor: kNeutralColor2,
     cursorColor: kPrimaryColor,
     textSelectionColor: kPrimaryLightColor,
-    textSelectionHandleColor: kPrimaryColor
+    textSelectionHandleColor: kPrimaryColor,
   );
 }
 
