@@ -31,6 +31,7 @@ class SonaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Sona',
       theme: _createThemeData(),
       home: BottomNavigationScreen(),
