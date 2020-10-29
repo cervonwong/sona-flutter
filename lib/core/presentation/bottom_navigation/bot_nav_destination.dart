@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 
 abstract class BotNavDestination extends StatelessWidget {
-  final AppBar appBar;
+  final PreferredSizeWidget appBar;
   final String label;
   final Widget icon;
   final Widget activeIcon;
