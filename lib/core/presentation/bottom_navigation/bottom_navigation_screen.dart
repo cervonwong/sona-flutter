@@ -46,6 +46,8 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   Widget build(BuildContext context) {
     var _items = BottomNavigationScreen._allDestinations.map((destinationData) {
       return BottomNavigationBarItem(
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         label: destinationData.label,
         icon: destinationData.icon,
         activeIcon: destinationData.activeIcon,
