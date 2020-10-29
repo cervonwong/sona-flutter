@@ -56,7 +56,7 @@ ThemeData _createBaseThemeData() {
     primaryColorLight: kPrimaryLightColor,
 
     // Secondary
-    accentColor: kSecondaryCyanColor,
+    accentColor: kPrimaryColor,
 
     backgroundColor: kNeutralColor2,
     errorColor: kErrorColor,
@@ -74,8 +74,8 @@ ColorScheme _createColorScheme() {
     onPrimary: Colors.white,
 
     // Secondary
-    secondary: kSecondaryCyanColor,
-    secondaryVariant: kSecondaryCyanDarkColor,
+    secondary: kPrimaryColor,
+    secondaryVariant: kPrimaryDarkColor,
     onSecondary: Colors.white,
 
     // Surface
