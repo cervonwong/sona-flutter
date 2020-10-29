@@ -38,29 +38,39 @@ class DeckViewBotNavDestination extends BotNavDestination {
         for (var i = 0; i < 50; i++)
           Ink(
             color: Theme.of(context).colorScheme.surface,
-            child: ListTile(
-              title: Text(
-                'Deck Title',
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              subtitle: Text(
-                '15 Due · 1000 Total · 90% Seen',
-                style: Theme.of(context).textTheme.caption,
-              ),
-              leading: AspectRatio(
-                aspectRatio: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    color:
-                        i % 2 == 0 ? kSecondaryCyanColor : kSecondaryPinkColor,
-                  ),
-                ),
-              ),
-              onTap: () => print('Tapped'),
-            ),
+            child: _DeckListTile(i: i),
           ),
       ],
+    );
+  }
+}
+
+class _DeckListTile extends StatelessWidget {
+  const _DeckListTile({@required this.i});
+
+  final int i;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        'Deck Title',
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
+      subtitle: Text(
+        '15 Due · 1000 Total · 90% Seen',
+        style: Theme.of(context).textTheme.caption,
+      ),
+      leading: AspectRatio(
+        aspectRatio: 1,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            color: i % 2 == 0 ? kSecondaryCyanColor : kSecondaryPinkColor,
+          ),
+        ),
+      ),
+      onTap: null,
     );
   }
 }
