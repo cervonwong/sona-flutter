@@ -93,8 +93,8 @@ void main() {
   );
 
   test(
-    'Entry copyWith '
-    'should return Entry with new fields',
+    'Entry copyWith, '
+    'should return Entry with expected altered fields',
     () {
       final entry = Entry(
         id: 7,

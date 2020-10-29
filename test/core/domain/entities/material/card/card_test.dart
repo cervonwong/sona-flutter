@@ -78,8 +78,8 @@ void main() {
   );
 
   test(
-    'Card copyWith '
-    'should return Card with new fields',
+    'Card copyWith, '
+    'should return Card with expected altered fields',
     () {
       final card1 = Card(
         id: 123,
