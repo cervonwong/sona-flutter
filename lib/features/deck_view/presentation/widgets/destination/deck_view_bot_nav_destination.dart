@@ -78,28 +78,70 @@ class _TextFieldAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-class _AppBarTextField extends StatelessWidget {
-  final _textFieldController = TextEditingController();
+class _AppBarTextField extends StatefulWidget {
+  @override
+  _AppBarTextFieldState createState() => _AppBarTextFieldState();
+}
+
+class _AppBarTextFieldState extends State<_AppBarTextField>
+    with WidgetsBindingObserver {
+  // To unfocus TextField when keyboard is retracted.
+  // See also: initState(), didChangeMetrics, dispose()
+  final _focusNode = FocusNode();
+
+  // To clear the TextField when clear button is pressed.
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _initWidgetsBinding();
+  }
+
+  void clearTextField() => _controller.clear();
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _textFieldController,
+      focusNode: _focusNode,
+      controller: _controller,
       decoration: InputDecoration(
-        hintText: 'Search Decks',
+        hintText: 'Search Decks...',
         border: InputBorder.none,
-        icon: Icon(FluentIcons.book_formula_lookup_24_regular),
+        icon: const Icon(FluentIcons.book_formula_lookup_24_regular),
         suffixIcon: Container(
           child: IconButton(
             icon: Icon(FluentIcons.dismiss_24_regular),
-            onPressed: () => _textFieldController.clear(),
+            onPressed: clearTextField,
           ),
         ),
-        suffixIconConstraints: BoxConstraints(
+        suffixIconConstraints: const BoxConstraints(
           maxHeight: 40.0,
           maxWidth: 40.0,
         ),
       ),
     );
+  }
+
+  // WidgetsBinding / FocusNode methods
+
+  void _initWidgetsBinding() {
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    final value = WidgetsBinding.instance.window.viewInsets.bottom;
+    if (value == 0) {
+      _focusNode.unfocus();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _focusNode.dispose();
+    super.dispose();
   }
 }
