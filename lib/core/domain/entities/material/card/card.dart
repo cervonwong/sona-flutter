@@ -25,18 +25,18 @@ import 'package:meta/meta.dart';
 @immutable
 class Card extends Equatable {
   final int id;
-  final int noteId;
+  final int entryId;
 
   final bool isStarred;
   final bool isHidden;
 
   Card({
     @required this.id,
-    @required this.noteId,
+    @required this.entryId,
     this.isStarred = false,
     this.isHidden = false,
   })  : assert(id != null),
-        assert(noteId != null),
+        assert(entryId != null),
         assert(isStarred != null),
         assert(isHidden != null);
 
@@ -46,12 +46,12 @@ class Card extends Equatable {
   }) {
     return Card(
       id: id,
-      noteId: noteId,
+      entryId: entryId,
       isStarred: isStarred ?? this.isStarred,
       isHidden: isHidden ?? this.isHidden,
     );
   }
 
   @override
-  List<Object> get props => [id, noteId];
+  List<Object> get props => [id, entryId];
 }

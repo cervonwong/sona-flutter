@@ -20,33 +20,33 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class Note extends Equatable with Diagnosticable {
+class Entry extends Equatable with Diagnosticable {
   final int id;
   final String deckName;
-  final int noteTypeId;
+  final int entryTypeId;
   final Set<String> tags;
   final Map<String, String> fieldData;
 
-  Note({
+  Entry({
     @required this.id,
     @required this.deckName,
-    @required this.noteTypeId,
+    @required this.entryTypeId,
     this.tags = const <String>{},
     this.fieldData = const <String, String>{},
   })  : assert(id != null),
         assert(deckName != null),
-        assert(noteTypeId != null),
+        assert(entryTypeId != null),
         assert(tags != null),
         assert(fieldData != null);
 
-  Note copyWith({
+  Entry copyWith({
     Set<String> tags,
     Map<String, String> fieldData,
   }) {
-    return Note(
+    return Entry(
       id: id,
       deckName: deckName,
-      noteTypeId: noteTypeId,
+      entryTypeId: entryTypeId,
       tags: tags ?? this.tags,
       fieldData: fieldData ?? this.fieldData,
     );

@@ -27,11 +27,11 @@ void main() {
     () {
       final card = Card(
         id: 1,
-        noteId: 2,
+        entryId: 2,
       );
 
       expect(card.id, 1);
-      expect(card.noteId, 2);
+      expect(card.entryId, 2);
       expect(card.isStarred, false);
       expect(card.isHidden, false);
     },
@@ -44,7 +44,7 @@ void main() {
       expect(
         () => Card(
           id: null,
-          noteId: 1,
+          entryId: 1,
         ),
         throwsAssertionError,
       );
@@ -52,7 +52,7 @@ void main() {
       expect(
         () => Card(
           id: 1,
-          noteId: null,
+          entryId: null,
         ),
         throwsAssertionError,
       );
@@ -60,7 +60,7 @@ void main() {
       expect(
         () => Card(
           id: 1,
-          noteId: 2,
+          entryId: 2,
           isStarred: null,
         ),
         throwsAssertionError,
@@ -69,7 +69,7 @@ void main() {
       expect(
         () => Card(
           id: 1,
-          noteId: 2,
+          entryId: 2,
           isHidden: null,
         ),
         throwsAssertionError,
@@ -83,24 +83,24 @@ void main() {
     () {
       final card1 = Card(
         id: 123,
-        noteId: 456,
+        entryId: 456,
         isStarred: false,
         isHidden: true,
       );
       expect(card1.id, 123);
-      expect(card1.noteId, 456);
+      expect(card1.entryId, 456);
       expect(card1.isStarred, false);
       expect(card1.isHidden, true);
 
       final card2 = card1.copyWith(isStarred: true);
       expect(card2.id, 123);
-      expect(card2.noteId, 456);
+      expect(card2.entryId, 456);
       expect(card2.isStarred, true);
       expect(card2.isHidden, true);
 
       final card3 = card2.copyWith(isHidden: false);
       expect(card3.id, 123);
-      expect(card3.noteId, 456);
+      expect(card3.entryId, 456);
       expect(card3.isStarred, true);
       expect(card3.isHidden, false);
     },
@@ -110,7 +110,7 @@ void main() {
     'Card when equating logically equal Cards, '
     'should return true',
     () {
-      final card1 = Card(id: 1001, noteId: 1002);
+      final card1 = Card(id: 1001, entryId: 1002);
       final card2 = card1.copyWith(isStarred: true);
       final card3 = card1.copyWith(isHidden: true);
       final card4 = card1.copyWith(isStarred: true, isHidden: true);
@@ -126,9 +126,9 @@ void main() {
     'Card when equating logically unequal Cards, '
     'should return false',
     () {
-      final card1 = Card(id: 111, noteId: 222);
-      final card2 = Card(id: 110, noteId: 222);
-      final card3 = Card(id: 111, noteId: 221);
+      final card1 = Card(id: 111, entryId: 222);
+      final card2 = Card(id: 110, entryId: 222);
+      final card3 = Card(id: 111, entryId: 221);
 
       expect(card1, isNot(card2));
       expect(card1, isNot(card3));
