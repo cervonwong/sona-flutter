@@ -18,9 +18,9 @@
  */
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
-class Entry extends Equatable with Diagnosticable {
+class Entry extends Equatable {
   final int id;
   final String deckName;
   final int entryTypeId;
