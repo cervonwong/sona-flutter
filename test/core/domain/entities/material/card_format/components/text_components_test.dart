@@ -21,175 +21,177 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/core/domain/entities/material/card_format/components/text_component.dart';
 
 void main() {
-  test(
-    'TextComponent when constructed without optional parameters, '
-    'should have expected default fields',
-    () {
-      final textComponent = TextComponent(
-        name: 'My Component',
-        data: 'The quick brown fox.',
-      );
+  group('TextComponent when constructed', () {
+    test(
+      'without optional parameters, '
+      'should have expected default fields',
+      () {
+        final textComponent = TextComponent(
+          name: 'My Component',
+          data: 'The quick brown fox.',
+        );
 
-      expect(textComponent.name, 'My Component');
-      expect(textComponent.data, 'The quick brown fox.');
-      expect(textComponent.size, 1.0);
-      expect(textComponent.alignment, TextComponentAlignment.center);
-      expect(textComponent.fillColor, TextComponentFillColor.neutral);
-      expect(textComponent.highlightColor, TextComponentHighlightColor.none);
-      expect(textComponent.isBold, false);
-      expect(textComponent.isItalic, false);
-      expect(textComponent.isUnderlined, false);
-    },
-  );
+        expect(textComponent.name, 'My Component');
+        expect(textComponent.data, 'The quick brown fox.');
+        expect(textComponent.size, 1.0);
+        expect(textComponent.alignment, TextComponentAlignment.center);
+        expect(textComponent.fillColor, TextComponentFillColor.neutral);
+        expect(textComponent.highlightColor, TextComponentHighlightColor.none);
+        expect(textComponent.isBold, false);
+        expect(textComponent.isItalic, false);
+        expect(textComponent.isUnderlined, false);
+      },
+    );
 
-  test(
-    'TextComponent when constructed with null parameters, '
-    'should fail asserts',
-    () {
-      expect(
-        () => TextComponent(
-          name: null,
-          data: 'Null component data',
-        ),
-        throwsAssertionError,
-      );
+    test(
+      'with null parameters, '
+      'should fail asserts',
+      () {
+        expect(
+          () => TextComponent(
+            name: null,
+            data: 'Null component data',
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          size: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            size: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          alignment: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            alignment: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          fillColor: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            fillColor: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          highlightColor: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            highlightColor: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          isBold: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            isBold: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          isItalic: null,
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            isItalic: null,
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Null component name',
-          data: 'Null component data',
-          isUnderlined: null,
-        ),
-        throwsAssertionError,
-      );
-    },
-  );
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            isUnderlined: null,
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
 
-  test(
-    'TextComponent when constructed with illegal name, '
-    'should fail asserts',
-    () {
-      expect(
-        () => TextComponent(
-          name: 'x' * 151, // name > 150 characters is illegal.
-          data: 'Illegal component data',
-        ),
-        throwsAssertionError,
-      );
+    test(
+      'with illegal name, '
+      'should fail asserts',
+      () {
+        expect(
+          () => TextComponent(
+            name: 'x' * 151, // name > 150 characters is illegal.
+            data: 'Illegal component data',
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'x' * 150, // name <= 150 characters is legal.
-          data: 'Legal component data',
-        ),
-        isNot(throwsAssertionError),
-      );
-    },
-  );
+        expect(
+          () => TextComponent(
+            name: 'x' * 150, // name <= 150 characters is legal.
+            data: 'Legal component data',
+          ),
+          isNot(throwsAssertionError),
+        );
+      },
+    );
 
-  test(
-    'TextComponent when constructed with illegal size, '
-    'should fail asserts',
-    () {
-      expect(
-        () => TextComponent(
-          name: 'Illegal component name',
-          data: 'Illegal component data',
-          size: 0.09, // size < 0.1 is illegal.
-        ),
-        throwsAssertionError,
-      );
+    test(
+      'with illegal size, '
+      'should fail asserts',
+      () {
+        expect(
+          () => TextComponent(
+            name: 'Illegal component name',
+            data: 'Illegal component data',
+            size: 0.09, // size < 0.1 is illegal.
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Illegal component name',
-          data: 'Illegal component data',
-          size: 0.10, // size >= 0.10 and size <= 10.0 is legal.
-        ),
-        isNot(throwsAssertionError),
-      );
+        expect(
+          () => TextComponent(
+            name: 'Illegal component name',
+            data: 'Illegal component data',
+            size: 0.10, // size >= 0.10 and size <= 10.0 is legal.
+          ),
+          isNot(throwsAssertionError),
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Illegal component name',
-          data: 'Illegal component data',
-          size: 10.01, // size > 10.0 is illegal.
-        ),
-        throwsAssertionError,
-      );
+        expect(
+          () => TextComponent(
+            name: 'Illegal component name',
+            data: 'Illegal component data',
+            size: 10.01, // size > 10.0 is illegal.
+          ),
+          throwsAssertionError,
+        );
 
-      expect(
-        () => TextComponent(
-          name: 'Illegal component name',
-          data: 'Illegal component data',
-          size: 10.0, // size >= 0.10 and size <= 10.0 is legal.
-        ),
-        isNot(throwsAssertionError),
-      );
-    },
-  );
+        expect(
+          () => TextComponent(
+            name: 'Illegal component name',
+            data: 'Illegal component data',
+            size: 10.0, // size >= 0.10 and size <= 10.0 is legal.
+          ),
+          isNot(throwsAssertionError),
+        );
+      },
+    );
+  });
 
   test(
     'TextComponent copyWith, '

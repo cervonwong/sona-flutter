@@ -21,58 +21,63 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 
 void main() {
-  test(
-    'Card when constructed without optional parameters, '
-    'should have expected default fields',
+  group(
+    'Card when constructed',
     () {
-      final card = Card(
-        id: 1,
-        entryId: 2,
+      test(
+        'without optional parameters, '
+        'should have expected default fields',
+        () {
+          final card = Card(
+            id: 1,
+            entryId: 2,
+          );
+
+          expect(card.id, 1);
+          expect(card.entryId, 2);
+          expect(card.isStarred, false);
+          expect(card.isHidden, false);
+        },
       );
 
-      expect(card.id, 1);
-      expect(card.entryId, 2);
-      expect(card.isStarred, false);
-      expect(card.isHidden, false);
-    },
-  );
+      test(
+        'with null parameters, '
+        'should fail asserts',
+        () {
+          expect(
+            () => Card(
+              id: null,
+              entryId: 1,
+            ),
+            throwsAssertionError,
+          );
 
-  test(
-    'Card when constructed with null parameters, '
-    'should fail asserts',
-    () {
-      expect(
-        () => Card(
-          id: null,
-          entryId: 1,
-        ),
-        throwsAssertionError,
-      );
+          expect(
+            () => Card(
+              id: 1,
+              entryId: null,
+            ),
+            throwsAssertionError,
+          );
 
-      expect(
-        () => Card(
-          id: 1,
-          entryId: null,
-        ),
-        throwsAssertionError,
-      );
+          expect(
+            () => Card(
+              id: 1,
+              entryId: 2,
+              isStarred: null,
+            ),
+            throwsAssertionError,
+          );
 
-      expect(
-        () => Card(
-          id: 1,
-          entryId: 2,
-          isStarred: null,
-        ),
-        throwsAssertionError,
-      );
-
-      expect(
-        () => Card(
-          id: 1,
-          entryId: 2,
-          isHidden: null,
-        ),
-        throwsAssertionError,
+          expect(
+            () => Card(
+              id: 1,
+              entryId: 2,
+              isHidden: null,
+            ),
+            throwsAssertionError,
+          );
+        },
       );
     },
   );
@@ -106,33 +111,38 @@ void main() {
     },
   );
 
-  test(
-    'Card when equating logically equal Cards, '
-    'should return true',
+  group(
+    'Card when equating',
     () {
-      final card1 = Card(id: 1001, entryId: 1002);
-      final card2 = card1.copyWith(isStarred: true);
-      final card3 = card1.copyWith(isHidden: true);
-      final card4 = card1.copyWith(isStarred: true, isHidden: true);
+      test(
+        'logically equal Cards, '
+        'should return true',
+        () {
+          final card1 = Card(id: 1001, entryId: 1002);
+          final card2 = card1.copyWith(isStarred: true);
+          final card3 = card1.copyWith(isHidden: true);
+          final card4 = card1.copyWith(isStarred: true, isHidden: true);
 
-      expect(card1, card2);
-      expect(card1, card3);
-      expect(card1, card4);
-      expect(card2, card3);
-    },
-  );
+          expect(card1, card2);
+          expect(card1, card3);
+          expect(card1, card4);
+          expect(card2, card3);
+        },
+      );
 
-  test(
-    'Card when equating logically unequal Cards, '
-    'should return false',
-    () {
-      final card1 = Card(id: 111, entryId: 222);
-      final card2 = Card(id: 110, entryId: 222);
-      final card3 = Card(id: 111, entryId: 221);
+      test(
+        'logically unequal Cards, '
+        'should return false',
+        () {
+          final card1 = Card(id: 111, entryId: 222);
+          final card2 = Card(id: 110, entryId: 222);
+          final card3 = Card(id: 111, entryId: 221);
 
-      expect(card1, isNot(card2));
-      expect(card1, isNot(card3));
-      expect(card2, isNot(card1));
+          expect(card1, isNot(card2));
+          expect(card1, isNot(card3));
+          expect(card2, isNot(card1));
+        },
+      );
     },
   );
 }
