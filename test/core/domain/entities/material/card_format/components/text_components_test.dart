@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sona_flutter/core/domain/entities/material/card/components/text_component.dart';
+import 'package:sona_flutter/core/domain/entities/material/card_format/components/text_component.dart';
 
 void main() {
   test(

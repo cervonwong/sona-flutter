@@ -18,7 +18,7 @@
  */
 
 export 'card/card.dart';
-export 'card/components/component.dart';
-export 'card/components/text_component.dart';
+export 'card_format/components/component.dart';
+export 'card_format/components/text_component.dart';
 export 'deck/deck.dart';
 export 'entry/entry.dart';
