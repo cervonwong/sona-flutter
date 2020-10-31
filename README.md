@@ -9,3 +9,7 @@ Some stuff to note:
 ## Want to Contribute? 🤝
 
 Please view [Sona's contributing guidelines](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under [GNU General Public License v3.0](LICENSE).
