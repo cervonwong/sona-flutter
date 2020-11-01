@@ -40,17 +40,29 @@ class _AppBarTextField extends StatefulWidget {
 
 class _AppBarTextFieldState extends State<_AppBarTextField>
     with WidgetsBindingObserver {
+  // 1. To clear the TextField when clear button is pressed.
+  // 2. To trigger whenever the TextField is empty.
+  final _controller = TextEditingController();
+
   // To unfocus TextField when keyboard is retracted.
   // See also: initState(), didChangeMetrics, dispose()
   final _focusNode = FocusNode();
 
-  // To clear the TextField when clear button is pressed.
-  final _controller = TextEditingController();
+  bool _isTextFieldEmpty = true;
 
   @override
   void initState() {
     super.initState();
     _initWidgetsBinding();
+    _initControllerBinding();
+  }
+
+  void _initControllerBinding() {
+    _controller.addListener(() {
+      setState(() {
+        _isTextFieldEmpty = _controller.text.isEmpty;
+      });
+    });
   }
 
   void _clearTextField() => _controller.clear();
@@ -64,12 +76,12 @@ class _AppBarTextFieldState extends State<_AppBarTextField>
         hintText: 'Search Decks...',
         border: InputBorder.none,
         icon: const Icon(FluentIcons.book_formula_lookup_24_regular),
-        suffixIcon: Container(
-          child: IconButton(
-            icon: Icon(FluentIcons.dismiss_24_regular),
-            onPressed: _clearTextField,
-          ),
-        ),
+        suffixIcon: _isTextFieldEmpty
+            ? null
+            : IconButton(
+                icon: Icon(FluentIcons.dismiss_24_regular),
+                onPressed: _clearTextField,
+              ),
         suffixIconConstraints: const BoxConstraints(
           maxHeight: 40.0,
           maxWidth: 40.0,
@@ -80,10 +92,12 @@ class _AppBarTextFieldState extends State<_AppBarTextField>
 
   // WidgetsBinding / FocusNode methods
 
+  // Notify this when app events occur (specifically window.viewInsets).
   void _initWidgetsBinding() {
     WidgetsBinding.instance.addObserver(this);
   }
 
+  // Check if keyboard is retracted, to unfocus TextField.
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
@@ -96,8 +110,8 @@ class _AppBarTextFieldState extends State<_AppBarTextField>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 }
-
