@@ -279,4 +279,16 @@ void main() {
       );
     },
   );
+
+  test(
+    'CardFormatStructure when equating logically equal CardFormatStructures, '
+    'should return true',
+    () {
+      expect(emptyStructure, CardFormatStructure.empty());
+      expect(
+        mediumStructure,
+        CardFormatStructure(components: [mockComponent1, mockComponent2]),
+      );
+    },
+  );
 }

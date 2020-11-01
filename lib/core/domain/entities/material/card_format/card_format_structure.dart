@@ -17,11 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import 'components/component.dart';
 
-class CardFormatStructure {
+class CardFormatStructure extends Equatable {
   final List<Component> _components;
 
   List<Component> get components => List<Component>.from(_components);
@@ -75,4 +76,7 @@ class CardFormatStructure {
 
     return CardFormatStructure(components: newComponents);
   }
+
+  @override
+  List<Object> get props => [_components];
 }
