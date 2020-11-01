@@ -37,7 +37,7 @@ void main() {
         'without optional parameters, '
         'should have expected default fields',
         () {
-          var entries = [MockEntry()];
+          final entries = [MockEntry()];
 
           final deck = Deck(
               id: 1,
@@ -230,7 +230,7 @@ void main() {
       expect(deck1.authorName, 'Random Author');
       expect(deck1.description, 'A random deck.');
 
-      var newEntries = [MockEntry()];
+      final newEntries = [MockEntry()];
 
       final deck2 = deck1.copyWith(
         name: 'New Deck',
