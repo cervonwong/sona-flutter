@@ -22,10 +22,12 @@ import 'package:flutter/material.dart';
 import 'package:sona_flutter/core/constants/app_colors.dart';
 import 'package:sona_flutter/core/presentation/bottom_navigation/bot_nav_destination.dart';
 
+import '../deck_view_app_bar.dart';
+
 class DeckViewBotNavDestination extends BotNavDestination {
   DeckViewBotNavDestination()
       : super(
-          appBar: _TextFieldAppBar(),
+          appBar: DeckViewAppBar(),
           label: 'Decks',
           icon: Icon(FluentIcons.dictionary_24_regular),
           activeIcon: Icon(FluentIcons.dictionary_24_filled),
@@ -72,86 +74,5 @@ class _DeckListTile extends StatelessWidget {
       ),
       onTap: null,
     );
-  }
-}
-
-class _TextFieldAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      title: _AppBarTextField(),
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
-}
-
-class _AppBarTextField extends StatefulWidget {
-  @override
-  _AppBarTextFieldState createState() => _AppBarTextFieldState();
-}
-
-class _AppBarTextFieldState extends State<_AppBarTextField>
-    with WidgetsBindingObserver {
-  // To unfocus TextField when keyboard is retracted.
-  // See also: initState(), didChangeMetrics, dispose()
-  final _focusNode = FocusNode();
-
-  // To clear the TextField when clear button is pressed.
-  final _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _initWidgetsBinding();
-  }
-
-  void clearTextField() => _controller.clear();
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      focusNode: _focusNode,
-      controller: _controller,
-      decoration: InputDecoration(
-        hintText: 'Search Decks...',
-        border: InputBorder.none,
-        icon: const Icon(FluentIcons.book_formula_lookup_24_regular),
-        suffixIcon: Container(
-          child: IconButton(
-            icon: Icon(FluentIcons.dismiss_24_regular),
-            onPressed: clearTextField,
-          ),
-        ),
-        suffixIconConstraints: const BoxConstraints(
-          maxHeight: 40.0,
-          maxWidth: 40.0,
-        ),
-      ),
-    );
-  }
-
-  // WidgetsBinding / FocusNode methods
-
-  void _initWidgetsBinding() {
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangeMetrics() {
-    super.didChangeMetrics();
-    final value = WidgetsBinding.instance.window.viewInsets.bottom;
-    if (value == 0) {
-      _focusNode.unfocus();
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    _focusNode.dispose();
-    super.dispose();
   }
 }
