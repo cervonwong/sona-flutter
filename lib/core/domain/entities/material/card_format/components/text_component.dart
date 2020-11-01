@@ -24,6 +24,38 @@ import 'component.dart';
 
 class TextComponent extends Component with EquatableMixin {
   final String data;
+  final TextComponentStyle style;
+
+  TextComponent({
+    @required String name,
+    @required this.data,
+    this.style = const TextComponentStyle(),
+  })  : assert(name != null),
+        assert(data != null),
+        assert(style != null),
+        super(name: name);
+
+  TextComponent copyWith({
+    String name,
+    String data,
+    TextComponentStyle style,
+  }) {
+    return TextComponent(
+      name: name ?? this.name,
+      data: data ?? this.data,
+      style: style ?? this.style,
+    );
+  }
+
+  @override
+  List<Object> get props => [
+        name,
+        data,
+        style,
+      ];
+}
+
+class TextComponentStyle extends Equatable {
   final double size;
   final TextComponentAlignment alignment;
   final TextComponentFillColor fillColor;
@@ -32,9 +64,7 @@ class TextComponent extends Component with EquatableMixin {
   final bool isItalic;
   final bool isUnderlined;
 
-  TextComponent({
-    @required String name,
-    @required this.data,
+  const TextComponentStyle({
     this.size = 1.0,
     this.alignment = TextComponentAlignment.center,
     this.fillColor = TextComponentFillColor.neutral,
@@ -42,9 +72,7 @@ class TextComponent extends Component with EquatableMixin {
     this.isBold = false,
     this.isItalic = false,
     this.isUnderlined = false,
-  })  : assert(name != null),
-        assert(data != null),
-        assert(size != null),
+  })  : assert(size != null),
         assert(alignment != null),
         assert(fillColor != null),
         assert(highlightColor != null),
@@ -52,12 +80,9 @@ class TextComponent extends Component with EquatableMixin {
         assert(isItalic != null),
         assert(isUnderlined != null),
         assert(size >= 0.1),
-        assert(size <= 10.0),
-        super(name: name);
+        assert(size <= 10.0);
 
-  TextComponent copyWith({
-    String name,
-    String data,
+  TextComponentStyle copyWith({
     double size,
     TextComponentAlignment alignment,
     TextComponentFillColor fillColor,
@@ -66,9 +91,7 @@ class TextComponent extends Component with EquatableMixin {
     bool isItalic,
     bool isUnderlined,
   }) {
-    return TextComponent(
-      name: name ?? this.name,
-      data: data ?? this.data,
+    return TextComponentStyle(
       size: size ?? this.size,
       alignment: alignment ?? this.alignment,
       fillColor: fillColor ?? this.fillColor,
@@ -81,8 +104,6 @@ class TextComponent extends Component with EquatableMixin {
 
   @override
   List<Object> get props => [
-        name,
-        data,
         size,
         alignment,
         fillColor,

@@ -33,13 +33,22 @@ void main() {
 
         expect(textComponent.name, 'My Component');
         expect(textComponent.data, 'The quick brown fox.');
-        expect(textComponent.size, 1.0);
-        expect(textComponent.alignment, TextComponentAlignment.center);
-        expect(textComponent.fillColor, TextComponentFillColor.neutral);
-        expect(textComponent.highlightColor, TextComponentHighlightColor.none);
-        expect(textComponent.isBold, false);
-        expect(textComponent.isItalic, false);
-        expect(textComponent.isUnderlined, false);
+        expect(textComponent.style.size, 1.0);
+        expect(
+          textComponent.style.alignment,
+          TextComponentAlignment.center,
+        );
+        expect(
+          textComponent.style.fillColor,
+          TextComponentFillColor.neutral,
+        );
+        expect(
+          textComponent.style.highlightColor,
+          TextComponentHighlightColor.none,
+        );
+        expect(textComponent.style.isBold, false);
+        expect(textComponent.style.isItalic, false);
+        expect(textComponent.style.isUnderlined, false);
       },
     );
 
@@ -67,7 +76,22 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            size: null,
+            style: null,
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
+
+    test(
+      'with style with null parameters, '
+      'should fail asserts',
+      () {
+        expect(
+          () => TextComponent(
+            name: 'Null component name',
+            data: 'Null component data',
+            style: TextComponentStyle(size: null),
           ),
           throwsAssertionError,
         );
@@ -76,7 +100,7 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            alignment: null,
+            style: TextComponentStyle(alignment: null),
           ),
           throwsAssertionError,
         );
@@ -85,7 +109,7 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            fillColor: null,
+            style: TextComponentStyle(fillColor: null),
           ),
           throwsAssertionError,
         );
@@ -94,7 +118,7 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            highlightColor: null,
+            style: TextComponentStyle(highlightColor: null),
           ),
           throwsAssertionError,
         );
@@ -103,7 +127,7 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            isBold: null,
+            style: TextComponentStyle(isBold: null),
           ),
           throwsAssertionError,
         );
@@ -112,7 +136,7 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            isItalic: null,
+            style: TextComponentStyle(isItalic: null),
           ),
           throwsAssertionError,
         );
@@ -121,7 +145,7 @@ void main() {
           () => TextComponent(
             name: 'Null component name',
             data: 'Null component data',
-            isUnderlined: null,
+            style: TextComponentStyle(isUnderlined: null),
           ),
           throwsAssertionError,
         );
@@ -151,14 +175,15 @@ void main() {
     );
 
     test(
-      'with illegal size, '
+      'with style with illegal size, '
       'should fail asserts',
       () {
         expect(
           () => TextComponent(
             name: 'Illegal component name',
             data: 'Illegal component data',
-            size: 0.09, // size < 0.1 is illegal.
+            style: TextComponentStyle(size: 0.09),
+            // size < 0.1 is illegal.
           ),
           throwsAssertionError,
         );
@@ -167,7 +192,8 @@ void main() {
           () => TextComponent(
             name: 'Illegal component name',
             data: 'Illegal component data',
-            size: 0.10, // size >= 0.10 and size <= 10.0 is legal.
+            style: TextComponentStyle(size: 0.10),
+            // size >= 0.10 and size <= 10.0 is legal.
           ),
           isNot(throwsAssertionError),
         );
@@ -176,7 +202,8 @@ void main() {
           () => TextComponent(
             name: 'Illegal component name',
             data: 'Illegal component data',
-            size: 10.01, // size > 10.0 is illegal.
+            style: TextComponentStyle(size: 10.01),
+            // size > 10.0 is illegal.
           ),
           throwsAssertionError,
         );
@@ -185,7 +212,8 @@ void main() {
           () => TextComponent(
             name: 'Illegal component name',
             data: 'Illegal component data',
-            size: 10.0, // size >= 0.10 and size <= 10.0 is legal.
+            style: TextComponentStyle(size: 10.0),
+            // 0.10 <= size <= 10.0 is legal.
           ),
           isNot(throwsAssertionError),
         );
@@ -194,12 +222,10 @@ void main() {
   });
 
   test(
-    'TextComponent copyWith, '
-    'should return Card with expected altered fields',
+    'TextComponent and TextComponentStyle copyWith, '
+    'should return TextComponent with expected altered fields',
     () {
-      final textComponent1 = TextComponent(
-        name: 'Name',
-        data: 'Data',
+      final style1 = TextComponentStyle(
         size: 5.0,
         alignment: TextComponentAlignment.justify,
         fillColor: TextComponentFillColor.blue,
@@ -208,45 +234,74 @@ void main() {
         isItalic: true,
         isUnderlined: false,
       );
+
+      final textComponent1 = TextComponent(
+        name: 'Name',
+        data: 'Data',
+        style: style1,
+      );
       expect(textComponent1.name, 'Name');
       expect(textComponent1.data, 'Data');
-      expect(textComponent1.size, 5.0);
-      expect(textComponent1.alignment, TextComponentAlignment.justify);
-      expect(textComponent1.fillColor, TextComponentFillColor.blue);
-      expect(textComponent1.highlightColor, TextComponentHighlightColor.blue);
-      expect(textComponent1.isBold, false);
-      expect(textComponent1.isItalic, true);
-      expect(textComponent1.isUnderlined, false);
+      expect(textComponent1.style.size, 5.0);
+      expect(
+        textComponent1.style.alignment,
+        TextComponentAlignment.justify,
+      );
+      expect(
+        textComponent1.style.fillColor,
+        TextComponentFillColor.blue,
+      );
+      expect(
+        textComponent1.style.highlightColor,
+        TextComponentHighlightColor.blue,
+      );
+      expect(textComponent1.style.isBold, false);
+      expect(textComponent1.style.isItalic, true);
+      expect(textComponent1.style.isUnderlined, false);
 
       final textComponent2 = textComponent1.copyWith(
         name: 'New name',
         data: 'New data',
-        size: 8.0,
-        alignment: TextComponentAlignment.start,
-        fillColor: TextComponentFillColor.red,
-        highlightColor: TextComponentHighlightColor.pink,
-        isBold: true,
-        isItalic: false,
-        isUnderlined: true,
+        style: style1.copyWith(
+          size: 8.0,
+          alignment: TextComponentAlignment.start,
+          fillColor: TextComponentFillColor.red,
+          highlightColor: TextComponentHighlightColor.pink,
+          isBold: true,
+          isItalic: false,
+          isUnderlined: true,
+        ),
       );
       expect(textComponent2.name, 'New name');
       expect(textComponent2.data, 'New data');
-      expect(textComponent2.size, 8.0);
-      expect(textComponent2.alignment, TextComponentAlignment.start);
-      expect(textComponent2.fillColor, TextComponentFillColor.red);
-      expect(textComponent2.highlightColor, TextComponentHighlightColor.pink);
-      expect(textComponent2.isBold, true);
-      expect(textComponent2.isItalic, false);
-      expect(textComponent2.isUnderlined, true);
+      expect(textComponent2.style.size, 8.0);
+      expect(
+        textComponent2.style.alignment,
+        TextComponentAlignment.start,
+      );
+      expect(
+        textComponent2.style.fillColor,
+        TextComponentFillColor.red,
+      );
+      expect(
+        textComponent2.style.highlightColor,
+        TextComponentHighlightColor.pink,
+      );
+      expect(textComponent2.style.isBold, true);
+      expect(textComponent2.style.isItalic, false);
+      expect(textComponent2.style.isUnderlined, true);
     },
   );
 
   test(
-    'TextComponent when equating logically equal Cards, '
+    'TextComponent when equating logically equal TextComponents, '
     'should return true',
     () {
-      var textComponent = TextComponent(name: 'Equal name', data: 'Equal data');
-      expect(textComponent, textComponent.copyWith());
+      final textComponent = TextComponent(name: 'Equal name', data: 'Equal data');
+      expect(
+        textComponent,
+        textComponent.copyWith(style: textComponent.style.copyWith()),
+      );
     },
   );
 
