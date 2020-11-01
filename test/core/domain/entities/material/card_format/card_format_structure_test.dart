@@ -53,33 +53,38 @@ void main() {
     ]);
   });
 
-  test(
-    'CardFormatStructure when constructed by named constructor \'empty\', '
-    'should have an empty state',
+  group(
+    'CardFormatStructure when constructed',
     () {
-      expect(emptyStructure.components, []);
-    },
-  );
+      test(
+        'by named constructor \'empty\', '
+        'should have an empty state',
+        () {
+          expect(emptyStructure.components, []);
+        },
+      );
 
-  test(
-    'CardFormatStructure when constructed with components, '
-    'should shallow copy the passed instance',
-    () {
-      final components = [mockComponent1];
-      final structure = CardFormatStructure(components: components);
+      test(
+        'with components, '
+        'should shallow copy the passed instance',
+        () {
+          final components = [mockComponent1];
+          final structure = CardFormatStructure(components: components);
 
-      expect(components, [mockComponent1]);
-      expect(structure.components, [mockComponent1]);
+          expect(components, [mockComponent1]);
+          expect(structure.components, [mockComponent1]);
 
-      components.add(mockComponent2);
+          components.add(mockComponent2);
 
-      expect(components, [mockComponent1, mockComponent2]);
-      expect(structure.components, [mockComponent1]);
+          expect(components, [mockComponent1, mockComponent2]);
+          expect(structure.components, [mockComponent1]);
 
-      structure.components.remove(mockComponent1);
+          structure.components.remove(mockComponent1);
 
-      expect(components, [mockComponent1, mockComponent2]);
-      expect(structure.components, [mockComponent1]);
+          expect(components, [mockComponent1, mockComponent2]);
+          expect(structure.components, [mockComponent1]);
+        },
+      );
     },
   );
 
