@@ -17,32 +17,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/core/presentation/bottom_navigation/bot_nav_destination.dart';
+import 'package:sona_flutter/core/constants/app_colors.dart';
 
-import '../deck_view_app_bar.dart';
-import '../deck_view_list_tile.dart';
+class DeckViewListTile extends StatelessWidget {
+  const DeckViewListTile({@required this.i});
 
-class DeckViewBotNavDestination extends BotNavDestination {
-  DeckViewBotNavDestination()
-      : super(
-          appBar: DeckViewAppBar(),
-          label: 'Decks',
-          icon: Icon(FluentIcons.dictionary_24_regular),
-          activeIcon: Icon(FluentIcons.dictionary_24_filled),
-        );
+  final int i;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        for (var i = 0; i < 50; i++)
-          Ink(
-            color: Theme.of(context).colorScheme.surface,
-            child: DeckViewListTile(i: i),
+    return ListTile(
+      title: Text(
+        'Deck Title',
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
+      subtitle: Text(
+        '15 Due · 1000 Total · 90% Seen',
+        style: Theme.of(context).textTheme.caption,
+      ),
+      leading: AspectRatio(
+        aspectRatio: 1,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            color: i % 2 == 0 ? kSecondaryCyanColor : kSecondaryPinkColor,
           ),
-      ],
+        ),
+      ),
+      onTap: null,
     );
   }
 }
