@@ -119,7 +119,7 @@ TextTheme _createTextTheme() {
       headline4: TextStyle(
         color: kNeutralColor8,
         fontSize: 36,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         letterSpacing: 0.25,
       ),
       headline5: TextStyle(
@@ -202,7 +202,7 @@ TextTheme _createPrimaryAndAccentTextTheme() {
       headline4: TextStyle(
         color: Colors.white,
         fontSize: 36,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         letterSpacing: 0.25,
       ),
       headline5: TextStyle(
