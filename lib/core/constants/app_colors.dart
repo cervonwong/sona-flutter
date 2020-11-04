@@ -79,6 +79,6 @@ const Color kNeutralColor1 = Color(0xFFFCFCFC);
 
 // Emphasis Opacity Values
 
-const double highEmphasisOpacity = 0.87;
+const double highEmphasisOpacity = 0.90;
 const double mediumEmphasisOpacity = 0.65;
 const double lowEmphasisOpacity = 0.30;
