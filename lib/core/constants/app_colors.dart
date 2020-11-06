@@ -20,11 +20,14 @@
 import 'dart:ui';
 
 // Primary Colors
+// The main color in the UI.
 const Color kPrimaryColor = Color(0xff7b68ee);
 const Color kPrimaryLightColor = Color(0xffdfdbfb);
 const Color kPrimaryDarkColor = Color(0xff5c4dbc);
 
 // Secondary Colors (Always use this order in lists)
+// Use the first three colors (Pink, Cyan, Yellow) mainly.
+// Use the rest of the colors when many colors are needed (e.g. stats charts).
 const Color kSecondaryPinkColor = Color(0xfffd71af);
 const Color kSecondaryCyanColor = Color(0xff49ccf9);
 const Color kSecondaryYellowColor = Color(0xffffc800);
@@ -35,6 +38,7 @@ const Color kSecondaryBlueColor = Color(0xff5577ff);
 const Color kSecondaryPurpleColor = Color(0xffb660dd);
 
 // Accent Colors
+// Reserved for denotative colors.
 const Color _kAccentRedColor = Color(0xfffc575e);
 const Color _kAccentOrangeColor = Color(0xffff8600);
 const Color _kAccentYellowColor = Color(0xfffcb410);
@@ -45,11 +49,14 @@ const Color _kAccentGrayColor = Color(0xff34495e);
 const Color _kAccentBrownColor = Color(0xffb17e22);
 
 // Denotative Colors
+// Specify a certain state in the UI.
 const Color kErrorColor = _kAccentRedColor;
 const Color kWarningColor = _kAccentOrangeColor;
 const Color kSuccessColor = _kAccentGreenColor;
 
 // Text Fill Colors
+// User is able to select from these colors when choosing a text color
+// when creating the style of a card format.
 const Color kTextFillRedColor = Color(0xffe03e3e);
 const Color kTextFillOrangeColor = Color(0xffd9730d);
 const Color kTextFillYellowColor = Color(0xffdfab01);
@@ -60,6 +67,8 @@ const Color kTextFillBlackColor = Color(0xff343434);
 const Color kTextFillBrownColor = Color(0xff64473a);
 
 // Text Highlight Colors
+// User is able to select from these colors when choosing a text highlight color
+// when creating the style of a card format.
 const Color kTextHighlightPinkColor = Color(0xffffe0e0);
 const Color kTextHighlightOrangeColor = Color(0xffffdbba);
 const Color kTextHighlightYellowColor = Color(0xfffffa78);
@@ -68,6 +77,7 @@ const Color kTextHighlightBlueColor = Color(0xffcae4f6);
 const Color kTextHighlightPurpleColor = Color(0xffeedbf6);
 
 // Neutrals
+// Used in texts, dividers, backgrounds, surfaces, and other UI components.
 const Color kNeutralColor8 = Color(0xFF14142B);
 const Color kNeutralColor7 = Color(0xFF4E4B66);
 const Color kNeutralColor6 = Color(0xFF6E7191);
@@ -78,6 +88,8 @@ const Color kNeutralColor2 = Color(0XFFF7F7FC);
 const Color kNeutralColor1 = Color(0xFFFCFCFC);
 
 // Emphasis Opacity Values
+// Used to set the opacity of the colors of texts or icons at different
+// emphasis levels to express hierarchy between elements.
 const double highEmphasisOpacity = 0.90;
 const double mediumEmphasisOpacity = 0.65;
 const double lowEmphasisOpacity = 0.30;
