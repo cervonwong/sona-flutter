@@ -24,15 +24,15 @@ const Color kPrimaryColor = Color(0xff7b68ee);
 const Color kPrimaryLightColor = Color(0xffdfdbfb);
 const Color kPrimaryDarkColor = Color(0xff5c4dbc);
 
-// Secondary Colors
-const Color kSecondaryCyanColor = Color(0xff49ccf9);
-const Color kSecondaryCyanDarkColor = Color(0xff27a4ce);
+// Secondary Colors (Always use this order in lists)
 const Color kSecondaryPinkColor = Color(0xfffd71af);
-const Color kSecondaryPinkDarkColor = Color(0xffd44988);
+const Color kSecondaryCyanColor = Color(0xff49ccf9);
 const Color kSecondaryYellowColor = Color(0xffffc800);
-const Color kSecondaryYellowDarkColor = Color(0xffd19b1f);
-const Color kSecondaryGreenColor = Color(0xff67cb48);
-const Color kSecondaryGreenDarkColor = Color(0xff58a540);
+const Color kSecondaryGreenColor = Color(0xff00b884);
+const Color kSecondaryRedColor = Color(0xfffd7171);
+const Color kSecondaryTurquoiseColor = Color(0xff44ddcc);
+const Color kSecondaryBlueColor = Color(0xff5577ff);
+const Color kSecondaryPurpleColor = Color(0xffb660dd);
 
 // Accent Colors
 const Color _kAccentRedColor = Color(0xfffc575e);
@@ -78,7 +78,6 @@ const Color kNeutralColor2 = Color(0XFFF7F7FC);
 const Color kNeutralColor1 = Color(0xFFFCFCFC);
 
 // Emphasis Opacity Values
-
 const double highEmphasisOpacity = 0.90;
 const double mediumEmphasisOpacity = 0.65;
 const double lowEmphasisOpacity = 0.30;
