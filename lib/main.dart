@@ -46,6 +46,8 @@ ThemeData _createThemeData() {
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
     bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
+    splashColor: kNeutralColor8.withOpacity(0.06),
+    highlightColor: kNeutralColor8.withOpacity(0.06),
   );
 }
 
