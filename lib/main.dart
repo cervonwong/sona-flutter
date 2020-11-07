@@ -19,7 +19,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sona_flutter/features/screens/home_screen.dart';
+import 'package:sona_flutter/screens/home_screen.dart';
 
 import 'core/constants/app_colors.dart';
 
