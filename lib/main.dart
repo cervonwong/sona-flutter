@@ -18,7 +18,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sona_flutter/screens/home_screen.dart';
 
 import 'core/constants/app_colors.dart';
@@ -99,73 +98,84 @@ ColorScheme _createColorScheme() {
 }
 
 TextTheme _createBaseTextTheme() {
-  return GoogleFonts.workSansTextTheme(
-    TextTheme(
-      headline1: TextStyle(
-        fontSize: 102,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -1.5,
-      ),
-      headline2: TextStyle(
-        fontSize: 64,
-        fontWeight: FontWeight.w800,
-        letterSpacing: -0.5,
-      ),
-      headline3: TextStyle(
-        fontSize: 51,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.0,
-      ),
-      headline4: TextStyle(
-        fontSize: 36,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.25,
-      ),
-      headline5: TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.0,
-      ),
-      headline6: TextStyle(
-        fontSize: 21,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.15,
-      ),
-      subtitle1: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-      ),
-      subtitle2: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.1,
-      ),
-      bodyText1: TextStyle(
-        fontSize: 17,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.5,
-      ),
-      bodyText2: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.25,
-      ),
-      button: TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 1.25,
-      ),
-      caption: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.4,
-      ),
-      overline: TextStyle(
-        fontSize: 11,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1.5,
-      ),
+  return TextTheme(
+    headline1: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 102,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -1.5,
+    ),
+    headline2: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 64,
+      fontWeight: FontWeight.w800,
+      letterSpacing: -0.5,
+    ),
+    headline3: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 51,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.0,
+    ),
+    headline4: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 36,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.25,
+    ),
+    headline5: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 25,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.0,
+    ),
+    headline6: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 21,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+    ),
+    subtitle1: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.15,
+    ),
+    subtitle2: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+    ),
+    bodyText1: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 17,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.5,
+    ),
+    bodyText2: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.25,
+    ),
+    button: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 15,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 1.25,
+    ),
+    caption: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.4,
+    ),
+    overline: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 11,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 1.5,
     ),
   );
 }
