@@ -17,14 +17,117 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:sona_flutter/core/constants/app_widget_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Home'),
+      ),
+      drawer: CustomDrawer(),
       body: SafeArea(
         child: Container(),
+      ),
+    );
+  }
+}
+
+class CustomDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Padding(
+        padding: const EdgeInsets.only(right: 16.0),
+        child: ListTileTheme(
+          style: ListTileStyle.drawer,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(kSmallCornerRadius),
+              bottomRight: Radius.circular(kSmallCornerRadius),
+            ),
+          ),
+          child: ListView(
+            children: [
+              CustomListTile(
+                selected: true,
+                title: 'Home',
+                icon: FluentIcons.home_24_regular,
+                selectedIcon: FluentIcons.home_24_filled,
+                onTap: () {},
+              ),
+              CustomListTile(
+                selected: false,
+                title: 'Browse',
+                icon: FluentIcons.search_24_regular,
+                selectedIcon: FluentIcons.search_24_filled,
+                onTap: () {},
+              ),
+              CustomListTile(
+                selected: false,
+                title: 'Edit',
+                icon: FluentIcons.edit_24_regular,
+                selectedIcon: FluentIcons.edit_24_filled,
+                onTap: () {},
+              ),
+              CustomListTile(
+                selected: false,
+                title: 'Progress',
+                icon: FluentIcons.data_pie_24_regular,
+                selectedIcon: FluentIcons.data_pie_24_filled,
+                onTap: () {},
+              ),
+              AboutListTile(
+                icon: Icon(FluentIcons.info_24_regular),
+                applicationName: 'Sona',
+                applicationVersion: 'v.DEV',
+                applicationLegalese: 'Copyright (C) 2020 Cervon Wong',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  final bool selected;
+  final String title;
+  final IconData icon;
+  final IconData selectedIcon;
+  final GestureTapCallback onTap;
+
+  CustomListTile({
+    @required this.selected,
+    @required this.title,
+    @required this.icon,
+    @required this.selectedIcon,
+    @required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Ink(
+      decoration: BoxDecoration(
+        color: selected
+            ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
+            : null,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(kSmallCornerRadius),
+          bottomRight: Radius.circular(kSmallCornerRadius),
+        ),
+      ),
+      child: ListTile(
+        tileColor: Colors.transparent,
+        selected: selected,
+        leading: selected ? Icon(selectedIcon) : Icon(icon),
+        title: Text(title),
+        onTap: onTap,
       ),
     );
   }
