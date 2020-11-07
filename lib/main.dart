@@ -42,9 +42,9 @@ class SonaApp extends StatelessWidget {
 ThemeData _createThemeData() {
   return _createBaseThemeData().copyWith(
     colorScheme: _createColorScheme(),
+    textTheme: _createTextTheme(),
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
-    textTheme: _createTextTheme(),
     bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
   );
 }
