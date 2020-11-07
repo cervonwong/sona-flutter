@@ -46,9 +46,8 @@ class CustomDrawer extends StatelessWidget {
         child: ListTileTheme(
           style: ListTileStyle.drawer,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(kSmallCornerRadius),
-              bottomRight: Radius.circular(kSmallCornerRadius),
+            borderRadius: BorderRadius.horizontal(
+              right: Radius.circular(kSmallCornerRadius),
             ),
           ),
           child: ListView(
@@ -79,6 +78,20 @@ class CustomDrawer extends StatelessWidget {
                 title: 'Progress',
                 icon: FluentIcons.data_pie_24_regular,
                 selectedIcon: FluentIcons.data_pie_24_filled,
+                onTap: () {},
+              ),
+              CustomListTile(
+                selected: false,
+                title: 'Settings',
+                icon: FluentIcons.settings_24_regular,
+                selectedIcon: FluentIcons.settings_24_filled,
+                onTap: () {},
+              ),
+              CustomListTile(
+                selected: false,
+                title: 'Help',
+                icon: FluentIcons.question_circle_24_regular,
+                selectedIcon: FluentIcons.question_circle_24_filled,
                 onTap: () {},
               ),
               AboutListTile(
@@ -117,9 +130,8 @@ class CustomListTile extends StatelessWidget {
         color: selected
             ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
             : null,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(kSmallCornerRadius),
-          bottomRight: Radius.circular(kSmallCornerRadius),
+        borderRadius: BorderRadius.horizontal(
+          right: Radius.circular(kSmallCornerRadius),
         ),
       ),
       child: ListTile(
