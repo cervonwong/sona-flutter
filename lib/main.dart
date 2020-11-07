@@ -44,6 +44,7 @@ ThemeData _createThemeData() {
     textTheme: _createTextTheme(),
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
+    dividerTheme: _createDividerTheme(),
     bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
     splashColor: kNeutralColor8.withOpacity(0.06),
     highlightColor: kNeutralColor8.withOpacity(0.06),
@@ -191,6 +192,13 @@ TextTheme _createPrimaryAndAccentTextTheme() {
   return _createBaseTextTheme().apply(
     bodyColor: Colors.white,
     displayColor: Colors.white,
+  );
+}
+
+DividerThemeData _createDividerTheme() {
+  return DividerThemeData(
+    color: kNeutralColor4,
+    thickness: 1.0,
   );
 }
 
