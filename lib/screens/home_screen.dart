@@ -145,7 +145,13 @@ class CustomListTile extends StatelessWidget {
         tileColor: Colors.transparent,
         selected: selected,
         leading: selected ? Icon(selectedIcon) : Icon(icon),
-        title: Text(title),
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: selected ? Theme.of(context).colorScheme.primary : null,
+                fontWeight: selected ? FontWeight.w500 : null,
+              ),
+        ),
         onTap: onTap,
       ),
     );
