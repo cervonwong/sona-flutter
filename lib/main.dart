@@ -130,12 +130,12 @@ TextTheme _createBaseTextTheme() {
         letterSpacing: 0.15,
       ),
       subtitle1: TextStyle(
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.15,
       ),
       subtitle2: TextStyle(
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.1,
       ),
@@ -145,7 +145,7 @@ TextTheme _createBaseTextTheme() {
         letterSpacing: 0.5,
       ),
       bodyText2: TextStyle(
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
       ),
@@ -155,7 +155,7 @@ TextTheme _createBaseTextTheme() {
         letterSpacing: 1.25,
       ),
       caption: TextStyle(
-        fontSize: 13,
+        fontSize: 12,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.4,
       ),
