@@ -46,7 +46,6 @@ ThemeData _createThemeData() {
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
     appBarTheme: _createAppBarTheme(),
     dividerTheme: _createDividerTheme(),
-    bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
   );
 }
 
@@ -208,14 +207,5 @@ DividerThemeData _createDividerTheme() {
     color: kNeutralColor4,
     space: 0.0,
     thickness: 1.0,
-  );
-}
-
-BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
-  return BottomNavigationBarThemeData(
-    backgroundColor: kNeutralColor1,
-    elevation: 8.0,
-    selectedItemColor: kPrimaryColor,
-    unselectedItemColor: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
   );
 }
