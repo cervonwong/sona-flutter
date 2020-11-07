@@ -33,7 +33,124 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrawer(),
       drawerScrimColor: kNeutralColor8.withOpacity(0.50),
       body: SafeArea(
-        child: Container(),
+        child: ListView(
+          children: [
+            HomeHeader(),
+            SizedBox(height: 32.0),
+            DeckListTitleBar(),
+            SizedBox(height: 8.0),
+            DeckListTile(
+              title: 'Toki Pona Base Terms Deck',
+              dateMetadata: '1 day ago',
+              dueCardCount: 12,
+            ),
+            Divider(),
+            DeckListTile(
+              title: 'Toki Pona Base Terms Deck',
+              dateMetadata: '1 day ago',
+              dueCardCount: 12,
+            ),
+            Divider(),
+            DeckListTile(
+              title: 'Toki Pona Base Terms Deck',
+              dateMetadata: '1 day ago',
+              dueCardCount: 12,
+            ),
+            Divider(),
+            DeckListTile(
+              title: 'Toki Pona Base Terms Deck',
+              dateMetadata: '1 day ago',
+              dueCardCount: 12,
+            ),
+            Divider(),
+            DeckListTile(
+              title: 'Toki Pona Base Terms Deck',
+              dateMetadata: '1 day ago',
+              dueCardCount: 12,
+            ),
+            Divider(),
+            DeckListTile(
+              title: 'Toki Pona Base Terms Deck',
+              dateMetadata: '1 day ago',
+              dueCardCount: 12,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Container(
+        color: Theme.of(context).colorScheme.surface,
+        height: 300,
+      ),
+    );
+  }
+}
+
+class DeckListTitleBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        '136 cards to review',
+        style: Theme.of(context).textTheme.bodyText1.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+      ),
+    );
+  }
+}
+
+class DeckListTile extends StatelessWidget {
+  final String title;
+  final String dateMetadata;
+  final int dueCardCount;
+
+  const DeckListTile({
+    @required this.title,
+    @required this.dateMetadata,
+    @required this.dueCardCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 64.0,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 12.0,
+      ),
+      color: Theme.of(context).colorScheme.surface,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                dateMetadata,
+                style: Theme.of(context).textTheme.caption.copyWith(
+                      color: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
+                    ),
+              ),
+              Spacer(),
+              Text(
+                '$dueCardCount to review',
+                style: Theme.of(context).textTheme.caption.copyWith(
+                      color: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
+                    ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8.0),
+          Text(title, style: Theme.of(context).textTheme.subtitle1),
+        ],
       ),
     );
   }
