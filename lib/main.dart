@@ -267,6 +267,6 @@ BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
     backgroundColor: kNeutralColor1,
     elevation: 8.0,
     selectedItemColor: kPrimaryColor,
-    unselectedItemColor: kNeutralColor8.withOpacity(0.6),
+    unselectedItemColor: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
   );
 }
