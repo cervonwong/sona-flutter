@@ -46,8 +46,6 @@ ThemeData _createThemeData() {
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
     dividerTheme: _createDividerTheme(),
     bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
-    splashColor: kNeutralColor8.withOpacity(0.06),
-    highlightColor: kNeutralColor8.withOpacity(0.06),
   );
 }
 
@@ -67,6 +65,8 @@ ThemeData _createBaseThemeData() {
     cursorColor: kPrimaryColor,
     textSelectionColor: kPrimaryLightColor,
     textSelectionHandleColor: kPrimaryColor,
+    splashColor: kNeutralColor8.withOpacity(0.06),
+    highlightColor: kNeutralColor8.withOpacity(0.06),
   );
 }
 
