@@ -29,9 +29,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
+      appBar: _HomeAppBar(),
       drawer: CustomDrawer(),
       drawerScrimColor: kNeutralColor8.withOpacity(0.50),
       body: SafeArea(
@@ -81,6 +79,27 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _HomeAppBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text('Home'),
+      leading: IconButton(
+        icon: Icon(FluentIcons.list_24_regular),
+        onPressed: () => Scaffold.of(context).openDrawer(),
+        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
 class HomeHeader extends StatelessWidget {
