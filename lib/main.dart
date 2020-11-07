@@ -96,81 +96,69 @@ ColorScheme _createColorScheme() {
   );
 }
 
-TextTheme _createTextTheme() {
+TextTheme _createBaseTextTheme() {
   return GoogleFonts.workSansTextTheme(
     TextTheme(
       headline1: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 102,
         fontWeight: FontWeight.w300,
         letterSpacing: -1.5,
       ),
       headline2: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 64,
         fontWeight: FontWeight.w300,
         letterSpacing: -0.5,
       ),
       headline3: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 51,
         fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
       ),
       headline4: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 36,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.25,
       ),
       headline5: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 25,
         fontWeight: FontWeight.w400,
       ),
       headline6: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 21,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.15,
       ),
       subtitle1: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 17,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.15,
       ),
       subtitle2: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 15,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.1,
       ),
       bodyText1: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 17,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
       ),
       bodyText2: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 15,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
       ),
       button: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 15,
         fontWeight: FontWeight.w500,
         letterSpacing: 1.25,
       ),
       caption: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 13,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.4,
       ),
       overline: TextStyle(
-        color: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
         fontSize: 11,
         fontWeight: FontWeight.w400,
         letterSpacing: 1.5,
@@ -179,86 +167,17 @@ TextTheme _createTextTheme() {
   );
 }
 
+TextTheme _createTextTheme() {
+  return _createBaseTextTheme().apply(
+    bodyColor: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
+    displayColor: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
+  );
+}
+
 TextTheme _createPrimaryAndAccentTextTheme() {
-  return GoogleFonts.workSansTextTheme(
-    TextTheme(
-      headline1: TextStyle(
-        color: Colors.white,
-        fontSize: 102,
-        fontWeight: FontWeight.w300,
-        letterSpacing: -1.5,
-      ),
-      headline2: TextStyle(
-        color: Colors.white,
-        fontSize: 64,
-        fontWeight: FontWeight.w300,
-        letterSpacing: -0.5,
-      ),
-      headline3: TextStyle(
-        color: Colors.white,
-        fontSize: 51,
-        fontWeight: FontWeight.w400,
-      ),
-      headline4: TextStyle(
-        color: Colors.white,
-        fontSize: 36,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.25,
-      ),
-      headline5: TextStyle(
-        color: Colors.white,
-        fontSize: 25,
-        fontWeight: FontWeight.w400,
-      ),
-      headline6: TextStyle(
-        color: Colors.white,
-        fontSize: 21,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.15,
-      ),
-      subtitle1: TextStyle(
-        color: Colors.white,
-        fontSize: 17,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-      ),
-      subtitle2: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.1,
-      ),
-      bodyText1: TextStyle(
-        color: Colors.white,
-        fontSize: 17,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.5,
-      ),
-      bodyText2: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.25,
-      ),
-      button: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 1.25,
-      ),
-      caption: TextStyle(
-        color: Colors.white,
-        fontSize: 13,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.4,
-      ),
-      overline: TextStyle(
-        color: Colors.white,
-        fontSize: 11,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1.5,
-      ),
-    ),
+  return _createBaseTextTheme().apply(
+    bodyColor: Colors.white,
+    displayColor: Colors.white,
   );
 }
 
