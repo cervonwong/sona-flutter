@@ -44,6 +44,7 @@ ThemeData _createThemeData() {
     textTheme: _createTextTheme(),
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
+    appBarTheme: _createAppBarTheme(),
     dividerTheme: _createDividerTheme(),
     bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
   );
@@ -192,6 +193,13 @@ TextTheme _createPrimaryAndAccentTextTheme() {
   return _createBaseTextTheme().apply(
     bodyColor: Colors.white,
     displayColor: Colors.white,
+  );
+}
+
+AppBarTheme _createAppBarTheme() {
+  return AppBarTheme(
+    centerTitle: true,
+    elevation: 0.0,
   );
 }
 
