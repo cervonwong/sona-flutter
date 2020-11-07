@@ -18,9 +18,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/screens/home_screen.dart';
 
 import 'core/constants/app_colors.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(SonaApp());

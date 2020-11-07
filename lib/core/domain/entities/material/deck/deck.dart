@@ -19,8 +19,9 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
-import 'package:sona_flutter/core/utils/nullable.dart';
+
+import '../../../../utils/nullable.dart';
+import '../entry/entry.dart';
 
 class Deck extends Equatable {
   final int id;

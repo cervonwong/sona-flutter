@@ -18,7 +18,8 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/core/constants/app_colors.dart';
+
+import '../../../../../../core/constants/app_colors.dart';
 
 class DeckListTile extends StatelessWidget {
   final String title;
