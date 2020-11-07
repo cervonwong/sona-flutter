@@ -198,6 +198,7 @@ TextTheme _createPrimaryAndAccentTextTheme() {
 DividerThemeData _createDividerTheme() {
   return DividerThemeData(
     color: kNeutralColor4,
+    space: 0.0,
     thickness: 1.0,
   );
 }
