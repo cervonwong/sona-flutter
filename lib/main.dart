@@ -101,17 +101,17 @@ TextTheme _createBaseTextTheme() {
     TextTheme(
       headline1: TextStyle(
         fontSize: 102,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w600,
         letterSpacing: -1.5,
       ),
       headline2: TextStyle(
         fontSize: 64,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w800,
         letterSpacing: -0.5,
       ),
       headline3: TextStyle(
         fontSize: 51,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         letterSpacing: 0.0,
       ),
       headline4: TextStyle(
@@ -121,7 +121,8 @@ TextTheme _createBaseTextTheme() {
       ),
       headline5: TextStyle(
         fontSize: 25,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.0,
       ),
       headline6: TextStyle(
         fontSize: 21,
@@ -150,7 +151,7 @@ TextTheme _createBaseTextTheme() {
       ),
       button: TextStyle(
         fontSize: 15,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
         letterSpacing: 1.25,
       ),
       caption: TextStyle(
