@@ -40,67 +40,74 @@ class HomeScreen extends StatelessWidget {
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Padding(
-        padding: const EdgeInsets.only(right: 16.0),
-        child: ListTileTheme(
-          style: ListTileStyle.drawer,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.horizontal(
-              right: Radius.circular(kSmallCornerRadius),
+    return ClipRRect(
+      borderRadius: BorderRadius.horizontal(
+        right: Radius.circular(
+          kLargeCornerRadius,
+        ),
+      ),
+      child: Drawer(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: ListTileTheme(
+            style: ListTileStyle.drawer,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.horizontal(
+                right: Radius.circular(kSmallCornerRadius),
+              ),
             ),
-          ),
-          child: ListView(
-            children: [
-              CustomListTile(
-                selected: true,
-                title: 'Home',
-                icon: FluentIcons.home_24_regular,
-                selectedIcon: FluentIcons.home_24_filled,
-                onTap: () {},
-              ),
-              CustomListTile(
-                selected: false,
-                title: 'Browse',
-                icon: FluentIcons.search_24_regular,
-                selectedIcon: FluentIcons.search_24_filled,
-                onTap: () {},
-              ),
-              CustomListTile(
-                selected: false,
-                title: 'Edit',
-                icon: FluentIcons.edit_24_regular,
-                selectedIcon: FluentIcons.edit_24_filled,
-                onTap: () {},
-              ),
-              CustomListTile(
-                selected: false,
-                title: 'Progress',
-                icon: FluentIcons.data_pie_24_regular,
-                selectedIcon: FluentIcons.data_pie_24_filled,
-                onTap: () {},
-              ),
-              CustomListTile(
-                selected: false,
-                title: 'Settings',
-                icon: FluentIcons.settings_24_regular,
-                selectedIcon: FluentIcons.settings_24_filled,
-                onTap: () {},
-              ),
-              CustomListTile(
-                selected: false,
-                title: 'Help',
-                icon: FluentIcons.question_circle_24_regular,
-                selectedIcon: FluentIcons.question_circle_24_filled,
-                onTap: () {},
-              ),
-              AboutListTile(
-                icon: Icon(FluentIcons.info_24_regular),
-                applicationName: 'Sona',
-                applicationVersion: 'v.DEV',
-                applicationLegalese: 'Copyright (C) 2020 Cervon Wong',
-              ),
-            ],
+            child: ListView(
+              children: [
+                CustomListTile(
+                  selected: true,
+                  title: 'Home',
+                  icon: FluentIcons.home_24_regular,
+                  selectedIcon: FluentIcons.home_24_filled,
+                  onTap: () {},
+                ),
+                CustomListTile(
+                  selected: false,
+                  title: 'Browse',
+                  icon: FluentIcons.search_24_regular,
+                  selectedIcon: FluentIcons.search_24_filled,
+                  onTap: () {},
+                ),
+                CustomListTile(
+                  selected: false,
+                  title: 'Edit',
+                  icon: FluentIcons.edit_24_regular,
+                  selectedIcon: FluentIcons.edit_24_filled,
+                  onTap: () {},
+                ),
+                CustomListTile(
+                  selected: false,
+                  title: 'Progress',
+                  icon: FluentIcons.data_pie_24_regular,
+                  selectedIcon: FluentIcons.data_pie_24_filled,
+                  onTap: () {},
+                ),
+                CustomListTile(
+                  selected: false,
+                  title: 'Settings',
+                  icon: FluentIcons.settings_24_regular,
+                  selectedIcon: FluentIcons.settings_24_filled,
+                  onTap: () {},
+                ),
+                CustomListTile(
+                  selected: false,
+                  title: 'Help',
+                  icon: FluentIcons.question_circle_24_regular,
+                  selectedIcon: FluentIcons.question_circle_24_filled,
+                  onTap: () {},
+                ),
+                AboutListTile(
+                  icon: Icon(FluentIcons.info_24_regular),
+                  applicationName: 'Sona',
+                  applicationVersion: 'v.DEV',
+                  applicationLegalese: 'Copyright (C) 2020 Cervon Wong',
+                ),
+              ],
+            ),
           ),
         ),
       ),
