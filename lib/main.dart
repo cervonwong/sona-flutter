@@ -18,6 +18,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:sona_flutter/core/constants/app_widget_constants.dart';
 
 import 'core/constants/app_colors.dart';
 import 'screens/home_screen.dart';
@@ -46,6 +47,7 @@ ThemeData _createThemeData() {
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
     appBarTheme: _createAppBarTheme(),
     dividerTheme: _createDividerTheme(),
+    tooltipTheme: _createTooltipTheme(),
   );
 }
 
@@ -207,5 +209,14 @@ DividerThemeData _createDividerTheme() {
     color: kNeutralColor4,
     space: 0.0,
     thickness: 1.0,
+  );
+}
+
+TooltipThemeData _createTooltipTheme() {
+  return TooltipThemeData(
+    decoration: BoxDecoration(
+      color: kNeutralColor7.withOpacity(0.8),
+      borderRadius: BorderRadius.circular(kSmallCornerRadius),
+    ),
   );
 }
