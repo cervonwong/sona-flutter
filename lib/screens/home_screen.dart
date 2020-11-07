@@ -19,6 +19,7 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:sona_flutter/core/constants/app_colors.dart';
 import 'package:sona_flutter/core/constants/app_widget_constants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -30,6 +31,7 @@ class HomeScreen extends StatelessWidget {
         title: Text('Home'),
       ),
       drawer: CustomDrawer(),
+      drawerScrimColor: kNeutralColor8.withOpacity(0.50),
       body: SafeArea(
         child: Container(),
       ),
