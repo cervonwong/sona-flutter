@@ -19,8 +19,11 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/core/constants/app_colors.dart';
-import 'package:sona_flutter/core/constants/app_widget_constants.dart';
+
+import '../core/constants/app_colors.dart';
+import '../core/constants/app_widget_constants.dart';
+import '../features/stats/streak/presentation/widgets/deck_list/deck_list_tile.dart';
+import '../features/stats/streak/presentation/widgets/deck_list/deck_list_title_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -89,69 +92,6 @@ class HomeHeader extends StatelessWidget {
       child: Container(
         color: Theme.of(context).colorScheme.surface,
         height: 300,
-      ),
-    );
-  }
-}
-
-class DeckListTitleBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Text(
-        '136 cards to review',
-        style: Theme.of(context).textTheme.bodyText1.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-      ),
-    );
-  }
-}
-
-class DeckListTile extends StatelessWidget {
-  final String title;
-  final String dateMetadata;
-  final int dueCardCount;
-
-  const DeckListTile({
-    @required this.title,
-    @required this.dateMetadata,
-    @required this.dueCardCount,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 64.0,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 12.0,
-      ),
-      color: Theme.of(context).colorScheme.surface,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                dateMetadata,
-                style: Theme.of(context).textTheme.caption.copyWith(
-                      color: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
-                    ),
-              ),
-              Spacer(),
-              Text(
-                '$dueCardCount to review',
-                style: Theme.of(context).textTheme.caption.copyWith(
-                      color: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
-                    ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8.0),
-          Text(title, style: Theme.of(context).textTheme.subtitle1),
-        ],
       ),
     );
   }
