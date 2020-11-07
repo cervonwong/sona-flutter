@@ -90,6 +90,6 @@ const Color kNeutralColor1 = Color(0xFFFCFCFC);
 // Emphasis Opacity Values
 // Used to set the opacity of the colors of texts or icons at different
 // emphasis levels to express hierarchy between elements.
-const double highEmphasisOpacity = 0.90;
-const double mediumEmphasisOpacity = 0.65;
-const double lowEmphasisOpacity = 0.30;
+const double kHighEmphasisOpacity = 0.90;
+const double kMediumEmphasisOpacity = 0.65;
+const double kLowEmphasisOpacity = 0.30;
