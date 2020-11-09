@@ -17,54 +17,104 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/constants/app_colors.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:sona_flutter/core/constants/app_colors.dart';
 
 class DeckListTile extends StatelessWidget {
   final String title;
-  final String dateMetadata;
+  final String dateString;
+  final int reviewedCardCount;
   final int dueCardCount;
 
   const DeckListTile({
     @required this.title,
-    @required this.dateMetadata,
+    @required this.dateString,
+    @required this.reviewedCardCount,
+    @required this.dueCardCount,
+  })  : assert(title != null),
+        assert(dateString != null),
+        assert(reviewedCardCount != null),
+        assert(dueCardCount != null),
+        assert(reviewedCardCount >= 0),
+        assert(dueCardCount >= 0),
+        assert(reviewedCardCount <= dueCardCount);
+
+  @override
+  Widget build(BuildContext context) {
+    return Ink(
+      color: Theme.of(context).colorScheme.surface,
+      child: ListTile(
+        key: Key(title),
+        title: Text(
+          title,
+          softWrap: false,
+          overflow: TextOverflow.fade,
+        ),
+        subtitle: Text(
+          dateString,
+          style: Theme.of(context).textTheme.caption.copyWith(
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurface
+                    .withOpacity(kMediumEmphasisOpacity),
+              ),
+        ),
+        leading: _ReviewProgressIndicator(
+          reviewedCardCount: reviewedCardCount,
+          dueCardCount: dueCardCount,
+        ),
+        trailing: SizedBox(
+          height: 24.0,
+          width: 24.0,
+          child: IconButton(
+            splashRadius: 24.0,
+            padding: const EdgeInsets.all(0.0),
+            icon: Icon(FluentIcons.more_vertical_24_regular),
+            onPressed: () {},
+          ),
+        ),
+        onTap: () {},
+      ),
+    );
+  }
+}
+
+class _ReviewProgressIndicator extends StatelessWidget {
+  final int reviewedCardCount;
+  final int dueCardCount;
+
+  const _ReviewProgressIndicator({
+    @required this.reviewedCardCount,
     @required this.dueCardCount,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 64.0,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 12.0,
-      ),
-      color: Theme.of(context).colorScheme.surface,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                dateMetadata,
-                style: Theme.of(context).textTheme.caption.copyWith(
-                      color: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
-                    ),
-              ),
-              Spacer(),
-              Text(
-                '$dueCardCount to review',
-                style: Theme.of(context).textTheme.caption.copyWith(
-                      color: kNeutralColor8.withOpacity(kMediumEmphasisOpacity),
-                    ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8.0),
-          Text(title, style: Theme.of(context).textTheme.subtitle1),
-        ],
-      ),
+    return CircularPercentIndicator(
+      percent: (reviewedCardCount / dueCardCount),
+      lineWidth: 4.0,
+      radius: 40.0,
+      circularStrokeCap: CircularStrokeCap.round,
+      backgroundColor: kNeutralColor3,
+      progressColor: Theme.of(context).colorScheme.primary,
+      center: reviewedCardCount == dueCardCount
+          ? Icon(
+              FluentIcons.checkmark_12_filled,
+              size: 20.0,
+              color: Theme.of(context).colorScheme.primary,
+            )
+          : Text(
+              '${dueCardCount - reviewedCardCount}',
+              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(kMediumEmphasisOpacity),
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
     );
   }
 }
