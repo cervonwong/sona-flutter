@@ -63,14 +63,14 @@ ThemeData _createBaseThemeData() {
     accentColor: kPrimaryColor,
 
     backgroundColor: kNeutralColor2,
-    errorColor: kErrorColor,
-    scaffoldBackgroundColor: kNeutralColor2,
+    canvasColor: kNeutralColor1,
     cursorColor: kPrimaryColor,
+    errorColor: kErrorColor,
+    highlightColor: kNeutralColor8.withOpacity(0.06),
+    scaffoldBackgroundColor: kNeutralColor2,
+    splashColor: kNeutralColor8.withOpacity(0.06),
     textSelectionColor: kPrimaryLightColor,
     textSelectionHandleColor: kPrimaryColor,
-    splashColor: kNeutralColor8.withOpacity(0.06),
-    highlightColor: kNeutralColor8.withOpacity(0.06),
-    canvasColor: kNeutralColor1,
   );
 }
 
