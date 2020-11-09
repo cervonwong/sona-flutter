@@ -219,7 +219,7 @@ class DrawerTile extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        tileColor: Colors.transparent,
+        dense: true,
         selected: selected,
         leading: selected ? Icon(selectedIcon) : Icon(icon),
         title: Text(
