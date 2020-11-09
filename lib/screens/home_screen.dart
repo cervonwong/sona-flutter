@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
             DeckListTile(
               title: 'Toki Pona Base Terms Deck',
               dateString: '1 day ago',
-              reviewedCardCount: 0,
+              reviewedCardCount: 2,
               dueCardCount: 120,
             ),
             DeckListTile(
