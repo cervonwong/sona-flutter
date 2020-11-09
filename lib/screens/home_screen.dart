@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _HomeAppBar(),
-      drawer: CustomDrawer(),
+      drawer: SonaDrawer(),
       drawerScrimColor: kNeutralColor8.withOpacity(0.50),
       body: SafeArea(
         child: ListView(
@@ -114,7 +114,7 @@ class HomeHeader extends StatelessWidget {
   }
 }
 
-class CustomDrawer extends StatelessWidget {
+class SonaDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -135,42 +135,42 @@ class CustomDrawer extends StatelessWidget {
             ),
             child: ListView(
               children: [
-                CustomListTile(
+                DrawerTile(
                   selected: true,
                   title: 'Home',
                   icon: FluentIcons.home_24_regular,
                   selectedIcon: FluentIcons.home_24_filled,
                   onTap: () {},
                 ),
-                CustomListTile(
+                DrawerTile(
                   selected: false,
                   title: 'Browse',
                   icon: FluentIcons.search_24_regular,
                   selectedIcon: FluentIcons.search_24_filled,
                   onTap: () {},
                 ),
-                CustomListTile(
+                DrawerTile(
                   selected: false,
                   title: 'Edit',
                   icon: FluentIcons.edit_24_regular,
                   selectedIcon: FluentIcons.edit_24_filled,
                   onTap: () {},
                 ),
-                CustomListTile(
+                DrawerTile(
                   selected: false,
                   title: 'Progress',
                   icon: FluentIcons.data_pie_24_regular,
                   selectedIcon: FluentIcons.data_pie_24_filled,
                   onTap: () {},
                 ),
-                CustomListTile(
+                DrawerTile(
                   selected: false,
                   title: 'Settings',
                   icon: FluentIcons.settings_24_regular,
                   selectedIcon: FluentIcons.settings_24_filled,
                   onTap: () {},
                 ),
-                CustomListTile(
+                DrawerTile(
                   selected: false,
                   title: 'Help',
                   icon: FluentIcons.question_circle_24_regular,
@@ -192,14 +192,14 @@ class CustomDrawer extends StatelessWidget {
   }
 }
 
-class CustomListTile extends StatelessWidget {
+class DrawerTile extends StatelessWidget {
   final bool selected;
   final String title;
   final IconData icon;
   final IconData selectedIcon;
   final GestureTapCallback onTap;
 
-  CustomListTile({
+  DrawerTile({
     @required this.selected,
     @required this.title,
     @required this.icon,
