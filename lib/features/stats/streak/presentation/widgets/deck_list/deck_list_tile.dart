@@ -20,7 +20,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:sona_flutter/core/constants/app_colors.dart';
+
+import '../../../../../../core/constants/app_colors.dart';
 
 class DeckListTile extends StatelessWidget {
   final String title;

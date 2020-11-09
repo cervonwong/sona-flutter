@@ -18,9 +18,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/core/constants/app_widget_constants.dart';
 
 import 'core/constants/app_colors.dart';
+import 'core/constants/app_widget_constants.dart';
 import 'screens/home_screen.dart';
 
 void main() {
