@@ -90,11 +90,11 @@ ColorScheme _createColorScheme() {
 
     // Surface
     surface: kNeutralColor1,
-    onSurface: kNeutralColor8,
+    onSurface: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
 
     // Background
     background: kNeutralColor2,
-    onBackground: kNeutralColor8,
+    onBackground: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
 
     // Error
     error: kErrorColor,
