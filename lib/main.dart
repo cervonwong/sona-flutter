@@ -69,6 +69,7 @@ ThemeData _createBaseThemeData() {
     textSelectionHandleColor: kPrimaryColor,
     splashColor: kNeutralColor8.withOpacity(0.06),
     highlightColor: kNeutralColor8.withOpacity(0.06),
+    canvasColor: kNeutralColor1,
   );
 }
 
