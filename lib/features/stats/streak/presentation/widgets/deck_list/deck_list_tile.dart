@@ -92,6 +92,8 @@ class _ReviewProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasCompletedReview = reviewedCardCount == dueCardCount;
+
     return CircularPercentIndicator(
       percent: (reviewedCardCount / dueCardCount),
       lineWidth: 4.0,
@@ -99,7 +101,7 @@ class _ReviewProgressIndicator extends StatelessWidget {
       circularStrokeCap: CircularStrokeCap.round,
       backgroundColor: kNeutralColor3,
       progressColor: Theme.of(context).colorScheme.primary,
-      center: reviewedCardCount == dueCardCount
+      center: hasCompletedReview
           ? Icon(
               FluentIcons.checkmark_12_filled,
               size: 20.0,
