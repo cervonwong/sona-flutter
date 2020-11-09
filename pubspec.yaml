@@ -13,6 +13,7 @@ dependencies:
   fluentui_system_icons: ^1.1.83
   flutter:
     sdk: flutter
+  percent_indicator: ^2.1.8
 
 dev_dependencies:
   flutter_test:
