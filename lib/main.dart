@@ -46,6 +46,7 @@ ThemeData _createThemeData() {
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
     appBarTheme: _createAppBarTheme(),
+    dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
     tooltipTheme: _createTooltipTheme(),
   );
@@ -202,6 +203,16 @@ AppBarTheme _createAppBarTheme() {
   return AppBarTheme(
     centerTitle: true,
     elevation: 0.0,
+  );
+}
+
+DialogTheme _createDialogTheme() {
+  return DialogTheme(
+    backgroundColor: kNeutralColor1,
+    elevation: 0.0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(kMediumCornerRadius),
+    ),
   );
 }
 
