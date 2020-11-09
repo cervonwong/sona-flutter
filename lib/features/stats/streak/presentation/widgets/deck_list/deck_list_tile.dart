@@ -18,16 +18,19 @@
  */
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../../../../core/constants/app_colors.dart';
+import '../../../../../../core/constants/app_widget_constants.dart';
 
 class DeckListTile extends StatelessWidget {
   final String title;
   final String dateString;
   final int reviewedCardCount;
   final int dueCardCount;
+  final int _toReviewCardCount;
+  final bool _hasCompletedReview;
 
   const DeckListTile({
     @required this.title,
@@ -40,7 +43,9 @@ class DeckListTile extends StatelessWidget {
         assert(dueCardCount != null),
         assert(reviewedCardCount >= 0),
         assert(dueCardCount >= 0),
-        assert(reviewedCardCount <= dueCardCount);
+        assert(reviewedCardCount <= dueCardCount),
+        _toReviewCardCount = dueCardCount - reviewedCardCount,
+        _hasCompletedReview = reviewedCardCount == dueCardCount;
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +67,9 @@ class DeckListTile extends StatelessWidget {
                     .withOpacity(kMediumEmphasisOpacity),
               ),
         ),
-        leading: _ReviewProgressIndicator(
-          reviewedCardCount: reviewedCardCount,
-          dueCardCount: dueCardCount,
+        leading: _ReviewIndicator(
+          toReviewCardCount: _toReviewCardCount,
+          hasCompletedReview: _hasCompletedReview,
         ),
         trailing: SizedBox(
           height: 24.0,
@@ -82,40 +87,37 @@ class DeckListTile extends StatelessWidget {
   }
 }
 
-class _ReviewProgressIndicator extends StatelessWidget {
-  final int reviewedCardCount;
-  final int dueCardCount;
+class _ReviewIndicator extends StatelessWidget {
+  final int toReviewCardCount;
+  final bool hasCompletedReview;
 
-  const _ReviewProgressIndicator({
-    @required this.reviewedCardCount,
-    @required this.dueCardCount,
+  const _ReviewIndicator({
+    @required this.toReviewCardCount,
+    @required this.hasCompletedReview,
   });
 
   @override
   Widget build(BuildContext context) {
-    final hasCompletedReview = reviewedCardCount == dueCardCount;
-
-    return CircularPercentIndicator(
-      percent: (reviewedCardCount / dueCardCount),
-      lineWidth: 4.0,
-      radius: 40.0,
-      circularStrokeCap: CircularStrokeCap.round,
-      backgroundColor: kNeutralColor3,
-      progressColor: Theme.of(context).colorScheme.primary,
-      center: hasCompletedReview
+    return Container(
+      height: 40.0,
+      width: 40.0,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Theme.of(context)
+            .colorScheme
+            .primary
+            .withOpacity(hasCompletedReview ? 1.0 : 0.2),
+        borderRadius: BorderRadius.circular(kSmallCornerRadius),
+      ),
+      child: hasCompletedReview
           ? Icon(
-              FluentIcons.checkmark_12_filled,
-              size: 20.0,
-              color: Theme.of(context).colorScheme.primary,
+              FluentIcons.checkmark_24_regular,
+              color: Theme.of(context).colorScheme.onPrimary,
             )
           : Text(
-              '${dueCardCount - reviewedCardCount}',
-              style: Theme.of(context).textTheme.bodyText2.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(kMediumEmphasisOpacity),
-                    fontWeight: FontWeight.w600,
+              '$toReviewCardCount',
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
             ),
     );

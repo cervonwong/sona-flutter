@@ -17,18 +17,49 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../core/constants/app_colors.dart';
 
 class DeckListTitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Text(
-        '136 cards to review',
-        style: Theme.of(context).textTheme.bodyText1.copyWith(
-              fontWeight: FontWeight.w600,
+      child: Row(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            children: [
+              Text(
+                'Decks',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              SizedBox(width: 12.0),
+              Text(
+                '136 cards due',
+                style: Theme.of(context).textTheme.subtitle2.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(kMediumEmphasisOpacity),
+                    ),
+              ),
+            ],
+          ),
+          Spacer(),
+          SizedBox(
+            height: 24.0,
+            width: 24.0,
+            child: IconButton(
+              splashRadius: 24.0,
+              padding: const EdgeInsets.all(0.0),
+              icon: Icon(FluentIcons.search_24_regular),
+              onPressed: () {},
             ),
+          ),
+        ],
       ),
     );
   }
