@@ -71,6 +71,7 @@ ThemeData _createBaseThemeData() {
     splashColor: kDarkSplashColor, // May explicit kLightSplashColor.
     textSelectionColor: kPrimaryLightColor,
     textSelectionHandleColor: kPrimaryColor,
+    shadowColor: kNeutralColor8,
   );
 }
 
