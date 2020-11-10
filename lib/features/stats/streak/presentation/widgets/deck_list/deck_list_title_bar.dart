@@ -38,7 +38,7 @@ class DeckListTitleBar extends StatelessWidget {
               ),
               SizedBox(width: 12.0),
               Text(
-                '136 cards due',
+                '136 cards due today',
                 style: Theme.of(context).textTheme.subtitle2.copyWith(
                       color: Theme.of(context)
                           .colorScheme
