@@ -102,6 +102,6 @@ const Color kDarkSplashColor =
 const Color kDarkHighlightColor =
     Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
 const Color kLightSplashColor =
-    Color(0x1FFCFCFC); // kNeutralColor1.withOpacity(0.12);
+    Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
 const Color kLightHighlightColor =
-    Color(0x1FFCFCFC); // kNeutralColor1.withOpacity(0.12);
+    Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
