@@ -31,6 +31,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: _HomeAppBar(),
       drawer: SonaDrawer(),
+      floatingActionButton: _HomeFAB(),
       drawerScrimColor: kNeutralColor8.withOpacity(0.50),
       body: SafeArea(
         child: ListView(
@@ -232,6 +233,25 @@ class DrawerTile extends StatelessWidget {
               ),
         ),
         onTap: onTap,
+      ),
+    );
+  }
+}
+
+class _HomeFAB extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        shadowColor: Theme.of(context).colorScheme.primary,
+      ),
+      child: FloatingActionButton(
+        elevation: 2.0,
+        highlightElevation: 4.0,
+        splashColor: kLightSplashColor,
+        tooltip: 'Addition options',
+        onPressed: () {},
+        child: Icon(FluentIcons.add_24_regular),
       ),
     );
   }
