@@ -83,24 +83,24 @@ ColorScheme _createColorScheme() {
     // Primary
     primary: kPrimaryColor,
     primaryVariant: kPrimaryDarkColor,
-    onPrimary: Colors.white,
+    onPrimary: kNeutralColor1.withOpacity(kLightHighEmphasisOpacity),
 
     // Secondary
     secondary: kPrimaryColor,
     secondaryVariant: kPrimaryDarkColor,
-    onSecondary: Colors.white,
+    onSecondary: kNeutralColor1.withOpacity(kLightHighEmphasisOpacity),
 
     // Surface
     surface: kNeutralColor1,
-    onSurface: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
+    onSurface: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
 
     // Background
     background: kNeutralColor2,
-    onBackground: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
+    onBackground: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
 
     // Error
     error: kErrorColor,
-    onError: Colors.white,
+    onError: kNeutralColor1.withOpacity(kLightHighEmphasisOpacity),
   );
 }
 
@@ -189,8 +189,8 @@ TextTheme _createBaseTextTheme() {
 
 TextTheme _createTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
-    displayColor: kNeutralColor8.withOpacity(kHighEmphasisOpacity),
+    bodyColor: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
+    displayColor: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
   );
 }
 

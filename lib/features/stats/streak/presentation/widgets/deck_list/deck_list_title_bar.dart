@@ -43,7 +43,7 @@ class DeckListTitleBar extends StatelessWidget {
                       color: Theme.of(context)
                           .colorScheme
                           .onSurface
-                          .withOpacity(kMediumEmphasisOpacity),
+                          .withOpacity(kDarkMediumEmphasisOpacity),
                     ),
               ),
             ],
