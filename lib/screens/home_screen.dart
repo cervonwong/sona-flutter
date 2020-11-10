@@ -77,6 +77,7 @@ class HomeScreen extends StatelessWidget {
               reviewedCardCount: 12,
               dueCardCount: 12,
             ),
+            SizedBox(height: 100),
           ],
         ),
       ),
