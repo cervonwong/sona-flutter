@@ -56,6 +56,7 @@ class DeckListTitleBar extends StatelessWidget {
               splashRadius: 24.0,
               padding: const EdgeInsets.all(0.0),
               icon: Icon(FluentIcons.search_24_regular),
+              tooltip: 'Search decks',
               onPressed: () {},
             ),
           ),

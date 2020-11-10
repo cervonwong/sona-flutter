@@ -79,6 +79,7 @@ class DeckListTile extends StatelessWidget {
             splashRadius: 24.0,
             padding: const EdgeInsets.all(0.0),
             icon: Icon(FluentIcons.more_vertical_24_regular),
+            tooltip: 'More options',
             onPressed: () {},
           ),
         ),
