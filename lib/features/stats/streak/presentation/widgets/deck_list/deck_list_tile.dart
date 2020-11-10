@@ -29,8 +29,9 @@ class DeckListTile extends StatelessWidget {
   final String dateString;
   final int reviewedCardCount;
   final int dueCardCount;
-  final int _toReviewCardCount;
-  final bool _hasCompletedReview;
+
+  final int toReviewCardCount;
+  final bool hasCompletedReview;
 
   const DeckListTile({
     @required this.title,
@@ -44,8 +45,8 @@ class DeckListTile extends StatelessWidget {
         assert(reviewedCardCount >= 0),
         assert(dueCardCount >= 0),
         assert(reviewedCardCount <= dueCardCount),
-        _toReviewCardCount = dueCardCount - reviewedCardCount,
-        _hasCompletedReview = reviewedCardCount == dueCardCount;
+        toReviewCardCount = dueCardCount - reviewedCardCount,
+        hasCompletedReview = reviewedCardCount == dueCardCount;
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +69,8 @@ class DeckListTile extends StatelessWidget {
               ),
         ),
         leading: _ReviewIndicator(
-          toReviewCardCount: _toReviewCardCount,
-          hasCompletedReview: _hasCompletedReview,
+          toReviewCardCount: toReviewCardCount,
+          hasCompletedReview: hasCompletedReview,
         ),
         trailing: SizedBox(
           height: 24.0,
