@@ -95,9 +95,11 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text('Home'),
       leading: IconButton(
+        splashColor: kLightSplashColor,
+        highlightColor: kLightHighlightColor,
         icon: Icon(FluentIcons.list_24_regular),
-        onPressed: () => Scaffold.of(context).openDrawer(),
         tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+        onPressed: () => Scaffold.of(context).openDrawer(),
       ),
     );
   }
