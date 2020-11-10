@@ -93,3 +93,15 @@ const Color kNeutralColor1 = Color(0xFFFCFCFC);
 const double kHighEmphasisOpacity = 0.90;
 const double kMediumEmphasisOpacity = 0.65;
 const double kLowEmphasisOpacity = 0.30;
+
+// Splashes and Highlights
+// Overlaid on interactive components with a ripple effect (Ink).
+
+const Color kDarkSplashColor =
+    Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
+const Color kDarkHighlightColor =
+    Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
+const Color kLightSplashColor =
+    Color(0x1FFCFCFC); // kNeutralColor1.withOpacity(0.12);
+const Color kLightHighlightColor =
+    Color(0x1FFCFCFC); // kNeutralColor1.withOpacity(0.12);

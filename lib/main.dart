@@ -66,9 +66,9 @@ ThemeData _createBaseThemeData() {
     canvasColor: kNeutralColor1,
     cursorColor: kPrimaryColor,
     errorColor: kErrorColor,
-    highlightColor: kNeutralColor8.withOpacity(0.06),
+    highlightColor: kDarkHighlightColor, // May explicit kLightHighlightColor.
     scaffoldBackgroundColor: kNeutralColor2,
-    splashColor: kNeutralColor8.withOpacity(0.06),
+    splashColor: kDarkSplashColor, // May explicit kLightSplashColor.
     textSelectionColor: kPrimaryLightColor,
     textSelectionHandleColor: kPrimaryColor,
   );
