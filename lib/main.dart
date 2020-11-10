@@ -48,6 +48,7 @@ ThemeData _createThemeData() {
     appBarTheme: _createAppBarTheme(),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
+    floatingActionButtonTheme: _createFloatingActionButtonTheme(),
     tooltipTheme: _createTooltipTheme(),
   );
 }
@@ -222,6 +223,14 @@ DividerThemeData _createDividerTheme() {
     color: kNeutralColor4,
     space: 0.0,
     thickness: 1.0,
+  );
+}
+
+FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
+  return FloatingActionButtonThemeData(
+    elevation: 2.0,
+    highlightElevation: 4.0,
+    splashColor: kLightSplashColor,
   );
 }
 
