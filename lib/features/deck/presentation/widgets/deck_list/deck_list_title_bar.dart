@@ -20,7 +20,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/app_colors.dart';
 
 class DeckListTitleBar extends StatelessWidget {
   @override

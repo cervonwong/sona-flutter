@@ -22,8 +22,8 @@ import 'package:flutter/material.dart';
 
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_widget_constants.dart';
-import '../features/stats/streak/presentation/widgets/deck_list/deck_list_tile.dart';
-import '../features/stats/streak/presentation/widgets/deck_list/deck_list_title_bar.dart';
+import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
+import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
