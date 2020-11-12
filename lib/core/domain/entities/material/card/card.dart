@@ -23,7 +23,6 @@ import 'package:meta/meta.dart';
 @immutable
 class Card extends Equatable {
   final int id;
-
   final bool isStarred;
   final bool isHidden;
 
