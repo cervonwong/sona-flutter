@@ -30,12 +30,10 @@ void main() {
         () {
           final entry = Entry(
             id: 1,
-            deckName: 'Some Deck',
             entryTypeId: 2,
           );
 
           expect(entry.id, 1);
-          expect(entry.deckName, 'Some Deck');
           expect(entry.entryTypeId, 2);
           expect(entry.tags, <String>{});
           expect(entry.fieldData, <String, String>{});
@@ -49,7 +47,6 @@ void main() {
           expect(
             () => Entry(
               id: null,
-              deckName: 'Null Deck',
               entryTypeId: 1,
             ),
             throwsAssertionError,
@@ -58,16 +55,6 @@ void main() {
           expect(
             () => Entry(
               id: 100,
-              deckName: null,
-              entryTypeId: 1,
-            ),
-            throwsAssertionError,
-          );
-
-          expect(
-            () => Entry(
-              id: 100,
-              deckName: 'Null Deck',
               entryTypeId: null,
             ),
             throwsAssertionError,
@@ -76,7 +63,6 @@ void main() {
           expect(
             () => Entry(
               id: 100,
-              deckName: 'Null Deck',
               entryTypeId: 1,
               tags: null,
             ),
@@ -86,7 +72,6 @@ void main() {
           expect(
             () => Entry(
               id: 100,
-              deckName: 'Null Deck',
               entryTypeId: 1,
               fieldData: null,
             ),
@@ -103,14 +88,12 @@ void main() {
     () {
       final entry = Entry(
         id: 7,
-        deckName: 'Another Deck',
         entryTypeId: 3,
         tags: {'Tag 1', 'Tag 2'},
         fieldData: {'Field 1': 'Data 1', 'Field 2': 'Data 2'},
       );
 
       expect(entry.id, 7);
-      expect(entry.deckName, 'Another Deck');
       expect(entry.entryTypeId, 3);
       expect(entry.tags, {'Tag 1', 'Tag 2'});
       expect(entry.fieldData, {'Field 1': 'Data 1', 'Field 2': 'Data 2'});
@@ -121,7 +104,6 @@ void main() {
       );
 
       expect(newEntry.id, 7);
-      expect(newEntry.deckName, 'Another Deck');
       expect(newEntry.entryTypeId, 3);
       expect(newEntry.tags, {'New tag 1', 'New tag 2', 'New tag 3'});
       expect(newEntry.fieldData, {'New field 1': 'New data 1'});
@@ -135,7 +117,7 @@ void main() {
         'logically equal Entries, '
         'should return true',
         () {
-          final entry1 = Entry(id: 1, deckName: 'A deck', entryTypeId: 2);
+          final entry1 = Entry(id: 1,  entryTypeId: 2);
           final entry2 = entry1.copyWith(tags: {'Sona', 'Is', 'Good'});
           final entry3 = entry1.copyWith(fieldData: {
             'Sona': 'Is',
@@ -158,31 +140,14 @@ void main() {
         () {
           final entry1 = Entry(
             id: 9999,
-            deckName: 'Deck of Joy',
             entryTypeId: 1,
           );
           final entry2 = Entry(
             id: 9998,
-            deckName: 'Deck of Joy',
             entryTypeId: 1,
-          );
-          final entry3 = Entry(
-            id: 9999,
-            deckName: 'Deck of Shame',
-            entryTypeId: 1,
-          );
-          final entry4 = Entry(
-            id: 9999,
-            deckName: 'Deck omf Joy',
-            entryTypeId: 2,
           );
 
           expect(entry1, isNot(entry2));
-          expect(entry1, isNot(entry3));
-          expect(entry1, isNot(entry4));
-          expect(entry2, isNot(entry3));
-          expect(entry2, isNot(entry4));
-          expect(entry3, isNot(entry4));
         },
       );
     },

@@ -23,19 +23,16 @@ import 'package:meta/meta.dart';
 @immutable
 class Entry extends Equatable {
   final int id;
-  final String deckName;
   final int entryTypeId;
   final Set<String> tags;
   final Map<String, String> fieldData;
 
   Entry({
     @required this.id,
-    @required this.deckName,
     @required this.entryTypeId,
     this.tags = const <String>{},
     this.fieldData = const <String, String>{},
   })  : assert(id != null),
-        assert(deckName != null),
         assert(entryTypeId != null),
         assert(tags != null),
         assert(fieldData != null);
@@ -46,7 +43,6 @@ class Entry extends Equatable {
   }) {
     return Entry(
       id: id,
-      deckName: deckName,
       entryTypeId: entryTypeId,
       tags: tags ?? this.tags,
       fieldData: fieldData ?? this.fieldData,
@@ -54,5 +50,5 @@ class Entry extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, deckName];
+  List<Object> get props => [id];
 }
