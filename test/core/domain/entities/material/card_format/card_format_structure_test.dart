@@ -23,6 +23,7 @@ import 'package:mockito/mockito.dart';
 import 'package:sona_flutter/core/domain/entities/material/card_format/card_format_structure.dart';
 import 'package:sona_flutter/core/domain/entities/material/card_format/components/component.dart';
 
+// ignore: must_be_immutable
 class MockComponent extends Mock with EquatableMixin implements Component {}
 
 void main() {
