@@ -21,13 +21,11 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../utils/nullable.dart';
-import '../entry/entry.dart';
 
 @immutable
 class Deck extends Equatable {
   final int id;
   final String name;
-  final List<Entry> entries;
   final DateTime createdDateTime;
   final DateTime lastEditedDateTime;
   final String authorName; // Nullable
@@ -36,23 +34,19 @@ class Deck extends Equatable {
   Deck({
     @required this.id,
     @required this.name,
-    @required this.entries,
     @required this.createdDateTime,
     @required this.lastEditedDateTime,
     this.authorName, // Default value is null.
     this.description, // Default value is null.
   })  : assert(id != null),
         assert(name != null),
-        assert(entries != null),
         assert(createdDateTime != null),
         assert(lastEditedDateTime != null),
         assert(createdDateTime.isBefore(lastEditedDateTime) ||
-            createdDateTime.isAtSameMomentAs(lastEditedDateTime)),
-        assert(!entries.contains(null));
+            createdDateTime.isAtSameMomentAs(lastEditedDateTime));
 
   Deck copyWith({
     String name,
-    List<Entry> entries,
     DateTime lastEditedDateTime,
     Nullable<String> authorName,
     Nullable<String> description,
@@ -60,7 +54,6 @@ class Deck extends Equatable {
     return Deck(
       id: id,
       name: name ?? this.name,
-      entries: entries ?? this.entries,
       createdDateTime: createdDateTime,
       lastEditedDateTime: lastEditedDateTime ?? this.lastEditedDateTime,
       authorName: authorName == null ? this.authorName : authorName.value,
