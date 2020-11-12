@@ -117,7 +117,7 @@ void main() {
         'logically equal Entries, '
         'should return true',
         () {
-          final entry1 = Entry(id: 1,  entryTypeId: 2);
+          final entry1 = Entry(id: 1, entryTypeId: 2);
           final entry2 = entry1.copyWith(tags: {'Sona', 'Is', 'Good'});
           final entry3 = entry1.copyWith(fieldData: {
             'Sona': 'Is',
