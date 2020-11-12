@@ -19,6 +19,7 @@
 
 import 'package:meta/meta.dart';
 
+@immutable
 abstract class Component {
   final String name;
 

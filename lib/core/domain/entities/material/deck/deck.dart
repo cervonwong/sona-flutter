@@ -23,6 +23,7 @@ import 'package:meta/meta.dart';
 import '../../../../utils/nullable.dart';
 import '../entry/entry.dart';
 
+@immutable
 class Deck extends Equatable {
   final int id;
   final String name;

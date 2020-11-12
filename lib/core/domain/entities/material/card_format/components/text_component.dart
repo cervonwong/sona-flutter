@@ -22,6 +22,7 @@ import 'package:meta/meta.dart';
 
 import 'component.dart';
 
+@immutable
 class TextComponent extends Component with EquatableMixin {
   final String data;
   final TextComponentStyle style;

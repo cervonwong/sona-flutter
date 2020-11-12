@@ -22,6 +22,7 @@ import 'package:meta/meta.dart';
 
 import 'components/component.dart';
 
+@immutable
 class CardFormatStructure extends Equatable {
   final List<Component> _components;
 

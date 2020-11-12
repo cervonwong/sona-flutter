@@ -30,6 +30,7 @@ import 'card_format_structure.dart';
 /// * styles of components, defining how each component looks when rendered.
 ///
 /// This defines two different structures of a card: the front and the back.
+@immutable
 class CardFormat extends Equatable {
   final String name;
   final CardFormatStructure front;

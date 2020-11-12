@@ -20,6 +20,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+@immutable
 class Entry extends Equatable {
   final int id;
   final String deckName;
