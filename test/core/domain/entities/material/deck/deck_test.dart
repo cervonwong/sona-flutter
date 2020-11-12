@@ -23,9 +23,6 @@ import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/utils/nullable.dart';
 
-/// Mocks [Entry] to be used in tests.
-///
-/// Use the [key] property to make this unique from other entries.
 // ignore: must_be_immutable
 class MockEntry extends Mock implements Entry {}
 
