@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sona_flutter/core/domain/entities/material/card_format/components/text_component.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/components/text_component.dart';
 
 void main() {
   group('TextComponent when constructed', () {
@@ -297,7 +297,8 @@ void main() {
     'TextComponent when equating logically equal TextComponents, '
     'should return true',
     () {
-      final textComponent = TextComponent(name: 'Equal name', data: 'Equal data');
+      final textComponent =
+          TextComponent(name: 'Equal name', data: 'Equal data');
       expect(
         textComponent,
         textComponent.copyWith(style: textComponent.style.copyWith()),

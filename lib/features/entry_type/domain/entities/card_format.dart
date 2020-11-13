@@ -22,6 +22,45 @@ import 'package:meta/meta.dart';
 
 import 'components/component.dart';
 
+/// The format defining how a card is rendered when reviewing.
+///
+/// The format of a card defines the:
+/// * structures of components, defining the relative positions and
+/// relationships between them.
+/// * styles of components, defining how each component looks when rendered.
+///
+/// This defines two different structures of a card: the front and the back.
+@immutable
+class CardFormat extends Equatable {
+  final String name;
+  final CardFormatStructure front;
+  final CardFormatStructure back;
+
+  CardFormat({
+    @required this.name,
+    this.front = const CardFormatStructure.empty(),
+    this.back = const CardFormatStructure.empty(),
+  })  : assert(name != null),
+        assert(front != null),
+        assert(back != null),
+        assert(name.length <= 150);
+
+  CardFormat copyWith({
+    String name,
+    CardFormatStructure front,
+    CardFormatStructure back,
+  }) {
+    return CardFormat(
+      name: name ?? this.name,
+      front: front ?? this.front,
+      back: back ?? this.back,
+    );
+  }
+
+  @override
+  List<Object> get props => [name, front, back];
+}
+
 @immutable
 class CardFormatStructure extends Equatable {
   final List<Component> _components;
