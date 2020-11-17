@@ -1,5 +1,7 @@
 # Sona
 
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+
 Sona is a cross-platform educational app which helps you remember facts easier, developed with Flutter.
 
 Some stuff to note:
