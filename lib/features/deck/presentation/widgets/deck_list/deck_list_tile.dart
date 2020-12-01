@@ -21,8 +21,8 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/app_colors.dart';
-import '../../../../../core/constants/app_widget_constants.dart';
+import '../../../../../core/constants/color_constants.dart';
+import '../../../../../core/constants/widget_constants.dart';
 
 class DeckListTile extends StatelessWidget {
   final String title;

@@ -19,8 +19,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'core/constants/app_colors.dart';
-import 'core/constants/app_widget_constants.dart';
+import 'core/constants/color_constants.dart';
+import 'core/constants/widget_constants.dart';
 import 'screens/home_screen.dart';
 
 void main() {
