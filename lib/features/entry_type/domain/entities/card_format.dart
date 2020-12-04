@@ -65,19 +65,19 @@ class CardFormat extends Equatable {
 class CardFormatStructure extends Equatable {
   final List<Component> _components;
 
-  List<Component> get components => List<Component>.from(_components);
+  List<Component> get components => _components.toList();
 
   const CardFormatStructure.empty() : _components = const [];
 
   CardFormatStructure({@required List<Component> components})
       : assert(components != null),
         assert(!components.contains(null)),
-        _components = List<Component>.from(components);
+        _components = components.toList();
 
   /// Creates a [CardFormatStructure] with an inserted component.
   ///
   /// This method inserts [component] at the position specified by [index]. For
-  /// example, if [index] is `3`, [component] will be the fourth component in
+  /// example, if [index] is `3`, [component] will b`e the fourth component in
   /// the component list (index 3 in a list), If [index] is not specified, it is
   /// inserted to the end of the component list.
   CardFormatStructure insert({
@@ -87,7 +87,7 @@ class CardFormatStructure extends Equatable {
     assert(component != null);
     if (index != null) assert(index >= 0 && index <= _components.length);
 
-    final newComponents = List<Component>.from(_components);
+    final newComponents = _components.toList();
     newComponents.insert(index ?? _components.length, component);
 
     return CardFormatStructure(components: newComponents);
@@ -101,7 +101,7 @@ class CardFormatStructure extends Equatable {
     assert(index != null);
     assert(index >= 0 && index < _components.length);
 
-    final newComponents = List<Component>.from(_components);
+    final newComponents = _components.toList();
     newComponents[index] = component;
 
     return CardFormatStructure(components: newComponents);
@@ -111,7 +111,7 @@ class CardFormatStructure extends Equatable {
     assert(index != null);
     assert(index >= 0 && index < _components.length);
 
-    final newComponents = List<Component>.from(_components);
+    final newComponents = _components.toList();
     newComponents.removeAt(index);
 
     return CardFormatStructure(components: newComponents);
