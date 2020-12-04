@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   equatable: ^1.2.5
-  fluentui_system_icons: ^1.1.83
+  fluentui_system_icons: ^1.1.87
   flutter:
     sdk: flutter
   percent_indicator: ^2.1.8
