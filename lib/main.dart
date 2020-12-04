@@ -49,6 +49,7 @@ ThemeData _createThemeData() {
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
+    textSelectionTheme: _createTextSelectionTheme(),
     tooltipTheme: _createTooltipTheme(),
   );
 }
@@ -65,13 +66,12 @@ ThemeData _createBaseThemeData() {
 
     backgroundColor: kNeutralColor2,
     canvasColor: kNeutralColor1,
-    cursorColor: kPrimaryColor,
     errorColor: kErrorColor,
-    highlightColor: kDarkHighlightColor, // May explicit kLightHighlightColor.
+    highlightColor: kDarkHighlightColor,
+    // May explicit kLightHighlightColor.
     scaffoldBackgroundColor: kNeutralColor2,
-    splashColor: kDarkSplashColor, // May explicit kLightSplashColor.
-    textSelectionColor: kPrimaryLightColor,
-    textSelectionHandleColor: kPrimaryColor,
+    splashColor: kDarkSplashColor,
+    // May explicit kLightSplashColor.
     shadowColor: kNeutralColor8,
   );
 }
@@ -231,6 +231,14 @@ FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
     elevation: 2.0,
     highlightElevation: 4.0,
     splashColor: kLightSplashColor,
+  );
+}
+
+TextSelectionThemeData _createTextSelectionTheme() {
+  return TextSelectionThemeData(
+    cursorColor: kPrimaryColor,
+    selectionColor: kPrimaryLightColor,
+    selectionHandleColor: kPrimaryColor,
   );
 }
 
