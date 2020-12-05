@@ -1,0 +1,53 @@
+@startuml
+
+object core {
+	Shared components used throughout the app.
+}
+
+object screens {
+	Widgets that represent a navigation destination. Screens depends on one or more feature packages.
+}
+
+object search {
+	"filter/sort + table"
+}
+search <.. screens
+core <.. search
+
+object review {
+	controls + presenter
+}
+review <.. screens
+core <.. review
+
+object scheduler {
+	algorithm
+}
+scheduler <.. screens
+core <.. scheduler
+
+object editor {
+	adding/updating entries
+}
+editor <.. screens
+core <.. editor
+
+object formatter {
+	format style/structure
+}
+formatter <.. screens
+core <.. formatter
+
+object stats {
+	graphs, etc.
+}
+stats <.. screens
+core <.. stats
+
+object deck {
+	deck view, etc.
+}
+deck <.. screens
+core <.. deck
+
+@enduml
