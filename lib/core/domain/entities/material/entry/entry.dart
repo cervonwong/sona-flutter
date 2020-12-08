@@ -20,17 +20,19 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import 'entry_tag.dart';
+
 @immutable
 class Entry extends Equatable {
   final int id;
   final int entryTypeId;
-  final Set<String> tags;
+  final Set<EntryTag> tags;
   final Map<String, String> fieldData;
 
   Entry({
     @required this.id,
     @required this.entryTypeId,
-    this.tags = const <String>{},
+    this.tags = const <EntryTag>{},
     this.fieldData = const <String, String>{},
   })  : assert(id != null),
         assert(entryTypeId != null),
@@ -38,7 +40,7 @@ class Entry extends Equatable {
         assert(fieldData != null);
 
   Entry copyWith({
-    Set<String> tags,
+    Set<EntryTag> tags,
     Map<String, String> fieldData,
   }) {
     return Entry(

@@ -18,9 +18,17 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
+
+// ignore: must_be_immutable
+class MockEntryTag extends Mock implements EntryTag {}
 
 void main() {
+  final tag1 = MockEntryTag();
+  final tag2 = MockEntryTag();
+
   group(
     'Entry when constructed',
     () {
@@ -35,7 +43,7 @@ void main() {
 
           expect(entry.id, 1);
           expect(entry.entryTypeId, 2);
-          expect(entry.tags, <String>{});
+          expect(entry.tags, <EntryTag>{});
           expect(entry.fieldData, <String, String>{});
         },
       );
@@ -97,23 +105,23 @@ void main() {
       final entry = Entry(
         id: 7,
         entryTypeId: 3,
-        tags: {'Tag 1', 'Tag 2'},
+        tags: {tag1},
         fieldData: {'Field 1': 'Data 1', 'Field 2': 'Data 2'},
       );
 
       expect(entry.id, 7);
       expect(entry.entryTypeId, 3);
-      expect(entry.tags, {'Tag 1', 'Tag 2'});
+      expect(entry.tags, {tag1});
       expect(entry.fieldData, {'Field 1': 'Data 1', 'Field 2': 'Data 2'});
 
       final newEntry = entry.copyWith(
-        tags: {'New tag 1', 'New tag 2', 'New tag 3'},
+        tags: {tag2},
         fieldData: {'New field 1': 'New data 1'},
       );
 
       expect(newEntry.id, 7);
       expect(newEntry.entryTypeId, 3);
-      expect(newEntry.tags, {'New tag 1', 'New tag 2', 'New tag 3'});
+      expect(newEntry.tags, {tag2});
       expect(newEntry.fieldData, {'New field 1': 'New data 1'});
     },
   );
@@ -126,7 +134,7 @@ void main() {
         'should return true',
         () {
           final entry1 = Entry(id: 1, entryTypeId: 2);
-          final entry2 = entry1.copyWith(tags: {'Sona', 'Is', 'Good'});
+          final entry2 = entry1.copyWith(tags: {tag1, tag2});
           final entry3 = entry1.copyWith(fieldData: {
             'Sona': 'Is',
             'Very': 'Good',
