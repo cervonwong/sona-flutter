@@ -47,22 +47,30 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => CardFormat(id: null, name: 'Null name'),
+            () {
+              CardFormat(id: null, name: 'Null name');
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(id: 2, name: null),
+            () {
+              CardFormat(id: 2, name: null);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(id: 3, name: 'Null name', front: null),
+            () {
+              CardFormat(id: 3, name: 'Null name', front: null);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(id: 4, name: 'Null name', back: null),
+            () {
+              CardFormat(id: 4, name: 'Null name', back: null);
+            },
             throwsAssertionError,
           );
         },
@@ -73,13 +81,17 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => CardFormat(id: 5, name: 'x' * 151),
+            () {
+              CardFormat(id: 5, name: 'x' * 151);
+            },
             // name > 150 chars is illegal.
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(id: 6, name: 'x' * 150),
+            () {
+              CardFormat(id: 6, name: 'x' * 150);
+            },
             // name <= 150 chars is legal.
             isNot(throwsAssertionError),
           );

@@ -45,36 +45,44 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => Entry(
-              id: null,
-              entryTypeId: 1,
-            ),
+            () {
+              Entry(
+                id: null,
+                entryTypeId: 1,
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Entry(
-              id: 100,
-              entryTypeId: null,
-            ),
+            () {
+              Entry(
+                id: 100,
+                entryTypeId: null,
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Entry(
-              id: 100,
-              entryTypeId: 1,
-              tags: null,
-            ),
+            () {
+              Entry(
+                id: 100,
+                entryTypeId: 1,
+                tags: null,
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Entry(
-              id: 100,
-              entryTypeId: 1,
-              fieldData: null,
-            ),
+            () {
+              Entry(
+                id: 100,
+                entryTypeId: 1,
+                fieldData: null,
+              );
+            },
             throwsAssertionError,
           );
         },

@@ -76,42 +76,50 @@ void main() {
           final lastEditedDateTime = DateTime(2020, 2, 3);
 
           expect(
-            () => Deck(
-              id: null,
-              name: name,
-              createdDateTime: createdDateTime,
-              lastEditedDateTime: lastEditedDateTime,
-            ),
+            () {
+              Deck(
+                id: null,
+                name: name,
+                createdDateTime: createdDateTime,
+                lastEditedDateTime: lastEditedDateTime,
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Deck(
-              id: id,
-              name: null,
-              createdDateTime: createdDateTime,
-              lastEditedDateTime: lastEditedDateTime,
-            ),
+            () {
+              Deck(
+                id: id,
+                name: null,
+                createdDateTime: createdDateTime,
+                lastEditedDateTime: lastEditedDateTime,
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Deck(
-              id: id,
-              name: name,
-              createdDateTime: null,
-              lastEditedDateTime: lastEditedDateTime,
-            ),
+            () {
+              Deck(
+                id: id,
+                name: name,
+                createdDateTime: null,
+                lastEditedDateTime: lastEditedDateTime,
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Deck(
-              id: id,
-              name: name,
-              createdDateTime: createdDateTime,
-              lastEditedDateTime: null,
-            ),
+            () {
+              Deck(
+                id: id,
+                name: name,
+                createdDateTime: createdDateTime,
+                lastEditedDateTime: null,
+              );
+            },
             throwsAssertionError,
           );
         },
@@ -122,23 +130,25 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => Deck(
-              id: 6,
-              name: 'Time Traveller Deck',
-              createdDateTime: DateTime(2000, 12, 5),
-              lastEditedDateTime: DateTime(1999, 9, 13),
-            ),
+            () {
+              Deck(
+                id: 6,
+                name: 'Time Traveller Deck',
+                createdDateTime: DateTime(2000, 12, 5),
+                lastEditedDateTime: DateTime(1999, 9, 13),
+              );
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => {
+            () {
               Deck(
                 id: 7,
                 name: 'Time Traveller Deck',
                 createdDateTime: DateTime(2000, 12, 5),
                 lastEditedDateTime: DateTime(2000, 12, 5),
-              )
+              );
             },
             isNot(throwsAssertionError),
           );

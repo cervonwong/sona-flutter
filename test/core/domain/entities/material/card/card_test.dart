@@ -43,25 +43,23 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => Card(
-              id: null,
-            ),
+            () {
+              Card(id: null);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Card(
-              id: 1,
-              isStarred: null,
-            ),
+            () {
+              Card(id: 1, isStarred: null);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => Card(
-              id: 1,
-              isHidden: null,
-            ),
+            () {
+              Card(id: 1, isHidden: null);
+            },
             throwsAssertionError,
           );
         },

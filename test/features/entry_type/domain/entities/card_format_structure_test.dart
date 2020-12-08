@@ -145,7 +145,9 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => mediumStructure.insert(component: null),
+            () {
+              mediumStructure.insert(component: null);
+            },
             throwsAssertionError,
           );
         },
@@ -156,12 +158,16 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => smallStructure.insert(component: mockComponent2, index: -1),
+            () {
+              smallStructure.insert(component: mockComponent2, index: -1);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => smallStructure.insert(component: mockComponent2, index: 2),
+            () {
+              smallStructure.insert(component: mockComponent2, index: 2);
+            },
             throwsAssertionError,
           );
         },
@@ -195,12 +201,16 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => largeStructure.update(component: null, index: 0),
+            () {
+              largeStructure.update(component: null, index: 0);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => smallStructure.update(component: mockComponent3, index: null),
+            () {
+              smallStructure.update(component: mockComponent3, index: null);
+            },
             throwsAssertionError,
           );
         },
@@ -211,17 +221,23 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => emptyStructure.update(component: mockComponent1, index: 0),
+            () {
+              emptyStructure.update(component: mockComponent1, index: 0);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => smallStructure.update(component: mockComponent1, index: -1),
+            () {
+              smallStructure.update(component: mockComponent1, index: -1);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => mediumStructure.update(component: mockComponent1, index: 2),
+            () {
+              mediumStructure.update(component: mockComponent1, index: 2);
+            },
             throwsAssertionError,
           );
         },
@@ -252,7 +268,9 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => largeStructure.remove(index: null),
+            () {
+              largeStructure.remove(index: null);
+            },
             throwsAssertionError,
           );
         },
@@ -263,17 +281,23 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => emptyStructure.remove(index: 0),
+            () {
+              emptyStructure.remove(index: 0);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => largeStructure.remove(index: -1),
+            () {
+              largeStructure.remove(index: -1);
+            },
             throwsAssertionError,
           );
 
           expect(
-            () => largeStructure.remove(index: 3),
+            () {
+              largeStructure.remove(index: 3);
+            },
             throwsAssertionError,
           );
         },

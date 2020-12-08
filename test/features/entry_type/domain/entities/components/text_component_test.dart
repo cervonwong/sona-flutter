@@ -57,27 +57,33 @@ void main() {
       'should fail asserts',
       () {
         expect(
-          () => TextComponent(
-            name: null,
-            data: 'Null component data',
-          ),
+          () {
+            TextComponent(
+              name: null,
+              data: 'Null component data',
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: null,
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: null,
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: null,
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: null,
+            );
+          },
           throwsAssertionError,
         );
       },
@@ -88,65 +94,79 @@ void main() {
       'should fail asserts',
       () {
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(size: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(size: null),
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(alignment: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(alignment: null),
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(fillColor: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(fillColor: null),
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(highlightColor: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(highlightColor: null),
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(isBold: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(isBold: null),
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(isItalic: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(isItalic: null),
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Null component name',
-            data: 'Null component data',
-            style: TextComponentStyle(isUnderlined: null),
-          ),
+          () {
+            TextComponent(
+              name: 'Null component name',
+              data: 'Null component data',
+              style: TextComponentStyle(isUnderlined: null),
+            );
+          },
           throwsAssertionError,
         );
       },
@@ -157,18 +177,22 @@ void main() {
       'should fail asserts',
       () {
         expect(
-          () => TextComponent(
-            name: 'x' * 151, // name > 150 characters is illegal.
-            data: 'Illegal component data',
-          ),
+          () {
+            TextComponent(
+              name: 'x' * 151, // name > 150 characters is illegal.
+              data: 'Illegal component data',
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'x' * 150, // name <= 150 characters is legal.
-            data: 'Legal component data',
-          ),
+          () {
+            TextComponent(
+              name: 'x' * 150, // name <= 150 characters is legal.
+              data: 'Legal component data',
+            );
+          },
           isNot(throwsAssertionError),
         );
       },
@@ -179,42 +203,50 @@ void main() {
       'should fail asserts',
       () {
         expect(
-          () => TextComponent(
-            name: 'Illegal component name',
-            data: 'Illegal component data',
-            style: TextComponentStyle(size: 0.09),
-            // size < 0.1 is illegal.
-          ),
+          () {
+            TextComponent(
+              name: 'Illegal component name',
+              data: 'Illegal component data',
+              style: TextComponentStyle(size: 0.09),
+              // size < 0.1 is illegal.
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Illegal component name',
-            data: 'Illegal component data',
-            style: TextComponentStyle(size: 0.10),
-            // size >= 0.10 and size <= 10.0 is legal.
-          ),
+          () {
+            TextComponent(
+              name: 'Illegal component name',
+              data: 'Illegal component data',
+              style: TextComponentStyle(size: 0.10),
+              // size >= 0.10 and size <= 10.0 is legal.
+            );
+          },
           isNot(throwsAssertionError),
         );
 
         expect(
-          () => TextComponent(
-            name: 'Illegal component name',
-            data: 'Illegal component data',
-            style: TextComponentStyle(size: 10.01),
-            // size > 10.0 is illegal.
-          ),
+          () {
+            TextComponent(
+              name: 'Illegal component name',
+              data: 'Illegal component data',
+              style: TextComponentStyle(size: 10.01),
+              // size > 10.0 is illegal.
+            );
+          },
           throwsAssertionError,
         );
 
         expect(
-          () => TextComponent(
-            name: 'Illegal component name',
-            data: 'Illegal component data',
-            style: TextComponentStyle(size: 10.0),
-            // 0.10 <= size <= 10.0 is legal.
-          ),
+          () {
+            TextComponent(
+              name: 'Illegal component name',
+              data: 'Illegal component data',
+              style: TextComponentStyle(size: 10.0),
+              // 0.10 <= size <= 10.0 is legal.
+            );
+          },
           isNot(throwsAssertionError),
         );
       },
