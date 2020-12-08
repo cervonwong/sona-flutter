@@ -22,6 +22,7 @@ import 'package:meta/meta.dart';
 
 /// A data-class specifying a field in an EntryType. This class does not
 /// contain field data of an Entry.
+@immutable
 class EntryField extends Equatable {
   final String name;
   final EntryFieldType type;
