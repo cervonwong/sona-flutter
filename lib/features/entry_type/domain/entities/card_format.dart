@@ -20,7 +20,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'components/component.dart';
+import 'card_format_structure.dart';
 
 /// The format defining how a card is rendered when reviewing.
 ///
@@ -59,64 +59,4 @@ class CardFormat extends Equatable {
 
   @override
   List<Object> get props => [name, front, back];
-}
-
-@immutable
-class CardFormatStructure extends Equatable {
-  final List<Component> _components;
-
-  List<Component> get components => _components.toList();
-
-  const CardFormatStructure.empty() : _components = const [];
-
-  CardFormatStructure({@required List<Component> components})
-      : assert(components != null),
-        assert(!components.contains(null)),
-        _components = components.toList();
-
-  /// Creates a [CardFormatStructure] with an inserted component.
-  ///
-  /// This method inserts [component] at the position specified by [index]. For
-  /// example, if [index] is `3`, [component] will b`e the fourth component in
-  /// the component list (index 3 in a list), If [index] is not specified, it is
-  /// inserted to the end of the component list.
-  CardFormatStructure insert({
-    @required Component component,
-    int index,
-  }) {
-    assert(component != null);
-    if (index != null) assert(index >= 0 && index <= _components.length);
-
-    final newComponents = _components.toList();
-    newComponents.insert(index ?? _components.length, component);
-
-    return CardFormatStructure(components: newComponents);
-  }
-
-  CardFormatStructure update({
-    @required Component component,
-    @required int index,
-  }) {
-    assert(component != null);
-    assert(index != null);
-    assert(index >= 0 && index < _components.length);
-
-    final newComponents = _components.toList();
-    newComponents[index] = component;
-
-    return CardFormatStructure(components: newComponents);
-  }
-
-  CardFormatStructure remove({@required int index}) {
-    assert(index != null);
-    assert(index >= 0 && index < _components.length);
-
-    final newComponents = _components.toList();
-    newComponents.removeAt(index);
-
-    return CardFormatStructure(components: newComponents);
-  }
-
-  @override
-  List<Object> get props => [_components];
 }

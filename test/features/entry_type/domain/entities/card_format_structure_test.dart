@@ -20,7 +20,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/card_format.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/card_format_structure.dart';
 import 'package:sona_flutter/features/entry_type/domain/entities/components/component.dart';
 
 // ignore: must_be_immutable
