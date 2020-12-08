@@ -81,5 +81,3 @@ class CardFormatStructure extends Equatable {
   @override
   List<Object> get props => [_components];
 }
-
-
