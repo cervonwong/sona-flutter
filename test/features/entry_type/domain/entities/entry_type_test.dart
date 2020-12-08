@@ -54,6 +54,120 @@ void main() {
         },
       );
 
+      group(
+        'with null parameters, '
+        'should fail asserts',
+        () {
+          test(
+            'id is null',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: null,
+                    name: 'Null EntryType',
+                    cardFormats: [],
+                    fields: [],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'name is null',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: null,
+                    cardFormats: [],
+                    fields: [],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'cardFormats is null',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: 'Null EntryType',
+                    cardFormats: null,
+                    fields: [],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'cardFormats is null',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: 'Null EntryType',
+                    cardFormats: [],
+                    fields: null,
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'with lists containing null, '
+        'should fail asserts',
+        () {
+          test(
+            'cardFormats contains null',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: 'Null EntryType',
+                    cardFormats: [null],
+                    fields: [],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'fields contains null',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: 'Null EntryType',
+                    cardFormats: [],
+                    fields: [null],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
+
       test(
         'with all parameters, '
         'should shallow copy lists',
