@@ -40,6 +40,7 @@ class EntryField {
 	type : EntryFieldType
 }
 class CardFormat {
+	id : int
 	name : String
 	front : CardFormatStructure
 	back : CardFormatStructure
