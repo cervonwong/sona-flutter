@@ -3,7 +3,7 @@
 skinparam maxMessageSize 100
 skinparam shadowing false
 
-title Relationships of material entities with features.\n
+title Relationships of material entities.\n
 
 class Card {
 	id : int
