@@ -102,7 +102,7 @@ void main() {
 
       test(
         'logically unequal EntryFields, '
-        'should return true',
+        'should return false',
         () {
           final entryField1 = EntryField(
             name: 'Name alpha',
