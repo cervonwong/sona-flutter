@@ -26,6 +26,7 @@ import 'package:sona_flutter/features/entry_type/domain/entities/entry_type.dart
 // ignore: must_be_immutable
 class MockCardFormat extends Mock implements CardFormat {}
 
+// ignore: must_be_immutable
 class MockEntryField extends Mock implements EntryField {}
 
 void main() {
