@@ -33,8 +33,9 @@ void main() {
         'without optional parameters, '
         'should have expected default fields',
         () {
-          final cardFormat = CardFormat(name: 'Basic Front Format');
+          final cardFormat = CardFormat(id: 1, name: 'Basic Front Format');
 
+          expect(cardFormat.id, 1);
           expect(cardFormat.name, 'Basic Front Format');
           expect(cardFormat.front, CardFormatStructure.empty());
           expect(cardFormat.back, CardFormatStructure.empty());
@@ -46,17 +47,22 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => CardFormat(name: null),
+            () => CardFormat(id: null, name: 'Null name'),
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(name: 'Null name', front: null),
+            () => CardFormat(id: 2, name: null),
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(name: 'Null name', back: null),
+            () => CardFormat(id: 3, name: 'Null name', front: null),
+            throwsAssertionError,
+          );
+
+          expect(
+            () => CardFormat(id: 4, name: 'Null name', back: null),
             throwsAssertionError,
           );
         },
@@ -67,13 +73,13 @@ void main() {
         'should fail asserts',
         () {
           expect(
-            () => CardFormat(name: 'x' * 151),
+            () => CardFormat(id: 5, name: 'x' * 151),
             // name > 150 chars is illegal.
             throwsAssertionError,
           );
 
           expect(
-            () => CardFormat(name: 'x' * 150),
+            () => CardFormat(id: 6, name: 'x' * 150),
             // name <= 150 chars is legal.
             isNot(throwsAssertionError),
           );
@@ -90,10 +96,13 @@ void main() {
       final structure2 = MockCardFormatStructure();
 
       final cardFormat1 = CardFormat(
+        id: 7,
         name: 'First name',
         front: structure1,
         back: structure2,
       );
+
+      expect(cardFormat1.id, 7);
       expect(cardFormat1.name, 'First name');
       expect(cardFormat1.front, structure1);
       expect(cardFormat1.back, structure2);
@@ -103,6 +112,8 @@ void main() {
         front: structure2,
         back: structure1,
       );
+
+      expect(cardFormat1.id, 7);
       expect(cardFormat2.name, 'New name');
       expect(cardFormat2.front, structure2);
       expect(cardFormat2.back, structure1);
@@ -114,11 +125,19 @@ void main() {
     'should return true',
     () {
       final cardFormat = CardFormat(
+        id: 8,
         name: 'Equal name',
         front: MockCardFormatStructure(),
         back: MockCardFormatStructure(),
       );
-      expect(cardFormat, cardFormat.copyWith());
+
+      final newCardFormat = cardFormat.copyWith(
+        name: 'Another name',
+        front: MockCardFormatStructure(),
+        back: MockCardFormatStructure(),
+      );
+
+      expect(cardFormat, newCardFormat);
     },
   );
 }

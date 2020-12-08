@@ -32,15 +32,18 @@ import 'card_format_structure.dart';
 /// This defines two different structures of a card: the front and the back.
 @immutable
 class CardFormat extends Equatable {
+  final int id;
   final String name;
   final CardFormatStructure front;
   final CardFormatStructure back;
 
   CardFormat({
+    @required this.id,
     @required this.name,
     this.front = const CardFormatStructure.empty(),
     this.back = const CardFormatStructure.empty(),
-  })  : assert(name != null),
+  })  : assert(id != null),
+        assert(name != null),
         assert(front != null),
         assert(back != null),
         assert(name.length <= 150);
@@ -51,6 +54,7 @@ class CardFormat extends Equatable {
     CardFormatStructure back,
   }) {
     return CardFormat(
+      id: id,
       name: name ?? this.name,
       front: front ?? this.front,
       back: back ?? this.back,
@@ -58,5 +62,5 @@ class CardFormat extends Equatable {
   }
 
   @override
-  List<Object> get props => [name, front, back];
+  List<Object> get props => [id];
 }
