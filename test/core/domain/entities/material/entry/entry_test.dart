@@ -48,50 +48,56 @@ void main() {
         },
       );
 
-      test(
+      group(
         'with null parameters, '
         'should fail asserts',
         () {
-          expect(
+          test(
+            'id is null',
             () {
-              Entry(
-                id: null,
-                entryTypeId: 1,
+              expect(
+                () {
+                  Entry(id: null, entryTypeId: 1);
+                },
+                throwsAssertionError,
               );
             },
-            throwsAssertionError,
           );
 
-          expect(
+          test(
+            'entryTypeId is null',
             () {
-              Entry(
-                id: 100,
-                entryTypeId: null,
+              expect(
+                () {
+                  Entry(id: 100, entryTypeId: null);
+                },
+                throwsAssertionError,
               );
             },
-            throwsAssertionError,
           );
 
-          expect(
+          test(
+            'tags is null',
             () {
-              Entry(
-                id: 100,
-                entryTypeId: 1,
-                tags: null,
+              expect(
+                () {
+                  Entry(id: 100, entryTypeId: 1, tags: null);
+                },
+                throwsAssertionError,
               );
             },
-            throwsAssertionError,
           );
 
-          expect(
+          test(
+            'fieldData is null',
             () {
-              Entry(
-                id: 100,
-                entryTypeId: 1,
-                fieldData: null,
+              expect(
+                () {
+                  Entry(id: 100, entryTypeId: 1, fieldData: null);
+                },
+                throwsAssertionError,
               );
             },
-            throwsAssertionError,
           );
         },
       );
