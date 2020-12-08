@@ -101,6 +101,24 @@ void main() {
           );
         },
       );
+
+      group(
+        'with parameters containing null, '
+        'should fail asserts',
+        () {
+          test(
+            'tags contains null',
+            () {
+              expect(
+                () {
+                  Entry(id: 100, entryTypeId: 1, tags: {null});
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
     },
   );
 

@@ -37,6 +37,7 @@ class Entry extends Equatable {
   })  : assert(id != null),
         assert(entryTypeId != null),
         assert(tags != null),
+        assert(!tags.contains(null)),
         assert(fieldData != null);
 
   Entry copyWith({
