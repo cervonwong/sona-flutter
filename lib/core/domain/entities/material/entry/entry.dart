@@ -32,8 +32,8 @@ class Entry extends Equatable {
   Entry({
     @required this.id,
     @required this.entryTypeId,
-    Set<EntryTag> tags = const <EntryTag>{},
-    Map<String, String> fieldData = const <String, String>{},
+    @required Set<EntryTag> tags,
+    @required Map<String, String> fieldData,
   })  : assert(id != null),
         assert(entryTypeId != null),
         assert(tags != null),

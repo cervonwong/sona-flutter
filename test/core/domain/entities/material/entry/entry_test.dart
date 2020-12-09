@@ -32,22 +32,6 @@ void main() {
   group(
     'Entry when constructed',
     () {
-      test(
-        'without optional parameters, '
-        'should have expected default fields',
-        () {
-          final entry = Entry(
-            id: 1,
-            entryTypeId: 2,
-          );
-
-          expect(entry.id, 1);
-          expect(entry.entryTypeId, 2);
-          expect(entry.tags, <EntryTag>{});
-          expect(entry.fieldData, <String, String>{});
-        },
-      );
-
       group(
         'with null parameters, '
         'should fail asserts',
@@ -57,7 +41,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: null, entryTypeId: 1);
+                  Entry(id: null, entryTypeId: 1, tags: {}, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -69,7 +53,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: null);
+                  Entry(id: 100, entryTypeId: null, tags: {}, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -81,7 +65,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: 1, tags: null);
+                  Entry(id: 100, entryTypeId: 1, tags: null, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -93,7 +77,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: 1, fieldData: null);
+                  Entry(id: 100, entryTypeId: 1, tags: {}, fieldData: null);
                 },
                 throwsAssertionError,
               );
@@ -111,7 +95,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: 1, tags: {null});
+                  Entry(id: 100, entryTypeId: 1, tags: {null}, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -129,7 +113,12 @@ void main() {
             () {
               final tags = {tag1};
 
-              final entry = Entry(id: 999, entryTypeId: 1, tags: tags);
+              final entry = Entry(
+                id: 999,
+                entryTypeId: 1,
+                tags: tags,
+                fieldData: {},
+              );
 
               tags.add(tag2);
 
@@ -145,6 +134,7 @@ void main() {
               final entry = Entry(
                 id: 999,
                 entryTypeId: 1,
+                tags: {},
                 fieldData: fieldData,
               );
 
@@ -194,7 +184,7 @@ void main() {
         'logically equal Entries, '
         'should return true',
         () {
-          final entry1 = Entry(id: 1, entryTypeId: 2);
+          final entry1 = Entry(id: 1, entryTypeId: 2, tags: {}, fieldData: {});
           final entry2 = entry1.copyWith(tags: {tag1, tag2});
           final entry3 = entry1.copyWith(fieldData: {
             'Sona': 'Is',
@@ -218,10 +208,14 @@ void main() {
           final entry1 = Entry(
             id: 9999,
             entryTypeId: 1,
+            tags: {},
+            fieldData: {},
           );
           final entry2 = Entry(
             id: 9998,
             entryTypeId: 1,
+            tags: {},
+            fieldData: {},
           );
 
           expect(entry1, isNot(entry2));
