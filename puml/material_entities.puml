@@ -12,8 +12,7 @@ class Card {
 }
 class Entry {
 	id : int
-	entryTypeId : int
-	tags : Set<String>
+	tags : Set<EntryTag>
 	fieldData : Map<String, String>
 }
 class Deck {
