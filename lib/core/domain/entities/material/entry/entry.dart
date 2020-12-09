@@ -32,13 +32,15 @@ class Entry extends Equatable {
   Entry({
     @required this.id,
     @required this.entryTypeId,
-    this.tags = const <EntryTag>{},
-    this.fieldData = const <String, String>{},
+    Set<EntryTag> tags = const <EntryTag>{},
+    Map<String, String> fieldData = const <String, String>{},
   })  : assert(id != null),
         assert(entryTypeId != null),
         assert(tags != null),
         assert(!tags.contains(null)),
-        assert(fieldData != null);
+        assert(fieldData != null),
+        tags = tags.toSet(),
+        fieldData = Map.of(fieldData);
 
   Entry copyWith({
     Set<EntryTag> tags,

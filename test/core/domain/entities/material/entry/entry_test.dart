@@ -119,6 +119,43 @@ void main() {
           );
         },
       );
+
+      group(
+        'with iterable parameters, '
+        'should shallow copy them',
+        () {
+          test(
+            'tags is passed',
+            () {
+              final tags = {tag1};
+
+              final entry = Entry(id: 999, entryTypeId: 1, tags: tags);
+
+              tags.add(tag2);
+
+              expect(entry.tags, {tag1});
+            },
+          );
+
+          test(
+            'fieldData is passed',
+            () {
+              final fieldData = {'TEST': 'test'};
+
+              final entry = Entry(
+                id: 999,
+                entryTypeId: 1,
+                fieldData: fieldData,
+              );
+
+              fieldData['WOW'] = 'wow';
+
+              print(fieldData);
+              expect(entry.fieldData, {'TEST': 'test'});
+            },
+          );
+        },
+      );
     },
   );
 
