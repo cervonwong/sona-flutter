@@ -18,11 +18,11 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/entry_field_spec.dart';
 
 void main() {
   group(
-    'EntryField when constructed',
+    'EntryFieldSpec when constructed',
     () {
       group(
         'with null parameters, '
@@ -33,7 +33,7 @@ void main() {
             () {
               expect(
                 () {
-                  EntryField(
+                  EntryFieldSpec(
                     name: null,
                     type: EntryFieldType.text,
                   );
@@ -48,7 +48,7 @@ void main() {
             () {
               expect(
                 () {
-                  EntryField(
+                  EntryFieldSpec(
                     name: 'Not null name',
                     type: null,
                   );
@@ -63,64 +63,64 @@ void main() {
   );
 
   test(
-    'EntryField copyWith, '
-    'should return EntryField with expected altered fields',
+    'EntryFieldSpec copyWith, '
+    'should return EntryFieldSpec with expected altered fields',
     () {
-      final entryField = EntryField(
+      final entryFieldSpec = EntryFieldSpec(
         name: 'Random name',
         type: EntryFieldType.text,
       );
 
-      expect(entryField.name, 'Random name');
-      expect(entryField.type, EntryFieldType.text);
+      expect(entryFieldSpec.name, 'Random name');
+      expect(entryFieldSpec.type, EntryFieldType.text);
 
-      final newEntryField = entryField.copyWith(
+      final newEntryFieldSpec = entryFieldSpec.copyWith(
         name: 'New name',
         type: EntryFieldType.image,
       );
 
-      expect(newEntryField.name, 'New name');
-      expect(newEntryField.type, EntryFieldType.image);
+      expect(newEntryFieldSpec.name, 'New name');
+      expect(newEntryFieldSpec.type, EntryFieldType.image);
     },
   );
 
   group(
-    'EntryField when equating',
+    'EntryFieldSpec when equating',
     () {
       test(
-        'logically equal EntryFields, '
+        'logically equal EntryFieldSpecs, '
         'should return true',
         () {
-          final entryField = EntryField(
-            name: 'Equal entryField',
+          final entryFieldSpec = EntryFieldSpec(
+            name: 'Equal entryFieldSpec',
             type: EntryFieldType.image,
           );
 
-          expect(entryField, entryField.copyWith());
+          expect(entryFieldSpec, entryFieldSpec.copyWith());
         },
       );
 
       test(
-        'logically unequal EntryFields, '
+        'logically unequal EntryFieldSpecs, '
         'should return false',
         () {
-          final entryField1 = EntryField(
+          final entryFieldSpec1 = EntryFieldSpec(
             name: 'Name alpha',
             type: EntryFieldType.image,
           );
 
-          final entryField2 = EntryField(
+          final entryFieldSpec2 = EntryFieldSpec(
             name: 'Name beta',
             type: EntryFieldType.image,
           );
 
-          final entryField3 = EntryField(
+          final entryFieldSpec3 = EntryFieldSpec(
             name: 'Name alpha',
             type: EntryFieldType.text,
           );
 
-          expect(entryField1, isNot(entryField2));
-          expect(entryField1, isNot(entryField3));
+          expect(entryFieldSpec1, isNot(entryFieldSpec2));
+          expect(entryFieldSpec1, isNot(entryFieldSpec3));
         },
       );
     },

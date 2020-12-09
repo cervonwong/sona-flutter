@@ -23,21 +23,21 @@ import 'package:meta/meta.dart';
 /// A data-class specifying a field in an EntryType. This class does not
 /// contain field data of an Entry.
 @immutable
-class EntryField extends Equatable {
+class EntryFieldSpec extends Equatable {
   final String name;
   final EntryFieldType type;
 
-  EntryField({
+  EntryFieldSpec({
     @required this.name,
     @required this.type,
   })  : assert(name != null),
         assert(type != null);
 
-  EntryField copyWith({
+  EntryFieldSpec copyWith({
     String name,
     EntryFieldType type,
   }) {
-    return EntryField(
+    return EntryFieldSpec(
       name: name ?? this.name,
       type: type ?? this.type,
     );

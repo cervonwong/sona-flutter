@@ -20,14 +20,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sona_flutter/features/entry_type/domain/entities/card_format.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/entry_field_spec.dart';
 import 'package:sona_flutter/features/entry_type/domain/entities/entry_type.dart';
 
 // ignore: must_be_immutable
 class MockCardFormat extends Mock implements CardFormat {}
 
 // ignore: must_be_immutable
-class MockEntryField extends Mock implements EntryField {}
+class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 
 void main() {
   group(
@@ -38,20 +38,20 @@ void main() {
         'should have expected fields '
         '(this class does not have optional parameters)',
         () {
-          var cardFormat = MockCardFormat();
-          var field = MockEntryField();
+          final cardFormat = MockCardFormat();
+          final fieldSpec = MockEntryFieldSpec();
 
           final entryType = EntryType(
             id: 1,
             name: 'Entry Type Name',
             cardFormats: [cardFormat],
-            fields: [field],
+            fieldSpecs: [fieldSpec],
           );
 
           expect(entryType.id, 1);
           expect(entryType.name, 'Entry Type Name');
           expect(entryType.cardFormats, [cardFormat]);
-          expect(entryType.fields, [field]);
+          expect(entryType.fieldSpecs, [fieldSpec]);
         },
       );
 
@@ -68,7 +68,7 @@ void main() {
                     id: null,
                     name: 'Null EntryType',
                     cardFormats: [],
-                    fields: [],
+                    fieldSpecs: [],
                   );
                 },
                 throwsAssertionError,
@@ -85,7 +85,7 @@ void main() {
                     id: 1,
                     name: null,
                     cardFormats: [],
-                    fields: [],
+                    fieldSpecs: [],
                   );
                 },
                 throwsAssertionError,
@@ -102,7 +102,7 @@ void main() {
                     id: 1,
                     name: 'Null EntryType',
                     cardFormats: null,
-                    fields: [],
+                    fieldSpecs: [],
                   );
                 },
                 throwsAssertionError,
@@ -119,7 +119,7 @@ void main() {
                     id: 1,
                     name: 'Null EntryType',
                     cardFormats: [],
-                    fields: null,
+                    fieldSpecs: null,
                   );
                 },
                 throwsAssertionError,
@@ -142,7 +142,7 @@ void main() {
                     id: 1,
                     name: 'Null EntryType',
                     cardFormats: [null],
-                    fields: [],
+                    fieldSpecs: [],
                   );
                 },
                 throwsAssertionError,
@@ -151,7 +151,7 @@ void main() {
           );
 
           test(
-            'fields contains null',
+            'fieldSpecs contains null',
             () {
               expect(
                 () {
@@ -159,7 +159,7 @@ void main() {
                     id: 1,
                     name: 'Null EntryType',
                     cardFormats: [],
-                    fields: [null],
+                    fieldSpecs: [null],
                   );
                 },
                 throwsAssertionError,
@@ -173,24 +173,24 @@ void main() {
         'with all parameters, '
         'should shallow copy lists',
         () {
-          var cardFormat = MockCardFormat();
-          var field = MockEntryField();
+          final cardFormat = MockCardFormat();
+          final fieldSpec = MockEntryFieldSpec();
 
           final cardFormats = [cardFormat];
-          final fields = [field];
+          final fieldSpecs = [fieldSpec];
 
           final entryType = EntryType(
             id: 1,
             name: 'Entry Type Name',
             cardFormats: cardFormats,
-            fields: fields,
+            fieldSpecs: fieldSpecs,
           );
 
           cardFormats.add(MockCardFormat());
-          fields.add(MockEntryField());
+          fieldSpecs.add(MockEntryFieldSpec());
 
           expect(entryType.cardFormats, [cardFormat]);
-          expect(entryType.fields, [field]);
+          expect(entryType.fieldSpecs, [fieldSpec]);
         },
       );
     },
@@ -207,14 +207,14 @@ void main() {
             id: 1,
             name: 'First name',
             cardFormats: [],
-            fields: [],
+            fieldSpecs: [],
           );
 
           final entryType2 = EntryType(
             id: 1,
             name: 'Second name',
             cardFormats: [MockCardFormat()],
-            fields: [MockEntryField()],
+            fieldSpecs: [MockEntryFieldSpec()],
           );
 
           expect(entryType1, entryType2);
@@ -229,14 +229,14 @@ void main() {
             id: 1,
             name: 'Name name',
             cardFormats: [],
-            fields: [],
+            fieldSpecs: [],
           );
 
           final entryType2 = EntryType(
             id: 2,
             name: 'Name name',
             cardFormats: [],
-            fields: [],
+            fieldSpecs: [],
           );
 
           expect(entryType1, isNot(entryType2));

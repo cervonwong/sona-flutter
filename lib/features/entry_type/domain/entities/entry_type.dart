@@ -21,33 +21,33 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import 'card_format.dart';
-import 'entry_field.dart';
+import 'entry_field_spec.dart';
 
 @immutable
 class EntryType extends Equatable {
   final int id;
   final String name;
   final List<CardFormat> cardFormats;
-  final List<EntryField> fields;
+  final List<EntryFieldSpec> fieldSpecs;
 
   EntryType({
     @required this.id,
     @required this.name,
     @required List<CardFormat> cardFormats,
-    @required List<EntryField> fields,
+    @required List<EntryFieldSpec> fieldSpecs,
   })  : assert(id != null),
         assert(name != null),
         assert(cardFormats != null),
         assert(!cardFormats.contains(null)),
-        assert(fields != null),
-        assert(!fields.contains(null)),
+        assert(fieldSpecs != null),
+        assert(!fieldSpecs.contains(null)),
         cardFormats = cardFormats.toList(),
-        fields = fields.toList();
+        fieldSpecs = fieldSpecs.toList();
 
   // TODO(cervonwong): 09/12/2020 Enforce 1..* for lists, not 0..*.
 
   // TODO(cervonwong): 09/12/2020 Add copyWith for name, then see
-  //  CardFormatStructure for CRUD on CardFormats and fields.
+  //  CardFormatStructure for CRUD on cardFormats and fieldSpecs.
 
   @override
   List<Object> get props => [id];
