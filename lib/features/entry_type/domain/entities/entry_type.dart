@@ -21,7 +21,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import 'card_format.dart';
-import 'entry_field_spec.dart';
+import 'entry_field/entry_field_spec.dart';
 
 @immutable
 class EntryType extends Equatable {
