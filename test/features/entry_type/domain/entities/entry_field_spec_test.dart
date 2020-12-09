@@ -19,6 +19,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_spec.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_type.dart';
 
 void main() {
   group(

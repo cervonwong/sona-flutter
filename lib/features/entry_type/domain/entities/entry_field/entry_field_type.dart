@@ -17,34 +17,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-
-import 'entry_field_type.dart';
-
-/// A data-class specifying a field in an EntryType. This class does not
-/// contain field data of an Entry.
-@immutable
-class EntryFieldSpec extends Equatable {
-  final String name;
-  final EntryFieldType type;
-
-  EntryFieldSpec({
-    @required this.name,
-    @required this.type,
-  })  : assert(name != null),
-        assert(type != null);
-
-  EntryFieldSpec copyWith({
-    String name,
-    EntryFieldType type,
-  }) {
-    return EntryFieldSpec(
-      name: name ?? this.name,
-      type: type ?? this.type,
-    );
-  }
-
-  @override
-  List<Object> get props => [name, type];
-}
+enum EntryFieldType { text, image }
