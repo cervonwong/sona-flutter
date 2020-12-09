@@ -44,6 +44,11 @@ class EntryType extends Equatable {
         cardFormats = cardFormats.toList(),
         fields = fields.toList();
 
+  // TODO(cervonwong): 09/12/2020 Enforce 1..* for lists, not 0..*.
+
+  // TODO(cervonwong): 09/12/2020 Add copyWith for name, then see
+  //  CardFormatStructure for CRUD on CardFormats and fields.
+
   @override
   List<Object> get props => [id];
 }
