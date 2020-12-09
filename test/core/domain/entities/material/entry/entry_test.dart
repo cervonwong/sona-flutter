@@ -41,19 +41,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: null, entryTypeId: 1, tags: {}, fieldData: {});
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'entryTypeId is null',
-            () {
-              expect(
-                () {
-                  Entry(id: 100, entryTypeId: null, tags: {}, fieldData: {});
+                  Entry(id: null, tags: {}, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -65,7 +53,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: 1, tags: null, fieldData: {});
+                  Entry(id: 100, tags: null, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -77,7 +65,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: 1, tags: {}, fieldData: null);
+                  Entry(id: 100, tags: {}, fieldData: null);
                 },
                 throwsAssertionError,
               );
@@ -95,7 +83,7 @@ void main() {
             () {
               expect(
                 () {
-                  Entry(id: 100, entryTypeId: 1, tags: {null}, fieldData: {});
+                  Entry(id: 100, tags: {null}, fieldData: {});
                 },
                 throwsAssertionError,
               );
@@ -113,12 +101,7 @@ void main() {
             () {
               final tags = {tag1};
 
-              final entry = Entry(
-                id: 999,
-                entryTypeId: 1,
-                tags: tags,
-                fieldData: {},
-              );
+              final entry = Entry(id: 999, tags: tags, fieldData: {});
 
               tags.add(tag2);
 
@@ -131,16 +114,10 @@ void main() {
             () {
               final fieldData = {'TEST': 'test'};
 
-              final entry = Entry(
-                id: 999,
-                entryTypeId: 1,
-                tags: {},
-                fieldData: fieldData,
-              );
+              final entry = Entry(id: 999, tags: {}, fieldData: fieldData);
 
               fieldData['WOW'] = 'wow';
 
-              print(fieldData);
               expect(entry.fieldData, {'TEST': 'test'});
             },
           );
@@ -155,13 +132,11 @@ void main() {
     () {
       final entry = Entry(
         id: 7,
-        entryTypeId: 3,
         tags: {tag1},
         fieldData: {'Field 1': 'Data 1', 'Field 2': 'Data 2'},
       );
 
       expect(entry.id, 7);
-      expect(entry.entryTypeId, 3);
       expect(entry.tags, {tag1});
       expect(entry.fieldData, {'Field 1': 'Data 1', 'Field 2': 'Data 2'});
 
@@ -171,7 +146,6 @@ void main() {
       );
 
       expect(newEntry.id, 7);
-      expect(newEntry.entryTypeId, 3);
       expect(newEntry.tags, {tag2});
       expect(newEntry.fieldData, {'New field 1': 'New data 1'});
     },
@@ -184,7 +158,7 @@ void main() {
         'logically equal Entries, '
         'should return true',
         () {
-          final entry1 = Entry(id: 1, entryTypeId: 2, tags: {}, fieldData: {});
+          final entry1 = Entry(id: 1, tags: {}, fieldData: {});
           final entry2 = entry1.copyWith(tags: {tag1, tag2});
           final entry3 = entry1.copyWith(fieldData: {
             'Sona': 'Is',
@@ -207,13 +181,11 @@ void main() {
         () {
           final entry1 = Entry(
             id: 9999,
-            entryTypeId: 1,
             tags: {},
             fieldData: {},
           );
           final entry2 = Entry(
             id: 9998,
-            entryTypeId: 1,
             tags: {},
             fieldData: {},
           );

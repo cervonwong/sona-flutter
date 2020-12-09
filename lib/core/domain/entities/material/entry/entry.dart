@@ -25,17 +25,14 @@ import 'entry_tag.dart';
 @immutable
 class Entry extends Equatable {
   final int id;
-  final int entryTypeId;
   final Set<EntryTag> tags;
   final Map<String, String> fieldData;
 
   Entry({
     @required this.id,
-    @required this.entryTypeId,
     @required Set<EntryTag> tags,
     @required Map<String, String> fieldData,
   })  : assert(id != null),
-        assert(entryTypeId != null),
         assert(tags != null),
         assert(!tags.contains(null)),
         assert(fieldData != null),
@@ -48,7 +45,6 @@ class Entry extends Equatable {
   }) {
     return Entry(
       id: id,
-      entryTypeId: entryTypeId,
       tags: tags ?? this.tags,
       fieldData: fieldData ?? this.fieldData,
     );
