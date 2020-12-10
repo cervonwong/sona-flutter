@@ -86,7 +86,7 @@ void main() {
 
   test(
     'CardFormatStructure components getter, '
-    'should return shallow copy',
+    'should return a shallow copy',
     () {
       final structure = CardFormatStructure(components: [mockComponent1]);
       final components = structure.components..add(mockComponent2);
