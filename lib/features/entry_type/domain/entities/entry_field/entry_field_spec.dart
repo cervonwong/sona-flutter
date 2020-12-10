@@ -22,29 +22,37 @@ import 'package:meta/meta.dart';
 
 import 'entry_field_type.dart';
 
-/// A data-class specifying a field in an EntryType. This class does not
-/// contain field data of an Entry.
+/// A class specifying a field in an EntryType.
+///
+/// This class does not contain field data of an Entry. [id] ensures that when
+/// a field is renamed, the data is preserved and migrated. [type] is not
+/// included in [copyWith] as the [EntryFieldDatum] classes is not interoperable
+/// with each other. Create a new field if a field with a different type is
+/// required.
 @immutable
 class EntryFieldSpec extends Equatable {
-  final String name;
+  final int id;
   final EntryFieldType type;
+  final String name;
 
   EntryFieldSpec({
-    @required this.name,
+    @required this.id,
     @required this.type,
-  })  : assert(name != null),
+    @required this.name,
+  })  : assert(id != null),
+        assert(name != null),
         assert(type != null);
 
   EntryFieldSpec copyWith({
     String name,
-    EntryFieldType type,
   }) {
     return EntryFieldSpec(
+      id: id,
+      type: type,
       name: name ?? this.name,
-      type: type ?? this.type,
     );
   }
 
   @override
-  List<Object> get props => [name, type];
+  List<Object> get props => [id];
 }

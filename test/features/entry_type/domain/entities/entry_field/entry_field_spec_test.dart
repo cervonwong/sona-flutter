@@ -30,11 +30,28 @@ void main() {
         'should fail asserts',
         () {
           test(
+            'id is null',
+            () {
+              expect(
+                () {
+                  EntryFieldSpec(
+                    id: null,
+                    name: 'Not null name',
+                    type: EntryFieldType.text,
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
             'name is null',
             () {
               expect(
                 () {
                   EntryFieldSpec(
+                    id: 1,
                     name: null,
                     type: EntryFieldType.text,
                   );
@@ -46,10 +63,11 @@ void main() {
 
           test(
             'type is null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryFieldSpec(
+                    id: 2,
                     name: 'Not null name',
                     type: null,
                   );
@@ -68,20 +86,22 @@ void main() {
     'should return EntryFieldSpec with expected altered fields',
     () {
       final entryFieldSpec = EntryFieldSpec(
+        id: 3,
         name: 'Random name',
         type: EntryFieldType.text,
       );
 
+      expect(entryFieldSpec.id, 3);
       expect(entryFieldSpec.name, 'Random name');
       expect(entryFieldSpec.type, EntryFieldType.text);
 
       final newEntryFieldSpec = entryFieldSpec.copyWith(
         name: 'New name',
-        type: EntryFieldType.image,
       );
 
+      expect(entryFieldSpec.id, 3);
       expect(newEntryFieldSpec.name, 'New name');
-      expect(newEntryFieldSpec.type, EntryFieldType.image);
+      expect(entryFieldSpec.type, EntryFieldType.text);
     },
   );
 
@@ -92,12 +112,19 @@ void main() {
         'logically equal EntryFieldSpecs, '
         'should return true',
         () {
-          final entryFieldSpec = EntryFieldSpec(
+          final entryFieldSpec1 = EntryFieldSpec(
+            id: 4,
             name: 'Equal entryFieldSpec',
             type: EntryFieldType.image,
           );
 
-          expect(entryFieldSpec, entryFieldSpec.copyWith());
+          final entryFieldSpec2 = EntryFieldSpec(
+            id: 4,
+            name: 'Another equal entryFieldSpec',
+            type: EntryFieldType.text,
+          );
+
+          expect(entryFieldSpec1, entryFieldSpec2);
         },
       );
 
@@ -106,22 +133,18 @@ void main() {
         'should return false',
         () {
           final entryFieldSpec1 = EntryFieldSpec(
+            id: 5,
             name: 'Name alpha',
             type: EntryFieldType.image,
           );
 
           final entryFieldSpec2 = EntryFieldSpec(
-            name: 'Name beta',
+            id: 6,
+            name: 'Name alpha',
             type: EntryFieldType.image,
           );
 
-          final entryFieldSpec3 = EntryFieldSpec(
-            name: 'Name alpha',
-            type: EntryFieldType.text,
-          );
-
           expect(entryFieldSpec1, isNot(entryFieldSpec2));
-          expect(entryFieldSpec1, isNot(entryFieldSpec3));
         },
       );
     },
