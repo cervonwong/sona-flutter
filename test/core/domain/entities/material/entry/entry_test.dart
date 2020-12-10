@@ -139,11 +139,11 @@ void main() {
 
       group(
         'with collection type parameters, '
-            'should shallow copy them',
-            () {
+        'should shallow copy them',
+        () {
           test(
             'tags is passed',
-                () {
+            () {
               final tags = {tag1};
 
               final entry = Entry(
