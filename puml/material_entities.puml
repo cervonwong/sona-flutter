@@ -35,8 +35,9 @@ class EntryType {
 	fieldSpecs : List<EntryFieldSpec>
 }
 class EntryFieldSpec {
-	name : String
+	id : int
 	type : EntryFieldType
+	name : String
 }
 class CardFormat {
 	id : int
