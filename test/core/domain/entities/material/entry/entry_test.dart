@@ -113,9 +113,9 @@ void main() {
 
           test(
             'fieldData contains null keys',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   Entry(id: 100, tags: {}, fieldData: {null: datum1});
                 },
                 throwsAssertionError,
@@ -138,8 +138,8 @@ void main() {
       );
 
       group(
-        'with iterable parameters, '
-        'should shallow copy them',
+        'with collection type parameters, '
+            'should shallow copy them',
         () {
           test(
             'tags is passed',

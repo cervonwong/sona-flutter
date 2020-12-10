@@ -59,13 +59,13 @@ void main() {
 
       group(
         'with null parameters, '
-            'should fail asserts',
-            () {
+        'should fail asserts',
+        () {
           test(
             'id is null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   EntryType(
                     id: null,
                     name: 'Null EntryType',
@@ -132,7 +132,7 @@ void main() {
       );
 
       group(
-        'with iterable parameters containing null, '
+        'with collection type parameters containing null, '
             'should fail asserts',
             () {
           test(
@@ -196,7 +196,7 @@ void main() {
   );
 
   group(
-    'EntryType getters for iterable fields, '
+    'EntryType getters for collection type fields, '
         'should return a shallow copy',
         () {
       test(

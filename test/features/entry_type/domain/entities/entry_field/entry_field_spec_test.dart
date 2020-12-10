@@ -63,9 +63,9 @@ void main() {
 
           test(
             'type is null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   EntryFieldSpec(
                     id: 2,
                     name: 'Not null name',
