@@ -97,9 +97,9 @@ void main() {
 
           test(
             'cardFormats is null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
