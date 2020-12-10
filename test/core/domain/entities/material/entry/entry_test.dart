@@ -192,6 +192,44 @@ void main() {
     },
   );
 
+  group(
+    'EntryType getters for collection type fields, '
+    'should return a shallow copy',
+    () {
+      test(
+        'tags getter',
+        () {
+          final entry = Entry(
+            id: 2,
+            tags: {tag1},
+            fieldData: {spec1: datum1},
+          );
+          expect(entry.tags, {tag1});
+
+          final tags = entry.tags..clear();
+          expect(tags, <EntryTag>{});
+          expect(entry.tags, {tag1});
+        },
+      );
+
+      test(
+        'fieldData getter',
+        () {
+          final entry = Entry(
+            id: 2,
+            tags: {},
+            fieldData: {spec1: datum1},
+          );
+          expect(entry.fieldData, {spec1: datum1});
+
+          final fieldData = entry.fieldData..clear();
+          expect(fieldData, <EntryFieldSpec, EntryFieldDatum>{});
+          expect(entry.fieldData, {spec1: datum1});
+        },
+      );
+    },
+  );
+
   test(
     'Entry copyWith, '
     'should return Entry with expected altered fields',

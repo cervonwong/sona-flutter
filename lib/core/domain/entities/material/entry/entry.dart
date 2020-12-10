@@ -27,8 +27,12 @@ import 'entry_tag.dart';
 @immutable
 class Entry extends Equatable {
   final int id;
-  final Set<EntryTag> tags;
-  final Map<EntryFieldSpec, EntryFieldDatum> fieldData;
+  final Set<EntryTag> _tags;
+  final Map<EntryFieldSpec, EntryFieldDatum> _fieldData;
+
+  Set<EntryTag> get tags => _tags.toSet();
+
+  Map<EntryFieldSpec, EntryFieldDatum> get fieldData => Map.of(_fieldData);
 
   Entry({
     @required this.id,
@@ -42,8 +46,8 @@ class Entry extends Equatable {
         assert(!fieldData.containsKey(null)),
         assert(!fieldData.containsValue(null)),
         assert(_checkFieldDataType(fieldData)),
-        tags = tags.toSet(),
-        fieldData = Map.of(fieldData);
+        _tags = tags.toSet(),
+        _fieldData = Map.of(fieldData);
 
   static bool _checkFieldDataType(
     Map<EntryFieldSpec, EntryFieldDatum> fieldData,
@@ -62,8 +66,8 @@ class Entry extends Equatable {
   }) {
     return Entry(
       id: id,
-      tags: tags ?? this.tags,
-      fieldData: fieldData ?? this.fieldData,
+      tags: tags ?? _tags,
+      fieldData: fieldData ?? _fieldData,
     );
   }
 
