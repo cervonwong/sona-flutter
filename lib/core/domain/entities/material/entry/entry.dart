@@ -48,9 +48,11 @@ class Entry extends Equatable {
   static bool _checkFieldDataType(
     Map<EntryFieldSpec, EntryFieldDatum> fieldData,
   ) {
-    fieldData.forEach((spec, datum) {
-      if (spec.type != datum.type) return false;
-    });
+    for (var mapEntry in fieldData.entries) {
+      if (mapEntry.key.type != mapEntry.value.type) {
+        return false;
+      }
+    }
     return true;
   }
 

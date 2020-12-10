@@ -101,9 +101,9 @@ void main() {
         () {
           test(
             'tags contains null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   Entry(id: 100, tags: {null}, fieldData: {spec1: datum1});
                 },
                 throwsAssertionError,
@@ -169,6 +169,23 @@ void main() {
 
               expect(entry.fieldData, {spec1: datum1});
             },
+          );
+        },
+      );
+
+      test(
+        'with fieldData with entries with key and value with different types, '
+            'should fail asserts',
+            () {
+          expect(
+                () {
+              Entry(
+                id: 2,
+                tags: {},
+                fieldData: {spec1: datum2},
+              );
+            },
+            throwsAssertionError,
           );
         },
       );
