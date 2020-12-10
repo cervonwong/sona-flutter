@@ -20,28 +20,43 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../features/entry_type/domain/entities/entry_field/datum/entry_field_datum.dart';
+import '../../../../../features/entry_type/domain/entities/entry_field/entry_field_spec.dart';
 import 'entry_tag.dart';
 
 @immutable
 class Entry extends Equatable {
   final int id;
   final Set<EntryTag> tags;
-  final Map<String, String> fieldData;
+  final Map<EntryFieldSpec, EntryFieldDatum> fieldData;
 
   Entry({
     @required this.id,
     @required Set<EntryTag> tags,
-    @required Map<String, String> fieldData,
+    @required Map<EntryFieldSpec, EntryFieldDatum> fieldData,
   })  : assert(id != null),
         assert(tags != null),
         assert(!tags.contains(null)),
         assert(fieldData != null),
+        assert(fieldData.isNotEmpty),
+        assert(!fieldData.containsKey(null)),
+        assert(!fieldData.containsValue(null)),
+        assert(_checkFieldDataType(fieldData)),
         tags = tags.toSet(),
         fieldData = Map.of(fieldData);
 
+  static bool _checkFieldDataType(
+    Map<EntryFieldSpec, EntryFieldDatum> fieldData,
+  ) {
+    fieldData.forEach((spec, datum) {
+      if (spec.type != datum.type) return false;
+    });
+    return true;
+  }
+
   Entry copyWith({
     Set<EntryTag> tags,
-    Map<String, String> fieldData,
+    Map<EntryFieldSpec, EntryFieldDatum> fieldData,
   }) {
     return Entry(
       id: id,

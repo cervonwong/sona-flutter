@@ -21,13 +21,34 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/datum/entry_field_datum.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_spec.dart';
+import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_type.dart';
 
 // ignore: must_be_immutable
 class MockEntryTag extends Mock implements EntryTag {}
 
+// ignore: must_be_immutable
+class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
+
+// ignore: must_be_immutable
+class MockEntryFieldDatum extends Mock implements EntryFieldDatum {}
+
 void main() {
   final tag1 = MockEntryTag();
   final tag2 = MockEntryTag();
+
+  final spec1 = MockEntryFieldSpec();
+  final spec2 = MockEntryFieldSpec();
+  final datum1 = MockEntryFieldDatum();
+  final datum2 = MockEntryFieldDatum();
+
+  setUp(() {
+    when(spec1.type).thenReturn(EntryFieldType.text);
+    when(spec2.type).thenReturn(EntryFieldType.image);
+    when(datum1.type).thenReturn(EntryFieldType.text);
+    when(datum2.type).thenReturn(EntryFieldType.image);
+  });
 
   group(
     'Entry when constructed',
@@ -80,10 +101,34 @@ void main() {
         () {
           test(
             'tags contains null',
-            () {
-              expect(
                 () {
-                  Entry(id: 100, tags: {null}, fieldData: {});
+              expect(
+                    () {
+                  Entry(id: 100, tags: {null}, fieldData: {spec1: datum1});
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'fieldData contains null keys',
+                () {
+              expect(
+                    () {
+                  Entry(id: 100, tags: {}, fieldData: {null: datum1});
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'fieldData contains null values',
+                () {
+              expect(
+                    () {
+                  Entry(id: 100, tags: {}, fieldData: {spec1: null});
                 },
                 throwsAssertionError,
               );
@@ -101,7 +146,11 @@ void main() {
             () {
               final tags = {tag1};
 
-              final entry = Entry(id: 999, tags: tags, fieldData: {});
+              final entry = Entry(
+                id: 999,
+                tags: tags,
+                fieldData: {spec1: datum1},
+              );
 
               tags.add(tag2);
 
@@ -112,13 +161,13 @@ void main() {
           test(
             'fieldData is passed',
             () {
-              final fieldData = {'TEST': 'test'};
+              final fieldData = {spec1: datum1};
 
               final entry = Entry(id: 999, tags: {}, fieldData: fieldData);
 
-              fieldData['WOW'] = 'wow';
+              fieldData[spec2] = datum2;
 
-              expect(entry.fieldData, {'TEST': 'test'});
+              expect(entry.fieldData, {spec1: datum1});
             },
           );
         },
@@ -133,21 +182,21 @@ void main() {
       final entry = Entry(
         id: 7,
         tags: {tag1},
-        fieldData: {'Field 1': 'Data 1', 'Field 2': 'Data 2'},
+        fieldData: {spec1: datum1},
       );
 
       expect(entry.id, 7);
       expect(entry.tags, {tag1});
-      expect(entry.fieldData, {'Field 1': 'Data 1', 'Field 2': 'Data 2'});
+      expect(entry.fieldData, {spec1: datum1});
 
       final newEntry = entry.copyWith(
         tags: {tag2},
-        fieldData: {'New field 1': 'New data 1'},
+        fieldData: {spec2: datum2},
       );
 
       expect(newEntry.id, 7);
       expect(newEntry.tags, {tag2});
-      expect(newEntry.fieldData, {'New field 1': 'New data 1'});
+      expect(newEntry.fieldData, {spec2: datum2});
     },
   );
 
@@ -158,20 +207,13 @@ void main() {
         'logically equal Entries, '
         'should return true',
         () {
-          final entry1 = Entry(id: 1, tags: {}, fieldData: {});
+          final entry1 = Entry(id: 1, tags: {}, fieldData: {spec1: datum1});
           final entry2 = entry1.copyWith(tags: {tag1, tag2});
-          final entry3 = entry1.copyWith(fieldData: {
-            'Sona': 'Is',
-            'Very': 'Good',
-          });
-          final entry4 = entry2.copyWith(fieldData: {'Remember': 'Facts'});
+          final entry3 = entry1.copyWith(fieldData: {spec2: datum2});
 
           expect(entry1, entry2);
           expect(entry1, entry3);
-          expect(entry1, entry4);
           expect(entry2, entry3);
-          expect(entry2, entry4);
-          expect(entry3, entry4);
         },
       );
 
@@ -182,12 +224,12 @@ void main() {
           final entry1 = Entry(
             id: 9999,
             tags: {},
-            fieldData: {},
+            fieldData: {spec1: datum1},
           );
           final entry2 = Entry(
             id: 9998,
             tags: {},
-            fieldData: {},
+            fieldData: {spec1: datum1},
           );
 
           expect(entry1, isNot(entry2));
