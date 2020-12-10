@@ -79,13 +79,20 @@ void main() {
 
           expect(components, [mockComponent1, mockComponent2]);
           expect(structure.components, [mockComponent1]);
-
-          structure.components.remove(mockComponent1);
-
-          expect(components, [mockComponent1, mockComponent2]);
-          expect(structure.components, [mockComponent1]);
         },
       );
+    },
+  );
+
+  test(
+    'CardFormatStructure components getter, '
+    'should return shallow copy',
+    () {
+      final structure = CardFormatStructure(components: [mockComponent1]);
+      final components = structure.components..add(mockComponent2);
+
+      expect(components, [mockComponent1, mockComponent2]);
+      expect(structure.components, [mockComponent1]);
     },
   );
 
