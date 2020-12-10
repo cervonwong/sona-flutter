@@ -27,8 +27,12 @@ import 'entry_field/entry_field_spec.dart';
 class EntryType extends Equatable {
   final int id;
   final String name;
-  final List<CardFormat> cardFormats;
-  final List<EntryFieldSpec> fieldSpecs;
+  final List<CardFormat> _cardFormats;
+  final List<EntryFieldSpec> _fieldSpecs;
+
+  List<CardFormat> get cardFormats => _cardFormats.toList();
+
+  List<EntryFieldSpec> get fieldSpecs => _fieldSpecs.toList();
 
   EntryType({
     @required this.id,
@@ -41,8 +45,8 @@ class EntryType extends Equatable {
         assert(!cardFormats.contains(null)),
         assert(fieldSpecs != null),
         assert(!fieldSpecs.contains(null)),
-        cardFormats = cardFormats.toList(),
-        fieldSpecs = fieldSpecs.toList();
+        _cardFormats = cardFormats.toList(),
+        _fieldSpecs = fieldSpecs.toList();
 
   // TODO(cervonwong): 09/12/2020 Enforce 1..* for lists, not 0..*.
 

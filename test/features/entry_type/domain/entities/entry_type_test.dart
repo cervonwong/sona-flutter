@@ -30,6 +30,11 @@ class MockCardFormat extends Mock implements CardFormat {}
 class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 
 void main() {
+  final cardFormat1 = MockCardFormat();
+  final cardFormat2 = MockCardFormat();
+  final fieldSpec1 = MockEntryFieldSpec();
+  final fieldSpec2 = MockEntryFieldSpec();
+
   group(
     'EntryType when constructed',
     () {
@@ -38,32 +43,29 @@ void main() {
         'should have expected fields '
         '(this class does not have optional parameters)',
         () {
-          final cardFormat = MockCardFormat();
-          final fieldSpec = MockEntryFieldSpec();
-
           final entryType = EntryType(
             id: 1,
             name: 'Entry Type Name',
-            cardFormats: [cardFormat],
-            fieldSpecs: [fieldSpec],
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
           );
 
           expect(entryType.id, 1);
           expect(entryType.name, 'Entry Type Name');
-          expect(entryType.cardFormats, [cardFormat]);
-          expect(entryType.fieldSpecs, [fieldSpec]);
+          expect(entryType.cardFormats, [cardFormat1]);
+          expect(entryType.fieldSpecs, [fieldSpec1]);
         },
       );
 
       group(
         'with null parameters, '
-        'should fail asserts',
-        () {
+            'should fail asserts',
+            () {
           test(
             'id is null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryType(
                     id: null,
                     name: 'Null EntryType',
@@ -78,9 +80,9 @@ void main() {
 
           test(
             'name is null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryType(
                     id: 1,
                     name: null,
@@ -95,9 +97,9 @@ void main() {
 
           test(
             'cardFormats is null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
@@ -112,9 +114,9 @@ void main() {
 
           test(
             'cardFormats is null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
@@ -130,14 +132,14 @@ void main() {
       );
 
       group(
-        'with lists containing null, '
-        'should fail asserts',
-        () {
+        'with iterable parameters containing null, '
+            'should fail asserts',
+            () {
           test(
             'cardFormats contains null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
@@ -152,9 +154,9 @@ void main() {
 
           test(
             'fieldSpecs contains null',
-            () {
-              expect(
                 () {
+              expect(
+                    () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
@@ -171,13 +173,10 @@ void main() {
 
       test(
         'with all parameters, '
-        'should shallow copy lists',
-        () {
-          final cardFormat = MockCardFormat();
-          final fieldSpec = MockEntryFieldSpec();
-
-          final cardFormats = [cardFormat];
-          final fieldSpecs = [fieldSpec];
+            'should shallow copy lists',
+            () {
+          final cardFormats = [cardFormat1];
+          final fieldSpecs = [fieldSpec1];
 
           final entryType = EntryType(
             id: 1,
@@ -186,11 +185,57 @@ void main() {
             fieldSpecs: fieldSpecs,
           );
 
-          cardFormats.add(MockCardFormat());
-          fieldSpecs.add(MockEntryFieldSpec());
+          cardFormats.add(cardFormat2);
+          fieldSpecs.add(fieldSpec2);
 
-          expect(entryType.cardFormats, [cardFormat]);
-          expect(entryType.fieldSpecs, [fieldSpec]);
+          expect(entryType.cardFormats, [cardFormat1]);
+          expect(entryType.fieldSpecs, [fieldSpec1]);
+        },
+      );
+    },
+  );
+
+  group(
+    'EntryType getters for iterable fields, '
+        'should return a shallow copy',
+        () {
+      test(
+        'cardFormats getter',
+            () {
+          final entryType = EntryType(
+            id: 1,
+            name: 'Entry Type Name',
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
+          );
+
+          expect(entryType.cardFormats, [cardFormat1]);
+
+          final cardFormats = entryType.cardFormats..clear();
+
+          expect(cardFormats, []);
+
+          expect(entryType.cardFormats, [cardFormat1]);
+        },
+      );
+
+      test(
+        'fieldSpecs getter',
+            () {
+          final entryType = EntryType(
+            id: 1,
+            name: 'Entry Type Name',
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
+          );
+
+          expect(entryType.fieldSpecs, [fieldSpec1]);
+
+          final fieldSpecs = entryType.fieldSpecs..clear();
+
+          expect(fieldSpecs, []);
+
+          expect(entryType.fieldSpecs, [fieldSpec1]);
         },
       );
     },
@@ -198,11 +243,11 @@ void main() {
 
   group(
     'EntryType when equating',
-    () {
+        () {
       test(
         'logically equal EntryTypes, '
-        'should return true',
-        () {
+            'should return true',
+            () {
           final entryType1 = EntryType(
             id: 1,
             name: 'First name',
@@ -213,8 +258,8 @@ void main() {
           final entryType2 = EntryType(
             id: 1,
             name: 'Second name',
-            cardFormats: [MockCardFormat()],
-            fieldSpecs: [MockEntryFieldSpec()],
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
           );
 
           expect(entryType1, entryType2);
@@ -223,8 +268,8 @@ void main() {
 
       test(
         'logically unequal EntryTypes, '
-        'should return false',
-        () {
+            'should return false',
+            () {
           final entryType1 = EntryType(
             id: 1,
             name: 'Name name',
