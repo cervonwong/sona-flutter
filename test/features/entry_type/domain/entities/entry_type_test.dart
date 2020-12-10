@@ -133,13 +133,13 @@ void main() {
 
       group(
         'with collection type parameters containing null, '
-            'should fail asserts',
-            () {
+        'should fail asserts',
+        () {
           test(
             'cardFormats contains null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
@@ -154,9 +154,9 @@ void main() {
 
           test(
             'fieldSpecs contains null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
@@ -173,8 +173,8 @@ void main() {
 
       test(
         'with all parameters, '
-            'should shallow copy lists',
-            () {
+        'should shallow copy lists',
+        () {
           final cardFormats = [cardFormat1];
           final fieldSpecs = [fieldSpec1];
 
@@ -197,11 +197,11 @@ void main() {
 
   group(
     'EntryType getters for collection type fields, '
-        'should return a shallow copy',
-        () {
+    'should return a shallow copy',
+    () {
       test(
         'cardFormats getter',
-            () {
+        () {
           final entryType = EntryType(
             id: 1,
             name: 'Entry Type Name',
@@ -221,7 +221,7 @@ void main() {
 
       test(
         'fieldSpecs getter',
-            () {
+        () {
           final entryType = EntryType(
             id: 1,
             name: 'Entry Type Name',
@@ -243,11 +243,11 @@ void main() {
 
   group(
     'EntryType when equating',
-        () {
+    () {
       test(
         'logically equal EntryTypes, '
-            'should return true',
-            () {
+        'should return true',
+        () {
           final entryType1 = EntryType(
             id: 1,
             name: 'First name',
@@ -268,8 +268,8 @@ void main() {
 
       test(
         'logically unequal EntryTypes, '
-            'should return false',
-            () {
+        'should return false',
+        () {
           final entryType1 = EntryType(
             id: 1,
             name: 'Name name',
