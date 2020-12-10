@@ -125,9 +125,9 @@ void main() {
 
           test(
             'fieldData contains null values',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   Entry(id: 100, tags: {}, fieldData: {spec1: null});
                 },
                 throwsAssertionError,
@@ -140,10 +140,10 @@ void main() {
       group(
         'with collection type parameters, '
             'should shallow copy them',
-        () {
+            () {
           test(
             'tags is passed',
-            () {
+                () {
               final tags = {tag1};
 
               final entry = Entry(

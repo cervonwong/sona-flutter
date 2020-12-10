@@ -80,9 +80,9 @@ void main() {
 
           test(
             'name is null',
-                () {
+            () {
               expect(
-                    () {
+                () {
                   EntryType(
                     id: 1,
                     name: null,
