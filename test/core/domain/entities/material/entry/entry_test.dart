@@ -175,10 +175,10 @@ void main() {
 
       test(
         'with fieldData with entries with key and value with different types, '
-            'should fail asserts',
-            () {
+        'should fail asserts',
+        () {
           expect(
-                () {
+            () {
               Entry(
                 id: 2,
                 tags: {},
