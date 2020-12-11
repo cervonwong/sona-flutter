@@ -38,8 +38,8 @@ class CardFormatStructure extends Equatable {
   /// Creates a [CardFormatStructure] with an inserted component.
   ///
   /// This method inserts [component] at the position specified by [index]. For
-  /// example, if [index] is `3`, [component] will b`e the fourth component in
-  /// the component list (index 3 in a list), If [index] is not specified, it is
+  /// example, if [index] is `3`, [component] will be the fourth component in
+  /// the component list (index 3 in a list). If [index] is not specified, it is
   /// inserted to the end of the component list.
   CardFormatStructure insert({
     @required Component component,
