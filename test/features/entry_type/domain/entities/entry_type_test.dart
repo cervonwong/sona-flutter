@@ -32,16 +32,25 @@ class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 void main() {
   final cardFormat1 = MockCardFormat();
   final cardFormat2 = MockCardFormat();
+  final cardFormat3 = MockCardFormat();
   final fieldSpec1 = MockEntryFieldSpec();
   final fieldSpec2 = MockEntryFieldSpec();
+  final fieldSpec3 = MockEntryFieldSpec();
+
+  final entryType = EntryType(
+    id: 666,
+    name: 'Suspicious name',
+    cardFormats: [cardFormat1],
+    fieldSpecs: [fieldSpec1],
+  );
 
   group(
     'EntryType when constructed',
     () {
       test(
-        'with all parameters, '
+        'with all arguments, '
         'should have expected fields '
-        '(this class does not have optional parameters)',
+        '(this class does not have optional arguments)',
         () {
           final entryType = EntryType(
             id: 1,
@@ -58,7 +67,7 @@ void main() {
       );
 
       group(
-        'with null parameters, '
+        'with null arguments, '
         'should fail asserts',
         () {
           test(
@@ -132,7 +141,7 @@ void main() {
       );
 
       group(
-        'with collection type parameters containing null, '
+        'with collection type arguments containing null, '
         'should fail asserts',
         () {
           test(
@@ -172,7 +181,7 @@ void main() {
       );
 
       test(
-        'with all parameters, '
+        'with all arguments, '
         'should shallow copy lists',
         () {
           final cardFormats = [cardFormat1];
@@ -194,7 +203,7 @@ void main() {
       );
 
       group(
-        'with empty collection type parameters, '
+        'with empty collection type arguments, '
         'should fail asserts',
         () {
           test(
@@ -303,6 +312,98 @@ void main() {
       expect(entryType2.name, 'New name');
       expect(entryType2.cardFormats, [cardFormat1]);
       expect(entryType2.fieldSpecs, [fieldSpec1]);
+    },
+  );
+
+  group(
+    'EntryType insertCardFormat',
+    () {
+      test(
+        'when not passed index, '
+        'should insert passed cardFormat to the end of cardFormats',
+        () {
+          final entryType1 = entryType
+              .insertCardFormat(cardFormat: cardFormat2)
+              .insertCardFormat(cardFormat: cardFormat3);
+
+          expect(
+            entryType1.cardFormats,
+            [cardFormat1, cardFormat2, cardFormat3],
+          );
+        },
+      );
+
+      test(
+        'when passed legal index, '
+        'should insert passed cardFormat to specified position in cardFormats',
+        () {
+          final entryType1 = entryType.insertCardFormat(
+            cardFormat: cardFormat2,
+            index: 0,
+          );
+          expect(entryType1.cardFormats, [cardFormat2, cardFormat1]);
+
+          final entryType2 = entryType1.insertCardFormat(
+            cardFormat: cardFormat3,
+            index: 1,
+          );
+          expect(
+            entryType2.cardFormats,
+            [cardFormat2, cardFormat3, cardFormat1],
+          );
+        },
+      );
+
+      test(
+        'when passed null cardFormat, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.insertCardFormat(cardFormat: null);
+            },
+            throwsAssertionError,
+          );
+
+          expect(
+            () {
+              entryType.insertCardFormat(cardFormat: null, index: 0);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      group(
+        'when passed index out of bounds, '
+        'should fail asserts',
+        () {
+          test(
+            'out of upper bound',
+            () {
+              expect(
+                () {
+                  entryType.insertCardFormat(cardFormat: cardFormat2, index: 2);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'out of lower bound',
+            () {
+              expect(
+                () {
+                  entryType.insertCardFormat(
+                      cardFormat: cardFormat2, index: -1);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
     },
   );
 

@@ -61,6 +61,50 @@ class EntryType extends Equatable {
     );
   }
 
+  /// Creates an [EntryType] with an inserted [CardFormat].
+  ///
+  /// This method insets [cardFormat] at the position specified by [index]. For
+  /// example, if [index] is `3`, [component] will be the fourth item in
+  /// [cardFormats] of the created [EntryType] (index 3 in the list). If [index]
+  /// is not specified, [cardFormat] is inserted to the end of [cardFormats].
+  EntryType insertCardFormat({
+    @required CardFormat cardFormat,
+    int index,
+  }) {
+    assert(cardFormat != null);
+    if (index != null) assert(index >= 0 && index <= _cardFormats.length);
+
+    final newCardFormats = _cardFormats.toList();
+    newCardFormats.insert(index ?? _cardFormats.length, cardFormat);
+
+    return EntryType(
+      id: id,
+      name: name,
+      cardFormats: newCardFormats,
+      fieldSpecs: _fieldSpecs,
+    );
+  }
+
+  EntryType updateCardFormat() {
+    throw UnimplementedError();
+  }
+
+  EntryType removeCardFormat() {
+    throw UnimplementedError();
+  }
+
+  EntryType insertFieldSpec() {
+    throw UnimplementedError();
+  }
+
+  EntryType updateFieldSpec() {
+    throw UnimplementedError();
+  }
+
+  EntryType removeFieldSpec() {
+    throw UnimplementedError();
+  }
+
   @override
   List<Object> get props => [id];
 }
