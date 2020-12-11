@@ -69,8 +69,8 @@ void main() {
                   EntryType(
                     id: null,
                     name: 'Null EntryType',
-                    cardFormats: [],
-                    fieldSpecs: [],
+                    cardFormats: [cardFormat1],
+                    fieldSpecs: [fieldSpec1],
                   );
                 },
                 throwsAssertionError,
@@ -86,8 +86,8 @@ void main() {
                   EntryType(
                     id: 1,
                     name: null,
-                    cardFormats: [],
-                    fieldSpecs: [],
+                    cardFormats: [cardFormat1],
+                    fieldSpecs: [fieldSpec1],
                   );
                 },
                 throwsAssertionError,
@@ -120,7 +120,7 @@ void main() {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
-                    cardFormats: [],
+                    cardFormats: [cardFormat1],
                     fieldSpecs: null,
                   );
                 },
@@ -144,7 +144,7 @@ void main() {
                     id: 1,
                     name: 'Null EntryType',
                     cardFormats: [null],
-                    fieldSpecs: [],
+                    fieldSpecs: [fieldSpec1],
                   );
                 },
                 throwsAssertionError,
@@ -160,7 +160,7 @@ void main() {
                   EntryType(
                     id: 1,
                     name: 'Null EntryType',
-                    cardFormats: [],
+                    cardFormats: [cardFormat1],
                     fieldSpecs: [null],
                   );
                 },
@@ -190,6 +190,46 @@ void main() {
 
           expect(entryType.cardFormats, [cardFormat1]);
           expect(entryType.fieldSpecs, [fieldSpec1]);
+        },
+      );
+
+      group(
+        'with empty collection type parameters, '
+        'should fail asserts',
+        () {
+          test(
+            'cardFormats is empty',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: 'Random name',
+                    cardFormats: [],
+                    fieldSpecs: [fieldSpec1],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'fieldSpecs is empty',
+            () {
+              expect(
+                () {
+                  EntryType(
+                    id: 1,
+                    name: 'Random name',
+                    cardFormats: [cardFormat1],
+                    fieldSpecs: [],
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
         },
       );
     },
@@ -251,15 +291,15 @@ void main() {
           final entryType1 = EntryType(
             id: 1,
             name: 'First name',
-            cardFormats: [],
-            fieldSpecs: [],
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
           );
 
           final entryType2 = EntryType(
             id: 1,
             name: 'Second name',
-            cardFormats: [cardFormat1],
-            fieldSpecs: [fieldSpec1],
+            cardFormats: [cardFormat2],
+            fieldSpecs: [fieldSpec2],
           );
 
           expect(entryType1, entryType2);
@@ -273,15 +313,15 @@ void main() {
           final entryType1 = EntryType(
             id: 1,
             name: 'Name name',
-            cardFormats: [],
-            fieldSpecs: [],
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
           );
 
           final entryType2 = EntryType(
             id: 2,
             name: 'Name name',
-            cardFormats: [],
-            fieldSpecs: [],
+            cardFormats: [cardFormat1],
+            fieldSpecs: [fieldSpec1],
           );
 
           expect(entryType1, isNot(entryType2));

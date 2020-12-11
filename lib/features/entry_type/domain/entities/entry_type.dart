@@ -42,13 +42,13 @@ class EntryType extends Equatable {
   })  : assert(id != null),
         assert(name != null),
         assert(cardFormats != null),
+        assert(cardFormats.isNotEmpty),
         assert(!cardFormats.contains(null)),
         assert(fieldSpecs != null),
+        assert(fieldSpecs.isNotEmpty),
         assert(!fieldSpecs.contains(null)),
         _cardFormats = cardFormats.toList(),
         _fieldSpecs = fieldSpecs.toList();
-
-  // TODO(cervonwong): 09/12/2020 Enforce 1..* for lists, not 0..*.
 
   // TODO(cervonwong): 09/12/2020 Add copyWith for name, then see
   //  CardFormatStructure for CRUD on cardFormats and fieldSpecs.
