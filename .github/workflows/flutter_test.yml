@@ -21,7 +21,7 @@ jobs:
 
       - uses: subosito/flutter-action@master
         with:
-          channel: master
+          channel: stable
 
       - run: flutter --version
       - run: dart --version
