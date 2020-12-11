@@ -49,8 +49,8 @@ class CardFormatStructure extends Equatable {
     assert(component != null);
     if (index != null) assert(index >= 0 && index <= _components.length);
 
-    final newComponents = _components.toList();
-    newComponents.insert(index ?? _components.length, component);
+    final newComponents = _components.toList()
+      ..insert(index ?? _components.length, component);
 
     return CardFormatStructure(components: newComponents);
   }
@@ -63,8 +63,7 @@ class CardFormatStructure extends Equatable {
     assert(index != null);
     assert(index >= 0 && index < _components.length);
 
-    final newComponents = _components.toList();
-    newComponents[index] = component;
+    final newComponents = _components.toList()..[index] = component;
 
     return CardFormatStructure(components: newComponents);
   }
@@ -73,8 +72,7 @@ class CardFormatStructure extends Equatable {
     assert(index != null);
     assert(index >= 0 && index < _components.length);
 
-    final newComponents = _components.toList();
-    newComponents.removeAt(index);
+    final newComponents = _components.toList()..removeAt(index);
 
     return CardFormatStructure(components: newComponents);
   }
