@@ -26,7 +26,7 @@ void main() {
     'Deck when constructed',
     () {
       test(
-        'without optional parameters, '
+        'without optional arguments, '
         'should have expected default fields',
         () {
           final deck = Deck(
@@ -45,7 +45,7 @@ void main() {
       );
 
       test(
-        'with all parameters, '
+        'with all arguments, '
         'should have expected fields',
         () {
           final deck = Deck(
@@ -54,7 +54,7 @@ void main() {
             createdDateTime: DateTime(2010, 3, 4),
             lastEditedDateTime: DateTime(2020, 10, 30),
             authorName: 'Cervon Wong',
-            description: 'A deck with all of its parameters set.',
+            description: 'A deck with all of its arguments set.',
           );
 
           expect(deck.id, 2);
@@ -62,12 +62,12 @@ void main() {
           expect(deck.createdDateTime, DateTime(2010, 3, 4));
           expect(deck.lastEditedDateTime, DateTime(2020, 10, 30));
           expect(deck.authorName, 'Cervon Wong');
-          expect(deck.description, 'A deck with all of its parameters set.');
+          expect(deck.description, 'A deck with all of its arguments set.');
         },
       );
 
       test(
-        'with null for non-nullable parameters, '
+        'with null for non-nullable arguments, '
         'should fail asserts',
         () {
           final id = 3;

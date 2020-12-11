@@ -23,7 +23,7 @@ import 'package:sona_flutter/features/entry_type/domain/entities/components/text
 void main() {
   group('TextComponent when constructed', () {
     test(
-      'without optional parameters, '
+      'without optional arguments, '
       'should have expected default fields',
       () {
         final textComponent = TextComponent(
@@ -53,7 +53,7 @@ void main() {
     );
 
     test(
-      'with null parameters, '
+      'with null arguments, '
       'should fail asserts',
       () {
         expect(
@@ -90,7 +90,7 @@ void main() {
     );
 
     test(
-      'with style with null parameters, '
+      'with style constructed with null arguments, '
       'should fail asserts',
       () {
         expect(

@@ -25,7 +25,7 @@ void main() {
     'EntryTag when constructed',
     () {
       group(
-        'with null parameters, '
+        'with null arguments, '
         'should fail asserts',
         () {
           test(

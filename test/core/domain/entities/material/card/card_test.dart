@@ -25,7 +25,7 @@ void main() {
     'Card when constructed',
     () {
       test(
-        'without optional parameters, '
+        'without optional arguments, '
         'should have expected default fields',
         () {
           final card = Card(
@@ -39,7 +39,7 @@ void main() {
       );
 
       test(
-        'with null parameters, '
+        'with null arguments, '
         'should fail asserts',
         () {
           expect(

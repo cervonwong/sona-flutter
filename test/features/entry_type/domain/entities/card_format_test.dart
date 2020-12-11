@@ -30,7 +30,7 @@ void main() {
     'CardFormat when constructed',
     () {
       test(
-        'without optional parameters, '
+        'without optional arguments, '
         'should have expected default fields',
         () {
           final cardFormat = CardFormat(id: 1, name: 'Basic Front Format');
@@ -43,7 +43,7 @@ void main() {
       );
 
       test(
-        'with null parameters, '
+        'with null arguments, '
         'should fail asserts',
         () {
           expect(

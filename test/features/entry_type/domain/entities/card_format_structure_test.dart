@@ -148,7 +148,7 @@ void main() {
       );
 
       test(
-        'when passed null parameters, '
+        'when passed null component, '
         'should fail asserts',
         () {
           expect(
@@ -186,7 +186,7 @@ void main() {
     'CardFormatStructure update',
     () {
       test(
-        'when passed legal parameters, '
+        'when passed legal arguments, '
         'should replace specified component at index with passed component',
         () {
           final structure1 = mediumStructure.update(
@@ -204,7 +204,7 @@ void main() {
       );
 
       test(
-        'when passed null parameters, '
+        'when passed null arguments, '
         'should fail asserts',
         () {
           expect(

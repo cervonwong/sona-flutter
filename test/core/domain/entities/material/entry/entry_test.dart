@@ -54,7 +54,7 @@ void main() {
     'Entry when constructed',
     () {
       group(
-        'with null parameters, '
+        'with null arguments, '
         'should fail asserts',
         () {
           test(
@@ -96,7 +96,7 @@ void main() {
       );
 
       group(
-        'with parameters containing null, '
+        'with arguments containing null, '
         'should fail asserts',
         () {
           test(
@@ -138,7 +138,7 @@ void main() {
       );
 
       group(
-        'with collection type parameters, '
+        'with collection type arguments, '
         'should shallow copy them',
         () {
           test(
