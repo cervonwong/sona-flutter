@@ -281,6 +281,31 @@ void main() {
     },
   );
 
+  test(
+    'EntryType copyWith, '
+    'should return EntryType with expected altered fields',
+    () {
+      final entryType1 = EntryType(
+        id: 1,
+        name: 'Initial name',
+        cardFormats: [cardFormat1],
+        fieldSpecs: [fieldSpec1],
+      );
+
+      expect(entryType1.id, 1);
+      expect(entryType1.name, 'Initial name');
+      expect(entryType1.cardFormats, [cardFormat1]);
+      expect(entryType1.fieldSpecs, [fieldSpec1]);
+
+      final entryType2 = entryType1.copyWith(name: 'New name');
+
+      expect(entryType2.id, 1);
+      expect(entryType2.name, 'New name');
+      expect(entryType2.cardFormats, [cardFormat1]);
+      expect(entryType2.fieldSpecs, [fieldSpec1]);
+    },
+  );
+
   group(
     'EntryType when equating',
     () {

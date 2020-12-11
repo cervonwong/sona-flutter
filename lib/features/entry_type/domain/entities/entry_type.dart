@@ -50,8 +50,16 @@ class EntryType extends Equatable {
         _cardFormats = cardFormats.toList(),
         _fieldSpecs = fieldSpecs.toList();
 
-  // TODO(cervonwong): 09/12/2020 Add copyWith for name, then see
-  //  CardFormatStructure for CRUD on cardFormats and fieldSpecs.
+  EntryType copyWith({
+    String name,
+  }) {
+    return EntryType(
+      id: id,
+      name: name ?? this.name,
+      cardFormats: _cardFormats,
+      fieldSpecs: _fieldSpecs,
+    );
+  }
 
   @override
   List<Object> get props => [id];
