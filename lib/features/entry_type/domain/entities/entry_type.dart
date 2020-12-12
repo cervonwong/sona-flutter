@@ -133,7 +133,21 @@ class EntryType extends Equatable {
   EntryType removeCardFormat({
     @required CardFormat cardFormat,
   }) {
-    throw UnimplementedError();
+    assert(cardFormat != null);
+
+    final index = _cardFormats.indexWhere(
+        (cf) => cf.id == cardFormat.id,
+    );
+    assert(index != -1);
+
+    final newCardFormats = _cardFormats.toList()..removeAt(index);
+
+    return EntryType(
+      id: id,
+      name: name,
+      cardFormats: newCardFormats,
+      fieldSpecs: _fieldSpecs,
+    );
   }
 
   EntryType insertFieldSpec({

@@ -539,6 +539,71 @@ void main() {
   );
 
   group(
+    'EntryType removeCardFormat',
+    () {
+      EntryType entryType2;
+
+      setUp(() {
+        when(cardFormat1.id).thenReturn(1);
+        when(cardFormat2.id).thenReturn(1);
+        when(cardFormat3.id).thenReturn(2);
+
+        entryType2 = EntryType(
+          id: 999,
+          name: 'Internal name',
+          cardFormats: [cardFormat1, cardFormat3],
+          fieldSpecs: [fieldSpec1],
+        );
+      });
+
+      test(
+        'when passed legal cardFormat, '
+        'should remove correct CardFormat in cardFormats',
+        () {
+          final entryType3 = entryType2.removeCardFormat(
+            cardFormat: cardFormat2,
+          );
+
+          expect(entryType3.cardFormats, [cardFormat3]);
+
+          final entryType4 = entryType2.removeCardFormat(
+            cardFormat: cardFormat3,
+          );
+
+          expect(entryType4.cardFormats, [cardFormat1]);
+        },
+      );
+
+      test(
+        'when passed null cardFormat, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType2.removeCardFormat(cardFormat: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed cardFormat '
+        'which does not have the same id as any existing CardFormat, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.removeCardFormat(cardFormat: cardFormat3);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
     'EntryType when equating',
     () {
       test(
