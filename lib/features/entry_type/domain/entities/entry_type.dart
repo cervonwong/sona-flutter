@@ -85,7 +85,7 @@ class EntryType extends Equatable {
 
   /// Creates an [EntryType] with an inserted [CardFormat].
   ///
-  /// This method insets [cardFormat] at the position specified by [index]. For
+  /// This method inserts [cardFormat] at the position specified by [index]. For
   /// example, if [index] is `3`, [component] will be the fourth item in
   /// [cardFormats] of the created [EntryType] (index 3 in the list). If [index]
   /// is not specified, [cardFormat] is inserted to the end of [cardFormats].
@@ -136,7 +136,7 @@ class EntryType extends Equatable {
     assert(cardFormat != null);
 
     final index = _cardFormats.indexWhere(
-        (cf) => cf.id == cardFormat.id,
+      (cf) => cf.id == cardFormat.id,
     );
     assert(index != -1);
 
