@@ -132,24 +132,60 @@ void main() {
     },
   );
 
-  test(
-    'CardFormat when equating logically equal CardFormats, '
-    'should return true',
+  group(
+    'CardFormat when equating',
     () {
-      final cardFormat = CardFormat(
-        id: 8,
-        name: 'Equal name',
-        front: MockCardFormatStructure(),
-        back: MockCardFormatStructure(),
+      test(
+        'logically equal CardFormats, '
+        'should return true',
+        () {
+          final cardFormat = CardFormat(
+            id: 8,
+            name: 'Equal name',
+            front: MockCardFormatStructure(),
+            back: MockCardFormatStructure(),
+          );
+
+          expect(cardFormat, cardFormat.copyWith());
+        },
       );
 
-      final newCardFormat = cardFormat.copyWith(
-        name: 'Another name',
-        front: MockCardFormatStructure(),
-        back: MockCardFormatStructure(),
-      );
+      test(
+        'logically unequal CardFormats, '
+        'should return false',
+        () {
+          final cardFormat = CardFormat(
+            id: 8,
+            name: 'Equal name',
+            front: MockCardFormatStructure(),
+            back: MockCardFormatStructure(),
+          );
 
-      expect(cardFormat, newCardFormat);
+          expect(
+            cardFormat,
+            isNot(
+              CardFormat(
+                id: 9,
+                name: 'Equal name',
+                front: MockCardFormatStructure(),
+                back: MockCardFormatStructure(),
+              ),
+            ),
+          );
+          expect(
+            cardFormat,
+            isNot(cardFormat.copyWith(name: 'Another name')),
+          );
+          expect(
+            cardFormat,
+            isNot(cardFormat.copyWith(front: MockCardFormatStructure())),
+          );
+          expect(
+            cardFormat,
+            isNot(cardFormat.copyWith(back: MockCardFormatStructure())),
+          );
+        },
+      );
     },
   );
 }
