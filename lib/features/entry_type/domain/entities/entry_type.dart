@@ -74,8 +74,11 @@ class EntryType extends Equatable {
     assert(cardFormat != null);
     if (index != null) assert(index >= 0 && index <= _cardFormats.length);
 
-    final newCardFormats = _cardFormats.toList();
-    newCardFormats.insert(index ?? _cardFormats.length, cardFormat);
+    // Checks that there does not exist a CardFormat with equal id.
+    assert(!_cardFormats.any((cf) => cf.id == cardFormat.id));
+
+    final newCardFormats = _cardFormats.toList()
+      ..insert(index ?? _cardFormats.length, cardFormat);
 
     return EntryType(
       id: id,
@@ -85,23 +88,48 @@ class EntryType extends Equatable {
     );
   }
 
-  EntryType updateCardFormat() {
+  EntryType updateCardFormat({
+    @required CardFormat newCardFormat,
+  }) {
+    assert(newCardFormat != null);
+
+    final index = _cardFormats.indexWhere(
+      (cf) => cf.id == newCardFormat.id,
+    );
+    assert(index != -1); // Checks that there is a CardFormat with equal id.
+
+    final newCardFormats = _cardFormats.toList()..[index] = newCardFormat;
+
+    return EntryType(
+      id: id,
+      name: name,
+      cardFormats: newCardFormats,
+      fieldSpecs: _fieldSpecs,
+    );
+  }
+
+  EntryType removeCardFormat({
+    @required CardFormat cardFormat,
+  }) {
     throw UnimplementedError();
   }
 
-  EntryType removeCardFormat() {
+  EntryType insertFieldSpec({
+    @required EntryFieldSpec fieldSpec,
+    int index,
+  }) {
     throw UnimplementedError();
   }
 
-  EntryType insertFieldSpec() {
+  EntryType updateFieldSpec({
+    @required EntryFieldSpec fieldSpec,
+  }) {
     throw UnimplementedError();
   }
 
-  EntryType updateFieldSpec() {
-    throw UnimplementedError();
-  }
-
-  EntryType removeFieldSpec() {
+  EntryType removeFieldSpec({
+    @required EntryFieldSpec fieldSpec,
+  }) {
     throw UnimplementedError();
   }
 

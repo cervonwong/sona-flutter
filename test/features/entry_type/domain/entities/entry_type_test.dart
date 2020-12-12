@@ -318,6 +318,12 @@ void main() {
   group(
     'EntryType insertCardFormat',
     () {
+      setUp(() {
+        when(cardFormat1.id).thenReturn(1);
+        when(cardFormat2.id).thenReturn(2);
+        when(cardFormat3.id).thenReturn(3);
+      });
+
       test(
         'when not passed index, '
         'should insert passed cardFormat to the end of cardFormats',
@@ -383,7 +389,10 @@ void main() {
             () {
               expect(
                 () {
-                  entryType.insertCardFormat(cardFormat: cardFormat2, index: 2);
+                  entryType.insertCardFormat(
+                    cardFormat: cardFormat2,
+                    index: 2,
+                  );
                 },
                 throwsAssertionError,
               );
@@ -396,11 +405,83 @@ void main() {
               expect(
                 () {
                   entryType.insertCardFormat(
-                      cardFormat: cardFormat2, index: -1);
+                    cardFormat: cardFormat2,
+                    index: -1,
+                  );
                 },
                 throwsAssertionError,
               );
             },
+          );
+        },
+      );
+
+      test(
+        'when passed cardFormat '
+        'which has the same id as an existing CardFormat, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.insertCardFormat(cardFormat: cardFormat1);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'EntryType updateCardFormat',
+    () {
+      setUp(() {
+        when(cardFormat1.id).thenReturn(1);
+        when(cardFormat2.id).thenReturn(1);
+        when(cardFormat3.id).thenReturn(2);
+      });
+
+      test(
+        'when passed legal newCardFormat, '
+        'should replace correct CardFormat in cardFormats',
+        () {
+          final entryType1 = entryType.updateCardFormat(
+            newCardFormat: cardFormat2,
+          );
+
+          expect(entryType1.cardFormats, [cardFormat2]);
+
+          final entryType2 = entryType.updateCardFormat(
+            newCardFormat: cardFormat1,
+          );
+
+          expect(entryType2.cardFormats, [cardFormat1]);
+        },
+      );
+
+      test(
+        'when passed null newCardFormat, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.updateCardFormat(newCardFormat: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed newCardFormat '
+        'which does not have the same id as any existing CardFormat, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.updateCardFormat(newCardFormat: cardFormat3);
+            },
+            throwsAssertionError,
           );
         },
       );
