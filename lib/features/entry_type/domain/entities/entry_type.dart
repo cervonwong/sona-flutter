@@ -179,9 +179,24 @@ class EntryType extends Equatable {
   }
 
   EntryType updateFieldSpec({
-    @required EntryFieldSpec fieldSpec,
+    @required EntryFieldSpec newFieldSpec,
   }) {
-    throw UnimplementedError();
+    assert(newFieldSpec != null);
+
+    final index = _fieldSpecs.indexWhere(
+      (fs) => fs.id == newFieldSpec.id,
+    );
+    // Checks that there is an EntryFieldSpec with equal id.
+    assert(index != -1);
+
+    final newFieldSpecs = _fieldSpecs.toList()..[index] = newFieldSpec;
+
+    return EntryType(
+      id: id,
+      name: name,
+      cardFormats: _cardFormats,
+      fieldSpecs: newFieldSpecs,
+    );
   }
 
   EntryType removeFieldSpec({

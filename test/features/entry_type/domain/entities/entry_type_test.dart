@@ -695,6 +695,62 @@ void main() {
   );
 
   group(
+    'EntryType updateFieldSpec',
+    () {
+      setUp(() {
+        when(fieldSpec1.id).thenReturn(1);
+        when(fieldSpec2.id).thenReturn(1);
+        when(fieldSpec3.id).thenReturn(2);
+      });
+
+      test(
+        'when passed legal newFieldSpec, '
+        'should replace correct EntryFieldSpec in fieldSpecs',
+        () {
+          final entryType2 = entryType.updateFieldSpec(
+            newFieldSpec: fieldSpec2,
+          );
+
+          expect(entryType2.fieldSpecs, [fieldSpec2]);
+
+          final entryType3 = entryType2.updateFieldSpec(
+            newFieldSpec: fieldSpec1,
+          );
+
+          expect(entryType3.fieldSpecs, [fieldSpec1]);
+        },
+      );
+
+      test(
+        'when passed null newFieldSpec, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.updateFieldSpec(newFieldSpec: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed newFieldSpec '
+        'which does not have the same id as any existing EntryFieldSpec, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.updateFieldSpec(newFieldSpec: fieldSpec3);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
     'EntryType when equating',
     () {
       test(
