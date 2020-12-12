@@ -138,7 +138,7 @@ class EntryType extends Equatable {
     final index = _cardFormats.indexWhere(
       (cf) => cf.id == cardFormat.id,
     );
-    assert(index != -1);
+    assert(index != -1); // Checks that there is a CardFormat with equal id.
 
     final newCardFormats = _cardFormats.toList()..removeAt(index);
 
@@ -202,7 +202,22 @@ class EntryType extends Equatable {
   EntryType removeFieldSpec({
     @required EntryFieldSpec fieldSpec,
   }) {
-    throw UnimplementedError();
+    assert(fieldSpec != null);
+
+    final index = _fieldSpecs.indexWhere(
+      (fs) => fs.id == fieldSpec.id,
+    );
+    // Checks that there is an EntryFieldSpec with equal id.
+    assert(index != -1);
+
+    final newFieldSpecs = _fieldSpecs.toList()..removeAt(index);
+
+    return EntryType(
+      id: id,
+      name: name,
+      cardFormats: _cardFormats,
+      fieldSpecs: newFieldSpecs,
+    );
   }
 
   @override

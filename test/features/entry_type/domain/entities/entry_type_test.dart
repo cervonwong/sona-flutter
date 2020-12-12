@@ -751,6 +751,67 @@ void main() {
   );
 
   group(
+    'EntryType removeFieldSpec',
+    () {
+      EntryType entryType2;
+
+      setUp(() {
+        when(fieldSpec1.id).thenReturn(1);
+        when(fieldSpec2.id).thenReturn(1);
+        when(fieldSpec3.id).thenReturn(2);
+
+        entryType2 = EntryType(
+          id: 999,
+          name: 'Internal name',
+          cardFormats: [cardFormat1],
+          fieldSpecs: [fieldSpec1, fieldSpec3],
+        );
+      });
+
+      test(
+        'when passed legal field spec, '
+        'should remove EntryFieldSpec in fieldSpecs',
+        () {
+          final entryType3 = entryType2.removeFieldSpec(fieldSpec: fieldSpec2);
+
+          expect(entryType3.fieldSpecs, [fieldSpec3]);
+
+          final entryType4 = entryType2.removeFieldSpec(fieldSpec: fieldSpec3);
+
+          expect(entryType4.fieldSpecs, [fieldSpec1]);
+        },
+      );
+
+      test(
+        'when passed null fieldSpec, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType2.removeFieldSpec(fieldSpec: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed fieldSpec '
+        'which does not have the same id as any existing EntryFieldSpec, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.removeFieldSpec(fieldSpec: fieldSpec3);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
     'EntryType when equating',
     () {
       test(
