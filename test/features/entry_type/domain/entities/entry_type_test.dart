@@ -604,6 +604,97 @@ void main() {
   );
 
   group(
+    'EntryType insertFieldSpec',
+    () {
+      setUp(() {
+        when(fieldSpec1.id).thenReturn(1);
+        when(fieldSpec2.id).thenReturn(2);
+        when(fieldSpec3.id).thenReturn(3);
+      });
+
+      test(
+        'when not passed index, '
+        'should insert passed fieldSpec to the end of fieldSpecs',
+        () {
+          final entryType2 = entryType
+              .insertFieldSpec(fieldSpec: fieldSpec2)
+              .insertFieldSpec(fieldSpec: fieldSpec3);
+
+          expect(entryType2.fieldSpecs, [fieldSpec1, fieldSpec2, fieldSpec3]);
+        },
+      );
+
+      test(
+        'when passed legal index, '
+        'should insert passed fieldSpec to specified position in fieldSpecs',
+        () {
+          final entryType2 = entryType
+              .insertFieldSpec(fieldSpec: fieldSpec2, index: 1)
+              .insertFieldSpec(fieldSpec: fieldSpec3, index: 1);
+
+          expect(entryType2.fieldSpecs, [fieldSpec1, fieldSpec3, fieldSpec2]);
+        },
+      );
+
+      test(
+        'when passed null fieldSpec, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.insertFieldSpec(fieldSpec: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      group(
+        'when passed index out of bounds, '
+        'should fail asserts',
+        () {
+          test(
+            'out of upper bound',
+            () {
+              expect(
+                () {
+                  entryType.insertFieldSpec(fieldSpec: fieldSpec2, index: 2);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+          test(
+            'out of lower bound',
+            () {
+              expect(
+                () {
+                  entryType.insertFieldSpec(fieldSpec: fieldSpec2, index: -1);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when passed fieldSpec,'
+        'which has the same id as an existing EntryFieldSpec, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              entryType.insertFieldSpec(fieldSpec: fieldSpec1, index: 0);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
     'EntryType when equating',
     () {
       test(

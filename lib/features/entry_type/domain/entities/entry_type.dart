@@ -96,7 +96,7 @@ class EntryType extends Equatable {
     assert(cardFormat != null);
     if (index != null) assert(index >= 0 && index <= _cardFormats.length);
 
-    // Checks that there does not exist a CardFormat with equal id.
+    // Checks that there does not exist a CardFormat with equal id. (Redundant!)
     assert(!_cardFormats.any((cf) => cf.id == cardFormat.id));
 
     final newCardFormats = _cardFormats.toList()
@@ -150,11 +150,32 @@ class EntryType extends Equatable {
     );
   }
 
+  /// Creates an [EntryType] with an inserted [EntryFieldSpec].
+  ///
+  /// This method inserts [fieldSpec] at the position specified by [index]. For
+  /// example, if [index] is `3`, [fieldSpec] will be the fourth item in
+  /// [fieldSpecs] of the created [EntryType] (index 3 in the list). If [index]
+  /// is not specified, [fieldSpec] is inserted to the end of [fieldSpecs].
   EntryType insertFieldSpec({
     @required EntryFieldSpec fieldSpec,
     int index,
   }) {
-    throw UnimplementedError();
+    assert(fieldSpec != null);
+    if (index != null) assert(index >= 0 && index <= _fieldSpecs.length);
+
+    // Checks that there does not exist an EntryFieldSpec with equal id.
+    // (Redundant!)
+    assert(!_fieldSpecs.any((fs) => fs.id == fieldSpec.id));
+
+    final newFieldSpecs = _fieldSpecs.toList()
+      ..insert(index ?? _fieldSpecs.length, fieldSpec);
+
+    return EntryType(
+      id: id,
+      name: name,
+      cardFormats: _cardFormats,
+      fieldSpecs: newFieldSpecs,
+    );
   }
 
   EntryType updateFieldSpec({
