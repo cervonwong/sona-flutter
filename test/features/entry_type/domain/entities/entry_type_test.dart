@@ -241,6 +241,56 @@ void main() {
           );
         },
       );
+
+      test(
+        'with cardFormats '
+        'with at least a pair of CardFormats with equal id (duplicate), '
+        'should fail asserts',
+        () {
+          final cardFormat100 = MockCardFormat();
+          final cardFormat101 = MockCardFormat();
+
+          when(cardFormat100.id).thenReturn(100);
+          when(cardFormat101.id).thenReturn(100);
+
+          expect(
+            () {
+              EntryType(
+                id: 1,
+                name: 'Something',
+                cardFormats: [cardFormat100, cardFormat101],
+                fieldSpecs: [fieldSpec1],
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'with fieldSpecs '
+        'with at least a pair of EntryFieldSpecs with equal id (duplicate), '
+        'should fail asserts',
+        () {
+          final fieldSpec100 = MockEntryFieldSpec();
+          final fieldSpec101 = MockEntryFieldSpec();
+
+          when(fieldSpec100.id).thenReturn(100);
+          when(fieldSpec101.id).thenReturn(100);
+
+          expect(
+            () {
+              EntryType(
+                id: 1,
+                name: 'Something',
+                cardFormats: [cardFormat1],
+                fieldSpecs: [fieldSpec100, fieldSpec101],
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
     },
   );
 

@@ -44,11 +44,33 @@ class EntryType extends Equatable {
         assert(cardFormats != null),
         assert(cardFormats.isNotEmpty),
         assert(!cardFormats.contains(null)),
+        assert(_checkCardFormatsDuplicate(cardFormats)),
         assert(fieldSpecs != null),
         assert(fieldSpecs.isNotEmpty),
         assert(!fieldSpecs.contains(null)),
+        assert(_checkFieldSpecsDuplicate(fieldSpecs)),
         _cardFormats = cardFormats.toList(),
         _fieldSpecs = fieldSpecs.toList();
+
+  static bool _checkCardFormatsDuplicate(List<CardFormat> cardFormats) {
+    for (var cardFormat in cardFormats) {
+      if (cardFormats.where((cf) => cf.id == cardFormat.id).length > 1) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  static bool _checkFieldSpecsDuplicate(List<EntryFieldSpec> fieldSpecs) {
+    for (var fieldSpec in fieldSpecs) {
+      if (fieldSpecs.where((fs) => fs.id == fieldSpec.id).length > 1) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   EntryType copyWith({
     String name,
