@@ -90,13 +90,22 @@ const Color kNeutralColor1 = Color(0xFFFCFCFC);
 // Emphasis Opacity Values
 // Used to set the opacity of the colors of texts or icons at different
 // emphasis levels to express hierarchy between elements.
-const double kDarkHighEmphasisOpacity = 0.90;
-const double kDarkMediumEmphasisOpacity = 0.65;
-const double kDarkLowEmphasisOpacity = 0.30;
 
+// Dark text colors use kNeutralColor8 as a base.
+const double kDarkHighEmphasisOpacity = 0.90;
+const Color kDarkHighEmphasisTextColor = Color(0xe614142B); // E6 --> 90%.
+const double kDarkMediumEmphasisOpacity = 0.65;
+const Color kDarkMediumEmphasisTextColor = Color(0xa614142B); // A6 --> 65%.
+const double kDarkLowEmphasisOpacity = 0.30;
+const Color kDarkLowEmphasisTextColor = Color(0x4d14142B); // 4D --> 30%.
+
+// Light text colors use pure white (#FFFFFF) as a base.
 const double kLightHighEmphasisOpacity = 1.00;
+const Color kLightHighEmphasisTextColor = Color(0xffffffff); // FF --> 100%.
 const double kLightMediumEmphasisOpacity = 0.70;
+const Color kLightMediumEmphasisTextColor = Color(0xb3ffffff); // B3 --> 70%.
 const double kLightLowEmphasisOpacity = 0.35;
+const Color kLightLowEmphasisTextColor = Color(0x59ffffff); // 59 --> 35%.
 
 // Splashes and Highlights
 // Overlaid on interactive components with a ripple effect (Ink).
