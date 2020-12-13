@@ -21,9 +21,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/datum/entry_field_datum.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_spec.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_type.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/datum/entry_field_datum.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_spec.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
 
 // ignore: must_be_immutable
 class MockEntryTag extends Mock implements EntryTag {}

@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/components/text_component.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/components/text_component.dart';
 
 void main() {
   group('TextComponent when constructed', () {

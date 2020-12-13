@@ -19,8 +19,8 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/card_format.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/card_format_structure.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/card_format.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/card_format_structure.dart';
 
 // ignore: must_be_immutable
 class MockCardFormatStructure extends Mock implements CardFormatStructure {}

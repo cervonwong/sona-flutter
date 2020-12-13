@@ -20,26 +20,26 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../../core/utils/nullable.dart';
+import '../../../../../../utils/nullable.dart';
 import '../entry_field_type.dart';
 import 'entry_field_datum.dart';
 
 @immutable
-class ImageEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
-  final int imageId; // Nullable!
+class TextEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
+  final String rawText; // Nullable!
 
-  ImageEntryFieldDatum({
-    @required this.imageId,
-  }) : super(type: EntryFieldType.image);
+  TextEntryFieldDatum({
+    @required this.rawText,
+  }) : super(type: EntryFieldType.text);
 
-  ImageEntryFieldDatum copyWith({
-    Nullable<int> imageId,
+  TextEntryFieldDatum copyWith({
+    Nullable<String> rawText,
   }) {
-    return ImageEntryFieldDatum(
-      imageId: imageId == null ? this.imageId : imageId.value,
+    return TextEntryFieldDatum(
+      rawText: rawText == null ? this.rawText : rawText.value,
     );
   }
 
   @override
-  List<Object> get props => [imageId];
+  List<Object> get props => [rawText];
 }

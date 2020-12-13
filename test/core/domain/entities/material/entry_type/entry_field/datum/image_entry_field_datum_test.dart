@@ -18,9 +18,9 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/datum/image_entry_field_datum.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
 import 'package:sona_flutter/core/utils/nullable.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/datum/image_entry_field_datum.dart';
-import 'package:sona_flutter/features/entry_type/domain/entities/entry_field/entry_field_type.dart';
 
 void main() {
   group(

@@ -20,8 +20,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../features/entry_type/domain/entities/entry_field/datum/entry_field_datum.dart';
-import '../../../../../features/entry_type/domain/entities/entry_field/entry_field_spec.dart';
+import '../entry_type/entry_field/datum/entry_field_datum.dart';
+import '../entry_type/entry_field/entry_field_spec.dart';
 import 'entry_tag.dart';
 
 @immutable

@@ -17,31 +17,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import '../../../../core/domain/entities/material/entry/entry.dart';
-import '../entities/entry_type.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
-abstract class EntryTypeRepository {
-  // COUNT
+import '../../../../../../utils/nullable.dart';
+import '../entry_field_type.dart';
+import 'entry_field_datum.dart';
 
-  Future<int> getCount();
+@immutable
+class ImageEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
+  final int imageId; // Nullable!
 
-  // NAVIGABLE ACCESSORS
+  ImageEntryFieldDatum({
+    @required this.imageId,
+  }) : super(type: EntryFieldType.image);
 
-  Future<EntryType> getByCard();
+  ImageEntryFieldDatum copyWith({
+    Nullable<int> imageId,
+  }) {
+    return ImageEntryFieldDatum(
+      imageId: imageId == null ? this.imageId : imageId.value,
+    );
+  }
 
-  Future<List<Entry>> getEntries(EntryType entryType);
-
-  // CRUD
-
-  Future<List<EntryType>> getAll();
-
-  Future<EntryType> create();
-
-  // TODO(cervonwong): 13/11/2020 This will require communication with Card and
-  //  Entry data sources to prevent invalid states.
-  Future<void> update(EntryType entryType);
-
-  // TODO(cervonwong): 13/11/2020 This will require communication with Card and
-  //  Entry data sources to prevent invalid states.
-  Future<void> delete(EntryType entryType);
+  @override
+  List<Object> get props => [imageId];
 }
