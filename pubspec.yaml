@@ -14,7 +14,10 @@ dependencies:
   flutter:
     sdk: flutter
   moor: ^3.4.0
+  path: ^1.7.0
+  path_provider: ^1.6.24
   percent_indicator: ^2.1.8
+  sqlite3_flutter_libs: ^0.3.0
 
 dev_dependencies:
   build_runner: ^1.10.6
