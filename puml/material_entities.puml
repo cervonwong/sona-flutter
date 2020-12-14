@@ -8,7 +8,9 @@ skinparam arrowFontSize 12
 skinparam titleFontSize 24
 skinparam titleFontStyle bold
 
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
 title Relationships of material entities.\n
+footer Copyright (C) 2020 Cervon Wong
 
 class Card {
 	id        : int
