@@ -1,5 +1,16 @@
 @startuml
 
+skinparam defaultFontName Monospaced
+skinparam defaultFontSize 16
+skinparam objectFontStyle bold
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Dependency relationships between main directories.\n
+footer Copyright (C) 2020 Cervon Wong
+
 object core {
 	Shared components used throughout the app.
 }
