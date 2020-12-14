@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1558.8px" preserveAspectRatio="none" style="width:877px;height:1558px;" version="1.1" viewBox="0 0 877 1558" width="877.8px" zoomAndPan="magnify"><defs/><g><text fill="#888888" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="414" x="456" y="9.6516">This diagram is part of a visualisation of the code written for Sona.</text><text fill="#888888" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="330" x="540" y="22.1859">View the project at github.com/cervonwong/sona-flutter.</text><text fill="#000000" font-family="monospace" font-size="14.4" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="529.2" x="170.4" y="39.5461">Relationships of tables in SQLite database for material models.</text><text fill="#000000" font-family="monospace" font-size="14.4" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="0" x="439.2" y="58.3477"/><rect fill="#FEFECE" height="94.9406" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="229.2" x="288" y="67.0547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="30" x="387.6" y="77.9063">decks</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="288.6" x2="516.6" y1="81.9891" y2="81.9891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="186" x="291.6" y="94.0406">id          : INTEGER «PK, gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="162" x="291.6" y="106.575">name        : TEXT «unique»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="222" x="291.6" y="119.1094">created     : INTEGER(DATETIME) «gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="222" x="291.6" y="131.6437">last_edited : INTEGER(DATETIME) «gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="108" x="291.6" y="144.1781">authorName  : TEXT</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="108" x="291.6" y="156.7125">description : TEXT</text><rect fill="#FEFECE" height="57.3375" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="205.2" x="300" y="234.4547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="381.6" y="245.3062">entries</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="300.6" x2="504.6" y1="249.3891" y2="249.3891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="303.6" y="261.4406">id            : INTEGER «PK, gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="303.6" y="273.975">deck_id       : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="303.6" y="286.5094">entry_type_id : INTEGER «FK»</text><rect fill="#FEFECE" height="69.8719" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="175.2" x="195.6" y="364.6547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="30" x="268.2" y="375.5062">cards</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="196.2" x2="370.2" y1="379.5891" y2="379.5891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="199.2" y="391.6406">id       : INTEGER «PK, gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="138" x="199.2" y="404.175">entry_id : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="144" x="199.2" y="416.7094">starred  : INTEGER(BOOL)</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="144" x="199.2" y="429.2438">hidden   : INTEGER(BOOL)</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="151.2" x="722.4" y="240.7547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="24" x="786" y="251.6063">tags</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="723" x2="873" y1="255.6891" y2="255.6891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="144" x="726" y="267.7406">id   : INTEGER «PK, gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="120" x="726" y="280.275">name : TEXT «unique»</text><rect fill="#FEFECE" height="55.7707" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="175.2" x="526.2" y="235.3547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="76.8" x="575.4" y="243.7998">«junction table»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="72" x="577.8" y="257.1738">entries_tags</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="526.8" x2="700.8" y1="261.2566" y2="261.2566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="529.8" y="273.3082">entry_id : INTEGER «FK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="529.8" y="285.8426">tag_id   : INTEGER «FK, cPK»</text><rect fill="#FEFECE" height="69.8719" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="205.2" x="468.6" y="716.8547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="66" x="538.2" y="727.7063">field_specs</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="469.2" x2="673.2" y1="731.7891" y2="731.7891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="472.2" y="743.8406">id            : INTEGER «PK, gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="472.2" y="756.375">field_type_id : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="472.2" y="768.9094">entry_type_id : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="120" x="472.2" y="781.4438">name          : TEXT</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="121.2" x="510.6" y="927.4547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="66" x="538.2" y="938.3063">field_types</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="511.2" x2="631.2" y1="942.3891" y2="942.3891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="114" x="514.2" y="954.4406">id   : INTEGER «PK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="66" x="514.2" y="966.975">name : TEXT</text><rect fill="#FEFECE" height="55.7707" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="205.2" x="260.4" y="470.2547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="33.6" x="346.2" y="478.6998">«super»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="333" y="492.0738">field_data</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="261" x2="465" y1="496.1566" y2="496.1566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="264" y="508.2082">entry_id      : INTEGER «FK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="264" y="520.7426">field_spec_id : INTEGER «FK, cPK»</text><rect fill="#FEFECE" height="68.3051" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="211.2" x="236.4" y="717.4547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="24" x="330" y="725.8998">«sub»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="90" x="297" y="739.2738">text_field_data</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="237" x2="447" y1="743.3566" y2="743.3566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="240" y="755.4082">entry_id      : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="240" y="767.9426">field_spec_id : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="120" x="240" y="780.477">raw_text      : TEXT</text><rect fill="#FEFECE" height="68.3051" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="211.2" x="4.2" y="717.4547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="24" x="97.8" y="725.8998">«sub»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="96" x="61.8" y="739.2738">image_field_data</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="4.8" x2="214.8" y1="743.3566" y2="743.3566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="7.8" y="755.4082">entry_id      : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="7.8" y="767.9426">field_spec_id : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="168" x="7.8" y="780.477">image_id      : INTEGER «FK»</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="151.2" x="487.8" y="376.9547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="66" x="530.4" y="387.8063">entry_types</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="488.4" x2="638.4" y1="391.8891" y2="391.8891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="144" x="491.4" y="403.9406">id   : INTEGER «PK, gen»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="66" x="491.4" y="416.475">name : TEXT</text><rect fill="#FEFECE" height="82.4063" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="235.2" x="595.2" y="598.6547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="72" x="676.8" y="609.5063">card_formats</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="595.8" x2="829.8" y1="613.5891" y2="613.5891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="228" x="598.8" y="625.6406">entry_type_id      : INTEGER «FK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="598.8" y="638.175">position           : INTEGER «cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="150" x="598.8" y="650.7094">name               : TEXT</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="598.8" y="663.2438">front_structure_id : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="598.8" y="675.7781">back_structure_id  : INTEGER «FK»</text><rect fill="#FEFECE" height="32.2688" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="109.2" x="658.2" y="859.0547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="682.8" y="869.9063">structures</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="658.8" x2="766.8" y1="873.9891" y2="873.9891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="102" x="661.8" y="886.0406">id : INTEGER «PK»</text><rect fill="#FEFECE" height="68.3051" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="229.2" x="598.2" y="1045.0547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="33.6" x="696" y="1053.4998">«super»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="682.8" y="1066.8738">components</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="598.8" x2="826.8" y1="1070.9566" y2="1070.9566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="222" x="601.8" y="1083.0082">structure_id      : INTEGER «FK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="601.8" y="1095.5426">position          : INTEGER «cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="192" x="601.8" y="1108.077">component_type_id : INTEGER «FK»</text><rect fill="#FEFECE" height="156.0457" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="241.2" x="348" y="1267.0547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="24" x="456.6" y="1275.4998">«sub»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="90" x="423.6" y="1288.8738">text_components</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="348.6" x2="588.6" y1="1292.9566" y2="1292.9566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="234" x="351.6" y="1305.0082">structure_id       : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="234" x="351.6" y="1317.5426">position           : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="150" x="351.6" y="1330.077">data               : TEXT</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="162" x="351.6" y="1342.6113">size               : double</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="351.6" y="1355.1457">alignment_id       : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="351.6" y="1367.6801">fill_color_id      : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="351.6" y="1380.2145">highlight_color_id : INTEGER «FK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="351.6" y="1392.7488">bold               : INTEGER(BOOL)</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="351.6" y="1405.2832">italic             : INTEGER(BOOL)</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="204" x="351.6" y="1417.8176">underlined         : INTEGER(BOOL)</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="121.2" x="265.8" y="1495.6547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="296.4" y="1506.5063">alignments</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="266.4" x2="386.4" y1="1510.5891" y2="1510.5891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="114" x="269.4" y="1522.6406">id   : INTEGER «PK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="66" x="269.4" y="1535.175">name : TEXT</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="121.2" x="408" y="1495.6547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="66" x="435.6" y="1506.5063">fill_colors</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="408.6" x2="528.6" y1="1510.5891" y2="1510.5891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="114" x="411.6" y="1522.6406">id   : INTEGER «PK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="66" x="411.6" y="1535.175">name : TEXT</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="121.2" x="550.2" y="1495.6547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="96" x="562.8" y="1506.5063">highlight_colors</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="550.8" x2="670.8" y1="1510.5891" y2="1510.5891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="114" x="553.8" y="1522.6406">id   : INTEGER «PK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="66" x="553.8" y="1535.175">name : TEXT</text><rect fill="#FEFECE" height="68.3051" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="205.2" x="610.2" y="1310.8547"/><text fill="#000000" font-family="monospace" font-size="8.4" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="24" x="700.8" y="1319.2998">«sub»</text><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="96" x="664.8" y="1332.6738">image_components</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="610.8" x2="814.8" y1="1336.7566" y2="1336.7566"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="613.8" y="1348.8082">structure_id : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="198" x="613.8" y="1361.3426">position     : INTEGER «cFK, cPK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="36" x="613.8" y="1373.877">TBC...</text><rect fill="#FEFECE" height="44.8031" style="stroke: #A80036; stroke-width: 0.8999999999999999;" width="121.2" x="744.6" y="1186.0547"/><text fill="#000000" font-family="monospace" font-size="9.6" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="90" x="760.2" y="1196.9063">component_types</text><line style="stroke: #A80036; stroke-width: 0.8999999999999999;" x1="745.2" x2="865.2" y1="1200.9891" y2="1200.9891"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="114" x="748.2" y="1213.0406">id   : INTEGER «PK»</text><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="66" x="748.2" y="1225.575">name : TEXT</text><!--MD5=[a671adb2ebc1f9a33b58e30638ca49cc]
+link decks to entries--><path codeLine="142" d="M402.6,166.7447 C402.6,166.7447 402.6,229.5707 402.6,229.5707 " fill="none" id="decks-entries" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="402.6" x2="406.2" y1="229.5707" y2="234.3707"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="402.6" x2="399" y1="229.5707" y2="234.3707"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="402.6" x2="402.6" y1="229.5707" y2="234.3707"/><ellipse cx="402.6" cy="225.9707" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="400.2" x2="405" y1="164.3447" y2="164.3447"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="400.2" x2="405" y1="166.1447" y2="166.1447"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="402.6" x2="402.6" y1="166.7447" y2="161.9447"/><!--MD5=[cc6763c8831d3a7ed24e1a9129f2b84b]
+link entries to cards--><path codeLine="143" d="M335.4,296.9387 C335.4,296.9387 335.4,359.7707 335.4,359.7707 " fill="none" id="entries-cards" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="335.4" x2="339" y1="359.7707" y2="364.5707"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="335.4" x2="331.8" y1="359.7707" y2="364.5707"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="335.4" x2="335.4" y1="359.7707" y2="364.5707"/><ellipse cx="335.4" cy="356.1707" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="333" x2="337.8" y1="294.5387" y2="294.5387"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="333" x2="337.8" y1="296.3387" y2="296.3387"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="335.4" x2="335.4" y1="296.9387" y2="292.1387"/><!--MD5=[45ab2164ff65fb3f45e04732d01b077a]
+link entries to entries_tags--><path codeLine="144" d="M510.0612,263.2547 C510.0612,263.2547 521.3382,263.2547 521.3382,263.2547 " fill="none" id="entries-entries_tags" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="521.3382" x2="526.1382" y1="263.2547" y2="259.6547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="521.3382" x2="526.1382" y1="263.2547" y2="266.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="521.3382" x2="526.1382" y1="263.2547" y2="263.2547"/><ellipse cx="517.7382" cy="263.2547" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="507.6612" x2="507.6612" y1="265.6547" y2="260.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="509.4612" x2="509.4612" y1="265.6547" y2="260.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="510.0612" x2="505.2612" y1="263.2547" y2="263.2547"/><!--MD5=[85d134dcee7cc2771606a63e7a3b6abe]
+link entries_tags to tags--><path codeLine="145" d="M706.386,263.2547 C706.386,263.2547 717.57,263.2547 717.57,263.2547 " fill="none" id="entries_tags-tags" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="719.97" x2="719.97" y1="260.8547" y2="265.6547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="718.17" x2="718.17" y1="260.8547" y2="265.6547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="717.57" x2="722.37" y1="263.2547" y2="263.2547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="706.386" x2="701.586" y1="263.2547" y2="266.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="706.386" x2="701.586" y1="263.2547" y2="259.6547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="706.386" x2="701.586" y1="263.2547" y2="263.2547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="707.586" x2="707.586" y1="265.6547" y2="260.8547"/><!--MD5=[0639111a83df85138e4f3cc26be773ea]
+link field_specs to field_types--><path codeLine="146" d="M571.2,791.4527 C571.2,791.4527 571.2,922.5347 571.2,922.5347 " fill="none" id="field_specs-field_types" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="573.6" x2="568.8" y1="924.9347" y2="924.9347"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="573.6" x2="568.8" y1="923.1347" y2="923.1347"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="571.2" x2="571.2" y1="922.5347" y2="927.3347"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="571.2" x2="567.6" y1="791.4527" y2="786.6527"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="571.2" x2="574.8" y1="791.4527" y2="786.6527"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="571.2" x2="571.2" y1="791.4527" y2="786.6527"/><ellipse cx="571.2" cy="795.0527" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><!--MD5=[748d2b46abbfed3d2411c7c664ead33b]
+link field_data to text_field_data--><path codeLine="147" d="M354,531.0527 C354,531.0527 354,712.5887 354,712.5887 " fill="none" id="field_data-text_field_data" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="354" x2="354" y1="710.7887" y2="717.3887"/><ellipse cx="354" cy="710.7887" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="356.4" x2="351.6" y1="714.9887" y2="714.9887"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="351.6" x2="356.4" y1="528.6527" y2="528.6527"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="351.6" x2="356.4" y1="530.4527" y2="530.4527"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="354" x2="354" y1="531.0527" y2="526.2527"/><!--MD5=[0bb1386a9eb651c3abeb458d45c68d50]
+link field_data to image_field_data--><path codeLine="148" d="M255.5646,498.4547 C255.5646,498.4547 205.5,498.4547 205.5,498.4547 C205.5,498.4547 205.5,712.4447 205.5,712.4447 " fill="none" id="field_data-image_field_data" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="205.5" x2="205.5" y1="710.6447" y2="717.2447"/><ellipse cx="205.5" cy="710.6447" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="207.9" x2="203.1" y1="714.8447" y2="714.8447"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="257.9646" x2="257.9646" y1="496.0547" y2="500.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="256.1646" x2="256.1646" y1="496.0547" y2="500.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="255.5646" x2="260.3646" y1="498.4547" y2="498.4547"/><!--MD5=[4e5fec1c971cf0c528df619d176d40e6]
+link field_data to field_specs--><path codeLine="149" d="M470.4522,498.4547 C470.4522,498.4547 478.2,498.4547 478.2,498.4547 C478.2,498.4547 478.2,711.9167 478.2,711.9167 " fill="none" id="field_data-field_specs" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="480.6" x2="475.8" y1="714.3167" y2="714.3167"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="480.6" x2="475.8" y1="712.5167" y2="712.5167"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="478.2" x2="478.2" y1="711.9167" y2="716.7167"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="470.4522" x2="465.6522" y1="498.4547" y2="502.0547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="470.4522" x2="465.6522" y1="498.4547" y2="494.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="470.4522" x2="465.6522" y1="498.4547" y2="498.4547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="471.6522" x2="471.6522" y1="500.8547" y2="496.0547"/><!--MD5=[b29c4747e1c1c43f1751f08d22d7874e]
+link entries to field_data--><path codeLine="150" d="M418.2,296.8607 C418.2,296.8607 418.2,465.4127 418.2,465.4127 " fill="none" id="entries-field_data" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="418.2" x2="421.8" y1="465.4127" y2="470.2127"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="418.2" x2="414.6" y1="465.4127" y2="470.2127"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="418.2" x2="418.2" y1="465.4127" y2="470.2127"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="420.6" x2="415.8" y1="464.2127" y2="464.2127"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="415.8" x2="420.6" y1="294.4607" y2="294.4607"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="415.8" x2="420.6" y1="296.2607" y2="296.2607"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="418.2" x2="418.2" y1="296.8607" y2="292.0607"/><!--MD5=[767af5cf7b12a1207fa0489b038d7462]
+link entries to entry_types--><path codeLine="151" d="M496.5,296.9387 C496.5,296.9387 496.5,372.1067 496.5,372.1067 " fill="none" id="entries-entry_types" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="498.9" x2="494.1" y1="374.5067" y2="374.5067"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="498.9" x2="494.1" y1="372.7067" y2="372.7067"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="496.5" x2="496.5" y1="372.1067" y2="376.9067"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="496.5" x2="492.9" y1="296.9387" y2="292.1387"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="496.5" x2="500.1" y1="296.9387" y2="292.1387"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="496.5" x2="496.5" y1="296.9387" y2="292.1387"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="494.1" x2="498.9" y1="298.1387" y2="298.1387"/><!--MD5=[ec9ae22352518476d6196562827e6240]
+link entry_types to field_specs--><path codeLine="152" d="M541.5,426.8207 C541.5,426.8207 541.5,711.9287 541.5,711.9287 " fill="none" id="entry_types-field_specs" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="541.5" x2="545.1" y1="711.9287" y2="716.7287"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="541.5" x2="537.9" y1="711.9287" y2="716.7287"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="541.5" x2="541.5" y1="711.9287" y2="716.7287"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="543.9" x2="539.1" y1="710.7287" y2="710.7287"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="539.1" x2="543.9" y1="424.4207" y2="424.4207"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="539.1" x2="543.9" y1="426.2207" y2="426.2207"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="541.5" x2="541.5" y1="426.8207" y2="422.0207"/><!--MD5=[684246b4d88f92ea9ab5a6c312d1d21c]
+link entry_types to card_formats--><path codeLine="153" d="M617.1,426.8627 C617.1,426.8627 617.1,593.6687 617.1,593.6687 " fill="none" id="entry_types-card_formats" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="617.1" x2="620.7" y1="593.6687" y2="598.4687"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="617.1" x2="613.5" y1="593.6687" y2="598.4687"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="617.1" x2="617.1" y1="593.6687" y2="598.4687"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="619.5" x2="614.7" y1="592.4687" y2="592.4687"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="614.7" x2="619.5" y1="424.4627" y2="424.4627"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="614.7" x2="619.5" y1="426.2627" y2="426.2627"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="617.1" x2="617.1" y1="426.8627" y2="422.0627"/><!--MD5=[bc737ab8373d9db78f81fcf125b58e37]
+reverse link card_formats to structures--><path codeLine="154" d="M720.6,685.2467 C720.6,685.2467 720.6,859.0127 720.6,859.0127 " fill="none" id="card_formats-backto-structures" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="718.2" x2="723" y1="683.4467" y2="683.4467"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="718.2" x2="723" y1="685.2467" y2="685.2467"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="720.6" x2="720.6" y1="685.8467" y2="681.0467"/><text fill="#000000" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="6" x="715.77" y="851.3239">2</text><!--MD5=[c94ade0fa46524e20877c801d66a65f9]
+link structures to components--><path codeLine="155" d="M712.8,896.4047 C712.8,896.4047 712.8,1040.1131 712.8,1040.1131 " fill="none" id="structures-components" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="712.8" x2="716.4" y1="1040.1131" y2="1044.9131"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="712.8" x2="709.2" y1="1040.1131" y2="1044.9131"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="712.8" x2="712.8" y1="1040.1131" y2="1044.9131"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="715.2" x2="710.4" y1="1038.9131" y2="1038.9131"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="710.4" x2="715.2" y1="894.0047" y2="894.0047"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="710.4" x2="715.2" y1="895.8047" y2="895.8047"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="712.8" x2="712.8" y1="896.4047" y2="891.6047"/><!--MD5=[b77592f6bc8c1deacc42a0c68354a7cc]
+link components to component_types--><path codeLine="156" d="M786,1118.3651 C786,1118.3651 786,1181.1155 786,1181.1155 " fill="none" id="components-component_types" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="788.4" x2="783.6" y1="1183.5155" y2="1183.5155"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="788.4" x2="783.6" y1="1181.7155" y2="1181.7155"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="786" x2="786" y1="1181.1155" y2="1185.9155"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="786" x2="782.4" y1="1118.3651" y2="1113.5651"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="786" x2="789.6" y1="1118.3651" y2="1113.5651"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="786" x2="786" y1="1118.3651" y2="1113.5651"/><ellipse cx="786" cy="1121.9651" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><!--MD5=[226e6f3e63406a2ea0fb585d715ee636]
+link components to text_components--><path codeLine="157" d="M604.2,1118.2625 C604.2,1118.2625 604.2,1289.2547 604.2,1289.2547 C604.2,1289.2547 594.2304,1289.2547 594.2304,1289.2547 " fill="none" id="components-text_components" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="596.0304" x2="589.4304" y1="1289.2547" y2="1289.2547"/><ellipse cx="596.0304" cy="1289.2547" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="591.8304" x2="591.8304" y1="1291.6547" y2="1286.8547"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="601.8" x2="606.6" y1="1115.8625" y2="1115.8625"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="601.8" x2="606.6" y1="1117.6625" y2="1117.6625"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="604.2" x2="604.2" y1="1118.2625" y2="1113.4625"/><!--MD5=[7ede59675e6e74377c61b6387aed2251]
+link components to image_components--><path codeLine="158" d="M677.4,1118.2595 C677.4,1118.2595 677.4,1305.9713 677.4,1305.9713 " fill="none" id="components-image_components" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="677.4" x2="677.4" y1="1304.1713" y2="1310.7713"/><ellipse cx="677.4" cy="1304.1713" fill="none" rx="2.4" ry="2.4" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="679.8" x2="675" y1="1308.3713" y2="1308.3713"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="675" x2="679.8" y1="1115.8595" y2="1115.8595"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="675" x2="679.8" y1="1117.6595" y2="1117.6595"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="677.4" x2="677.4" y1="1118.2595" y2="1113.4595"/><!--MD5=[c6abeb4f2f63939dc121a0d72fae8886]
+link text_components to alignments--><path codeLine="159" d="M367.5,1428.0485 C367.5,1428.0485 367.5,1490.7158 367.5,1490.7158 " fill="none" id="text_components-alignments" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="369.9" x2="365.1" y1="1493.1158" y2="1493.1158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="369.9" x2="365.1" y1="1491.3158" y2="1491.3158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="367.5" x2="367.5" y1="1490.7158" y2="1495.5158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="367.5" x2="363.9" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="367.5" x2="371.1" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="367.5" x2="367.5" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="365.1" x2="369.9" y1="1429.2485" y2="1429.2485"/><!--MD5=[e84ac700acfaf09e267ebd8f1fd8b80b]
+link text_components to fill_colors--><path codeLine="160" d="M468.6,1428.0485 C468.6,1428.0485 468.6,1490.7158 468.6,1490.7158 " fill="none" id="text_components-fill_colors" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="471" x2="466.2" y1="1493.1158" y2="1493.1158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="471" x2="466.2" y1="1491.3158" y2="1491.3158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="468.6" x2="468.6" y1="1490.7158" y2="1495.5158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="468.6" x2="465" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="468.6" x2="472.2" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="468.6" x2="468.6" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="466.2" x2="471" y1="1429.2485" y2="1429.2485"/><!--MD5=[97186fdb99571496790224be74c2571c]
+link text_components to highlight_colors--><path codeLine="161" d="M569.7,1428.0485 C569.7,1428.0485 569.7,1490.7158 569.7,1490.7158 " fill="none" id="text_components-highlight_colors" style="stroke: #A80036; stroke-width: 0.6;"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="572.1" x2="567.3" y1="1493.1158" y2="1493.1158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="572.1" x2="567.3" y1="1491.3158" y2="1491.3158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="569.7" x2="569.7" y1="1490.7158" y2="1495.5158"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="569.7" x2="566.1" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="569.7" x2="573.3" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="569.7" x2="569.7" y1="1428.0485" y2="1423.2485"/><line style="stroke: #A80036; stroke-width: 0.6;" x1="567.3" x2="572.1" y1="1429.2485" y2="1429.2485"/><text fill="#888888" font-family="monospace" font-size="9.6" lengthAdjust="spacingAndGlyphs" textLength="180" x="345" y="1553.7094">Copyright (C) 2020 Cervon Wong</text><!--MD5=[65bfd2d67fd825c5087550275484112a]
+@startuml
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 400
+
+skinparam defaultFontName Monospaced
+skinparam objectAttributeFontName Monospaced
+skinparam objectStereotypeFontName Monospaced
+skinparam defaultFontSize 16
+skinparam objectFontSize 16
+skinparam objectStereotypeFontSize 14
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam objectFontStyle bold
+skinparam linetype ortho
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Relationships of tables in SQLite database for material models.\n
+footer Copyright (C) 2020 Cervon Wong
+
+object decks {
+	id          : INTEGER <<PK, gen>>
+	name        : TEXT <<unique>>
+	created     : INTEGER(DATETIME) <<gen>>
+	last_edited : INTEGER(DATETIME) <<gen>>
+	authorName  : TEXT
+	description : TEXT
+}
+
+object entries {
+	id            : INTEGER <<PK, gen>>
+	deck_id       : INTEGER <<FK>>
+	entry_type_id : INTEGER <<FK>>
+}
+
+object cards {
+	id       : INTEGER <<PK, gen>>
+	entry_id : INTEGER <<FK>>
+	starred  : INTEGER(BOOL)
+	hidden   : INTEGER(BOOL)
+}
+
+object tags {
+	id   : INTEGER <<PK, gen>>
+	name : TEXT <<unique>>
+}
+
+object entries_tags <<junction table>> {
+	entry_id : INTEGER <<FK, cPK>>
+	tag_id   : INTEGER <<FK, cPK>>
+}
+
+object field_specs {
+	id            : INTEGER <<PK, gen>>
+	field_type_id : INTEGER <<FK>>
+	entry_type_id : INTEGER <<FK>>
+	name          : TEXT
+}
+
+object field_types {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object field_data <<super>> {
+	entry_id      : INTEGER <<FK, cPK>>
+    field_spec_id : INTEGER <<FK, cPK>>
+    ' Get field_type_id from field_specs table.
+}
+
+object text_field_data <<sub>> {
+	entry_id      : INTEGER <<cFK, cPK>>
+    field_spec_id : INTEGER <<cFK, cPK>>
+	raw_text      : TEXT
+}
+
+object image_field_data <<sub>> {
+	entry_id      : INTEGER <<cFK, cPK>>
+    field_spec_id : INTEGER <<cFK, cPK>>
+	image_id      : INTEGER <<FK>>
+}
+
+object entry_types {
+	id   : INTEGER <<PK, gen>>
+	name : TEXT
+}
+
+object card_formats {
+	entry_type_id      : INTEGER <<FK, cPK>>
+	position           : INTEGER <<cPK>>
+	name               : TEXT
+	front_structure_id : INTEGER <<FK>>
+	back_structure_id  : INTEGER <<FK>>
+}
+
+object structures {
+	id : INTEGER <<PK>>
+}
+
+object components <<super>> {
+	structure_id      : INTEGER <<FK, cPK>>
+	position          : INTEGER <<cPK>>
+	component_type_id : INTEGER <<FK>>
+}
+
+object text_components <<sub>> {
+	structure_id       : INTEGER <<cFK, cPK>>
+	position           : INTEGER <<cFK, cPK>>
+	data               : TEXT
+	size               : double
+	alignment_id       : INTEGER <<FK>>
+	fill_color_id      : INTEGER <<FK>>
+	highlight_color_id : INTEGER <<FK>>
+	bold               : INTEGER(BOOL)
+	italic             : INTEGER(BOOL)
+	underlined         : INTEGER(BOOL)
+}
+
+object alignments {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object fill_colors {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object highlight_colors {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object image_components <<sub>> {
+	structure_id : INTEGER <<cFK, cPK>>
+    position     : INTEGER <<cFK, cPK>>
+    TBC...
+}
+
+object component_types {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+decks           ||- - -o{    entries
+entries         ||- - -o{    cards
+entries         ||-o{      entries_tags
+entries_tags    }|-||      tags
+field_specs     }o- - - -||   field_types
+field_data      ||- - - -o|   text_field_data
+field_data      ||- - - -o|   image_field_data
+field_data      }|- - - -||   field_specs
+entries         ||- - - -|{   field_data
+entries         }|- - -||    entry_types
+entry_types     ||- - - -|{   field_specs
+entry_types     ||- - - -|{   card_formats
+card_formats    ||- - - - "2" structures
+structures      ||- - - -|{   components
+components      }o- - -||    component_types
+components      ||- - - -o|   text_components
+components      ||- - - -o|   image_components
+text_components }|- - -||    alignments
+text_components }|- - -||    fill_colors
+text_components }|- - -||    highlight_colors
+
+@enduml
+
+@startuml
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 400
+
+skinparam defaultFontName Monospaced
+skinparam objectAttributeFontName Monospaced
+skinparam objectStereotypeFontName Monospaced
+skinparam defaultFontSize 16
+skinparam objectFontSize 16
+skinparam objectStereotypeFontSize 14
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam objectFontStyle bold
+skinparam linetype ortho
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Relationships of tables in SQLite database for material models.\n
+footer Copyright (C) 2020 Cervon Wong
+
+object decks {
+	id          : INTEGER <<PK, gen>>
+	name        : TEXT <<unique>>
+	created     : INTEGER(DATETIME) <<gen>>
+	last_edited : INTEGER(DATETIME) <<gen>>
+	authorName  : TEXT
+	description : TEXT
+}
+
+object entries {
+	id            : INTEGER <<PK, gen>>
+	deck_id       : INTEGER <<FK>>
+	entry_type_id : INTEGER <<FK>>
+}
+
+object cards {
+	id       : INTEGER <<PK, gen>>
+	entry_id : INTEGER <<FK>>
+	starred  : INTEGER(BOOL)
+	hidden   : INTEGER(BOOL)
+}
+
+object tags {
+	id   : INTEGER <<PK, gen>>
+	name : TEXT <<unique>>
+}
+
+object entries_tags <<junction table>> {
+	entry_id : INTEGER <<FK, cPK>>
+	tag_id   : INTEGER <<FK, cPK>>
+}
+
+object field_specs {
+	id            : INTEGER <<PK, gen>>
+	field_type_id : INTEGER <<FK>>
+	entry_type_id : INTEGER <<FK>>
+	name          : TEXT
+}
+
+object field_types {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object field_data <<super>> {
+	entry_id      : INTEGER <<FK, cPK>>
+    field_spec_id : INTEGER <<FK, cPK>>
+}
+
+object text_field_data <<sub>> {
+	entry_id      : INTEGER <<cFK, cPK>>
+    field_spec_id : INTEGER <<cFK, cPK>>
+	raw_text      : TEXT
+}
+
+object image_field_data <<sub>> {
+	entry_id      : INTEGER <<cFK, cPK>>
+    field_spec_id : INTEGER <<cFK, cPK>>
+	image_id      : INTEGER <<FK>>
+}
+
+object entry_types {
+	id   : INTEGER <<PK, gen>>
+	name : TEXT
+}
+
+object card_formats {
+	entry_type_id      : INTEGER <<FK, cPK>>
+	position           : INTEGER <<cPK>>
+	name               : TEXT
+	front_structure_id : INTEGER <<FK>>
+	back_structure_id  : INTEGER <<FK>>
+}
+
+object structures {
+	id : INTEGER <<PK>>
+}
+
+object components <<super>> {
+	structure_id      : INTEGER <<FK, cPK>>
+	position          : INTEGER <<cPK>>
+	component_type_id : INTEGER <<FK>>
+}
+
+object text_components <<sub>> {
+	structure_id       : INTEGER <<cFK, cPK>>
+	position           : INTEGER <<cFK, cPK>>
+	data               : TEXT
+	size               : double
+	alignment_id       : INTEGER <<FK>>
+	fill_color_id      : INTEGER <<FK>>
+	highlight_color_id : INTEGER <<FK>>
+	bold               : INTEGER(BOOL)
+	italic             : INTEGER(BOOL)
+	underlined         : INTEGER(BOOL)
+}
+
+object alignments {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object fill_colors {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object highlight_colors {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object image_components <<sub>> {
+	structure_id : INTEGER <<cFK, cPK>>
+    position     : INTEGER <<cFK, cPK>>
+    TBC...
+}
+
+object component_types {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+decks           ||- - -o{    entries
+entries         ||- - -o{    cards
+entries         ||-o{      entries_tags
+entries_tags    }|-||      tags
+field_specs     }o- - - -||   field_types
+field_data      ||- - - -o|   text_field_data
+field_data      ||- - - -o|   image_field_data
+field_data      }|- - - -||   field_specs
+entries         ||- - - -|{   field_data
+entries         }|- - -||    entry_types
+entry_types     ||- - - -|{   field_specs
+entry_types     ||- - - -|{   card_formats
+card_formats    ||- - - - "2" structures
+structures      ||- - - -|{   components
+components      }o- - -||    component_types
+components      ||- - - -o|   text_components
+components      ||- - - -o|   image_components
+text_components }|- - -||    alignments
+text_components }|- - -||    fill_colors
+text_components }|- - -||    highlight_colors
+
+@enduml
+
+PlantUML version 1.2020.20(Sat Nov 21 18:02:45 SGT 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
