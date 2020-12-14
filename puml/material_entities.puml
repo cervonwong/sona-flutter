@@ -2,26 +2,31 @@
 
 skinparam maxMessageSize 100
 skinparam shadowing false
+skinparam defaultFontName monospaced
+skinparam defaultFontSize 16
+skinparam arrowFontSize 12
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
 
 title Relationships of material entities.\n
 
 class Card {
-	id : int
+	id        : int
 	isStarred : bool
-	isHidden : bool
+	isHidden  : bool
 }
 class Entry {
-	id : int
-	tags : Set<EntryTag>
+	id        : int
+	tags      : Set<EntryTag>
 	fieldData : Map<EntryFieldSpec, EntryFieldDatum>
 }
 class Deck {
-	id : int
-	name : String
-	createdDateTime : DateTime
+	id                 : int
+	name               : String
+	createdDateTime    : DateTime
 	lastEditedDateTime : DateTime
-	authorName : String
-	description : String
+	authorName         : String
+	description        : String
 }
 
 Deck "1" <--> "0..*" Entry : owns >
@@ -29,28 +34,28 @@ Entry "1" <--> "1..*" Card : generates >
 Deck "1" <--> "0..*" Card : owns >
 
 class EntryTag {
-	id : int
+	id   : int
 	name : String
 }
 abstract class EntryFieldDatum {
 	type : EntryFieldType
 }
 class EntryType {
-	id : int
-	name : String
+	id          : int
+	name        : String
 	cardFormats : List<CardFormat>
-	fieldSpecs : List<EntryFieldSpec>
+	fieldSpecs  : List<EntryFieldSpec>
 }
 class EntryFieldSpec {
-	id : int
+	id   : int
 	type : EntryFieldType
 	name : String
 }
 class CardFormat {
-	id : int
-	name : String
+	id    : int
+	name  : String
 	front : CardFormatStructure
-	back : CardFormatStructure
+	back  : CardFormatStructure
 }
 class CardFormatStructure {
 	components : List<Component>
