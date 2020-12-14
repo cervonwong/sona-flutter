@@ -1,0 +1,164 @@
+@startuml
+
+skinparam defaultFontName Monospaced
+skinparam objectAttributeFontName Monospaced
+skinparam objectStereotypeFontName Monospaced
+skinparam defaultFontSize 16
+skinparam objectFontSize 16
+skinparam objectStereotypeFontSize 14
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam objectFontStyle bold
+skinparam linetype ortho
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Relationships of tables in SQLite database for material models.\n
+footer Copyright (C) 2020 Cervon Wong
+
+object decks {
+	id          : INTEGER <<PK, gen>>
+	name        : TEXT <<unique>>
+	created     : INTEGER(DATETIME) <<gen>>
+	last_edited : INTEGER(DATETIME) <<gen>>
+	authorName  : TEXT
+	description : TEXT
+}
+
+object entries {
+	id            : INTEGER <<PK, gen>>
+	deck_id       : INTEGER <<FK>>
+	entry_type_id : INTEGER <<FK>>
+}
+
+object cards {
+	id       : INTEGER <<PK, gen>>
+	entry_id : INTEGER <<FK>>
+	starred  : INTEGER(BOOL)
+	hidden   : INTEGER(BOOL)
+}
+
+object tags {
+	id   : INTEGER <<PK, gen>>
+	name : TEXT <<unique>>
+}
+
+object entries_tags <<junction table>> {
+	entry_id : INTEGER <<FK, cPK>>
+	tag_id   : INTEGER <<FK, cPK>>
+}
+
+object field_specs {
+	id            : INTEGER <<PK, gen>>
+	field_type_id : INTEGER <<FK>>
+	entry_type_id : INTEGER <<FK>>
+	name          : TEXT
+}
+
+object field_types {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object field_data <<super>> {
+	entry_id      : INTEGER <<FK, cPK>>
+    field_spec_id : INTEGER <<FK, cPK>>
+    ' Get field_type_id from field_specs table.
+}
+
+object text_field_data <<sub>> {
+	entry_id      : INTEGER <<cFK, cPK>>
+    field_spec_id : INTEGER <<cFK, cPK>>
+	raw_text      : TEXT
+}
+
+object image_field_data <<sub>> {
+	entry_id      : INTEGER <<cFK, cPK>>
+    field_spec_id : INTEGER <<cFK, cPK>>
+	image_id      : INTEGER <<FK>>
+}
+
+object entry_types {
+	id   : INTEGER <<PK, gen>>
+	name : TEXT
+}
+
+object card_formats {
+	entry_type_id      : INTEGER <<FK, cPK>>
+	position           : INTEGER <<cPK>>
+	name               : TEXT
+	front_structure_id : INTEGER <<FK>>
+	back_structure_id  : INTEGER <<FK>>
+}
+
+object structures {
+	id : INTEGER <<PK>>
+}
+
+object components <<super>> {
+	structure_id      : INTEGER <<FK, cPK>>
+	position          : INTEGER <<cPK>>
+	component_type_id : INTEGER <<FK>>
+}
+
+object text_components <<sub>> {
+	structure_id       : INTEGER <<cFK, cPK>>
+	position           : INTEGER <<cFK, cPK>>
+	data               : TEXT
+	size               : double
+	alignment_id       : INTEGER <<FK>>
+	fill_color_id      : INTEGER <<FK>>
+	highlight_color_id : INTEGER <<FK>>
+	bold               : INTEGER(BOOL)
+	italic             : INTEGER(BOOL)
+	underlined         : INTEGER(BOOL)
+}
+
+object alignments {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object fill_colors {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object highlight_colors {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+object image_components <<sub>> {
+	structure_id : INTEGER <<cFK, cPK>>
+    position     : INTEGER <<cFK, cPK>>
+    TBC...
+}
+
+object component_types {
+	id   : INTEGER <<PK>>
+	name : TEXT
+}
+
+decks           ||---o{    entries
+entries         ||---o{    cards
+entries         ||-o{      entries_tags
+entries_tags    }|-||      tags
+field_specs     }o----||   field_types
+field_data      ||----o|   text_field_data
+field_data      ||----o|   image_field_data
+field_data      }|----||   field_specs
+entries         ||----|{   field_data
+entries         }|---||    entry_types
+entry_types     ||----|{   field_specs
+entry_types     ||----|{   card_formats
+card_formats    ||---- "2" structures
+structures      ||----|{   components
+components      }o---||    component_types
+components      ||----o|   text_components
+components      ||----o|   image_components
+text_components }|---||    alignments
+text_components }|---||    fill_colors
+text_components }|---||    highlight_colors
+
+@enduml
