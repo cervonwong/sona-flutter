@@ -620,14 +620,298 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
   }
 }
 
+class CardModel extends DataClass implements Insertable<CardModel> {
+  final int id;
+  final int entryId;
+  final bool starred;
+  final bool hidden;
+  CardModel(
+      {@required this.id,
+      @required this.entryId,
+      @required this.starred,
+      @required this.hidden});
+  factory CardModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final boolType = db.typeSystem.forDartType<bool>();
+    return CardModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      entryId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      starred:
+          boolType.mapFromDatabaseResponse(data['${effectivePrefix}starred']),
+      hidden:
+          boolType.mapFromDatabaseResponse(data['${effectivePrefix}hidden']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || entryId != null) {
+      map['entry_id'] = Variable<int>(entryId);
+    }
+    if (!nullToAbsent || starred != null) {
+      map['starred'] = Variable<bool>(starred);
+    }
+    if (!nullToAbsent || hidden != null) {
+      map['hidden'] = Variable<bool>(hidden);
+    }
+    return map;
+  }
+
+  CardsCompanion toCompanion(bool nullToAbsent) {
+    return CardsCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      entryId: entryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryId),
+      starred: starred == null && nullToAbsent
+          ? const Value.absent()
+          : Value(starred),
+      hidden:
+          hidden == null && nullToAbsent ? const Value.absent() : Value(hidden),
+    );
+  }
+
+  factory CardModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return CardModel(
+      id: serializer.fromJson<int>(json['id']),
+      entryId: serializer.fromJson<int>(json['entryId']),
+      starred: serializer.fromJson<bool>(json['starred']),
+      hidden: serializer.fromJson<bool>(json['hidden']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'entryId': serializer.toJson<int>(entryId),
+      'starred': serializer.toJson<bool>(starred),
+      'hidden': serializer.toJson<bool>(hidden),
+    };
+  }
+
+  CardModel copyWith({int id, int entryId, bool starred, bool hidden}) =>
+      CardModel(
+        id: id ?? this.id,
+        entryId: entryId ?? this.entryId,
+        starred: starred ?? this.starred,
+        hidden: hidden ?? this.hidden,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('CardModel(')
+          ..write('id: $id, ')
+          ..write('entryId: $entryId, ')
+          ..write('starred: $starred, ')
+          ..write('hidden: $hidden')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode,
+      $mrjc(entryId.hashCode, $mrjc(starred.hashCode, hidden.hashCode))));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is CardModel &&
+          other.id == this.id &&
+          other.entryId == this.entryId &&
+          other.starred == this.starred &&
+          other.hidden == this.hidden);
+}
+
+class CardsCompanion extends UpdateCompanion<CardModel> {
+  final Value<int> id;
+  final Value<int> entryId;
+  final Value<bool> starred;
+  final Value<bool> hidden;
+  const CardsCompanion({
+    this.id = const Value.absent(),
+    this.entryId = const Value.absent(),
+    this.starred = const Value.absent(),
+    this.hidden = const Value.absent(),
+  });
+  CardsCompanion.insert({
+    this.id = const Value.absent(),
+    @required int entryId,
+    @required bool starred,
+    @required bool hidden,
+  })  : entryId = Value(entryId),
+        starred = Value(starred),
+        hidden = Value(hidden);
+  static Insertable<CardModel> custom({
+    Expression<int> id,
+    Expression<int> entryId,
+    Expression<bool> starred,
+    Expression<bool> hidden,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (entryId != null) 'entry_id': entryId,
+      if (starred != null) 'starred': starred,
+      if (hidden != null) 'hidden': hidden,
+    });
+  }
+
+  CardsCompanion copyWith(
+      {Value<int> id,
+      Value<int> entryId,
+      Value<bool> starred,
+      Value<bool> hidden}) {
+    return CardsCompanion(
+      id: id ?? this.id,
+      entryId: entryId ?? this.entryId,
+      starred: starred ?? this.starred,
+      hidden: hidden ?? this.hidden,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (entryId.present) {
+      map['entry_id'] = Variable<int>(entryId.value);
+    }
+    if (starred.present) {
+      map['starred'] = Variable<bool>(starred.value);
+    }
+    if (hidden.present) {
+      map['hidden'] = Variable<bool>(hidden.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CardsCompanion(')
+          ..write('id: $id, ')
+          ..write('entryId: $entryId, ')
+          ..write('starred: $starred, ')
+          ..write('hidden: $hidden')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $CardsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
+  GeneratedIntColumn _entryId;
+  @override
+  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  GeneratedIntColumn _constructEntryId() {
+    return GeneratedIntColumn('entry_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES entries(id)');
+  }
+
+  final VerificationMeta _starredMeta = const VerificationMeta('starred');
+  GeneratedBoolColumn _starred;
+  @override
+  GeneratedBoolColumn get starred => _starred ??= _constructStarred();
+  GeneratedBoolColumn _constructStarred() {
+    return GeneratedBoolColumn(
+      'starred',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _hiddenMeta = const VerificationMeta('hidden');
+  GeneratedBoolColumn _hidden;
+  @override
+  GeneratedBoolColumn get hidden => _hidden ??= _constructHidden();
+  GeneratedBoolColumn _constructHidden() {
+    return GeneratedBoolColumn(
+      'hidden',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, entryId, starred, hidden];
+  @override
+  $CardsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'cards';
+  @override
+  final String actualTableName = 'cards';
+  @override
+  VerificationContext validateIntegrity(Insertable<CardModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('entry_id')) {
+      context.handle(_entryIdMeta,
+          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryIdMeta);
+    }
+    if (data.containsKey('starred')) {
+      context.handle(_starredMeta,
+          starred.isAcceptableOrUnknown(data['starred'], _starredMeta));
+    } else if (isInserting) {
+      context.missing(_starredMeta);
+    }
+    if (data.containsKey('hidden')) {
+      context.handle(_hiddenMeta,
+          hidden.isAcceptableOrUnknown(data['hidden'], _hiddenMeta));
+    } else if (isInserting) {
+      context.missing(_hiddenMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CardModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return CardModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $CardsTable createAlias(String alias) {
+    return $CardsTable(_db, alias);
+  }
+}
+
 abstract class _$MoorDatabase extends GeneratedDatabase {
   _$MoorDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $DecksTable _decks;
   $DecksTable get decks => _decks ??= $DecksTable(this);
   $EntriesTable _entries;
   $EntriesTable get entries => _entries ??= $EntriesTable(this);
+  $CardsTable _cards;
+  $CardsTable get cards => _cards ??= $CardsTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [decks, entries];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [decks, entries, cards];
 }

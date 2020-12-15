@@ -17,12 +17,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'cards/cards_table.dart';
-import 'decks/decks_table.dart';
-import 'entries/entries_table.dart';
+import 'package:moor/moor.dart';
 
-export 'cards/cards_table.dart';
-export 'decks/decks_table.dart';
-export 'entries/entries_table.dart';
+@DataClassName('CardModel')
+class Cards extends Table {
+  IntColumn get id => integer().autoIncrement()(); // PK
 
-const List<Type> kTables = [Decks, Entries, Cards];
+  IntColumn get entryId => integer().customConstraint(
+        'NOT NULL REFERENCES entries(id)',
+      )();
+
+  BoolColumn get starred => boolean()();
+
+  BoolColumn get hidden => boolean()();
+}
