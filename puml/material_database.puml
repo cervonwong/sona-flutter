@@ -33,15 +33,15 @@ object entries {
 }
 
 object cards {
-	id       : INTEGER <<PK, gen>>
-	entry_id : INTEGER <<FK>>
+	id       : INTEGER       <<PK, gen>>
+	entry_id : INTEGER       <<FK>>
 	starred  : INTEGER(BOOL)
 	hidden   : INTEGER(BOOL)
 }
 
 object tags {
 	id   : INTEGER <<PK, gen>>
-	name : TEXT <<unique>>
+	name : TEXT    <<unique>>
 }
 
 object entries_tags <<junction table>> {
@@ -103,13 +103,13 @@ object components <<super>> {
 }
 
 object text_components <<sub>> {
-	structure_id       : INTEGER <<cFK, cPK>>
-	position           : INTEGER <<cFK, cPK>>
+	structure_id       : INTEGER       <<cFK, cPK>>
+	position           : INTEGER       <<cFK, cPK>>
 	data               : TEXT
 	size               : double
-	alignment_id       : INTEGER <<FK>>
-	fill_color_id      : INTEGER <<FK>>
-	highlight_color_id : INTEGER <<FK>>
+	alignment_id       : INTEGER       <<FK>>
+	fill_color_id      : INTEGER       <<FK>>
+	highlight_color_id : INTEGER       <<FK>>
 	bold               : INTEGER(BOOL)
 	italic             : INTEGER(BOOL)
 	underlined         : INTEGER(BOOL)
