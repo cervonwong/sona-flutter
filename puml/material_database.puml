@@ -143,8 +143,8 @@ object component_types {
 
 decks           ||---o{    entries
 entries         ||---o{    cards
-entries         ||-o{      entries_tags
-entries_tags    }|-||      tags
+entries         ||-o{      entries_tags : \t
+entries_tags    }|-||      tags : \t
 field_specs     }o----||   field_types
 field_data      ||----o|   text_field_data
 field_data      ||----o|   image_field_data
