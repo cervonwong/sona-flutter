@@ -17,22 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'cards/cards_table.dart';
-import 'decks/decks_table.dart';
-import 'entries/entries_table.dart';
-import 'entries_tags/entries_tags_table.dart';
-import 'tags/tags_table.dart';
+import 'package:moor/moor.dart';
 
-export 'cards/cards_table.dart';
-export 'decks/decks_table.dart';
-export 'entries/entries_table.dart';
-export 'entries_tags/entries_tags_table.dart';
-export 'tags/tags_table.dart';
+@DataClassName('EntryTagModel')
+class EntriesTags extends Table {
+  IntColumn get entryId => integer().customConstraint(
+        'NOT NULL REFERENCES entries(id)',
+      )();
 
-const List<Type> kTables = [
-  Cards,
-  Decks,
-  Entries,
-  EntriesTags,
-  Tags,
-];
+  IntColumn get tagId => integer().customConstraint(
+        'NOT NULL REFERENCES tags(id)',
+      )();
+
+  @override
+  Set<Column> get primaryKey => {entryId, tagId};
+}
