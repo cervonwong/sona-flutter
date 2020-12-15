@@ -2,10 +2,7 @@
 
 skinparam wrapWidth 1000
 skinparam defaultFontName Monospaced
-skinparam objectAttributeFontName Monospaced
-skinparam objectStereotypeFontName Monospaced
 skinparam defaultFontSize 16
-skinparam objectFontSize 16
 skinparam objectStereotypeFontSize 14
 skinparam titleFontSize 24
 skinparam titleFontStyle bold
