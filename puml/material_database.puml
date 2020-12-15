@@ -86,7 +86,7 @@ object entry_types {
 
 object card_formats {
 	entry_type_id      : INTEGER <<FK, cPK, c_unique>>
-	position           : INTEGER <<cPK>>
+	position           : INTEGER <<cPK, unique>>
 	name               : TEXT    <<c_unique>>
 	front_structure_id : INTEGER <<FK>>
 	back_structure_id  : INTEGER <<FK>>
@@ -98,7 +98,7 @@ object structures {
 
 object components <<super>> {
 	structure_id      : INTEGER <<FK, cPK>>
-	position          : INTEGER <<cPK>>
+	position          : INTEGER <<cPK, unique>>
 	component_type_id : INTEGER <<FK>>
 }
 
