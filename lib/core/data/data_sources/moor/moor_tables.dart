@@ -21,6 +21,7 @@ import 'cards/cards_table.dart';
 import 'decks/decks_table.dart';
 import 'entries/entries_table.dart';
 import 'entries_tags/entries_tags_table.dart';
+import 'entry_types/entry_types.dart';
 import 'field_data/field_data_table.dart';
 import 'field_data/image_field_data/image_field_data_table.dart';
 import 'field_data/text_field_data/text_field_data_table.dart';
@@ -30,6 +31,7 @@ export 'cards/cards_table.dart';
 export 'decks/decks_table.dart';
 export 'entries/entries_table.dart';
 export 'entries_tags/entries_tags_table.dart';
+export 'entry_types/entry_types.dart';
 export 'field_data/field_data_table.dart';
 export 'field_data/image_field_data/image_field_data_table.dart';
 export 'field_data/text_field_data/text_field_data_table.dart';
@@ -40,6 +42,7 @@ const List<Type> kTables = [
   Decks,
   Entries,
   EntriesTags,
+  EntryTypes,
   FieldData,
   ImageFieldData,
   Tags,
