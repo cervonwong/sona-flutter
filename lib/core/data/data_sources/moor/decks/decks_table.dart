@@ -19,7 +19,7 @@
 
 import 'package:moor/moor.dart';
 
-import '../../../constants/material_constants.dart';
+import '../../../../constants/material_constants.dart';
 
 @DataClassName('DeckModel')
 class Decks extends Table {
