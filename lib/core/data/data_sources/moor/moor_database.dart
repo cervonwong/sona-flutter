@@ -24,8 +24,7 @@ import 'package:moor/moor.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
-import 'decks/decks_table.dart';
-import 'entries/entries_table.dart';
+import 'moor_tables.dart';
 
 part 'moor_database.g.dart';
 
@@ -37,7 +36,7 @@ LazyDatabase _openConnection() {
   });
 }
 
-@UseMoor(tables: [Decks, Entries])
+@UseMoor(tables: kTables)
 class MoorDatabase extends _$MoorDatabase {
   MoorDatabase() : super(_openConnection());
 
