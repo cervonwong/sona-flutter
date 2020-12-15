@@ -52,13 +52,13 @@ object entries_tags <<junction table>> {
 object field_specs {
 	id            : INTEGER <<PK, gen>>
 	field_type_id : INTEGER <<FK>>
-	entry_type_id : INTEGER <<FK>>
-	name          : TEXT
+	entry_type_id : INTEGER <<FK, c_unique>>
+	name          : TEXT    <<c_unique>>
 }
 
 object field_types {
 	id   : INTEGER <<PK>>
-	name : TEXT
+	name : TEXT    <<unique>>
 }
 
 object field_data <<super>> {
@@ -81,13 +81,13 @@ object image_field_data <<sub>> {
 
 object entry_types {
 	id   : INTEGER <<PK, gen>>
-	name : TEXT
+	name : TEXT    <<unique>>
 }
 
 object card_formats {
-	entry_type_id      : INTEGER <<FK, cPK>>
+	entry_type_id      : INTEGER <<FK, cPK, c_unique>>
 	position           : INTEGER <<cPK>>
-	name               : TEXT
+	name               : TEXT    <<c_unique>>
 	front_structure_id : INTEGER <<FK>>
 	back_structure_id  : INTEGER <<FK>>
 }
@@ -117,17 +117,17 @@ object text_components <<sub>> {
 
 object alignments {
 	id   : INTEGER <<PK>>
-	name : TEXT
+	name : TEXT    <<unique>>
 }
 
 object fill_colors {
 	id   : INTEGER <<PK>>
-	name : TEXT
+	name : TEXT    <<unique>>
 }
 
 object highlight_colors {
 	id   : INTEGER <<PK>>
-	name : TEXT
+	name : TEXT    <<unique>>
 }
 
 object image_components <<sub>> {
@@ -138,7 +138,7 @@ object image_components <<sub>> {
 
 object component_types {
 	id   : INTEGER <<PK>>
-	name : TEXT
+	name : TEXT    <<unique>>
 }
 
 decks           ||---o{    entries
