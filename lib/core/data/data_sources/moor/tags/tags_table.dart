@@ -25,4 +25,3 @@ class Tags extends Table {
 
   TextColumn get name => text().customConstraint('NOT NULL UNIQUE')();
 }
-
