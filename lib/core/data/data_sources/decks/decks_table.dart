@@ -17,31 +17,36 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'dart:io';
-
-import 'package:moor/ffi.dart';
 import 'package:moor/moor.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart' as path_provider;
 
-import '../decks/decks_table.dart';
+import '../../../constants/material_constants.dart';
 
-part 'moor_database.g.dart';
+@DataClassName('DeckModel')
+class Decks extends Table {
+  IntColumn get id => integer().autoIncrement()(); // PK
 
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await path_provider.getApplicationDocumentsDirectory();
-    final file = File(path.join(dbFolder.path, 'db.sqlite'));
-    return VmDatabase(file, logStatements: true);
-  });
-}
+  TextColumn get name => text()
+      .withLength(
+        min: kMinDeckNameLength,
+        max: kMaxDeckNameLength,
+      )
+      .customConstraint('NOT NULL UNIQUE')();
 
-@UseMoor(tables: [Decks])
-class MoorDatabase extends _$MoorDatabase {
-  MoorDatabase() : super(_openConnection());
+  DateTimeColumn get created => dateTime().withDefault(
+        currentDateAndTime,
+      )();
 
-  // Update this each time the database structure (tables) have been changed
-  // after this app has been released.
-  @override
-  int get schemaVersion => 1;
+  DateTimeColumn get lastEdited => dateTime().withDefault(
+        currentDateAndTime,
+      )();
+
+  TextColumn get authorName => text().withLength(
+        min: kMinDeckAuthorNameLength,
+        max: kMaxDeckAuthorNameLength,
+      )();
+
+  TextColumn get description => text().withLength(
+        min: kMinDeckDescriptionLength,
+        max: kMaxDeckDescriptionLenth,
+      )();
 }
