@@ -31,8 +31,8 @@ class TextFieldData extends Table {
   List<String> get customConstraints => [
         // Creates a composite foreign key constraint.
         // See https://sqlite.org/foreignkeys.html#fk_composite.
-        'FOREIGN KEY(entryId, fieldSpecId) '
-            'REFERENCES field_data(entryId, fieldSpecId)',
+        'FOREIGN KEY(entry_id, field_spec_id) '
+            'REFERENCES field_data(entry_id, field_spec_id)',
       ];
 
   @override
