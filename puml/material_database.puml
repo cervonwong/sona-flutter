@@ -1,5 +1,6 @@
 @startuml
 
+skinparam wrapWidth 1000
 skinparam defaultFontName Monospaced
 skinparam objectAttributeFontName Monospaced
 skinparam objectStereotypeFontName Monospaced
@@ -17,12 +18,12 @@ title Relationships of tables in SQLite database for material models.\n
 footer Copyright (C) 2020 Cervon Wong
 
 object decks {
-	id          : INTEGER <<PK, gen>>
-	name        : TEXT <<unique>>
+	id          : INTEGER           <<PK, gen>>
+	name        : TEXT              <<unique, min: 5, max: 150>>
 	created     : INTEGER(DATETIME) <<gen>>
 	last_edited : INTEGER(DATETIME) <<gen>>
-	authorName  : TEXT
-	description : TEXT
+	authorName  : TEXT              <<min: 1, max: 50>>
+	description : TEXT              <<min: 10, max: 255>>
 }
 
 object entries {
