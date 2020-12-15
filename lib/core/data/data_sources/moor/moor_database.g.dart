@@ -388,12 +388,246 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   }
 }
 
+class EntryModel extends DataClass implements Insertable<EntryModel> {
+  final int id;
+  final int deckId;
+  final int entryTypeId;
+  EntryModel(
+      {@required this.id, @required this.deckId, @required this.entryTypeId});
+  factory EntryModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    return EntryModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      deckId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}deck_id']),
+      entryTypeId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || deckId != null) {
+      map['deck_id'] = Variable<int>(deckId);
+    }
+    if (!nullToAbsent || entryTypeId != null) {
+      map['entry_type_id'] = Variable<int>(entryTypeId);
+    }
+    return map;
+  }
+
+  EntriesCompanion toCompanion(bool nullToAbsent) {
+    return EntriesCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      deckId:
+          deckId == null && nullToAbsent ? const Value.absent() : Value(deckId),
+      entryTypeId: entryTypeId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryTypeId),
+    );
+  }
+
+  factory EntryModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return EntryModel(
+      id: serializer.fromJson<int>(json['id']),
+      deckId: serializer.fromJson<int>(json['deckId']),
+      entryTypeId: serializer.fromJson<int>(json['entryTypeId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'deckId': serializer.toJson<int>(deckId),
+      'entryTypeId': serializer.toJson<int>(entryTypeId),
+    };
+  }
+
+  EntryModel copyWith({int id, int deckId, int entryTypeId}) => EntryModel(
+        id: id ?? this.id,
+        deckId: deckId ?? this.deckId,
+        entryTypeId: entryTypeId ?? this.entryTypeId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('EntryModel(')
+          ..write('id: $id, ')
+          ..write('deckId: $deckId, ')
+          ..write('entryTypeId: $entryTypeId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      $mrjf($mrjc(id.hashCode, $mrjc(deckId.hashCode, entryTypeId.hashCode)));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is EntryModel &&
+          other.id == this.id &&
+          other.deckId == this.deckId &&
+          other.entryTypeId == this.entryTypeId);
+}
+
+class EntriesCompanion extends UpdateCompanion<EntryModel> {
+  final Value<int> id;
+  final Value<int> deckId;
+  final Value<int> entryTypeId;
+  const EntriesCompanion({
+    this.id = const Value.absent(),
+    this.deckId = const Value.absent(),
+    this.entryTypeId = const Value.absent(),
+  });
+  EntriesCompanion.insert({
+    this.id = const Value.absent(),
+    @required int deckId,
+    @required int entryTypeId,
+  })  : deckId = Value(deckId),
+        entryTypeId = Value(entryTypeId);
+  static Insertable<EntryModel> custom({
+    Expression<int> id,
+    Expression<int> deckId,
+    Expression<int> entryTypeId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (deckId != null) 'deck_id': deckId,
+      if (entryTypeId != null) 'entry_type_id': entryTypeId,
+    });
+  }
+
+  EntriesCompanion copyWith(
+      {Value<int> id, Value<int> deckId, Value<int> entryTypeId}) {
+    return EntriesCompanion(
+      id: id ?? this.id,
+      deckId: deckId ?? this.deckId,
+      entryTypeId: entryTypeId ?? this.entryTypeId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (deckId.present) {
+      map['deck_id'] = Variable<int>(deckId.value);
+    }
+    if (entryTypeId.present) {
+      map['entry_type_id'] = Variable<int>(entryTypeId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('EntriesCompanion(')
+          ..write('id: $id, ')
+          ..write('deckId: $deckId, ')
+          ..write('entryTypeId: $entryTypeId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $EntriesTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _deckIdMeta = const VerificationMeta('deckId');
+  GeneratedIntColumn _deckId;
+  @override
+  GeneratedIntColumn get deckId => _deckId ??= _constructDeckId();
+  GeneratedIntColumn _constructDeckId() {
+    return GeneratedIntColumn('deck_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES decks(id)');
+  }
+
+  final VerificationMeta _entryTypeIdMeta =
+      const VerificationMeta('entryTypeId');
+  GeneratedIntColumn _entryTypeId;
+  @override
+  GeneratedIntColumn get entryTypeId =>
+      _entryTypeId ??= _constructEntryTypeId();
+  GeneratedIntColumn _constructEntryTypeId() {
+    return GeneratedIntColumn('entry_type_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, deckId, entryTypeId];
+  @override
+  $EntriesTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'entries';
+  @override
+  final String actualTableName = 'entries';
+  @override
+  VerificationContext validateIntegrity(Insertable<EntryModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('deck_id')) {
+      context.handle(_deckIdMeta,
+          deckId.isAcceptableOrUnknown(data['deck_id'], _deckIdMeta));
+    } else if (isInserting) {
+      context.missing(_deckIdMeta);
+    }
+    if (data.containsKey('entry_type_id')) {
+      context.handle(
+          _entryTypeIdMeta,
+          entryTypeId.isAcceptableOrUnknown(
+              data['entry_type_id'], _entryTypeIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryTypeIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  EntryModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return EntryModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $EntriesTable createAlias(String alias) {
+    return $EntriesTable(_db, alias);
+  }
+}
+
 abstract class _$MoorDatabase extends GeneratedDatabase {
   _$MoorDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $DecksTable _decks;
   $DecksTable get decks => _decks ??= $DecksTable(this);
+  $EntriesTable _entries;
+  $EntriesTable get entries => _entries ??= $EntriesTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [decks];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [decks, entries];
 }

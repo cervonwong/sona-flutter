@@ -17,32 +17,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'dart:io';
-
-import 'package:moor/ffi.dart';
 import 'package:moor/moor.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart' as path_provider;
 
-import 'decks/decks_table.dart';
-import 'entries/entries_table.dart';
+@DataClassName('EntryModel')
+class Entries extends Table {
+  IntColumn get id => integer().autoIncrement()(); // PK
 
-part 'moor_database.g.dart';
+  IntColumn get deckId => integer().customConstraint(
+        'NOT NULL REFERENCES decks(id)',
+      )();
 
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await path_provider.getApplicationDocumentsDirectory();
-    final file = File(path.join(dbFolder.path, 'db.sqlite'));
-    return VmDatabase(file, logStatements: true);
-  });
-}
-
-@UseMoor(tables: [Decks, Entries])
-class MoorDatabase extends _$MoorDatabase {
-  MoorDatabase() : super(_openConnection());
-
-  // Update this each time the database structure (tables) have been changed
-  // after this app has been released.
-  @override
-  int get schemaVersion => 1;
+  IntColumn get entryTypeId => integer().customConstraint(
+        'NOT NULL REFERENCES entry_types(id)',
+      )();
 }
