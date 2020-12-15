@@ -1095,6 +1095,461 @@ class $EntriesTagsTable extends EntriesTags
   }
 }
 
+class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
+  final int entryId;
+  final int fieldSpecId;
+  FieldDatumModel({@required this.entryId, @required this.fieldSpecId});
+  factory FieldDatumModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    return FieldDatumModel(
+      entryId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      fieldSpecId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || entryId != null) {
+      map['entry_id'] = Variable<int>(entryId);
+    }
+    if (!nullToAbsent || fieldSpecId != null) {
+      map['field_spec_id'] = Variable<int>(fieldSpecId);
+    }
+    return map;
+  }
+
+  FieldDataCompanion toCompanion(bool nullToAbsent) {
+    return FieldDataCompanion(
+      entryId: entryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryId),
+      fieldSpecId: fieldSpecId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fieldSpecId),
+    );
+  }
+
+  factory FieldDatumModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return FieldDatumModel(
+      entryId: serializer.fromJson<int>(json['entryId']),
+      fieldSpecId: serializer.fromJson<int>(json['fieldSpecId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'entryId': serializer.toJson<int>(entryId),
+      'fieldSpecId': serializer.toJson<int>(fieldSpecId),
+    };
+  }
+
+  FieldDatumModel copyWith({int entryId, int fieldSpecId}) => FieldDatumModel(
+        entryId: entryId ?? this.entryId,
+        fieldSpecId: fieldSpecId ?? this.fieldSpecId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('FieldDatumModel(')
+          ..write('entryId: $entryId, ')
+          ..write('fieldSpecId: $fieldSpecId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(entryId.hashCode, fieldSpecId.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is FieldDatumModel &&
+          other.entryId == this.entryId &&
+          other.fieldSpecId == this.fieldSpecId);
+}
+
+class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
+  final Value<int> entryId;
+  final Value<int> fieldSpecId;
+  const FieldDataCompanion({
+    this.entryId = const Value.absent(),
+    this.fieldSpecId = const Value.absent(),
+  });
+  FieldDataCompanion.insert({
+    @required int entryId,
+    @required int fieldSpecId,
+  })  : entryId = Value(entryId),
+        fieldSpecId = Value(fieldSpecId);
+  static Insertable<FieldDatumModel> custom({
+    Expression<int> entryId,
+    Expression<int> fieldSpecId,
+  }) {
+    return RawValuesInsertable({
+      if (entryId != null) 'entry_id': entryId,
+      if (fieldSpecId != null) 'field_spec_id': fieldSpecId,
+    });
+  }
+
+  FieldDataCompanion copyWith({Value<int> entryId, Value<int> fieldSpecId}) {
+    return FieldDataCompanion(
+      entryId: entryId ?? this.entryId,
+      fieldSpecId: fieldSpecId ?? this.fieldSpecId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (entryId.present) {
+      map['entry_id'] = Variable<int>(entryId.value);
+    }
+    if (fieldSpecId.present) {
+      map['field_spec_id'] = Variable<int>(fieldSpecId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FieldDataCompanion(')
+          ..write('entryId: $entryId, ')
+          ..write('fieldSpecId: $fieldSpecId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $FieldDataTable extends FieldData
+    with TableInfo<$FieldDataTable, FieldDatumModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $FieldDataTable(this._db, [this._alias]);
+  final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
+  GeneratedIntColumn _entryId;
+  @override
+  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  GeneratedIntColumn _constructEntryId() {
+    return GeneratedIntColumn('entry_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES entries(id)');
+  }
+
+  final VerificationMeta _fieldSpecIdMeta =
+      const VerificationMeta('fieldSpecId');
+  GeneratedIntColumn _fieldSpecId;
+  @override
+  GeneratedIntColumn get fieldSpecId =>
+      _fieldSpecId ??= _constructFieldSpecId();
+  GeneratedIntColumn _constructFieldSpecId() {
+    return GeneratedIntColumn('field_spec_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES field_specs(id)');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [entryId, fieldSpecId];
+  @override
+  $FieldDataTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'field_data';
+  @override
+  final String actualTableName = 'field_data';
+  @override
+  VerificationContext validateIntegrity(Insertable<FieldDatumModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('entry_id')) {
+      context.handle(_entryIdMeta,
+          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryIdMeta);
+    }
+    if (data.containsKey('field_spec_id')) {
+      context.handle(
+          _fieldSpecIdMeta,
+          fieldSpecId.isAcceptableOrUnknown(
+              data['field_spec_id'], _fieldSpecIdMeta));
+    } else if (isInserting) {
+      context.missing(_fieldSpecIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
+  @override
+  FieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return FieldDatumModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $FieldDataTable createAlias(String alias) {
+    return $FieldDataTable(_db, alias);
+  }
+}
+
+class ImageFieldDatumModel extends DataClass
+    implements Insertable<ImageFieldDatumModel> {
+  final int entryId;
+  final int fieldSpecId;
+  final int imageId;
+  ImageFieldDatumModel(
+      {@required this.entryId,
+      @required this.fieldSpecId,
+      @required this.imageId});
+  factory ImageFieldDatumModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    return ImageFieldDatumModel(
+      entryId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      fieldSpecId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
+      imageId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}image_id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || entryId != null) {
+      map['entry_id'] = Variable<int>(entryId);
+    }
+    if (!nullToAbsent || fieldSpecId != null) {
+      map['field_spec_id'] = Variable<int>(fieldSpecId);
+    }
+    if (!nullToAbsent || imageId != null) {
+      map['image_id'] = Variable<int>(imageId);
+    }
+    return map;
+  }
+
+  ImageFieldDataCompanion toCompanion(bool nullToAbsent) {
+    return ImageFieldDataCompanion(
+      entryId: entryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryId),
+      fieldSpecId: fieldSpecId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fieldSpecId),
+      imageId: imageId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imageId),
+    );
+  }
+
+  factory ImageFieldDatumModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return ImageFieldDatumModel(
+      entryId: serializer.fromJson<int>(json['entryId']),
+      fieldSpecId: serializer.fromJson<int>(json['fieldSpecId']),
+      imageId: serializer.fromJson<int>(json['imageId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'entryId': serializer.toJson<int>(entryId),
+      'fieldSpecId': serializer.toJson<int>(fieldSpecId),
+      'imageId': serializer.toJson<int>(imageId),
+    };
+  }
+
+  ImageFieldDatumModel copyWith({int entryId, int fieldSpecId, int imageId}) =>
+      ImageFieldDatumModel(
+        entryId: entryId ?? this.entryId,
+        fieldSpecId: fieldSpecId ?? this.fieldSpecId,
+        imageId: imageId ?? this.imageId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('ImageFieldDatumModel(')
+          ..write('entryId: $entryId, ')
+          ..write('fieldSpecId: $fieldSpecId, ')
+          ..write('imageId: $imageId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf(
+      $mrjc(entryId.hashCode, $mrjc(fieldSpecId.hashCode, imageId.hashCode)));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is ImageFieldDatumModel &&
+          other.entryId == this.entryId &&
+          other.fieldSpecId == this.fieldSpecId &&
+          other.imageId == this.imageId);
+}
+
+class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
+  final Value<int> entryId;
+  final Value<int> fieldSpecId;
+  final Value<int> imageId;
+  const ImageFieldDataCompanion({
+    this.entryId = const Value.absent(),
+    this.fieldSpecId = const Value.absent(),
+    this.imageId = const Value.absent(),
+  });
+  ImageFieldDataCompanion.insert({
+    @required int entryId,
+    @required int fieldSpecId,
+    @required int imageId,
+  })  : entryId = Value(entryId),
+        fieldSpecId = Value(fieldSpecId),
+        imageId = Value(imageId);
+  static Insertable<ImageFieldDatumModel> custom({
+    Expression<int> entryId,
+    Expression<int> fieldSpecId,
+    Expression<int> imageId,
+  }) {
+    return RawValuesInsertable({
+      if (entryId != null) 'entry_id': entryId,
+      if (fieldSpecId != null) 'field_spec_id': fieldSpecId,
+      if (imageId != null) 'image_id': imageId,
+    });
+  }
+
+  ImageFieldDataCompanion copyWith(
+      {Value<int> entryId, Value<int> fieldSpecId, Value<int> imageId}) {
+    return ImageFieldDataCompanion(
+      entryId: entryId ?? this.entryId,
+      fieldSpecId: fieldSpecId ?? this.fieldSpecId,
+      imageId: imageId ?? this.imageId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (entryId.present) {
+      map['entry_id'] = Variable<int>(entryId.value);
+    }
+    if (fieldSpecId.present) {
+      map['field_spec_id'] = Variable<int>(fieldSpecId.value);
+    }
+    if (imageId.present) {
+      map['image_id'] = Variable<int>(imageId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ImageFieldDataCompanion(')
+          ..write('entryId: $entryId, ')
+          ..write('fieldSpecId: $fieldSpecId, ')
+          ..write('imageId: $imageId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ImageFieldDataTable extends ImageFieldData
+    with TableInfo<$ImageFieldDataTable, ImageFieldDatumModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $ImageFieldDataTable(this._db, [this._alias]);
+  final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
+  GeneratedIntColumn _entryId;
+  @override
+  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  GeneratedIntColumn _constructEntryId() {
+    return GeneratedIntColumn(
+      'entry_id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _fieldSpecIdMeta =
+      const VerificationMeta('fieldSpecId');
+  GeneratedIntColumn _fieldSpecId;
+  @override
+  GeneratedIntColumn get fieldSpecId =>
+      _fieldSpecId ??= _constructFieldSpecId();
+  GeneratedIntColumn _constructFieldSpecId() {
+    return GeneratedIntColumn(
+      'field_spec_id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _imageIdMeta = const VerificationMeta('imageId');
+  GeneratedIntColumn _imageId;
+  @override
+  GeneratedIntColumn get imageId => _imageId ??= _constructImageId();
+  GeneratedIntColumn _constructImageId() {
+    return GeneratedIntColumn(
+      'image_id',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [entryId, fieldSpecId, imageId];
+  @override
+  $ImageFieldDataTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'image_field_data';
+  @override
+  final String actualTableName = 'image_field_data';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<ImageFieldDatumModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('entry_id')) {
+      context.handle(_entryIdMeta,
+          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryIdMeta);
+    }
+    if (data.containsKey('field_spec_id')) {
+      context.handle(
+          _fieldSpecIdMeta,
+          fieldSpecId.isAcceptableOrUnknown(
+              data['field_spec_id'], _fieldSpecIdMeta));
+    } else if (isInserting) {
+      context.missing(_fieldSpecIdMeta);
+    }
+    if (data.containsKey('image_id')) {
+      context.handle(_imageIdMeta,
+          imageId.isAcceptableOrUnknown(data['image_id'], _imageIdMeta));
+    } else if (isInserting) {
+      context.missing(_imageIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
+  @override
+  ImageFieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return ImageFieldDatumModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $ImageFieldDataTable createAlias(String alias) {
+    return $ImageFieldDataTable(_db, alias);
+  }
+}
+
 class TagModel extends DataClass implements Insertable<TagModel> {
   final int id;
   final String name;
@@ -1277,6 +1732,264 @@ class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
   }
 }
 
+class TextFieldDatumModel extends DataClass
+    implements Insertable<TextFieldDatumModel> {
+  final int entryId;
+  final int fieldSpecId;
+  final String rawText;
+  TextFieldDatumModel(
+      {@required this.entryId,
+      @required this.fieldSpecId,
+      @required this.rawText});
+  factory TextFieldDatumModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return TextFieldDatumModel(
+      entryId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      fieldSpecId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
+      rawText: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}raw_text']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || entryId != null) {
+      map['entry_id'] = Variable<int>(entryId);
+    }
+    if (!nullToAbsent || fieldSpecId != null) {
+      map['field_spec_id'] = Variable<int>(fieldSpecId);
+    }
+    if (!nullToAbsent || rawText != null) {
+      map['raw_text'] = Variable<String>(rawText);
+    }
+    return map;
+  }
+
+  TextFieldDataCompanion toCompanion(bool nullToAbsent) {
+    return TextFieldDataCompanion(
+      entryId: entryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryId),
+      fieldSpecId: fieldSpecId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fieldSpecId),
+      rawText: rawText == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rawText),
+    );
+  }
+
+  factory TextFieldDatumModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return TextFieldDatumModel(
+      entryId: serializer.fromJson<int>(json['entryId']),
+      fieldSpecId: serializer.fromJson<int>(json['fieldSpecId']),
+      rawText: serializer.fromJson<String>(json['rawText']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'entryId': serializer.toJson<int>(entryId),
+      'fieldSpecId': serializer.toJson<int>(fieldSpecId),
+      'rawText': serializer.toJson<String>(rawText),
+    };
+  }
+
+  TextFieldDatumModel copyWith(
+          {int entryId, int fieldSpecId, String rawText}) =>
+      TextFieldDatumModel(
+        entryId: entryId ?? this.entryId,
+        fieldSpecId: fieldSpecId ?? this.fieldSpecId,
+        rawText: rawText ?? this.rawText,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('TextFieldDatumModel(')
+          ..write('entryId: $entryId, ')
+          ..write('fieldSpecId: $fieldSpecId, ')
+          ..write('rawText: $rawText')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf(
+      $mrjc(entryId.hashCode, $mrjc(fieldSpecId.hashCode, rawText.hashCode)));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is TextFieldDatumModel &&
+          other.entryId == this.entryId &&
+          other.fieldSpecId == this.fieldSpecId &&
+          other.rawText == this.rawText);
+}
+
+class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
+  final Value<int> entryId;
+  final Value<int> fieldSpecId;
+  final Value<String> rawText;
+  const TextFieldDataCompanion({
+    this.entryId = const Value.absent(),
+    this.fieldSpecId = const Value.absent(),
+    this.rawText = const Value.absent(),
+  });
+  TextFieldDataCompanion.insert({
+    @required int entryId,
+    @required int fieldSpecId,
+    @required String rawText,
+  })  : entryId = Value(entryId),
+        fieldSpecId = Value(fieldSpecId),
+        rawText = Value(rawText);
+  static Insertable<TextFieldDatumModel> custom({
+    Expression<int> entryId,
+    Expression<int> fieldSpecId,
+    Expression<String> rawText,
+  }) {
+    return RawValuesInsertable({
+      if (entryId != null) 'entry_id': entryId,
+      if (fieldSpecId != null) 'field_spec_id': fieldSpecId,
+      if (rawText != null) 'raw_text': rawText,
+    });
+  }
+
+  TextFieldDataCompanion copyWith(
+      {Value<int> entryId, Value<int> fieldSpecId, Value<String> rawText}) {
+    return TextFieldDataCompanion(
+      entryId: entryId ?? this.entryId,
+      fieldSpecId: fieldSpecId ?? this.fieldSpecId,
+      rawText: rawText ?? this.rawText,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (entryId.present) {
+      map['entry_id'] = Variable<int>(entryId.value);
+    }
+    if (fieldSpecId.present) {
+      map['field_spec_id'] = Variable<int>(fieldSpecId.value);
+    }
+    if (rawText.present) {
+      map['raw_text'] = Variable<String>(rawText.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TextFieldDataCompanion(')
+          ..write('entryId: $entryId, ')
+          ..write('fieldSpecId: $fieldSpecId, ')
+          ..write('rawText: $rawText')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TextFieldDataTable extends TextFieldData
+    with TableInfo<$TextFieldDataTable, TextFieldDatumModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $TextFieldDataTable(this._db, [this._alias]);
+  final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
+  GeneratedIntColumn _entryId;
+  @override
+  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  GeneratedIntColumn _constructEntryId() {
+    return GeneratedIntColumn(
+      'entry_id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _fieldSpecIdMeta =
+      const VerificationMeta('fieldSpecId');
+  GeneratedIntColumn _fieldSpecId;
+  @override
+  GeneratedIntColumn get fieldSpecId =>
+      _fieldSpecId ??= _constructFieldSpecId();
+  GeneratedIntColumn _constructFieldSpecId() {
+    return GeneratedIntColumn(
+      'field_spec_id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _rawTextMeta = const VerificationMeta('rawText');
+  GeneratedTextColumn _rawText;
+  @override
+  GeneratedTextColumn get rawText => _rawText ??= _constructRawText();
+  GeneratedTextColumn _constructRawText() {
+    return GeneratedTextColumn(
+      'raw_text',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [entryId, fieldSpecId, rawText];
+  @override
+  $TextFieldDataTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'text_field_data';
+  @override
+  final String actualTableName = 'text_field_data';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<TextFieldDatumModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('entry_id')) {
+      context.handle(_entryIdMeta,
+          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryIdMeta);
+    }
+    if (data.containsKey('field_spec_id')) {
+      context.handle(
+          _fieldSpecIdMeta,
+          fieldSpecId.isAcceptableOrUnknown(
+              data['field_spec_id'], _fieldSpecIdMeta));
+    } else if (isInserting) {
+      context.missing(_fieldSpecIdMeta);
+    }
+    if (data.containsKey('raw_text')) {
+      context.handle(_rawTextMeta,
+          rawText.isAcceptableOrUnknown(data['raw_text'], _rawTextMeta));
+    } else if (isInserting) {
+      context.missing(_rawTextMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
+  @override
+  TextFieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return TextFieldDatumModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $TextFieldDataTable createAlias(String alias) {
+    return $TextFieldDataTable(_db, alias);
+  }
+}
+
 abstract class _$MoorDatabase extends GeneratedDatabase {
   _$MoorDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $CardsTable _cards;
@@ -1287,11 +2000,27 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $EntriesTable get entries => _entries ??= $EntriesTable(this);
   $EntriesTagsTable _entriesTags;
   $EntriesTagsTable get entriesTags => _entriesTags ??= $EntriesTagsTable(this);
+  $FieldDataTable _fieldData;
+  $FieldDataTable get fieldData => _fieldData ??= $FieldDataTable(this);
+  $ImageFieldDataTable _imageFieldData;
+  $ImageFieldDataTable get imageFieldData =>
+      _imageFieldData ??= $ImageFieldDataTable(this);
   $TagsTable _tags;
   $TagsTable get tags => _tags ??= $TagsTable(this);
+  $TextFieldDataTable _textFieldData;
+  $TextFieldDataTable get textFieldData =>
+      _textFieldData ??= $TextFieldDataTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [cards, decks, entries, entriesTags, tags];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        cards,
+        decks,
+        entries,
+        entriesTags,
+        fieldData,
+        imageFieldData,
+        tags,
+        textFieldData
+      ];
 }
