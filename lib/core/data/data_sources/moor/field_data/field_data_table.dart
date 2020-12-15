@@ -29,6 +29,10 @@ class FieldData extends Table {
         'NOT NULL REFERENCES field_specs(id)',
       )();
 
+  // TODO(cervonwong): 15/12/2020 Check that the fieldSpec of fieldSpecId is
+  //  contained within the entry of entryId's entryType of entryTypeId's
+  //  fieldSpecs from their entryTypeIds.
+
   @override
   Set<Column> get primaryKey => {entryId, fieldSpecId};
 }
