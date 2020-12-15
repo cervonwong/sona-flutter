@@ -26,6 +26,7 @@ import 'field_data/field_data_table.dart';
 import 'field_data/image_field_data/image_field_data_table.dart';
 import 'field_data/text_field_data/text_field_data_table.dart';
 import 'field_specs/field_specs_table.dart';
+import 'field_types/field_types_table.dart';
 import 'tags/tags_table.dart';
 
 export 'cards/cards_table.dart';
@@ -37,6 +38,7 @@ export 'field_data/field_data_table.dart';
 export 'field_data/image_field_data/image_field_data_table.dart';
 export 'field_data/text_field_data/text_field_data_table.dart';
 export 'field_specs/field_specs_table.dart';
+export 'field_types/field_types_table.dart';
 export 'tags/tags_table.dart';
 
 const List<Type> kTables = [
@@ -47,6 +49,7 @@ const List<Type> kTables = [
   EntryTypes,
   FieldData,
   FieldSpecs,
+  FieldTypes,
   ImageFieldData,
   Tags,
   TextFieldData,

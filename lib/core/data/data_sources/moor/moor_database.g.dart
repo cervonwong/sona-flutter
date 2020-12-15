@@ -1768,6 +1768,195 @@ class $FieldSpecsTable extends FieldSpecs
   }
 }
 
+class FieldTypeModel extends DataClass implements Insertable<FieldTypeModel> {
+  final int id;
+  final String name;
+  FieldTypeModel({@required this.id, @required this.name});
+  factory FieldTypeModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return FieldTypeModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    return map;
+  }
+
+  FieldTypesCompanion toCompanion(bool nullToAbsent) {
+    return FieldTypesCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+    );
+  }
+
+  factory FieldTypeModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return FieldTypeModel(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  FieldTypeModel copyWith({int id, String name}) => FieldTypeModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('FieldTypeModel(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is FieldTypeModel &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class FieldTypesCompanion extends UpdateCompanion<FieldTypeModel> {
+  final Value<int> id;
+  final Value<String> name;
+  const FieldTypesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  FieldTypesCompanion.insert({
+    this.id = const Value.absent(),
+    @required String name,
+  }) : name = Value(name);
+  static Insertable<FieldTypeModel> custom({
+    Expression<int> id,
+    Expression<String> name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  FieldTypesCompanion copyWith({Value<int> id, Value<String> name}) {
+    return FieldTypesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FieldTypesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $FieldTypesTable extends FieldTypes
+    with TableInfo<$FieldTypesTable, FieldTypeModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $FieldTypesTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn('name', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  $FieldTypesTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'field_types';
+  @override
+  final String actualTableName = 'field_types';
+  @override
+  VerificationContext validateIntegrity(Insertable<FieldTypeModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FieldTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return FieldTypeModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $FieldTypesTable createAlias(String alias) {
+    return $FieldTypesTable(_db, alias);
+  }
+}
+
 class ImageFieldDatumModel extends DataClass
     implements Insertable<ImageFieldDatumModel> {
   final int entryId;
@@ -2480,6 +2669,8 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $FieldDataTable get fieldData => _fieldData ??= $FieldDataTable(this);
   $FieldSpecsTable _fieldSpecs;
   $FieldSpecsTable get fieldSpecs => _fieldSpecs ??= $FieldSpecsTable(this);
+  $FieldTypesTable _fieldTypes;
+  $FieldTypesTable get fieldTypes => _fieldTypes ??= $FieldTypesTable(this);
   $ImageFieldDataTable _imageFieldData;
   $ImageFieldDataTable get imageFieldData =>
       _imageFieldData ??= $ImageFieldDataTable(this);
@@ -2499,6 +2690,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         entryTypes,
         fieldData,
         fieldSpecs,
+        fieldTypes,
         imageFieldData,
         tags,
         textFieldData
