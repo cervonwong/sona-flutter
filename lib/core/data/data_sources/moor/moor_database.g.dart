@@ -1480,6 +1480,294 @@ class $FieldDataTable extends FieldData
   }
 }
 
+class FieldSpecModel extends DataClass implements Insertable<FieldSpecModel> {
+  final int id;
+  final int fieldTypeId;
+  final int entryTypeId;
+  final String name;
+  FieldSpecModel(
+      {@required this.id,
+      @required this.fieldTypeId,
+      @required this.entryTypeId,
+      @required this.name});
+  factory FieldSpecModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return FieldSpecModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      fieldTypeId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_type_id']),
+      entryTypeId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || fieldTypeId != null) {
+      map['field_type_id'] = Variable<int>(fieldTypeId);
+    }
+    if (!nullToAbsent || entryTypeId != null) {
+      map['entry_type_id'] = Variable<int>(entryTypeId);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    return map;
+  }
+
+  FieldSpecsCompanion toCompanion(bool nullToAbsent) {
+    return FieldSpecsCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      fieldTypeId: fieldTypeId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fieldTypeId),
+      entryTypeId: entryTypeId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryTypeId),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+    );
+  }
+
+  factory FieldSpecModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return FieldSpecModel(
+      id: serializer.fromJson<int>(json['id']),
+      fieldTypeId: serializer.fromJson<int>(json['fieldTypeId']),
+      entryTypeId: serializer.fromJson<int>(json['entryTypeId']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'fieldTypeId': serializer.toJson<int>(fieldTypeId),
+      'entryTypeId': serializer.toJson<int>(entryTypeId),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  FieldSpecModel copyWith(
+          {int id, int fieldTypeId, int entryTypeId, String name}) =>
+      FieldSpecModel(
+        id: id ?? this.id,
+        fieldTypeId: fieldTypeId ?? this.fieldTypeId,
+        entryTypeId: entryTypeId ?? this.entryTypeId,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('FieldSpecModel(')
+          ..write('id: $id, ')
+          ..write('fieldTypeId: $fieldTypeId, ')
+          ..write('entryTypeId: $entryTypeId, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode,
+      $mrjc(fieldTypeId.hashCode, $mrjc(entryTypeId.hashCode, name.hashCode))));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is FieldSpecModel &&
+          other.id == this.id &&
+          other.fieldTypeId == this.fieldTypeId &&
+          other.entryTypeId == this.entryTypeId &&
+          other.name == this.name);
+}
+
+class FieldSpecsCompanion extends UpdateCompanion<FieldSpecModel> {
+  final Value<int> id;
+  final Value<int> fieldTypeId;
+  final Value<int> entryTypeId;
+  final Value<String> name;
+  const FieldSpecsCompanion({
+    this.id = const Value.absent(),
+    this.fieldTypeId = const Value.absent(),
+    this.entryTypeId = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  FieldSpecsCompanion.insert({
+    this.id = const Value.absent(),
+    @required int fieldTypeId,
+    @required int entryTypeId,
+    @required String name,
+  })  : fieldTypeId = Value(fieldTypeId),
+        entryTypeId = Value(entryTypeId),
+        name = Value(name);
+  static Insertable<FieldSpecModel> custom({
+    Expression<int> id,
+    Expression<int> fieldTypeId,
+    Expression<int> entryTypeId,
+    Expression<String> name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (fieldTypeId != null) 'field_type_id': fieldTypeId,
+      if (entryTypeId != null) 'entry_type_id': entryTypeId,
+      if (name != null) 'name': name,
+    });
+  }
+
+  FieldSpecsCompanion copyWith(
+      {Value<int> id,
+      Value<int> fieldTypeId,
+      Value<int> entryTypeId,
+      Value<String> name}) {
+    return FieldSpecsCompanion(
+      id: id ?? this.id,
+      fieldTypeId: fieldTypeId ?? this.fieldTypeId,
+      entryTypeId: entryTypeId ?? this.entryTypeId,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (fieldTypeId.present) {
+      map['field_type_id'] = Variable<int>(fieldTypeId.value);
+    }
+    if (entryTypeId.present) {
+      map['entry_type_id'] = Variable<int>(entryTypeId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FieldSpecsCompanion(')
+          ..write('id: $id, ')
+          ..write('fieldTypeId: $fieldTypeId, ')
+          ..write('entryTypeId: $entryTypeId, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $FieldSpecsTable extends FieldSpecs
+    with TableInfo<$FieldSpecsTable, FieldSpecModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $FieldSpecsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _fieldTypeIdMeta =
+      const VerificationMeta('fieldTypeId');
+  GeneratedIntColumn _fieldTypeId;
+  @override
+  GeneratedIntColumn get fieldTypeId =>
+      _fieldTypeId ??= _constructFieldTypeId();
+  GeneratedIntColumn _constructFieldTypeId() {
+    return GeneratedIntColumn('field_type_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES field_types(id)');
+  }
+
+  final VerificationMeta _entryTypeIdMeta =
+      const VerificationMeta('entryTypeId');
+  GeneratedIntColumn _entryTypeId;
+  @override
+  GeneratedIntColumn get entryTypeId =>
+      _entryTypeId ??= _constructEntryTypeId();
+  GeneratedIntColumn _constructEntryTypeId() {
+    return GeneratedIntColumn('entry_type_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn(
+      'name',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, fieldTypeId, entryTypeId, name];
+  @override
+  $FieldSpecsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'field_specs';
+  @override
+  final String actualTableName = 'field_specs';
+  @override
+  VerificationContext validateIntegrity(Insertable<FieldSpecModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('field_type_id')) {
+      context.handle(
+          _fieldTypeIdMeta,
+          fieldTypeId.isAcceptableOrUnknown(
+              data['field_type_id'], _fieldTypeIdMeta));
+    } else if (isInserting) {
+      context.missing(_fieldTypeIdMeta);
+    }
+    if (data.containsKey('entry_type_id')) {
+      context.handle(
+          _entryTypeIdMeta,
+          entryTypeId.isAcceptableOrUnknown(
+              data['entry_type_id'], _entryTypeIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryTypeIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FieldSpecModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return FieldSpecModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $FieldSpecsTable createAlias(String alias) {
+    return $FieldSpecsTable(_db, alias);
+  }
+}
+
 class ImageFieldDatumModel extends DataClass
     implements Insertable<ImageFieldDatumModel> {
   final int entryId;
@@ -2190,6 +2478,8 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $EntryTypesTable get entryTypes => _entryTypes ??= $EntryTypesTable(this);
   $FieldDataTable _fieldData;
   $FieldDataTable get fieldData => _fieldData ??= $FieldDataTable(this);
+  $FieldSpecsTable _fieldSpecs;
+  $FieldSpecsTable get fieldSpecs => _fieldSpecs ??= $FieldSpecsTable(this);
   $ImageFieldDataTable _imageFieldData;
   $ImageFieldDataTable get imageFieldData =>
       _imageFieldData ??= $ImageFieldDataTable(this);
@@ -2208,6 +2498,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         entriesTags,
         entryTypes,
         fieldData,
+        fieldSpecs,
         imageFieldData,
         tags,
         textFieldData
