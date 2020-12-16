@@ -20,7 +20,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/color_constants.dart';
+import 'constants/color_constants.dart';
 
 class ColorNotifier extends ChangeNotifier {
   ColorTheme _theme;

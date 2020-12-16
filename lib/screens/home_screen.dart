@@ -20,8 +20,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
-import '../core/constants/color_constants.dart';
-import '../core/constants/widget_constants.dart';
+import '../core/presentation/constants/color_constants.dart';
+import '../core/presentation/constants/widget_constants.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
 
