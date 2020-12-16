@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'card_formats/card_formats_table.dart';
 import 'cards/cards_table.dart';
 import 'decks/decks_table.dart';
 import 'entries/entries_table.dart';
@@ -29,6 +30,7 @@ import 'field_specs/field_specs_table.dart';
 import 'field_types/field_types_table.dart';
 import 'tags/tags_table.dart';
 
+export 'card_formats/card_formats_table.dart';
 export 'cards/cards_table.dart';
 export 'decks/decks_table.dart';
 export 'entries/entries_table.dart';
@@ -43,6 +45,7 @@ export 'tags/tags_table.dart';
 
 const List<Type> kTables = [
   Cards,
+  CardFormats,
   Decks,
   Entries,
   EntriesTags,

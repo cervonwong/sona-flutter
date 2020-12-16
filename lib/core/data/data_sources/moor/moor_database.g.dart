@@ -289,6 +289,356 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   }
 }
 
+class CardFormatModel extends DataClass implements Insertable<CardFormatModel> {
+  final int entryTypeId;
+  final int position;
+  final String name;
+  final int frontStructureId;
+  final int backStructureId;
+  CardFormatModel(
+      {@required this.entryTypeId,
+      @required this.position,
+      @required this.name,
+      @required this.frontStructureId,
+      @required this.backStructureId});
+  factory CardFormatModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return CardFormatModel(
+      entryTypeId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
+      position:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      frontStructureId: intType.mapFromDatabaseResponse(
+          data['${effectivePrefix}front_structure_id']),
+      backStructureId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}back_structure_id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || entryTypeId != null) {
+      map['entry_type_id'] = Variable<int>(entryTypeId);
+    }
+    if (!nullToAbsent || position != null) {
+      map['position'] = Variable<int>(position);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    if (!nullToAbsent || frontStructureId != null) {
+      map['front_structure_id'] = Variable<int>(frontStructureId);
+    }
+    if (!nullToAbsent || backStructureId != null) {
+      map['back_structure_id'] = Variable<int>(backStructureId);
+    }
+    return map;
+  }
+
+  CardFormatsCompanion toCompanion(bool nullToAbsent) {
+    return CardFormatsCompanion(
+      entryTypeId: entryTypeId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(entryTypeId),
+      position: position == null && nullToAbsent
+          ? const Value.absent()
+          : Value(position),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      frontStructureId: frontStructureId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(frontStructureId),
+      backStructureId: backStructureId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(backStructureId),
+    );
+  }
+
+  factory CardFormatModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return CardFormatModel(
+      entryTypeId: serializer.fromJson<int>(json['entryTypeId']),
+      position: serializer.fromJson<int>(json['position']),
+      name: serializer.fromJson<String>(json['name']),
+      frontStructureId: serializer.fromJson<int>(json['frontStructureId']),
+      backStructureId: serializer.fromJson<int>(json['backStructureId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'entryTypeId': serializer.toJson<int>(entryTypeId),
+      'position': serializer.toJson<int>(position),
+      'name': serializer.toJson<String>(name),
+      'frontStructureId': serializer.toJson<int>(frontStructureId),
+      'backStructureId': serializer.toJson<int>(backStructureId),
+    };
+  }
+
+  CardFormatModel copyWith(
+          {int entryTypeId,
+          int position,
+          String name,
+          int frontStructureId,
+          int backStructureId}) =>
+      CardFormatModel(
+        entryTypeId: entryTypeId ?? this.entryTypeId,
+        position: position ?? this.position,
+        name: name ?? this.name,
+        frontStructureId: frontStructureId ?? this.frontStructureId,
+        backStructureId: backStructureId ?? this.backStructureId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('CardFormatModel(')
+          ..write('entryTypeId: $entryTypeId, ')
+          ..write('position: $position, ')
+          ..write('name: $name, ')
+          ..write('frontStructureId: $frontStructureId, ')
+          ..write('backStructureId: $backStructureId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      entryTypeId.hashCode,
+      $mrjc(
+          position.hashCode,
+          $mrjc(name.hashCode,
+              $mrjc(frontStructureId.hashCode, backStructureId.hashCode)))));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is CardFormatModel &&
+          other.entryTypeId == this.entryTypeId &&
+          other.position == this.position &&
+          other.name == this.name &&
+          other.frontStructureId == this.frontStructureId &&
+          other.backStructureId == this.backStructureId);
+}
+
+class CardFormatsCompanion extends UpdateCompanion<CardFormatModel> {
+  final Value<int> entryTypeId;
+  final Value<int> position;
+  final Value<String> name;
+  final Value<int> frontStructureId;
+  final Value<int> backStructureId;
+  const CardFormatsCompanion({
+    this.entryTypeId = const Value.absent(),
+    this.position = const Value.absent(),
+    this.name = const Value.absent(),
+    this.frontStructureId = const Value.absent(),
+    this.backStructureId = const Value.absent(),
+  });
+  CardFormatsCompanion.insert({
+    @required int entryTypeId,
+    @required int position,
+    @required String name,
+    @required int frontStructureId,
+    @required int backStructureId,
+  })  : entryTypeId = Value(entryTypeId),
+        position = Value(position),
+        name = Value(name),
+        frontStructureId = Value(frontStructureId),
+        backStructureId = Value(backStructureId);
+  static Insertable<CardFormatModel> custom({
+    Expression<int> entryTypeId,
+    Expression<int> position,
+    Expression<String> name,
+    Expression<int> frontStructureId,
+    Expression<int> backStructureId,
+  }) {
+    return RawValuesInsertable({
+      if (entryTypeId != null) 'entry_type_id': entryTypeId,
+      if (position != null) 'position': position,
+      if (name != null) 'name': name,
+      if (frontStructureId != null) 'front_structure_id': frontStructureId,
+      if (backStructureId != null) 'back_structure_id': backStructureId,
+    });
+  }
+
+  CardFormatsCompanion copyWith(
+      {Value<int> entryTypeId,
+      Value<int> position,
+      Value<String> name,
+      Value<int> frontStructureId,
+      Value<int> backStructureId}) {
+    return CardFormatsCompanion(
+      entryTypeId: entryTypeId ?? this.entryTypeId,
+      position: position ?? this.position,
+      name: name ?? this.name,
+      frontStructureId: frontStructureId ?? this.frontStructureId,
+      backStructureId: backStructureId ?? this.backStructureId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (entryTypeId.present) {
+      map['entry_type_id'] = Variable<int>(entryTypeId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (frontStructureId.present) {
+      map['front_structure_id'] = Variable<int>(frontStructureId.value);
+    }
+    if (backStructureId.present) {
+      map['back_structure_id'] = Variable<int>(backStructureId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CardFormatsCompanion(')
+          ..write('entryTypeId: $entryTypeId, ')
+          ..write('position: $position, ')
+          ..write('name: $name, ')
+          ..write('frontStructureId: $frontStructureId, ')
+          ..write('backStructureId: $backStructureId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CardFormatsTable extends CardFormats
+    with TableInfo<$CardFormatsTable, CardFormatModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $CardFormatsTable(this._db, [this._alias]);
+  final VerificationMeta _entryTypeIdMeta =
+      const VerificationMeta('entryTypeId');
+  GeneratedIntColumn _entryTypeId;
+  @override
+  GeneratedIntColumn get entryTypeId =>
+      _entryTypeId ??= _constructEntryTypeId();
+  GeneratedIntColumn _constructEntryTypeId() {
+    return GeneratedIntColumn('entry_type_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
+  }
+
+  final VerificationMeta _positionMeta = const VerificationMeta('position');
+  GeneratedIntColumn _position;
+  @override
+  GeneratedIntColumn get position => _position ??= _constructPosition();
+  GeneratedIntColumn _constructPosition() {
+    return GeneratedIntColumn('position', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn(
+      'name',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _frontStructureIdMeta =
+      const VerificationMeta('frontStructureId');
+  GeneratedIntColumn _frontStructureId;
+  @override
+  GeneratedIntColumn get frontStructureId =>
+      _frontStructureId ??= _constructFrontStructureId();
+  GeneratedIntColumn _constructFrontStructureId() {
+    return GeneratedIntColumn('front_structure_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES structures(id)');
+  }
+
+  final VerificationMeta _backStructureIdMeta =
+      const VerificationMeta('backStructureId');
+  GeneratedIntColumn _backStructureId;
+  @override
+  GeneratedIntColumn get backStructureId =>
+      _backStructureId ??= _constructBackStructureId();
+  GeneratedIntColumn _constructBackStructureId() {
+    return GeneratedIntColumn('back_structure_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES structures(id)');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns =>
+      [entryTypeId, position, name, frontStructureId, backStructureId];
+  @override
+  $CardFormatsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'card_formats';
+  @override
+  final String actualTableName = 'card_formats';
+  @override
+  VerificationContext validateIntegrity(Insertable<CardFormatModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('entry_type_id')) {
+      context.handle(
+          _entryTypeIdMeta,
+          entryTypeId.isAcceptableOrUnknown(
+              data['entry_type_id'], _entryTypeIdMeta));
+    } else if (isInserting) {
+      context.missing(_entryTypeIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+    } else if (isInserting) {
+      context.missing(_positionMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('front_structure_id')) {
+      context.handle(
+          _frontStructureIdMeta,
+          frontStructureId.isAcceptableOrUnknown(
+              data['front_structure_id'], _frontStructureIdMeta));
+    } else if (isInserting) {
+      context.missing(_frontStructureIdMeta);
+    }
+    if (data.containsKey('back_structure_id')) {
+      context.handle(
+          _backStructureIdMeta,
+          backStructureId.isAcceptableOrUnknown(
+              data['back_structure_id'], _backStructureIdMeta));
+    } else if (isInserting) {
+      context.missing(_backStructureIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {entryTypeId, position};
+  @override
+  CardFormatModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return CardFormatModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $CardFormatsTable createAlias(String alias) {
+    return $CardFormatsTable(_db, alias);
+  }
+}
+
 class DeckModel extends DataClass implements Insertable<DeckModel> {
   final int id;
   final String name;
@@ -2657,6 +3007,8 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   _$MoorDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $CardsTable _cards;
   $CardsTable get cards => _cards ??= $CardsTable(this);
+  $CardFormatsTable _cardFormats;
+  $CardFormatsTable get cardFormats => _cardFormats ??= $CardFormatsTable(this);
   $DecksTable _decks;
   $DecksTable get decks => _decks ??= $DecksTable(this);
   $EntriesTable _entries;
@@ -2684,6 +3036,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
         cards,
+        cardFormats,
         decks,
         entries,
         entriesTags,
