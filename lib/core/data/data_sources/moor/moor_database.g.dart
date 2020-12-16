@@ -3332,6 +3332,613 @@ class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
   }
 }
 
+class TextComponentModel extends DataClass
+    implements Insertable<TextComponentModel> {
+  final int structureId;
+  final int position;
+  final String data;
+  final double size;
+  final int alignmentId;
+  final int fillColorId;
+  final int highlightColorId;
+  final bool bold;
+  final bool italic;
+  final bool underlined;
+  TextComponentModel(
+      {@required this.structureId,
+      @required this.position,
+      @required this.data,
+      @required this.size,
+      @required this.alignmentId,
+      @required this.fillColorId,
+      @required this.highlightColorId,
+      @required this.bold,
+      @required this.italic,
+      @required this.underlined});
+  factory TextComponentModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    final doubleType = db.typeSystem.forDartType<double>();
+    final boolType = db.typeSystem.forDartType<bool>();
+    return TextComponentModel(
+      structureId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
+      position:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      data: stringType.mapFromDatabaseResponse(data['${effectivePrefix}data']),
+      size: doubleType.mapFromDatabaseResponse(data['${effectivePrefix}size']),
+      alignmentId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}alignment_id']),
+      fillColorId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}fill_color_id']),
+      highlightColorId: intType.mapFromDatabaseResponse(
+          data['${effectivePrefix}highlight_color_id']),
+      bold: boolType.mapFromDatabaseResponse(data['${effectivePrefix}bold']),
+      italic:
+          boolType.mapFromDatabaseResponse(data['${effectivePrefix}italic']),
+      underlined: boolType
+          .mapFromDatabaseResponse(data['${effectivePrefix}underlined']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || structureId != null) {
+      map['structure_id'] = Variable<int>(structureId);
+    }
+    if (!nullToAbsent || position != null) {
+      map['position'] = Variable<int>(position);
+    }
+    if (!nullToAbsent || data != null) {
+      map['data'] = Variable<String>(data);
+    }
+    if (!nullToAbsent || size != null) {
+      map['size'] = Variable<double>(size);
+    }
+    if (!nullToAbsent || alignmentId != null) {
+      map['alignment_id'] = Variable<int>(alignmentId);
+    }
+    if (!nullToAbsent || fillColorId != null) {
+      map['fill_color_id'] = Variable<int>(fillColorId);
+    }
+    if (!nullToAbsent || highlightColorId != null) {
+      map['highlight_color_id'] = Variable<int>(highlightColorId);
+    }
+    if (!nullToAbsent || bold != null) {
+      map['bold'] = Variable<bool>(bold);
+    }
+    if (!nullToAbsent || italic != null) {
+      map['italic'] = Variable<bool>(italic);
+    }
+    if (!nullToAbsent || underlined != null) {
+      map['underlined'] = Variable<bool>(underlined);
+    }
+    return map;
+  }
+
+  TextComponentsCompanion toCompanion(bool nullToAbsent) {
+    return TextComponentsCompanion(
+      structureId: structureId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(structureId),
+      position: position == null && nullToAbsent
+          ? const Value.absent()
+          : Value(position),
+      data: data == null && nullToAbsent ? const Value.absent() : Value(data),
+      size: size == null && nullToAbsent ? const Value.absent() : Value(size),
+      alignmentId: alignmentId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(alignmentId),
+      fillColorId: fillColorId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fillColorId),
+      highlightColorId: highlightColorId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(highlightColorId),
+      bold: bold == null && nullToAbsent ? const Value.absent() : Value(bold),
+      italic:
+          italic == null && nullToAbsent ? const Value.absent() : Value(italic),
+      underlined: underlined == null && nullToAbsent
+          ? const Value.absent()
+          : Value(underlined),
+    );
+  }
+
+  factory TextComponentModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return TextComponentModel(
+      structureId: serializer.fromJson<int>(json['structureId']),
+      position: serializer.fromJson<int>(json['position']),
+      data: serializer.fromJson<String>(json['data']),
+      size: serializer.fromJson<double>(json['size']),
+      alignmentId: serializer.fromJson<int>(json['alignmentId']),
+      fillColorId: serializer.fromJson<int>(json['fillColorId']),
+      highlightColorId: serializer.fromJson<int>(json['highlightColorId']),
+      bold: serializer.fromJson<bool>(json['bold']),
+      italic: serializer.fromJson<bool>(json['italic']),
+      underlined: serializer.fromJson<bool>(json['underlined']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'structureId': serializer.toJson<int>(structureId),
+      'position': serializer.toJson<int>(position),
+      'data': serializer.toJson<String>(data),
+      'size': serializer.toJson<double>(size),
+      'alignmentId': serializer.toJson<int>(alignmentId),
+      'fillColorId': serializer.toJson<int>(fillColorId),
+      'highlightColorId': serializer.toJson<int>(highlightColorId),
+      'bold': serializer.toJson<bool>(bold),
+      'italic': serializer.toJson<bool>(italic),
+      'underlined': serializer.toJson<bool>(underlined),
+    };
+  }
+
+  TextComponentModel copyWith(
+          {int structureId,
+          int position,
+          String data,
+          double size,
+          int alignmentId,
+          int fillColorId,
+          int highlightColorId,
+          bool bold,
+          bool italic,
+          bool underlined}) =>
+      TextComponentModel(
+        structureId: structureId ?? this.structureId,
+        position: position ?? this.position,
+        data: data ?? this.data,
+        size: size ?? this.size,
+        alignmentId: alignmentId ?? this.alignmentId,
+        fillColorId: fillColorId ?? this.fillColorId,
+        highlightColorId: highlightColorId ?? this.highlightColorId,
+        bold: bold ?? this.bold,
+        italic: italic ?? this.italic,
+        underlined: underlined ?? this.underlined,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('TextComponentModel(')
+          ..write('structureId: $structureId, ')
+          ..write('position: $position, ')
+          ..write('data: $data, ')
+          ..write('size: $size, ')
+          ..write('alignmentId: $alignmentId, ')
+          ..write('fillColorId: $fillColorId, ')
+          ..write('highlightColorId: $highlightColorId, ')
+          ..write('bold: $bold, ')
+          ..write('italic: $italic, ')
+          ..write('underlined: $underlined')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      structureId.hashCode,
+      $mrjc(
+          position.hashCode,
+          $mrjc(
+              data.hashCode,
+              $mrjc(
+                  size.hashCode,
+                  $mrjc(
+                      alignmentId.hashCode,
+                      $mrjc(
+                          fillColorId.hashCode,
+                          $mrjc(
+                              highlightColorId.hashCode,
+                              $mrjc(
+                                  bold.hashCode,
+                                  $mrjc(italic.hashCode,
+                                      underlined.hashCode))))))))));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is TextComponentModel &&
+          other.structureId == this.structureId &&
+          other.position == this.position &&
+          other.data == this.data &&
+          other.size == this.size &&
+          other.alignmentId == this.alignmentId &&
+          other.fillColorId == this.fillColorId &&
+          other.highlightColorId == this.highlightColorId &&
+          other.bold == this.bold &&
+          other.italic == this.italic &&
+          other.underlined == this.underlined);
+}
+
+class TextComponentsCompanion extends UpdateCompanion<TextComponentModel> {
+  final Value<int> structureId;
+  final Value<int> position;
+  final Value<String> data;
+  final Value<double> size;
+  final Value<int> alignmentId;
+  final Value<int> fillColorId;
+  final Value<int> highlightColorId;
+  final Value<bool> bold;
+  final Value<bool> italic;
+  final Value<bool> underlined;
+  const TextComponentsCompanion({
+    this.structureId = const Value.absent(),
+    this.position = const Value.absent(),
+    this.data = const Value.absent(),
+    this.size = const Value.absent(),
+    this.alignmentId = const Value.absent(),
+    this.fillColorId = const Value.absent(),
+    this.highlightColorId = const Value.absent(),
+    this.bold = const Value.absent(),
+    this.italic = const Value.absent(),
+    this.underlined = const Value.absent(),
+  });
+  TextComponentsCompanion.insert({
+    @required int structureId,
+    @required int position,
+    @required String data,
+    @required double size,
+    @required int alignmentId,
+    @required int fillColorId,
+    @required int highlightColorId,
+    @required bool bold,
+    @required bool italic,
+    @required bool underlined,
+  })  : structureId = Value(structureId),
+        position = Value(position),
+        data = Value(data),
+        size = Value(size),
+        alignmentId = Value(alignmentId),
+        fillColorId = Value(fillColorId),
+        highlightColorId = Value(highlightColorId),
+        bold = Value(bold),
+        italic = Value(italic),
+        underlined = Value(underlined);
+  static Insertable<TextComponentModel> custom({
+    Expression<int> structureId,
+    Expression<int> position,
+    Expression<String> data,
+    Expression<double> size,
+    Expression<int> alignmentId,
+    Expression<int> fillColorId,
+    Expression<int> highlightColorId,
+    Expression<bool> bold,
+    Expression<bool> italic,
+    Expression<bool> underlined,
+  }) {
+    return RawValuesInsertable({
+      if (structureId != null) 'structure_id': structureId,
+      if (position != null) 'position': position,
+      if (data != null) 'data': data,
+      if (size != null) 'size': size,
+      if (alignmentId != null) 'alignment_id': alignmentId,
+      if (fillColorId != null) 'fill_color_id': fillColorId,
+      if (highlightColorId != null) 'highlight_color_id': highlightColorId,
+      if (bold != null) 'bold': bold,
+      if (italic != null) 'italic': italic,
+      if (underlined != null) 'underlined': underlined,
+    });
+  }
+
+  TextComponentsCompanion copyWith(
+      {Value<int> structureId,
+      Value<int> position,
+      Value<String> data,
+      Value<double> size,
+      Value<int> alignmentId,
+      Value<int> fillColorId,
+      Value<int> highlightColorId,
+      Value<bool> bold,
+      Value<bool> italic,
+      Value<bool> underlined}) {
+    return TextComponentsCompanion(
+      structureId: structureId ?? this.structureId,
+      position: position ?? this.position,
+      data: data ?? this.data,
+      size: size ?? this.size,
+      alignmentId: alignmentId ?? this.alignmentId,
+      fillColorId: fillColorId ?? this.fillColorId,
+      highlightColorId: highlightColorId ?? this.highlightColorId,
+      bold: bold ?? this.bold,
+      italic: italic ?? this.italic,
+      underlined: underlined ?? this.underlined,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (structureId.present) {
+      map['structure_id'] = Variable<int>(structureId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (data.present) {
+      map['data'] = Variable<String>(data.value);
+    }
+    if (size.present) {
+      map['size'] = Variable<double>(size.value);
+    }
+    if (alignmentId.present) {
+      map['alignment_id'] = Variable<int>(alignmentId.value);
+    }
+    if (fillColorId.present) {
+      map['fill_color_id'] = Variable<int>(fillColorId.value);
+    }
+    if (highlightColorId.present) {
+      map['highlight_color_id'] = Variable<int>(highlightColorId.value);
+    }
+    if (bold.present) {
+      map['bold'] = Variable<bool>(bold.value);
+    }
+    if (italic.present) {
+      map['italic'] = Variable<bool>(italic.value);
+    }
+    if (underlined.present) {
+      map['underlined'] = Variable<bool>(underlined.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TextComponentsCompanion(')
+          ..write('structureId: $structureId, ')
+          ..write('position: $position, ')
+          ..write('data: $data, ')
+          ..write('size: $size, ')
+          ..write('alignmentId: $alignmentId, ')
+          ..write('fillColorId: $fillColorId, ')
+          ..write('highlightColorId: $highlightColorId, ')
+          ..write('bold: $bold, ')
+          ..write('italic: $italic, ')
+          ..write('underlined: $underlined')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TextComponentsTable extends TextComponents
+    with TableInfo<$TextComponentsTable, TextComponentModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $TextComponentsTable(this._db, [this._alias]);
+  final VerificationMeta _structureIdMeta =
+      const VerificationMeta('structureId');
+  GeneratedIntColumn _structureId;
+  @override
+  GeneratedIntColumn get structureId =>
+      _structureId ??= _constructStructureId();
+  GeneratedIntColumn _constructStructureId() {
+    return GeneratedIntColumn(
+      'structure_id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _positionMeta = const VerificationMeta('position');
+  GeneratedIntColumn _position;
+  @override
+  GeneratedIntColumn get position => _position ??= _constructPosition();
+  GeneratedIntColumn _constructPosition() {
+    return GeneratedIntColumn(
+      'position',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _dataMeta = const VerificationMeta('data');
+  GeneratedTextColumn _data;
+  @override
+  GeneratedTextColumn get data => _data ??= _constructData();
+  GeneratedTextColumn _constructData() {
+    return GeneratedTextColumn(
+      'data',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _sizeMeta = const VerificationMeta('size');
+  GeneratedRealColumn _size;
+  @override
+  GeneratedRealColumn get size => _size ??= _constructSize();
+  GeneratedRealColumn _constructSize() {
+    return GeneratedRealColumn(
+      'size',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _alignmentIdMeta =
+      const VerificationMeta('alignmentId');
+  GeneratedIntColumn _alignmentId;
+  @override
+  GeneratedIntColumn get alignmentId =>
+      _alignmentId ??= _constructAlignmentId();
+  GeneratedIntColumn _constructAlignmentId() {
+    return GeneratedIntColumn('alignment_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES alignments(id)');
+  }
+
+  final VerificationMeta _fillColorIdMeta =
+      const VerificationMeta('fillColorId');
+  GeneratedIntColumn _fillColorId;
+  @override
+  GeneratedIntColumn get fillColorId =>
+      _fillColorId ??= _constructFillColorId();
+  GeneratedIntColumn _constructFillColorId() {
+    return GeneratedIntColumn('fill_color_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES fill_colors(id)');
+  }
+
+  final VerificationMeta _highlightColorIdMeta =
+      const VerificationMeta('highlightColorId');
+  GeneratedIntColumn _highlightColorId;
+  @override
+  GeneratedIntColumn get highlightColorId =>
+      _highlightColorId ??= _constructHighlightColorId();
+  GeneratedIntColumn _constructHighlightColorId() {
+    return GeneratedIntColumn('highlight_color_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES highlight_colors(id)');
+  }
+
+  final VerificationMeta _boldMeta = const VerificationMeta('bold');
+  GeneratedBoolColumn _bold;
+  @override
+  GeneratedBoolColumn get bold => _bold ??= _constructBold();
+  GeneratedBoolColumn _constructBold() {
+    return GeneratedBoolColumn(
+      'bold',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _italicMeta = const VerificationMeta('italic');
+  GeneratedBoolColumn _italic;
+  @override
+  GeneratedBoolColumn get italic => _italic ??= _constructItalic();
+  GeneratedBoolColumn _constructItalic() {
+    return GeneratedBoolColumn(
+      'italic',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _underlinedMeta = const VerificationMeta('underlined');
+  GeneratedBoolColumn _underlined;
+  @override
+  GeneratedBoolColumn get underlined => _underlined ??= _constructUnderlined();
+  GeneratedBoolColumn _constructUnderlined() {
+    return GeneratedBoolColumn(
+      'underlined',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [
+        structureId,
+        position,
+        data,
+        size,
+        alignmentId,
+        fillColorId,
+        highlightColorId,
+        bold,
+        italic,
+        underlined
+      ];
+  @override
+  $TextComponentsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'text_components';
+  @override
+  final String actualTableName = 'text_components';
+  @override
+  VerificationContext validateIntegrity(Insertable<TextComponentModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('structure_id')) {
+      context.handle(
+          _structureIdMeta,
+          structureId.isAcceptableOrUnknown(
+              data['structure_id'], _structureIdMeta));
+    } else if (isInserting) {
+      context.missing(_structureIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+    } else if (isInserting) {
+      context.missing(_positionMeta);
+    }
+    if (data.containsKey('data')) {
+      context.handle(
+          _dataMeta, this.data.isAcceptableOrUnknown(data['data'], _dataMeta));
+    } else if (isInserting) {
+      context.missing(_dataMeta);
+    }
+    if (data.containsKey('size')) {
+      context.handle(
+          _sizeMeta, size.isAcceptableOrUnknown(data['size'], _sizeMeta));
+    } else if (isInserting) {
+      context.missing(_sizeMeta);
+    }
+    if (data.containsKey('alignment_id')) {
+      context.handle(
+          _alignmentIdMeta,
+          alignmentId.isAcceptableOrUnknown(
+              data['alignment_id'], _alignmentIdMeta));
+    } else if (isInserting) {
+      context.missing(_alignmentIdMeta);
+    }
+    if (data.containsKey('fill_color_id')) {
+      context.handle(
+          _fillColorIdMeta,
+          fillColorId.isAcceptableOrUnknown(
+              data['fill_color_id'], _fillColorIdMeta));
+    } else if (isInserting) {
+      context.missing(_fillColorIdMeta);
+    }
+    if (data.containsKey('highlight_color_id')) {
+      context.handle(
+          _highlightColorIdMeta,
+          highlightColorId.isAcceptableOrUnknown(
+              data['highlight_color_id'], _highlightColorIdMeta));
+    } else if (isInserting) {
+      context.missing(_highlightColorIdMeta);
+    }
+    if (data.containsKey('bold')) {
+      context.handle(
+          _boldMeta, bold.isAcceptableOrUnknown(data['bold'], _boldMeta));
+    } else if (isInserting) {
+      context.missing(_boldMeta);
+    }
+    if (data.containsKey('italic')) {
+      context.handle(_italicMeta,
+          italic.isAcceptableOrUnknown(data['italic'], _italicMeta));
+    } else if (isInserting) {
+      context.missing(_italicMeta);
+    }
+    if (data.containsKey('underlined')) {
+      context.handle(
+          _underlinedMeta,
+          underlined.isAcceptableOrUnknown(
+              data['underlined'], _underlinedMeta));
+    } else if (isInserting) {
+      context.missing(_underlinedMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {structureId, position};
+  @override
+  TextComponentModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return TextComponentModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $TextComponentsTable createAlias(String alias) {
+    return $TextComponentsTable(_db, alias);
+  }
+}
+
 class TextFieldDatumModel extends DataClass
     implements Insertable<TextFieldDatumModel> {
   final int entryId;
@@ -3622,6 +4229,9 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $StructuresTable get structures => _structures ??= $StructuresTable(this);
   $TagsTable _tags;
   $TagsTable get tags => _tags ??= $TagsTable(this);
+  $TextComponentsTable _textComponents;
+  $TextComponentsTable get textComponents =>
+      _textComponents ??= $TextComponentsTable(this);
   $TextFieldDataTable _textFieldData;
   $TextFieldDataTable get textFieldData =>
       _textFieldData ??= $TextFieldDataTable(this);
@@ -3643,6 +4253,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         imageFieldData,
         structures,
         tags,
+        textComponents,
         textFieldData
       ];
 }
