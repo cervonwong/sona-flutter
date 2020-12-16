@@ -2563,6 +2563,150 @@ class $ImageFieldDataTable extends ImageFieldData
   }
 }
 
+class StructureModel extends DataClass implements Insertable<StructureModel> {
+  final int id;
+  StructureModel({@required this.id});
+  factory StructureModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    return StructureModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    return map;
+  }
+
+  StructuresCompanion toCompanion(bool nullToAbsent) {
+    return StructuresCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+    );
+  }
+
+  factory StructureModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return StructureModel(
+      id: serializer.fromJson<int>(json['id']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+    };
+  }
+
+  StructureModel copyWith({int id}) => StructureModel(
+        id: id ?? this.id,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('StructureModel(')..write('id: $id')..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf(id.hashCode);
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is StructureModel && other.id == this.id);
+}
+
+class StructuresCompanion extends UpdateCompanion<StructureModel> {
+  final Value<int> id;
+  const StructuresCompanion({
+    this.id = const Value.absent(),
+  });
+  StructuresCompanion.insert({
+    this.id = const Value.absent(),
+  });
+  static Insertable<StructureModel> custom({
+    Expression<int> id,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+    });
+  }
+
+  StructuresCompanion copyWith({Value<int> id}) {
+    return StructuresCompanion(
+      id: id ?? this.id,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('StructuresCompanion(')..write('id: $id')..write(')'))
+        .toString();
+  }
+}
+
+class $StructuresTable extends Structures
+    with TableInfo<$StructuresTable, StructureModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $StructuresTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id];
+  @override
+  $StructuresTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'structures';
+  @override
+  final String actualTableName = 'structures';
+  @override
+  VerificationContext validateIntegrity(Insertable<StructureModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  StructureModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return StructureModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $StructuresTable createAlias(String alias) {
+    return $StructuresTable(_db, alias);
+  }
+}
+
 class TagModel extends DataClass implements Insertable<TagModel> {
   final int id;
   final String name;
@@ -3026,6 +3170,8 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $ImageFieldDataTable _imageFieldData;
   $ImageFieldDataTable get imageFieldData =>
       _imageFieldData ??= $ImageFieldDataTable(this);
+  $StructuresTable _structures;
+  $StructuresTable get structures => _structures ??= $StructuresTable(this);
   $TagsTable _tags;
   $TagsTable get tags => _tags ??= $TagsTable(this);
   $TextFieldDataTable _textFieldData;
@@ -3045,6 +3191,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         fieldSpecs,
         fieldTypes,
         imageFieldData,
+        structures,
         tags,
         textFieldData
       ];
