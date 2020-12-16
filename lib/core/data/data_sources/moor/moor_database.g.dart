@@ -639,6 +639,259 @@ class $CardFormatsTable extends CardFormats
   }
 }
 
+class ComponentModel extends DataClass implements Insertable<ComponentModel> {
+  final int structureId;
+  final int position;
+  final int componentTypeId;
+  ComponentModel(
+      {@required this.structureId,
+      @required this.position,
+      @required this.componentTypeId});
+  factory ComponentModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    return ComponentModel(
+      structureId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
+      position:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      componentTypeId: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}component_type_id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || structureId != null) {
+      map['structure_id'] = Variable<int>(structureId);
+    }
+    if (!nullToAbsent || position != null) {
+      map['position'] = Variable<int>(position);
+    }
+    if (!nullToAbsent || componentTypeId != null) {
+      map['component_type_id'] = Variable<int>(componentTypeId);
+    }
+    return map;
+  }
+
+  ComponentsCompanion toCompanion(bool nullToAbsent) {
+    return ComponentsCompanion(
+      structureId: structureId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(structureId),
+      position: position == null && nullToAbsent
+          ? const Value.absent()
+          : Value(position),
+      componentTypeId: componentTypeId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(componentTypeId),
+    );
+  }
+
+  factory ComponentModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return ComponentModel(
+      structureId: serializer.fromJson<int>(json['structureId']),
+      position: serializer.fromJson<int>(json['position']),
+      componentTypeId: serializer.fromJson<int>(json['componentTypeId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'structureId': serializer.toJson<int>(structureId),
+      'position': serializer.toJson<int>(position),
+      'componentTypeId': serializer.toJson<int>(componentTypeId),
+    };
+  }
+
+  ComponentModel copyWith(
+          {int structureId, int position, int componentTypeId}) =>
+      ComponentModel(
+        structureId: structureId ?? this.structureId,
+        position: position ?? this.position,
+        componentTypeId: componentTypeId ?? this.componentTypeId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('ComponentModel(')
+          ..write('structureId: $structureId, ')
+          ..write('position: $position, ')
+          ..write('componentTypeId: $componentTypeId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(structureId.hashCode,
+      $mrjc(position.hashCode, componentTypeId.hashCode)));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is ComponentModel &&
+          other.structureId == this.structureId &&
+          other.position == this.position &&
+          other.componentTypeId == this.componentTypeId);
+}
+
+class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
+  final Value<int> structureId;
+  final Value<int> position;
+  final Value<int> componentTypeId;
+  const ComponentsCompanion({
+    this.structureId = const Value.absent(),
+    this.position = const Value.absent(),
+    this.componentTypeId = const Value.absent(),
+  });
+  ComponentsCompanion.insert({
+    @required int structureId,
+    @required int position,
+    @required int componentTypeId,
+  })  : structureId = Value(structureId),
+        position = Value(position),
+        componentTypeId = Value(componentTypeId);
+  static Insertable<ComponentModel> custom({
+    Expression<int> structureId,
+    Expression<int> position,
+    Expression<int> componentTypeId,
+  }) {
+    return RawValuesInsertable({
+      if (structureId != null) 'structure_id': structureId,
+      if (position != null) 'position': position,
+      if (componentTypeId != null) 'component_type_id': componentTypeId,
+    });
+  }
+
+  ComponentsCompanion copyWith(
+      {Value<int> structureId,
+      Value<int> position,
+      Value<int> componentTypeId}) {
+    return ComponentsCompanion(
+      structureId: structureId ?? this.structureId,
+      position: position ?? this.position,
+      componentTypeId: componentTypeId ?? this.componentTypeId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (structureId.present) {
+      map['structure_id'] = Variable<int>(structureId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (componentTypeId.present) {
+      map['component_type_id'] = Variable<int>(componentTypeId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ComponentsCompanion(')
+          ..write('structureId: $structureId, ')
+          ..write('position: $position, ')
+          ..write('componentTypeId: $componentTypeId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ComponentsTable extends Components
+    with TableInfo<$ComponentsTable, ComponentModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $ComponentsTable(this._db, [this._alias]);
+  final VerificationMeta _structureIdMeta =
+      const VerificationMeta('structureId');
+  GeneratedIntColumn _structureId;
+  @override
+  GeneratedIntColumn get structureId =>
+      _structureId ??= _constructStructureId();
+  GeneratedIntColumn _constructStructureId() {
+    return GeneratedIntColumn('structure_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES structures(id)');
+  }
+
+  final VerificationMeta _positionMeta = const VerificationMeta('position');
+  GeneratedIntColumn _position;
+  @override
+  GeneratedIntColumn get position => _position ??= _constructPosition();
+  GeneratedIntColumn _constructPosition() {
+    return GeneratedIntColumn('position', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  final VerificationMeta _componentTypeIdMeta =
+      const VerificationMeta('componentTypeId');
+  GeneratedIntColumn _componentTypeId;
+  @override
+  GeneratedIntColumn get componentTypeId =>
+      _componentTypeId ??= _constructComponentTypeId();
+  GeneratedIntColumn _constructComponentTypeId() {
+    return GeneratedIntColumn('component_type_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES component_types(id)');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns =>
+      [structureId, position, componentTypeId];
+  @override
+  $ComponentsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'components';
+  @override
+  final String actualTableName = 'components';
+  @override
+  VerificationContext validateIntegrity(Insertable<ComponentModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('structure_id')) {
+      context.handle(
+          _structureIdMeta,
+          structureId.isAcceptableOrUnknown(
+              data['structure_id'], _structureIdMeta));
+    } else if (isInserting) {
+      context.missing(_structureIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+    } else if (isInserting) {
+      context.missing(_positionMeta);
+    }
+    if (data.containsKey('component_type_id')) {
+      context.handle(
+          _componentTypeIdMeta,
+          componentTypeId.isAcceptableOrUnknown(
+              data['component_type_id'], _componentTypeIdMeta));
+    } else if (isInserting) {
+      context.missing(_componentTypeIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {structureId, position};
+  @override
+  ComponentModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return ComponentModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $ComponentsTable createAlias(String alias) {
+    return $ComponentsTable(_db, alias);
+  }
+}
+
 class DeckModel extends DataClass implements Insertable<DeckModel> {
   final int id;
   final String name;
@@ -3153,6 +3406,8 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $CardsTable get cards => _cards ??= $CardsTable(this);
   $CardFormatsTable _cardFormats;
   $CardFormatsTable get cardFormats => _cardFormats ??= $CardFormatsTable(this);
+  $ComponentsTable _components;
+  $ComponentsTable get components => _components ??= $ComponentsTable(this);
   $DecksTable _decks;
   $DecksTable get decks => _decks ??= $DecksTable(this);
   $EntriesTable _entries;
@@ -3183,6 +3438,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
         cards,
         cardFormats,
+        components,
         decks,
         entries,
         entriesTags,
