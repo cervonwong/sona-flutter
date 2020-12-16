@@ -19,6 +19,7 @@
 
 import 'card_formats/card_formats_table.dart';
 import 'cards/cards_table.dart';
+import 'component_types/component_types_table.dart';
 import 'components/components_table.dart';
 import 'decks/decks_table.dart';
 import 'entries/entries_table.dart';
@@ -34,6 +35,7 @@ import 'tags/tags_table.dart';
 
 export 'card_formats/card_formats_table.dart';
 export 'cards/cards_table.dart';
+export 'component_types/component_types_table.dart';
 export 'components/components_table.dart';
 export 'decks/decks_table.dart';
 export 'entries/entries_table.dart';
@@ -51,6 +53,7 @@ const List<Type> kTables = [
   Cards,
   CardFormats,
   Components,
+  ComponentTypes,
   Decks,
   Entries,
   EntriesTags,
