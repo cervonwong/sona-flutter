@@ -47,6 +47,6 @@ class Decks extends Table {
 
   TextColumn get description => text().withLength(
         min: kMinDeckDescriptionLength,
-        max: kMaxDeckDescriptionLenth,
+        max: kMaxDeckDescriptionLength,
       )();
 }

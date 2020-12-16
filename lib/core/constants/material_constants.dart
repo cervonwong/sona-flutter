@@ -24,4 +24,4 @@ const int kMaxDeckNameLength = 150;
 const int kMinDeckAuthorNameLength = 1;
 const int kMaxDeckAuthorNameLength = 50;
 const int kMinDeckDescriptionLength = 10;
-const int kMaxDeckDescriptionLenth = 255;
+const int kMaxDeckDescriptionLength = 255;
