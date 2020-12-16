@@ -90,7 +90,7 @@ object card_formats {
 }
 
 object structures {
-	id : INTEGER <<PK>>
+	id : INTEGER <<PK, gen>>
 }
 
 object components <<super>> {
