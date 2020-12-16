@@ -25,3 +25,7 @@ const int kMinDeckAuthorNameLength = 1;
 const int kMaxDeckAuthorNameLength = 50;
 const int kMinDeckDescriptionLength = 10;
 const int kMaxDeckDescriptionLength = 255;
+
+// Defaults
+const bool kDefaultCardStarred = false;
+const bool kDefaultCardHidden = false;
