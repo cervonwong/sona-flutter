@@ -7,6 +7,195 @@ part of 'moor_database.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
+class AlignmentModel extends DataClass implements Insertable<AlignmentModel> {
+  final int id;
+  final String name;
+  AlignmentModel({@required this.id, @required this.name});
+  factory AlignmentModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return AlignmentModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    return map;
+  }
+
+  AlignmentsCompanion toCompanion(bool nullToAbsent) {
+    return AlignmentsCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+    );
+  }
+
+  factory AlignmentModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return AlignmentModel(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  AlignmentModel copyWith({int id, String name}) => AlignmentModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('AlignmentModel(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is AlignmentModel &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class AlignmentsCompanion extends UpdateCompanion<AlignmentModel> {
+  final Value<int> id;
+  final Value<String> name;
+  const AlignmentsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  AlignmentsCompanion.insert({
+    this.id = const Value.absent(),
+    @required String name,
+  }) : name = Value(name);
+  static Insertable<AlignmentModel> custom({
+    Expression<int> id,
+    Expression<String> name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  AlignmentsCompanion copyWith({Value<int> id, Value<String> name}) {
+    return AlignmentsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AlignmentsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $AlignmentsTable extends Alignments
+    with TableInfo<$AlignmentsTable, AlignmentModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $AlignmentsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn('name', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  $AlignmentsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'alignments';
+  @override
+  final String actualTableName = 'alignments';
+  @override
+  VerificationContext validateIntegrity(Insertable<AlignmentModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AlignmentModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return AlignmentModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $AlignmentsTable createAlias(String alias) {
+    return $AlignmentsTable(_db, alias);
+  }
+}
+
 class CardModel extends DataClass implements Insertable<CardModel> {
   final int id;
   final int entryId;
@@ -2750,6 +2939,386 @@ class $FieldTypesTable extends FieldTypes
   }
 }
 
+class FillColorModel extends DataClass implements Insertable<FillColorModel> {
+  final int id;
+  final String name;
+  FillColorModel({@required this.id, @required this.name});
+  factory FillColorModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return FillColorModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    return map;
+  }
+
+  FillColorsCompanion toCompanion(bool nullToAbsent) {
+    return FillColorsCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+    );
+  }
+
+  factory FillColorModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return FillColorModel(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  FillColorModel copyWith({int id, String name}) => FillColorModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('FillColorModel(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is FillColorModel &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class FillColorsCompanion extends UpdateCompanion<FillColorModel> {
+  final Value<int> id;
+  final Value<String> name;
+  const FillColorsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  FillColorsCompanion.insert({
+    this.id = const Value.absent(),
+    @required String name,
+  }) : name = Value(name);
+  static Insertable<FillColorModel> custom({
+    Expression<int> id,
+    Expression<String> name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  FillColorsCompanion copyWith({Value<int> id, Value<String> name}) {
+    return FillColorsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FillColorsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $FillColorsTable extends FillColors
+    with TableInfo<$FillColorsTable, FillColorModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $FillColorsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn('name', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  $FillColorsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'fill_colors';
+  @override
+  final String actualTableName = 'fill_colors';
+  @override
+  VerificationContext validateIntegrity(Insertable<FillColorModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FillColorModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return FillColorModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $FillColorsTable createAlias(String alias) {
+    return $FillColorsTable(_db, alias);
+  }
+}
+
+class HighlightColorModel extends DataClass
+    implements Insertable<HighlightColorModel> {
+  final int id;
+  final String name;
+  HighlightColorModel({@required this.id, @required this.name});
+  factory HighlightColorModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return HighlightColorModel(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    return map;
+  }
+
+  HighlightColorsCompanion toCompanion(bool nullToAbsent) {
+    return HighlightColorsCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+    );
+  }
+
+  factory HighlightColorModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return HighlightColorModel(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  HighlightColorModel copyWith({int id, String name}) => HighlightColorModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('HighlightColorModel(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is HighlightColorModel &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class HighlightColorsCompanion extends UpdateCompanion<HighlightColorModel> {
+  final Value<int> id;
+  final Value<String> name;
+  const HighlightColorsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  HighlightColorsCompanion.insert({
+    this.id = const Value.absent(),
+    @required String name,
+  }) : name = Value(name);
+  static Insertable<HighlightColorModel> custom({
+    Expression<int> id,
+    Expression<String> name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  HighlightColorsCompanion copyWith({Value<int> id, Value<String> name}) {
+    return HighlightColorsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('HighlightColorsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $HighlightColorsTable extends HighlightColors
+    with TableInfo<$HighlightColorsTable, HighlightColorModel> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $HighlightColorsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn('name', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  $HighlightColorsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'highlight_colors';
+  @override
+  final String actualTableName = 'highlight_colors';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<HighlightColorModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  HighlightColorModel map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return HighlightColorModel.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $HighlightColorsTable createAlias(String alias) {
+    return $HighlightColorsTable(_db, alias);
+  }
+}
+
 class ImageFieldDatumModel extends DataClass
     implements Insertable<ImageFieldDatumModel> {
   final int entryId;
@@ -4199,6 +4768,8 @@ class $TextFieldDataTable extends TextFieldData
 
 abstract class _$MoorDatabase extends GeneratedDatabase {
   _$MoorDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  $AlignmentsTable _alignments;
+  $AlignmentsTable get alignments => _alignments ??= $AlignmentsTable(this);
   $CardsTable _cards;
   $CardsTable get cards => _cards ??= $CardsTable(this);
   $CardFormatsTable _cardFormats;
@@ -4222,6 +4793,11 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   $FieldSpecsTable get fieldSpecs => _fieldSpecs ??= $FieldSpecsTable(this);
   $FieldTypesTable _fieldTypes;
   $FieldTypesTable get fieldTypes => _fieldTypes ??= $FieldTypesTable(this);
+  $FillColorsTable _fillColors;
+  $FillColorsTable get fillColors => _fillColors ??= $FillColorsTable(this);
+  $HighlightColorsTable _highlightColors;
+  $HighlightColorsTable get highlightColors =>
+      _highlightColors ??= $HighlightColorsTable(this);
   $ImageFieldDataTable _imageFieldData;
   $ImageFieldDataTable get imageFieldData =>
       _imageFieldData ??= $ImageFieldDataTable(this);
@@ -4239,6 +4815,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
+        alignments,
         cards,
         cardFormats,
         components,
@@ -4250,6 +4827,8 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         fieldData,
         fieldSpecs,
         fieldTypes,
+        fillColors,
+        highlightColors,
         imageFieldData,
         structures,
         tags,

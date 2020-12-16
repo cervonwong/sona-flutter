@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'alignments/alignments_table.dart';
 import 'card_formats/card_formats_table.dart';
 import 'cards/cards_table.dart';
 import 'component_types/component_types_table.dart';
@@ -28,12 +29,15 @@ import 'entry_types/entry_types_table.dart';
 import 'field_data/field_data_table.dart';
 import 'field_specs/field_specs_table.dart';
 import 'field_types/field_types_table.dart';
+import 'fill_colors/fill_colors_table.dart';
+import 'highlight_colors/highlight_colors_table.dart';
 import 'image_field_data/image_field_data_table.dart';
 import 'structures/structures_table.dart';
 import 'tags/tags_table.dart';
 import 'text_components/text_components_table.dart';
 import 'text_field_data/text_field_data_table.dart';
 
+export 'alignments/alignments_table.dart';
 export 'card_formats/card_formats_table.dart';
 export 'cards/cards_table.dart';
 export 'component_types/component_types_table.dart';
@@ -45,6 +49,8 @@ export 'entry_types/entry_types_table.dart';
 export 'field_data/field_data_table.dart';
 export 'field_specs/field_specs_table.dart';
 export 'field_types/field_types_table.dart';
+export 'fill_colors/fill_colors_table.dart';
+export 'highlight_colors/highlight_colors_table.dart';
 export 'image_field_data/image_field_data_table.dart';
 export 'structures/structures_table.dart';
 export 'tags/tags_table.dart';
@@ -52,6 +58,7 @@ export 'text_components/text_components_table.dart';
 export 'text_field_data/text_field_data_table.dart';
 
 const List<Type> kTables = [
+  Alignments,
   Cards,
   CardFormats,
   Components,
@@ -63,6 +70,8 @@ const List<Type> kTables = [
   FieldData,
   FieldSpecs,
   FieldTypes,
+  FillColors,
+  HighlightColors,
   ImageFieldData,
   Structures,
   Tags,
