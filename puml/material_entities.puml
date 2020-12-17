@@ -68,6 +68,7 @@ class CardFormatStructure {
 
 abstract class Component {
 	name : String
+	type : ComponentType
 }
 
 Deck                "1"                                  <--> "0..*" Entry               : owns >
