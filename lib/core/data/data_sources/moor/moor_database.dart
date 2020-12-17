@@ -38,7 +38,7 @@ LazyDatabase _openConnection() {
 
 @UseMoor(tables: kTables)
 class MoorDatabase extends _$MoorDatabase {
-  MoorDatabase() : super(_openConnection());
+  MoorDatabase(QueryExecutor e) : super(e);
 
   // Update this each time the database structure (tables) have been changed
   // after this app has been released.
