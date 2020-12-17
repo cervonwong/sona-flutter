@@ -25,7 +25,7 @@ const int kFieldTypeImageId = 2;
 const String kFieldTypeTextName = 'TEXT';
 const String kFieldTypeImageName = 'IMAGE';
 
-// Entity : TO BE CREATED
+// Entity : ComponentType
 // Table  : component_types
 const int kComponentTypeTextId = 1;
 const int kComponentTypeImageId = 2;
