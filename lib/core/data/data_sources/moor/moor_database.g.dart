@@ -832,15 +832,18 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
   final int structureId;
   final int position;
   final int componentTypeId;
+  final String name;
   ComponentModel(
       {@required this.structureId,
       @required this.position,
-      @required this.componentTypeId});
+      @required this.componentTypeId,
+      @required this.name});
   factory ComponentModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
     return ComponentModel(
       structureId: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
@@ -848,6 +851,7 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
           intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
       componentTypeId: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}component_type_id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -861,6 +865,9 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
     }
     if (!nullToAbsent || componentTypeId != null) {
       map['component_type_id'] = Variable<int>(componentTypeId);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
     }
     return map;
   }
@@ -876,6 +883,7 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
       componentTypeId: componentTypeId == null && nullToAbsent
           ? const Value.absent()
           : Value(componentTypeId),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
     );
   }
 
@@ -886,6 +894,7 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
       structureId: serializer.fromJson<int>(json['structureId']),
       position: serializer.fromJson<int>(json['position']),
       componentTypeId: serializer.fromJson<int>(json['componentTypeId']),
+      name: serializer.fromJson<String>(json['name']),
     );
   }
   @override
@@ -895,74 +904,88 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
       'structureId': serializer.toJson<int>(structureId),
       'position': serializer.toJson<int>(position),
       'componentTypeId': serializer.toJson<int>(componentTypeId),
+      'name': serializer.toJson<String>(name),
     };
   }
 
   ComponentModel copyWith(
-          {int structureId, int position, int componentTypeId}) =>
+          {int structureId, int position, int componentTypeId, String name}) =>
       ComponentModel(
         structureId: structureId ?? this.structureId,
         position: position ?? this.position,
         componentTypeId: componentTypeId ?? this.componentTypeId,
+        name: name ?? this.name,
       );
   @override
   String toString() {
     return (StringBuffer('ComponentModel(')
           ..write('structureId: $structureId, ')
           ..write('position: $position, ')
-          ..write('componentTypeId: $componentTypeId')
+          ..write('componentTypeId: $componentTypeId, ')
+          ..write('name: $name')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(structureId.hashCode,
-      $mrjc(position.hashCode, componentTypeId.hashCode)));
+  int get hashCode => $mrjf($mrjc(
+      structureId.hashCode,
+      $mrjc(
+          position.hashCode, $mrjc(componentTypeId.hashCode, name.hashCode))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is ComponentModel &&
           other.structureId == this.structureId &&
           other.position == this.position &&
-          other.componentTypeId == this.componentTypeId);
+          other.componentTypeId == this.componentTypeId &&
+          other.name == this.name);
 }
 
 class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
   final Value<int> structureId;
   final Value<int> position;
   final Value<int> componentTypeId;
+  final Value<String> name;
   const ComponentsCompanion({
     this.structureId = const Value.absent(),
     this.position = const Value.absent(),
     this.componentTypeId = const Value.absent(),
+    this.name = const Value.absent(),
   });
   ComponentsCompanion.insert({
     @required int structureId,
     @required int position,
     @required int componentTypeId,
+    @required String name,
   })  : structureId = Value(structureId),
         position = Value(position),
-        componentTypeId = Value(componentTypeId);
+        componentTypeId = Value(componentTypeId),
+        name = Value(name);
   static Insertable<ComponentModel> custom({
     Expression<int> structureId,
     Expression<int> position,
     Expression<int> componentTypeId,
+    Expression<String> name,
   }) {
     return RawValuesInsertable({
       if (structureId != null) 'structure_id': structureId,
       if (position != null) 'position': position,
       if (componentTypeId != null) 'component_type_id': componentTypeId,
+      if (name != null) 'name': name,
     });
   }
 
   ComponentsCompanion copyWith(
       {Value<int> structureId,
       Value<int> position,
-      Value<int> componentTypeId}) {
+      Value<int> componentTypeId,
+      Value<String> name}) {
     return ComponentsCompanion(
       structureId: structureId ?? this.structureId,
       position: position ?? this.position,
       componentTypeId: componentTypeId ?? this.componentTypeId,
+      name: name ?? this.name,
     );
   }
 
@@ -978,6 +1001,9 @@ class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
     if (componentTypeId.present) {
       map['component_type_id'] = Variable<int>(componentTypeId.value);
     }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
     return map;
   }
 
@@ -986,7 +1012,8 @@ class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
     return (StringBuffer('ComponentsCompanion(')
           ..write('structureId: $structureId, ')
           ..write('position: $position, ')
-          ..write('componentTypeId: $componentTypeId')
+          ..write('componentTypeId: $componentTypeId, ')
+          ..write('name: $name')
           ..write(')'))
         .toString();
   }
@@ -1028,9 +1055,21 @@ class $ComponentsTable extends Components
         $customConstraints: 'NOT NULL REFERENCES component_types(id)');
   }
 
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn(
+      'name',
+      $tableName,
+      false,
+    );
+  }
+
   @override
   List<GeneratedColumn> get $columns =>
-      [structureId, position, componentTypeId];
+      [structureId, position, componentTypeId, name];
   @override
   $ComponentsTable get asDslTable => this;
   @override
@@ -1063,6 +1102,12 @@ class $ComponentsTable extends Components
               data['component_type_id'], _componentTypeIdMeta));
     } else if (isInserting) {
       context.missing(_componentTypeIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
     }
     return context;
   }

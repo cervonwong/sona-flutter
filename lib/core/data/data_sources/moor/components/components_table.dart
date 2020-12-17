@@ -31,6 +31,15 @@ class Components extends Table {
         'NOT NULL REFERENCES component_types(id)',
       )();
 
+  TextColumn get name => text()();
+
+  @override
+  List<String> get customConstraints => [
+        // Creates a unique constraint on multiple columns.
+        // See https://sqlite.org/lang_createtable.html#unique_constraints.
+        'UNIQUE(structure_id, name)',
+      ];
+
   @override
   Set<Column> get primaryKey => {structureId, position};
 }
