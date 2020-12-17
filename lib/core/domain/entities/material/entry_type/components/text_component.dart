@@ -34,7 +34,7 @@ class TextComponent extends Component with EquatableMixin {
   })  : assert(name != null),
         assert(data != null),
         assert(style != null),
-        super(name: name);
+        super(name: name, type: ComponentType.text);
 
   TextComponent copyWith({
     String name,

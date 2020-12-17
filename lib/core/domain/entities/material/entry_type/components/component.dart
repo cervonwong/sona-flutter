@@ -22,9 +22,14 @@ import 'package:meta/meta.dart';
 @immutable
 abstract class Component {
   final String name;
+  final ComponentType type;
 
   Component({
     @required this.name,
+    @required this.type,
   })  : assert(name != null),
-        assert(name.length <= 150);
+        assert(name.length <= 150),
+        assert(type != null);
 }
+
+enum ComponentType { text, image, divider }

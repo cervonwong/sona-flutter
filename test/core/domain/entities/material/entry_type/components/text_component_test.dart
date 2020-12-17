@@ -18,10 +18,23 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/components/component.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/components/text_component.dart';
 
 void main() {
   group('TextComponent when constructed', () {
+    test(
+      'should have type ComponentType.text',
+      () {
+        final textComponent = TextComponent(
+          name: 'A random component',
+          data: 'A slow brown fox',
+        );
+
+        expect(textComponent.type, ComponentType.text);
+      },
+    );
+
     test(
       'without optional arguments, '
       'should have expected default fields',
