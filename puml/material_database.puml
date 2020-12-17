@@ -94,9 +94,10 @@ object structures {
 }
 
 object components <<super>> {
-	structure_id      : INTEGER <<FK, cPK>>
+	structure_id      : INTEGER <<FK, cPK, c_unique>>
 	position          : INTEGER <<cPK, unique>>
 	component_type_id : INTEGER <<FK>>
+	name              : TEXT <<c_unique>>
 }
 
 object text_components <<sub>> {
