@@ -91,7 +91,29 @@ class MoorDatabase extends _$MoorDatabase {
     );
   }
 
-  void _initializeAlignments(Batch batch) {}
+  void _initializeAlignments(Batch batch) {
+    batch.insertAll(
+      alignments,
+      [
+        AlignmentModel(
+          id: kAlignmentCenterId,
+          name: kAlignmentCenterName,
+        ),
+        AlignmentModel(
+          id: kAlignmentStartId,
+          name: kAlignmentStartName,
+        ),
+        AlignmentModel(
+          id: kAlignmentEndId,
+          name: kAlignmentEndName,
+        ),
+        AlignmentModel(
+          id: kAlignmentJustifyId,
+          name: kAlignmentJustifyName,
+        ),
+      ],
+    );
+  }
 
   void _initializeFillColors(Batch batch) {}
 
