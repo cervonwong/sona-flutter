@@ -112,6 +112,52 @@ void main() {
           );
         },
       );
+
+      test(
+        'fill_colors table, '
+        'should have expected records',
+        () async {
+          final fillColorModels = await db.select(db.fillColors).get();
+
+          expect(
+            fillColorModels,
+            [
+              FillColorModel(
+                id: kFillColorNeutralId,
+                name: kFillColorNeutralName,
+              ),
+              FillColorModel(
+                id: kFillColorRedId,
+                name: kFillColorRedName,
+              ),
+              FillColorModel(
+                id: kFillColorOrangeId,
+                name: kFillColorOrangeName,
+              ),
+              FillColorModel(
+                id: kFillColorYellowId,
+                name: kFillColorYellowName,
+              ),
+              FillColorModel(
+                id: kFillColorBlueId,
+                name: kFillColorBlueName,
+              ),
+              FillColorModel(
+                id: kFillColorPurpleId,
+                name: kFillColorPurpleName,
+              ),
+              FillColorModel(
+                id: kFillColorMagentaId,
+                name: kFillColorMagentaName,
+              ),
+              FillColorModel(
+                id: kFillColorBrownId,
+                name: kFillColorBrownName,
+              ),
+            ],
+          );
+        },
+      );
     },
   );
 }
