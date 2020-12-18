@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="486px" preserveAspectRatio="none" style="width:1530px;height:486px;" version="1.1" viewBox="0 0 1530 486" width="1530px" zoomAndPan="magnify"><defs/><g><text fill="#888888" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="690" x="827" y="16.0859">This diagram is part of a visualisation of the code written for Sona.</text><text fill="#888888" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="550" x="967" y="36.9766">View the project at github.com/cervonwong/sona-flutter.</text><text fill="#000000" font-family="monospace" font-size="24" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="700" x="408.5" y="65.9102">Dependency relationships between main directories.</text><text fill="#000000" font-family="monospace" font-size="24" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="0" x="765.5" y="97.2461"/><rect fill="#FEFECE" height="74.6719" style="stroke: #A80036; stroke-width: 1.5;" width="392" x="575" y="111.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="751" y="129.8438">core</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="576" x2="966" y1="136.6484" y2="136.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="370" x="581" y="156.7344">Shared components used throughout the</text><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="40" x="581" y="177.625">app.</text><rect fill="#FEFECE" height="95.5625" style="stroke: #A80036; stroke-width: 1.5;" width="402" x="570" y="360.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="70" x="736" y="378.8438">screens</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="571" x2="971" y1="385.6484" y2="385.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="350" x="576" y="405.7344">Widgets that represent a navigation</text><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="380" x="576" y="426.625">destination. Screens depends on one or</text><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="220" x="576" y="447.5156">more feature packages.</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="222" x="7" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="88" y="264.8438">search</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="8" x2="228" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="210" x="13" y="291.7344">"filter/sort + table"</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="212" x="264" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="340" y="264.8438">review</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="265" x2="475" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="200" x="270" y="291.7344">controls + presenter</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="104" x="511" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="90" x="518" y="264.8438">scheduler</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="512" x2="614" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="90" x="517" y="291.7344">algorithm</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="242" x="650" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="741" y="264.8438">editor</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="651" x2="891" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="230" x="656" y="291.7344">adding/updating entries</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="232" x="927" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="90" x="998" y="264.8438">formatter</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="928" x2="1158" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="220" x="933" y="291.7344">format style/structure</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="1194" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="50" x="1235" y="264.8438">stats</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="1195" x2="1325" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="120" x="1200" y="291.7344">graphs, etc.</text><rect fill="#FEFECE" height="53.7813" style="stroke: #A80036; stroke-width: 1.5;" width="162" x="1361" y="246.7578"/><text fill="#000000" font-family="monospace" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="1422" y="264.8438">deck</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="1362" x2="1522" y1="271.6484" y2="271.6484"/><text fill="#000000" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="150" x="1367" y="291.7344">deck view, etc.</text><!--MD5=[ec3fe329b127ee769849f7510cac8a65]
+reverse link search to screens--><path codeLine="24" d="M234.096,298.4038 C327.1,317.3458 459.781,344.3698 569.973,366.8135 " fill="none" id="search-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="229.142,297.3948,237.1636,303.1092,234.0416,298.3919,238.7589,295.2699,229.142,297.3948" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[78ededb24225f7d695327f3829ba9ecc]
+reverse link core to search--><path codeLine="25" d="M569.881,186.3198 C472.061,204.0908 352.811,226.0948 246,246.7578 C240.545,247.8128 234.963,248.9048 229.326,250.0148 " fill="none" id="core-backto-search" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="574.817,185.4238,565.2474,183.0951,569.8974,186.3166,566.6759,190.9666,574.817,185.4238" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[9c071918e24def5112afa02a835b54ad]
+reverse link review to screens--><path codeLine="30" d="M453.607,302.4878 C504.337,319.3138 570.408,341.2278 629.125,360.7021 " fill="none" id="review-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="448.746,300.8758,456.0288,307.5061,453.4917,302.4501,458.5477,299.913,448.746,300.8758" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[fd97e9525359b852a248d6b260c463da]
+reverse link core to review--><path codeLine="31" d="M646.668,188.2398 C584.523,207.2238 510.91,229.7118 455.245,246.7168 " fill="none" id="core-backto-review" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="651.501,186.7628,641.725,185.5674,646.7192,188.2239,644.0627,193.2182,651.501,186.7628" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[67ad85b4b14aabae87cedcd7ba0f28e8]
+reverse link scheduler to screens--><path codeLine="36" d="M608.521,303.8648 C634.459,320.4508 667.587,341.6328 697.155,360.5393 " fill="none" id="scheduler-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="604.094,301.0348,609.5216,309.2531,608.3065,303.7283,613.8313,302.5132,604.094,301.0348" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[bc1f804ad6ab6c2bfcc53fb01995b6dc]
+reverse link core to scheduler--><path codeLine="37" d="M704.237,189.5768 C672.531,208.2498 635.506,230.0558 607.32,246.6558 " fill="none" id="core-backto-scheduler" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="708.875,186.8458,699.0905,187.9696,704.5675,189.3846,703.1525,194.8616,708.875,186.8458" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ad930bcea009b609db1d881a1ad3b70e]
+reverse link editor to screens--><path codeLine="42" d="M771,306.3658 C771,322.5458 771,342.5708 771,360.5393 " fill="none" id="editor-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="771,301.0348,767,310.0348,771,306.0348,775,310.0348,771,301.0348" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[3587e4aa55fdc2ea61715bb0525dcfdc]
+reverse link core to editor--><path codeLine="43" d="M771,192.0328 C771,210.0928 771,230.6738 771,246.5348 " fill="none" id="core-backto-editor" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="771,187.0118,767,196.0118,771,192.0118,775,196.0118,771,187.0118" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[4f7719e9688f8c5997e80a9f0686831a]
+reverse link formatter to screens--><path codeLine="48" d="M985.036,303.1008 C950.795,319.8428 906.58,341.4628 867.234,360.7021 " fill="none" id="formatter-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="989.586,300.8758,979.7437,301.235,985.094,303.0718,983.2573,308.4221,989.586,300.8758" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[190b640c21fe4a99aad077d4e153b9c5]
+reverse link core to formatter--><path codeLine="49" d="M857.033,189.0038 C898.773,207.8028 947.807,229.8858 985.043,246.6558 " fill="none" id="core-backto-formatter" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="852.241,186.8458,858.8048,194.1886,856.8,188.8989,862.0897,186.8941,852.241,186.8458" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[672999b9ebf2d10801551f8c4f23fc0d]
+reverse link stats to screens--><path codeLine="54" d="M1189.12,297.1988 C1185.02,298.4208 1180.96,299.6158 1177,300.7578 C1105.3,321.4258 1026.01,342.6748 956.679,360.7354 " fill="none" id="stats-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1193.94,295.7518,1184.1721,294.4917,1189.1487,297.1812,1186.4591,302.1578,1193.94,295.7518" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[893185db6b508c02b0200d56cb72da59]
+reverse link core to stats--><path codeLine="55" d="M941.832,188.0548 C1014.61,204.8808 1100.26,225.6448 1177,246.7578 C1182.53,248.2798 1188.25,249.9228 1193.98,251.6178 " fill="none" id="core-backto-stats" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="936.614,186.8498,944.4823,192.7735,941.4856,187.9756,946.2835,184.9789,936.614,186.8498" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[f1158baac5b07d4a9472730074f13ec3]
+reverse link deck to screens--><path codeLine="60" d="M1355.78,298.0148 C1351.8,298.9668 1347.86,299.8858 1344,300.7578 C1221.22,328.4678 1082.49,354.5088 972.294,373.9618 " fill="none" id="deck-backto-screens" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1360.83,296.7928,1351.1433,295.0131,1355.9692,297.9644,1353.0179,302.7904,1360.83,296.7928" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[1c3beedff1f4356a48c4717b5238f1db]
+reverse link core to deck--><path codeLine="61" d="M972.343,179.5028 C1082.59,196.6848 1221.34,220.2178 1344,246.7578 C1349.51,247.9488 1355.17,249.2488 1360.86,250.6108 " fill="none" id="core-backto-deck" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="967.115,178.6888,975.3931,184.0248,972.0556,179.4575,976.6229,176.1199,967.115,178.6888" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#888888" font-family="monospace" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="300" x="608.5" y="478.4063">Copyright (C) 2020 Cervon Wong</text><!--MD5=[7ab8a4a23503b3811318e5762719fa48]
+@startuml
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 400
+
+skinparam defaultFontName Monospaced
+skinparam defaultFontSize 16
+skinparam objectFontStyle bold
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Dependency relationships between main directories.\n
+footer Copyright (C) 2020 Cervon Wong
+
+object core {
+	Shared components used throughout the app.
+}
+
+object screens {
+	Widgets that represent a navigation destination. Screens depends on one or more feature packages.
+}
+
+object search {
+	"filter/sort + table"
+}
+search <.. screens
+core <.. search
+
+object review {
+	controls + presenter
+}
+review <.. screens
+core <.. review
+
+object scheduler {
+	algorithm
+}
+scheduler <.. screens
+core <.. scheduler
+
+object editor {
+	adding/updating entries
+}
+editor <.. screens
+core <.. editor
+
+object formatter {
+	format style/structure
+}
+formatter <.. screens
+core <.. formatter
+
+object stats {
+	graphs, etc.
+}
+stats <.. screens
+core <.. stats
+
+object deck {
+	deck view, etc.
+}
+deck <.. screens
+core <.. deck
+
+@enduml
+
+PlantUML version 1.2020.20(Sat Nov 21 18:02:45 SGT 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
