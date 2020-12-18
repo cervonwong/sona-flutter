@@ -155,5 +155,39 @@ class MoorDatabase extends _$MoorDatabase {
     );
   }
 
-  void _initializeHighlightColors(Batch batch) {}
+  void _initializeHighlightColors(Batch batch) {
+    batch.insertAll(
+      highlightColors,
+      [
+        HighlightColorModel(
+          id: kHighlightColorNoneId,
+          name: kHighlightColorNoneName,
+        ),
+        HighlightColorModel(
+          id: kHighlightColorPinkId,
+          name: kHighlightColorPinkName,
+        ),
+        HighlightColorModel(
+          id: kHighlightColorOrangeId,
+          name: kHighlightColorOrangeName,
+        ),
+        HighlightColorModel(
+          id: kHighlightColorYellowId,
+          name: kHighlightColorYellowName,
+        ),
+        HighlightColorModel(
+          id: kHighlightColorGreenId,
+          name: kHighlightColorGreenName,
+        ),
+        HighlightColorModel(
+          id: kHighlightColorBlueId,
+          name: kHighlightColorBlueName,
+        ),
+        HighlightColorModel(
+          id: kHighlightColorPurpleId,
+          name: kHighlightColorPurpleName,
+        ),
+      ],
+    );
+  }
 }

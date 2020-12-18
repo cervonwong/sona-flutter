@@ -158,6 +158,49 @@ void main() {
           );
         },
       );
+
+      test(
+        'highlight_colors table, '
+        'should have expected records',
+        () async {
+          final highlightColorModels =
+              await db.select(db.highlightColors).get();
+
+          expect(
+            highlightColorModels,
+            [
+              HighlightColorModel(
+                id: kHighlightColorNoneId,
+                name: kHighlightColorNoneName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorPinkId,
+                name: kHighlightColorPinkName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorOrangeId,
+                name: kHighlightColorOrangeName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorYellowId,
+                name: kHighlightColorYellowName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorGreenId,
+                name: kHighlightColorGreenName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorBlueId,
+                name: kHighlightColorBlueName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorPurpleId,
+                name: kHighlightColorPurpleName,
+              ),
+            ],
+          );
+        },
+      );
     },
   );
 }
