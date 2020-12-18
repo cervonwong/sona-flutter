@@ -24,6 +24,7 @@ import 'package:moor/moor.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
+import '../../constants/lookup_constants.dart';
 import 'moor_tables.dart';
 
 part 'moor_database.g.dart';
@@ -44,4 +45,37 @@ class MoorDatabase extends _$MoorDatabase {
   // after this app has been released.
   @override
   int get schemaVersion => 1;
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(beforeOpen: (details) async {
+      if (!details.wasCreated) return;
+
+      await batch((batch) {
+        _initializeFieldTypes(batch);
+        _initializeComponentTypes(batch);
+        _initializeAlignments(batch);
+        _initializeFillColors(batch);
+        _initializeHighlightColors(batch);
+      });
+    });
+  }
+
+  void _initializeFieldTypes(Batch batch) {
+    batch.insertAll(
+      fieldTypes,
+      [
+        FieldTypeModel(id: kFieldTypeTextId, name: kFieldTypeTextName),
+        FieldTypeModel(id: kFieldTypeImageId, name: kFieldTypeImageName),
+      ],
+    );
+  }
+
+  void _initializeComponentTypes(Batch batch) {}
+
+  void _initializeAlignments(Batch batch) {}
+
+  void _initializeFillColors(Batch batch) {}
+
+  void _initializeHighlightColors(Batch batch) {}
 }
