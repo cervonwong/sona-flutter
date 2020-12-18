@@ -39,12 +39,12 @@ void main() {
 
   group(
     'MoorDatabase when first created, '
-        'should initialize lookup tables',
-        () {
+    'should initialize lookup tables',
+    () {
       test(
         'field_types table, '
-            'should have expected records',
-            () async {
+        'should have expected records',
+        () async {
           final fieldTypeModels = await db.select(db.fieldTypes).get();
 
           expect(
@@ -59,8 +59,8 @@ void main() {
 
       test(
         'component_types table, '
-            'should have expected records',
-            () async {
+        'should have expected records',
+        () async {
           final componentTypeModels = await db.select(db.componentTypes).get();
 
           expect(
@@ -85,8 +85,8 @@ void main() {
 
       test(
         'alignments table, '
-            'should have expected records',
-            () async {
+        'should have expected records',
+        () async {
           final alignmentModels = await db.select(db.alignments).get();
 
           expect(
