@@ -71,7 +71,25 @@ class MoorDatabase extends _$MoorDatabase {
     );
   }
 
-  void _initializeComponentTypes(Batch batch) {}
+  void _initializeComponentTypes(Batch batch) {
+    batch.insertAll(
+      componentTypes,
+      [
+        ComponentTypeModel(
+          id: kComponentTypeTextId,
+          name: kComponentTypeTextName,
+        ),
+        ComponentTypeModel(
+          id: kComponentTypeImageId,
+          name: kComponentTypeImageName,
+        ),
+        ComponentTypeModel(
+          id: kComponentTypeDividerId,
+          name: kComponentTypeDividerName,
+        ),
+      ],
+    );
+  }
 
   void _initializeAlignments(Batch batch) {}
 

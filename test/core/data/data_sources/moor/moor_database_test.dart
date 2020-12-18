@@ -42,7 +42,8 @@ void main() {
     'should initialize lookup tables',
     () {
       test(
-        'field_types table should have expected records',
+        'field_types table, '
+        'should have expected records',
         () async {
           final fieldTypeModels = await db.select(db.fieldTypes).get();
 
@@ -51,6 +52,32 @@ void main() {
             [
               FieldTypeModel(id: kFieldTypeTextId, name: kFieldTypeTextName),
               FieldTypeModel(id: kFieldTypeImageId, name: kFieldTypeImageName),
+            ],
+          );
+        },
+      );
+
+      test(
+        'component_types table, '
+        'should have expected records',
+        () async {
+          final componentTypeModels = await db.select(db.componentTypes).get();
+
+          expect(
+            componentTypeModels,
+            [
+              ComponentTypeModel(
+                id: kComponentTypeTextId,
+                name: kComponentTypeTextName,
+              ),
+              ComponentTypeModel(
+                id: kComponentTypeImageId,
+                name: kComponentTypeImageName,
+              ),
+              ComponentTypeModel(
+                id: kComponentTypeDividerId,
+                name: kComponentTypeDividerName,
+              ),
             ],
           );
         },
