@@ -20,7 +20,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:sona_flutter/core/presentation/constants/color_constants.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../core/presentation/color_notifier.dart';
 
 class DeckListTile extends StatelessWidget {
   // Constructor parameters
@@ -66,31 +68,42 @@ class DeckListTile extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text(
-                    deckName,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
+                  child: Consumer<ColorNotifier>(builder: (_, cn, __) {
+                    return Text(
+                      deckName,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            color: cn.onSurface.highEmphasisTextColor,
+                          ),
+                    );
+                  }),
                 ),
                 SizedBox(width: 24.0),
-                Text(
-                  '$unreviewedCardCount',
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: kSuccessColor,
-                      ),
+                Consumer<ColorNotifier>(
+                  builder: (_, cn, __) {
+                    return Text(
+                      '$unreviewedCardCount',
+                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                            color: cn.onSurface.mediumFamiliarityColor,
+                          ),
+                    );
+                  },
                 ),
               ],
             ),
             SizedBox(height: 12.0),
-            LinearPercentIndicator(
-              percent: 0.50,
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              progressColor: kSuccessColor,
-              backgroundColor: kSuccessColor.withOpacity(0.2),
-              fillColor: Theme.of(context).colorScheme.surface,
-              lineHeight: 8.0,
-            ),
+            Consumer<ColorNotifier>(builder: (_, cn, __) {
+              return LinearPercentIndicator(
+                percent: 0.50,
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                progressColor: cn.onSurface.mediumFamiliarityColor,
+                backgroundColor:
+                    cn.onSurface.mediumFamiliarityColor.withOpacity(0.2),
+                fillColor: Theme.of(context).colorScheme.surface,
+                lineHeight: 8.0,
+              );
+            })
           ],
         ),
       ),

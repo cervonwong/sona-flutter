@@ -18,13 +18,20 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'core/presentation/color_notifier.dart';
 import 'core/presentation/constants/color_constants.dart';
 import 'core/presentation/constants/widget_constants.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(SonaApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ColorNotifier(theme: ColorTheme.light),
+      child: SonaApp(),
+    ),
+  );
 }
 
 class SonaApp extends StatelessWidget {
