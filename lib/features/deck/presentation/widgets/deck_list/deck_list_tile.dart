@@ -17,111 +17,83 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/constants/color_constants.dart';
-import '../../../../../core/presentation/constants/widget_constants.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:sona_flutter/core/presentation/constants/color_constants.dart';
 
 class DeckListTile extends StatelessWidget {
-  final String title;
-  final String dateString;
-  final int reviewedCardCount;
+  // Constructor parameters
+  final String deckName;
+  final int totalCardCount;
   final int dueCardCount;
+  final int reviewedCardCount;
+  final int unscheduledCardCount;
 
-  final int toReviewCardCount;
-  final bool hasCompletedReview;
+  // Derived values
+  final int unreviewedCardCount;
 
   const DeckListTile({
-    @required this.title,
-    @required this.dateString,
-    @required this.reviewedCardCount,
+    @required this.deckName,
+    @required this.totalCardCount,
     @required this.dueCardCount,
-  })  : assert(title != null),
-        assert(dateString != null),
-        assert(reviewedCardCount != null),
+    @required this.reviewedCardCount,
+    @required this.unscheduledCardCount,
+  })  : assert(deckName != null),
+        assert(totalCardCount != null),
+        assert(totalCardCount >= dueCardCount),
         assert(dueCardCount != null),
-        assert(reviewedCardCount >= 0),
         assert(dueCardCount >= 0),
+        assert(dueCardCount <= totalCardCount),
+        assert(reviewedCardCount != null),
+        assert(reviewedCardCount >= 0),
         assert(reviewedCardCount <= dueCardCount),
-        toReviewCardCount = dueCardCount - reviewedCardCount,
-        hasCompletedReview = reviewedCardCount == dueCardCount;
+        assert(unscheduledCardCount != null),
+        assert(unscheduledCardCount >= 0),
+        assert(unscheduledCardCount <= totalCardCount),
+        unreviewedCardCount = dueCardCount - reviewedCardCount;
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      color: Theme.of(context).colorScheme.surface,
-      child: ListTile(
-        key: Key(title),
-        title: Text(
-          title,
-          softWrap: false,
-          overflow: TextOverflow.fade,
-        ),
-        subtitle: Text(
-          dateString,
-          style: Theme.of(context).textTheme.caption.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withOpacity(kDarkMediumEmphasisOpacity),
-              ),
-        ),
-        leading: _ReviewIndicator(
-          toReviewCardCount: toReviewCardCount,
-          hasCompletedReview: hasCompletedReview,
-        ),
-        trailing: SizedBox(
-          height: 24.0,
-          width: 24.0,
-          child: IconButton(
-            splashRadius: 24.0,
-            padding: const EdgeInsets.all(0.0),
-            icon: Icon(FluentIcons.more_vertical_24_regular),
-            tooltip: 'More options',
-            onPressed: () {},
-          ),
-        ),
-        onTap: () {},
-      ),
-    );
-  }
-}
-
-class _ReviewIndicator extends StatelessWidget {
-  final int toReviewCardCount;
-  final bool hasCompletedReview;
-
-  const _ReviewIndicator({
-    @required this.toReviewCardCount,
-    @required this.hasCompletedReview,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40.0,
-      width: 40.0,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Theme.of(context)
-            .colorScheme
-            .primary
-            .withOpacity(hasCompletedReview ? 1.0 : 0.2),
-        borderRadius: BorderRadius.circular(kSmallCornerRadius),
-      ),
-      child: hasCompletedReview
-          ? Icon(
-              FluentIcons.checkmark_24_regular,
-              color: Theme.of(context).colorScheme.onPrimary,
-            )
-          : Text(
-              '$toReviewCardCount',
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
+    return Card(
+      key: Key(deckName),
+      margin: const EdgeInsets.all(0.0),
+      elevation: 0.0,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    deckName,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
+                ),
+                SizedBox(width: 24.0),
+                Text(
+                  '$unreviewedCardCount',
+                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        color: kSuccessColor,
+                      ),
+                ),
+              ],
             ),
+            SizedBox(height: 12.0),
+            LinearPercentIndicator(
+              percent: 0.50,
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              progressColor: kSuccessColor,
+              backgroundColor: kSuccessColor.withOpacity(0.2),
+              fillColor: Theme.of(context).colorScheme.surface,
+              lineHeight: 8.0,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
