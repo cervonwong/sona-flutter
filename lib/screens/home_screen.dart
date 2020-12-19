@@ -255,7 +255,6 @@ class _HomeFAB extends StatelessWidget {
         shadowColor: Theme.of(context).colorScheme.primary,
       ),
       child: FloatingActionButton(
-        tooltip: 'Addition options',
         onPressed: () {},
         child: Icon(FluentIcons.add_24_regular),
       ),
