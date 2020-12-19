@@ -67,50 +67,84 @@ class DeckListTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(
-                  child: Consumer<ColorNotifier>(
-                    builder: (_, cn, __) {
-                      return Text(
-                        deckName,
-                        softWrap: false,
-                        overflow: TextOverflow.fade,
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: cn.onSurface.highEmphasisTextColor,
-                            ),
-                      );
-                    },
-                  ),
-                ),
+                _DeckNameTitle(deckName: deckName),
                 SizedBox(width: 24.0),
-                Consumer<ColorNotifier>(
-                  builder: (_, cn, __) {
-                    return Text(
-                      '$unreviewedCardCount',
-                      style: Theme.of(context).textTheme.subtitle1.copyWith(
-                            color: cn.onSurface.mediumFamiliarityColor,
-                          ),
-                    );
-                  },
+                _UnreviewedCardCounter(
+                  unreviewedCardCount: unreviewedCardCount,
                 ),
               ],
             ),
             SizedBox(height: 12.0),
-            Consumer<ColorNotifier>(
-              builder: (_, cn, __) {
-                return LinearPercentIndicator(
-                  percent: 0.50,
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  progressColor: cn.onSurface.mediumFamiliarityColor,
-                  backgroundColor:
-                      cn.onSurface.mediumFamiliarityColor.withOpacity(0.2),
-                  fillColor: Theme.of(context).colorScheme.surface,
-                  lineHeight: 8.0,
-                );
-              },
-            ),
+            _FamiliarityPercentIndicator(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _DeckNameTitle extends StatelessWidget {
+  const _DeckNameTitle({
+    @required this.deckName,
+  });
+
+  final String deckName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return Text(
+            deckName,
+            softWrap: false,
+            overflow: TextOverflow.fade,
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  color: cn.onSurface.highEmphasisTextColor,
+                ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _UnreviewedCardCounter extends StatelessWidget {
+  const _UnreviewedCardCounter({
+    @required this.unreviewedCardCount,
+  });
+
+  final int unreviewedCardCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return Text(
+          '$unreviewedCardCount',
+          style: Theme.of(context).textTheme.subtitle1.copyWith(
+                color: cn.onSurface.mediumFamiliarityColor,
+              ),
+        );
+      },
+    );
+  }
+}
+
+class _FamiliarityPercentIndicator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return LinearPercentIndicator(
+          percent: 0.50,
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          progressColor: cn.onSurface.mediumFamiliarityColor,
+          backgroundColor: cn.onSurface.mediumFamiliarityColor.withOpacity(0.2),
+          fillColor: Theme.of(context).colorScheme.surface,
+          lineHeight: 8.0,
+        );
+      },
     );
   }
 }
