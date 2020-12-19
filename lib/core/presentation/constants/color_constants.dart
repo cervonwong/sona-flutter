@@ -118,3 +118,7 @@ const Color kLightSplashColor =
     Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
 const Color kLightHighlightColor =
     Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
+const Color kPrimarySplashColor =
+    Color(0x1f7b68ee); // kPrimaryColor.withOpacity(0.12);
+const Color kPrimaryHighlightColor =
+    Color(0x1f7b68ee); // kPrimaryColor.withOpacity(0.12);

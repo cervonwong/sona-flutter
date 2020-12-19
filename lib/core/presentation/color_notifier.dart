@@ -81,10 +81,10 @@ class _OnLightColorGroup implements _ColorGroup {
   Color get highlightColor => kDarkHighlightColor;
 
   @override
-  Color get primarySplashColor => kPrimaryColor.withOpacity(0.12);
+  Color get primarySplashColor => kPrimarySplashColor;
 
   @override
-  Color get primaryHighlightColor => kPrimaryColor.withOpacity(0.12);
+  Color get primaryHighlightColor => kPrimaryHighlightColor;
 
   @override
   Color get highEmphasisTextColor => kDarkHighEmphasisTextColor;
