@@ -145,13 +145,13 @@ TextTheme _createBaseTextTheme() {
     subtitle1: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 16,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w600,
       letterSpacing: 0.15,
     ),
     subtitle2: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 14,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
     ),
     bodyText1: TextStyle(
