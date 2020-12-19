@@ -17,6 +17,7 @@ dependencies:
   path: ^1.7.0
   path_provider: ^1.6.24
   percent_indicator: ^2.1.8
+  provider: ^4.3.2+3
   sqlite3_flutter_libs: ^0.3.0
 
 dev_dependencies:
