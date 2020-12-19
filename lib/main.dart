@@ -162,7 +162,7 @@ TextTheme _createBaseTextTheme() {
     ),
     bodyText2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 14,
+      fontSize: 15,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.25,
     ),
