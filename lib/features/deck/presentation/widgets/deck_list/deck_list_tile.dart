@@ -68,16 +68,18 @@ class DeckListTile extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Consumer<ColorNotifier>(builder: (_, cn, __) {
-                    return Text(
-                      deckName,
-                      softWrap: false,
-                      overflow: TextOverflow.fade,
-                      style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            color: cn.onSurface.highEmphasisTextColor,
-                          ),
-                    );
-                  }),
+                  child: Consumer<ColorNotifier>(
+                    builder: (_, cn, __) {
+                      return Text(
+                        deckName,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              color: cn.onSurface.highEmphasisTextColor,
+                            ),
+                      );
+                    },
+                  ),
                 ),
                 SizedBox(width: 24.0),
                 Consumer<ColorNotifier>(
@@ -93,17 +95,19 @@ class DeckListTile extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.0),
-            Consumer<ColorNotifier>(builder: (_, cn, __) {
-              return LinearPercentIndicator(
-                percent: 0.50,
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                progressColor: cn.onSurface.mediumFamiliarityColor,
-                backgroundColor:
-                    cn.onSurface.mediumFamiliarityColor.withOpacity(0.2),
-                fillColor: Theme.of(context).colorScheme.surface,
-                lineHeight: 8.0,
-              );
-            })
+            Consumer<ColorNotifier>(
+              builder: (_, cn, __) {
+                return LinearPercentIndicator(
+                  percent: 0.50,
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  progressColor: cn.onSurface.mediumFamiliarityColor,
+                  backgroundColor:
+                      cn.onSurface.mediumFamiliarityColor.withOpacity(0.2),
+                  fillColor: Theme.of(context).colorScheme.surface,
+                  lineHeight: 8.0,
+                );
+              },
+            ),
           ],
         ),
       ),
