@@ -66,32 +66,47 @@ class DeckListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = _calculateColor(context);
 
-    return Card(
+    return Material(
       key: Key(deckName),
-      margin: const EdgeInsets.all(0.0),
-      elevation: 0.0,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
+      color: Theme.of(context).colorScheme.surface,
+      child: Consumer<ColorNotifier>(
+        builder: (_, cn, child) {
+          return InkWell(
+            onTap: () {},
+            onLongPress: () {},
+            highlightColor: cn.onSurface.primaryHighlightColor,
+            splashColor: cn.onSurface.primarySplashColor,
+            child: child,
+          );
+        },
+        child: Card(
+          color: Colors.transparent,
+          margin: const EdgeInsets.all(0.0),
+          elevation: 0.0,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
               children: [
-                _DeckNameTitle(deckName: deckName),
-                SizedBox(width: 24.0),
-                unreviewedCardCount == 0
-                    ? _CompletedReviewCheckmark()
-                    : _UnreviewedCardCounter(
-                        unreviewedCardCount: unreviewedCardCount,
-                        color: color,
-                      ),
+                Row(
+                  children: [
+                    _DeckNameTitle(deckName: deckName),
+                    SizedBox(width: 24.0),
+                    unreviewedCardCount == 0
+                        ? _CompletedReviewCheckmark()
+                        : _UnreviewedCardCounter(
+                            unreviewedCardCount: unreviewedCardCount,
+                            color: color,
+                          ),
+                  ],
+                ),
+                SizedBox(height: 12.0),
+                _FamiliarityProgressBar(
+                  familiarCardPercentage: familiarCardPercentage,
+                  color: color,
+                ),
               ],
             ),
-            SizedBox(height: 12.0),
-            _FamiliarityProgressBar(
-              familiarCardPercentage: familiarCardPercentage,
-              color: color,
-            ),
-          ],
+          ),
         ),
       ),
     );
