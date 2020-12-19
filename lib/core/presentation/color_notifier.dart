@@ -81,6 +81,12 @@ class _OnLightColorGroup implements _ColorGroup {
   Color get highlightColor => kDarkHighlightColor;
 
   @override
+  Color get primarySplashColor => kPrimaryColor.withOpacity(0.12);
+
+  @override
+  Color get primaryHighlightColor => kPrimaryColor.withOpacity(0.12);
+
+  @override
   Color get highEmphasisTextColor => kDarkHighEmphasisTextColor;
 
   @override
@@ -108,6 +114,14 @@ class _OnDarkColorGroup implements _ColorGroup {
   Color get highlightColor => kLightHighlightColor;
 
   @override
+  // TODO: implement primarySplashColor
+  Color get primarySplashColor => throw UnimplementedError();
+
+  @override
+  // TODO: implement primaryHighlightColor
+  Color get primaryHighlightColor => throw UnimplementedError();
+
+  @override
   Color get highEmphasisTextColor => kLightHighEmphasisTextColor;
 
   @override
@@ -130,6 +144,10 @@ abstract class _ColorGroup {
   Color get splashColor;
 
   Color get highlightColor;
+
+  Color get primarySplashColor;
+
+  Color get primaryHighlightColor;
 
   Color get highEmphasisTextColor;
 
