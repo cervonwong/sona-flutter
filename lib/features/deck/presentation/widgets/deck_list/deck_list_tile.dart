@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -33,9 +34,11 @@ class DeckListTile extends StatelessWidget {
   final int unscheduledCardCount;
 
   // Derived values
+  final int scheduledCardCount;
   final int unreviewedCardCount;
+  final double familiarCardPercentage;
 
-  const DeckListTile({
+  DeckListTile({
     @required this.deckName,
     @required this.totalCardCount,
     @required this.dueCardCount,
@@ -53,10 +56,16 @@ class DeckListTile extends StatelessWidget {
         assert(unscheduledCardCount != null),
         assert(unscheduledCardCount >= 0),
         assert(unscheduledCardCount <= totalCardCount),
-        unreviewedCardCount = dueCardCount - reviewedCardCount;
+        scheduledCardCount = totalCardCount - unscheduledCardCount,
+        unreviewedCardCount = dueCardCount - reviewedCardCount,
+        familiarCardPercentage = 1 -
+            (dueCardCount - reviewedCardCount) /
+                (totalCardCount - unscheduledCardCount);
 
   @override
   Widget build(BuildContext context) {
+    final color = _calculateColor(context);
+
     return Card(
       key: Key(deckName),
       margin: const EdgeInsets.all(0.0),
@@ -69,17 +78,36 @@ class DeckListTile extends StatelessWidget {
               children: [
                 _DeckNameTitle(deckName: deckName),
                 SizedBox(width: 24.0),
-                _UnreviewedCardCounter(
-                  unreviewedCardCount: unreviewedCardCount,
-                ),
+                unreviewedCardCount == 0
+                    ? _CompletedReviewCheckmark()
+                    : _UnreviewedCardCounter(
+                        unreviewedCardCount: unreviewedCardCount,
+                        color: color,
+                      ),
               ],
             ),
             SizedBox(height: 12.0),
-            _FamiliarityPercentIndicator(),
+            _FamiliarityProgressBar(
+              familiarCardPercentage: familiarCardPercentage,
+              color: color,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Color _calculateColor(BuildContext context) {
+    // Naïve algorithm
+    if (familiarCardPercentage >= 0.90) {
+      return Provider.of<ColorNotifier>(context).onSurface.highFamiliarityColor;
+    } else if (familiarCardPercentage >= 0.70) {
+      return Provider.of<ColorNotifier>(context)
+          .onSurface
+          .mediumFamiliarityColor;
+    } else {
+      return Provider.of<ColorNotifier>(context).onSurface.lowFamiliarityColor;
+    }
   }
 }
 
@@ -111,9 +139,11 @@ class _DeckNameTitle extends StatelessWidget {
 
 class _UnreviewedCardCounter extends StatelessWidget {
   final int unreviewedCardCount;
+  final Color color;
 
   const _UnreviewedCardCounter({
     @required this.unreviewedCardCount,
+    @required this.color,
   });
 
   @override
@@ -123,7 +153,7 @@ class _UnreviewedCardCounter extends StatelessWidget {
         return Text(
           '$unreviewedCardCount',
           style: Theme.of(context).textTheme.subtitle1.copyWith(
-                color: cn.onSurface.mediumFamiliarityColor,
+                color: color,
               ),
         );
       },
@@ -131,18 +161,40 @@ class _UnreviewedCardCounter extends StatelessWidget {
   }
 }
 
-class _FamiliarityPercentIndicator extends StatelessWidget {
+class _CompletedReviewCheckmark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
       builder: (_, cn, __) {
+        return Icon(
+          FluentIcons.checkmark_circle_24_filled,
+          color: cn.onSurface.highFamiliarityColor,
+        );
+      },
+    );
+  }
+}
+
+class _FamiliarityProgressBar extends StatelessWidget {
+  final double familiarCardPercentage;
+  final Color color;
+
+  _FamiliarityProgressBar({
+    @required this.familiarCardPercentage,
+    @required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    print(familiarCardPercentage);
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
         return LinearPercentIndicator(
-          percent: 0.50,
-          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-          progressColor: cn.onSurface.mediumFamiliarityColor,
-          backgroundColor: cn.onSurface.mediumFamiliarityColor.withOpacity(0.2),
-          fillColor: Theme.of(context).colorScheme.surface,
+          percent: familiarCardPercentage,
+          padding: EdgeInsets.symmetric(horizontal: 4.0),
           lineHeight: 8.0,
+          progressColor: color,
+          backgroundColor: color.withOpacity(0.2),
         );
       },
     );
