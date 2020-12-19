@@ -87,6 +87,15 @@ class _OnLightColorGroup implements _ColorGroup {
 
   @override
   Color get lowEmphasisTextColor => kDarkLowEmphasisTextColor;
+
+  @override
+  Color get highFamiliarityColor => kSuccessColor;
+
+  @override
+  Color get mediumFamiliarityColor => kWarningColor;
+
+  @override
+  Color get lowFamiliarityColor => kErrorColor;
 }
 
 /// Colors are generally lighter to contrast against darker colors.
@@ -105,6 +114,15 @@ class _OnDarkColorGroup implements _ColorGroup {
 
   @override
   Color get lowEmphasisTextColor => kLightLowEmphasisTextColor;
+
+  @override
+  Color get highFamiliarityColor => kSuccessColor;
+
+  @override
+  Color get mediumFamiliarityColor => kWarningColor;
+
+  @override
+  Color get lowFamiliarityColor => kErrorColor;
 }
 
 abstract class _ColorGroup {
@@ -117,6 +135,12 @@ abstract class _ColorGroup {
   Color get mediumEmphasisTextColor;
 
   Color get lowEmphasisTextColor;
+
+  Color get highFamiliarityColor;
+
+  Color get mediumFamiliarityColor;
+
+  Color get lowFamiliarityColor;
 }
 
 enum ColorTheme { light, dark }
