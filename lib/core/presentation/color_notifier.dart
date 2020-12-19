@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 
 import 'constants/color_constants.dart';
 
+/// This maps color constants and gives context to them to be dynamic.
 class ColorNotifier extends ChangeNotifier {
   ColorTheme _theme;
   static final _onLight = _OnLightColorGroup();
