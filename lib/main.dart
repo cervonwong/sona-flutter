@@ -74,11 +74,9 @@ ThemeData _createBaseThemeData() {
     backgroundColor: kNeutralColor2,
     canvasColor: Colors.white,
     errorColor: kErrorColor,
-    highlightColor: kDarkHighlightColor,
-    // May explicit kLightHighlightColor.
+    highlightColor: kPrimaryHighlightColor,
     scaffoldBackgroundColor: kNeutralColor2,
-    splashColor: kDarkSplashColor,
-    // May explicit kLightSplashColor.
+    splashColor: kPrimarySplashColor,
     shadowColor: kNeutralColor8,
   );
 }
