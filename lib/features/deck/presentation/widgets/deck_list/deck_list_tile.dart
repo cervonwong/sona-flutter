@@ -84,11 +84,11 @@ class DeckListTile extends StatelessWidget {
 }
 
 class _DeckNameTitle extends StatelessWidget {
+  final String deckName;
+
   const _DeckNameTitle({
     @required this.deckName,
   });
-
-  final String deckName;
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +110,11 @@ class _DeckNameTitle extends StatelessWidget {
 }
 
 class _UnreviewedCardCounter extends StatelessWidget {
+  final int unreviewedCardCount;
+
   const _UnreviewedCardCounter({
     @required this.unreviewedCardCount,
   });
-
-  final int unreviewedCardCount;
 
   @override
   Widget build(BuildContext context) {
