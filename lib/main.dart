@@ -72,7 +72,7 @@ ThemeData _createBaseThemeData() {
     accentColor: kPrimaryColor,
 
     backgroundColor: kNeutralColor2,
-    canvasColor: kNeutralColor1,
+    canvasColor: Colors.white,
     errorColor: kErrorColor,
     highlightColor: kDarkHighlightColor,
     // May explicit kLightHighlightColor.
@@ -90,15 +90,15 @@ ColorScheme _createColorScheme() {
     // Primary
     primary: kPrimaryColor,
     primaryVariant: kPrimaryDarkColor,
-    onPrimary: kNeutralColor1.withOpacity(kLightHighEmphasisOpacity),
+    onPrimary: Colors.white.withOpacity(kLightHighEmphasisOpacity),
 
     // Secondary
     secondary: kPrimaryColor,
     secondaryVariant: kPrimaryDarkColor,
-    onSecondary: kNeutralColor1.withOpacity(kLightHighEmphasisOpacity),
+    onSecondary: Colors.white.withOpacity(kLightHighEmphasisOpacity),
 
     // Surface
-    surface: kNeutralColor1,
+    surface: Colors.white,
     onSurface: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
 
     // Background
@@ -107,7 +107,7 @@ ColorScheme _createColorScheme() {
 
     // Error
     error: kErrorColor,
-    onError: kNeutralColor1.withOpacity(kLightHighEmphasisOpacity),
+    onError: Colors.white.withOpacity(kLightHighEmphasisOpacity),
   );
 }
 
@@ -217,7 +217,7 @@ AppBarTheme _createAppBarTheme() {
 
 DialogTheme _createDialogTheme() {
   return DialogTheme(
-    backgroundColor: kNeutralColor1,
+    backgroundColor: Colors.white,
     elevation: 0.0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(kMediumCornerRadius),
