@@ -28,7 +28,7 @@ abstract class EntryTagRepository {
 
   Future<List<EntryTag>> getAll();
 
-  Future<EntryTag> update({@required EntryTag tag});
+  Future<void> update({@required EntryTag tag});
 
-  Future<EntryTag> delete({@required EntryTag tag});
+  Future<void> delete({@required EntryTag tag});
 }
