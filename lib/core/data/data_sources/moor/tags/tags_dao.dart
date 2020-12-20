@@ -67,8 +67,8 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
     throw UnimplementedError();
   }
 
-  Future<TagModel> getAll() async {
-    throw UnimplementedError();
+  Future<List<TagModel>> getAll() async {
+    return select(tags).get();
   }
 
   Future<TagModel> rename({@required int id, @required String newName}) async {

@@ -119,4 +119,39 @@ void main() {
       );
     },
   );
+
+  group(
+    'TagsDao getAll',
+    () {
+      test(
+        'when there are no tags in the db, '
+        'should return an empty list',
+        () async {
+          final tags = await dao.getAll();
+
+          expect(tags, <TagModel>[]);
+        },
+      );
+
+      test(
+        'when there are multiple tags in the db, '
+        'should return the expected TagModels in order of creation',
+        () async {
+          await dao.create(name: 'Tag 1');
+          await dao.create(name: 'Tag 2');
+          await dao.create(name: 'Tag 3');
+
+          final tags = await dao.getAll();
+          expect(
+            tags,
+            [
+              TagModel(id: 1, name: 'Tag 1'),
+              TagModel(id: 2, name: 'Tag 2'),
+              TagModel(id: 3, name: 'Tag 3'),
+            ],
+          );
+        },
+      );
+    },
+  );
 }
