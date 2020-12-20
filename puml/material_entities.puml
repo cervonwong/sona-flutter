@@ -4,6 +4,7 @@ skinparam maxMessageSize 100
 skinparam shadowing false
 skinparam defaultFontName monospaced
 skinparam defaultFontSize 16
+skinparam classFontStyle bold
 skinparam arrowFontSize 12
 skinparam titleFontSize 24
 skinparam titleFontStyle bold
