@@ -39,7 +39,7 @@ void main() {
     await db?.close();
   });
 
-  Future<List<TagModel>> selectAll() {
+  Future<List<TagModel>> selectAll() async {
     return db.select(db.tags).get();
   }
 
