@@ -30,19 +30,30 @@ class MockCardFormat extends Mock implements CardFormat {}
 class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 
 void main() {
-  final cardFormat1 = MockCardFormat();
-  final cardFormat2 = MockCardFormat();
-  final cardFormat3 = MockCardFormat();
-  final fieldSpec1 = MockEntryFieldSpec();
-  final fieldSpec2 = MockEntryFieldSpec();
-  final fieldSpec3 = MockEntryFieldSpec();
+  CardFormat cardFormat1;
+  CardFormat cardFormat2;
+  CardFormat cardFormat3;
+  EntryFieldSpec fieldSpec1;
+  EntryFieldSpec fieldSpec2;
+  EntryFieldSpec fieldSpec3;
 
-  final entryType = EntryType(
-    id: 666,
-    name: 'Suspicious name',
-    cardFormats: [cardFormat1],
-    fieldSpecs: [fieldSpec1],
-  );
+  EntryType entryType;
+
+  setUp(() {
+    cardFormat1 = MockCardFormat();
+    cardFormat2 = MockCardFormat();
+    cardFormat3 = MockCardFormat();
+    fieldSpec1 = MockEntryFieldSpec();
+    fieldSpec2 = MockEntryFieldSpec();
+    fieldSpec3 = MockEntryFieldSpec();
+
+    entryType = EntryType(
+      id: 666,
+      name: 'Suspicious name',
+      cardFormats: [cardFormat1],
+      fieldSpecs: [fieldSpec1],
+    );
+  });
 
   group(
     'EntryType when constructed',
