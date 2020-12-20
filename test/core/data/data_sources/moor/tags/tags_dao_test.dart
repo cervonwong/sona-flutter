@@ -51,6 +51,7 @@ void main() {
         'should return expected TagModel',
         () async {
           final tag = await dao.create(name: 'Tag name');
+          expect(await selectAll(), [TagModel(id: 1, name: 'Tag name')]);
 
           expect(tag, TagModel(id: 1, name: 'Tag name'));
         },
@@ -74,6 +75,7 @@ void main() {
         'should fail asserts',
         () async {
           await dao.create(name: 'Tag name');
+          expect(await selectAll(), [TagModel(id: 1, name: 'Tag name')]);
 
           expect(
             () async {
@@ -94,6 +96,7 @@ void main() {
         'should return expected TagModel',
         () async {
           final id = (await dao.create(name: 'Random tag')).id;
+          expect(await selectAll(), [TagModel(id: id, name: 'Random tag')]);
 
           final tag = await dao.getById(id: id);
           expect(tag, TagModel(id: id, name: 'Random tag'));
@@ -144,6 +147,14 @@ void main() {
           await dao.create(name: 'Tag 1');
           await dao.create(name: 'Tag 2');
           await dao.create(name: 'Tag 3');
+          expect(
+            await selectAll(),
+            [
+              TagModel(id: 1, name: 'Tag 1'),
+              TagModel(id: 2, name: 'Tag 2'),
+              TagModel(id: 3, name: 'Tag 3'),
+            ],
+          );
 
           final tags = await dao.getAll();
           expect(
@@ -167,8 +178,10 @@ void main() {
         'should return expected renamed TagModel',
         () async {
           final id = (await dao.create(name: 'Old name')).id;
+          expect(await selectAll(), [TagModel(id: 1, name: 'Old name')]);
 
           final tag = await dao.rename(id: id, newName: 'New name');
+          expect(await selectAll(), [TagModel(id: 1, name: 'New name')]);
           expect(tag, TagModel(id: id, name: 'New name'));
         },
       );
@@ -193,6 +206,7 @@ void main() {
             'newName is null',
             () async {
               final id = (await dao.create(name: 'Random tag')).id;
+              expect(await selectAll(), [TagModel(id: 1, name: 'Random tag')]);
 
               expect(
                 () async {
@@ -224,6 +238,13 @@ void main() {
         () async {
           final id = (await dao.create(name: 'Alpha')).id;
           await dao.create(name: 'Beta');
+          expect(
+            await selectAll(),
+            [
+              TagModel(id: 1, name: 'Alpha'),
+              TagModel(id: 2, name: 'Beta'),
+            ],
+          );
 
           expect(
             () async {
