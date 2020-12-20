@@ -47,4 +47,38 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
     // Returns the tag from the database with the ID.
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
+
+  /// Returns the TagModel of the tag in the database with a matching ID.
+  ///
+  /// Returns a `Future(null)` if there are no tags in the database with a
+  /// matching ID.
+  Future<TagModel> getById({@required int id}) async {
+    assert(id != null);
+
+    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
+  }
+
+  /// Returns the TagModel of the tag in the database with a matching name.
+  ///
+  /// Returns a `Future(null)` if there are no tags in the database with a
+  /// matching name.
+  @deprecated
+  Future<TagModel> getByName({@required String name}) async {
+    throw UnimplementedError();
+  }
+
+  Future<TagModel> getAll() async {
+    throw UnimplementedError();
+  }
+
+  Future<TagModel> rename({@required int id, @required String newName}) async {
+    throw UnimplementedError();
+  }
+
+  ///
+  ///
+  /// This method is not named `delete` because of naming conflicts.
+  Future<TagModel> remove({@required int id}) async {
+    throw UnimplementedError();
+  }
 }

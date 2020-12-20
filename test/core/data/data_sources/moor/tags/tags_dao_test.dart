@@ -81,4 +81,42 @@ void main() {
       );
     },
   );
+
+  group(
+    'TagsDao getById',
+    () {
+      test(
+        'when passed valid id, '
+        'should return expected TagModel',
+        () async {
+          final id = (await dao.create(name: 'Random tag')).id;
+
+          final tag = await dao.getById(id: id);
+          expect(tag, TagModel(id: id, name: 'Random tag'));
+        },
+      );
+
+      test(
+        'when no tags in the db has the same id as the passed id, '
+        'should return null',
+        () async {
+          final tag = await dao.getById(id: -1);
+          expect(tag, isNull);
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.getById(id: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
 }
