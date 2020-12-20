@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
 import '../moor_database.dart';
@@ -27,4 +28,23 @@ part 'tags_dao.g.dart';
 @UseDao(tables: [Tags])
 class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   TagsDao(MoorDatabase db) : super(db);
+
+  /// Creates a record in the database for a tag with `name`, then returns its
+  /// model.
+  ///
+  /// Throws `AssertionError`s when name is `null` or when there already exists
+  /// a tag with the same name in the database. In production,
+  /// `InvalidDataException` or `SqliteException` may be thrown. You must check
+  /// inputs before passing them to this method.
+  Future<TagModel> create({@required String name}) async {
+    assert(name != null);
+    // Asserts that a tag with the same name in the db does not exist.
+    assert((await (select(tags)..where((tag) => tag.name.equals(name))).get())
+        .isEmpty);
+
+    // Inserts a tag with the given name, and gets the auto-incremented ID.
+    final id = await into(tags).insert(TagsCompanion.insert(name: name));
+    // Returns the tag from the database with the ID.
+    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
+  }
 }
