@@ -1,0 +1,63 @@
+@startuml
+
+skinparam wrapWidth 200
+skinparam maxMessageSize 100
+skinparam defaultFontName Monospaced
+skinparam defaultFontSize 16
+skinparam arrowFontSize 12
+skinparam objectFontStyle bold
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Dependencies between layers of the app.\n
+footer Copyright (C) 2020 Cervon Wong
+
+package Presentation <<Cloud>> {
+	object "Widgets" as w
+    object "State Management" as s {
+    	BLoC, ChangeNotifier...
+    }
+}
+
+package Domain <<Cloud>> {
+	object "Use Cases" as u
+	object "Entities" as e
+	object "Repo Interfaces" as ir
+}
+
+package Data <<Cloud>> {
+	object "Repo Impls" as ri
+    object "DAOs" AS d {
+    	also Data Sources
+    }
+    object "Moor Database" as db {
+    	Configs, Tables, Models
+    }
+}
+
+package Core <<Cloud>> {
+	object "Service Locator" as di {
+    	GetIt used for Dependency Injection
+    }
+}
+
+w  ....>  s
+w  ....>  e
+s  ....>  u
+s  ....>  e
+u  ....>  e
+u  ....>  ir
+ir ....>  e
+ri ....|> ir
+ri ....>  d
+ri ....>  db
+ri ....>  e
+d  ....>  db
+
+note right of di
+Unimplemented
+end note
+
+@enduml
