@@ -32,7 +32,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   /// Creates a record in the database for a tag with `name`, then returns its
   /// model.
   ///
-  /// Throws `AssertionError`s when name is `null` or when there already exists
+  /// Throws `AssertionError` when name is `null` or when there already exists
   /// a tag with the same name in the database. In production,
   /// `InvalidDataException` or `SqliteException` may be thrown. You must check
   /// inputs before passing them to this method.
@@ -44,7 +44,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
 
     // Inserts a tag with the given name, and gets the auto-incremented ID.
     final id = await into(tags).insert(TagsCompanion.insert(name: name));
-    // Returns the tag from the database with the ID.
+    // Returns the tag from the database specified by its ID.
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
@@ -74,11 +74,11 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
     return select(tags).get();
   }
 
-  /// Updates the name to `newName` of the tag specified by its `id`, then
+  /// Updates the name to `newName` of the tag specified by its ID, then
   /// return its renamed model.
   ///
-  /// Throws `AssertionError`s when there are no tags in the database with a
-  /// matching id or when there is another tag in the database with the name
+  /// Throws `AssertionError` when there are no tags in the database with a
+  /// matching ID or when there is another tag in the database with the name
   /// `newName`. In production, `InvalidDataException` or `SqliteException` may
   /// be thrown. You must check inputs before passing them to this method.
   Future<TagModel> rename({@required int id, @required String newName}) async {
@@ -99,10 +99,30 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
+  /// Deletes the tag specified by its ID.
   ///
+  /// Throws `AssertionError` when there are no tags in the database with a
+  /// matching ID. In production, `InvalidDataException` or `SqliteException`
+  /// may be thrown. You must check inputs before passing them to this method.
   ///
   /// This method is not named `delete` because of naming conflicts.
   Future<TagModel> remove({@required int id}) async {
-    throw UnimplementedError();
+    assert(id != null);
+
+    // Gets the tag specified by its ID.
+    final tag = (await select(tags)
+          ..where((tag) => tag.id.equals(id)))
+        .getSingle();
+    // Asserts that there is 1 tag specified by its ID.
+    assert(tag != null);
+
+    // Deletes the tag specified by its ID,
+    // then gets the number of deleted tags.
+    final num = await (delete(tags)..where((tag) => tag.id.equals(id))).go();
+    // Asserts that the number of deleted tags is 1.
+    assert(num == 1);
+
+    // Returns the now removed tag.
+    return tag;
   }
 }

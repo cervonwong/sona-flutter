@@ -39,6 +39,10 @@ void main() {
     await db?.close();
   });
 
+  Future<List<TagModel>> selectAll() {
+    return db.select(db.tags).get();
+  }
+
   group(
     'TagsDao create',
     () {
@@ -224,6 +228,50 @@ void main() {
           expect(
             () async {
               await dao.rename(id: id, newName: 'Beta');
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'TagsDao remove',
+    () {
+      test(
+        'when passed legal id, '
+        'should return expected deleted tag',
+        () async {
+          final id = (await dao.create(name: 'Random tag')).id;
+          expect(await selectAll(), [TagModel(id: 1, name: 'Random tag')]);
+
+          final tag = await dao.remove(id: id);
+          expect(tag, TagModel(id: 1, name: 'Random tag'));
+          expect(await selectAll(), <TagModel>[]);
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.remove(id: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when no tags in the db has the same id as the passed id, '
+        'should fail asserts',
+        () {
+          expect(
+            () async {
+              await dao.remove(id: -1);
             },
             throwsAssertionError,
           );
