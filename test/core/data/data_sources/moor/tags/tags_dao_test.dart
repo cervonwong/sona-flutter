@@ -43,7 +43,7 @@ void main() {
     'TagsDao create',
     () {
       test(
-        'when passed valid name, '
+        'when passed legal name, '
         'should return expected TagModel',
         () async {
           final tag = await dao.create(name: 'Tag name');
@@ -86,7 +86,7 @@ void main() {
     'TagsDao getById',
     () {
       test(
-        'when passed valid id, '
+        'when passed legal id, '
         'should return expected TagModel',
         () async {
           final id = (await dao.create(name: 'Random tag')).id;
@@ -149,6 +149,83 @@ void main() {
               TagModel(id: 2, name: 'Tag 2'),
               TagModel(id: 3, name: 'Tag 3'),
             ],
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'TagsDao rename',
+    () {
+      test(
+        'when passed legal arguments, '
+        'should return expected renamed TagModel',
+        () async {
+          final id = (await dao.create(name: 'Old name')).id;
+
+          final tag = await dao.rename(id: id, newName: 'New name');
+          expect(tag, TagModel(id: id, name: 'New name'));
+        },
+      );
+
+      group(
+        'when passed null arguments, '
+        'should fail asserts',
+        () {
+          test(
+            'id is null',
+            () async {
+              expect(
+                () async {
+                  await dao.rename(id: null, newName: 'New name');
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'newName is null',
+            () async {
+              final id = (await dao.create(name: 'Random tag')).id;
+
+              expect(
+                () async {
+                  await dao.rename(id: id, newName: null);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when no tags in the db has the same id as the passed id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.rename(id: 1, newName: 'New name');
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when a tag in the db has the same name as the passed newName, '
+        'should fail asserts',
+        () async {
+          final id = (await dao.create(name: 'Alpha')).id;
+          await dao.create(name: 'Beta');
+
+          expect(
+            () async {
+              await dao.rename(id: id, newName: 'Beta');
+            },
+            throwsAssertionError,
           );
         },
       );

@@ -67,12 +67,36 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
     throw UnimplementedError();
   }
 
+  /// Returns the list of TagModels of all tags in the database.
+  ///
+  /// Returns the list of TagModels in the order of creation.
   Future<List<TagModel>> getAll() async {
     return select(tags).get();
   }
 
+  /// Updates the name to `newName` of the tag specified by its `id`, then
+  /// return its renamed model.
+  ///
+  /// Throws `AssertionError`s when there are no tags in the database with a
+  /// matching id or when there is another tag in the database with the name
+  /// `newName`. In production, `InvalidDataException` or `SqliteException` may
+  /// be thrown. You must check inputs before passing them to this method.
   Future<TagModel> rename({@required int id, @required String newName}) async {
-    throw UnimplementedError();
+    assert(id != null);
+    assert(newName != null);
+    // Asserts that a tag with the same id in the db exists.
+    assert((await (select(tags)..where((tag) => tag.id.equals(id))).get())
+        .isNotEmpty);
+    // Asserts that a tag with the same name in the db does not exist.
+    assert(
+        (await (select(tags)..where((tag) => tag.name.equals(newName))).get())
+            .isEmpty);
+
+    // Rename tags from the database which has the ID.
+    await (update(tags)..where((tag) => tag.id.equals(id)))
+        .write(TagsCompanion(name: Value(newName)));
+    // Returns the renamed tag from the database with the ID.
+    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
   ///
