@@ -30,8 +30,8 @@ class Deck {
 	name               : String
 	createdDateTime    : DateTime
 	lastEditedDateTime : DateTime
-	authorName         : String
-	description        : String
+	authorName         : String?
+	description        : String?
 }
 
 class EntryTag {
