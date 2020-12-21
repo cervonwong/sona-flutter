@@ -161,8 +161,8 @@ void main() {
         'when no decks in the db has the same id as the passed id, '
         'should return null',
         () async {
-          final tag = await dao.getById(id: -1);
-          expect(tag, isNull);
+          final deck = await dao.getById(id: -1);
+          expect(deck, isNull);
         },
       );
 
