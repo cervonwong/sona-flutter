@@ -17,4 +17,119 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-void main() {}
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:moor/ffi.dart';
+import 'package:sona_flutter/core/constants/material_constants.dart';
+import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
+import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
+import 'package:sona_flutter/core/utils/system_time.dart';
+
+class MockSystemTime extends Mock implements SystemTime {}
+
+// This is an integration test with MoorDatabase.
+void main() {
+  DecksDao dao;
+  SystemTime systemTime;
+  MoorDatabase db;
+
+  setUp(() {
+    db = MoorDatabase(VmDatabase.memory(
+      // Change the logStatement argument to true to print each SQL query for
+      // debugging if needed. This is set to false to not pollute test logs.
+      logStatements: false,
+    ));
+    systemTime = MockSystemTime();
+    when(systemTime.now()).thenReturn(DateTime(2020));
+    dao = DecksDaoImpl(db: db, systemTime: systemTime);
+  });
+
+  tearDown(() async {
+    await db?.close();
+  });
+
+  Future<List<DeckModel>> selectAll() async {
+    return db.select(db.decks).get();
+  }
+
+  group(
+    'DecksDaoImpl create',
+    () {
+      group(
+        'when passed legal name',
+        () {
+          DeckModel deck;
+          setUp(() async {
+            deck = await dao.create(name: 'Leo');
+          });
+
+          test(
+            'should create expected record in database',
+            () async {
+              final all = await selectAll();
+              expect(all, hasLength(1));
+
+              final record = all[0];
+              expect(
+                record,
+                DeckModel(
+                  id: 1,
+                  name: 'Leo',
+                  created: DateTime(2020),
+                  lastEdited: DateTime(2020),
+                  authorName: kDefaultDeckAuthorName,
+                  description: kDefaultDeckDescription,
+                ),
+              );
+            },
+          );
+
+          test(
+            'should return expected DeckModel',
+            () async {
+              expect(
+                deck,
+                DeckModel(
+                  id: 1,
+                  name: 'Leo',
+                  created: DateTime(2020),
+                  lastEdited: DateTime(2020),
+                  authorName: kDefaultDeckAuthorName,
+                  description: kDefaultDeckDescription,
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when passed null name, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.create(name: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when a deck in the db has the same name as the passed name, '
+        'should fail asserts',
+        () async {
+          await dao.create(name: 'Cancer');
+
+          expect(
+            () async {
+              await dao.create(name: 'Cancer');
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+}

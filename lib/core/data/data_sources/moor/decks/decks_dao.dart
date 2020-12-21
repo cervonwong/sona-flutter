@@ -19,6 +19,8 @@
 
 import 'package:moor/moor.dart';
 
+import '../../../../constants/material_constants.dart';
+import '../../../../utils/system_time.dart';
 import '../moor_database.dart';
 import 'decks_table.dart';
 
@@ -40,12 +42,43 @@ abstract class DecksDao {
 class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     with _$DecksDaoImplMixin
     implements DecksDao {
-  DecksDaoImpl(MoorDatabase db) : super(db);
+  final SystemTime systemTime;
 
+  DecksDaoImpl({
+    @required MoorDatabase db,
+    @required this.systemTime,
+  }) : super(db);
+
+  /// Creates a record in the database for a deck with name `name`, then returns
+  /// its model.
+  ///
+  /// Throws `AssertionError` when name is `null` or when there already exists
+  /// a deck with the same name in the database. In production,
+  /// `InvalidDataException` or `SqliteException` may be thrown. You must check
+  /// inputs before passing them to this method.
   @override
-  Future<DeckModel> create({@required String name}) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<DeckModel> create({@required String name}) async {
+    assert(name != null);
+    // Asserts that a deck with the same name in the db does not exist.
+    assert((await (select(decks)
+              ..where(
+                (deck) => deck.name.equals(name),
+              ))
+            .get())
+        .isEmpty);
+
+    // Inserts a deck with the given name, then gets the auto-incremented ID.
+    final id = await into(decks).insert(
+      DecksCompanion.insert(
+        name: name,
+        created: systemTime.now(),
+        lastEdited: systemTime.now(),
+        authorName: Value(kDefaultDeckAuthorName),
+        description: Value(kDefaultDeckDescription),
+      ),
+    );
+    // Returns the deck from the database specified by its ID.
+    return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
   }
 
   @override
