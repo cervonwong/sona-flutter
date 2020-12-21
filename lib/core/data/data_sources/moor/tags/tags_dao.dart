@@ -30,9 +30,6 @@ abstract class TagsDao {
 
   Future<TagModel> getById({@required int id});
 
-  @deprecated
-  Future<TagModel> getByName({@required String name});
-
   Future<List<TagModel>> getAll();
 
   Future<TagModel> rename({@required int id, @required String newName});
@@ -75,16 +72,6 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     assert(id != null);
 
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
-  }
-
-  /// Returns the TagModel of the tag in the database with a matching name.
-  ///
-  /// Returns a `Future(null)` if there are no tags in the database with a
-  /// matching name.
-  @override
-  @deprecated
-  Future<TagModel> getByName({@required String name}) async {
-    throw UnimplementedError();
   }
 
   /// Returns the list of TagModels of all tags in the database.
