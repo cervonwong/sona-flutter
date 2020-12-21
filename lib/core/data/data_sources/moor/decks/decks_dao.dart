@@ -33,7 +33,7 @@ abstract class DecksDao {
 
   Future<List<DeckModel>> getAll();
 
-  Future<DeckModel> edit({@required DeckModel deck});
+  Future<DeckModel> edit({@required DeckModel newDeck});
 
   Future<DeckModel> remove({@required int id});
 }
@@ -49,12 +49,12 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     @required this.systemTime,
   }) : super(db);
 
-  /// Creates a record in the database for a deck with name `name`, then returns
-  /// its model.
+  /// Creates a record in the database for a deck with name [name], then returns
+  /// its [DeckModel].
   ///
-  /// Throws `AssertionError` when name is `null` or when there already exists
+  /// Throws [AssertionError] when name is `null` or when there already exists
   /// a deck with the same name in the database. In production,
-  /// `InvalidDataException` or `SqliteException` may be thrown. You must check
+  /// [InvalidDataException] or [SqliteException] may be thrown. You must check
   /// inputs before passing them to this method.
   @override
   Future<DeckModel> create({@required String name}) async {
@@ -78,10 +78,10 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
       ),
     );
     // Returns the deck from the database specified by its ID.
-    return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
+    return getById(id: id);
   }
 
-  /// Returns the DeckModel of the deck in the database with a matching ID.
+  /// Returns the [DeckModel] of the deck in the database with a matching ID.
   ///
   /// Returns a `Future(null)` if there are no decks in the database with a
   /// matching ID.
@@ -92,19 +92,53 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
   }
 
-  /// Returns the list of DeckModels of all decks in the database.
+  /// Returns the list of [DeckModel]s of all decks in the database.
   ///
-  /// Returns the list of DeckModels in the order of creation.
+  /// Returns the list of [DeckModel]s in the order of creation.
   @override
   Future<List<DeckModel>> getAll() async => select(decks).get();
 
+  /// Updates the updatable fields of the deck specified by [newDeck]'s ID, then
+  /// returns its updated [DeckModel].
   ///
+  /// If any of these fields: [`name`, `lastEdited` ,`authorName`,
+  /// `description`] are different in [newDeck] compared to the deck in the
+  /// database, then the deck in the database's fields are updated.
+  ///
+  /// Throws [AssertionError] when there are no decks in the database with a
+  /// matching ID or when there is another deck the database with the same name
+  /// as [newDeck]'s `name` In production, [InvalidDataException] or
+  /// [SqliteException] may be thrown. You must check inputs before passing
+  /// them to this method.
   ///
   /// This method is not named `update` because of naming conflicts.
   @override
-  Future<DeckModel> edit({@required DeckModel deck}) {
-    // TODO: implement edit
-    throw UnimplementedError();
+  Future<DeckModel> edit({@required DeckModel newDeck}) async {
+    assert(newDeck != null);
+    // Asserts that a deck with the same ID as the passed deck's ID exists.
+    assert(await getById(id: newDeck.id) != null);
+    // Asserts that a deck with the same name as the passed deck's name and is
+    // not the same deck (deck with the same ID as newDeck's id) does not exist.
+    assert((await (select(decks)
+              ..where(
+                (deck) =>
+                    deck.name.equals(newDeck.name) &
+                    deck.id.equals(newDeck.id).not(),
+              ))
+            .get())
+        .isEmpty);
+
+    // Updates deck from the database which has the same ID.
+    await (update(decks)..where((deck) => deck.id.equals(newDeck.id))).write(
+      DecksCompanion(
+        name: Value(newDeck.name),
+        lastEdited: Value(systemTime.now()),
+        authorName: Value(newDeck.authorName),
+        description: Value(newDeck.description),
+      ),
+    );
+    // Returns the updated deck from the database specified by its ID.
+    return getById(id: newDeck.id);
   }
 
   ///

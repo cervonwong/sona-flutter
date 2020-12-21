@@ -65,7 +65,7 @@ void main() {
           });
 
           test(
-            'should create expected records in database',
+            'should create expected records in decks table',
             () async {
               expect(
                 await selectAll(),
@@ -250,6 +250,291 @@ void main() {
                 description: kDefaultDeckDescription,
               ),
             ],
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'DecksDaoImpl edit',
+    () {
+      group(
+        'when passed legal newDeck, '
+        'should update changed fields',
+        () {
+          group(
+            'when authorName and description are unchanged',
+            () {
+              DeckModel editedDeck;
+              setUp(() async {
+                when(systemTime.now()).thenReturn(DateTime(1990));
+                final deck = await dao.create(name: 'Capricorn');
+
+                when(systemTime.now()).thenReturn(DateTime(2000));
+                editedDeck = await dao.edit(
+                  newDeck: deck.copyWith(name: 'Aquarius'),
+                );
+              });
+
+              test(
+                'should update expected records in decks table',
+                () async {
+                  expect(
+                    await selectAll(),
+                    [
+                      DeckModel(
+                        id: 1,
+                        name: 'Aquarius',
+                        created: DateTime(1990),
+                        lastEdited: DateTime(2000),
+                        authorName: kDefaultDeckAuthorName,
+                        description: kDefaultDeckDescription,
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              test(
+                'should return expected DeckModel',
+                () async {
+                  expect(
+                    editedDeck,
+                    DeckModel(
+                      id: 1,
+                      name: 'Aquarius',
+                      created: DateTime(1990),
+                      lastEdited: DateTime(2000),
+                      authorName: kDefaultDeckAuthorName,
+                      description: kDefaultDeckDescription,
+                    ),
+                  );
+                },
+              );
+            },
+          );
+
+          group(
+            'when authorName and description are changed',
+            () {
+              DeckModel editedDeck;
+              setUp(() async {
+                when(systemTime.now()).thenReturn(DateTime(1990));
+                final deck = await dao.create(name: 'Capricorn');
+
+                when(systemTime.now()).thenReturn(DateTime(2000));
+                editedDeck = await dao.edit(
+                  newDeck: deck.copyWith(
+                    name: 'Aquarius',
+                    authorName: 'Me',
+                    description: 'This is a string.',
+                  ),
+                );
+              });
+
+              test(
+                'should update expected records in decks table',
+                () async {
+                  expect(await selectAll(), [
+                    DeckModel(
+                      id: 1,
+                      name: 'Aquarius',
+                      created: DateTime(1990),
+                      lastEdited: DateTime(2000),
+                      authorName: 'Me',
+                      description: 'This is a string.',
+                    ),
+                  ]);
+                },
+              );
+
+              test(
+                'should return expected DeckModel',
+                () async {
+                  expect(
+                    editedDeck,
+                    DeckModel(
+                      id: 1,
+                      name: 'Aquarius',
+                      created: DateTime(1990),
+                      lastEdited: DateTime(2000),
+                      authorName: 'Me',
+                      description: 'This is a string.',
+                    ),
+                  );
+                },
+              );
+            },
+          );
+
+          group(
+            'when created or lastEdited are changed',
+            () {
+              DeckModel editedDeck;
+              setUp(() async {
+                when(systemTime.now()).thenReturn(DateTime(1990));
+                final deck = await dao.create(name: 'Capricorn');
+
+                when(systemTime.now()).thenReturn(DateTime(2000));
+                editedDeck = await dao.edit(
+                  newDeck: deck.copyWith(
+                    name: 'Aquarius',
+                    created: DateTime(2020),
+                    lastEdited: DateTime(2030),
+                  ),
+                );
+              });
+
+              test(
+                'should update expected records in decks table',
+                () async {
+                  expect(
+                    await selectAll(),
+                    [
+                      DeckModel(
+                        id: 1,
+                        name: 'Aquarius',
+                        created: DateTime(1990),
+                        lastEdited: DateTime(2000),
+                        authorName: kDefaultDeckAuthorName,
+                        description: kDefaultDeckDescription,
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              test(
+                'should return expected DeckModel',
+                () async {
+                  expect(
+                    editedDeck,
+                    DeckModel(
+                      id: 1,
+                      name: 'Aquarius',
+                      created: DateTime(1990),
+                      lastEdited: DateTime(2000),
+                      authorName: kDefaultDeckAuthorName,
+                      description: kDefaultDeckDescription,
+                    ),
+                  );
+                },
+              );
+            },
+          );
+
+          group(
+            'when name is unchanged',
+            () {
+              DeckModel editedDeck;
+              setUp(() async {
+                when(systemTime.now()).thenReturn(DateTime(1990));
+                final deck = await dao.create(name: 'Capricorn');
+
+                when(systemTime.now()).thenReturn(DateTime(2000));
+                editedDeck = await dao.edit(
+                  newDeck: deck.copyWith(
+                    authorName: 'You',
+                  ),
+                );
+              });
+
+              test(
+                'should update expected records in decks table',
+                () async {
+                  expect(
+                    await selectAll(),
+                    [
+                      DeckModel(
+                        id: 1,
+                        name: 'Capricorn',
+                        created: DateTime(1990),
+                        lastEdited: DateTime(2000),
+                        authorName: 'You',
+                        description: kDefaultDeckDescription,
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              test(
+                'should return expected DeckModel',
+                () async {
+                  expect(
+                    editedDeck,
+                    DeckModel(
+                      id: 1,
+                      name: 'Capricorn',
+                      created: DateTime(1990),
+                      lastEdited: DateTime(2000),
+                      authorName: 'You',
+                      description: kDefaultDeckDescription,
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when no decks in the db has the same ID as the passed newDeck\'s id',
+        () async {
+          expect(
+            () async {
+              await dao.edit(
+                newDeck: DeckModel(
+                  id: 1,
+                  name: 'Aquarius',
+                  created: DateTime(1990),
+                  lastEdited: DateTime(2000),
+                  authorName: 'Me',
+                  description: 'This is a string.',
+                ),
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when another deck in the db has the same name '
+        'as the passed newDeck\'s name',
+        () async {
+          await dao.create(name: 'Scorpio');
+          await dao.create(name: 'Pisces');
+
+          expect(
+            () async {
+              await dao.edit(
+                newDeck: DeckModel(
+                  id: 1,
+                  name: 'Pisces',
+                  created: DateTime(1990),
+                  lastEdited: DateTime(2000),
+                  authorName: 'Me',
+                  description: 'This is a string.',
+                ),
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed null newDeck, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.edit(newDeck: null);
+            },
+            throwsAssertionError,
           );
         },
       );
