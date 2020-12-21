@@ -22,6 +22,7 @@ import 'package:moor/ffi.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/tags/tags_dao.dart';
 
+// This is an integration test with MoorDatabase.
 void main() {
   TagsDao dao;
   MoorDatabase db;
