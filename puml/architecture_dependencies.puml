@@ -29,7 +29,10 @@ package Domain <<Cloud>> {
 
 package Data <<Cloud>> {
 	object "Repo Impls" as ri
-    object "DAOs" AS d {
+    object "DAO Impls" AS di {
+    	also Data Sources
+    }
+    object "DAO Interfaces" as id {
     	also Data Sources
     }
     object "Moor Database" as db {
@@ -38,7 +41,7 @@ package Data <<Cloud>> {
 }
 
 package Core <<Cloud>> {
-	object "Service Locator" as di {
+	object "Service Locator" as sl {
     	GetIt used for Dependency Injection
     }
 }
@@ -51,12 +54,14 @@ u  ....>  e
 u  ....>  ir
 ir ....>  e
 ri ....|> ir
-ri ....>  d
+ri ....>  id
 ri ....>  db
 ri ....>  e
-d  ....>  db
+di ....>  db
+di ....|> id
+id ....> db
 
-note right of di
+note right of sl
 	Unimplemented
 end note
 
