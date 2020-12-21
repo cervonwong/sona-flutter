@@ -278,7 +278,7 @@ void main() {
               });
 
               test(
-                'should update expected records in decks table',
+                'should update expected record in decks table',
                 () async {
                   expect(
                     await selectAll(),
@@ -334,7 +334,7 @@ void main() {
               });
 
               test(
-                'should update expected records in decks table',
+                'should update expected record in decks table',
                 () async {
                   expect(await selectAll(), [
                     DeckModel(
@@ -387,7 +387,7 @@ void main() {
               });
 
               test(
-                'should update expected records in decks table',
+                'should update expected record in decks table',
                 () async {
                   expect(
                     await selectAll(),
@@ -533,6 +533,85 @@ void main() {
           expect(
             () async {
               await dao.edit(newDeck: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'DecksDaoImpl remove',
+    () {
+      group(
+        'when passed legal id',
+        () {
+          DeckModel removedDeck;
+          setUp(() async {
+            await dao.create(name: 'Apple');
+            await dao.create(name: 'Banana');
+            removedDeck = await dao.remove(id: 1);
+          });
+
+          test(
+            'should delete expected record in decks table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  DeckModel(
+                    id: 2,
+                    name: 'Banana',
+                    created: DateTime(2020),
+                    lastEdited: DateTime(2020),
+                    authorName: kDefaultDeckAuthorName,
+                    description: kDefaultDeckDescription,
+                  ),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return expected DecksModel',
+            () async {
+              expect(
+                removedDeck,
+                DeckModel(
+                  id: 1,
+                  name: 'Apple',
+                  created: DateTime(2020),
+                  lastEdited: DateTime(2020),
+                  authorName: kDefaultDeckAuthorName,
+                  description: kDefaultDeckDescription,
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.remove(id: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when no decks in the db has the same ID as the passed id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.remove(id: -1);
             },
             throwsAssertionError,
           );

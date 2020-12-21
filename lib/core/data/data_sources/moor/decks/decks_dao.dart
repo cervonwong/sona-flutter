@@ -141,12 +141,29 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     return getById(id: newDeck.id);
   }
 
+  /// Deletes the deck specified by its ID [id].
   ///
+  /// Throws [AssertionError] when there are no decks in the database with a
+  /// matching ID. In production, [InvalidDataException] or [SqliteException]
+  /// may be thrown. You must check inputs before passing them to this method.
   ///
   /// This method is not named `delete` because of naming conflicts.
   @override
-  Future<DeckModel> remove({@required int id}) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<DeckModel> remove({@required int id}) async {
+    assert(id != null);
+
+    // Gets the deck specified by its ID.
+    final deck = await getById(id: id);
+    // Asserts that there is 1 deck specified by its ID.
+    assert(deck != null);
+
+    // Deletes the deck specified by its ID,
+    // then gets the number of deleted decks.
+    final num = await (delete(decks)..where((deck) => deck.id.equals(id))).go();
+    // Asserts that the number of deleted tags is 1.
+    assert(num == 1);
+
+    // Returns the now removed deck.
+    return deck;
   }
 }
