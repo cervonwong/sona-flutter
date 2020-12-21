@@ -180,4 +180,60 @@ void main() {
       );
     },
   );
+
+  group(
+    'DecksDaoImpl getAll',
+    () {
+      test(
+        'when there are no decks in the db, '
+        'should return an empty list',
+        () async {
+          final decks = await dao.getAll();
+
+          expect(decks, <DeckModel>[]);
+        },
+      );
+
+      test(
+        'when there are multiple decks in the db, '
+        'should return the expected DeckModels in the order of creation',
+        () async {
+          await dao.create(name: 'Aries');
+          await dao.create(name: 'Taurus');
+          await dao.create(name: 'Gemini');
+
+          final decks = await dao.getAll();
+          expect(
+            decks,
+            [
+              DeckModel(
+                id: 1,
+                name: 'Aries',
+                created: DateTime(2020),
+                lastEdited: DateTime(2020),
+                authorName: kDefaultDeckAuthorName,
+                description: kDefaultDeckDescription,
+              ),
+              DeckModel(
+                id: 2,
+                name: 'Taurus',
+                created: DateTime(2020),
+                lastEdited: DateTime(2020),
+                authorName: kDefaultDeckAuthorName,
+                description: kDefaultDeckDescription,
+              ),
+              DeckModel(
+                id: 3,
+                name: 'Gemini',
+                created: DateTime(2020),
+                lastEdited: DateTime(2020),
+                authorName: kDefaultDeckAuthorName,
+                description: kDefaultDeckDescription,
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
 }

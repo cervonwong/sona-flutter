@@ -92,11 +92,11 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
   }
 
+  /// Returns the list of DeckModels of all decks in the database.
+  ///
+  /// Returns the list of DeckModels in the order of creation.
   @override
-  Future<List<DeckModel>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
+  Future<List<DeckModel>> getAll() async => select(decks).get();
 
   ///
   ///
