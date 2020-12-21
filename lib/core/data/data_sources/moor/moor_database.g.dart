@@ -1484,11 +1484,13 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
   DecksCompanion.insert({
     this.id = const Value.absent(),
     @required String name,
-    this.created = const Value.absent(),
-    this.lastEdited = const Value.absent(),
+    @required DateTime created,
+    @required DateTime lastEdited,
     this.authorName = const Value.absent(),
     this.description = const Value.absent(),
-  }) : name = Value(name);
+  })  : name = Value(name),
+        created = Value(created),
+        lastEdited = Value(lastEdited);
   static Insertable<DeckModel> custom({
     Expression<int> id,
     Expression<String> name,
@@ -1589,8 +1591,11 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   @override
   GeneratedDateTimeColumn get created => _created ??= _constructCreated();
   GeneratedDateTimeColumn _constructCreated() {
-    return GeneratedDateTimeColumn('created', $tableName, false,
-        defaultValue: currentDateAndTime);
+    return GeneratedDateTimeColumn(
+      'created',
+      $tableName,
+      false,
+    );
   }
 
   final VerificationMeta _lastEditedMeta = const VerificationMeta('lastEdited');
@@ -1599,8 +1604,11 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   GeneratedDateTimeColumn get lastEdited =>
       _lastEdited ??= _constructLastEdited();
   GeneratedDateTimeColumn _constructLastEdited() {
-    return GeneratedDateTimeColumn('last_edited', $tableName, false,
-        defaultValue: currentDateAndTime);
+    return GeneratedDateTimeColumn(
+      'last_edited',
+      $tableName,
+      false,
+    );
   }
 
   final VerificationMeta _authorNameMeta = const VerificationMeta('authorName');
@@ -1655,12 +1663,16 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
     if (data.containsKey('created')) {
       context.handle(_createdMeta,
           created.isAcceptableOrUnknown(data['created'], _createdMeta));
+    } else if (isInserting) {
+      context.missing(_createdMeta);
     }
     if (data.containsKey('last_edited')) {
       context.handle(
           _lastEditedMeta,
           lastEdited.isAcceptableOrUnknown(
               data['last_edited'], _lastEditedMeta));
+    } else if (isInserting) {
+      context.missing(_lastEditedMeta);
     }
     if (data.containsKey('author_name')) {
       context.handle(

@@ -32,13 +32,9 @@ class Decks extends Table {
       )
       .customConstraint('NOT NULL UNIQUE')();
 
-  DateTimeColumn get created => dateTime().withDefault(
-        currentDateAndTime,
-      )();
+  DateTimeColumn get created => dateTime()();
 
-  DateTimeColumn get lastEdited => dateTime().withDefault(
-        currentDateAndTime,
-      )();
+  DateTimeColumn get lastEdited => dateTime()();
 
   TextColumn get authorName => text()
       .withLength(
