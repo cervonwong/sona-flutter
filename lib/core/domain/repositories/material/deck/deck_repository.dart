@@ -19,9 +19,9 @@
 
 import 'package:meta/meta.dart';
 
-import '../../entities/material/card/card.dart';
-import '../../entities/material/deck/deck.dart';
-import '../../entities/material/entry/entry.dart';
+import '../../../entities/material/card/card.dart';
+import '../../../entities/material/deck/deck.dart';
+import '../../../entities/material/entry/entry.dart';
 
 abstract class DeckRepository {
   // COUNT
