@@ -43,12 +43,12 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     implements TagsDao {
   TagsDaoImpl({@required MoorDatabase db}) : super(db);
 
-  /// Creates a record in the database for a tag with name `name`, then returns
-  /// its model.
+  /// Creates a record in the database for a tag with name [name], then returns
+  /// its [TagModel].
   ///
-  /// Throws `AssertionError` when name is `null` or when there already exists
+  /// Throws [AssertionError] when name is `null` or when there already exists
   /// a tag with the same name in the database. In production,
-  /// `InvalidDataException` or `SqliteException` may be thrown. You must check
+  /// [InvalidDataException] or [SqliteException] may be thrown. You must check
   /// inputs before passing them to this method.
   @override
   Future<TagModel> create({@required String name}) async {
@@ -67,7 +67,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
-  /// Returns the TagModel of the tag in the database with a matching ID.
+  /// Returns the [TagModel] of the tag in the database with a matching ID.
   ///
   /// Returns a `Future(null)` if there are no tags in the database with a
   /// matching ID.
@@ -78,18 +78,18 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
-  /// Returns the list of TagModels of all tags in the database.
+  /// Returns the list of [TagModel]s of all tags in the database.
   ///
-  /// Returns the list of TagModels in the order of creation.
+  /// Returns the list of [TagModel]s in the order of creation.
   @override
   Future<List<TagModel>> getAll() async => select(tags).get();
 
-  /// Updates the name to `newName` of the tag specified by its ID, then
-  /// return its renamed model.
+  /// Updates the name to [newName] of the tag specified by its ID, then
+  /// return its renamed [TagModel].
   ///
-  /// Throws `AssertionError` when there are no tags in the database with a
+  /// Throws [AssertionError] when there are no tags in the database with a
   /// matching ID or when there is another tag in the database with the name
-  /// `newName`. In production, `InvalidDataException` or `SqliteException` may
+  /// [newName]. In production, [InvalidDataException] or [SqliteException] may
   /// be thrown. You must check inputs before passing them to this method.
   @override
   Future<TagModel> rename({@required int id, @required String newName}) async {
@@ -117,10 +117,10 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
-  /// Deletes the tag specified by its ID.
+  /// Deletes the tag specified by its ID [id].
   ///
-  /// Throws `AssertionError` when there are no tags in the database with a
-  /// matching ID. In production, `InvalidDataException` or `SqliteException`
+  /// Throws [AssertionError] when there are no tags in the database with a
+  /// matching ID. In production, [InvalidDataException] or [SqliteException]
   /// may be thrown. You must check inputs before passing them to this method.
   ///
   /// This method is not named `delete` because of naming conflicts.
