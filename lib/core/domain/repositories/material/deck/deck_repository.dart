@@ -24,10 +24,6 @@ import '../../../entities/material/deck/deck.dart';
 import '../../../entities/material/entry/entry.dart';
 
 abstract class DeckRepository {
-  // COUNT
-
-  Future<int> getCount();
-
   // NAVIGABLE ACCESSORS
 
   Future<Deck> getByCard({@required Card card});
@@ -36,10 +32,11 @@ abstract class DeckRepository {
 
   // CRUD
 
-  // TODO(cervonwong): 12/11/2020 Add filter (stackable), sort, and sorting direction parameters.
-  Future<List<Deck>> get();
+  Future<Deck> create({@required String name});
 
-  Future<Deck> create();
+  Future<Deck> getById({@required int id});
+
+  Future<List<Deck>> getAll();
 
   Future<void> update({@required Deck deck});
 
