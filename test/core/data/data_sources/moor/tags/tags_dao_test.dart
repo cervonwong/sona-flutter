@@ -32,7 +32,7 @@ void main() {
       // debugging if needed. This is set to false to not pollute test logs.
       logStatements: false,
     ));
-    dao = TagsDao(db);
+    dao = TagsDaoImpl(db);
   });
 
   tearDown(() async {
@@ -44,7 +44,7 @@ void main() {
   }
 
   group(
-    'TagsDao create',
+    'TagsDaoImpl create',
     () {
       test(
         'when passed legal name, '
@@ -89,7 +89,7 @@ void main() {
   );
 
   group(
-    'TagsDao getById',
+    'TagsDaoImpl getById',
     () {
       test(
         'when passed legal id, '
@@ -128,7 +128,7 @@ void main() {
   );
 
   group(
-    'TagsDao getAll',
+    'TagsDaoImpl getAll',
     () {
       test(
         'when there are no tags in the db, '
@@ -171,7 +171,7 @@ void main() {
   );
 
   group(
-    'TagsDao rename',
+    'TagsDaoImpl rename',
     () {
       test(
         'when passed legal arguments, '
@@ -258,7 +258,7 @@ void main() {
   );
 
   group(
-    'TagsDao remove',
+    'TagsDaoImpl remove',
     () {
       test(
         'when passed legal id, '

@@ -25,7 +25,7 @@ import 'package:sona_flutter/core/data/repositories/material/entry/entry_tag_rep
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
 import 'package:sona_flutter/core/domain/repositories/material/entry/entry_tag_repository.dart';
 
-class MockTagsDao extends Mock implements TagsDao {}
+class MockTagsDaoImpl extends Mock implements TagsDao {}
 
 void main() {
   TagsDao dao;
@@ -33,7 +33,7 @@ void main() {
 
   setUp(
     () {
-      dao = MockTagsDao();
+      dao = MockTagsDaoImpl();
       repository = EntryTagRepositoryImpl(dao: dao);
     },
   );

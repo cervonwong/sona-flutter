@@ -25,9 +25,26 @@ import 'tags_table.dart';
 
 part 'tags_dao.g.dart';
 
+abstract class TagsDao {
+  Future<TagModel> create({@required String name});
+
+  Future<TagModel> getById({@required int id});
+
+  @deprecated
+  Future<TagModel> getByName({@required String name});
+
+  Future<List<TagModel>> getAll();
+
+  Future<TagModel> rename({@required int id, @required String newName});
+
+  Future<TagModel> remove({@required int id});
+}
+
 @UseDao(tables: [Tags])
-class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
-  TagsDao(MoorDatabase db) : super(db);
+class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
+    with _$TagsDaoImplMixin
+    implements TagsDao {
+  TagsDaoImpl(MoorDatabase db) : super(db);
 
   /// Creates a record in the database for a tag with `name`, then returns its
   /// model.
@@ -36,6 +53,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   /// a tag with the same name in the database. In production,
   /// `InvalidDataException` or `SqliteException` may be thrown. You must check
   /// inputs before passing them to this method.
+  @override
   Future<TagModel> create({@required String name}) async {
     assert(name != null);
     // Asserts that a tag with the same name in the db does not exist.
@@ -52,6 +70,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   ///
   /// Returns a `Future(null)` if there are no tags in the database with a
   /// matching ID.
+  @override
   Future<TagModel> getById({@required int id}) async {
     assert(id != null);
 
@@ -62,6 +81,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   ///
   /// Returns a `Future(null)` if there are no tags in the database with a
   /// matching name.
+  @override
   @deprecated
   Future<TagModel> getByName({@required String name}) async {
     throw UnimplementedError();
@@ -70,6 +90,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   /// Returns the list of TagModels of all tags in the database.
   ///
   /// Returns the list of TagModels in the order of creation.
+  @override
   Future<List<TagModel>> getAll() async {
     return select(tags).get();
   }
@@ -81,6 +102,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   /// matching ID or when there is another tag in the database with the name
   /// `newName`. In production, `InvalidDataException` or `SqliteException` may
   /// be thrown. You must check inputs before passing them to this method.
+  @override
   Future<TagModel> rename({@required int id, @required String newName}) async {
     assert(id != null);
     assert(newName != null);
@@ -106,6 +128,7 @@ class TagsDao extends DatabaseAccessor<MoorDatabase> with _$TagsDaoMixin {
   /// may be thrown. You must check inputs before passing them to this method.
   ///
   /// This method is not named `delete` because of naming conflicts.
+  @override
   Future<TagModel> remove({@required int id}) async {
     assert(id != null);
 
