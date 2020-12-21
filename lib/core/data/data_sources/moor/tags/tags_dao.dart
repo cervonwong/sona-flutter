@@ -110,7 +110,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
             .get())
         .isEmpty);
 
-    // Rename tags from the database which has the ID.
+    // Renames tag from the database which has the ID.
     await (update(tags)..where((tag) => tag.id.equals(id)))
         .write(TagsCompanion(name: Value(newName)));
     // Returns the renamed tag from the database with the ID.
