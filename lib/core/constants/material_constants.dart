@@ -17,8 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Constraints
+// CONSTRAINTS
 // Currently, constraints are only set for Deck as a test.
+
+// Deck
 const int kMinDeckNameLength = 5;
 const int kMaxDeckNameLength = 150;
 const int kMinDeckAuthorNameLength = 1;
@@ -27,5 +29,11 @@ const int kMinDeckDescriptionLength = 10;
 const int kMaxDeckDescriptionLength = 255;
 
 // Defaults
+
+// Deck
+const String kDefaultDeckAuthorName = null;
+const String kDefaultDeckDescription = null;
+
+// Card
 const bool kDefaultCardStarred = false;
 const bool kDefaultCardHidden = false;
