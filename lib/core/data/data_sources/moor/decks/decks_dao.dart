@@ -81,10 +81,15 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
   }
 
+  /// Returns the DeckModel of the deck in the database with a matching ID.
+  ///
+  /// Returns a `Future(null)` if there are no decks in the database with a
+  /// matching ID.
   @override
   Future<DeckModel> getById({@required int id}) {
-    // TODO: implement getById
-    throw UnimplementedError();
+    assert(id != null);
+
+    return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
   }
 
   @override

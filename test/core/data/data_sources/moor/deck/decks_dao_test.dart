@@ -132,4 +132,52 @@ void main() {
       );
     },
   );
+
+  group(
+    'DecksDaoImpl getById',
+    () {
+      test(
+        'when passed legal id, '
+        'should return expected DeckModel',
+        () async {
+          final id = (await dao.create(name: 'Virgo')).id;
+
+          final deck = await dao.getById(id: id);
+          expect(
+            deck,
+            DeckModel(
+              id: id,
+              name: 'Virgo',
+              created: DateTime(2020),
+              lastEdited: DateTime(2020),
+              authorName: kDefaultDeckAuthorName,
+              description: kDefaultDeckDescription,
+            ),
+          );
+        },
+      );
+
+      test(
+        'when no decks in the db has the same id as the passed id, '
+        'should return null',
+        () async {
+          final tag = await dao.getById(id: -1);
+          expect(tag, isNull);
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () {
+          expect(
+            () async {
+              await dao.getById(id: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
 }
