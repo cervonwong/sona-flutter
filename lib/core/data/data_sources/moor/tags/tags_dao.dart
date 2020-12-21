@@ -43,8 +43,8 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     implements TagsDao {
   TagsDaoImpl(MoorDatabase db) : super(db);
 
-  /// Creates a record in the database for a tag with `name`, then returns its
-  /// model.
+  /// Creates a record in the database for a tag with name `name`, then returns
+  /// its model.
   ///
   /// Throws `AssertionError` when name is `null` or when there already exists
   /// a tag with the same name in the database. In production,
@@ -53,11 +53,15 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   @override
   Future<TagModel> create({@required String name}) async {
     assert(name != null);
-    // Asserts that a tag with the same name in the db does not exist.
-    assert((await (select(tags)..where((tag) => tag.name.equals(name))).get())
+    // Asserts that a tag with the same name in the database does not exist.
+    assert((await (select(tags)
+              ..where(
+                (tag) => tag.name.equals(name),
+              ))
+            .get())
         .isEmpty);
 
-    // Inserts a tag with the given name, and gets the auto-incremented ID.
+    // Inserts a tag with the given name, then gets the auto-incremented ID.
     final id = await into(tags).insert(TagsCompanion.insert(name: name));
     // Returns the tag from the database specified by its ID.
     return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
@@ -91,13 +95,20 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<TagModel> rename({@required int id, @required String newName}) async {
     assert(id != null);
     assert(newName != null);
-    // Asserts that a tag with the same id in the db exists.
-    assert((await (select(tags)..where((tag) => tag.id.equals(id))).get())
+    // Asserts that a tag with the same id in the database exists.
+    assert((await (select(tags)
+              ..where(
+                (tag) => tag.id.equals(id),
+              ))
+            .get())
         .isNotEmpty);
-    // Asserts that a tag with the same name in the db does not exist.
-    assert(
-        (await (select(tags)..where((tag) => tag.name.equals(newName))).get())
-            .isEmpty);
+    // Asserts that a tag with the same name in the database does not exist.
+    assert((await (select(tags)
+              ..where(
+                (tag) => tag.name.equals(newName),
+              ))
+            .get())
+        .isEmpty);
 
     // Rename tags from the database which has the ID.
     await (update(tags)..where((tag) => tag.id.equals(id)))
