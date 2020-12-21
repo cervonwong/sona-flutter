@@ -56,22 +56,46 @@ void main() {
     'DecksDaoImpl create',
     () {
       group(
-        'when passed legal name',
+        'when passed legal name (called twice to create two decks)',
         () {
-          DeckModel deck;
+          DeckModel deck1, deck2;
           setUp(() async {
-            deck = await dao.create(name: 'Leo');
+            deck1 = await dao.create(name: 'Leo');
+            deck2 = await dao.create(name: 'Libra');
           });
 
           test(
-            'should create expected record in database',
+            'should create expected records in database',
             () async {
-              final all = await selectAll();
-              expect(all, hasLength(1));
-
-              final record = all[0];
               expect(
-                record,
+                await selectAll(),
+                [
+                  DeckModel(
+                    id: 1,
+                    name: 'Leo',
+                    created: DateTime(2020),
+                    lastEdited: DateTime(2020),
+                    authorName: kDefaultDeckAuthorName,
+                    description: kDefaultDeckDescription,
+                  ),
+                  DeckModel(
+                    id: 2,
+                    name: 'Libra',
+                    created: DateTime(2020),
+                    lastEdited: DateTime(2020),
+                    authorName: kDefaultDeckAuthorName,
+                    description: kDefaultDeckDescription,
+                  ),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return expected DeckModels',
+            () async {
+              expect(
+                deck1,
                 DeckModel(
                   id: 1,
                   name: 'Leo',
@@ -81,17 +105,12 @@ void main() {
                   description: kDefaultDeckDescription,
                 ),
               );
-            },
-          );
 
-          test(
-            'should return expected DeckModel',
-            () async {
               expect(
-                deck,
+                deck2,
                 DeckModel(
-                  id: 1,
-                  name: 'Leo',
+                  id: 2,
+                  name: 'Libra',
                   created: DateTime(2020),
                   lastEdited: DateTime(2020),
                   authorName: kDefaultDeckAuthorName,
