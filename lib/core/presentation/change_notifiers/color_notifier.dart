@@ -20,7 +20,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'constants/color_constants.dart';
+import '../constants/color_constants.dart';
 
 /// This maps color constants and gives context to them to be dynamic.
 class ColorNotifier extends ChangeNotifier {

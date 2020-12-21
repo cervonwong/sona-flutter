@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'core/presentation/color_notifier.dart';
+import 'core/presentation/change_notifiers/color_notifier.dart';
 import 'core/presentation/constants/color_constants.dart';
 import 'core/presentation/constants/widget_constants.dart';
 import 'screens/home_screen.dart';
