@@ -91,9 +91,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   ///
   /// Returns the list of TagModels in the order of creation.
   @override
-  Future<List<TagModel>> getAll() async {
-    return select(tags).get();
-  }
+  Future<List<TagModel>> getAll() async => select(tags).get();
 
   /// Updates the name to `newName` of the tag specified by its ID, then
   /// return its renamed model.
