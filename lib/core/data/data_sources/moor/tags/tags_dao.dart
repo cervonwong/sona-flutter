@@ -41,7 +41,7 @@ abstract class TagsDao {
 class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     with _$TagsDaoImplMixin
     implements TagsDao {
-  TagsDaoImpl(MoorDatabase db) : super(db);
+  TagsDaoImpl({@required MoorDatabase db}) : super(db);
 
   /// Creates a record in the database for a tag with name `name`, then returns
   /// its model.

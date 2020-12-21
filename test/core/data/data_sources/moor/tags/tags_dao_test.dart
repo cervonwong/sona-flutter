@@ -33,7 +33,7 @@ void main() {
       // debugging if needed. This is set to false to not pollute test logs.
       logStatements: false,
     ));
-    dao = TagsDaoImpl(db);
+    dao = TagsDaoImpl(db: db);
   });
 
   tearDown(() async {
