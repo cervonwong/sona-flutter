@@ -57,7 +57,11 @@ ri ....>  e
 d  ....>  db
 
 note right of di
-Unimplemented
+	Unimplemented
+end note
+
+note left of db
+	Models are part of the database due to the limitations of moor's builders. See <i>https://github.com/ simolus3/moor/issues/490</i>for progress on this :)
 end note
 
 @enduml
