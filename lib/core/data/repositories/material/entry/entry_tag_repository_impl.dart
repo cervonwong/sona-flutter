@@ -20,36 +20,48 @@
 import 'package:meta/meta.dart';
 
 import '../../../../domain/entities/material/entry/entry_tag.dart';
-import '../../../../domain/repositories/material/entry/entry_tag_repsitory.dart';
+import '../../../../domain/repositories/material/entry/entry_tag_repository.dart';
+import '../../../data_sources/moor/moor_database.dart';
+import '../../../data_sources/moor/tags/tags_dao.dart';
 
+@immutable
 class EntryTagRepositoryImpl implements EntryTagRepository {
+  final TagsDao _dao;
+
+  EntryTagRepositoryImpl({@required TagsDao dao}) : _dao = dao;
+
   @override
-  Future<EntryTag> create({@required String name}) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<EntryTag> create({@required String name}) async {
+    final model = await _dao.create(name: name);
+
+    return _toEntity(model);
   }
 
   @override
-  Future<EntryTag> getById({@required int id}) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<EntryTag> getById({@required int id}) async {
+    final model = await _dao.getById(id: id);
+
+    return _toEntity(model);
   }
 
   @override
-  Future<List<EntryTag>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<EntryTag>> getAll() async {
+    final models = await _dao.getAll();
+
+    return models.map((model) => _toEntity(model)).toList();
   }
 
   @override
-  Future<EntryTag> update({@required EntryTag entryTag}) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update({@required EntryTag tag}) async {
+    await _dao.rename(id: tag.id, newName: tag.name);
   }
 
   @override
-  Future<EntryTag> delete({@required EntryTag entryTag}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete({@required EntryTag tag}) async {
+    await _dao.remove(id: tag.id);
+  }
+
+  EntryTag _toEntity(TagModel model) {
+    return EntryTag(id: model.id, name: model.name);
   }
 }
