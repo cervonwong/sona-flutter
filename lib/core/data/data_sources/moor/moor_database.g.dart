@@ -1328,8 +1328,8 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
       @required this.name,
       @required this.created,
       @required this.lastEdited,
-      @required this.authorName,
-      @required this.description});
+      this.authorName,
+      this.description});
   factory DeckModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -1486,11 +1486,9 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
     @required String name,
     this.created = const Value.absent(),
     this.lastEdited = const Value.absent(),
-    @required String authorName,
-    @required String description,
-  })  : name = Value(name),
-        authorName = Value(authorName),
-        description = Value(description);
+    this.authorName = const Value.absent(),
+    this.description = const Value.absent(),
+  }) : name = Value(name);
   static Insertable<DeckModel> custom({
     Expression<int> id,
     Expression<String> name,
@@ -1613,7 +1611,7 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
     return GeneratedTextColumn(
       'author_name',
       $tableName,
-      false,
+      true,
     );
   }
 
@@ -1627,7 +1625,7 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
     return GeneratedTextColumn(
       'description',
       $tableName,
-      false,
+      true,
     );
   }
 
@@ -1669,16 +1667,12 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
           _authorNameMeta,
           authorName.isAcceptableOrUnknown(
               data['author_name'], _authorNameMeta));
-    } else if (isInserting) {
-      context.missing(_authorNameMeta);
     }
     if (data.containsKey('description')) {
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
               data['description'], _descriptionMeta));
-    } else if (isInserting) {
-      context.missing(_descriptionMeta);
     }
     return context;
   }

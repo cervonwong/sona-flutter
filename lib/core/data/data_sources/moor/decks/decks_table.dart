@@ -40,13 +40,17 @@ class Decks extends Table {
         currentDateAndTime,
       )();
 
-  TextColumn get authorName => text().withLength(
+  TextColumn get authorName => text()
+      .withLength(
         min: kMinDeckAuthorNameLength,
         max: kMaxDeckAuthorNameLength,
-      )();
+      )
+      .nullable()();
 
-  TextColumn get description => text().withLength(
+  TextColumn get description => text()
+      .withLength(
         min: kMinDeckDescriptionLength,
         max: kMaxDeckDescriptionLength,
-      )();
+      )
+      .nullable()();
 }
