@@ -19,8 +19,8 @@ object decks {
 	name        : TEXT              <<unique, min: 5, max: 150>>
 	created     : INTEGER(DATETIME) <<gen>>
 	last_edited : INTEGER(DATETIME) <<gen>>
-	authorName  : TEXT              <<min: 1, max: 50>>
-	description : TEXT              <<min: 10, max: 255>>
+	authorName  : TEXT              <<min: 1, max: 50, nullable>>
+	description : TEXT              <<min: 10, max: 255, nullable>>
 }
 
 object entries {
