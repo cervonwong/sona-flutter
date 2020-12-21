@@ -42,7 +42,7 @@ void main() {
     'EntryTagRepositoryImpl create',
     () {
       test(
-        'when dao returns TagModel, '
+        'when DAO returns TagModel, '
         'should return expected EntryTag',
         () async {
           when(dao.create(name: argThat(equals('Miaow'), named: 'name')))
@@ -61,7 +61,7 @@ void main() {
     'EntryTagRepositoryImpl getById',
     () {
       test(
-        'when dao returns TagModel, '
+        'when DAO returns TagModel, '
         'should return expected EntryTag',
         () async {
           when(dao.getById(id: argThat(equals(20), named: 'id'))).thenAnswer(
@@ -79,7 +79,7 @@ void main() {
     'EntryTagRepositoryImpl getAll',
     () {
       test(
-        'when dao returns an empty List of TagModels, '
+        'when DAO returns an empty List of TagModels, '
         'should return an empty List of EntryTags',
         () async {
           when(dao.getAll()).thenAnswer(
@@ -92,7 +92,7 @@ void main() {
       );
 
       test(
-        'when dao returns a List with three TagModels, '
+        'when DAO returns a List with three TagModels, '
         'should return the mapped List of EntryTags',
         () async {
           when(dao.getAll()).thenAnswer(
