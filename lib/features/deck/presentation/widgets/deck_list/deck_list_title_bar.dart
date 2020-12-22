@@ -19,8 +19,9 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../../core/presentation/constants/color_constants.dart';
+import '../../../../../core/presentation/change_notifiers/color_notifier.dart';
 
 class DeckListTitleBar extends StatelessWidget {
   @override
@@ -32,19 +33,26 @@ class DeckListTitleBar extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
-              Text(
-                'Decks',
-                style: Theme.of(context).textTheme.headline6,
+              Consumer<ColorNotifier>(
+                builder: (_, cn, __) {
+                  return Text(
+                    'Decks',
+                    style: Theme.of(context).textTheme.headline6.copyWith(
+                          color: cn.onBackground.highEmphasisTextColor,
+                        ),
+                  );
+                },
               ),
               SizedBox(width: 12.0),
-              Text(
-                '136 cards due today',
-                style: Theme.of(context).textTheme.subtitle2.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(kDarkMediumEmphasisOpacity),
-                    ),
+              Consumer<ColorNotifier>(
+                builder: (_, cn, __) {
+                  return Text(
+                    '136 cards to review',
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          color: cn.onBackground.mediumEmphasisTextColor,
+                        ),
+                  );
+                },
               ),
             ],
           ),
@@ -55,8 +63,15 @@ class DeckListTitleBar extends StatelessWidget {
             child: IconButton(
               splashRadius: 24.0,
               padding: const EdgeInsets.all(0.0),
-              icon: Icon(FluentIcons.search_24_regular),
-              tooltip: 'Search decks',
+              icon: Consumer<ColorNotifier>(
+                builder: (_, cn, __) {
+                  return Icon(
+                    FluentIcons.filter_24_regular,
+                    color: cn.onBackground.mediumEmphasisTextColor,
+                  );
+                },
+              ),
+              tooltip: 'Filter and sort',
               onPressed: () {},
             ),
           ),
