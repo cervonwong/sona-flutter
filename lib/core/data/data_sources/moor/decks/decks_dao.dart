@@ -116,7 +116,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<DeckModel> edit({@required DeckModel newDeck}) async {
     assert(newDeck != null);
     // Asserts that a deck with the same ID as the passed deck's ID exists.
-    assert(await getById(id: newDeck.id) != null);
+    assert((await getById(id: newDeck.id)) != null);
     // Asserts that a deck with the same name as the passed deck's name and is
     // not the same deck (deck with the same ID as newDeck's id) does not exist.
     assert((await (select(decks)
