@@ -43,14 +43,15 @@ class DeckAdded extends DeckEvent {
   List<Object> get props => [name];
 }
 
-/// Tells the BloC that it needs to update an existing deck.
-class DeckUpdated extends DeckEvent {
+/// Tells the BloC that it needs to rename an existing deck.
+class DeckRenamed extends DeckEvent {
   final Deck deck;
+  final String newName;
 
-  const DeckUpdated({@required this.deck});
+  const DeckRenamed({@required this.deck, @required this.newName});
 
   @override
-  List<Object> get props => [deck];
+  List<Object> get props => [deck, newName];
 }
 
 /// Tells the BloC that it needs to delete an existing deck.
