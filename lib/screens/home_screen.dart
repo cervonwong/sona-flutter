@@ -21,16 +21,16 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../core/presentation/constants/color_constants.dart';
-import '../core/presentation/constants/widget_constants.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
+import 'shared/main_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _HomeAppBar(),
-      drawer: SonaDrawer(),
+      drawer: MainDrawer(selected: SelectableDrawerDestination.home),
       floatingActionButton: _HomeFAB(),
       drawerScrimColor: kNeutralColor8.withOpacity(0.50),
       body: SafeArea(
@@ -121,127 +121,6 @@ class HomeHeader extends StatelessWidget {
       child: Container(
         color: Theme.of(context).colorScheme.surface,
         height: 300,
-      ),
-    );
-  }
-}
-
-class SonaDrawer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.horizontal(
-        right: Radius.circular(
-          kLargeCornerRadius,
-        ),
-      ),
-      child: Drawer(
-        child: Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: ListTileTheme(
-            style: ListTileStyle.drawer,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.horizontal(
-                right: Radius.circular(kSmallCornerRadius),
-              ),
-            ),
-            child: ListView(
-              children: [
-                DrawerTile(
-                  selected: true,
-                  title: 'Home',
-                  icon: FluentIcons.home_24_regular,
-                  selectedIcon: FluentIcons.home_24_filled,
-                  onTap: () {},
-                ),
-                DrawerTile(
-                  selected: false,
-                  title: 'Browse',
-                  icon: FluentIcons.search_24_regular,
-                  selectedIcon: FluentIcons.search_24_filled,
-                  onTap: () {},
-                ),
-                DrawerTile(
-                  selected: false,
-                  title: 'Edit',
-                  icon: FluentIcons.edit_24_regular,
-                  selectedIcon: FluentIcons.edit_24_filled,
-                  onTap: () {},
-                ),
-                DrawerTile(
-                  selected: false,
-                  title: 'Progress',
-                  icon: FluentIcons.data_pie_24_regular,
-                  selectedIcon: FluentIcons.data_pie_24_filled,
-                  onTap: () {},
-                ),
-                DrawerTile(
-                  selected: false,
-                  title: 'Settings',
-                  icon: FluentIcons.settings_24_regular,
-                  selectedIcon: FluentIcons.settings_24_filled,
-                  onTap: () {},
-                ),
-                DrawerTile(
-                  selected: false,
-                  title: 'Help',
-                  icon: FluentIcons.question_circle_24_regular,
-                  selectedIcon: FluentIcons.question_circle_24_filled,
-                  onTap: () {},
-                ),
-                AboutListTile(
-                  icon: Icon(FluentIcons.info_24_regular),
-                  applicationName: 'Sona',
-                  applicationVersion: 'v.DEV',
-                  applicationLegalese: 'Copyright (C) 2020 Cervon Wong',
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DrawerTile extends StatelessWidget {
-  final bool selected;
-  final String title;
-  final IconData icon;
-  final IconData selectedIcon;
-  final GestureTapCallback onTap;
-
-  DrawerTile({
-    @required this.selected,
-    @required this.title,
-    @required this.icon,
-    @required this.selectedIcon,
-    @required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Ink(
-      decoration: BoxDecoration(
-        color: selected
-            ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-            : null,
-        borderRadius: BorderRadius.horizontal(
-          right: Radius.circular(kSmallCornerRadius),
-        ),
-      ),
-      child: ListTile(
-        dense: true,
-        selected: selected,
-        leading: selected ? Icon(selectedIcon) : Icon(icon),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: selected ? Theme.of(context).colorScheme.primary : null,
-                fontWeight: selected ? FontWeight.w500 : null,
-              ),
-        ),
-        onTap: onTap,
       ),
     );
   }
