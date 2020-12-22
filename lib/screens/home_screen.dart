@@ -22,7 +22,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../core/presentation/change_notifiers/color_notifier.dart';
-import '../core/presentation/constants/color_constants.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
 import 'shared/main_drawer.dart';
@@ -103,12 +102,16 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text('Home'),
-      leading: IconButton(
-        splashColor: kLightSplashColor,
-        highlightColor: kLightHighlightColor,
-        icon: Icon(FluentIcons.list_24_regular),
-        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-        onPressed: () => Scaffold.of(context).openDrawer(),
+      leading: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return IconButton(
+            splashColor: cn.onPrimary.splashColor,
+            highlightColor: cn.onPrimary.highlightColor,
+            icon: Icon(FluentIcons.list_24_regular),
+            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          );
+        },
       ),
     );
   }
