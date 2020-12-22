@@ -48,7 +48,7 @@ class EntryTagRepositoryImpl implements EntryTagRepository {
   Future<List<EntryTag>> getAll() async {
     final models = await _dao.getAll();
 
-    return models.map((model) => _toEntity(model)).toList();
+    return models.map(_toEntity).toList();
   }
 
   @override
