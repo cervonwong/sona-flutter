@@ -13,6 +13,7 @@ dependencies:
   fluentui_system_icons: ^1.1.87
   flutter:
     sdk: flutter
+  flutter_bloc: ^6.1.1
   moor: ^3.4.0
   path: ^1.7.0
   path_provider: ^1.6.24
