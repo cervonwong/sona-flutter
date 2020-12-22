@@ -64,7 +64,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     // Inserts a tag with the given name, then gets the auto-incremented ID.
     final id = await into(tags).insert(TagsCompanion.insert(name: name));
     // Returns the tag from the database specified by its ID.
-    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
+    return getById(id: id);
   }
 
   /// Returns the [TagModel] of the tag in the database with a matching ID.
@@ -96,12 +96,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     assert(id != null);
     assert(newName != null);
     // Asserts that a tag with the same id in the database exists.
-    assert((await (select(tags)
-              ..where(
-                (tag) => tag.id.equals(id),
-              ))
-            .get())
-        .isNotEmpty);
+    assert((await getById(id: id)) != null);
     // Asserts that a tag with the same name in the database does not exist.
     assert((await (select(tags)
               ..where(
@@ -114,7 +109,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     await (update(tags)..where((tag) => tag.id.equals(id)))
         .write(TagsCompanion(name: Value(newName)));
     // Returns the renamed tag from the database with the ID.
-    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
+    return getById(id: id);
   }
 
   /// Deletes the tag specified by its ID [id].
@@ -129,9 +124,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     assert(id != null);
 
     // Gets the tag specified by its ID.
-    final tag = (await select(tags)
-          ..where((tag) => tag.id.equals(id)))
-        .getSingle();
+    final tag = await getById(id: id);
     // Asserts that there is 1 tag specified by its ID.
     assert(tag != null);
 
