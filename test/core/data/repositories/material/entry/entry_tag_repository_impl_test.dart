@@ -61,7 +61,7 @@ void main() {
     'EntryTagRepositoryImpl getById',
     () {
       test(
-        'when DAO returns TagModel, '
+        'when TagsDao.getAll returns TagModel, '
         'should return expected EntryTag',
         () async {
           when(dao.getById(id: argThat(equals(20), named: 'id'))).thenAnswer(
@@ -79,7 +79,7 @@ void main() {
     'EntryTagRepositoryImpl getAll',
     () {
       test(
-        'when DAO returns an empty List of TagModels, '
+        'when TagsDao.getAll returns an empty List of TagModels, '
         'should return an empty List of EntryTags',
         () async {
           when(dao.getAll()).thenAnswer(
