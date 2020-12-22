@@ -190,6 +190,19 @@ void main() {
         },
       );
 
+      test(
+        'when passed the original name of the tag, '
+        'should return expected TagModel',
+        () async {
+          final id = (await dao.create(name: 'Same name')).id;
+          expect(await selectAll(), [TagModel(id: 1, name: 'Same name')]);
+
+          final tag = await dao.rename(id: id, newName: 'Same name');
+          expect(await selectAll(), [TagModel(id: 1, name: 'Same name')]);
+          expect(tag, TagModel(id: id, name: 'Same name'));
+        },
+      );
+
       group(
         'when passed null arguments, '
         'should fail asserts',

@@ -100,7 +100,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     // Asserts that a tag with the same name in the database does not exist.
     assert((await (select(tags)
               ..where(
-                (tag) => tag.name.equals(newName),
+                (tag) => tag.name.equals(newName) & tag.id.equals(id).not(),
               ))
             .get())
         .isEmpty);
