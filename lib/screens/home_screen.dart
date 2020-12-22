@@ -19,7 +19,9 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../core/presentation/change_notifiers/color_notifier.dart';
 import '../core/presentation/constants/color_constants.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
@@ -28,12 +30,17 @@ import 'shared/main_drawer.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _HomeAppBar(),
-      drawer: MainDrawer(selected: SelectableDrawerDestination.home),
-      floatingActionButton: _HomeFAB(),
-      drawerScrimColor: kNeutralColor8.withOpacity(0.50),
-      body: SafeArea(
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, child) {
+        return Scaffold(
+          appBar: _HomeAppBar(),
+          drawer: MainDrawer(selected: SelectableDrawerDestination.home),
+          floatingActionButton: _HomeFAB(),
+          drawerScrimColor: cn.specific.scrimColor,
+          body: child,
+        );
+      },
+      child: SafeArea(
         child: ListView(
           children: [
             HomeHeader(),

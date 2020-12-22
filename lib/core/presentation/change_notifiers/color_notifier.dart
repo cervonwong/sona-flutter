@@ -27,6 +27,8 @@ class ColorNotifier extends ChangeNotifier {
   ColorTheme _theme;
   static final _onLight = _OnLightColorGroup();
   static final _onDark = _OnDarkColorGroup();
+  static final _specificLight = _LightSpecificColorGroup();
+  static final _specificDark = _DarkSpecificColorGroup();
 
   ColorTheme get theme => _theme;
 
@@ -65,6 +67,17 @@ class ColorNotifier extends ChangeNotifier {
   }
 
   _ColorGroup get onBackground => onSurface; // They have similar brightnesses.
+
+  _SpecificColorGroup get specific {
+    switch (_theme) {
+      case ColorTheme.light:
+        return _specificLight;
+      case ColorTheme.dark:
+        return _specificDark;
+      default:
+        throw UnimplementedError();
+    }
+  }
 
   ColorNotifier({
     @required ColorTheme theme,
@@ -160,6 +173,21 @@ abstract class _ColorGroup {
   Color get mediumFamiliarityColor;
 
   Color get lowFamiliarityColor;
+}
+
+class _LightSpecificColorGroup extends _SpecificColorGroup {
+  @override
+  Color get scrimColor => kScrimColor;
+}
+
+class _DarkSpecificColorGroup extends _SpecificColorGroup {
+  @override
+  // TODO: implement drawerScrimColor
+  Color get scrimColor => throw UnimplementedError();
+}
+
+abstract class _SpecificColorGroup {
+  Color get scrimColor;
 }
 
 enum ColorTheme { light, dark }

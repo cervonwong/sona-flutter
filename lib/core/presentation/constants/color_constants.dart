@@ -122,3 +122,7 @@ const Color kPrimarySplashColor =
     Color(0x1F7B68EE); // kPrimaryColor.withOpacity(0.12);
 const Color kPrimaryHighlightColor =
     Color(0x1F7B68EE); // kPrimaryColor.withOpacity(0.12);
+
+// Misc.
+
+const Color kScrimColor = Color(0x800B0844); // 80 --> 50%.
