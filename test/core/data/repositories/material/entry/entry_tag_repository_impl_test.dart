@@ -136,19 +136,22 @@ void main() {
     },
   );
 
-  group('EntryTagRepositoryImpl delete', () {
-    test(
-      'when passed legal arguments, '
-      'should call TagsDao.remove with expected arguments',
-      () async {
-        when(dao.remove(id: argThat(equals(100), named: 'id'))).thenAnswer(
-          (_) async => TagModel(id: 100, name: 'Squawk'),
-        );
+  group(
+    'EntryTagRepositoryImpl delete',
+    () {
+      test(
+        'when passed legal arguments, '
+        'should call TagsDao.remove with expected arguments',
+        () async {
+          when(dao.remove(id: argThat(equals(100), named: 'id'))).thenAnswer(
+            (_) async => TagModel(id: 100, name: 'Squawk'),
+          );
 
-        await repository.delete(tag: EntryTag(id: 100, name: 'Squawk'));
-        // verify is only used for testing void and stubbed methods.
-        verify(dao.remove(id: 100));
-      },
-    );
-  });
+          await repository.delete(tag: EntryTag(id: 100, name: 'Squawk'));
+          // verify is only used for testing void and stubbed methods.
+          verify(dao.remove(id: 100));
+        },
+      );
+    },
+  );
 }
