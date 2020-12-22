@@ -32,14 +32,15 @@ abstract class DeckEvent extends Equatable {
 /// decks.
 class DeckInitialized extends DeckEvent {}
 
-/// Tells the BloC that it needs to add a new deck to the list of decks.
+/// Tells the BloC that it needs to add a new deck with this name to the list of
+/// decks.
 class DeckAdded extends DeckEvent {
-  final Deck deck;
+  final String name;
 
-  const DeckAdded({@required this.deck});
+  const DeckAdded({@required this.name});
 
   @override
-  List<Object> get props => [deck];
+  List<Object> get props => [name];
 }
 
 /// Tells the BloC that it needs to update an existing deck.
