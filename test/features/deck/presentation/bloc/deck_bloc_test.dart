@@ -90,8 +90,8 @@ void main() {
   );
 
   test(
-    'DeckBloc when added DeckInitialized then DeckAdded, '
-    'should emit expected state with list of decks with added deck',
+    'DeckBloc when added DeckInitialized then DeckCreated, '
+    'should emit expected state with list of decks with created deck',
     () async {
       when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
 
@@ -112,7 +112,7 @@ void main() {
       );
       when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
 
-      bloc.add(DeckAdded(name: 'Prague'));
+      bloc.add(DeckCreated(name: 'Prague'));
       await expectLater(
         bloc,
         emitsInOrder(

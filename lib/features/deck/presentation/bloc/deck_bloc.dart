@@ -57,8 +57,8 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
 
     if (event is DeckInitialized) {
       yield* _mapDeckInitializedToState();
-    } else if (event is DeckAdded) {
-      yield* _mapDeckAddedToState(event);
+    } else if (event is DeckCreated) {
+      yield* _mapDeckCreatedToState(event);
     } else if (event is DeckDeleted) {
       yield* _mapDeckDeletedToState(event);
     }
@@ -71,7 +71,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
     yield DeckLoaded(decks: _decks);
   }
 
-  Stream<DeckState> _mapDeckAddedToState(DeckAdded event) async* {
+  Stream<DeckState> _mapDeckCreatedToState(DeckCreated event) async* {
     await _createDeck(name: event.name);
     _decks = await _getAllDecks();
     yield DeckLoaded(decks: _decks);
