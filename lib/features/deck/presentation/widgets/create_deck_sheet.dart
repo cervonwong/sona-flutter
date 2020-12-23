@@ -40,8 +40,8 @@ class CreateDeckSheet extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
-              style: Theme.of(context).textTheme.bodyText2
-,            ),
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
             SizedBox(height: 32.0),
             Align(
               alignment: Alignment.centerRight,
