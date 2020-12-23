@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import '../features/deck/presentation/widgets/create_deck_sheet.dart';
 
 import '../core/presentation/change_notifiers/color_notifier.dart';
 import '../features/deck/presentation/bloc/deck_bloc.dart';
@@ -160,9 +161,17 @@ class _HomeFAB extends StatelessWidget {
         shadowColor: Theme.of(context).colorScheme.primary,
       ),
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _onPressed(context),
         child: Icon(FluentIcons.add_24_regular),
       ),
+    );
+  }
+
+  void _onPressed(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => CreateDeckSheet(),
     );
   }
 }
