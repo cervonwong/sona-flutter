@@ -20,13 +20,13 @@
 import 'package:get_it/get_it.dart';
 
 import 'core/utils/system_time.dart';
-import 'features/deck/deck_injection_container.dart';
+import 'features/deck/deck_injection_container.dart' as deck;
 
 final getIt = GetIt.instance;
 
 void init() {
   // Features
-  initDeck(getIt);
+  deck.init(getIt);
 
   // Core
   getIt.registerLazySingleton(() => SystemTime());

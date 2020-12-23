@@ -28,7 +28,7 @@ import 'domain/use_cases/delete_deck.dart';
 import 'domain/use_cases/get_all_decks.dart';
 import 'presentation/bloc/deck_bloc.dart';
 
-void initDeck(GetIt getIt) {
+void init(GetIt getIt) {
   // Presentation
   getIt.registerFactory(() {
     return DeckBloc(
