@@ -40,6 +40,9 @@ class DeckLoaded extends DeckState {
 
   @override
   List<Object> get props => [decks];
+
+  @override
+  bool get stringify => true;
 }
 
 /// The state when the BLoC has not successfully loaded the list of decks.
