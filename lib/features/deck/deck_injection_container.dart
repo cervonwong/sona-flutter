@@ -18,11 +18,11 @@
  */
 
 import 'package:get_it/get_it.dart';
-import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 
 import '../../core/data/data_sources/moor/decks/decks_dao.dart';
 import '../../core/data/data_sources/moor/moor_database.dart';
 import '../../core/data/repositories/material/deck/deck_repository_impl.dart';
+import '../../core/domain/repositories/material/deck/deck_repository.dart';
 import 'domain/use_cases/create_deck.dart';
 import 'domain/use_cases/delete_deck.dart';
 import 'domain/use_cases/get_all_decks.dart';
