@@ -41,6 +41,8 @@ LazyDatabase _openConnection() {
 class MoorDatabase extends _$MoorDatabase {
   MoorDatabase(QueryExecutor e) : super(e);
 
+  MoorDatabase.mobile() : super(_openConnection());
+
   // Update this each time the database structure (tables) have been changed
   // after this app has been released.
   @override
