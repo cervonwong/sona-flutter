@@ -52,5 +52,5 @@ void initDeck(GetIt getIt) {
     () => DecksDaoImpl(db: getIt(), systemTime: getIt()),
   );
 
-  getIt.registerLazySingleton(() => MoorDatabase.mobile());
+  getIt.registerLazySingleton(() => MoorDatabase());
 }
