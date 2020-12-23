@@ -23,8 +23,8 @@ import 'package:provider/provider.dart';
 import 'core/presentation/change_notifiers/color_notifier.dart';
 import 'core/presentation/constants/color_constants.dart';
 import 'core/presentation/constants/widget_constants.dart';
-import 'screens/home_screen.dart';
 import 'injection_container.dart' as injection_container;
+import 'screens/home_screen.dart';
 
 void main() {
   injection_container.init();
@@ -55,6 +55,7 @@ ThemeData _createThemeData() {
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
     appBarTheme: _createAppBarTheme(),
+    bottomSheetTheme: _createBottomSheetTheme(),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
@@ -212,6 +213,18 @@ AppBarTheme _createAppBarTheme() {
   return AppBarTheme(
     centerTitle: true,
     elevation: 0.0,
+  );
+}
+
+BottomSheetThemeData _createBottomSheetTheme() {
+  return BottomSheetThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(kLargeCornerRadius),
+        topRight: Radius.circular(kLargeCornerRadius),
+      ),
+    ),
+    modalBackgroundColor: Colors.white,
   );
 }
 
