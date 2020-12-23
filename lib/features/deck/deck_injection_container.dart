@@ -18,10 +18,11 @@
  */
 
 import 'package:get_it/get_it.dart';
+import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
+
 import '../../core/data/data_sources/moor/decks/decks_dao.dart';
 import '../../core/data/data_sources/moor/moor_database.dart';
 import '../../core/data/repositories/material/deck/deck_repository_impl.dart';
-
 import 'domain/use_cases/create_deck.dart';
 import 'domain/use_cases/delete_deck.dart';
 import 'domain/use_cases/get_all_decks.dart';
@@ -43,11 +44,13 @@ void initDeck(GetIt getIt) {
   getIt.registerLazySingleton(() => DeleteDeck(repository: getIt()));
 
   // Data
-  getIt.registerLazySingleton(() => DeckRepositoryImpl(decksDao: getIt()));
+  getIt.registerLazySingleton<DeckRepository>(
+    () => DeckRepositoryImpl(decksDao: getIt()),
+  );
 
-  getIt.registerLazySingleton(() {
-    return DecksDaoImpl(db: getIt(), systemTime: getIt());
-  });
+  getIt.registerLazySingleton<DecksDao>(
+    () => DecksDaoImpl(db: getIt(), systemTime: getIt()),
+  );
 
-  getIt.registerSingleton(() => MoorDatabase.mobile());
+  getIt.registerLazySingleton(() => MoorDatabase.mobile());
 }

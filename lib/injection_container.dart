@@ -28,5 +28,5 @@ void init() {
   initDeck(getIt);
 
   // Core
-  getIt.registerSingleton(() => SystemTime());
+  getIt.registerLazySingleton(() => SystemTime());
 }
