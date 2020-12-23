@@ -20,20 +20,20 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import '../core/presentation/change_notifiers/color_notifier.dart';
 import '../features/deck/presentation/bloc/deck_bloc.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
-import '../injection_container.dart';
 import 'shared/main_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DeckBloc>(
-      create: (_) => getIt()..add(DeckInitialized()),
+      create: (_) => GetIt.instance()..add(DeckInitialized()),
       child: Consumer<ColorNotifier>(
         builder: (_, cn, child) {
           return Scaffold(
