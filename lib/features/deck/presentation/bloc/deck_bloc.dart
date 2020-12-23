@@ -24,18 +24,62 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/domain/entities/material/deck/deck.dart';
+import '../../domain/use_cases/create_deck.dart';
+import '../../domain/use_cases/delete_deck.dart';
+import '../../domain/use_cases/get_all_decks.dart';
 
 part 'deck_event.dart';
 
 part 'deck_state.dart';
 
 class DeckBloc extends Bloc<DeckEvent, DeckState> {
-  DeckBloc() : super(DeckInitial());
+  final CreateDeck _createDeck;
+  final GetAllDecks _getAllDecks;
+  final DeleteDeck _deleteDeck;
+
+  // Updated when decks are updated or renamed
+  List<Deck> _decks;
+
+  DeckBloc({
+    @required CreateDeck createDeck,
+    @required GetAllDecks getAllDecks,
+    @required DeleteDeck deleteDeck,
+  })  : _createDeck = createDeck,
+        _getAllDecks = getAllDecks,
+        _deleteDeck = deleteDeck,
+        super(DeckInitial());
 
   @override
   Stream<DeckState> mapEventToState(
     DeckEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    yield DeckLoading();
+
+    if (event is DeckInitialized) {
+      yield* _mapDeckInitializedToState();
+    } else if (event is DeckAdded) {
+      yield* _mapDeckAddedToState(event);
+    } else if (event is DeckDeleted) {
+      yield* _mapDeckDeletedToState(event);
+    }
+
+    // TODO: implement other events in mapEventToState
+  }
+
+  Stream<DeckState> _mapDeckInitializedToState() async* {
+    _decks = await _getAllDecks();
+    yield DeckLoaded(decks: _decks);
+  }
+
+  Stream<DeckState> _mapDeckAddedToState(DeckAdded event) async* {
+    await _createDeck(name: event.name);
+    _decks = await _getAllDecks();
+    yield DeckLoaded(decks: _decks);
+  }
+
+  Stream<DeckState> _mapDeckDeletedToState(DeckDeleted event) async* {
+    await _deleteDeck(deck: event.deck);
+    _decks.remove(event.deck);
+    yield DeckLoaded(decks: _decks);
   }
 }
