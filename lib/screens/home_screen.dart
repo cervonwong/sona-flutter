@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DeckBloc>(
-      create: (_) => getIt(),
+      create: (_) => getIt()..add(DeckInitialized()),
       child: Consumer<ColorNotifier>(
         builder: (_, cn, child) {
           return Scaffold(
@@ -45,57 +45,71 @@ class HomeScreen extends StatelessWidget {
           );
         },
         child: SafeArea(
-          child: ListView(
-            children: [
-              HomeHeader(),
-              SizedBox(height: 32.0),
-              DeckListTitleBar(),
-              SizedBox(height: 8.0),
-              DeckListTile(
-                deckName: 'Toki Pona Base Terms Deck',
-                totalCardCount: 1000,
-                dueCardCount: 120,
-                reviewedCardCount: 2,
-                unscheduledCardCount: 500,
-              ),
-              DeckListTile(
-                deckName: 'Chess opening names (from the book)',
-                totalCardCount: 1000,
-                dueCardCount: 120,
-                reviewedCardCount: 60,
-                unscheduledCardCount: 5,
-              ),
-              DeckListTile(
-                deckName: 'French Vocabulary B2',
-                totalCardCount: 1000,
-                dueCardCount: 120,
-                reviewedCardCount: 2,
-                unscheduledCardCount: 5,
-              ),
-              DeckListTile(
-                deckName: 'CM3232 2020 | Chemistry Olympiad Training | '
-                    'Thermodynamics',
-                totalCardCount: 1000,
-                dueCardCount: 120,
-                reviewedCardCount: 120,
-                unscheduledCardCount: 5,
-              ),
-              DeckListTile(
-                deckName: 'Kanto Pokémon (name + image)',
-                totalCardCount: 1000,
-                dueCardCount: 500,
-                reviewedCardCount: 2,
-                unscheduledCardCount: 5,
-              ),
-              DeckListTile(
-                deckName: 'Chemistry 2021 Chapters 1-10',
-                totalCardCount: 1000,
-                dueCardCount: 120,
-                reviewedCardCount: 2,
-                unscheduledCardCount: 5,
-              ),
-              SizedBox(height: 100),
-            ],
+          child: BlocBuilder<DeckBloc, DeckState>(
+            builder: (_, state) {
+              return ListView(
+                children: [
+                  HomeHeader(),
+                  SizedBox(height: 32.0),
+                  DeckListTitleBar(),
+                  SizedBox(height: 8.0),
+                  if (state is DeckLoaded)
+                    ...state.decks.map<DeckListTile>(
+                      (deck) => DeckListTile(
+                        deckName: deck.name,
+                        totalCardCount: 1000,
+                        dueCardCount: 120,
+                        reviewedCardCount: 2,
+                        unscheduledCardCount: 500,
+                      ),
+                    ),
+                  // DeckListTile(
+                  //   deckName: 'Toki Pona Base Terms Deck',
+                  //   totalCardCount: 1000,
+                  //   dueCardCount: 120,
+                  //   reviewedCardCount: 2,
+                  //   unscheduledCardCount: 500,
+                  // ),
+                  // DeckListTile(
+                  //   deckName: 'Chess opening names (from the book)',
+                  //   totalCardCount: 1000,
+                  //   dueCardCount: 120,
+                  //   reviewedCardCount: 60,
+                  //   unscheduledCardCount: 5,
+                  // ),
+                  // DeckListTile(
+                  //   deckName: 'French Vocabulary B2',
+                  //   totalCardCount: 1000,
+                  //   dueCardCount: 120,
+                  //   reviewedCardCount: 2,
+                  //   unscheduledCardCount: 5,
+                  // ),
+                  // DeckListTile(
+                  //   deckName: 'CM3232 2020 | Chemistry Olympiad Training | '
+                  //       'Thermodynamics',
+                  //   totalCardCount: 1000,
+                  //   dueCardCount: 120,
+                  //   reviewedCardCount: 120,
+                  //   unscheduledCardCount: 5,
+                  // ),
+                  // DeckListTile(
+                  //   deckName: 'Kanto Pokémon (name + image)',
+                  //   totalCardCount: 1000,
+                  //   dueCardCount: 500,
+                  //   reviewedCardCount: 2,
+                  //   unscheduledCardCount: 5,
+                  // ),
+                  // DeckListTile(
+                  //   deckName: 'Chemistry 2021 Chapters 1-10',
+                  //   totalCardCount: 1000,
+                  //   dueCardCount: 120,
+                  //   reviewedCardCount: 2,
+                  //   unscheduledCardCount: 5,
+                  // ),
+                  SizedBox(height: 100),
+                ],
+              );
+            },
           ),
         ),
       ),
