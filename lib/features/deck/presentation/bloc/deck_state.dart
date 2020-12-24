@@ -48,10 +48,6 @@ class DeckLoaded extends DeckState {
 /// The state when the BLoC has not successfully loaded the list of decks.
 class DeckLoadFailed extends DeckState {}
 
-class DeckNameIsTooShort extends DeckLoadFailed {}
-
-class DeckNameIsTooLong extends DeckLoadFailed {}
-
 class DeckNameIsEmpty extends DeckLoadFailed {}
 
 class DeckNameAlreadyExists extends DeckLoadFailed {}
