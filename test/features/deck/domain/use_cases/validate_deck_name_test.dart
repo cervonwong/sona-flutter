@@ -25,6 +25,7 @@ import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.d
 
 class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 
+// ignore: must_be_immutable
 class MockDeck extends Mock implements Deck {}
 
 void main() {
