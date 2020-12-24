@@ -18,6 +18,7 @@
  */
 
 import 'package:get_it/get_it.dart';
+import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.dart';
 
 import '../../core/data/data_sources/moor/decks/decks_dao.dart';
 import '../../core/data/data_sources/moor/moor_database.dart';
@@ -35,6 +36,7 @@ void init(GetIt getIt) {
       createDeck: getIt(),
       getAllDecks: getIt(),
       deleteDeck: getIt(),
+      validateDeckName: getIt(),
     );
   });
 
@@ -42,6 +44,7 @@ void init(GetIt getIt) {
   getIt.registerLazySingleton(() => CreateDeck(repository: getIt()));
   getIt.registerLazySingleton(() => GetAllDecks(repository: getIt()));
   getIt.registerLazySingleton(() => DeleteDeck(repository: getIt()));
+  getIt.registerLazySingleton(() => ValidateDeckName(repository: getIt()));
 
   // Data
   getIt.registerLazySingleton<DeckRepository>(
