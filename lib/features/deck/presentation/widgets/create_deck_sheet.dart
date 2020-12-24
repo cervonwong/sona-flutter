@@ -25,45 +25,44 @@ class CreateDeckSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        // To move the sheet up when keyboard appears.
-        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 16.0,
+        right: 16.0,
+        top: 24.0,
+        bottom: 16.0 + MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Create a new deck',
-              style: Theme.of(context).textTheme.bodyText1,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            style: Theme.of(context).textTheme.bodyText1,
+            decoration: InputDecoration(
+              icon: Icon(FluentIcons.book_24_regular),
+              border: InputBorder.none,
+              hintText: 'A cool deck name...',
             ),
-            SizedBox(height: 16.0),
-            TextField(
-              style: Theme.of(context).textTheme.bodyText2,
+          ),
+          SizedBox(height: 16.0),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Wrap(
+              alignment: WrapAlignment.end,
+              spacing: 16.0,
+              children: [
+                OutlinedButton.icon(
+                  icon: Icon(FluentIcons.arrow_download_24_regular),
+                  label: Text('IMPORT'),
+                  onPressed: () {},
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(FluentIcons.add_24_regular),
+                  label: Text('CREATE'),
+                  onPressed: () {},
+                ),
+              ],
             ),
-            SizedBox(height: 32.0),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Wrap(
-                alignment: WrapAlignment.end,
-                spacing: 16.0,
-                children: [
-                  OutlinedButton.icon(
-                    icon: Icon(FluentIcons.arrow_download_24_regular),
-                    label: Text('IMPORT'),
-                    onPressed: () {},
-                  ),
-                  ElevatedButton.icon(
-                    icon: Icon(FluentIcons.add_24_regular),
-                    label: Text('CREATE'),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
