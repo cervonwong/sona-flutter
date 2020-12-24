@@ -18,7 +18,6 @@
  */
 
 import 'package:get_it/get_it.dart';
-import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.dart';
 
 import '../../core/data/data_sources/moor/decks/decks_dao.dart';
 import '../../core/data/data_sources/moor/moor_database.dart';
@@ -27,6 +26,7 @@ import '../../core/domain/repositories/material/deck/deck_repository.dart';
 import 'domain/use_cases/create_deck.dart';
 import 'domain/use_cases/delete_deck.dart';
 import 'domain/use_cases/get_all_decks.dart';
+import 'domain/use_cases/validate_deck_name.dart';
 import 'presentation/bloc/deck_bloc.dart';
 
 void init(GetIt getIt) {
