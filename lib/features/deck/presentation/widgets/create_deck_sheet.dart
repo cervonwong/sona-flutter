@@ -25,8 +25,8 @@ class CreateDeckSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: 16.0,
-        right: 16.0,
+        left: 24.0,
+        right: 24.0,
         top: 24.0,
         bottom: 16.0 + MediaQuery.of(context).viewInsets.bottom,
       ),
@@ -35,32 +35,30 @@ class CreateDeckSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+            autofocus: true,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              icon: Icon(FluentIcons.book_24_regular),
+              // icon: Icon(FluentIcons.book_24_regular),
               border: InputBorder.none,
               hintText: 'A cool deck name...',
             ),
           ),
           SizedBox(height: 16.0),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Wrap(
-              alignment: WrapAlignment.end,
-              spacing: 16.0,
-              children: [
-                OutlinedButton.icon(
-                  icon: Icon(FluentIcons.arrow_download_24_regular),
-                  label: Text('IMPORT'),
-                  onPressed: () {},
-                ),
-                ElevatedButton.icon(
-                  icon: Icon(FluentIcons.add_24_regular),
-                  label: Text('CREATE'),
-                  onPressed: () {},
-                ),
-              ],
-            ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16.0,
+            children: [
+              ElevatedButton.icon(
+                icon: Icon(FluentIcons.add_24_regular),
+                label: Text('CREATE'),
+                onPressed: () {},
+              ),
+              OutlinedButton.icon(
+                icon: Icon(FluentIcons.arrow_download_24_regular),
+                label: Text('IMPORT'),
+                onPressed: () {},
+              ),
+            ],
           ),
         ],
       ),
