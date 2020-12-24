@@ -64,49 +64,6 @@ class HomeScreen extends StatelessWidget {
                         unscheduledCardCount: 500,
                       ),
                     ),
-                  // DeckListTile(
-                  //   deckName: 'Toki Pona Base Terms Deck',
-                  //   totalCardCount: 1000,
-                  //   dueCardCount: 120,
-                  //   reviewedCardCount: 2,
-                  //   unscheduledCardCount: 500,
-                  // ),
-                  // DeckListTile(
-                  //   deckName: 'Chess opening names (from the book)',
-                  //   totalCardCount: 1000,
-                  //   dueCardCount: 120,
-                  //   reviewedCardCount: 60,
-                  //   unscheduledCardCount: 5,
-                  // ),
-                  // DeckListTile(
-                  //   deckName: 'French Vocabulary B2',
-                  //   totalCardCount: 1000,
-                  //   dueCardCount: 120,
-                  //   reviewedCardCount: 2,
-                  //   unscheduledCardCount: 5,
-                  // ),
-                  // DeckListTile(
-                  //   deckName: 'CM3232 2020 | Chemistry Olympiad Training | '
-                  //       'Thermodynamics',
-                  //   totalCardCount: 1000,
-                  //   dueCardCount: 120,
-                  //   reviewedCardCount: 120,
-                  //   unscheduledCardCount: 5,
-                  // ),
-                  // DeckListTile(
-                  //   deckName: 'Kanto Pokémon (name + image)',
-                  //   totalCardCount: 1000,
-                  //   dueCardCount: 500,
-                  //   reviewedCardCount: 2,
-                  //   unscheduledCardCount: 5,
-                  // ),
-                  // DeckListTile(
-                  //   deckName: 'Chemistry 2021 Chapters 1-10',
-                  //   totalCardCount: 1000,
-                  //   dueCardCount: 120,
-                  //   reviewedCardCount: 2,
-                  //   unscheduledCardCount: 5,
-                  // ),
                   SizedBox(height: 100),
                 ],
               );
@@ -176,7 +133,10 @@ class _HomeFAB extends StatelessWidget {
       barrierColor: cn.specific.scrimColor,
       context: context,
       isScrollControlled: true,
-      builder: (context) => CreateDeckSheet(),
+      builder: (_) => BlocProvider.value(
+        value: BlocProvider.of<DeckBloc>(context),
+        child: CreateDeckSheet(),
+      ),
     );
   }
 }
