@@ -36,6 +36,8 @@ abstract class DeckRepository {
 
   Future<Deck> getById({@required int id});
 
+  Future<Deck> getByName({@required String name});
+
   Future<List<Deck>> getAll();
 
   Future<void> update({@required Deck deck});

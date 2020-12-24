@@ -62,6 +62,13 @@ class DeckRepositoryImpl extends DeckRepository {
   }
 
   @override
+  Future<Deck> getByName({@required String name}) async {
+    final model = await _decksDao.getByName(name: name);
+
+    return _toEntity(model);
+  }
+
+  @override
   Future<List<Deck>> getAll() async {
     final models = await _decksDao.getAll();
 

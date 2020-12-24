@@ -114,6 +114,43 @@ void main() {
   );
 
   group(
+    'DeckRepositoryImpl getByName',
+    () {
+      test(
+        'when passed legal arguments, '
+        'should return expected Deck',
+        () async {
+          when(decksDao.getByName(
+            name: argThat(equals('Peter'), named: 'name'),
+          )).thenAnswer(
+            (_) async => DeckModel(
+              id: 5,
+              name: 'Peter',
+              created: DateTime(1999),
+              lastEdited: DateTime(1999),
+              authorName: kDefaultDeckAuthorName,
+              description: kDefaultDeckDescription,
+            ),
+          );
+
+          final deck = await repository.getByName(name: 'Peter');
+          expect(
+            deck,
+            Deck(
+              id: 5,
+              name: 'Peter',
+              createdDateTime: DateTime(1999),
+              lastEditedDateTime: DateTime(1999),
+              authorName: kDefaultDeckAuthorName,
+              description: kDefaultDeckDescription,
+            ),
+          );
+        },
+      );
+    },
+  );
+
+  group(
     'DeckRepositoryImpl getAll',
     () {
       test(
