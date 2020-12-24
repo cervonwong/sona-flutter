@@ -19,34 +19,17 @@
 
 import 'package:moor/moor.dart';
 
-import '../../../../constants/material_constants.dart';
-
 @DataClassName('DeckModel')
 class Decks extends Table {
   IntColumn get id => integer().autoIncrement()(); // PK
 
-  TextColumn get name => text()
-      .withLength(
-        min: kMinDeckNameLength,
-        max: kMaxDeckNameLength,
-      )
-      .customConstraint('NOT NULL UNIQUE')();
+  TextColumn get name => text().customConstraint('NOT NULL UNIQUE')();
 
   DateTimeColumn get created => dateTime()();
 
   DateTimeColumn get lastEdited => dateTime()();
 
-  TextColumn get authorName => text()
-      .withLength(
-        min: kMinDeckAuthorNameLength,
-        max: kMaxDeckAuthorNameLength,
-      )
-      .nullable()();
+  TextColumn get authorName => text().nullable()();
 
-  TextColumn get description => text()
-      .withLength(
-        min: kMinDeckDescriptionLength,
-        max: kMaxDeckDescriptionLength,
-      )
-      .nullable()();
+  TextColumn get description => text().nullable()();
 }

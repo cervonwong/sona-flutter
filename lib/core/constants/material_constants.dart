@@ -21,12 +21,12 @@
 // Currently, constraints are only set for Deck as a test.
 
 // Deck
-const int kMinDeckNameLength = 5;
-const int kMaxDeckNameLength = 150;
-const int kMinDeckAuthorNameLength = 1;
-const int kMaxDeckAuthorNameLength = 50;
-const int kMinDeckDescriptionLength = 10;
-const int kMaxDeckDescriptionLength = 255;
+// const int kMinDeckNameLength = 5;
+// const int kMaxDeckNameLength = 150;
+// const int kMinDeckAuthorNameLength = 1;
+// const int kMaxDeckAuthorNameLength = 50;
+// const int kMinDeckDescriptionLength = 10;
+// const int kMaxDeckDescriptionLength = 255;
 
 // Defaults
 
