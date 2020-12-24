@@ -83,6 +83,11 @@ ThemeData _createBaseThemeData() {
     scaffoldBackgroundColor: kNeutralColor2,
     splashColor: kPrimarySplashColor,
     shadowColor: kNeutralColor8,
+    // The below arguments should be removed after
+    // https://flutter.dev/docs/release/breaking-changes/text-selection-theme.
+    cursorColor: kPrimaryColor,
+    textSelectionColor: kPrimaryLightColor,
+    textSelectionHandleColor: kPrimaryColor,
   );
 }
 
