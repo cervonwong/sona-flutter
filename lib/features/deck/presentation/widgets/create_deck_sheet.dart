@@ -38,7 +38,6 @@ class CreateDeckSheet extends StatelessWidget {
             autofocus: true,
             style: Theme.of(context).textTheme.bodyText1,
             decoration: InputDecoration(
-              // icon: Icon(FluentIcons.book_24_regular),
               border: InputBorder.none,
               hintText: 'A cool deck name...',
             ),
