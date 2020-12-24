@@ -27,6 +27,7 @@ import '../../../../core/domain/entities/material/deck/deck.dart';
 import '../../domain/use_cases/create_deck.dart';
 import '../../domain/use_cases/delete_deck.dart';
 import '../../domain/use_cases/get_all_decks.dart';
+import '../../domain/use_cases/validate_deck_name.dart';
 
 part 'deck_event.dart';
 
@@ -36,6 +37,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
   final CreateDeck _createDeck;
   final GetAllDecks _getAllDecks;
   final DeleteDeck _deleteDeck;
+  final ValidateDeckName _validateDeckName;
 
   // Updated when decks are updated or renamed
   List<Deck> _decks;
@@ -44,9 +46,11 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
     @required CreateDeck createDeck,
     @required GetAllDecks getAllDecks,
     @required DeleteDeck deleteDeck,
+    @required ValidateDeckName validateDeckName,
   })  : _createDeck = createDeck,
         _getAllDecks = getAllDecks,
         _deleteDeck = deleteDeck,
+        _validateDeckName = validateDeckName,
         super(DeckInitial());
 
   @override
@@ -72,9 +76,20 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
   }
 
   Stream<DeckState> _mapDeckCreatedToState(DeckCreated event) async* {
-    await _createDeck(name: event.name);
-    _decks = await _getAllDecks();
-    yield DeckLoaded(decks: _decks);
+    final validationResult = await _validateDeckName(name: event.name);
+    switch (validationResult) {
+      case DeckNameValidationResult.valid:
+        await _createDeck(name: event.name);
+        _decks = await _getAllDecks();
+        yield DeckLoaded(decks: _decks);
+        break;
+      case DeckNameValidationResult.nameIsEmpty:
+        yield DeckNameIsEmpty();
+        break;
+      case DeckNameValidationResult.nameAlreadyExists:
+        yield DeckNameAlreadyExists();
+        break;
+    }
   }
 
   Stream<DeckState> _mapDeckDeletedToState(DeckDeleted event) async* {

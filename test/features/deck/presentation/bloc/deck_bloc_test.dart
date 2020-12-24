@@ -23,6 +23,7 @@ import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/create_deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/delete_deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/get_all_decks.dart';
+import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.dart';
 import 'package:sona_flutter/features/deck/presentation/bloc/deck_bloc.dart';
 
 class MockCreateDeck extends Mock implements CreateDeck {}
@@ -31,6 +32,8 @@ class MockGetAllDecks extends Mock implements GetAllDecks {}
 
 class MockDeleteDeck extends Mock implements DeleteDeck {}
 
+class MockValidateDeckName extends Mock implements ValidateDeckName {}
+
 // ignore: must_be_immutable
 class MockDeck extends Mock implements Deck {}
 
@@ -38,6 +41,7 @@ void main() {
   CreateDeck createDeck;
   GetAllDecks getAllDecks;
   DeleteDeck deleteDeck;
+  ValidateDeckName validateDeckName;
 
   Deck deck1, deck2, deck3;
 
@@ -47,6 +51,7 @@ void main() {
     createDeck = MockCreateDeck();
     getAllDecks = MockGetAllDecks();
     deleteDeck = MockDeleteDeck();
+    validateDeckName = MockValidateDeckName();
     deck1 = MockDeck();
     deck2 = MockDeck();
     deck3 = MockDeck();
@@ -54,6 +59,7 @@ void main() {
       createDeck: createDeck,
       getAllDecks: getAllDecks,
       deleteDeck: deleteDeck,
+      validateDeckName: validateDeckName,
     );
   });
 
@@ -89,49 +95,151 @@ void main() {
     },
   );
 
-  test(
-    'DeckBloc when added DeckInitialized then DeckCreated, '
-    'should emit expected state with list of decks with created deck',
-    () async {
-      when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+  group(
+    'DeckBloc when added DeckInitialized then DeckCreated',
+    () {
+      test(
+        'and when ValidateDeckName when called returns '
+        'DeckNameValidationResult.valid, '
+        'should emit expected state with list of decks with created deck',
+        () async {
+          when(validateDeckName(
+            name: argThat(equals('Valid'), named: 'name'),
+          )).thenAnswer((_) async => DeckNameValidationResult.valid);
 
-      bloc.add(DeckInitialized());
-      await expectLater(
-        bloc,
-        emitsInOrder(
-          [
-            DeckLoading(),
-            DeckLoaded(decks: [deck1, deck2]),
-          ],
-        ),
+          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+
+          bloc.add(DeckInitialized());
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckLoaded(decks: [deck1, deck2]),
+              ],
+            ),
+          );
+
+          when(createDeck(name: argThat(equals('Valid'), named: 'name')))
+              .thenAnswer(
+            (_) async => deck3,
+          );
+          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
+
+          bloc.add(DeckCreated(name: 'Valid'));
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckLoaded(decks: [deck1, deck2, deck3]),
+              ],
+            ),
+          );
+
+          verifyInOrder(
+            [
+              getAllDecks(),
+              validateDeckName(name: 'Valid'),
+              createDeck(name: 'Valid'),
+              getAllDecks(),
+            ],
+          );
+          verifyNoMoreInteractions(createDeck);
+          verifyNoMoreInteractions(validateDeckName);
+          verifyNoMoreInteractions(getAllDecks);
+        },
       );
 
-      when(createDeck(name: argThat(equals('Prague'), named: 'name')))
-          .thenAnswer(
-        (_) async => deck3,
-      );
-      when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
+      test(
+        'and when ValidateDeckName when called returns '
+        'DeckNameValidationResult.nameIsEmpty, '
+        'should emit DeckNameIsEmpty',
+        () async {
+          when(validateDeckName(
+            name: argThat(equals(''), named: 'name'),
+          )).thenAnswer((_) async => DeckNameValidationResult.nameIsEmpty);
 
-      bloc.add(DeckCreated(name: 'Prague'));
-      await expectLater(
-        bloc,
-        emitsInOrder(
-          [
-            DeckLoading(),
-            DeckLoaded(decks: [deck1, deck2, deck3]),
-          ],
-        ),
+          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+
+          bloc.add(DeckInitialized());
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckLoaded(decks: [deck1, deck2]),
+              ],
+            ),
+          );
+
+          bloc.add(DeckCreated(name: ''));
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckNameIsEmpty(),
+              ],
+            ),
+          );
+
+          verifyInOrder(
+            [
+              getAllDecks(),
+              validateDeckName(name: ''),
+            ],
+          );
+          verifyNoMoreInteractions(createDeck);
+          verifyNoMoreInteractions(validateDeckName);
+        },
       );
 
-      verifyInOrder(
-        [
-          getAllDecks(),
-          createDeck(name: 'Prague'),
-          getAllDecks(),
-        ],
+      test(
+        'and when ValidateDeckName when called returns '
+        'DeckNameValidationResult.nameAlreadyExists, '
+        'should emit DeckNameAlreadyExists',
+        () async {
+          when(validateDeckName(
+            name: argThat(equals('Duplicate'), named: 'name'),
+          )).thenAnswer(
+            (_) async => DeckNameValidationResult.nameAlreadyExists,
+          );
+
+          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+
+          bloc.add(DeckInitialized());
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckLoaded(decks: [deck1, deck2]),
+              ],
+            ),
+          );
+
+          bloc.add(DeckCreated(name: 'Duplicate'));
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckNameAlreadyExists(),
+              ],
+            ),
+          );
+
+          verifyInOrder(
+            [
+              getAllDecks(),
+              validateDeckName(name: 'Duplicate'),
+            ],
+          );
+          verifyNoMoreInteractions(createDeck);
+          verifyNoMoreInteractions(validateDeckName);
+        },
       );
-      verifyNoMoreInteractions(createDeck);
-      verifyNoMoreInteractions(getAllDecks);
     },
   );
 
