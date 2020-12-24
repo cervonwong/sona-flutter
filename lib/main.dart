@@ -251,6 +251,9 @@ DividerThemeData _createDividerTheme() {
 ElevatedButtonThemeData _createElevatedButtonTheme() {
   return ElevatedButtonThemeData(
     style: ButtonStyle(
+      elevation: MaterialStateProperty.all<double>(0.0),
+      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+      visualDensity: VisualDensity(vertical: 2.0),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
           return kNeutralColor5;
@@ -263,9 +266,6 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
         }
         return kPrimaryColor;
       }),
-      elevation: MaterialStateProperty.all<double>(0.0),
-      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
-      visualDensity: VisualDensity(vertical: 2.0),
     ),
   );
 }
@@ -281,6 +281,9 @@ FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
 OutlinedButtonThemeData _createOutlinedButtonTheme() {
   return OutlinedButtonThemeData(
     style: ButtonStyle(
+      elevation: MaterialStateProperty.all<double>(0.0),
+      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+      visualDensity: VisualDensity(vertical: 2.0),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
           return kNeutralColor5;
@@ -288,10 +291,8 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
         return kPrimaryColor;
       }),
       side: MaterialStateProperty.all<BorderSide>(
-          BorderSide(color: kNeutralColor4)),
-      elevation: MaterialStateProperty.all<double>(0.0),
-      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
-      visualDensity: VisualDensity(vertical: 2.0),
+        BorderSide(color: kNeutralColor4),
+      ),
     ),
   );
 }
