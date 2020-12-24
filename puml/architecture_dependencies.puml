@@ -14,36 +14,44 @@ header This diagram is part of a visualisation of the code written for Sona.\n V
 title Dependencies between layers of the app.\n
 footer Copyright (C) 2020 Cervon Wong
 
-package Presentation <<Cloud>> {
-	object "Widgets" as w
-    object "State Management" as s {
-    	BLoC, ChangeNotifier...
-    }
+package Features <<Node>> {
+	package Presentation <<Cloud>> {
+		object "Widgets" as w
+		object "State Management" as s {
+			BLoC, ChangeNotifier...
+		}
+	}
+	
+	package Domain <<Cloud>> {
+		object "Use Cases" as u
+		object "Entities" as e
+		object "Repo Interfaces" as ir
+	}
+	
+	package Data <<Cloud>> {
+		object "Repo Impls" as ri
+		object "DAO Impls" AS di {
+			also Data Sources
+		}
+		object "DAO Interfaces" as id {
+			also Data Sources
+		}
+		object "Moor Database" as db {
+			Configs, Tables, Models
+		}
+	}
+
+	note bottom of db
+    	Models are part of the database due to the limitations of moor's builders. See <i>https://github.com/ simolus3/moor/issues/490</i>for progress on this :)
+    end note
 }
 
-package Domain <<Cloud>> {
-	object "Use Cases" as u
-	object "Entities" as e
-	object "Repo Interfaces" as ir
+object "Service Locator" as sl {
+	Injection Container for Dependency Injection
 }
 
-package Data <<Cloud>> {
-	object "Repo Impls" as ri
-    object "DAO Impls" AS di {
-    	also Data Sources
-    }
-    object "DAO Interfaces" as id {
-    	also Data Sources
-    }
-    object "Moor Database" as db {
-    	Configs, Tables, Models
-    }
-}
-
-package Core <<Cloud>> {
-	object "Service Locator" as sl {
-    	GetIt used for Dependency Injection
-    }
+package Core <<Node>> {
+	note "Constants, utils, shared components, etc." as n1
 }
 
 w  ....>  s
@@ -61,12 +69,7 @@ di ....>  db
 di ....|> id
 id ....> db
 
-note right of sl
-	Unimplemented
-end note
-
-note left of db
-	Models are part of the database due to the limitations of moor's builders. See <i>https://github.com/ simolus3/moor/issues/490</i>for progress on this :)
-end note
+sl .> Features : \t
+Features .> Core : \t
 
 @enduml
