@@ -52,23 +52,23 @@ void main() {
 
   test(
     'ValidateDeckName when called with empty String for name, '
-    'should return DeckNameValidationResult.empty',
+    'should return DeckNameValidationResult.nameIsEmpty',
     () async {
       final result = await validateDeckName(name: '');
-      expect(result, DeckNameValidationResult.empty);
+      expect(result, DeckNameValidationResult.nameIsEmpty);
     },
   );
 
   test(
     'ValidateDeckName when called with name which a deck in the db has, '
-    'should return DeckNameValidationResult.duplicate',
+    'should return DeckNameValidationResult.nameAlreadyExists',
     () async {
       when(repository.getByName(
         name: argThat(equals('Duplicate'), named: 'name'),
       )).thenAnswer((_) async => MockDeck());
 
       final result = await validateDeckName(name: 'Duplicate');
-      expect(result, DeckNameValidationResult.duplicate);
+      expect(result, DeckNameValidationResult.nameAlreadyExists);
     },
   );
 }

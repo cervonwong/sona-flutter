@@ -32,12 +32,12 @@ class ValidateDeckName {
     assert(name != null);
 
     if (name.isEmpty) {
-      return DeckNameValidationResult.empty;
+      return DeckNameValidationResult.nameIsEmpty;
     }
     if ((await _repository.getByName(name: name)) == null) {
       return DeckNameValidationResult.valid;
     }
-    return DeckNameValidationResult.duplicate;
+    return DeckNameValidationResult.nameAlreadyExists;
   }
 }
 
@@ -45,7 +45,7 @@ enum DeckNameValidationResult {
   // Deck name is valid.
   valid,
   // Deck name is an empty String.
-  empty,
+  nameIsEmpty,
   // Deck name already exist.
-  duplicate,
+  nameAlreadyExists,
 }
