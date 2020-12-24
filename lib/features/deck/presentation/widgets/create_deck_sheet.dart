@@ -34,12 +34,15 @@ class CreateDeckSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextField(
-            autofocus: true,
-            style: Theme.of(context).textTheme.bodyText1,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'A cool deck name...',
+          Flexible(
+            child: TextField(
+              autofocus: true,
+              maxLines: null,
+              style: Theme.of(context).textTheme.bodyText1,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'A cool deck name...',
+              ),
             ),
           ),
           SizedBox(height: 16.0),
