@@ -22,10 +22,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
-import '../features/deck/presentation/widgets/create_deck_sheet.dart';
 
 import '../core/presentation/change_notifiers/color_notifier.dart';
 import '../features/deck/presentation/bloc/deck_bloc.dart';
+import '../features/deck/presentation/widgets/create_deck_sheet.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
 import 'shared/main_drawer.dart';
@@ -160,15 +160,20 @@ class _HomeFAB extends StatelessWidget {
       data: Theme.of(context).copyWith(
         shadowColor: Theme.of(context).colorScheme.primary,
       ),
-      child: FloatingActionButton(
-        onPressed: () => _onPressed(context),
-        child: Icon(FluentIcons.add_24_regular),
+      child: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return FloatingActionButton(
+            onPressed: () => _onPressed(context, cn),
+            child: Icon(FluentIcons.add_24_regular),
+          );
+        },
       ),
     );
   }
 
-  void _onPressed(BuildContext context) {
+  void _onPressed(BuildContext context, ColorNotifier cn) {
     showModalBottomSheet(
+      barrierColor: cn.specific.scrimColor,
       context: context,
       isScrollControlled: true,
       builder: (context) => CreateDeckSheet(),
