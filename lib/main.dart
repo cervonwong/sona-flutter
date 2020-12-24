@@ -58,7 +58,9 @@ ThemeData _createThemeData() {
     bottomSheetTheme: _createBottomSheetTheme(),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
+    elevatedButtonTheme: _createElevatedButtonTheme(),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
+    outlinedButtonTheme: _createOutlinedButtonTheme(),
     textSelectionTheme: _createTextSelectionTheme(),
     tooltipTheme: _createTooltipTheme(),
   );
@@ -177,8 +179,8 @@ TextTheme _createBaseTextTheme() {
     button: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 15,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 1.25,
+      fontWeight: FontWeight.w700,
+      letterSpacing: 1.0,
     ),
     caption: TextStyle(
       fontFamily: 'Work Sans',
@@ -246,11 +248,51 @@ DividerThemeData _createDividerTheme() {
   );
 }
 
+ElevatedButtonThemeData _createElevatedButtonTheme() {
+  return ElevatedButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return kNeutralColor5;
+        }
+        return kLightHighEmphasisTextColor;
+      }),
+      backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return kNeutralColor3;
+        }
+        return kPrimaryColor;
+      }),
+      elevation: MaterialStateProperty.all<double>(0.0),
+      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+      visualDensity: VisualDensity(vertical: 2.0),
+    ),
+  );
+}
+
 FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
   return FloatingActionButtonThemeData(
     elevation: 2.0,
     highlightElevation: 4.0,
     splashColor: kLightSplashColor,
+  );
+}
+
+OutlinedButtonThemeData _createOutlinedButtonTheme() {
+  return OutlinedButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return kNeutralColor5;
+        }
+        return kPrimaryColor;
+      }),
+      side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(color: kNeutralColor4)),
+      elevation: MaterialStateProperty.all<double>(0.0),
+      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+      visualDensity: VisualDensity(vertical: 2.0),
+    ),
   );
 }
 
