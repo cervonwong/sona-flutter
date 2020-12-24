@@ -201,6 +201,54 @@ void main() {
   );
 
   group(
+    'DecksDaoImpl getByName',
+    () {
+      test(
+        'when passed legal name, '
+        'should return expected DeckModel',
+        () async {
+          await dao.create(name: 'Cancer');
+
+          final deck = await dao.getByName(name: 'Cancer');
+          expect(
+            deck,
+            DeckModel(
+              id: 1,
+              name: 'Cancer',
+              created: DateTime(2020),
+              lastEdited: DateTime(2020),
+              authorName: kDefaultDeckAuthorName,
+              description: kDefaultDeckDescription,
+            ),
+          );
+        },
+      );
+
+      test(
+        'when no decks in the db has the same name as the passed name, '
+        'should return null',
+        () async {
+          final deck = await dao.getByName(name: 'Does not exist');
+          expect(deck, isNull);
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.getByName(name: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
     'DecksDaoImpl getAll',
     () {
       test(

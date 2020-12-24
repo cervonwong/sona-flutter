@@ -31,6 +31,8 @@ abstract class DecksDao {
 
   Future<DeckModel> getById({@required int id});
 
+  Future<DeckModel> getByName({@required String name});
+
   Future<List<DeckModel>> getAll();
 
   Future<DeckModel> edit({@required DeckModel newDeck});
@@ -90,6 +92,17 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
     assert(id != null);
 
     return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
+  }
+
+  /// Returns the [DeckModel] of the deck in the database with a matching name.
+  ///
+  /// Returns a `Future(null)` if there are no decks in the database with a
+  /// matching name.
+  @override
+  Future<DeckModel> getByName({@required String name}) {
+    assert(name != null);
+
+    return (select(decks)..where((deck) => deck.name.equals(name))).getSingle();
   }
 
   /// Returns the list of [DeckModel]s of all decks in the database.
