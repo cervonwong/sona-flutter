@@ -19,51 +19,120 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateDeckSheet extends StatelessWidget {
+import '../bloc/deck_bloc.dart';
+
+class CreateDeckSheet extends StatefulWidget {
+  @override
+  _CreateDeckSheetState createState() => _CreateDeckSheetState();
+}
+
+class _CreateDeckSheetState extends State<CreateDeckSheet> {
+  String _deckName = '';
+  bool _hasClickedCreated = false;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 24.0,
-        right: 24.0,
-        top: 24.0,
-        bottom: 16.0 + MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Flexible(
-            child: TextField(
-              autofocus: true,
-              maxLines: null,
-              style: Theme.of(context).textTheme.bodyText1,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'A cool deck name...',
+    return BlocListener<DeckBloc, DeckState>(
+      listener: (context, state) {
+        if (state is DeckLoaded) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 24.0,
+          right: 24.0,
+          top: 32.0,
+          bottom: 16.0 + MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: TextField(
+                autofocus: true,
+                maxLines: null,
+                style: Theme.of(context).textTheme.bodyText1,
+                decoration: InputDecoration(
+                  isCollapsed: true,
+                  border: InputBorder.none,
+                  hintText: 'A cool deck name...',
+                ),
+                onChanged: _textFieldOnChanged,
               ),
             ),
-          ),
-          SizedBox(height: 16.0),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16.0,
-            children: [
-              ElevatedButton.icon(
-                icon: Icon(FluentIcons.add_24_regular),
-                label: Text('CREATE'),
-                onPressed: () {},
-              ),
-              OutlinedButton.icon(
-                icon: Icon(FluentIcons.arrow_download_24_regular),
-                label: Text('IMPORT'),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ],
+            BlocBuilder<DeckBloc, DeckState>(
+              builder: (_, state) {
+                if (state is DeckNameAlreadyExists && _hasClickedCreated) {
+                  return _DeckNameAlreadyExistsMessage();
+                }
+                return Container();
+              },
+            ),
+            SizedBox(height: 16.0),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 16.0,
+              children: [
+                ElevatedButton.icon(
+                  icon: Icon(FluentIcons.add_24_regular),
+                  label: Text('CREATE'),
+                  onPressed: _deckName.isEmpty
+                      ? null
+                      : () {
+                          _createDeck(context);
+                        },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  void _textFieldOnChanged(String text) {
+    setState(() {
+      _deckName = text;
+    });
+  }
+
+  void _createDeck(BuildContext context) {
+    setState(() {
+      _hasClickedCreated = true;
+    });
+    BlocProvider.of<DeckBloc>(context).add(DeckCreated(name: _deckName));
+  }
+}
+
+class _DeckNameAlreadyExistsMessage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 16.0),
+        Row(
+          children: [
+            Icon(
+              FluentIcons.emoji_surprise_24_regular,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            SizedBox(width: 8.0),
+            Flexible(
+              child: Text(
+                'There\'s already a deck with this name!',
+                softWrap: true,
+                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
