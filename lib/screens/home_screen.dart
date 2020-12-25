@@ -136,7 +136,22 @@ class _HomeFAB extends StatelessWidget {
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
         value: BlocProvider.of<DeckBloc>(context),
-        child: CreateDeckSheet(),
+        child: CreateDeckSheet(
+          onSuccess: (deckName) {
+            _showCreationSuccessSnackBar(context, deckName);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showCreationSuccessSnackBar(BuildContext context, String deckName) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(deckName.length < 50
+            ? 'Created deck "$deckName"!'
+            : 'Created deck "${deckName.substring(0, 49)}..."!'),
       ),
     );
   }

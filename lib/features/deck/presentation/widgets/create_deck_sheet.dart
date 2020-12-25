@@ -23,7 +23,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/deck_bloc.dart';
 
+typedef OnSuccess = void Function(String deckName);
+
 class CreateDeckSheet extends StatefulWidget {
+  final OnSuccess onSuccess;
+
+  CreateDeckSheet({@required this.onSuccess});
+
   @override
   _CreateDeckSheetState createState() => _CreateDeckSheetState();
 }
@@ -37,7 +43,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
     return BlocListener<DeckBloc, DeckState>(
       listener: (context, state) {
         if (state is DeckLoaded) {
-          Navigator.of(context).pop();
+          _handleDeckCreationSuccess(context);
         }
       },
       child: Padding(
@@ -105,6 +111,11 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
       _hasClickedCreated = true;
     });
     BlocProvider.of<DeckBloc>(context).add(DeckCreated(name: _deckName));
+  }
+
+  void _handleDeckCreationSuccess(BuildContext context) {
+    Navigator.of(context).pop();
+    widget.onSuccess(_deckName);
   }
 }
 
