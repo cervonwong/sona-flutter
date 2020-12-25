@@ -60,6 +60,15 @@ void main() {
   );
 
   test(
+    'ValidateDeckName when called with multiline String for name, '
+    'should return DeckNameValidationResult.nameIsMultiline',
+    () async {
+      final result = await validateDeckName(name: 'This is\nmultiline');
+      expect(result, DeckNameValidationResult.nameIsMultiline);
+    },
+  );
+
+  test(
     'ValidateDeckName when called with name which a deck in the db has, '
     'should return DeckNameValidationResult.nameAlreadyExists',
     () async {

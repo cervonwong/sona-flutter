@@ -34,6 +34,9 @@ class ValidateDeckName {
     if (name.isEmpty) {
       return DeckNameValidationResult.nameIsEmpty;
     }
+    if (name.contains('\n')) {
+      return DeckNameValidationResult.nameIsMultiline;
+    }
     if ((await _repository.getByName(name: name)) == null) {
       return DeckNameValidationResult.valid;
     }
@@ -44,8 +47,10 @@ class ValidateDeckName {
 enum DeckNameValidationResult {
   // Deck name is valid.
   valid,
-  // Deck name is an empty String.
+  // Deck name is an empty String. This is enforced by the UI.
   nameIsEmpty,
+  // Deck name has \n. This is enforced by the UI.
+  nameIsMultiline,
   // Deck name already exist.
   nameAlreadyExists,
 }
