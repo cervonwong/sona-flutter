@@ -49,6 +49,8 @@ class SonaApp extends StatelessWidget {
 }
 
 ThemeData _createThemeData() {
+  final baseTextTheme = _createBaseTextTheme();
+
   return _createBaseThemeData().copyWith(
     colorScheme: _createColorScheme(),
     textTheme: _createTextTheme(),
@@ -61,6 +63,7 @@ ThemeData _createThemeData() {
     elevatedButtonTheme: _createElevatedButtonTheme(),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
     outlinedButtonTheme: _createOutlinedButtonTheme(),
+    snackBarTheme: _createSnackBarTheme(baseTextTheme: baseTextTheme),
     textSelectionTheme: _createTextSelectionTheme(),
     tooltipTheme: _createTooltipTheme(),
   );
@@ -299,6 +302,18 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
         BorderSide(color: kNeutralColor4),
       ),
     ),
+  );
+}
+
+SnackBarThemeData _createSnackBarTheme({@required TextTheme baseTextTheme}) {
+  return SnackBarThemeData(
+    behavior: SnackBarBehavior.floating,
+    elevation: 2.0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(kSmallCornerRadius),
+    ),
+    backgroundColor: kNeutralColor7.withOpacity(0.9),
+    contentTextStyle: baseTextTheme.caption,
   );
 }
 
