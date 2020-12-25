@@ -263,10 +263,16 @@ void main() {
 
       test(
         'when there are multiple decks in the db, '
-        'should return the expected DeckModels in the order of creation',
+        'should return the expected DeckModels '
+        'with the most recently created at the start of the list',
         () async {
+          when(systemTime.now()).thenReturn(DateTime(1999));
           await dao.create(name: 'Aries');
+
+          when(systemTime.now()).thenReturn(DateTime(2000));
           await dao.create(name: 'Taurus');
+
+          when(systemTime.now()).thenReturn(DateTime(2001));
           await dao.create(name: 'Gemini');
 
           final decks = await dao.getAll();
@@ -274,26 +280,26 @@ void main() {
             decks,
             [
               DeckModel(
-                id: 1,
-                name: 'Aries',
-                created: DateTime(2020),
-                lastEdited: DateTime(2020),
+                id: 3,
+                name: 'Gemini',
+                created: DateTime(2001),
+                lastEdited: DateTime(2001),
                 authorName: kDefaultDeckAuthorName,
                 description: kDefaultDeckDescription,
               ),
               DeckModel(
                 id: 2,
                 name: 'Taurus',
-                created: DateTime(2020),
-                lastEdited: DateTime(2020),
+                created: DateTime(2000),
+                lastEdited: DateTime(2000),
                 authorName: kDefaultDeckAuthorName,
                 description: kDefaultDeckDescription,
               ),
               DeckModel(
-                id: 3,
-                name: 'Gemini',
-                created: DateTime(2020),
-                lastEdited: DateTime(2020),
+                id: 1,
+                name: 'Aries',
+                created: DateTime(1999),
+                lastEdited: DateTime(1999),
                 authorName: kDefaultDeckAuthorName,
                 description: kDefaultDeckDescription,
               ),

@@ -107,9 +107,16 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
 
   /// Returns the list of [DeckModel]s of all decks in the database.
   ///
-  /// Returns the list of [DeckModel]s in the order of creation.
+  /// Returns the list of [DeckModel]s with the most recently created at the
+  /// start of the list (descending order of the creation).
   @override
-  Future<List<DeckModel>> getAll() async => select(decks).get();
+  Future<List<DeckModel>> getAll() async {
+    return (select(decks)
+          ..orderBy(
+            [(deck) => OrderingTerm.desc(deck.created)],
+          ))
+        .get();
+  }
 
   /// Updates the updatable fields of the deck specified by [newDeck]'s ID, then
   /// returns its updated [DeckModel].
