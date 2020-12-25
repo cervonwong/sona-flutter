@@ -240,6 +240,52 @@ void main() {
           verifyNoMoreInteractions(validateDeckName);
         },
       );
+
+      test(
+        'and when ValidateDeckName when called returns '
+        'DeckNameValidationResult.nameIsMultiline, '
+        'should emit DeckNameIsMultiline',
+        () async {
+          when(validateDeckName(
+            name: argThat(equals('Hey\nHo'), named: 'name'),
+          )).thenAnswer(
+            (_) async => DeckNameValidationResult.nameIsMultiline,
+          );
+
+          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+
+          bloc.add(DeckInitialized());
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckLoaded(decks: [deck1, deck2]),
+              ],
+            ),
+          );
+
+          bloc.add(DeckCreated(name: 'Hey\nHo'));
+          await expectLater(
+            bloc,
+            emitsInOrder(
+              [
+                DeckLoading(),
+                DeckNameIsMultiline(),
+              ],
+            ),
+          );
+
+          verifyInOrder(
+            [
+              getAllDecks(),
+              validateDeckName(name: 'Hey\nHo'),
+            ],
+          );
+          verifyNoMoreInteractions(createDeck);
+          verifyNoMoreInteractions(validateDeckName);
+        },
+      );
     },
   );
 

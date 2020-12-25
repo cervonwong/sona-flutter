@@ -89,6 +89,9 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
       case DeckNameValidationResult.nameAlreadyExists:
         yield DeckNameAlreadyExists();
         break;
+      case DeckNameValidationResult.nameIsMultiline:
+        yield DeckNameIsMultiline();
+        break;
     }
   }
 

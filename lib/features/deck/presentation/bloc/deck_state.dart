@@ -51,3 +51,5 @@ class DeckLoadFailed extends DeckState {}
 class DeckNameIsEmpty extends DeckLoadFailed {}
 
 class DeckNameAlreadyExists extends DeckLoadFailed {}
+
+class DeckNameIsMultiline extends DeckLoadFailed {}
