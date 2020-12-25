@@ -260,7 +260,11 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
   return ElevatedButtonThemeData(
     style: ButtonStyle(
       elevation: MaterialStateProperty.all<double>(0.0),
-      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+      shape: MaterialStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(kSmallCornerRadius),
+        ),
+      ),
       visualDensity: VisualDensity(vertical: 2.0),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
@@ -290,7 +294,11 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
   return OutlinedButtonThemeData(
     style: ButtonStyle(
       elevation: MaterialStateProperty.all<double>(0.0),
-      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+      shape: MaterialStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(kSmallCornerRadius),
+        ),
+      ),
       visualDensity: VisualDensity(vertical: 2.0),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {

@@ -18,6 +18,6 @@
  */
 
 // Shape
-const double kSmallCornerRadius = 999.0;
+const double kSmallCornerRadius = 12.0;
 const double kMediumCornerRadius = 16.0;
 const double kLargeCornerRadius = 32.0;
