@@ -148,7 +148,6 @@ class _HomeFAB extends StatelessWidget {
   void _showCreationSuccessSnackBar(BuildContext context, String deckName) {
     Scaffold.of(context).showSnackBar(
       SnackBar(
-        behavior: SnackBarBehavior.floating,
         content: Text(deckName.length < 50
             ? 'Created deck "$deckName"!'
             : 'Created deck "${deckName.substring(0, 49)}..."!'),
