@@ -215,7 +215,7 @@ void main() {
     'Deck when equating',
     () {
       test(
-        'logically equal Decks, '
+        'structurally equal Decks, '
         'should return true',
         () {
           final deck1 = Deck(
@@ -225,19 +225,12 @@ void main() {
             lastEditedDateTime: DateTime(2020, 10, 30),
           );
 
-          final deck2 = deck1.copyWith(
-            name: 'Different name',
-            lastEditedDateTime: DateTime(2021, 10, 30),
-            authorName: Nullable<String>('Cervon Wong'),
-            description: Nullable<String>('Finally a description.'),
-          );
-
-          expect(deck1, deck2);
+          expect(deck1, deck1.copyWith());
         },
       );
 
       test(
-        'logically unequal Decks, '
+        'structurally unequal Decks, '
         'should return false',
         () {
           final name = 'Same Deck Name';
@@ -256,12 +249,12 @@ void main() {
           );
 
           final deck2 = Deck(
-            id: 2,
+            id: 1,
             name: name,
             createdDateTime: createdDateTime,
             lastEditedDateTime: lastEditedDateTime,
             authorName: authorName,
-            description: description,
+            description: null,
           );
 
           expect(deck1, isNot(deck2));

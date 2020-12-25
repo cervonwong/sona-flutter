@@ -62,5 +62,12 @@ class Deck extends Equatable {
   }
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [
+        id,
+        name,
+        createdDateTime,
+        lastEditedDateTime,
+        authorName,
+        description,
+      ];
 }
