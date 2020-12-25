@@ -61,6 +61,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
               child: TextField(
                 autofocus: true,
                 maxLines: null,
+                textInputAction: TextInputAction.done,
                 style: Theme.of(context).textTheme.bodyText1,
                 decoration: InputDecoration(
                   isCollapsed: true,
