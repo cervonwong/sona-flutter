@@ -126,3 +126,7 @@ const Color kPrimaryHighlightColor =
 // Misc.
 
 const Color kScrimColor = Color(0x800B0844); // 80 --> 50%.
+const Color kSnackBarBackgroundColor =
+    Color(0xE64E4B66); // kNeutralColor7.withOpacity(0.9).
+const Color kTooltipBackgroundColor =
+    Color(0xCC4E4B66); // kNeutralColor7.withOpacity(0.8).

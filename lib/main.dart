@@ -101,24 +101,24 @@ ColorScheme _createColorScheme() {
     // Primary
     primary: kPrimaryColor,
     primaryVariant: kPrimaryDarkColor,
-    onPrimary: Colors.white.withOpacity(kLightHighEmphasisOpacity),
+    onPrimary: kLightHighEmphasisTextColor,
 
     // Secondary
     secondary: kPrimaryColor,
     secondaryVariant: kPrimaryDarkColor,
-    onSecondary: Colors.white.withOpacity(kLightHighEmphasisOpacity),
+    onSecondary: kLightHighEmphasisTextColor,
 
     // Surface
     surface: Colors.white,
-    onSurface: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
+    onSurface: kLightHighEmphasisTextColor,
 
     // Background
     background: kNeutralColor2,
-    onBackground: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
+    onBackground: kLightHighEmphasisTextColor,
 
     // Error
     error: kErrorColor,
-    onError: Colors.white.withOpacity(kLightHighEmphasisOpacity),
+    onError: kLightHighEmphasisTextColor,
   );
 }
 
@@ -207,15 +207,15 @@ TextTheme _createBaseTextTheme() {
 
 TextTheme _createTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
-    displayColor: kNeutralColor8.withOpacity(kDarkHighEmphasisOpacity),
+    bodyColor: kDarkHighEmphasisTextColor,
+    displayColor: kDarkHighEmphasisTextColor,
   );
 }
 
 TextTheme _createPrimaryAndAccentTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: Colors.white,
-    displayColor: Colors.white,
+    bodyColor: kLightHighEmphasisTextColor,
+    displayColor: kLightHighEmphasisTextColor,
   );
 }
 
@@ -312,7 +312,7 @@ SnackBarThemeData _createSnackBarTheme({@required TextTheme baseTextTheme}) {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(kSmallCornerRadius),
     ),
-    backgroundColor: kNeutralColor7.withOpacity(0.9),
+    backgroundColor: kSnackBarBackgroundColor,
     contentTextStyle: baseTextTheme.caption,
   );
 }
@@ -328,7 +328,7 @@ TextSelectionThemeData _createTextSelectionTheme() {
 TooltipThemeData _createTooltipTheme() {
   return TooltipThemeData(
     decoration: BoxDecoration(
-      color: kNeutralColor7.withOpacity(0.8),
+      color: kTooltipBackgroundColor,
       borderRadius: BorderRadius.circular(kSmallCornerRadius),
     ),
   );
