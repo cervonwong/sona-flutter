@@ -47,6 +47,7 @@ class HomeScreen extends StatelessWidget {
         },
         child: SafeArea(
           child: BlocBuilder<DeckBloc, DeckState>(
+            buildWhen: (_, state) => state is DeckLoaded,
             builder: (_, state) {
               return ListView(
                 children: [
@@ -55,15 +56,15 @@ class HomeScreen extends StatelessWidget {
                   DeckListTitleBar(),
                   SizedBox(height: 8.0),
                   if (state is DeckLoaded)
-                    ...state.decks.map<DeckListTile>(
-                      (deck) => DeckListTile(
-                        deckName: deck.name,
-                        totalCardCount: 1000,
-                        dueCardCount: 120,
-                        reviewedCardCount: 2,
-                        unscheduledCardCount: 500,
-                      ),
-                    ),
+                    ...(state).decks.map<DeckListTile>(
+                          (deck) => DeckListTile(
+                            deckName: deck.name,
+                            totalCardCount: 1000,
+                            dueCardCount: 120,
+                            reviewedCardCount: 2,
+                            unscheduledCardCount: 500,
+                          ),
+                        ),
                   SizedBox(height: 100),
                 ],
               );
