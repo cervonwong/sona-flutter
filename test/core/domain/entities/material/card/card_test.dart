@@ -18,9 +18,16 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 
+// ignore: must_be_immutable
+class MockCardId extends Mock implements CardId {}
+
 void main() {
+  CardId mockId1 = MockCardId();
+  CardId mockId2 = MockCardId();
+
   group(
     'Card when constructed',
     () {
@@ -29,10 +36,10 @@ void main() {
         'should have expected default fields',
         () {
           final card = Card(
-            id: 1,
+            id: mockId1,
           );
 
-          expect(card.id, 1);
+          expect(card.id, mockId1);
           expect(card.isStarred, false);
           expect(card.isHidden, false);
         },
@@ -51,14 +58,14 @@ void main() {
 
           expect(
             () {
-              Card(id: 1, isStarred: null);
+              Card(id: mockId1, isStarred: null);
             },
             throwsAssertionError,
           );
 
           expect(
             () {
-              Card(id: 1, isHidden: null);
+              Card(id: mockId1, isHidden: null);
             },
             throwsAssertionError,
           );
@@ -72,21 +79,21 @@ void main() {
     'should return Card with expected altered fields',
     () {
       final card1 = Card(
-        id: 123,
+        id: mockId1,
         isStarred: false,
         isHidden: true,
       );
-      expect(card1.id, 123);
+      expect(card1.id, mockId1);
       expect(card1.isStarred, false);
       expect(card1.isHidden, true);
 
       final card2 = card1.copyWith(isStarred: true);
-      expect(card2.id, 123);
+      expect(card2.id, mockId1);
       expect(card2.isStarred, true);
       expect(card2.isHidden, true);
 
       final card3 = card2.copyWith(isHidden: false);
-      expect(card3.id, 123);
+      expect(card3.id, mockId1);
       expect(card3.isStarred, true);
       expect(card3.isHidden, false);
     },
@@ -99,7 +106,7 @@ void main() {
         'logically equal Cards, '
         'should return true',
         () {
-          final card1 = Card(id: 1001);
+          final card1 = Card(id: mockId1);
           final card2 = card1.copyWith(isStarred: true);
           final card3 = card1.copyWith(isHidden: true);
           final card4 = card1.copyWith(isStarred: true, isHidden: true);
@@ -115,10 +122,69 @@ void main() {
         'logically unequal Cards, '
         'should return false',
         () {
-          final card1 = Card(id: 111);
-          final card2 = Card(id: 110);
+          final card1 = Card(id: mockId1);
+          final card2 = Card(id: mockId2);
 
           expect(card1, isNot(card2));
+        },
+      );
+    },
+  );
+
+  group(
+    'CardId when constructed with null arguments, '
+    'should fail asserts',
+    () {
+      test(
+        'entryId is null',
+        () {
+          expect(
+            () {
+              CardId(entryId: null, position: 1);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'position is null',
+        () {
+          expect(
+            () {
+              CardId(entryId: 1, position: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'CardId when equating',
+    () {
+      test(
+        'structurally equal CardIds, '
+        'should return true',
+        () {
+          final id1 = CardId(entryId: 10, position: 2);
+          final id2 = CardId(entryId: 10, position: 2);
+
+          expect(id1, id2);
+        },
+      );
+
+      test(
+        'structurally unequal CardIds, '
+        'should return false',
+        () {
+          final id1 = CardId(entryId: 10, position: 2);
+          final id2 = CardId(entryId: 15, position: 2);
+          final id3 = CardId(entryId: 10, position: 3);
+
+          expect(id1, isNot(id2));
+          expect(id1, isNot(id3));
         },
       );
     },

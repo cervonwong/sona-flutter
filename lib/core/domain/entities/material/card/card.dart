@@ -22,7 +22,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 class Card extends Equatable {
-  final int id;
+  final CardId id;
   final bool isStarred;
   final bool isHidden;
 
@@ -47,4 +47,19 @@ class Card extends Equatable {
 
   @override
   List<Object> get props => [id];
+}
+
+@immutable
+class CardId extends Equatable {
+  final int entryId;
+  final int position;
+
+  CardId({
+    @required this.entryId,
+    @required this.position,
+  })  : assert(entryId != null),
+        assert(position != null);
+
+  @override
+  List<Object> get props => [entryId, position];
 }
