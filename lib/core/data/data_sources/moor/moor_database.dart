@@ -50,17 +50,23 @@ class MoorDatabase extends _$MoorDatabase {
 
   @override
   MigrationStrategy get migration {
-    return MigrationStrategy(beforeOpen: (details) async {
-      if (!details.wasCreated) return;
+    return MigrationStrategy(
+      beforeOpen: (details) async {
+        await customStatement('PRAGMA foreign_keys = ON');
 
-      await batch((batch) {
-        _initializeFieldTypes(batch);
-        _initializeComponentTypes(batch);
-        _initializeAlignments(batch);
-        _initializeFillColors(batch);
-        _initializeHighlightColors(batch);
-      });
-    });
+        if (!details.wasCreated) return;
+
+        await batch(
+          (batch) {
+            _initializeFieldTypes(batch);
+            _initializeComponentTypes(batch);
+            _initializeAlignments(batch);
+            _initializeFillColors(batch);
+            _initializeHighlightColors(batch);
+          },
+        );
+      },
+    );
   }
 
   void _initializeFieldTypes(Batch batch) {
