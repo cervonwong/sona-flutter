@@ -30,8 +30,8 @@ object entries {
 }
 
 object cards {
-	id       : INTEGER       <<PK, gen>>
-	entry_id : INTEGER       <<FK>>
+	entry_id : INTEGER       <<cPK, FK>>
+	position : INTEGER       <<cPK>>
 	starred  : INTEGER(BOOL)
 	hidden   : INTEGER(BOOL)
 }
