@@ -21,13 +21,16 @@ import 'package:moor/moor.dart';
 
 @DataClassName('CardModel')
 class Cards extends Table {
-  IntColumn get id => integer().autoIncrement()(); // PK
-
   IntColumn get entryId => integer().customConstraint(
         'NOT NULL REFERENCES entries(id)',
       )();
 
+  IntColumn get position => integer()();
+
   BoolColumn get starred => boolean()();
 
   BoolColumn get hidden => boolean()();
+
+  @override
+  Set<Column> get primaryKey => {entryId, position};
 }

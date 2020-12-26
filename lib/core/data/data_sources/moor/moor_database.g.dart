@@ -197,13 +197,13 @@ class $AlignmentsTable extends Alignments
 }
 
 class CardModel extends DataClass implements Insertable<CardModel> {
-  final int id;
   final int entryId;
+  final int position;
   final bool starred;
   final bool hidden;
   CardModel(
-      {@required this.id,
-      @required this.entryId,
+      {@required this.entryId,
+      @required this.position,
       @required this.starred,
       @required this.hidden});
   factory CardModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
@@ -212,9 +212,10 @@ class CardModel extends DataClass implements Insertable<CardModel> {
     final intType = db.typeSystem.forDartType<int>();
     final boolType = db.typeSystem.forDartType<bool>();
     return CardModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       entryId:
           intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      position:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
       starred:
           boolType.mapFromDatabaseResponse(data['${effectivePrefix}starred']),
       hidden:
@@ -224,11 +225,11 @@ class CardModel extends DataClass implements Insertable<CardModel> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
     if (!nullToAbsent || entryId != null) {
       map['entry_id'] = Variable<int>(entryId);
+    }
+    if (!nullToAbsent || position != null) {
+      map['position'] = Variable<int>(position);
     }
     if (!nullToAbsent || starred != null) {
       map['starred'] = Variable<bool>(starred);
@@ -241,10 +242,12 @@ class CardModel extends DataClass implements Insertable<CardModel> {
 
   CardsCompanion toCompanion(bool nullToAbsent) {
     return CardsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       entryId: entryId == null && nullToAbsent
           ? const Value.absent()
           : Value(entryId),
+      position: position == null && nullToAbsent
+          ? const Value.absent()
+          : Value(position),
       starred: starred == null && nullToAbsent
           ? const Value.absent()
           : Value(starred),
@@ -257,8 +260,8 @@ class CardModel extends DataClass implements Insertable<CardModel> {
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return CardModel(
-      id: serializer.fromJson<int>(json['id']),
       entryId: serializer.fromJson<int>(json['entryId']),
+      position: serializer.fromJson<int>(json['position']),
       starred: serializer.fromJson<bool>(json['starred']),
       hidden: serializer.fromJson<bool>(json['hidden']),
     );
@@ -267,25 +270,25 @@ class CardModel extends DataClass implements Insertable<CardModel> {
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
       'entryId': serializer.toJson<int>(entryId),
+      'position': serializer.toJson<int>(position),
       'starred': serializer.toJson<bool>(starred),
       'hidden': serializer.toJson<bool>(hidden),
     };
   }
 
-  CardModel copyWith({int id, int entryId, bool starred, bool hidden}) =>
+  CardModel copyWith({int entryId, int position, bool starred, bool hidden}) =>
       CardModel(
-        id: id ?? this.id,
         entryId: entryId ?? this.entryId,
+        position: position ?? this.position,
         starred: starred ?? this.starred,
         hidden: hidden ?? this.hidden,
       );
   @override
   String toString() {
     return (StringBuffer('CardModel(')
-          ..write('id: $id, ')
           ..write('entryId: $entryId, ')
+          ..write('position: $position, ')
           ..write('starred: $starred, ')
           ..write('hidden: $hidden')
           ..write(')'))
@@ -293,59 +296,60 @@ class CardModel extends DataClass implements Insertable<CardModel> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(id.hashCode,
-      $mrjc(entryId.hashCode, $mrjc(starred.hashCode, hidden.hashCode))));
+  int get hashCode => $mrjf($mrjc(entryId.hashCode,
+      $mrjc(position.hashCode, $mrjc(starred.hashCode, hidden.hashCode))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is CardModel &&
-          other.id == this.id &&
           other.entryId == this.entryId &&
+          other.position == this.position &&
           other.starred == this.starred &&
           other.hidden == this.hidden);
 }
 
 class CardsCompanion extends UpdateCompanion<CardModel> {
-  final Value<int> id;
   final Value<int> entryId;
+  final Value<int> position;
   final Value<bool> starred;
   final Value<bool> hidden;
   const CardsCompanion({
-    this.id = const Value.absent(),
     this.entryId = const Value.absent(),
+    this.position = const Value.absent(),
     this.starred = const Value.absent(),
     this.hidden = const Value.absent(),
   });
   CardsCompanion.insert({
-    this.id = const Value.absent(),
     @required int entryId,
+    @required int position,
     @required bool starred,
     @required bool hidden,
   })  : entryId = Value(entryId),
+        position = Value(position),
         starred = Value(starred),
         hidden = Value(hidden);
   static Insertable<CardModel> custom({
-    Expression<int> id,
     Expression<int> entryId,
+    Expression<int> position,
     Expression<bool> starred,
     Expression<bool> hidden,
   }) {
     return RawValuesInsertable({
-      if (id != null) 'id': id,
       if (entryId != null) 'entry_id': entryId,
+      if (position != null) 'position': position,
       if (starred != null) 'starred': starred,
       if (hidden != null) 'hidden': hidden,
     });
   }
 
   CardsCompanion copyWith(
-      {Value<int> id,
-      Value<int> entryId,
+      {Value<int> entryId,
+      Value<int> position,
       Value<bool> starred,
       Value<bool> hidden}) {
     return CardsCompanion(
-      id: id ?? this.id,
       entryId: entryId ?? this.entryId,
+      position: position ?? this.position,
       starred: starred ?? this.starred,
       hidden: hidden ?? this.hidden,
     );
@@ -354,11 +358,11 @@ class CardsCompanion extends UpdateCompanion<CardModel> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
     if (entryId.present) {
       map['entry_id'] = Variable<int>(entryId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
     }
     if (starred.present) {
       map['starred'] = Variable<bool>(starred.value);
@@ -372,8 +376,8 @@ class CardsCompanion extends UpdateCompanion<CardModel> {
   @override
   String toString() {
     return (StringBuffer('CardsCompanion(')
-          ..write('id: $id, ')
           ..write('entryId: $entryId, ')
+          ..write('position: $position, ')
           ..write('starred: $starred, ')
           ..write('hidden: $hidden')
           ..write(')'))
@@ -385,15 +389,6 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   final GeneratedDatabase _db;
   final String _alias;
   $CardsTable(this._db, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
-  @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
   GeneratedIntColumn _entryId;
   @override
@@ -401,6 +396,18 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   GeneratedIntColumn _constructEntryId() {
     return GeneratedIntColumn('entry_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entries(id)');
+  }
+
+  final VerificationMeta _positionMeta = const VerificationMeta('position');
+  GeneratedIntColumn _position;
+  @override
+  GeneratedIntColumn get position => _position ??= _constructPosition();
+  GeneratedIntColumn _constructPosition() {
+    return GeneratedIntColumn(
+      'position',
+      $tableName,
+      false,
+    );
   }
 
   final VerificationMeta _starredMeta = const VerificationMeta('starred');
@@ -428,7 +435,7 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   }
 
   @override
-  List<GeneratedColumn> get $columns => [id, entryId, starred, hidden];
+  List<GeneratedColumn> get $columns => [entryId, position, starred, hidden];
   @override
   $CardsTable get asDslTable => this;
   @override
@@ -440,14 +447,17 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
-    }
     if (data.containsKey('entry_id')) {
       context.handle(_entryIdMeta,
           entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+    } else if (isInserting) {
+      context.missing(_positionMeta);
     }
     if (data.containsKey('starred')) {
       context.handle(_starredMeta,
@@ -465,7 +475,7 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {entryId, position};
   @override
   CardModel map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
