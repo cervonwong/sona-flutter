@@ -32,7 +32,7 @@ void main() {
     db = MoorDatabase.custom(VmDatabase.memory(
       // Change the logStatement argument to true to print each SQL query for
       // debugging if needed. This is set to false to not pollute test logs.
-      logStatements: true,
+      logStatements: false,
     ));
     // Disables foreign key constraints while testing. Tests for foreign key
     // constraints are in foreign_constraints_test.dart.
@@ -168,6 +168,74 @@ void main() {
               await dao.create(entryId: 6, position: 9);
             },
             throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'CardsDaoImpl getSingle',
+    () {
+      test(
+        'when passed legal arguments, '
+        'should return expected CardModel',
+        () async {
+          final cardCreated = (await dao.create(entryId: 5, position: 1));
+          final cardGotten = await dao.getSingle(
+            entryId: cardCreated.entryId,
+            position: cardCreated.position,
+          );
+
+          expect(cardCreated, cardGotten);
+        },
+      );
+
+      test(
+        'when no cards in the db has the same PK as the passed PK arguments, '
+        'should return null',
+        () async {
+          final result = await dao.getSingle(
+            entryId: 1,
+            position: 1,
+          );
+
+          expect(result, isNull);
+        },
+      );
+
+      group(
+        'when passed null arguments, '
+        'should fail asserts',
+        () {
+          test(
+            'entryId is null',
+            () async {
+              expect(
+                () async {
+                  await dao.getSingle(
+                    entryId: null,
+                    position: 1,
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'position is null',
+            () async {
+              expect(
+                () async {
+                  await dao.getSingle(
+                    entryId: 1,
+                    position: null,
+                  );
+                },
+                throwsAssertionError,
+              );
+            },
           );
         },
       );

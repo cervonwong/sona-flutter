@@ -51,14 +51,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }) async {
     assert(entryId != null);
     assert(position != null);
-    assert((await (select(cards)
-              ..where(
-                (card) =>
-                    card.entryId.equals(entryId) &
-                    card.position.equals(position),
-              ))
-            .get())
-        .isEmpty);
+    assert((await getSingle(entryId: entryId, position: position)) == null);
 
     await into(cards).insert(
       CardsCompanion.insert(
@@ -68,6 +61,14 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
         hidden: kDefaultCardHidden,
       ),
     );
+    return getSingle(entryId: entryId, position: position);
+  }
+
+  @override
+  Future<CardModel> getSingle({@required int entryId, @required int position}) {
+    assert(entryId != null);
+    assert(position != null);
+
     return (select(cards)
           ..where(
             (card) =>
@@ -77,20 +78,14 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<CardModel> edit({@required CardModel newCard}) {
-    // TODO: implement edit
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<CardModel>> getAll() {
     // TODO: implement getAll
     throw UnimplementedError();
   }
 
   @override
-  Future<CardModel> getSingle({@required int entryId, @required int position}) {
-    // TODO: implement getSingle
+  Future<CardModel> edit({@required CardModel newCard}) {
+    // TODO: implement edit
     throw UnimplementedError();
   }
 
