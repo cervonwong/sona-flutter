@@ -21,6 +21,8 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
 import '../bloc/deck_bloc.dart';
 
@@ -59,20 +61,26 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
-              child: TextField(
-                autofocus: true,
-                maxLines: null,
-                inputFormatters: [
-                  FilteringTextInputFormatter.singleLineFormatter,
-                ],
-                textInputAction: TextInputAction.done,
-                style: Theme.of(context).textTheme.bodyText1,
-                decoration: InputDecoration(
-                  isCollapsed: true,
-                  border: InputBorder.none,
-                  hintText: 'A cool deck name...',
-                ),
-                onChanged: _textFieldOnChanged,
+              child: Consumer<ColorNotifier>(
+                builder: (_, cn, __) {
+                  return TextField(
+                    autofocus: true,
+                    maxLines: null,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.singleLineFormatter,
+                    ],
+                    textInputAction: TextInputAction.done,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          color: cn.onSurface.highEmphasisTextColor,
+                        ),
+                    decoration: InputDecoration(
+                      isCollapsed: true,
+                      border: InputBorder.none,
+                      hintText: 'A cool deck name...',
+                    ),
+                    onChanged: _textFieldOnChanged,
+                  );
+                },
               ),
             ),
             BlocBuilder<DeckBloc, DeckState>(

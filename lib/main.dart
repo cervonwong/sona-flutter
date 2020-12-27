@@ -62,6 +62,9 @@ ThemeData _createThemeData() {
     dividerTheme: _createDividerTheme(),
     elevatedButtonTheme: _createElevatedButtonTheme(),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
+    inputDecorationTheme: _createInputDecorationTheme(
+      baseTextTheme: baseTextTheme,
+    ),
     outlinedButtonTheme: _createOutlinedButtonTheme(),
     snackBarTheme: _createSnackBarTheme(baseTextTheme: baseTextTheme),
     textSelectionTheme: _createTextSelectionTheme(),
@@ -287,6 +290,16 @@ FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
     elevation: 2.0,
     highlightElevation: 4.0,
     splashColor: kLightSplashColor,
+  );
+}
+
+InputDecorationTheme _createInputDecorationTheme({
+  @required TextTheme baseTextTheme,
+}) {
+  return InputDecorationTheme(
+    hintStyle: baseTextTheme.bodyText1.copyWith(
+      color: kDarkLowEmphasisTextColor,
+    ),
   );
 }
 
