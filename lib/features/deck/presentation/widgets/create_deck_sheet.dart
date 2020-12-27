@@ -82,20 +82,14 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
               },
             ),
             SizedBox(height: 16.0),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 16.0,
-              children: [
-                ElevatedButton.icon(
-                  icon: Icon(FluentIcons.add_24_regular),
-                  label: Text('CREATE'),
-                  onPressed: _deckName.isEmpty
-                      ? null
-                      : () {
-                          _createDeck(context);
-                        },
-                ),
-              ],
+            ElevatedButton.icon(
+              icon: Icon(FluentIcons.add_24_regular),
+              label: Text('CREATE'),
+              onPressed: _deckName.isEmpty
+                  ? null
+                  : () {
+                      _createDeck(context);
+                    },
             ),
           ],
         ),
