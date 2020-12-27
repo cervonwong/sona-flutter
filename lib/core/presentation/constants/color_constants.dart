@@ -94,8 +94,8 @@ const Color kNeutralColor1 = Color(0xFFFCFCFC);
 // Dark text colors use kNeutralColor8 as a base.
 const double kDarkHighEmphasisOpacity = 0.90;
 const Color kDarkHighEmphasisTextColor = Color(0xE614142B); // E6 --> 90%.
-const double kDarkMediumEmphasisOpacity = 0.65;
-const Color kDarkMediumEmphasisTextColor = Color(0xA614142B); // A6 --> 65%.
+const double kDarkMediumEmphasisOpacity = 0.60;
+const Color kDarkMediumEmphasisTextColor = Color(0x9914142B); // 99 --> 60%.
 const double kDarkLowEmphasisOpacity = 0.30;
 const Color kDarkLowEmphasisTextColor = Color(0x4D14142B); // 4D --> 30%.
 
