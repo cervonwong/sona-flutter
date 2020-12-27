@@ -535,7 +535,8 @@ void main() {
       );
 
       test(
-        'when no decks in the db has the same ID as the passed newDeck\'s id',
+        'when no decks in the db has the same ID as the passed newDeck\'s id, '
+        'should fail asserts',
         () async {
           expect(
             () async {
@@ -557,7 +558,8 @@ void main() {
 
       test(
         'when another deck in the db has the same name '
-        'as the passed newDeck\'s name',
+        'as the passed newDeck\'s name, '
+        'should fail asserts',
         () async {
           await dao.create(name: 'Scorpio');
           await dao.create(name: 'Pisces');
