@@ -108,8 +108,24 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<CardModel> remove({@required int entryId, @required int position}) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<CardModel> remove({
+    @required int entryId,
+    @required int position,
+  }) async {
+    assert(entryId != null);
+    assert(position != null);
+
+    final card = await getSingle(entryId: entryId, position: position);
+    assert(card != null);
+
+    final num = await (delete(cards)
+          ..where(
+            (card) =>
+                card.entryId.equals(entryId) & card.position.equals(position),
+          ))
+        .go();
+    assert(num == 1);
+
+    return card;
   }
 }

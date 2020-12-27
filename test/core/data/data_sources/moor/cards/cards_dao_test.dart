@@ -377,4 +377,96 @@ void main() {
       );
     },
   );
+
+  group(
+    'CardsDaoImpl remove',
+    () {
+      group(
+        'when passed legal arguments',
+        () {
+          CardModel removedCard;
+          setUp(() async {
+            await dao.create(entryId: 1, position: 2);
+            await dao.create(entryId: 2, position: 1);
+            removedCard = await dao.remove(entryId: 1, position: 2);
+          });
+
+          test(
+            'should delete expected record in cards table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  CardModel(
+                    entryId: 2,
+                    position: 1,
+                    starred: kDefaultCardStarred,
+                    hidden: kDefaultCardHidden,
+                  ),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return expected CardsModel',
+            () async {
+              expect(
+                removedCard,
+                CardModel(
+                  entryId: 1,
+                  position: 2,
+                  starred: kDefaultCardStarred,
+                  hidden: kDefaultCardHidden,
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'when passed null arguments, '
+        'should fail asserts',
+        () {
+          test(
+            'entryId is null',
+            () async {
+              expect(
+                () async {
+                  await dao.remove(entryId: null, position: 1);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'position is null',
+            () async {
+              expect(
+                () async {
+                  await dao.remove(entryId: 1, position: null);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when no cards in the db has the same PK as the passed PK arguments, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.remove(entryId: 1, position: 1);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
 }
