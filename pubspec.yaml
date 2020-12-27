@@ -34,22 +34,22 @@ flutter:
   fonts:
     - family: Work Sans
       fonts:
-        - asset: fonts/work_sans/WorkSans-Black.ttf
-        - asset: fonts/work_sans/WorkSans-BlackItalic.ttf
-        - asset: fonts/work_sans/WorkSans-Bold.ttf
-        - asset: fonts/work_sans/WorkSans-BoldItalic.ttf
-        - asset: fonts/work_sans/WorkSans-ExtraBold.ttf
-        - asset: fonts/work_sans/WorkSans-ExtraBoldItalic.ttf
-        - asset: fonts/work_sans/WorkSans-ExtraLight.ttf
-        - asset: fonts/work_sans/WorkSans-ExtraLightItalic.ttf
-        - asset: fonts/work_sans/WorkSans-Italic.ttf
-        - asset: fonts/work_sans/WorkSans-Light.ttf
-        - asset: fonts/work_sans/WorkSans-LightItalic.ttf
-        - asset: fonts/work_sans/WorkSans-Medium.ttf
-        - asset: fonts/work_sans/WorkSans-MediumItalic.ttf
-        - asset: fonts/work_sans/WorkSans-Regular.ttf
-        - asset: fonts/work_sans/WorkSans-SemiBold.ttf
-        - asset: fonts/work_sans/WorkSans-SemiBoldItalic.ttf
-        - asset: fonts/work_sans/WorkSans-Thin.ttf
-        - asset: fonts/work_sans/WorkSans-ThinItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Black.ttf
+        - asset: assets/fonts/work_sans/WorkSans-BlackItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Bold.ttf
+        - asset: assets/fonts/work_sans/WorkSans-BoldItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-ExtraBold.ttf
+        - asset: assets/fonts/work_sans/WorkSans-ExtraBoldItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-ExtraLight.ttf
+        - asset: assets/fonts/work_sans/WorkSans-ExtraLightItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Italic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Light.ttf
+        - asset: assets/fonts/work_sans/WorkSans-LightItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Medium.ttf
+        - asset: assets/fonts/work_sans/WorkSans-MediumItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Regular.ttf
+        - asset: assets/fonts/work_sans/WorkSans-SemiBold.ttf
+        - asset: assets/fonts/work_sans/WorkSans-SemiBoldItalic.ttf
+        - asset: assets/fonts/work_sans/WorkSans-Thin.ttf
+        - asset: assets/fonts/work_sans/WorkSans-ThinItalic.ttf
   uses-material-design: true
