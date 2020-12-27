@@ -62,12 +62,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<DeckModel> create({@required String name}) async {
     assert(name != null);
     // Asserts that a deck with the same name in the db does not exist.
-    assert((await (select(decks)
-              ..where(
-                (deck) => deck.name.equals(name),
-              ))
-            .get())
-        .isEmpty);
+    assert((await getByName(name: name)) == null);
 
     // Inserts a deck with the given name, then gets the auto-incremented ID.
     final id = await into(decks).insert(
