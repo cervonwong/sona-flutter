@@ -51,7 +51,28 @@ class SonaApp extends StatelessWidget {
 ThemeData _createThemeData() {
   final baseTextTheme = _createBaseTextTheme();
 
-  return _createBaseThemeData().copyWith(
+  return ThemeData(
+    // Primary
+    primaryColor: kPrimaryColor,
+    primaryColorDark: kPrimaryDarkColor,
+    primaryColorLight: kPrimaryLightColor,
+
+    // Secondary
+    accentColor: kPrimaryColor,
+
+    // Other colors
+    backgroundColor: kNeutralColor2,
+    canvasColor: Colors.white,
+    errorColor: kErrorColor,
+    highlightColor: kPrimaryHighlightColor,
+    scaffoldBackgroundColor: kNeutralColor2,
+    splashColor: kPrimarySplashColor,
+    shadowColor: kNeutralColor8,
+
+    // Misc.
+    useTextSelectionTheme: true,
+
+    // Themes
     colorScheme: _createColorScheme(),
     textTheme: _createTextTheme(),
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
@@ -69,28 +90,6 @@ ThemeData _createThemeData() {
     snackBarTheme: _createSnackBarTheme(baseTextTheme: baseTextTheme),
     textSelectionTheme: _createTextSelectionTheme(),
     tooltipTheme: _createTooltipTheme(),
-  );
-}
-
-ThemeData _createBaseThemeData() {
-  return ThemeData(
-    // Primary
-    primaryColor: kPrimaryColor,
-    primaryColorDark: kPrimaryDarkColor,
-    primaryColorLight: kPrimaryLightColor,
-
-    // Secondary
-    accentColor: kPrimaryColor,
-
-    backgroundColor: kNeutralColor2,
-    canvasColor: Colors.white,
-    errorColor: kErrorColor,
-    highlightColor: kPrimaryHighlightColor,
-    scaffoldBackgroundColor: kNeutralColor2,
-    splashColor: kPrimarySplashColor,
-    shadowColor: kNeutralColor8,
-
-    useTextSelectionTheme: true,
   );
 }
 
