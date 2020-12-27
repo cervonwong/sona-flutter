@@ -65,7 +65,10 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<CardModel> getSingle({@required int entryId, @required int position}) {
+  Future<CardModel> getSingle({
+    @required int entryId,
+    @required int position,
+  }) async {
     assert(entryId != null);
     assert(position != null);
 
