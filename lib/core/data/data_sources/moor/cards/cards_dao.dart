@@ -84,9 +84,27 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<List<CardModel>> getAll() async => (select(cards)).get();
 
   @override
-  Future<CardModel> edit({@required CardModel newCard}) {
-    // TODO: implement edit
-    throw UnimplementedError();
+  Future<CardModel> edit({@required CardModel newCard}) async {
+    assert(newCard != null);
+    assert((await getSingle(
+          entryId: newCard.entryId,
+          position: newCard.position,
+        )) !=
+        null);
+
+    await (update(cards)
+          ..where((card) =>
+              card.entryId.equals(newCard.entryId) &
+              card.position.equals(newCard.position)))
+        .write(
+      CardsCompanion(
+        entryId: Value(newCard.entryId),
+        position: Value(newCard.position),
+        starred: Value(newCard.starred),
+        hidden: Value(newCard.hidden),
+      ),
+    );
+    return getSingle(entryId: newCard.entryId, position: newCard.position);
   }
 
   @override

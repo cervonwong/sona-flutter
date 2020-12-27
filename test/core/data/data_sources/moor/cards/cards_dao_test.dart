@@ -246,7 +246,7 @@ void main() {
     'CardsDaoImpl getAll',
     () {
       test(
-        'when there are no decks in the db, '
+        'when there are no cards in the db, '
         'should return an empty list of CardModels',
         () async {
           final cards = await dao.getAll();
@@ -287,6 +287,91 @@ void main() {
                 hidden: kDefaultCardHidden,
               ),
             ],
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'CardsDaoImpl edit',
+    () {
+      group(
+        'when passed legal newCard, '
+        'should update changed fields',
+        () {
+          CardModel editedCard;
+          setUp(() async {
+            final card = await dao.create(entryId: 1, position: 1);
+
+            editedCard = await dao.edit(
+              newCard: card.copyWith(starred: true, hidden: false),
+            );
+          });
+
+          test(
+            'should update expected record in cards table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  CardModel(
+                    entryId: 1,
+                    position: 1,
+                    starred: true,
+                    hidden: false,
+                  ),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return expected CardModels',
+            () async {
+              expect(
+                editedCard,
+                CardModel(
+                  entryId: 1,
+                  position: 1,
+                  starred: true,
+                  hidden: false,
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when no cards in the db has the same PK as the passed newCard\'s PK, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.edit(
+                newCard: CardModel(
+                  entryId: 5,
+                  position: 6,
+                  starred: true,
+                  hidden: true,
+                ),
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed null newCard, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.edit(newCard: null);
+            },
+            throwsAssertionError,
           );
         },
       );
