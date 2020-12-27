@@ -294,7 +294,7 @@ InputDecorationTheme _createInputDecorationTheme({
 }) {
   return InputDecorationTheme(
     hintStyle: baseTextTheme.bodyText1.copyWith(
-      color: kDarkLowEmphasisTextColor,
+      color: kDarkMediumEmphasisTextColor,
     ),
   );
 }
