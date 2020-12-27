@@ -138,14 +138,20 @@ class _HomeFAB extends StatelessWidget {
         value: BlocProvider.of<DeckBloc>(context),
         child: CreateDeckSheet(
           onSuccess: (deckName) {
-            _showCreationSuccessSnackBar(context, deckName);
+            _showCreationSuccessSnackBar(
+              context: context,
+              deckName: deckName,
+            );
           },
         ),
       ),
     );
   }
 
-  void _showCreationSuccessSnackBar(BuildContext context, String deckName) {
+  void _showCreationSuccessSnackBar({
+    @required BuildContext context,
+    @required String deckName,
+  }) {
     Scaffold.of(context).showSnackBar(
       SnackBar(
         content: Text(deckName.length < 50

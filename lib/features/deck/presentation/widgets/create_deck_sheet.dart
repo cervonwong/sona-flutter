@@ -58,7 +58,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
     return BlocListener<DeckBloc, DeckState>(
       listener: (context, state) {
         if (state is DeckLoaded) {
-          _handleDeckCreationSuccess(context);
+          _handleDeckCreationSuccess(context: context);
         }
       },
       child: Padding(
@@ -88,7 +88,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
               onPressed: _deckName.isEmpty
                   ? null
                   : () {
-                      _createDeck(context);
+                      _createDeck(context: context);
                     },
             ),
           ],
@@ -97,14 +97,14 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
     );
   }
 
-  void _createDeck(BuildContext context) {
+  void _createDeck({@required BuildContext context}) {
     setState(() {
       _hasClickedCreated = true;
     });
     BlocProvider.of<DeckBloc>(context).add(DeckCreated(name: _deckName));
   }
 
-  void _handleDeckCreationSuccess(BuildContext context) {
+  void _handleDeckCreationSuccess({@required BuildContext context}) {
     Navigator.of(context).pop();
     widget.onSuccess(_deckName);
   }
@@ -119,7 +119,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
 class _DeckNameTextField extends StatelessWidget {
   final TextEditingController _controller;
 
-  const _DeckNameTextField({
+  _DeckNameTextField({
     @required TextEditingController controller,
   }) : _controller = controller;
 
