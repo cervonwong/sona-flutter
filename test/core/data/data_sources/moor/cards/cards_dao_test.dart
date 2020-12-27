@@ -241,4 +241,55 @@ void main() {
       );
     },
   );
+
+  group(
+    'CardsDaoImpl getAll',
+    () {
+      test(
+        'when there are no decks in the db, '
+        'should return an empty list of CardModels',
+        () async {
+          final cards = await dao.getAll();
+
+          expect(cards, <CardModel>[]);
+        },
+      );
+
+      test(
+        'when there are multiple cards in the db, '
+        'should return the expected list of CardModels'
+        'in order of creation',
+        () async {
+          await dao.create(entryId: 2, position: 2);
+          await dao.create(entryId: 3, position: 3);
+          await dao.create(entryId: 1, position: 1);
+
+          final cards = await dao.getAll();
+          expect(
+            cards,
+            [
+              CardModel(
+                entryId: 2,
+                position: 2,
+                starred: kDefaultCardStarred,
+                hidden: kDefaultCardHidden,
+              ),
+              CardModel(
+                entryId: 3,
+                position: 3,
+                starred: kDefaultCardStarred,
+                hidden: kDefaultCardHidden,
+              ),
+              CardModel(
+                entryId: 1,
+                position: 1,
+                starred: kDefaultCardStarred,
+                hidden: kDefaultCardHidden,
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
 }

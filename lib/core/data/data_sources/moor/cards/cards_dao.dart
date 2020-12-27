@@ -81,10 +81,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<List<CardModel>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
+  Future<List<CardModel>> getAll() async => (select(cards)).get();
 
   @override
   Future<CardModel> edit({@required CardModel newCard}) {
