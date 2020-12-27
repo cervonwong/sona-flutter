@@ -20,6 +20,7 @@
 import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
+import '../../../../constants/material_constants.dart';
 import '../moor_database.dart';
 import 'cards_table.dart';
 
@@ -44,9 +45,35 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   CardsDaoImpl({@required MoorDatabase db}) : super(db);
 
   @override
-  Future<CardModel> create({@required int entryId, @required int position}) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<CardModel> create({
+    @required int entryId,
+    @required int position,
+  }) async {
+    assert(entryId != null);
+    assert(position != null);
+    assert((await (select(cards)
+              ..where(
+                (card) =>
+                    card.entryId.equals(entryId) &
+                    card.position.equals(position),
+              ))
+            .get())
+        .isEmpty);
+
+    await into(cards).insert(
+      CardsCompanion.insert(
+        entryId: entryId,
+        position: position,
+        starred: kDefaultCardStarred,
+        hidden: kDefaultCardHidden,
+      ),
+    );
+    return (select(cards)
+          ..where(
+            (card) =>
+                card.entryId.equals(entryId) & card.position.equals(position),
+          ))
+        .getSingle();
   }
 
   @override
