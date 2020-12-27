@@ -22,8 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
+import '../../../../core/presentation/change_notifiers/color_notifier.dart';
 import '../bloc/deck_bloc.dart';
 
 typedef OnSuccess = void Function(String deckName);
@@ -38,8 +38,20 @@ class CreateDeckSheet extends StatefulWidget {
 }
 
 class _CreateDeckSheetState extends State<CreateDeckSheet> {
+  final _controller = TextEditingController();
+
   String _deckName = '';
   bool _hasClickedCreated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {
+        _deckName = _controller.text;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,29 +72,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              child: Consumer<ColorNotifier>(
-                builder: (_, cn, __) {
-                  return TextField(
-                    autofocus: true,
-                    maxLines: null,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.singleLineFormatter,
-                    ],
-                    textInputAction: TextInputAction.done,
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          color: cn.onSurface.highEmphasisTextColor,
-                        ),
-                    decoration: InputDecoration(
-                      isCollapsed: true,
-                      border: InputBorder.none,
-                      hintText: 'A cool deck name...',
-                    ),
-                    onChanged: _textFieldOnChanged,
-                  );
-                },
-              ),
-            ),
+            _DeckNameTextField(controller: _controller),
             BlocBuilder<DeckBloc, DeckState>(
               builder: (_, state) {
                 if (state is DeckNameAlreadyExists && _hasClickedCreated) {
@@ -113,12 +103,6 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
     );
   }
 
-  void _textFieldOnChanged(String text) {
-    setState(() {
-      _deckName = text;
-    });
-  }
-
   void _createDeck(BuildContext context) {
     setState(() {
       _hasClickedCreated = true;
@@ -129,6 +113,47 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
   void _handleDeckCreationSuccess(BuildContext context) {
     Navigator.of(context).pop();
     widget.onSuccess(_deckName);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+class _DeckNameTextField extends StatelessWidget {
+  final TextEditingController _controller;
+
+  const _DeckNameTextField({
+    @required TextEditingController controller,
+  }) : _controller = controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return TextField(
+            controller: _controller,
+            autofocus: true,
+            maxLines: null,
+            inputFormatters: [
+              FilteringTextInputFormatter.singleLineFormatter,
+            ],
+            textInputAction: TextInputAction.done,
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  color: cn.onSurface.highEmphasisTextColor,
+                ),
+            decoration: InputDecoration(
+              isCollapsed: true,
+              border: InputBorder.none,
+              hintText: 'A cool deck name...',
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
