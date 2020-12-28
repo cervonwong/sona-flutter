@@ -109,6 +109,8 @@ void main() {
         () async {
           when(decksDao.getById(id: argThat(equals(5), named: 'id')))
               .thenAnswer((_) async => null);
+          when(toEntity(model: argThat(isNull, named: 'model')))
+              .thenReturn(null);
 
           final deck = await repository.getById(id: 5);
           expect(deck, isNull);
@@ -140,6 +142,8 @@ void main() {
           when(decksDao.getByName(
             name: argThat(equals('Peter'), named: 'name'),
           )).thenAnswer((_) async => null);
+          when(toEntity(model: argThat(isNull, named: 'model')))
+              .thenReturn(null);
 
           final deck = await repository.getByName(name: 'Peter');
           expect(deck, isNull);
