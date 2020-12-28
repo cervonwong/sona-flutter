@@ -29,7 +29,9 @@ package Features <<Node>> {
 	}
 	
 	package Data <<Cloud>> {
-		object "Repo Impls" as ri
+		object "Repo Impls" as ri {
+			and Entity<->Model mappers
+		}
 		object "DAO Impls" AS di {
 			also Data Sources
 		}
