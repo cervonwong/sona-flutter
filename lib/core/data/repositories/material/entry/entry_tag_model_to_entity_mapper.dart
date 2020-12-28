@@ -22,7 +22,7 @@ import '../../../data_sources/moor/moor_database.dart';
 
 import 'package:meta/meta.dart';
 
-class EntryModelToEntityMapper {
+class EntryTagModelToEntityMapper {
   EntryTag call({@required TagModel model}) {
     if (model == null) return null;
 

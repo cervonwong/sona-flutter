@@ -22,16 +22,16 @@ import 'package:meta/meta.dart';
 import '../../../../domain/entities/material/entry/entry_tag.dart';
 import '../../../../domain/repositories/material/entry/entry_tag_repository.dart';
 import '../../../data_sources/moor/tags/tags_dao.dart';
-import 'entry_model_to_entity_mapper.dart';
+import 'entry_tag_model_to_entity_mapper.dart';
 
 @immutable
 class EntryTagRepositoryImpl implements EntryTagRepository {
   final TagsDao _dao;
-  final EntryModelToEntityMapper _toEntity;
+  final EntryTagModelToEntityMapper _toEntity;
 
   EntryTagRepositoryImpl({
     @required TagsDao dao,
-    @required EntryModelToEntityMapper toEntity,
+    @required EntryTagModelToEntityMapper toEntity,
   })  : _dao = dao,
         _toEntity = toEntity;
 
