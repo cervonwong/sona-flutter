@@ -149,4 +149,43 @@ void main() {
       );
     },
   );
+
+  group(
+    'EntriesDaoImpl getSingle',
+    () {
+      test(
+        'when passed legal arguments, '
+        'should return expected EntryModel',
+        () async {
+          final cardCreated = await dao.create(deckId: 6, entryTypeId: 9);
+          final cardGotten = await dao.getSingle(id: cardCreated.id);
+
+          expect(cardCreated, cardGotten);
+        },
+      );
+
+      test(
+        'when no entries in the db has the same id as the passed id, '
+        'should return null',
+        () async {
+          final result = await dao.getSingle(id: 1);
+
+          expect(result, isNull);
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.getSingle(id: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
 }

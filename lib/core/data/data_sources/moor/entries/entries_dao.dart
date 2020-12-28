@@ -58,18 +58,19 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
       ),
     );
 
+    return getSingle(id: id);
+  }
+
+  @override
+  Future<EntryModel> getSingle({@required int id}) {
+    assert(id != null);
+
     return (select(entries)..where((entry) => entry.id.equals(id))).getSingle();
   }
 
   @override
   Future<List<EntryModel>> getAll() {
     // TODO: implement getAll
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<EntryModel> getSingle({@required int id}) {
-    // TODO: implement getSingle
     throw UnimplementedError();
   }
 
