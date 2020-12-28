@@ -212,23 +212,26 @@ void main() {
           await dao.create(deckId: 1, entryTypeId: 1);
 
           final entries = await dao.getAll();
-          expect(entries, [
-            EntryModel(
-              id: 1,
-              deckId: 2,
-              entryTypeId: 2,
-            ),
-            EntryModel(
-              id: 2,
-              deckId: 3,
-              entryTypeId: 3,
-            ),
-            EntryModel(
-              id: 3,
-              deckId: 1,
-              entryTypeId: 1,
-            ),
-          ]);
+          expect(
+            entries,
+            [
+              EntryModel(
+                id: 1,
+                deckId: 2,
+                entryTypeId: 2,
+              ),
+              EntryModel(
+                id: 2,
+                deckId: 3,
+                entryTypeId: 3,
+              ),
+              EntryModel(
+                id: 3,
+                deckId: 1,
+                entryTypeId: 1,
+              ),
+            ],
+          );
         },
       );
     },
