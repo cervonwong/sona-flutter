@@ -351,7 +351,7 @@ void main() {
               );
 
               test(
-                'should return expected DeckModel',
+                'should return edited DeckModel',
                 () {
                   expect(
                     editedDeck,
@@ -404,7 +404,7 @@ void main() {
               );
 
               test(
-                'should return expected DeckModel',
+                'should return edited DeckModel',
                 () {
                   expect(
                     editedDeck,
@@ -460,7 +460,7 @@ void main() {
               );
 
               test(
-                'should return expected DeckModel',
+                'should return edited DeckModel',
                 () {
                   expect(
                     editedDeck,
@@ -514,7 +514,7 @@ void main() {
               );
 
               test(
-                'should return expected DeckModel',
+                'should return edited DeckModel',
                 () {
                   expect(
                     editedDeck,

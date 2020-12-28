@@ -327,7 +327,7 @@ void main() {
           );
 
           test(
-            'should return expected CardModels',
+            'should return edited CardModel',
             () {
               expect(
                 editedCard,
