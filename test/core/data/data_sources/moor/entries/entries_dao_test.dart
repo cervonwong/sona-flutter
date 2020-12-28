@@ -254,7 +254,7 @@ void main() {
           });
 
           test(
-            'should update expected record in cards table',
+            'should update expected record in entries table',
             () async {
               expect(
                 await selectAll(),
@@ -304,6 +304,79 @@ void main() {
           expect(
             () async {
               await dao.edit(newEntry: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'EntriesDaoImpl remove',
+    () {
+      group(
+        'when passed legal arguments',
+        () {
+          EntryModel removedEntry;
+          setUp(() async {
+            await dao.create(deckId: 1, entryTypeId: 2);
+            await dao.create(deckId: 2, entryTypeId: 1);
+            removedEntry = await dao.remove(id: 1);
+          });
+
+          test(
+            'should delete expected record in the entries table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  EntryModel(
+                    id: 2,
+                    deckId: 2,
+                    entryTypeId: 1,
+                  ),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return deleted EntryModel',
+            () {
+              expect(
+                removedEntry,
+                EntryModel(
+                  id: 1,
+                  deckId: 1,
+                  entryTypeId: 2,
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when passed null id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.remove(id: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when no entries in the db has the same id as the passed id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.remove(id: 1);
             },
             throwsAssertionError,
           );

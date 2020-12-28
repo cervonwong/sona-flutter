@@ -90,8 +90,19 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<EntryModel> remove({@required int id}) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<EntryModel> remove({@required int id}) async {
+    assert(id != null);
+
+    var entry = await getSingle(id: id);
+    assert(entry != null);
+
+    final num = await (delete(entries)
+          ..where(
+            (entry) => entry.id.equals(id),
+          ))
+        .go();
+    assert(num == 1);
+
+    return entry;
   }
 }
