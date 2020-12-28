@@ -28,8 +28,16 @@ import '../../../data_sources/moor/moor_database.dart';
 
 class DeckRepositoryImpl extends DeckRepository {
   final DecksDao _decksDao;
+  final DeckModelToEntityMapper _toEntity;
+  final DeckEntityToModelMapper _toModel;
 
-  DeckRepositoryImpl({@required DecksDao decksDao}) : _decksDao = decksDao;
+  DeckRepositoryImpl({
+    @required DecksDao decksDao,
+    @required DeckModelToEntityMapper toEntity,
+    @required DeckEntityToModelMapper toModel,
+  })  : _decksDao = decksDao,
+        _toEntity = toEntity,
+        _toModel = toModel;
 
   // NAVIGABLE ACCESSORS
 
@@ -51,33 +59,33 @@ class DeckRepositoryImpl extends DeckRepository {
   Future<Deck> create({@required String name}) async {
     final model = await _decksDao.create(name: name);
 
-    return _toEntity(model);
+    return _toEntity(model: model);
   }
 
   @override
   Future<Deck> getById({@required int id}) async {
     final model = await _decksDao.getById(id: id);
 
-    return model == null ? null : _toEntity(model);
+    return model == null ? null : _toEntity(model: model);
   }
 
   @override
   Future<Deck> getByName({@required String name}) async {
     final model = await _decksDao.getByName(name: name);
 
-    return model == null ? null : _toEntity(model);
+    return model == null ? null : _toEntity(model: model);
   }
 
   @override
   Future<List<Deck>> getAll() async {
     final models = await _decksDao.getAll();
 
-    return models.map(_toEntity).toList();
+    return models.map((model) => _toEntity(model: model)).toList();
   }
 
   @override
   Future<void> update({@required Deck deck}) async {
-    await _decksDao.edit(newDeck: _toModel(deck));
+    await _decksDao.edit(newDeck: _toModel(deck: deck));
   }
 
   @override
@@ -86,8 +94,10 @@ class DeckRepositoryImpl extends DeckRepository {
 
     // TODO(cervonwong): 22/12/2020 Should also delete Cards, Entities, etc.
   }
+}
 
-  Deck _toEntity(DeckModel model) {
+class DeckModelToEntityMapper {
+  Deck call({@required DeckModel model}) {
     return Deck(
       id: model.id,
       name: model.name,
@@ -97,8 +107,10 @@ class DeckRepositoryImpl extends DeckRepository {
       description: model.description,
     );
   }
+}
 
-  DeckModel _toModel(Deck deck) {
+class DeckEntityToModelMapper {
+  DeckModel call({@required Deck deck}) {
     return DeckModel(
       id: deck.id,
       name: deck.name,

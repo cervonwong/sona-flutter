@@ -19,23 +19,53 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:sona_flutter/core/constants/material_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/data/repositories/material/deck/deck_repository_impl.dart';
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 
+// ignore: must_be_immutable
+class MockDeck extends Mock implements Deck {}
+
+class MockDeckModel extends Mock implements DeckModel {}
+
 class MockDecksDaoImpl extends Mock implements DecksDao {}
+
+class MockDeckModelToEntityMapper extends Mock
+    implements DeckModelToEntityMapper {}
+
+class MockDeckEntityToModelMapper extends Mock
+    implements DeckEntityToModelMapper {}
 
 void main() {
   DecksDao decksDao;
   DeckRepository repository;
+  DeckModelToEntityMapper toEntity;
+  DeckEntityToModelMapper toModel;
+
+  Deck deck1;
+  DeckModel deckModel1;
 
   setUp(
     () {
       decksDao = MockDecksDaoImpl();
-      repository = DeckRepositoryImpl(decksDao: decksDao);
+      toEntity = MockDeckModelToEntityMapper();
+      toModel = MockDeckEntityToModelMapper();
+
+      repository = DeckRepositoryImpl(
+        decksDao: decksDao,
+        toEntity: toEntity,
+        toModel: toModel,
+      );
+
+      deck1 = MockDeck();
+      deckModel1 = MockDeckModel();
+
+      when(toEntity(model: argThat(equals(deckModel1), named: 'model')))
+          .thenReturn(deck1);
+      when(toModel(deck: argThat(equals(deck1), named: 'deck')))
+          .thenReturn(deckModel1);
     },
   );
 
@@ -47,31 +77,10 @@ void main() {
         'should return expected Deck',
         () async {
           when(decksDao.create(name: argThat(equals('Joseph'), named: 'name')))
-              .thenAnswer(
-            (_) async {
-              return DeckModel(
-                id: 1,
-                name: 'Joseph',
-                created: DateTime(2020),
-                lastEdited: DateTime(2020),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
-              );
-            },
-          );
+              .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.create(name: 'Joseph');
-          expect(
-            deck,
-            Deck(
-              id: 1,
-              name: 'Joseph',
-              createdDateTime: DateTime(2020),
-              lastEditedDateTime: DateTime(2020),
-              authorName: kDefaultDeckAuthorName,
-              description: kDefaultDeckDescription,
-            ),
-          );
+          expect(deck, deck1);
         },
       );
     },
@@ -85,29 +94,10 @@ void main() {
         'should return expected Deck',
         () async {
           when(decksDao.getById(id: argThat(equals(5), named: 'id')))
-              .thenAnswer(
-            (_) async => DeckModel(
-              id: 5,
-              name: 'Adam',
-              created: DateTime(1999),
-              lastEdited: DateTime(1999),
-              authorName: 'Eve',
-              description: kDefaultDeckDescription,
-            ),
-          );
+              .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.getById(id: 5);
-          expect(
-            deck,
-            Deck(
-              id: 5,
-              name: 'Adam',
-              createdDateTime: DateTime(1999),
-              lastEditedDateTime: DateTime(1999),
-              authorName: 'Eve',
-              description: kDefaultDeckDescription,
-            ),
-          );
+          expect(deck, deck1);
         },
       );
 
@@ -115,9 +105,8 @@ void main() {
         'when DecksDao.getById returns null, '
         'should return null',
         () async {
-          when(decksDao.getById(
-            id: argThat(equals(5), named: 'id'),
-          )).thenAnswer((_) async => null);
+          when(decksDao.getById(id: argThat(equals(5), named: 'id')))
+              .thenAnswer((_) async => null);
 
           final deck = await repository.getById(id: 5);
           expect(deck, isNull);
@@ -135,29 +124,10 @@ void main() {
         () async {
           when(decksDao.getByName(
             name: argThat(equals('Peter'), named: 'name'),
-          )).thenAnswer(
-            (_) async => DeckModel(
-              id: 5,
-              name: 'Peter',
-              created: DateTime(1999),
-              lastEdited: DateTime(1999),
-              authorName: kDefaultDeckAuthorName,
-              description: kDefaultDeckDescription,
-            ),
-          );
+          )).thenAnswer((_) async => deckModel1);
 
           final deck = await repository.getByName(name: 'Peter');
-          expect(
-            deck,
-            Deck(
-              id: 5,
-              name: 'Peter',
-              createdDateTime: DateTime(1999),
-              lastEditedDateTime: DateTime(1999),
-              authorName: kDefaultDeckAuthorName,
-              description: kDefaultDeckDescription,
-            ),
-          );
+          expect(deck, deck1);
         },
       );
 
@@ -196,64 +166,20 @@ void main() {
         'when DecksDao.getAll returns an List with three DeckModels, '
         'should return the mapped List with three Decks',
         () async {
-          final baseModel = DeckModel(
-            id: 1,
-            name: 'Joseph',
-            created: DateTime(2020),
-            lastEdited: DateTime(2020),
-            authorName: kDefaultDeckAuthorName,
-            description: kDefaultDeckDescription,
-          );
+          final deck2 = MockDeck(), deck3 = MockDeck();
+          final deckModel2 = MockDeckModel(), deckModel3 = MockDeckModel();
+
+          when(toEntity(model: argThat(equals(deckModel2), named: 'model')))
+              .thenReturn(deck2);
+          when(toEntity(model: argThat(equals(deckModel3), named: 'model')))
+              .thenReturn(deck3);
 
           when(decksDao.getAll()).thenAnswer(
-            (_) async => [
-              baseModel.copyWith(
-                id: 2,
-                name: 'Susan',
-              ),
-              baseModel.copyWith(
-                id: 3,
-                name: 'Susanne',
-                lastEdited: DateTime(2021),
-              ),
-              baseModel.copyWith(
-                id: 4,
-                name: 'Susanson',
-                description: 'Descriptive.',
-              ),
-            ],
+            (_) async => [deckModel1, deckModel2, deckModel3],
           );
 
           final decks = await repository.getAll();
-          expect(
-            decks,
-            [
-              Deck(
-                id: 2,
-                name: 'Susan',
-                createdDateTime: DateTime(2020),
-                lastEditedDateTime: DateTime(2020),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
-              ),
-              Deck(
-                id: 3,
-                name: 'Susanne',
-                createdDateTime: DateTime(2020),
-                lastEditedDateTime: DateTime(2021),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
-              ),
-              Deck(
-                id: 4,
-                name: 'Susanson',
-                createdDateTime: DateTime(2020),
-                lastEditedDateTime: DateTime(2020),
-                authorName: kDefaultDeckAuthorName,
-                description: 'Descriptive.',
-              ),
-            ],
-          );
+          expect(decks, [deck1, deck2, deck3]);
         },
       );
     },
@@ -266,31 +192,13 @@ void main() {
         'when passed legal arguments, '
         'should call DecksDao.edit with expected arguments',
         () async {
-          final model = DeckModel(
-            id: 60,
-            name: 'Brandon',
-            created: DateTime(1990),
-            lastEdited: DateTime(1990),
-            authorName: kDefaultDeckAuthorName,
-            description: kDefaultDeckDescription,
-          );
-
           when(decksDao.edit(
-            newDeck: argThat(equals(model), named: 'newDeck'),
-          )).thenAnswer((_) async => model);
+            newDeck: argThat(equals(deckModel1), named: 'newDeck'),
+          )).thenAnswer((_) async => deckModel1);
 
-          await repository.update(
-            deck: Deck(
-              id: 60,
-              name: 'Brandon',
-              createdDateTime: DateTime(1990),
-              lastEditedDateTime: DateTime(1990),
-              authorName: kDefaultDeckAuthorName,
-              description: kDefaultDeckDescription,
-            ),
-          );
-          // verify is only used for testing void and stubbed methosd.
-          verify(decksDao.edit(newDeck: model));
+          await repository.update(deck: deck1);
+          // verify is only used for testing void and stubbed methods.
+          verify(decksDao.edit(newDeck: deckModel1));
         },
       );
     },
@@ -303,31 +211,12 @@ void main() {
         'when passed legal arguments, '
         'should call DecksDao.remove with expected arguments',
         () async {
-          final model = DeckModel(
-            id: 123,
-            name: 'Julien',
-            created: DateTime(2000),
-            lastEdited: DateTime(2010),
-            authorName: 'Julie',
-            description: 'Same old bitter things...',
-          );
-
+          when(deck1.id).thenReturn(123);
           when(
             decksDao.remove(id: argThat(equals(123), named: 'id')),
-          ).thenAnswer(
-            (_) async => model,
-          );
+          ).thenAnswer((_) async => deckModel1);
 
-          await repository.delete(
-            deck: Deck(
-              id: 123,
-              name: 'Julien',
-              createdDateTime: DateTime(2000),
-              lastEditedDateTime: DateTime(2010),
-              authorName: 'Julie',
-              description: 'Same old bitter things...',
-            ),
-          );
+          await repository.delete(deck: deck1);
           // verify is only used for testing void and stubbed methods.
           verify(decksDao.remove(id: 123));
         },
