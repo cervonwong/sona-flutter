@@ -44,9 +44,21 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   EntriesDaoImpl({@required MoorDatabase db}) : super(db);
 
   @override
-  Future<EntryModel> create({@required int deckId, @required int entryTypeId}) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<EntryModel> create({
+    @required int deckId,
+    @required int entryTypeId,
+  }) async {
+    assert(deckId != null);
+    assert(entryTypeId != null);
+
+    final id = await into(entries).insert(
+      EntriesCompanion.insert(
+        deckId: deckId,
+        entryTypeId: entryTypeId,
+      ),
+    );
+
+    return (select(entries)..where((entry) => entry.id.equals(id))).getSingle();
   }
 
   @override

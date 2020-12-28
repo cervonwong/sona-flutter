@@ -17,4 +17,136 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-void main() {}
+import 'package:flutter_test/flutter_test.dart';
+import 'package:moor/ffi.dart';
+import 'package:sona_flutter/core/data/data_sources/moor/entries/entries_dao.dart';
+import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
+
+// This is an integration test with MoorDatabase.
+void main() {
+  EntriesDao dao;
+  MoorDatabase db;
+
+  setUp(() async {
+    db = MoorDatabase.custom(VmDatabase.memory(
+      // Change the logStatement argument to true to print each SQL query for
+      // debugging if needed. This is set to false to not pollute test logs.
+      logStatements: false,
+    ));
+    // Disables foreign key constraints while testing. Tests for foreign key
+    // constraints are in foreign_constraints_test.dart.
+    await db.customStatement('PRAGMA foreign_keys = OFF');
+
+    dao = EntriesDaoImpl(db: db);
+  });
+
+  tearDown(() async => await db?.close());
+
+  Future<List<EntryModel>> selectAll() async => db.select(db.entries).get();
+
+  group(
+    'EntriesDaoImpl create',
+    () {
+      group(
+        'when passed legal arguments '
+        '(called three times to create three entries)',
+        () {
+          EntryModel entry1, entry2, entry3;
+          setUp(() async {
+            entry1 = await dao.create(deckId: 1, entryTypeId: 1);
+            entry2 = await dao.create(deckId: 2, entryTypeId: 1);
+            entry3 = await dao.create(deckId: 1, entryTypeId: 2);
+          });
+
+          test(
+            'should create expected records in entries table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  EntryModel(
+                    id: 1,
+                    deckId: 1,
+                    entryTypeId: 1,
+                  ),
+                  EntryModel(
+                    id: 2,
+                    deckId: 2,
+                    entryTypeId: 1,
+                  ),
+                  EntryModel(
+                    id: 3,
+                    deckId: 1,
+                    entryTypeId: 2,
+                  ),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return expected EntryModels',
+            () {
+              expect(
+                entry1,
+                EntryModel(
+                  id: 1,
+                  deckId: 1,
+                  entryTypeId: 1,
+                ),
+              );
+
+              expect(
+                entry2,
+                EntryModel(
+                  id: 2,
+                  deckId: 2,
+                  entryTypeId: 1,
+                ),
+              );
+
+              expect(
+                entry3,
+                EntryModel(
+                  id: 3,
+                  deckId: 1,
+                  entryTypeId: 2,
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'when passed null arguments, '
+        'should fail asserts',
+        () {
+          test(
+            'deckId is null',
+            () async {
+              expect(
+                () async {
+                  await dao.create(deckId: null, entryTypeId: 1);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'entryTypeId is null',
+            () async {
+              expect(
+                () async {
+                  await dao.create(deckId: 1, entryTypeId: null);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+        },
+      );
+    },
+  );
+}
