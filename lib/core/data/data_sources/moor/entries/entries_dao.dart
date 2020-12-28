@@ -69,10 +69,7 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<List<EntryModel>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
+  Future<List<EntryModel>> getAll() async => (select(entries)).get();
 
   @override
   Future<EntryModel> edit({@required EntryModel newEntry}) {

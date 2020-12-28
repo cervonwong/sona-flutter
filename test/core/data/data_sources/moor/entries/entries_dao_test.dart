@@ -157,10 +157,10 @@ void main() {
         'when passed legal arguments, '
         'should return expected EntryModel',
         () async {
-          final cardCreated = await dao.create(deckId: 6, entryTypeId: 9);
-          final cardGotten = await dao.getSingle(id: cardCreated.id);
+          final entryCreated = await dao.create(deckId: 6, entryTypeId: 9);
+          final entryGotten = await dao.getSingle(id: entryCreated.id);
 
-          expect(cardCreated, cardGotten);
+          expect(entryCreated, entryGotten);
         },
       );
 
@@ -183,6 +183,54 @@ void main() {
               await dao.getSingle(id: null);
             },
             throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'EntriesDaoImpl getAll',
+    () {
+      test(
+        'when there are no entries in the db, '
+        'should return an empty list of EntryModels',
+        () async {
+          final entries = await dao.getAll();
+
+          expect(entries, <EntryModel>[]);
+        },
+      );
+
+      test(
+        'when there are multiple entries in the db, '
+        'should return the expected list of EntryModels '
+        'in order of creation',
+        () async {
+          await dao.create(deckId: 2, entryTypeId: 2);
+          await dao.create(deckId: 3, entryTypeId: 3);
+          await dao.create(deckId: 1, entryTypeId: 1);
+
+          final entries = await dao.getAll();
+          expect(
+            entries,
+            [
+              EntryModel(
+                id: 1,
+                deckId: 2,
+                entryTypeId: 2,
+              ),
+              EntryModel(
+                id: 2,
+                deckId: 3,
+                entryTypeId: 3,
+              ),
+              EntryModel(
+                id: 3,
+                deckId: 1,
+                entryTypeId: 1,
+              ),
+            ]
           );
         },
       );
