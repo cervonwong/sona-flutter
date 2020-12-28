@@ -24,6 +24,8 @@ import '../../../data_sources/moor/moor_database.dart';
 
 class DeckEntityToModelMapper {
   DeckModel call({@required Deck deck}) {
+    if (deck == null) return null;
+
     return DeckModel(
       id: deck.id,
       name: deck.name,

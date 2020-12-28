@@ -67,14 +67,14 @@ class DeckRepositoryImpl extends DeckRepository {
   Future<Deck> getById({@required int id}) async {
     final model = await _decksDao.getById(id: id);
 
-    return model == null ? null : _toEntity(model: model);
+    return _toEntity(model: model);
   }
 
   @override
   Future<Deck> getByName({@required String name}) async {
     final model = await _decksDao.getByName(name: name);
 
-    return model == null ? null : _toEntity(model: model);
+    return _toEntity(model: model);
   }
 
   @override
