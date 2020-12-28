@@ -24,14 +24,6 @@ import '../../../entities/material/deck/deck.dart';
 import '../../../entities/material/entry/entry.dart';
 
 abstract class DeckRepository {
-  // NAVIGABLE ACCESSORS
-
-  Future<Deck> getByCard({@required Card card});
-
-  Future<Deck> getByEntry({@required Entry entry});
-
-  // CRUD
-
   Future<Deck> create({@required String name});
 
   Future<Deck> getById({@required int id});
@@ -39,6 +31,10 @@ abstract class DeckRepository {
   Future<Deck> getByName({@required String name});
 
   Future<List<Deck>> getAll();
+
+  Future<Deck> getByEntry({@required Entry entry});
+
+  Future<Deck> getByCard({@required Card card});
 
   Future<void> update({@required Deck deck});
 

@@ -40,22 +40,6 @@ class DeckRepositoryImpl extends DeckRepository {
         _toEntity = toEntity,
         _toModel = toModel;
 
-  // NAVIGABLE ACCESSORS
-
-  @override
-  Future<Deck> getByCard({@required Card card}) {
-    // TODO: implement getByCard
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Deck> getByEntry({@required Entry entry}) {
-    // TODO: implement getByEntry
-    throw UnimplementedError();
-  }
-
-  // CRUD
-
   @override
   Future<Deck> create({@required String name}) async {
     final model = await _decksDao.create(name: name);
@@ -82,6 +66,18 @@ class DeckRepositoryImpl extends DeckRepository {
     final models = await _decksDao.getAll();
 
     return models.map((model) => _toEntity(model: model)).toList();
+  }
+
+  @override
+  Future<Deck> getByEntry({@required Entry entry}) {
+    // TODO: implement getByEntry
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Deck> getByCard({@required Card card}) {
+    // TODO: implement getByCard
+    throw UnimplementedError();
   }
 
   @override
