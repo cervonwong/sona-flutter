@@ -39,21 +39,21 @@ class EntryTagRepositoryImpl implements EntryTagRepository {
   Future<EntryTag> create({@required String name}) async {
     final model = await _dao.create(name: name);
 
-    return _toEntity(model);
+    return _toEntity(model: model);
   }
 
   @override
   Future<EntryTag> getById({@required int id}) async {
     final model = await _dao.getById(id: id);
 
-    return _toEntity(model);
+    return _toEntity(model: model);
   }
 
   @override
   Future<List<EntryTag>> getAll() async {
     final models = await _dao.getAll();
 
-    return models.map(_toEntity).toList();
+    return models.map((model) => _toEntity(model: model)).toList();
   }
 
   @override

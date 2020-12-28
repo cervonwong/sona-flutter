@@ -20,8 +20,12 @@
 import '../../../../domain/entities/material/entry/entry_tag.dart';
 import '../../../data_sources/moor/moor_database.dart';
 
+import 'package:meta/meta.dart';
+
 class EntryModelToEntityMapper {
-  EntryTag call(TagModel model) {
+  EntryTag call({@required TagModel model}) {
+    if (model == null) return null;
+
     return EntryTag(id: model.id, name: model.name);
   }
 }
