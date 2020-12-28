@@ -181,7 +181,7 @@ void main() {
         'when passed legal arguments, '
         'should return expected CardModel',
         () async {
-          final cardCreated = (await dao.create(entryId: 5, position: 1));
+          final cardCreated = await dao.create(entryId: 5, position: 1);
           final cardGotten = await dao.getSingle(
             entryId: cardCreated.entryId,
             position: cardCreated.position,
