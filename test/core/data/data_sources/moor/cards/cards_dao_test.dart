@@ -409,7 +409,7 @@ void main() {
           );
 
           test(
-            'should return expected CardsModel',
+            'should return deleted CardsModel',
             () {
               expect(
                 removedCard,

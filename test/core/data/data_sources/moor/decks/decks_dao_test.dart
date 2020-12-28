@@ -630,7 +630,7 @@ void main() {
           );
 
           test(
-            'should return expected DecksModel',
+            'should return deleted DecksModel',
             () {
               expect(
                 removedDeck,
