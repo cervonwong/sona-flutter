@@ -53,7 +53,7 @@ void main() {
     'CardsDaoImpl create',
     () {
       group(
-        'when passed legal name (called three times to create three cards)',
+        'when passed legal arguments (called three times to create three cards)',
         () {
           CardModel card1, card2, card3;
           setUp(() async {
