@@ -92,8 +92,8 @@ void main() {
           );
 
           test(
-            'should return expected CardModels',
-            () async {
+            'should return expected CardModeFls',
+            () {
               expect(
                 card1,
                 CardModel(
@@ -328,7 +328,7 @@ void main() {
 
           test(
             'should return expected CardModels',
-            () async {
+            () {
               expect(
                 editedCard,
                 CardModel(
@@ -410,7 +410,7 @@ void main() {
 
           test(
             'should return expected CardsModel',
-            () async {
+            () {
               expect(
                 removedCard,
                 CardModel(

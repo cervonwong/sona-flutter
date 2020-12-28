@@ -93,7 +93,7 @@ void main() {
 
           test(
             'should return expected DeckModels',
-            () async {
+            () {
               expect(
                 deck1,
                 DeckModel(
@@ -352,7 +352,7 @@ void main() {
 
               test(
                 'should return expected DeckModel',
-                () async {
+                () {
                   expect(
                     editedDeck,
                     DeckModel(
@@ -405,7 +405,7 @@ void main() {
 
               test(
                 'should return expected DeckModel',
-                () async {
+                () {
                   expect(
                     editedDeck,
                     DeckModel(
@@ -461,7 +461,7 @@ void main() {
 
               test(
                 'should return expected DeckModel',
-                () async {
+                () {
                   expect(
                     editedDeck,
                     DeckModel(
@@ -515,7 +515,7 @@ void main() {
 
               test(
                 'should return expected DeckModel',
-                () async {
+                () {
                   expect(
                     editedDeck,
                     DeckModel(
@@ -631,7 +631,7 @@ void main() {
 
           test(
             'should return expected DecksModel',
-            () async {
+            () {
               expect(
                 removedDeck,
                 DeckModel(
