@@ -236,4 +236,79 @@ void main() {
       );
     },
   );
+
+  group(
+    'EntriesDaoImpl edit',
+    () {
+      group(
+        'when passed legal newEntry, '
+        'should update changed fields',
+        () {
+          EntryModel editedEntry;
+          setUp(() async {
+            final entry = await dao.create(deckId: 1, entryTypeId: 1);
+
+            editedEntry = await dao.edit(
+              newEntry: entry.copyWith(deckId: 2, entryTypeId: 3),
+            );
+          });
+
+          test(
+            'should update expected record in cards table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  EntryModel(id: 1, deckId: 2, entryTypeId: 3),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return edited EntryModel',
+            () {
+              expect(
+                editedEntry,
+                EntryModel(id: 1, deckId: 2, entryTypeId: 3),
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'when no entries in the db '
+        'has the same id as the passed newEntry\'s id, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.edit(
+                newEntry: EntryModel(
+                  id: 1,
+                  deckId: 1,
+                  entryTypeId: 1,
+                ),
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+
+      test(
+        'when passed null newEntry, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await dao.edit(newEntry: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
 }

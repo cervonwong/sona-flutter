@@ -72,9 +72,21 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<List<EntryModel>> getAll() async => (select(entries)).get();
 
   @override
-  Future<EntryModel> edit({@required EntryModel newEntry}) {
-    // TODO: implement edit
-    throw UnimplementedError();
+  Future<EntryModel> edit({@required EntryModel newEntry}) async {
+    assert(newEntry != null);
+    assert((await getSingle(id: newEntry.id)) != null);
+
+    await (update(entries)
+          ..where(
+            (entry) => entry.id.equals(newEntry.id),
+          ))
+        .write(
+      EntriesCompanion(
+        deckId: Value(newEntry.deckId),
+        entryTypeId: Value(newEntry.entryTypeId),
+      ),
+    );
+    return getSingle(id: newEntry.id);
   }
 
   @override
