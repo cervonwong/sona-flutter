@@ -21,14 +21,19 @@ import 'package:meta/meta.dart';
 
 import '../../../../domain/entities/material/entry/entry_tag.dart';
 import '../../../../domain/repositories/material/entry/entry_tag_repository.dart';
-import '../../../data_sources/moor/moor_database.dart';
 import '../../../data_sources/moor/tags/tags_dao.dart';
+import 'entry_model_to_entity_mapper.dart';
 
 @immutable
 class EntryTagRepositoryImpl implements EntryTagRepository {
   final TagsDao _dao;
+  final EntryModelToEntityMapper _toEntity;
 
-  EntryTagRepositoryImpl({@required TagsDao dao}) : _dao = dao;
+  EntryTagRepositoryImpl({
+    @required TagsDao dao,
+    @required EntryModelToEntityMapper toEntity,
+  })  : _dao = dao,
+        _toEntity = toEntity;
 
   @override
   Future<EntryTag> create({@required String name}) async {
@@ -59,9 +64,5 @@ class EntryTagRepositoryImpl implements EntryTagRepository {
   @override
   Future<void> delete({@required EntryTag tag}) async {
     await _dao.remove(id: tag.id);
-  }
-
-  EntryTag _toEntity(TagModel model) {
-    return EntryTag(id: model.id, name: model.name);
   }
 }
