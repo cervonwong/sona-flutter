@@ -24,7 +24,8 @@ import '../../../../domain/entities/material/deck/deck.dart';
 import '../../../../domain/entities/material/entry/entry.dart';
 import '../../../../domain/repositories/material/deck/deck_repository.dart';
 import '../../../data_sources/moor/decks/decks_dao.dart';
-import '../../../data_sources/moor/moor_database.dart';
+import 'deck_entity_to_model_mapper.dart';
+import 'deck_model_to_entity_mapper.dart';
 
 class DeckRepositoryImpl extends DeckRepository {
   final DecksDao _decksDao;
@@ -93,31 +94,5 @@ class DeckRepositoryImpl extends DeckRepository {
     await _decksDao.remove(id: deck.id);
 
     // TODO(cervonwong): 22/12/2020 Should also delete Cards, Entities, etc.
-  }
-}
-
-class DeckModelToEntityMapper {
-  Deck call({@required DeckModel model}) {
-    return Deck(
-      id: model.id,
-      name: model.name,
-      createdDateTime: model.created,
-      lastEditedDateTime: model.lastEdited,
-      authorName: model.authorName,
-      description: model.description,
-    );
-  }
-}
-
-class DeckEntityToModelMapper {
-  DeckModel call({@required Deck deck}) {
-    return DeckModel(
-      id: deck.id,
-      name: deck.name,
-      created: deck.createdDateTime,
-      lastEdited: deck.lastEditedDateTime,
-      authorName: deck.authorName,
-      description: deck.description,
-    );
   }
 }
