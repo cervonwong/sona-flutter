@@ -257,7 +257,7 @@ void main() {
 
       test(
         'when there are multiple cards in the db, '
-        'should return the expected list of CardModels'
+        'should return the expected list of CardModels '
         'in order of creation',
         () async {
           await dao.create(entryId: 2, position: 2);
