@@ -32,9 +32,9 @@ abstract class TagsDao {
 
   Future<List<TagModel>> getAll();
 
-  Future<TagModel> rename({@required int id, @required String newName});
+  Future<void> rename({@required int id, @required String newName});
 
-  Future<TagModel> remove({@required int id});
+  Future<void> remove({@required int id});
 }
 
 @UseDao(tables: [Tags])
@@ -92,7 +92,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// [newName]. In production, [InvalidDataException] or [SqliteException] may
   /// be thrown. You must check inputs before passing them to this method.
   @override
-  Future<TagModel> rename({@required int id, @required String newName}) async {
+  Future<void> rename({@required int id, @required String newName}) async {
     assert(id != null);
     assert(newName != null);
     // Asserts that a tag with the same id in the database exists.
@@ -108,8 +108,6 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     // Renames tag from the database which has the ID.
     await (update(tags)..where((tag) => tag.id.equals(id)))
         .write(TagsCompanion(name: Value(newName)));
-    // Returns the renamed tag from the database with the ID.
-    return getById(id: id);
   }
 
   /// Deletes the tag specified by its ID [id].
@@ -120,21 +118,13 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   ///
   /// This method is not named `delete` because of naming conflicts.
   @override
-  Future<TagModel> remove({@required int id}) async {
+  Future<void> remove({@required int id}) async {
     assert(id != null);
-
-    // Gets the tag specified by its ID.
-    final tag = await getById(id: id);
-    // Asserts that there is 1 tag specified by its ID.
-    assert(tag != null);
 
     // Deletes the tag specified by its ID,
     // then gets the number of deleted tags.
     final num = await (delete(tags)..where((tag) => tag.id.equals(id))).go();
     // Asserts that the number of deleted tags is 1.
     assert(num == 1);
-
-    // Returns the now removed tag.
-    return tag;
   }
 }

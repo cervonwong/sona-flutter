@@ -179,27 +179,25 @@ void main() {
     () {
       test(
         'when passed legal arguments, '
-        'should return expected renamed TagModel',
+        'should update expected records in decks table',
         () async {
           final id = (await dao.create(name: 'Old name')).id;
           expect(await selectAll(), [TagModel(id: 1, name: 'Old name')]);
 
-          final tag = await dao.rename(id: id, newName: 'New name');
+          await dao.rename(id: id, newName: 'New name');
           expect(await selectAll(), [TagModel(id: 1, name: 'New name')]);
-          expect(tag, TagModel(id: id, name: 'New name'));
         },
       );
 
       test(
         'when passed the original name of the tag, '
-        'should return expected TagModel',
+        'should update expected records in decks table',
         () async {
           final id = (await dao.create(name: 'Same name')).id;
           expect(await selectAll(), [TagModel(id: 1, name: 'Same name')]);
 
-          final tag = await dao.rename(id: id, newName: 'Same name');
+          await dao.rename(id: id, newName: 'Same name');
           expect(await selectAll(), [TagModel(id: 1, name: 'Same name')]);
-          expect(tag, TagModel(id: id, name: 'Same name'));
         },
       );
 
@@ -279,13 +277,12 @@ void main() {
     () {
       test(
         'when passed legal id, '
-        'should return expected deleted tag',
+        'should update expected records in decks table',
         () async {
           final id = (await dao.create(name: 'Random tag')).id;
           expect(await selectAll(), [TagModel(id: 1, name: 'Random tag')]);
 
-          final tag = await dao.remove(id: id);
-          expect(tag, TagModel(id: 1, name: 'Random tag'));
+          await dao.remove(id: id);
           expect(await selectAll(), <TagModel>[]);
         },
       );
