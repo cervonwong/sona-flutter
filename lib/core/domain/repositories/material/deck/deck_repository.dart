@@ -36,6 +36,9 @@ abstract class DeckRepository {
 
   Future<Deck> getByCard({@required Card card});
 
+  // TODO(cervonwong): 29/12/2020 Possibly change the return type to return Deck
+  //  with the updated lastEditedDateTime? But this might not be necessary after
+  //  using watches instead of getAlls... Let's wait and see.
   Future<void> update({@required Deck deck});
 
   Future<void> delete({@required Deck deck});
