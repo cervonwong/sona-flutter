@@ -32,9 +32,9 @@ abstract class EntriesDao {
 
   Future<List<EntryModel>> getAll();
 
-  Future<EntryModel> edit({@required EntryModel newEntry});
+  Future<void> edit({@required EntryModel newEntry});
 
-  Future<EntryModel> remove({@required int id});
+  Future<void> remove({@required int id});
 }
 
 @UseDao(tables: [Entries])
@@ -72,7 +72,7 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<List<EntryModel>> getAll() async => (select(entries)).get();
 
   @override
-  Future<EntryModel> edit({@required EntryModel newEntry}) async {
+  Future<void> edit({@required EntryModel newEntry}) async {
     assert(newEntry != null);
     assert((await getSingle(id: newEntry.id)) != null);
 
@@ -86,23 +86,17 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
         entryTypeId: Value(newEntry.entryTypeId),
       ),
     );
-    return getSingle(id: newEntry.id);
   }
 
   @override
-  Future<EntryModel> remove({@required int id}) async {
+  Future<void> remove({@required int id}) async {
     assert(id != null);
 
-    var entry = await getSingle(id: id);
-    assert(entry != null);
-
-    final num = await (delete(entries)
+    final deletedCount = await (delete(entries)
           ..where(
             (entry) => entry.id.equals(id),
           ))
         .go();
-    assert(num == 1);
-
-    return entry;
+    assert(deletedCount == 1);
   }
 }

@@ -240,39 +240,18 @@ void main() {
   group(
     'EntriesDaoImpl edit',
     () {
-      group(
+      test(
         'when passed legal newEntry, '
-        'should update changed fields',
-        () {
-          EntryModel editedEntry;
-          setUp(() async {
-            final entry = await dao.create(deckId: 1, entryTypeId: 1);
-
-            editedEntry = await dao.edit(
-              newEntry: entry.copyWith(deckId: 2, entryTypeId: 3),
-            );
-          });
-
-          test(
-            'should update expected record in entries table',
-            () async {
-              expect(
-                await selectAll(),
-                [
-                  EntryModel(id: 1, deckId: 2, entryTypeId: 3),
-                ],
-              );
-            },
+        'should update expected record in entries table',
+        () async {
+          final entry = await dao.create(deckId: 1, entryTypeId: 1);
+          await dao.edit(
+            newEntry: entry.copyWith(deckId: 2, entryTypeId: 3),
           );
 
-          test(
-            'should return edited EntryModel',
-            () {
-              expect(
-                editedEntry,
-                EntryModel(id: 1, deckId: 2, entryTypeId: 3),
-              );
-            },
+          expect(
+            await selectAll(),
+            [EntryModel(id: 1, deckId: 2, entryTypeId: 3)],
           );
         },
       );
@@ -315,44 +294,23 @@ void main() {
   group(
     'EntriesDaoImpl remove',
     () {
-      group(
-        'when passed legal arguments',
-        () {
-          EntryModel removedEntry;
-          setUp(() async {
-            await dao.create(deckId: 1, entryTypeId: 2);
-            await dao.create(deckId: 2, entryTypeId: 1);
-            removedEntry = await dao.remove(id: 1);
-          });
+      test(
+        'when passed legal arguments, '
+        'should delete expected record in the entries table',
+        () async {
+          await dao.create(deckId: 1, entryTypeId: 2);
+          await dao.create(deckId: 2, entryTypeId: 1);
+          await dao.remove(id: 1);
 
-          test(
-            'should delete expected record in the entries table',
-            () async {
-              expect(
-                await selectAll(),
-                [
-                  EntryModel(
-                    id: 2,
-                    deckId: 2,
-                    entryTypeId: 1,
-                  ),
-                ],
-              );
-            },
-          );
-
-          test(
-            'should return deleted EntryModel',
-            () {
-              expect(
-                removedEntry,
-                EntryModel(
-                  id: 1,
-                  deckId: 1,
-                  entryTypeId: 2,
-                ),
-              );
-            },
+          expect(
+            await selectAll(),
+            [
+              EntryModel(
+                id: 2,
+                deckId: 2,
+                entryTypeId: 1,
+              ),
+            ],
           );
         },
       );
