@@ -123,7 +123,11 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
 
     // Deletes the tag specified by its ID,
     // then gets the number of deleted tags.
-    final deletedCount = await (delete(tags)..where((tag) => tag.id.equals(id))).go();
+    final deletedCount = await (delete(tags)
+          ..where(
+            (tag) => tag.id.equals(id),
+          ))
+        .go();
     // Asserts that the number of deleted tags is 1.
     assert(deletedCount == 1);
   }
