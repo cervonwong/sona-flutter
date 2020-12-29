@@ -600,50 +600,26 @@ void main() {
   group(
     'DecksDaoImpl remove',
     () {
-      group(
-        'when passed legal id',
-        () {
-          DeckModel removedDeck;
-          setUp(() async {
-            await dao.create(name: 'Apple');
-            await dao.create(name: 'Banana');
-            removedDeck = await dao.remove(id: 1);
-          });
+      test(
+        'when passed legal id, '
+        'should delete expected record in decks table',
+        () async {
+          await dao.create(name: 'Apple');
+          await dao.create(name: 'Banana');
+          await dao.remove(id: 1);
 
-          test(
-            'should delete expected record in decks table',
-            () async {
-              expect(
-                await selectAll(),
-                [
-                  DeckModel(
-                    id: 2,
-                    name: 'Banana',
-                    created: DateTime(2020),
-                    lastEdited: DateTime(2020),
-                    authorName: kDefaultDeckAuthorName,
-                    description: kDefaultDeckDescription,
-                  ),
-                ],
-              );
-            },
-          );
-
-          test(
-            'should return deleted DecksModel',
-            () {
-              expect(
-                removedDeck,
-                DeckModel(
-                  id: 1,
-                  name: 'Apple',
-                  created: DateTime(2020),
-                  lastEdited: DateTime(2020),
-                  authorName: kDefaultDeckAuthorName,
-                  description: kDefaultDeckDescription,
-                ),
-              );
-            },
+          expect(
+            await selectAll(),
+            [
+              DeckModel(
+                id: 2,
+                name: 'Banana',
+                created: DateTime(2020),
+                lastEdited: DateTime(2020),
+                authorName: kDefaultDeckAuthorName,
+                description: kDefaultDeckDescription,
+              ),
+            ],
           );
         },
       );

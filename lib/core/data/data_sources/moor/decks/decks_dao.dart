@@ -37,7 +37,7 @@ abstract class DecksDao {
 
   Future<DeckModel> edit({@required DeckModel newDeck});
 
-  Future<DeckModel> remove({@required int id});
+  Future<void> remove({@required int id});
 }
 
 @UseDao(tables: [Decks])
@@ -164,21 +164,17 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   ///
   /// This method is not named `delete` because of naming conflicts.
   @override
-  Future<DeckModel> remove({@required int id}) async {
+  Future<void> remove({@required int id}) async {
     assert(id != null);
-
-    // Gets the deck specified by its ID.
-    final deck = await getById(id: id);
-    // Asserts that there is 1 deck specified by its ID.
-    assert(deck != null);
 
     // Deletes the deck specified by its ID,
     // then gets the number of deleted decks.
-    final num = await (delete(decks)..where((deck) => deck.id.equals(id))).go();
+    final deletedCount = await (delete(decks)
+          ..where(
+            (deck) => deck.id.equals(id),
+          ))
+        .go();
     // Asserts that the number of deleted tags is 1.
-    assert(num == 1);
-
-    // Returns the now removed deck.
-    return deck;
+    assert(deletedCount == 1);
   }
 }
