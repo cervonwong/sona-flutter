@@ -33,9 +33,9 @@ abstract class CardsDao {
 
   Future<List<CardModel>> getAll();
 
-  Future<CardModel> edit({@required CardModel newCard});
+  Future<void> edit({@required CardModel newCard});
 
-  Future<CardModel> remove({@required int entryId, @required int position});
+  Future<void> remove({@required int entryId, @required int position});
 }
 
 @UseDao(tables: [Cards])
@@ -84,7 +84,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<List<CardModel>> getAll() async => (select(cards)).get();
 
   @override
-  Future<CardModel> edit({@required CardModel newCard}) async {
+  Future<void> edit({@required CardModel newCard}) async {
     assert(newCard != null);
     assert((await getSingle(
           entryId: newCard.entryId,
@@ -104,28 +104,19 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
         hidden: Value(newCard.hidden),
       ),
     );
-    return getSingle(entryId: newCard.entryId, position: newCard.position);
   }
 
   @override
-  Future<CardModel> remove({
-    @required int entryId,
-    @required int position,
-  }) async {
+  Future<void> remove({@required int entryId, @required int position}) async {
     assert(entryId != null);
     assert(position != null);
 
-    final card = await getSingle(entryId: entryId, position: position);
-    assert(card != null);
-
-    final num = await (delete(cards)
+    final deletedCount = await (delete(cards)
           ..where(
             (card) =>
                 card.entryId.equals(entryId) & card.position.equals(position),
           ))
         .go();
-    assert(num == 1);
-
-    return card;
+    assert(deletedCount == 1);
   }
 }

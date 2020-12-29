@@ -296,49 +296,42 @@ void main() {
   group(
     'CardsDaoImpl edit',
     () {
-      group(
+      test(
         'when passed legal newCard, '
-        'should update changed fields',
-        () {
-          CardModel editedCard;
-          setUp(() async {
-            final card = await dao.create(entryId: 1, position: 1);
+        'should update expected record in cards table',
+        () async {
+          final card = await dao.create(entryId: 1, position: 1);
 
-            editedCard = await dao.edit(
-              newCard: card.copyWith(starred: true, hidden: false),
-            );
-          });
-
-          test(
-            'should update expected record in cards table',
-            () async {
-              expect(
-                await selectAll(),
-                [
-                  CardModel(
-                    entryId: 1,
-                    position: 1,
-                    starred: true,
-                    hidden: false,
-                  ),
-                ],
-              );
-            },
+          await dao.edit(
+            newCard: card.copyWith(starred: true, hidden: false),
           );
 
-          test(
-            'should return edited CardModel',
-            () {
-              expect(
-                editedCard,
-                CardModel(
-                  entryId: 1,
-                  position: 1,
-                  starred: true,
-                  hidden: false,
-                ),
-              );
-            },
+          expect(
+            await selectAll(),
+            [
+              CardModel(
+                entryId: 1,
+                position: 1,
+                starred: true,
+                hidden: false,
+              ),
+            ],
+          );
+
+          await dao.edit(
+            newCard: card.copyWith(starred: false, hidden: true),
+          );
+
+          expect(
+            await selectAll(),
+            [
+              CardModel(
+                entryId: 1,
+                position: 1,
+                starred: false,
+                hidden: true,
+              ),
+            ],
           );
         },
       );
@@ -381,46 +374,24 @@ void main() {
   group(
     'CardsDaoImpl remove',
     () {
-      group(
-        'when passed legal arguments',
-        () {
-          CardModel removedCard;
-          setUp(() async {
-            await dao.create(entryId: 1, position: 2);
-            await dao.create(entryId: 2, position: 1);
-            removedCard = await dao.remove(entryId: 1, position: 2);
-          });
+      test(
+        'when passed legal arguments, '
+        'should delete expected record in cards table',
+        () async {
+          await dao.create(entryId: 1, position: 2);
+          await dao.create(entryId: 2, position: 1);
+          await dao.remove(entryId: 1, position: 2);
 
-          test(
-            'should delete expected record in cards table',
-            () async {
-              expect(
-                await selectAll(),
-                [
-                  CardModel(
-                    entryId: 2,
-                    position: 1,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
-                  ),
-                ],
-              );
-            },
-          );
-
-          test(
-            'should return deleted CardsModel',
-            () {
-              expect(
-                removedCard,
-                CardModel(
-                  entryId: 1,
-                  position: 2,
-                  starred: kDefaultCardStarred,
-                  hidden: kDefaultCardHidden,
-                ),
-              );
-            },
+          expect(
+            await selectAll(),
+            [
+              CardModel(
+                entryId: 2,
+                position: 1,
+                starred: kDefaultCardStarred,
+                hidden: kDefaultCardHidden,
+              ),
+            ],
           );
         },
       );
