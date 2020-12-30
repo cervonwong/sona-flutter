@@ -65,11 +65,11 @@ u  ....>  ir
 ir ....>  e
 ri ....|> ir
 ri ....>  id
-ri ....>  db
+ri ....>  db : models only\n\n<i>(also should not depend on moor-specific code)
 ri ....>  e
-di ....>  db
+di ....>  db : tables & models
 di ....|> id
-id ....> db
+id ....>  db : models only
 
 sl .> Features : \t
 Features .> Core : \t
