@@ -46,10 +46,26 @@ class DeckLoaded extends DeckState {
 }
 
 /// The state when the BLoC has not successfully loaded the list of decks.
-class DeckLoadFailed extends DeckState {}
+abstract class DeckLoadFailed extends DeckState {}
 
-class DeckNameIsEmpty extends DeckLoadFailed {}
+/// The state when the BLoC has caught an [ApplicationException].
+class DeckLoadFailedWithException extends DeckLoadFailed {
+  final ApplicationException exception;
 
-class DeckNameAlreadyExists extends DeckLoadFailed {}
+  DeckLoadFailedWithException({@required this.exception});
 
-class DeckNameIsMultiline extends DeckLoadFailed {}
+  @override
+  List<Object> get props => [exception];
+
+  @override
+  bool get stringify => true;
+}
+
+/// The state when the an Event passed to the BLoC has invalid name field.
+abstract class DeckNameValidationFailed extends DeckLoadFailed {}
+
+class DeckNameIsEmpty extends DeckNameValidationFailed {}
+
+class DeckNameAlreadyExists extends DeckNameValidationFailed {}
+
+class DeckNameIsMultiline extends DeckNameValidationFailed {}

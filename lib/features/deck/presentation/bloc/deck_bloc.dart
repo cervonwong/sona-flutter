@@ -24,6 +24,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/domain/entities/material/deck/deck.dart';
+import '../../../../core/exceptions/exceptions.dart';
 import '../../domain/use_cases/create_deck.dart';
 import '../../domain/use_cases/delete_deck.dart';
 import '../../domain/use_cases/get_all_decks.dart';
