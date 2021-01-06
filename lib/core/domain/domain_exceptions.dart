@@ -19,13 +19,14 @@
 
 import '../exceptions/exceptions.dart';
 
-/// Exception thrown by repositories failing to navigate between entities.
+/// Exception thrown by repositories failing to retrieve the entity to be
+/// navigated to.
 ///
-/// For example, when trying to get a [Deck] from a [Card] in [DeckRepository]
-/// yields no results.
+/// For example, when trying to get a [Deck] from a [Card] in [DeckRepository],
+/// but the [Deck] cannot be retrieved because it is not found.
 ///
-/// This might be due to corruption of the data source or a programming error
-/// resulting in data not being entered correctly.
+/// This might be due to errors where the repository does not perform the
+/// necessary operations on the data source to link data correctly.
 class EntityNavigationException extends ApplicationException {
   @override
   final String message;
@@ -34,4 +35,22 @@ class EntityNavigationException extends ApplicationException {
 
   @override
   String toString() => 'EntityNavigationException: $message';
+}
+
+/// Exception thrown by repositories when unable to perform an operation when
+/// received an entity argument which does not exist.
+///
+/// For example, when trying to get a [Deck] from a [Card] in [DeckRepository],
+/// but the [Card] cannot be retrieved because it is not found.
+///
+/// This might be due to a programming error resulting in the data in the app
+/// not being synced with the repository.
+class EntityNotFoundException extends ApplicationException {
+  @override
+  final String message;
+
+  EntityNotFoundException(this.message) : super(message);
+
+  @override
+  String toString() => 'EntityNotFoundException: $message';
 }
