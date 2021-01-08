@@ -19,24 +19,33 @@
 
 import 'package:meta/meta.dart';
 
+import '../../../../domain/domain_exceptions.dart';
 import '../../../../domain/entities/material/card/card.dart';
 import '../../../../domain/entities/material/deck/deck.dart';
 import '../../../../domain/entities/material/entry/entry.dart';
 import '../../../../domain/repositories/material/deck/deck_repository.dart';
+import '../../../data_sources/moor/cards/cards_dao.dart';
 import '../../../data_sources/moor/decks/decks_dao.dart';
+import '../../../data_sources/moor/entries/entries_dao.dart';
 import 'deck_entity_to_model_mapper.dart';
 import 'deck_model_to_entity_mapper.dart';
 
 class DeckRepositoryImpl extends DeckRepository {
   final DecksDao _decksDao;
+  final EntriesDao _entriesDao;
+  final CardsDao _cardsDao;
   final DeckModelToEntityMapper _toEntity;
   final DeckEntityToModelMapper _toModel;
 
   DeckRepositoryImpl({
     @required DecksDao decksDao,
+    @required EntriesDao entriesDao,
+    @required CardsDao cardsDao,
     @required DeckModelToEntityMapper toEntity,
     @required DeckEntityToModelMapper toModel,
   })  : _decksDao = decksDao,
+        _entriesDao = entriesDao,
+        _cardsDao = cardsDao,
         _toEntity = toEntity,
         _toModel = toModel;
 
@@ -69,15 +78,70 @@ class DeckRepositoryImpl extends DeckRepository {
   }
 
   @override
-  Future<Deck> getByEntry({@required Entry entry}) {
-    // TODO: implement getByEntry
-    throw UnimplementedError();
+  Future<Deck> getByEntry({@required Entry entry}) async {
+    assert(entry != null);
+
+    final entryModel = await _entriesDao.getSingle(id: entry.id);
+    if (entryModel == null) {
+      throw EntityNotFoundException(
+        'Tried to get the Deck of an Entry, '
+        'but the Entry does not exist in the data source. '
+        'This is probably due to the Entry\'s in the app\'s state '
+        'not being synced with the data source when deleting Entry\'s.',
+      );
+    }
+
+    final deckModel = await _decksDao.getById(id: entryModel.deckId);
+    if (deckModel == null) {
+      throw EntityNavigationException(
+        'Tried to get the Deck of an Entry '
+        'but the Deck does not exist in the data source. '
+        'This is probably due to errors when linking Entry\'s and Decks '
+        'upon creation or deletion of them.',
+      );
+    }
+
+    return _toEntity(model: deckModel);
   }
 
   @override
-  Future<Deck> getByCard({@required Card card}) {
-    // TODO: implement getByCard
-    throw UnimplementedError();
+  Future<Deck> getByCard({@required Card card}) async {
+    assert(card != null);
+
+    final cardModel = await _cardsDao.getSingle(
+      entryId: card.id.entryId,
+      position: card.id.position,
+    );
+    if (cardModel == null) {
+      throw EntityNotFoundException(
+        'Tried to get the Deck of a Card, '
+        'but the Card does not exist in the data source. '
+        'This is probably due to the Card\'s in the app\'s state '
+        'not being synced with the data source when deleting Card\'s.',
+      );
+    }
+
+    final entryModel = await _entriesDao.getSingle(id: cardModel.entryId);
+    if (entryModel == null) {
+      throw EntityNavigationException(
+        'Tried to get the Deck of a Card '
+        'but the Entry of the Card does not exist in the data source. '
+        'This is probably due to errors when linking Cards and Entry\'s '
+        'upon creation or deletion of them.',
+      );
+    }
+
+    final deckModel = await _decksDao.getById(id: entryModel.deckId);
+    if (deckModel == null) {
+      throw EntityNavigationException(
+        'Tried to get the Deck of a Card '
+        'but the Deck does not exist in the data source. '
+        'This is probably due to errors when linking Cards and Decks '
+        'upon creation or deletion of them.',
+      );
+    }
+
+    return _toEntity(model: deckModel);
   }
 
   @override

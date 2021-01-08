@@ -19,12 +19,17 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sona_flutter/core/data/data_sources/moor/cards/cards_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
+import 'package:sona_flutter/core/data/data_sources/moor/entries/entries_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/data/repositories/material/deck/deck_entity_to_model_mapper.dart';
 import 'package:sona_flutter/core/data/repositories/material/deck/deck_model_to_entity_mapper.dart';
 import 'package:sona_flutter/core/data/repositories/material/deck/deck_repository_impl.dart';
+import 'package:sona_flutter/core/domain/domain_exceptions.dart';
+import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 
 // ignore: must_be_immutable
@@ -32,7 +37,24 @@ class MockDeck extends Mock implements Deck {}
 
 class MockDeckModel extends Mock implements DeckModel {}
 
+// ignore: must_be_immutable
+class MockEntry extends Mock implements Entry {}
+
+class MockEntryModel extends Mock implements EntryModel {}
+
+// ignore: must_be_immutable
+class MockCard extends Mock implements Card {}
+
+// ignore: must_be_immutable
+class MockCardId extends Mock implements CardId {}
+
+class MockCardModel extends Mock implements CardModel {}
+
 class MockDecksDaoImpl extends Mock implements DecksDao {}
+
+class MockEntriesDaoImpl extends Mock implements EntriesDao {}
+
+class MockCardsDaoImpl extends Mock implements CardsDao {}
 
 class MockDeckModelToEntityMapper extends Mock
     implements DeckModelToEntityMapper {}
@@ -42,32 +64,50 @@ class MockDeckEntityToModelMapper extends Mock
 
 void main() {
   DecksDao decksDao;
+  EntriesDao entriesDao;
+  CardsDao cardsDao;
   DeckRepository repository;
   DeckModelToEntityMapper toEntity;
   DeckEntityToModelMapper toModel;
 
   Deck deck1;
   DeckModel deckModel1;
+  Entry entry1;
+  EntryModel entryModel1;
+  Card card1;
+  CardId cardId1;
+  CardModel cardModel1;
 
   setUp(
     () {
       decksDao = MockDecksDaoImpl();
+      entriesDao = MockEntriesDaoImpl();
+      cardsDao = MockCardsDaoImpl();
       toEntity = MockDeckModelToEntityMapper();
       toModel = MockDeckEntityToModelMapper();
 
       repository = DeckRepositoryImpl(
         decksDao: decksDao,
+        entriesDao: entriesDao,
+        cardsDao: cardsDao,
         toEntity: toEntity,
         toModel: toModel,
       );
 
       deck1 = MockDeck();
       deckModel1 = MockDeckModel();
-
       when(toEntity(model: argThat(equals(deckModel1), named: 'model')))
           .thenReturn(deck1);
       when(toModel(deck: argThat(equals(deck1), named: 'deck')))
           .thenReturn(deckModel1);
+
+      entry1 = MockEntry();
+      entryModel1 = MockEntryModel();
+
+      card1 = MockCard();
+      cardId1 = MockCardId();
+      cardModel1 = MockCardModel();
+      when(card1.id).thenReturn(cardId1);
     },
   );
 
@@ -186,6 +226,187 @@ void main() {
 
           final decks = await repository.getAll();
           expect(decks, [deck1, deck2, deck3]);
+        },
+      );
+    },
+  );
+
+  group(
+    'DeckRepositoryImpl getByEntry',
+    () {
+      test(
+        'when EntriesDao.getSingle and DecksDao.getById '
+        'return expected data classes, '
+        'should return expected Deck which the passed Entry belongs to',
+        () async {
+          when(entry1.id).thenReturn(69);
+          when(entryModel1.deckId).thenReturn(88);
+          when(entriesDao.getSingle(id: argThat(equals(69), named: 'id')))
+              .thenAnswer((_) async => entryModel1);
+          when(decksDao.getById(id: argThat(equals(88), named: 'id')))
+              .thenAnswer((_) async => deckModel1);
+
+          final deck = await repository.getByEntry(entry: entry1);
+          expect(deck, deck1);
+        },
+      );
+
+      test(
+        'when EntriesDao.getSingle returns null (entry not found), '
+        'should throw EntityNotFoundException',
+        () async {
+          when(entry1.id).thenReturn(69);
+          when(entriesDao.getSingle(id: argThat(equals(69), named: 'id')))
+              .thenAnswer((_) async => null);
+
+          expect(
+            () async {
+              await repository.getByEntry(entry: entry1);
+            },
+            throwsA(isA<EntityNotFoundException>()),
+          );
+        },
+      );
+
+      test(
+        'when DecksDao.getById returns null (deck not found), '
+        'should throw EntityNavigationException',
+        () async {
+          when(entry1.id).thenReturn(69);
+          when(entryModel1.deckId).thenReturn(88);
+          when(entriesDao.getSingle(id: argThat(equals(69), named: 'id')))
+              .thenAnswer((_) async => entryModel1);
+          when(decksDao.getById(id: argThat(equals(88), named: 'id')))
+              .thenAnswer((_) async => null);
+
+          expect(
+            () async {
+              await repository.getByEntry(entry: entry1);
+            },
+            throwsA(isA<EntityNavigationException>()),
+          );
+        },
+      );
+
+      test(
+        'when passed null entry, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await repository.getByEntry(entry: null);
+            },
+            throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'DeckRepositoryImpl getByCard',
+    () {
+      test(
+        'when CardsDao.getSingle, EntriesDao.getSingle and DecksDao.getById '
+        'return expected data classes, '
+        'should return expected Deck which the passed Card belongs to',
+        () async {
+          when(cardId1.entryId).thenReturn(100);
+          when(cardId1.position).thenReturn(234);
+          when(cardsDao.getSingle(
+            entryId: argThat(equals(100), named: 'entryId'),
+            position: argThat(equals(234), named: 'position'),
+          )).thenAnswer((_) async => cardModel1);
+          when(cardModel1.entryId).thenReturn(111);
+          when(entriesDao.getSingle(id: 111))
+              .thenAnswer((_) async => entryModel1);
+          when(entryModel1.deckId).thenReturn(69);
+          when(decksDao.getById(id: argThat(equals(69), named: 'id')))
+              .thenAnswer((_) async => deckModel1);
+
+          final deck = await repository.getByCard(card: card1);
+          expect(deck, deck1);
+        },
+      );
+
+      test(
+        'when CardsDao.getSingle returns null (card not found), '
+        'should throw EntityNotFoundException',
+        () async {
+          when(cardId1.entryId).thenReturn(100);
+          when(cardId1.position).thenReturn(234);
+          when(cardsDao.getSingle(
+            entryId: argThat(equals(100), named: 'entryId'),
+            position: argThat(equals(234), named: 'position'),
+          )).thenAnswer((_) async => null);
+
+          expect(
+            () async {
+              await repository.getByCard(card: card1);
+            },
+            throwsA(isA<EntityNotFoundException>()),
+          );
+        },
+      );
+
+      test(
+        'when EntriesDao.getSingle returns null (entry not found), '
+        'should throw EntityNavigationException',
+        () async {
+          when(cardId1.entryId).thenReturn(100);
+          when(cardId1.position).thenReturn(234);
+          when(cardsDao.getSingle(
+            entryId: argThat(equals(100), named: 'entryId'),
+            position: argThat(equals(234), named: 'position'),
+          )).thenAnswer((_) async => cardModel1);
+          when(cardModel1.entryId).thenReturn(111);
+          when(entriesDao.getSingle(id: 111)).thenAnswer((_) async => null);
+
+          expect(
+            () async {
+              await repository.getByCard(card: card1);
+            },
+            throwsA(isA<EntityNavigationException>()),
+          );
+        },
+      );
+
+      test(
+        'when DecksDao.getById returns null (deck not found), '
+        'should throw EntityNavigationException',
+        () async {
+          when(cardId1.entryId).thenReturn(100);
+          when(cardId1.position).thenReturn(234);
+          when(cardsDao.getSingle(
+            entryId: argThat(equals(100), named: 'entryId'),
+            position: argThat(equals(234), named: 'position'),
+          )).thenAnswer((_) async => cardModel1);
+          when(cardModel1.entryId).thenReturn(111);
+          when(entriesDao.getSingle(id: 111))
+              .thenAnswer((_) async => entryModel1);
+          when(entryModel1.deckId).thenReturn(69);
+          when(decksDao.getById(id: argThat(equals(69), named: 'id')))
+              .thenAnswer((_) async => null);
+
+          expect(
+            () async {
+              await repository.getByCard(card: card1);
+            },
+            throwsA(isA<EntityNavigationException>()),
+          );
+        },
+      );
+
+      test(
+        'when passed null card, '
+        'should fail asserts',
+        () async {
+          expect(
+            () async {
+              await repository.getByCard(card: null);
+            },
+            throwsAssertionError,
+          );
         },
       );
     },
