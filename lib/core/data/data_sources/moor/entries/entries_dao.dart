@@ -20,6 +20,7 @@
 import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
+import '../../../data_exceptions.dart';
 import '../moor_database.dart';
 import 'entries_table.dart';
 
@@ -35,6 +36,8 @@ abstract class EntriesDao {
   Future<void> edit({@required EntryModel newEntry});
 
   Future<void> remove({@required int id});
+
+  Future<void> removeAll({@required List<EntryModel> entryList});
 }
 
 @UseDao(tables: [Entries])
@@ -98,5 +101,40 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
           ))
         .go();
     assert(deletedCount == 1);
+  }
+
+  @override
+  Future<void> removeAll({@required List<EntryModel> entryList}) async {
+    assert(entryList != null);
+    assert(!entryList.contains(null));
+
+    // Checks that all entries in entryList exist.
+    await transaction(
+      () async {
+        for (final entry in entryList) {
+          final result =
+              await (select(entries)..whereSamePrimaryKey(entry)).getSingle();
+
+          if (result == null) {
+            throw ModelNotFoundException(
+              'Tried to delete a list of EntryModels, '
+              'but one or more EntryModels does not exist in the database. '
+              'This is probably due to the app state not being synced with the '
+              'database, '
+              'resulting in a call with illegal arguments to this DAO.',
+            );
+          }
+        }
+      },
+    );
+
+    // Deletes them transactionally.
+    await batch(
+      (batch) {
+        for (final entry in entryList) {
+          batch.delete(entries, entry);
+        }
+      },
+    );
   }
 }

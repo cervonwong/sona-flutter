@@ -19,6 +19,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moor/ffi.dart';
+import 'package:sona_flutter/core/data/data_exceptions.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/entries/entries_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 
@@ -154,7 +155,7 @@ void main() {
     'EntriesDaoImpl getSingle',
     () {
       test(
-        'when passed legal arguments, '
+        'when passed legal id, '
         'should return expected EntryModel',
         () async {
           final entryCreated = await dao.create(deckId: 6, entryTypeId: 9);
@@ -295,7 +296,7 @@ void main() {
     'EntriesDaoImpl remove',
     () {
       test(
-        'when passed legal arguments, '
+        'when passed legal id, '
         'should delete expected record in the entries table',
         () async {
           await dao.create(deckId: 1, entryTypeId: 2);
@@ -337,6 +338,123 @@ void main() {
               await dao.remove(id: 1);
             },
             throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'EntriesDaoImpl removeAll',
+    () {
+      group(
+        'when passed legal entryList, '
+        'should delete expected records in the entries table',
+        () {
+          EntryModel entry1, entry2, entry3;
+          setUp(() async {
+            entry1 = await dao.create(deckId: 1, entryTypeId: 1);
+            entry2 = await dao.create(deckId: 2, entryTypeId: 1);
+            entry3 = await dao.create(deckId: 1, entryTypeId: 2);
+          });
+
+          test(
+            'entryList is empty '
+            '(should not delete any records)',
+            () async {
+              await dao.removeAll(entryList: []);
+
+              expect(await selectAll(), [entry1, entry2, entry3]);
+            },
+          );
+
+          test(
+            'entryList has one item',
+            () async {
+              await dao.removeAll(entryList: [entry2]);
+
+              expect(await selectAll(), [entry1, entry3]);
+            },
+          );
+
+          test(
+            'entryList has multiple items',
+            () async {
+              await dao.removeAll(entryList: [entry2, entry1]);
+
+              expect(await selectAll(), [entry3]);
+            },
+          );
+        },
+      );
+
+      group(
+        'when no entries in the db '
+        'has the same id as any entry in passed entryList',
+        () {
+          test(
+            'should throw ModelNotFoundException',
+            () async {
+              final entry1 = await dao.create(deckId: 1, entryTypeId: 1);
+              final entry2 = await dao.create(deckId: 2, entryTypeId: 1);
+
+              await dao.removeAll(entryList: [entry1, entry2]);
+              expect(
+                () async {
+                  await dao.removeAll(entryList: [entry1]);
+                },
+                throwsA(isA<ModelNotFoundException>()),
+              );
+            },
+          );
+
+          test(
+            'should not delete any other records in the entries table',
+            () async {
+              final entry1 = await dao.create(deckId: 1, entryTypeId: 1);
+              final entry2 = await dao.create(deckId: 2, entryTypeId: 1);
+
+              await dao.removeAll(entryList: [entry2]);
+              try {
+                await dao.removeAll(entryList: [entry1, entry2]);
+                // ignore: empty_catches
+              } on ModelNotFoundException {}
+
+              expect(
+                await selectAll(),
+                [entry1],
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'when passed illegal entryList, '
+        'should fail asserts',
+        () {
+          test(
+            'entryList is null',
+            () async {
+              expect(
+                () async {
+                  await dao.removeAll(entryList: null);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'entryList contains null',
+            () async {
+              expect(
+                () async {
+                  await dao.removeAll(entryList: [null]);
+                },
+                throwsAssertionError,
+              );
+            },
           );
         },
       );
