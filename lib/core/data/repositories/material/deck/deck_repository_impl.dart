@@ -77,6 +77,8 @@ class DeckRepositoryImpl extends DeckRepository {
     return models.map((model) => _toEntity(model: model)).toList();
   }
 
+  // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO
+  //  calls.
   @override
   Future<Deck> getByEntry({@required Entry entry}) async {
     assert(entry != null);
@@ -104,6 +106,8 @@ class DeckRepositoryImpl extends DeckRepository {
     return _toEntity(model: deckModel);
   }
 
+  // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO
+  //  calls.
   @override
   Future<Deck> getByCard({@required Card card}) async {
     assert(card != null);
@@ -149,6 +153,8 @@ class DeckRepositoryImpl extends DeckRepository {
     await _decksDao.edit(newDeck: _toModel(deck: deck));
   }
 
+  // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO
+  //  calls.
   @override
   Future<void> delete({@required Deck deck}) async {
     await _decksDao.remove(id: deck.id);
