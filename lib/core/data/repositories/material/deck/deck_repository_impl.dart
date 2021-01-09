@@ -157,8 +157,16 @@ class DeckRepositoryImpl extends DeckRepository {
   //  calls.
   @override
   Future<void> delete({@required Deck deck}) async {
+    // Delete deck in DecksDao.
     await _decksDao.remove(id: deck.id);
 
-    // TODO(cervonwong): 22/12/2020 Should also delete Cards, Entities, etc.
+    // Delete all entries in EntriesDao belonging to deleted deck.
+    final entryModels = await _entriesDao.getAll(deckId: deck.id);
+    await _entriesDao.removeAll(entryList: entryModels);
+
+    // Delete all cards in CardsDao belonging to deleted entries.
+    final entryIds = entryModels.map((model) => model.id).toSet();
+    final cardModels = await _cardsDao.getAll(entryIds: entryIds);
+    await _cardsDao.removeAll(cardList: cardModels);
   }
 }

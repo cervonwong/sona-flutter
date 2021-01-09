@@ -436,16 +436,38 @@ void main() {
     () {
       test(
         'when passed legal arguments, '
-        'should call DecksDao.remove with expected arguments',
+        'should call '
+        'DecksDao.remove, EntriesDao.removeAll, and CardsDao.removeAll '
+        'with expected arguments',
         () async {
+          final entryModel2 = MockEntryModel();
+          final cardModel2 = MockCardModel();
+          final cardModel3 = MockCardModel();
+          final cardModel4 = MockCardModel();
+
           when(deck1.id).thenReturn(123);
+
+          when(entryModel1.id).thenReturn(10001);
+          when(entryModel2.id).thenReturn(10002);
           when(
-            decksDao.remove(id: argThat(equals(123), named: 'id')),
-          ).thenAnswer((_) async => deckModel1);
+            entriesDao.getAll(deckId: argThat(equals(123), named: 'deckId')),
+          ).thenAnswer((_) async => [entryModel1, entryModel2]);
+
+          when(
+            cardsDao.getAll(
+              entryIds: argThat(equals({10001, 10002}), named: 'entryIds'),
+            ),
+          ).thenAnswer(
+            (_) async => [cardModel1, cardModel2, cardModel3, cardModel4],
+          );
 
           await repository.delete(deck: deck1);
           // verify is only used for testing void and stubbed methods.
           verify(decksDao.remove(id: 123));
+          verify(entriesDao.removeAll(entryList: [entryModel1, entryModel2]));
+          verify(cardsDao.removeAll(
+            cardList: [cardModel1, cardModel2, cardModel3, cardModel4],
+          ));
         },
       );
     },
