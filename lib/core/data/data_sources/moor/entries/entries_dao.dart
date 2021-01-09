@@ -79,11 +79,7 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
     assert(newEntry != null);
     assert((await getSingle(id: newEntry.id)) != null);
 
-    await (update(entries)
-          ..where(
-            (entry) => entry.id.equals(newEntry.id),
-          ))
-        .write(
+    await (update(entries)..whereSamePrimaryKey(newEntry)).write(
       EntriesCompanion(
         deckId: Value(newEntry.deckId),
         entryTypeId: Value(newEntry.entryTypeId),

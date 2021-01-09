@@ -95,11 +95,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
         )) !=
         null);
 
-    await (update(cards)
-          ..where((card) =>
-              card.entryId.equals(newCard.entryId) &
-              card.position.equals(newCard.position)))
-        .write(
+    await (update(cards)..whereSamePrimaryKey(newCard)).write(
       CardsCompanion(
         entryId: Value(newCard.entryId),
         position: Value(newCard.position),

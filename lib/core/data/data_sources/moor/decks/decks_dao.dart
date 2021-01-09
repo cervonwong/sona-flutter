@@ -144,7 +144,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
         .isEmpty);
 
     // Updates deck from the database which has the same ID.
-    await (update(decks)..where((deck) => deck.id.equals(newDeck.id))).write(
+    await (update(decks)..whereSamePrimaryKey(newDeck)).write(
       DecksCompanion(
         name: Value(newDeck.name),
         lastEdited: Value(systemTime.now()),
