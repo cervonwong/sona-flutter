@@ -20,6 +20,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moor/ffi.dart';
 import 'package:sona_flutter/core/constants/material_constants.dart';
+import 'package:sona_flutter/core/data/data_exceptions.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/cards/cards_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 
@@ -435,6 +436,120 @@ void main() {
               await dao.remove(entryId: 1, position: 1);
             },
             throwsAssertionError,
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'CardsDaoImpl removeAll',
+    () {
+      group(
+        'when passed legal cardList, '
+        'should delete expected records in cards table',
+        () {
+          CardModel card1, card2, card3, card4;
+          setUp(() async {
+            card1 = await dao.create(entryId: 1, position: 1);
+            card2 = await dao.create(entryId: 2, position: 1);
+            card3 = await dao.create(entryId: 1, position: 2);
+            card4 = await dao.create(entryId: 2, position: 2);
+          });
+
+          test(
+            'cardList is empty (should not delete any records)',
+            () async {
+              await dao.removeAll(cardList: []);
+
+              expect(await selectAll(), [card1, card2, card3, card4]);
+            },
+          );
+
+          test(
+            'cardList has one item',
+            () async {
+              await dao.removeAll(cardList: [card3]);
+
+              expect(await selectAll(), [card1, card2, card4]);
+            },
+          );
+
+          test(
+            'cardList has multiple items',
+            () async {
+              await dao.removeAll(cardList: [card4, card3, card2]);
+
+              expect(await selectAll(), [card1]);
+            },
+          );
+        },
+      );
+
+      group(
+        'when no cards in the db '
+        'has the same id as any card in passed cardList',
+        () {
+          test(
+            'should throw ModelNotFoundException',
+            () async {
+              final card1 = await dao.create(entryId: 1, position: 1);
+              final card2 = await dao.create(entryId: 2, position: 1);
+
+              await dao.removeAll(cardList: [card1, card2]);
+              expect(
+                () async {
+                  await dao.removeAll(cardList: [card2]);
+                },
+                throwsA(isA<ModelNotFoundException>()),
+              );
+            },
+          );
+
+          test(
+            'should not delete any other records in the cards table',
+            () async {
+              final card1 = await dao.create(entryId: 1, position: 1);
+              final card2 = await dao.create(entryId: 2, position: 1);
+
+              await dao.removeAll(cardList: [card2]);
+              try {
+                await dao.removeAll(cardList: [card1, card2]);
+                // ignore: empty_catches
+              } on ModelNotFoundException {}
+
+              expect(await selectAll(), [card1]);
+            },
+          );
+        },
+      );
+
+      group(
+        'when passed illegal cardList, '
+        'should fail asserts',
+        () {
+          test(
+            'cardList is null',
+            () async {
+              expect(
+                () async {
+                  await dao.removeAll(cardList: null);
+                },
+                throwsAssertionError,
+              );
+            },
+          );
+
+          test(
+            'cardList contains null',
+            () async {
+              expect(
+                () async {
+                  await dao.removeAll(cardList: [null]);
+                },
+                throwsAssertionError,
+              );
+            },
           );
         },
       );

@@ -21,6 +21,7 @@ import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
 import '../../../../constants/material_constants.dart';
+import '../../../data_exceptions.dart';
 import '../moor_database.dart';
 import 'cards_table.dart';
 
@@ -36,6 +37,8 @@ abstract class CardsDao {
   Future<void> edit({@required CardModel newCard});
 
   Future<void> remove({@required int entryId, @required int position});
+
+  Future<void> removeAll({@required List<CardModel> cardList});
 }
 
 @UseDao(tables: [Cards])
@@ -118,5 +121,40 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
           ))
         .go();
     assert(deletedCount == 1);
+  }
+
+  @override
+  Future<void> removeAll({@required List<CardModel> cardList}) async {
+    assert(cardList != null);
+    assert(!cardList.contains(null));
+
+    // Checks that all cards in cardList exist.
+    await transaction(
+      () async {
+        for (final card in cardList) {
+          final result =
+              await (select(cards)..whereSamePrimaryKey(card)).getSingle();
+
+          if (result == null) {
+            throw ModelNotFoundException(
+              'Tried to delete a list of CardModels, '
+              'but one or more CardModels does not exist in the database. '
+              'This is probably due to the app state not being synced with the '
+              'database, '
+              'resulting in a call with illegal arguments to this DAO.',
+            );
+          }
+        }
+      },
+    );
+
+    // Deletes them transactionally.
+    await batch(
+      (batch) {
+        for (final card in cardList) {
+          batch.delete(cards, card);
+        }
+      },
+    );
   }
 }
