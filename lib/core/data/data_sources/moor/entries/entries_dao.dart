@@ -31,7 +31,7 @@ abstract class EntriesDao {
 
   Future<EntryModel> getSingle({@required int id});
 
-  Future<List<EntryModel>> getAll();
+  Future<List<EntryModel>> getAll({int deckId});
 
   Future<void> edit({@required EntryModel newEntry});
 
@@ -72,7 +72,15 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<List<EntryModel>> getAll() async => (select(entries)).get();
+  Future<List<EntryModel>> getAll({int deckId}) async {
+    final selectStatement = select(entries);
+
+    if (deckId != null) {
+      selectStatement.where((entry) => entry.deckId.equals(deckId));
+    }
+
+    return selectStatement.get();
+  }
 
   @override
   Future<void> edit({@required EntryModel newEntry}) async {

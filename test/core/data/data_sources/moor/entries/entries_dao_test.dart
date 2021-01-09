@@ -193,45 +193,88 @@ void main() {
   group(
     'EntriesDaoImpl getAll',
     () {
-      test(
-        'when there are no entries in the db, '
-        'should return an empty list of EntryModels',
-        () async {
-          final entries = await dao.getAll();
+      group(
+        'when called with no arguments',
+        () {
+          test(
+            'when there are no entries in the db, '
+            'should return an empty list of EntryModels',
+            () async {
+              final entries = await dao.getAll();
 
-          expect(entries, <EntryModel>[]);
+              expect(entries, <EntryModel>[]);
+            },
+          );
+
+          test(
+            'when there are multiple entries in the db, '
+            'should return the expected list of EntryModels '
+            'in order of creation',
+            () async {
+              await dao.create(deckId: 2, entryTypeId: 2);
+              await dao.create(deckId: 3, entryTypeId: 3);
+              await dao.create(deckId: 1, entryTypeId: 1);
+
+              final entries = await dao.getAll();
+              expect(
+                entries,
+                [
+                  EntryModel(
+                    id: 1,
+                    deckId: 2,
+                    entryTypeId: 2,
+                  ),
+                  EntryModel(
+                    id: 2,
+                    deckId: 3,
+                    entryTypeId: 3,
+                  ),
+                  EntryModel(
+                    id: 3,
+                    deckId: 1,
+                    entryTypeId: 1,
+                  ),
+                ],
+              );
+            },
+          );
         },
       );
 
-      test(
-        'when there are multiple entries in the db, '
-        'should return the expected list of EntryModels '
-        'in order of creation',
-        () async {
-          await dao.create(deckId: 2, entryTypeId: 2);
-          await dao.create(deckId: 3, entryTypeId: 3);
-          await dao.create(deckId: 1, entryTypeId: 1);
+      group(
+        'when called with legal deckId',
+        () {
+          EntryModel entry1, entry2, entry3, entry4;
+          setUp(() async {
+            entry1 = await dao.create(deckId: 1, entryTypeId: 1);
+            entry2 = await dao.create(deckId: 1, entryTypeId: 2);
+            entry3 = await dao.create(deckId: 2, entryTypeId: 1);
+            entry4 = await dao.create(deckId: 1, entryTypeId: 1);
+          });
 
-          final entries = await dao.getAll();
-          expect(
-            entries,
-            [
-              EntryModel(
-                id: 1,
-                deckId: 2,
-                entryTypeId: 2,
-              ),
-              EntryModel(
-                id: 2,
-                deckId: 3,
-                entryTypeId: 3,
-              ),
-              EntryModel(
-                id: 3,
-                deckId: 1,
-                entryTypeId: 1,
-              ),
-            ],
+          test(
+            'when there are no entries in the db with matching deckId, '
+            'should return an empty list of EntryModels',
+            () async {
+              final entries = await dao.getAll(deckId: 3);
+
+              expect(entries, <EntryModel>[]);
+            },
+          );
+
+          test(
+            'when there are multiple entries in the db with matching deckId, '
+            'should return the expected list of EntryModels '
+            'in order of creation',
+            () async {
+              final entries = await dao.getAll(deckId: 1);
+
+              expect(entries, [entry1, entry2, entry4]);
+
+              final entries2 = await dao.getAll(deckId: 2);
+
+              expect(entries2, [entry3]);
+            },
           );
         },
       );
