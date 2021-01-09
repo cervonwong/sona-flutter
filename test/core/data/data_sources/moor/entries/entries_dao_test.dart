@@ -420,10 +420,7 @@ void main() {
                 // ignore: empty_catches
               } on ModelNotFoundException {}
 
-              expect(
-                await selectAll(),
-                [entry1],
-              );
+              expect(await selectAll(), [entry1]);
             },
           );
         },
