@@ -246,48 +246,102 @@ void main() {
   group(
     'CardsDaoImpl getAll',
     () {
-      test(
-        'when there are no cards in the db, '
-        'should return an empty list of CardModels',
-        () async {
-          final cards = await dao.getAll();
+      group(
+        'when called with no arguments',
+        () {
+          test(
+            'when there are no cards in the db, '
+            'should return an empty list of CardModels',
+            () async {
+              final cards = await dao.getAll();
 
-          expect(cards, <CardModel>[]);
+              expect(cards, <CardModel>[]);
+            },
+          );
+
+          test(
+            'when there are multiple cards in the db, '
+            'should return the expected list of CardModels '
+            'in order of creation',
+            () async {
+              await dao.create(entryId: 2, position: 2);
+              await dao.create(entryId: 3, position: 3);
+              await dao.create(entryId: 1, position: 1);
+
+              final cards = await dao.getAll();
+              expect(
+                cards,
+                [
+                  CardModel(
+                    entryId: 2,
+                    position: 2,
+                    starred: kDefaultCardStarred,
+                    hidden: kDefaultCardHidden,
+                  ),
+                  CardModel(
+                    entryId: 3,
+                    position: 3,
+                    starred: kDefaultCardStarred,
+                    hidden: kDefaultCardHidden,
+                  ),
+                  CardModel(
+                    entryId: 1,
+                    position: 1,
+                    starred: kDefaultCardStarred,
+                    hidden: kDefaultCardHidden,
+                  ),
+                ],
+              );
+            },
+          );
         },
       );
 
-      test(
-        'when there are multiple cards in the db, '
-        'should return the expected list of CardModels '
-        'in order of creation',
-        () async {
-          await dao.create(entryId: 2, position: 2);
-          await dao.create(entryId: 3, position: 3);
-          await dao.create(entryId: 1, position: 1);
+      group(
+        'when called with legal entryIds',
+        () {
+          test(
+            'when passed an empty list for entryIds, '
+            'should return an empty list of CardModels',
+            () async {
+              await dao.create(entryId: 2, position: 2);
+              await dao.create(entryId: 3, position: 3);
+              await dao.create(entryId: 1, position: 1);
 
-          final cards = await dao.getAll();
-          expect(
-            cards,
-            [
-              CardModel(
-                entryId: 2,
-                position: 2,
-                starred: kDefaultCardStarred,
-                hidden: kDefaultCardHidden,
-              ),
-              CardModel(
-                entryId: 3,
-                position: 3,
-                starred: kDefaultCardStarred,
-                hidden: kDefaultCardHidden,
-              ),
-              CardModel(
-                entryId: 1,
-                position: 1,
-                starred: kDefaultCardStarred,
-                hidden: kDefaultCardHidden,
-              ),
-            ],
+              final cards = await dao.getAll(entryIds: {});
+              expect(cards, <CardModel>[]);
+            },
+          );
+
+          test(
+            'when there are no cards in the db '
+            'which has a matching id in entryIds, '
+            'should return an empty list of CardModels',
+            () async {
+              await dao.create(entryId: 2, position: 2);
+              await dao.create(entryId: 4, position: 3);
+              await dao.create(entryId: 1, position: 1);
+
+              final cards = await dao.getAll(entryIds: {5, 3});
+              expect(cards, <CardModel>[]);
+            },
+          );
+
+          test(
+            'when there are multiple cards in the db '
+            'which has matching ids in entryIds, '
+            'should return the expected list of CardModels '
+            'in order of PK',
+            () async {
+              final card1 = await dao.create(entryId: 1, position: 1);
+              final card2 = await dao.create(entryId: 3, position: 1);
+              final card3 = await dao.create(entryId: 3, position: 2);
+              await dao.create(entryId: 2, position: 1);
+              final card5 = await dao.create(entryId: 1, position: 2);
+
+              final cards = await dao.getAll(entryIds: {3, 1});
+              expect(cards, [card1, card5, card2, card3]);
+            },
           );
         },
       );

@@ -32,7 +32,7 @@ abstract class CardsDao {
 
   Future<CardModel> getSingle({@required int entryId, @required int position});
 
-  Future<List<CardModel>> getAll();
+  Future<List<CardModel>> getAll({Set<int> entryIds});
 
   Future<void> edit({@required CardModel newCard});
 
@@ -84,7 +84,15 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<List<CardModel>> getAll() async => (select(cards)).get();
+  Future<List<CardModel>> getAll({Set<int> entryIds}) async {
+    final selectStatement = select(cards);
+
+    if (entryIds != null) {
+      selectStatement.where((card) => card.entryId.isIn(entryIds));
+    }
+
+    return selectStatement.get();
+  }
 
   @override
   Future<void> edit({@required CardModel newCard}) async {
