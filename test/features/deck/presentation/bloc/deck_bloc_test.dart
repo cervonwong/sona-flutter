@@ -1,7 +1,7 @@
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
- * Copyright (C) 2020 Cervon Wong
+ * Copyright (C) 2020, 2021 Cervon Wong
  *
  * Sona is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
