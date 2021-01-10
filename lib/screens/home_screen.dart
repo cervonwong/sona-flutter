@@ -152,26 +152,22 @@ class _CreateActionsMenuSheet extends StatelessWidget {
             top: 32.0,
             bottom: 16.0,
           ),
-          child: ListTileTheme(
-            iconColor: cn.onSurface.lowEmphasisTextColor,
-            textColor: cn.onSurface.highEmphasisTextColor,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _CreateActionsMenuItem(
-                  icon: FluentIcons.book_add_24_regular,
-                  text: 'Create new deck',
-                  onTap: () {
-                    _handleCreateNewDeck(context: context, cn: cn);
-                  },
-                ),
-                _CreateActionsMenuItem(
-                  icon: FluentIcons.slide_add_24_regular,
-                  text: 'Create new entry',
-                  onTap: _handleCreateNewEntry,
-                ),
-              ],
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _CreateActionsMenuItem(
+                icon: FluentIcons.book_add_24_regular,
+                text: 'Create new deck',
+                onTap: () {
+                  _handleCreateNewDeck(context: context, cn: cn);
+                },
+              ),
+              _CreateActionsMenuItem(
+                icon: FluentIcons.slide_add_24_regular,
+                text: 'Create new entry',
+                onTap: _handleCreateNewEntry,
+              ),
+            ],
           ),
         );
       },
@@ -232,10 +228,23 @@ class _CreateActionsMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyText1,
+      leading: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return Icon(
+            icon,
+            color: cn.onSurface.lowEmphasisTextColor,
+          );
+        },
+      ),
+      title: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return Text(
+            text,
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  color: cn.onSurface.highEmphasisTextColor,
+                ),
+          );
+        },
       ),
       onTap: onTap,
     );
