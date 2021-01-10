@@ -25,7 +25,7 @@ import 'domain/use_cases/get_all_decks.dart';
 import 'domain/use_cases/validate_deck_name.dart';
 import 'presentation/bloc/deck_bloc.dart';
 
-void init(GetIt getIt) {
+void configureDependencies(GetIt getIt) {
   // Presentation > Bloc
   getIt.registerFactory(() {
     return DeckBloc(

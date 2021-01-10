@@ -27,7 +27,7 @@ import 'injection_container.dart' as injection_container;
 import 'screens/home_screen.dart';
 
 void main() {
-  injection_container.init();
+  injection_container.configureDependencies();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ColorNotifier(theme: ColorTheme.light),

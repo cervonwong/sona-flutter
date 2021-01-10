@@ -30,11 +30,11 @@ import 'core/domain/repositories/material/deck/deck_repository.dart';
 import 'core/utils/system_time.dart';
 import 'features/deck/deck_injection_container.dart' as deck;
 
-void init() {
+void configureDependencies() {
   final getIt = GetIt.instance;
 
   // Features
-  deck.init(getIt);
+  deck.configureDependencies(getIt);
 
   // Core > Utils
   getIt.registerLazySingleton(() => SystemTime());
