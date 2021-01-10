@@ -94,11 +94,18 @@ class MainDrawer extends StatelessWidget {
                     selectedIcon: FluentIcons.question_circle_24_filled,
                     onTap: () {},
                   ),
-                  AboutListTile(
-                    icon: Icon(FluentIcons.info_24_regular),
-                    applicationName: 'Sona',
-                    applicationVersion: 'v.DEV',
-                    applicationLegalese: 'Copyright (C) 2020 Cervon Wong',
+                  Consumer<ColorNotifier>(
+                    builder: (_, cn, __) {
+                      return AboutListTile(
+                        icon: Icon(
+                          FluentIcons.info_24_regular,
+                          color: cn.onSurface.lowEmphasisTextColor,
+                        ),
+                        applicationName: 'Sona',
+                        applicationVersion: 'v.DEV',
+                        applicationLegalese: 'Copyright (C) 2020 Cervon Wong',
+                      );
+                    },
                   ),
                 ],
               ),
@@ -137,16 +144,16 @@ class _DrawerTile extends StatelessWidget {
       child: ListTile(
         dense: true,
         selected: selected,
-        leading: selected
-            ? Consumer<ColorNotifier>(
-                builder: (_, cn, __) {
-                  return Icon(
-                    selectedIcon,
-                    color: cn.onPrimary.highEmphasisTextColor,
-                  );
-                },
-              )
-            : Icon(icon),
+        leading: Consumer<ColorNotifier>(
+          builder: (_, cn, __) {
+            return Icon(
+              selected ? selectedIcon : icon,
+              color: selected
+                  ? cn.onPrimary.highEmphasisTextColor
+                  : cn.onSurface.lowEmphasisTextColor,
+            );
+          },
+        ),
         title: Consumer<ColorNotifier>(
           builder: (_, cn, __) {
             return Text(
