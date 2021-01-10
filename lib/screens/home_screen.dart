@@ -156,16 +156,16 @@ class _CreateActionsMenuSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _CreateActionsMenuItem(
+                icon: FluentIcons.slide_add_24_regular,
+                text: 'Create new entry',
+                onTap: _handleCreateNewEntry,
+              ),
+              _CreateActionsMenuItem(
                 icon: FluentIcons.book_add_24_regular,
                 text: 'Create new deck',
                 onTap: () {
                   _handleCreateNewDeck(context: context, cn: cn);
                 },
-              ),
-              _CreateActionsMenuItem(
-                icon: FluentIcons.slide_add_24_regular,
-                text: 'Create new entry',
-                onTap: _handleCreateNewEntry,
               ),
             ],
           ),
