@@ -19,10 +19,6 @@
 
 import 'package:get_it/get_it.dart';
 
-import '../../core/data/data_sources/moor/decks/decks_dao.dart';
-import '../../core/data/data_sources/moor/moor_database.dart';
-import '../../core/data/repositories/material/deck/deck_repository_impl.dart';
-import '../../core/domain/repositories/material/deck/deck_repository.dart';
 import 'domain/use_cases/create_deck.dart';
 import 'domain/use_cases/delete_deck.dart';
 import 'domain/use_cases/get_all_decks.dart';
@@ -30,7 +26,7 @@ import 'domain/use_cases/validate_deck_name.dart';
 import 'presentation/bloc/deck_bloc.dart';
 
 void init(GetIt getIt) {
-  // Presentation
+  // Presentation > Bloc
   getIt.registerFactory(() {
     return DeckBloc(
       createDeck: getIt(),
@@ -40,20 +36,9 @@ void init(GetIt getIt) {
     );
   });
 
-  // Domain
+  // Domain > Use cases
   getIt.registerLazySingleton(() => CreateDeck(repository: getIt()));
   getIt.registerLazySingleton(() => GetAllDecks(repository: getIt()));
   getIt.registerLazySingleton(() => DeleteDeck(repository: getIt()));
   getIt.registerLazySingleton(() => ValidateDeckName(repository: getIt()));
-
-  // Data
-  getIt.registerLazySingleton<DeckRepository>(
-    () => DeckRepositoryImpl(decksDao: getIt()),
-  );
-
-  getIt.registerLazySingleton<DecksDao>(
-    () => DecksDaoImpl(db: getIt(), systemTime: getIt()),
-  );
-
-  getIt.registerLazySingleton(() => MoorDatabase());
 }
