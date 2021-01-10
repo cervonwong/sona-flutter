@@ -96,8 +96,8 @@ const double kDarkHighEmphasisOpacity = 0.90;
 const Color kDarkHighEmphasisTextColor = Color(0xE614142B); // E6 --> 90%.
 const double kDarkMediumEmphasisOpacity = 0.60;
 const Color kDarkMediumEmphasisTextColor = Color(0x9914142B); // 99 --> 60%.
-const double kDarkLowEmphasisOpacity = 0.30;
-const Color kDarkLowEmphasisTextColor = Color(0x4D14142B); // 4D --> 30%.
+const double kDarkLowEmphasisOpacity = 0.38;
+const Color kDarkLowEmphasisTextColor = Color(0x6114142B); // 61 --> 38%.
 
 // Light text colors use pure white (#FFFFFF) as a base.
 const double kLightHighEmphasisOpacity = 1.00;
