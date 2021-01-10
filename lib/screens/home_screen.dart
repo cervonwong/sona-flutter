@@ -133,12 +133,66 @@ class _HomeFAB extends StatelessWidget {
     showModalBottomSheet(
       barrierColor: cn.specific.scrimColor,
       context: context,
+      builder: (_) => _CreateActionsMenuSheet(context: context),
+    );
+  }
+}
+
+class _CreateActionsMenuSheet extends StatelessWidget {
+  final BuildContext context;
+
+  _CreateActionsMenuSheet({@required this.context});
+
+  @override
+  Widget build(BuildContext innerContext) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return Padding(
+          padding: EdgeInsets.only(
+            top: 32.0,
+            bottom: 16.0,
+          ),
+          child: ListTileTheme(
+            iconColor: cn.onSurface.lowEmphasisTextColor,
+            textColor: cn.onSurface.highEmphasisTextColor,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _CreateActionsMenuItem(
+                  icon: FluentIcons.book_add_24_regular,
+                  text: 'Create new deck',
+                  onTap: () {
+                    _handleCreateNewDeck(context: context, cn: cn);
+                  },
+                ),
+                _CreateActionsMenuItem(
+                  icon: FluentIcons.slide_add_24_regular,
+                  text: 'Create new entry',
+                  onTap: _handleCreateNewEntry,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _handleCreateNewDeck({
+    @required BuildContext context,
+    @required ColorNotifier cn,
+  }) {
+    Navigator.of(context).pop();
+
+    showModalBottomSheet(
+      barrierColor: cn.specific.scrimColor,
+      context: context,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
         value: BlocProvider.of<DeckBloc>(context),
         child: CreateDeckSheet(
           onSuccess: (deckName) {
-            _showCreationSuccessSnackBar(
+            _showDeckCreationSuccessSnackBar(
               context: context,
               deckName: deckName,
             );
@@ -148,7 +202,9 @@ class _HomeFAB extends StatelessWidget {
     );
   }
 
-  void _showCreationSuccessSnackBar({
+  void _handleCreateNewEntry() {}
+
+  void _showDeckCreationSuccessSnackBar({
     @required BuildContext context,
     @required String deckName,
   }) {
@@ -158,6 +214,30 @@ class _HomeFAB extends StatelessWidget {
             ? 'Created deck "$deckName"!'
             : 'Created deck "${deckName.substring(0, 49)}..."!'),
       ),
+    );
+  }
+}
+
+class _CreateActionsMenuItem extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final GestureTapCallback onTap;
+
+  const _CreateActionsMenuItem({
+    @required this.icon,
+    @required this.text,
+    @required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+      onTap: onTap,
     );
   }
 }
