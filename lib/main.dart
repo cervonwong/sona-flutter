@@ -77,6 +77,7 @@ ThemeData _createThemeData() {
     textTheme: _createTextTheme(),
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
+
     appBarTheme: _createAppBarTheme(),
     bottomSheetTheme: _createBottomSheetTheme(),
     dialogTheme: _createDialogTheme(),
