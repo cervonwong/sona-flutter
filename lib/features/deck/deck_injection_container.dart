@@ -23,7 +23,7 @@ import 'domain/use_cases/create_deck.dart';
 import 'domain/use_cases/delete_deck.dart';
 import 'domain/use_cases/get_all_decks.dart';
 import 'domain/use_cases/validate_deck_name.dart';
-import 'presentation/bloc/deck_bloc.dart';
+import 'presentation/bloc/deck_list_bloc.dart';
 
 void configureDependencies(GetIt getIt) {
   // Presentation > Bloc

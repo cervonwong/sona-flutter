@@ -24,7 +24,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/presentation/change_notifiers/color_notifier.dart';
-import '../bloc/deck_bloc.dart';
+import '../bloc/deck_list_bloc.dart';
 
 typedef OnSuccess = void Function(String deckName);
 

@@ -24,7 +24,7 @@ import 'package:sona_flutter/features/deck/domain/use_cases/create_deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/delete_deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/get_all_decks.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.dart';
-import 'package:sona_flutter/features/deck/presentation/bloc/deck_bloc.dart';
+import 'package:sona_flutter/features/deck/presentation/bloc/deck_list_bloc.dart';
 
 class MockCreateDeck extends Mock implements CreateDeck {}
 

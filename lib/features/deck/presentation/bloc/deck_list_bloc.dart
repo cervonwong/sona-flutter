@@ -30,9 +30,9 @@ import '../../domain/use_cases/delete_deck.dart';
 import '../../domain/use_cases/get_all_decks.dart';
 import '../../domain/use_cases/validate_deck_name.dart';
 
-part 'deck_event.dart';
+part 'deck_list_event.dart';
 
-part 'deck_state.dart';
+part 'deck_list_state.dart';
 
 class DeckBloc extends Bloc<DeckEvent, DeckState> {
   final CreateDeck _createDeck;

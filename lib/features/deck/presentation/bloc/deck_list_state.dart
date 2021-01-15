@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of 'deck_bloc.dart';
+part of 'deck_list_bloc.dart';
 
 abstract class DeckState extends Equatable {
   const DeckState();

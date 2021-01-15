@@ -24,7 +24,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import '../core/presentation/change_notifiers/color_notifier.dart';
-import '../features/deck/presentation/bloc/deck_bloc.dart';
+import '../features/deck/presentation/bloc/deck_list_bloc.dart';
 import '../features/deck/presentation/widgets/create_deck_sheet.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
