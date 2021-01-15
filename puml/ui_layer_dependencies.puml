@@ -1,0 +1,37 @@
+@startuml
+
+skinparam wrapWidth 200
+skinparam maxMessageSize 200
+skinparam defaultFontName Monospaced
+skinparam defaultFontSize 16
+skinparam arrowFontSize 12
+skinparam objectFontStyle bold
+skinparam titleFontSize 24
+skinparam titleFontStyle bold
+skinparam shadowing false
+
+header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
+title Dependencies between UI layers of the app.\n
+footer Copyright (C) 2020 Cervon Wong
+
+object "Screens"          as screens
+object "Shared widgets"   as shared
+object "Screen arguments" as args
+object "Feature widgets"  as widgets {
+	Panes, bars, etc.
+}
+object "main.dart" as main {
+	*Not in UI layer
+}
+
+screens ..> screens : Screens navigate to otehr screens, often requiring cyclical dependencies
+screens ..> widgets : Screens orchestrate feature widgets. Usually, screens put feature widgets in a Scaffold.
+screens ..> args    : Screens handle pushing logic by calling Navigator's pushNamed with these args. (Feature widgets invert control of navigation to screens, so feature widgets do not depend on screen arguments or Navigator!)
+
+shared ..> screens  : ??TO BE FINALIZED??
+screens ..> shared  : ??TO BE FINALIZED??
+
+main ..> screens    : generates routes
+main ..> args       : extracts fields from args to pass to screens
+
+@enduml
