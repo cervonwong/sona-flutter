@@ -16,7 +16,9 @@ footer Copyright (C) 2020 Cervon Wong
 
 package Features <<Node>> {
 	package Presentation <<Cloud>> {
-		object "Widgets" as w
+		object "Widgets" as w {
+			*See diagram on UI layer dependencies
+		}
 		object "State Management" as s {
 			BLoC, ChangeNotifier...
 		}
