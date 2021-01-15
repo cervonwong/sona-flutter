@@ -66,9 +66,9 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
       yield* _mapDeckCreatedToState(event);
     } else if (event is DeckDeleted) {
       yield* _mapDeckDeletedToState(event);
+    } else {
+      throw UnimplementedError();
     }
-
-    // TODO: implement other events in mapEventToState
   }
 
   Stream<DeckState> _mapDeckInitializedToState() async* {
