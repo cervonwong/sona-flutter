@@ -45,7 +45,7 @@ void main() {
 
   Deck deck1, deck2, deck3;
 
-  DeckBloc bloc;
+  DeckListBloc bloc;
 
   setUp(() {
     createDeck = MockCreateDeck();
@@ -55,7 +55,7 @@ void main() {
     deck1 = MockDeck();
     deck2 = MockDeck();
     deck3 = MockDeck();
-    bloc = DeckBloc(
+    bloc = DeckListBloc(
       createDeck: createDeck,
       getAllDecks: getAllDecks,
       deleteDeck: deleteDeck,
@@ -64,29 +64,29 @@ void main() {
   });
 
   test(
-    'DeckBloc when created, '
+    'DeckListBloc when created, '
     'should have initial state DeckInitial',
     () {
       final state = bloc.state;
 
-      expect(state, DeckInitial());
+      expect(state, DeckListInitial());
     },
   );
 
   test(
-    'DeckBloc when added DeckInitialized, '
+    'DeckListBloc when added DeckInitialized, '
     'should emit expected state with list of decks',
     () async {
       when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
 
-      bloc..add(DeckInitialized());
+      bloc..add(DeckListInitialized());
 
       await expectLater(
         bloc,
         emitsInOrder(
           [
-            DeckLoading(),
-            DeckLoaded(decks: [deck1, deck2, deck3]),
+            DeckListLoading(),
+            DeckListLoaded(decks: [deck1, deck2, deck3]),
           ],
         ),
       );
@@ -96,7 +96,7 @@ void main() {
   );
 
   group(
-    'DeckBloc when added DeckInitialized then DeckCreated',
+    'DeckListBloc when added DeckInitialized then DeckCreated',
     () {
       test(
         'and when ValidateDeckName when called returns '
@@ -109,13 +109,13 @@ void main() {
 
           when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
 
-          bloc.add(DeckInitialized());
+          bloc.add(DeckListInitialized());
           await expectLater(
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
-                DeckLoaded(decks: [deck1, deck2]),
+                DeckListLoading(),
+                DeckListLoaded(decks: [deck1, deck2]),
               ],
             ),
           );
@@ -131,8 +131,8 @@ void main() {
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
-                DeckLoaded(decks: [deck1, deck2, deck3]),
+                DeckListLoading(),
+                DeckListLoaded(decks: [deck1, deck2, deck3]),
               ],
             ),
           );
@@ -162,13 +162,13 @@ void main() {
 
           when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
 
-          bloc.add(DeckInitialized());
+          bloc.add(DeckListInitialized());
           await expectLater(
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
-                DeckLoaded(decks: [deck1, deck2]),
+                DeckListLoading(),
+                DeckListLoaded(decks: [deck1, deck2]),
               ],
             ),
           );
@@ -178,7 +178,7 @@ void main() {
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
+                DeckListLoading(),
                 DeckNameIsEmpty(),
               ],
             ),
@@ -208,13 +208,13 @@ void main() {
 
           when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
 
-          bloc.add(DeckInitialized());
+          bloc.add(DeckListInitialized());
           await expectLater(
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
-                DeckLoaded(decks: [deck1, deck2]),
+                DeckListLoading(),
+                DeckListLoaded(decks: [deck1, deck2]),
               ],
             ),
           );
@@ -224,7 +224,7 @@ void main() {
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
+                DeckListLoading(),
                 DeckNameAlreadyExists(),
               ],
             ),
@@ -254,13 +254,13 @@ void main() {
 
           when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
 
-          bloc.add(DeckInitialized());
+          bloc.add(DeckListInitialized());
           await expectLater(
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
-                DeckLoaded(decks: [deck1, deck2]),
+                DeckListLoading(),
+                DeckListLoaded(decks: [deck1, deck2]),
               ],
             ),
           );
@@ -270,7 +270,7 @@ void main() {
             bloc,
             emitsInOrder(
               [
-                DeckLoading(),
+                DeckListLoading(),
                 DeckNameIsMultiline(),
               ],
             ),
@@ -298,16 +298,16 @@ void main() {
         (_) async {},
       );
 
-      bloc..add(DeckInitialized())..add(DeckDeleted(deck: deck2));
+      bloc..add(DeckListInitialized())..add(DeckDeleted(deck: deck2));
 
       await expectLater(
         bloc,
         emitsInOrder(
           [
-            DeckLoading(),
-            DeckLoaded(decks: [deck1, deck2, deck3]),
-            DeckLoading(),
-            DeckLoaded(decks: [deck1, deck3]),
+            DeckListLoading(),
+            DeckListLoaded(decks: [deck1, deck2, deck3]),
+            DeckListLoading(),
+            DeckListLoaded(decks: [deck1, deck3]),
           ],
         ),
       );

@@ -28,7 +28,7 @@ import 'presentation/bloc/deck_list_bloc.dart';
 void configureDependencies(GetIt getIt) {
   // Presentation > Bloc
   getIt.registerFactory(() {
-    return DeckBloc(
+    return DeckListBloc(
       createDeck: getIt(),
       getAllDecks: getIt(),
       deleteDeck: getIt(),

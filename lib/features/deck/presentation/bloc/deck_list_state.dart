@@ -19,24 +19,24 @@
 
 part of 'deck_list_bloc.dart';
 
-abstract class DeckState extends Equatable {
-  const DeckState();
+abstract class DeckListState extends Equatable {
+  const DeckListState();
 
   @override
   List<Object> get props => [];
 }
 
 /// The default state.
-class DeckInitial extends DeckState {}
+class DeckListInitial extends DeckListState {}
 
 /// The state while the BLoC is fetching the list of decks from the repository.
-class DeckLoading extends DeckState {}
+class DeckListLoading extends DeckListState {}
 
 /// The state when the BLoC has successfully loaded the list of decks.
-class DeckLoaded extends DeckState {
+class DeckListLoaded extends DeckListState {
   final List<Deck> decks;
 
-  const DeckLoaded({@required this.decks});
+  const DeckListLoaded({@required this.decks});
 
   @override
   List<Object> get props => [decks];
@@ -46,13 +46,13 @@ class DeckLoaded extends DeckState {
 }
 
 /// The state when the BLoC has not successfully loaded the list of decks.
-abstract class DeckLoadFailed extends DeckState {}
+abstract class DeckListLoadFailed extends DeckListState {}
 
 /// The state when the BLoC has caught an [ApplicationException].
-class DeckLoadFailedWithException extends DeckLoadFailed {
+class DeckListLoadFailedWithException extends DeckListLoadFailed {
   final ApplicationException exception;
 
-  DeckLoadFailedWithException({@required this.exception});
+  DeckListLoadFailedWithException({@required this.exception});
 
   @override
   List<Object> get props => [exception];
@@ -62,7 +62,7 @@ class DeckLoadFailedWithException extends DeckLoadFailed {
 }
 
 /// The state when the an Event passed to the BLoC has invalid name field.
-abstract class DeckNameValidationFailed extends DeckLoadFailed {}
+abstract class DeckNameValidationFailed extends DeckListLoadFailed {}
 
 class DeckNameIsEmpty extends DeckNameValidationFailed {}
 

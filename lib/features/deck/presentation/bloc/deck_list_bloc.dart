@@ -34,7 +34,7 @@ part 'deck_list_event.dart';
 
 part 'deck_list_state.dart';
 
-class DeckBloc extends Bloc<DeckEvent, DeckState> {
+class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
   final CreateDeck _createDeck;
   final GetAllDecks _getAllDecks;
   final DeleteDeck _deleteDeck;
@@ -43,7 +43,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
   // Updated when decks are updated or renamed
   List<Deck> _decks;
 
-  DeckBloc({
+  DeckListBloc({
     @required CreateDeck createDeck,
     @required GetAllDecks getAllDecks,
     @required DeleteDeck deleteDeck,
@@ -52,16 +52,16 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
         _getAllDecks = getAllDecks,
         _deleteDeck = deleteDeck,
         _validateDeckName = validateDeckName,
-        super(DeckInitial());
+        super(DeckListInitial());
 
   @override
-  Stream<DeckState> mapEventToState(
-    DeckEvent event,
+  Stream<DeckListState> mapEventToState(
+    DeckListEvent event,
   ) async* {
-    yield DeckLoading();
+    yield DeckListLoading();
 
-    if (event is DeckInitialized) {
-      yield* _mapDeckInitializedToState();
+    if (event is DeckListInitialized) {
+      yield* _mapDeckListInitializedToState();
     } else if (event is DeckCreated) {
       yield* _mapDeckCreatedToState(event);
     } else if (event is DeckDeleted) {
@@ -71,18 +71,18 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
     }
   }
 
-  Stream<DeckState> _mapDeckInitializedToState() async* {
+  Stream<DeckListState> _mapDeckListInitializedToState() async* {
     _decks = await _getAllDecks();
-    yield DeckLoaded(decks: _decks);
+    yield DeckListLoaded(decks: _decks);
   }
 
-  Stream<DeckState> _mapDeckCreatedToState(DeckCreated event) async* {
+  Stream<DeckListState> _mapDeckCreatedToState(DeckCreated event) async* {
     final validationResult = await _validateDeckName(name: event.name);
     switch (validationResult) {
       case DeckNameValidationResult.valid:
         await _createDeck(name: event.name);
         _decks = await _getAllDecks();
-        yield DeckLoaded(decks: _decks);
+        yield DeckListLoaded(decks: _decks);
         break;
       case DeckNameValidationResult.nameIsEmpty:
         yield DeckNameIsEmpty();
@@ -96,9 +96,9 @@ class DeckBloc extends Bloc<DeckEvent, DeckState> {
     }
   }
 
-  Stream<DeckState> _mapDeckDeletedToState(DeckDeleted event) async* {
+  Stream<DeckListState> _mapDeckDeletedToState(DeckDeleted event) async* {
     await _deleteDeck(deck: event.deck);
     _decks.remove(event.deck);
-    yield DeckLoaded(decks: _decks);
+    yield DeckListLoaded(decks: _decks);
   }
 }

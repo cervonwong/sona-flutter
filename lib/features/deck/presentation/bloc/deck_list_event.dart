@@ -19,8 +19,8 @@
 
 part of 'deck_list_bloc.dart';
 
-abstract class DeckEvent extends Equatable {
-  const DeckEvent();
+abstract class DeckListEvent extends Equatable {
+  const DeckListEvent();
 
   @override
   List<Object> get props => [];
@@ -30,11 +30,11 @@ abstract class DeckEvent extends Equatable {
 ///
 /// This is immediately added to the BLoC when created to request the latest
 /// decks.
-class DeckInitialized extends DeckEvent {}
+class DeckListInitialized extends DeckListEvent {}
 
 /// Tells the BloC that it needs to create a new deck with this name to the list
 /// of decks.
-class DeckCreated extends DeckEvent {
+class DeckCreated extends DeckListEvent {
   final String name;
 
   const DeckCreated({@required this.name});
@@ -44,7 +44,7 @@ class DeckCreated extends DeckEvent {
 }
 
 /// Tells the BloC that it needs to delete an existing deck.
-class DeckDeleted extends DeckEvent {
+class DeckDeleted extends DeckListEvent {
   final Deck deck;
 
   const DeckDeleted({@required this.deck});

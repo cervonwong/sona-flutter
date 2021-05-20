@@ -55,9 +55,9 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DeckBloc, DeckState>(
+    return BlocListener<DeckListBloc, DeckListState>(
       listener: (context, state) {
-        if (state is DeckLoaded) {
+        if (state is DeckListLoaded) {
           _handleDeckCreationSuccess(context: context);
         }
       },
@@ -73,7 +73,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _DeckNameTextField(controller: _controller),
-            BlocBuilder<DeckBloc, DeckState>(
+            BlocBuilder<DeckListBloc, DeckListState>(
               builder: (_, state) {
                 if (state is DeckNameAlreadyExists && _hasClickedCreated) {
                   return _DeckNameAlreadyExistsMessage();
@@ -101,7 +101,7 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
     setState(() {
       _hasClickedCreated = true;
     });
-    BlocProvider.of<DeckBloc>(context).add(DeckCreated(name: _deckName));
+    BlocProvider.of<DeckListBloc>(context).add(DeckCreated(name: _deckName));
   }
 
   void _handleDeckCreationSuccess({@required BuildContext context}) {

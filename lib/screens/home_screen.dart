@@ -33,8 +33,8 @@ import 'shared/main_drawer.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DeckBloc>(
-      create: (_) => GetIt.instance()..add(DeckInitialized()),
+    return BlocProvider<DeckListBloc>(
+      create: (_) => GetIt.instance()..add(DeckListInitialized()),
       child: Consumer<ColorNotifier>(
         builder: (_, cn, child) {
           return Scaffold(
@@ -46,8 +46,8 @@ class HomeScreen extends StatelessWidget {
           );
         },
         child: SafeArea(
-          child: BlocBuilder<DeckBloc, DeckState>(
-            buildWhen: (_, state) => state is DeckLoaded,
+          child: BlocBuilder<DeckListBloc, DeckListState>(
+            buildWhen: (_, state) => state is DeckListLoaded,
             builder: (_, state) {
               return ListView(
                 children: [
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 32.0),
                   DeckListTitleBar(),
                   SizedBox(height: 8.0),
-                  if (state is DeckLoaded)
+                  if (state is DeckListLoaded)
                     ...(state).decks.map<DeckListTile>(
                           (deck) => DeckListTile(
                             deckName: deck.name,
@@ -185,7 +185,7 @@ class _CreateActionsMenuSheet extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
-        value: BlocProvider.of<DeckBloc>(context),
+        value: BlocProvider.of<DeckListBloc>(context),
         child: CreateDeckSheet(
           onSuccess: (deckName) {
             _showDeckCreationSuccessSnackBar(
