@@ -69,9 +69,6 @@ ThemeData _createThemeData() {
     splashColor: kPrimarySplashColor,
     shadowColor: kNeutralColor8,
 
-    // Misc.
-    useTextSelectionTheme: true,
-
     // Themes
     colorScheme: _createColorScheme(),
     textTheme: _createTextTheme(),
