@@ -86,7 +86,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<DeckModel> getById({@required int id}) {
     assert(id != null);
 
-    return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
+    return (select(decks)..where((deck) => deck.id.equals(id)))
+        .getSingleOrNull();
   }
 
   /// Returns the [DeckModel] of the deck in the database with a matching name.
@@ -97,7 +98,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<DeckModel> getByName({@required String name}) {
     assert(name != null);
 
-    return (select(decks)..where((deck) => deck.name.equals(name))).getSingle();
+    return (select(decks)..where((deck) => deck.name.equals(name)))
+        .getSingleOrNull();
   }
 
   /// Returns the list of [DeckModel]s of all decks in the database.
