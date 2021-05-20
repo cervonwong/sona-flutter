@@ -32,6 +32,7 @@ class DeckListTitleBar extends StatelessWidget {
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
               Consumer<ColorNotifier>(
                 builder: (_, cn, __) {
