@@ -84,7 +84,7 @@ const Color kNeutralColor6 = Color(0xFF6E7191);
 const Color kNeutralColor5 = Color(0xFFA0A3BD);
 const Color kNeutralColor4 = Color(0xFFD6D8E7);
 const Color kNeutralColor3 = Color(0xFFEFF0F6);
-const Color kNeutralColor2 = Color(0XFFF7F7FC);
+const Color kNeutralColor2 = Color(0xFFF7F7FC);
 const Color kNeutralColor1 = Color(0xFFFCFCFC);
 
 // Emphasis Opacity Values
