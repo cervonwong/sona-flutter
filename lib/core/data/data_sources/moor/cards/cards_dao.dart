@@ -136,8 +136,8 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
     await transaction(
       () async {
         for (final card in cardList) {
-          final result =
-              await (select(cards)..whereSamePrimaryKey(card)).getSingleOrNull();
+          final result = await (select(cards)..whereSamePrimaryKey(card))
+              .getSingleOrNull();
 
           if (result == null) {
             throw ModelNotFoundException(
