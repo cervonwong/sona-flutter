@@ -77,12 +77,12 @@ void main() {
     'DeckListBloc when added DeckInitialized, '
     'should emit expected state with list of decks',
     () async {
-      when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
+      when(getAllDecks()).thenAnswer((_) async => [deck1, deck2, deck3]);
 
-      bloc..add(DeckListInitialized());
+      bloc.add(DeckListInitialized());
 
       await expectLater(
-        bloc,
+        bloc.stream,
         emitsInOrder(
           [
             DeckListLoading(),
@@ -107,11 +107,11 @@ void main() {
             name: argThat(equals('Valid'), named: 'name'),
           )).thenAnswer((_) async => DeckNameValidationResult.valid);
 
-          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+          when(getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -124,11 +124,11 @@ void main() {
               .thenAnswer(
             (_) async => deck3,
           );
-          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
+          when(getAllDecks()).thenAnswer((_) async => [deck1, deck2, deck3]);
 
           bloc.add(DeckCreated(name: 'Valid'));
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -160,11 +160,11 @@ void main() {
             name: argThat(equals(''), named: 'name'),
           )).thenAnswer((_) async => DeckNameValidationResult.nameIsEmpty);
 
-          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+          when(getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -175,7 +175,7 @@ void main() {
 
           bloc.add(DeckCreated(name: ''));
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -206,11 +206,11 @@ void main() {
             (_) async => DeckNameValidationResult.nameAlreadyExists,
           );
 
-          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+          when(getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -221,7 +221,7 @@ void main() {
 
           bloc.add(DeckCreated(name: 'Duplicate'));
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -252,11 +252,11 @@ void main() {
             (_) async => DeckNameValidationResult.nameIsMultiline,
           );
 
-          when(getAllDecks())..thenAnswer((_) async => [deck1, deck2]);
+          when(getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -267,7 +267,7 @@ void main() {
 
           bloc.add(DeckCreated(name: 'Hey\nHo'));
           await expectLater(
-            bloc,
+            bloc.stream,
             emitsInOrder(
               [
                 DeckListLoading(),
@@ -293,7 +293,7 @@ void main() {
     'DeckBloc when added DeckInitialized then DeckDeleted, '
     'should emit expected state with list of decks with deleted deck',
     () async {
-      when(getAllDecks())..thenAnswer((_) async => [deck1, deck2, deck3]);
+      when(getAllDecks()).thenAnswer((_) async => [deck1, deck2, deck3]);
       when(deleteDeck(deck: argThat(equals(deck2), named: 'deck'))).thenAnswer(
         (_) async {},
       );
@@ -301,7 +301,7 @@ void main() {
       bloc..add(DeckListInitialized())..add(DeckDeleted(deck: deck2));
 
       await expectLater(
-        bloc,
+        bloc.stream,
         emitsInOrder(
           [
             DeckListLoading(),
