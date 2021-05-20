@@ -80,7 +80,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
             (card) =>
                 card.entryId.equals(entryId) & card.position.equals(position),
           ))
-        .getSingle();
+        .getSingleOrNull();
   }
 
   @override
@@ -137,7 +137,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
       () async {
         for (final card in cardList) {
           final result =
-              await (select(cards)..whereSamePrimaryKey(card)).getSingle();
+              await (select(cards)..whereSamePrimaryKey(card)).getSingleOrNull();
 
           if (result == null) {
             throw ModelNotFoundException(
