@@ -68,7 +68,8 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<EntryModel> getSingle({@required int id}) {
     assert(id != null);
 
-    return (select(entries)..where((entry) => entry.id.equals(id))).getSingle();
+    return (select(entries)..where((entry) => entry.id.equals(id)))
+        .getSingleOrNull();
   }
 
   @override
@@ -116,8 +117,8 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
     await transaction(
       () async {
         for (final entry in entryList) {
-          final result =
-              await (select(entries)..whereSamePrimaryKey(entry)).getSingle();
+          final result = await (select(entries)..whereSamePrimaryKey(entry))
+              .getSingleOrNull();
 
           if (result == null) {
             throw ModelNotFoundException(
