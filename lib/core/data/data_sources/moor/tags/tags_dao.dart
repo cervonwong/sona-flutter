@@ -75,7 +75,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   Future<TagModel> getById({@required int id}) async {
     assert(id != null);
 
-    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
+    return (select(tags)..where((tag) => tag.id.equals(id))).getSingleOrNull();
   }
 
   /// Returns the list of [TagModel]s of all tags in the database.
