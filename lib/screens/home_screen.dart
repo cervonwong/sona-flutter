@@ -204,7 +204,7 @@ class _CreateActionsMenuSheet extends StatelessWidget {
     @required BuildContext context,
     @required String deckName,
   }) {
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(deckName.length < 50
             ? 'Created deck "$deckName"!'
