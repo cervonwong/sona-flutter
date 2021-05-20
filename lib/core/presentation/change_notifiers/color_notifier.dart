@@ -143,6 +143,7 @@ class _OnDarkColorGroup implements _ColorGroup {
   @override
   Color get lowEmphasisTextColor => kLightLowEmphasisTextColor;
 
+  // TODO(cervonwong): 20/05/2021 Since between dark and light mode the hue will not change, just make wrappers for the hues in the case that there needs to be a dark mode variant but don't make a getter for the semantic color.
   @override
   Color get highFamiliarityColor => kSuccessColor;
 
