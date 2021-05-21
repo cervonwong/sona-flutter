@@ -63,7 +63,7 @@ ThemeData _createThemeData() {
     // Other colors
     backgroundColor: kNeutralColor2,
     canvasColor: Colors.white,
-    errorColor: kErrorColor,
+    errorColor: kAccentRedColor,
     highlightColor: kPrimaryHighlightColor,
     scaffoldBackgroundColor: kNeutralColor2,
     splashColor: kPrimarySplashColor,
@@ -114,7 +114,7 @@ ColorScheme _createColorScheme() {
     onBackground: kLightHighEmphasisTextColor,
 
     // Error
-    error: kErrorColor,
+    error: kAccentRedColor,
     onError: kLightHighEmphasisTextColor,
   );
 }

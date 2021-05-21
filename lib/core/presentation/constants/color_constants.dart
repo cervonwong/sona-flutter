@@ -22,59 +22,66 @@ import 'dart:ui';
 // Primary Colors
 // The main color in the UI.
 const Color kPrimaryColor = Color(0xFF7B68EE);
-const Color kPrimaryLightColor = Color(0xFFDFDBFB);
+const Color kPrimaryLightColor = Color(0xFFA293FF);
 const Color kPrimaryDarkColor = Color(0xFF5C4DBC);
 
-// Secondary Colors (Always use this order in lists)
-// Use the first three colors (Pink, Cyan, Yellow) mainly.
-// Use the rest of the colors when many colors are needed (e.g. stats charts).
-const Color kSecondaryPinkColor = Color(0xFFFD71AF);
-const Color kSecondaryCyanColor = Color(0xFF49CCF9);
-const Color kSecondaryYellowColor = Color(0xFFFFC800);
-const Color kSecondaryGreenColor = Color(0xFF00B884);
-const Color kSecondaryRedColor = Color(0xFFFD7171);
-const Color kSecondaryTurquoiseColor = Color(0xFF44DDCC);
-const Color kSecondaryBlueColor = Color(0xFF5577FF);
-const Color kSecondaryPurpleColor = Color(0xFFb660DD);
-
 // Accent Colors
-// Reserved for denotative colors.
-const Color _kAccentRedColor = Color(0xFFFC575E);
-const Color _kAccentOrangeColor = Color(0xFFFF8600);
-const Color _kAccentYellowColor = Color(0xFFFCB410);
-const Color _kAccentGreenColor = Color(0xFF27AE60);
-const Color _kAccentBlueColor = Color(0xFF528CCB);
-const Color _kAccentPurpleColor = Color(0xFFBF4ACC);
-const Color _kAccentGrayColor = Color(0xFF34495E);
-const Color _kAccentBrownColor = Color(0xFFB17E22);
-
-// Denotative Colors
-// Specify a certain state in the UI.
-const Color kErrorColor = _kAccentRedColor;
-const Color kWarningColor = _kAccentOrangeColor;
-const Color kSuccessColor = _kAccentGreenColor;
+// Used when a gamut of colors are needed as in statistics, tags or deck icons.
+// Most colors also have a semantic meaning that expresses a specific concept
+// throughout the UI.
+const Color kAccentRedColor = Color(0xFFFC575E);
+const Color kAccentOrangeColor = Color(0xFFFF9600);
+const Color kAccentYellowColor = Color(0xFFFFC800);
+const Color kAccentLimeColor = Color(0xFF5ED605);
+const Color kAccentGreenColor = Color(0xFF27AE60);
+const Color kAccentTealColor = Color(0xFF00B899);
+const Color kAccentCyanColor = Color(0xFF44DDCC);
+const Color kAccentSkyColor = Color(0xFF49BEF9);
+const Color kAccentBlueColor = Color(0xFF5577FF);
+const Color kAccentPurpleColor = Color(0xFFCE82FF);
+const Color kAccentPinkColor = Color(0xFFFD7CB5);
 
 // Text Fill Colors
-// User is able to select from these colors when choosing a text color
-// when creating the style of a card format.
-const Color kTextFillRedColor = Color(0xFFE03E3E);
-const Color kTextFillOrangeColor = Color(0xFFD9730D);
-const Color kTextFillYellowColor = Color(0xFFDFAB01);
-const Color kTextFillBlueColor = Color(0xFF0B6E99);
-const Color kTextFillPurpleColor = Color(0xFF6940A5);
-const Color kTextFillMagentaColor = Color(0xFFAD1A72);
-const Color kTextFillBlackColor = Color(0xFF343434);
-const Color kTextFillBrownColor = Color(0xFF64473A);
+// User is able to select from these colors (in addition to accent colors) when
+// choosing a text color when creating the style of a card format.
+const Color kTextFillBrownColor = Color(0xFFB17E22);
+
+const Color kTextFillOnLightGrayColor4 = Color(0xB314142B); // B3 -> 70%.
+const Color kTextFillOnLightGrayColor3 = Color(0x8014142B); // 80 -> 50%.
+const Color kTextFillOnLightGrayColor2 = Color(0x4D14142B); // 4D -> 30%.
+const Color kTextFillOnLightGrayColor1 = Color(0x1A14142B); // 1A -> 10%.
+
+const Color kTextFillOnDarkGrayColor4 = Color(0xCCFFFFFF); // CC -> 80%.
+const Color kTextFillOnDarkGrayColor3 = Color(0x99FFFFFF); // 99 -> 60%.
+const Color kTextFillOnDarkGrayColor2 = Color(0x66FFFFFF); // 66 -> 40%.
+const Color kTextFillOnDarkGrayColor1 = Color(0x33FFFFFF); // 33 -> 20%.
 
 // Text Highlight Colors
 // User is able to select from these colors when choosing a text highlight color
 // when creating the style of a card format.
-const Color kTextHighlightPinkColor = Color(0xFFFFE0E0);
-const Color kTextHighlightOrangeColor = Color(0xFFFFDBBA);
-const Color kTextHighlightYellowColor = Color(0xFFFFFA78);
-const Color kTextHighlightGreenColor = Color(0xFFE6FFCF);
-const Color kTextHighlightBlueColor = Color(0xFFCAE4F6);
-const Color kTextHighlightPurpleColor = Color(0xFFEEDBF6);
+const Color kTextHighlightOnLightRedColor = Color(0x33FC575E); // 33 -> 20%.
+const Color kTextHighlightOnLightOrangeColor = Color(0x33FF9600); // 33 -> 20%.
+const Color kTextHighlightOnLightYellowColor = Color(0x33FFC800); // 33 -> 20%.
+const Color kTextHighlightOnLightLimeColor = Color(0x335ED605); // 33 -> 20%.
+const Color kTextHighlightOnLightGreenColor = Color(0x3327AE60); // 33 -> 20%.
+const Color kTextHighlightOnLightTealColor = Color(0x3300B899); // 33 -> 20%.
+const Color kTextHighlightOnLightCyanColor = Color(0x3344DDCC); // 33 -> 20%.
+const Color kTextHighlightOnLightSkyColor = Color(0x3349BEF9); // 33 -> 20%.
+const Color kTextHighlightOnLightBlueColor = Color(0x335577FF); // 33 -> 20%.
+const Color kTextHighlightOnLightPurpleColor = Color(0x33CE82FF); // 33 -> 20%.
+const Color kTextHighlightOnLightPinkColor = Color(0x33FD7CB5); // 33 -> 20%.
+
+const Color kTextHighlightOnDarkRedColor = Color(0x4DFC575E); // 4D -> 30%.
+const Color kTextHighlightOnDarkOrangeColor = Color(0x4DFF9600); // 4D -> 30%.
+const Color kTextHighlightOnDarkYellowColor = Color(0x4DFFC800); // 4D -> 30%.
+const Color kTextHighlightOnDarkLimeColor = Color(0x4D5ED605); // 4D -> 30%.
+const Color kTextHighlightOnDarkGreenColor = Color(0x4D27AE60); // 4D -> 30%.
+const Color kTextHighlightOnDarkTealColor = Color(0x4D00B899); // 4D -> 30%.
+const Color kTextHighlightOnDarkCyanColor = Color(0x4D44DDCC); // 4D -> 30%.
+const Color kTextHighlightOnDarkSkyColor = Color(0x4D49BEF9); // 4D -> 30%.
+const Color kTextHighlightOnDarkBlueColor = Color(0x4D5577FF); // 4D -> 30%.
+const Color kTextHighlightOnDarkPurpleColor = Color(0x4DCE82FF); // 4D -> 30%.
+const Color kTextHighlightOnDarkPinkColor = Color(0x4DFD7CB5); // 4D -> 30%.
 
 // Neutrals
 // Used in texts, dividers, backgrounds, surfaces, and other UI components.
@@ -94,10 +101,10 @@ const Color kNeutralColor1 = Color(0xFFFCFCFC);
 // Dark text colors use kNeutralColor8 as a base.
 const double kDarkHighEmphasisOpacity = 0.90;
 const Color kDarkHighEmphasisTextColor = Color(0xE614142B); // E6 --> 90%.
-const double kDarkMediumEmphasisOpacity = 0.60;
-const Color kDarkMediumEmphasisTextColor = Color(0x9914142B); // 99 --> 60%.
-const double kDarkLowEmphasisOpacity = 0.38;
-const Color kDarkLowEmphasisTextColor = Color(0x6114142B); // 61 --> 38%.
+const double kDarkMediumEmphasisOpacity = 0.50;
+const Color kDarkMediumEmphasisTextColor = Color(0x8014142B); // 80 --> 50%.
+const double kDarkLowEmphasisOpacity = 0.20;
+const Color kDarkLowEmphasisTextColor = Color(0x3314142B); // 33 --> 20%.
 
 // Light text colors use pure white (#FFFFFF) as a base.
 const double kLightHighEmphasisOpacity = 1.00;

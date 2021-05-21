@@ -109,13 +109,85 @@ class _OnLightColorGroup implements _ColorGroup {
   Color get lowEmphasisTextColor => kDarkLowEmphasisTextColor;
 
   @override
-  Color get highFamiliarityColor => kSuccessColor;
+  Color get accentRedColor => kAccentRedColor;
 
   @override
-  Color get mediumFamiliarityColor => kWarningColor;
+  Color get accentOrangeColor => kAccentOrangeColor;
 
   @override
-  Color get lowFamiliarityColor => kErrorColor;
+  Color get accentYellowColor => kAccentYellowColor;
+
+  @override
+  Color get accentLimeColor => kAccentLimeColor;
+
+  @override
+  Color get accentGreenColor => kAccentGreenColor;
+
+  @override
+  Color get accentTealColor => kAccentTealColor;
+
+  @override
+  Color get accentCyanColor => kAccentCyanColor;
+
+  @override
+  Color get accentSkyColor => kAccentSkyColor;
+
+  @override
+  Color get accentBlueColor => kAccentBlueColor;
+
+  @override
+  Color get accentPurpleColor => kAccentPurpleColor;
+
+  @override
+  Color get accentPinkColor => kAccentPinkColor;
+
+  @override
+  Color get textFillBrownColor => kTextFillBrownColor;
+
+  @override
+  Color get textFillGrayColor4 => kTextFillOnLightGrayColor4;
+
+  @override
+  Color get textFillGrayColor3 => kTextFillOnLightGrayColor3;
+
+  @override
+  Color get textFillGrayColor2 => kTextFillOnLightGrayColor2;
+
+  @override
+  Color get textFillGrayColor1 => kTextFillOnLightGrayColor1;
+
+  @override
+  Color get textHighlightRedColor => kTextHighlightOnLightRedColor;
+
+  @override
+  Color get textHighlightOrangeColor => kTextHighlightOnLightOrangeColor;
+
+  @override
+  Color get textHighlightYellowColor => kTextHighlightOnLightYellowColor;
+
+  @override
+  Color get textHighlightLimeColor => kTextHighlightOnLightLimeColor;
+
+  @override
+  Color get textHighlightGreenColor => kTextHighlightOnLightGreenColor;
+
+  @override
+  Color get textHighlightTealColor => kTextHighlightOnLightTealColor;
+
+  @override
+  Color get textHighlightCyanColor => kTextHighlightOnLightCyanColor;
+
+  @override
+  Color get textHighlightSkyColor => kTextHighlightOnLightSkyColor;
+
+  @override
+  Color get textHighlightBlueColor => kTextHighlightOnLightBlueColor;
+
+  @override
+  Color get textHighlightPurpleColor => kTextHighlightOnLightPurpleColor;
+
+  @override
+  Color get textHighlightPinkColor => kTextHighlightOnLightPinkColor;
 }
 
 /// Colors are generally lighter to contrast against darker colors.
@@ -143,15 +215,86 @@ class _OnDarkColorGroup implements _ColorGroup {
   @override
   Color get lowEmphasisTextColor => kLightLowEmphasisTextColor;
 
-  // TODO(cervonwong): 20/05/2021 Since between dark and light mode the hue will not change, just make wrappers for the hues in the case that there needs to be a dark mode variant but don't make a getter for the semantic color.
   @override
-  Color get highFamiliarityColor => kSuccessColor;
+  Color get accentRedColor => kAccentRedColor;
 
   @override
-  Color get mediumFamiliarityColor => kWarningColor;
+  Color get accentOrangeColor => kAccentOrangeColor;
 
   @override
-  Color get lowFamiliarityColor => kErrorColor;
+  Color get accentYellowColor => kAccentYellowColor;
+
+  @override
+  Color get accentLimeColor => kAccentLimeColor;
+
+  @override
+  Color get accentGreenColor => kAccentGreenColor;
+
+  @override
+  Color get accentTealColor => kAccentTealColor;
+
+  @override
+  Color get accentCyanColor => kAccentCyanColor;
+
+  @override
+  Color get accentSkyColor => kAccentSkyColor;
+
+  @override
+  Color get accentBlueColor => kAccentBlueColor;
+
+  @override
+  Color get accentPurpleColor => kAccentPurpleColor;
+
+  @override
+  Color get accentPinkColor => kAccentPinkColor;
+
+  @override
+  Color get textFillBrownColor => kTextFillBrownColor;
+
+  @override
+  Color get textFillGrayColor4 => kTextFillOnDarkGrayColor4;
+
+  @override
+  Color get textFillGrayColor3 => kTextFillOnDarkGrayColor3;
+
+  @override
+  Color get textFillGrayColor2 => kTextFillOnDarkGrayColor2;
+
+  @override
+  Color get textFillGrayColor1 => kTextFillOnDarkGrayColor1;
+
+  @override
+  Color get textHighlightRedColor => kTextHighlightOnDarkRedColor;
+
+  @override
+  Color get textHighlightOrangeColor => kTextHighlightOnDarkOrangeColor;
+
+  @override
+  Color get textHighlightYellowColor => kTextHighlightOnDarkYellowColor;
+
+  @override
+  Color get textHighlightLimeColor => kTextHighlightOnDarkLimeColor;
+
+  @override
+  Color get textHighlightGreenColor => kTextHighlightOnDarkGreenColor;
+
+  @override
+  Color get textHighlightTealColor => kTextHighlightOnDarkTealColor;
+
+  @override
+  Color get textHighlightCyanColor => kTextHighlightOnDarkCyanColor;
+
+  @override
+  Color get textHighlightSkyColor => kTextHighlightOnDarkSkyColor;
+
+  @override
+  Color get textHighlightBlueColor => kTextHighlightOnDarkBlueColor;
+
+  @override
+  Color get textHighlightPurpleColor => kTextHighlightOnDarkPurpleColor;
+
+  @override
+  Color get textHighlightPinkColor => kTextHighlightOnDarkPinkColor;
 }
 
 abstract class _ColorGroup {
@@ -169,11 +312,59 @@ abstract class _ColorGroup {
 
   Color get lowEmphasisTextColor;
 
-  Color get highFamiliarityColor;
+  Color get accentRedColor;
 
-  Color get mediumFamiliarityColor;
+  Color get accentOrangeColor;
 
-  Color get lowFamiliarityColor;
+  Color get accentYellowColor;
+
+  Color get accentLimeColor;
+
+  Color get accentGreenColor;
+
+  Color get accentTealColor;
+
+  Color get accentCyanColor;
+
+  Color get accentSkyColor;
+
+  Color get accentBlueColor;
+
+  Color get accentPurpleColor;
+
+  Color get accentPinkColor;
+
+  Color get textFillBrownColor;
+
+  Color get textFillGrayColor4;
+
+  Color get textFillGrayColor3;
+
+  Color get textFillGrayColor2;
+
+  Color get textFillGrayColor1;
+
+  Color get textHighlightRedColor;
+
+  Color get textHighlightOrangeColor;
+
+  Color get textHighlightYellowColor;
+
+  Color get textHighlightLimeColor;
+
+  Color get textHighlightGreenColor;
+
+  Color get textHighlightTealColor;
+
+  Color get textHighlightCyanColor;
+
+  Color get textHighlightSkyColor;
+
+  Color get textHighlightBlueColor;
+
+  Color get textHighlightPurpleColor;
+
+  Color get textHighlightPinkColor;
 }
 
 class _LightSpecificColorGroup extends _SpecificColorGroup {

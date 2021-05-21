@@ -115,13 +115,11 @@ class DeckListTile extends StatelessWidget {
   Color _calculateColor(BuildContext context) {
     // Naïve algorithm
     if (familiarCardPercentage >= 0.90) {
-      return Provider.of<ColorNotifier>(context).onSurface.highFamiliarityColor;
+      return Provider.of<ColorNotifier>(context).onSurface.accentGreenColor;
     } else if (familiarCardPercentage >= 0.70) {
-      return Provider.of<ColorNotifier>(context)
-          .onSurface
-          .mediumFamiliarityColor;
+      return Provider.of<ColorNotifier>(context).onSurface.accentOrangeColor;
     } else {
-      return Provider.of<ColorNotifier>(context).onSurface.lowFamiliarityColor;
+      return Provider.of<ColorNotifier>(context).onSurface.accentRedColor;
     }
   }
 }
@@ -183,7 +181,7 @@ class _CompletedReviewCheckmark extends StatelessWidget {
       builder: (_, cn, __) {
         return Icon(
           FluentIcons.checkmark_circle_24_filled,
-          color: cn.onSurface.highFamiliarityColor,
+          color: cn.onSurface.accentGreenColor,
         );
       },
     );
