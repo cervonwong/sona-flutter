@@ -30,7 +30,7 @@ import '../features/deck/presentation/widgets/deck_list/deck_list_tile.dart';
 import '../features/deck/presentation/widgets/deck_list/deck_list_title_bar.dart';
 import 'shared/main_drawer.dart';
 
-class HomeScreen extends StatelessWidget {
+class OldHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DeckListBloc>(

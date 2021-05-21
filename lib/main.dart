@@ -24,7 +24,7 @@ import 'core/presentation/change_notifiers/color_notifier.dart';
 import 'core/presentation/constants/color_constants.dart';
 import 'core/presentation/constants/widget_constants.dart';
 import 'injection_container.dart' as injection_container;
-import 'screens/home_screen.dart';
+import 'screens/old_home_screen.dart';
 
 void main() {
   injection_container.configureDependencies();
@@ -43,7 +43,7 @@ class SonaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sona',
       theme: _createThemeData(),
-      home: HomeScreen(),
+      home: OldHomeScreen(),
     );
   }
 }
