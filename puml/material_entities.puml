@@ -32,6 +32,12 @@ class Deck {
 	lastEditedDateTime : DateTime
 	authorName         : String?
 	description        : String?
+	iconData           : DeckIconData
+}
+
+class DeckIconData {
+	color   : DeckIconColor
+	symbol  : DeckIconSymbol
 }
 
 class EntryTag {
@@ -72,6 +78,7 @@ abstract class Component {
 	type : ComponentType
 }
 
+Deck 				"1..*"								 *-   "1"    DeckIconData
 Deck                "1"                                  <--> "0..*" Entry               : owns >
 Entry               "1"                                  <--> "1..*" Card                : generates >
 Deck                "1"                                  <--> "0..*" Card                : owns >
