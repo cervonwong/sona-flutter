@@ -18,6 +18,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'core/presentation/change_notifiers/color_notifier.dart';
@@ -220,7 +221,13 @@ AppBarTheme _createAppBarTheme({@required TextTheme baseTextTheme}) {
   return AppBarTheme(
     centerTitle: false,
     elevation: 0.0,
+    backwardsCompatibility: false,
     backgroundColor: Colors.white,
+    foregroundColor: kDarkHighEmphasisTextColor,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
   );
 }
 
