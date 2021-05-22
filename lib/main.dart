@@ -100,24 +100,24 @@ ColorScheme _createColorScheme() {
     // Primary
     primary: kPrimaryColor,
     primaryVariant: kPrimaryDarkColor,
-    onPrimary: kLightHighEmphasisTextColor,
+    onPrimary: kOnDarkHighEmphasisColor,
 
     // Secondary
     secondary: kPrimaryColor,
     secondaryVariant: kPrimaryDarkColor,
-    onSecondary: kLightHighEmphasisTextColor,
+    onSecondary: kOnDarkHighEmphasisColor,
 
     // Surface
     surface: Colors.white,
-    onSurface: kLightHighEmphasisTextColor,
+    onSurface: kOnDarkHighEmphasisColor,
 
     // Background
     background: kNeutralColor2,
-    onBackground: kLightHighEmphasisTextColor,
+    onBackground: kOnDarkHighEmphasisColor,
 
     // Error
     error: kAccentRedColor,
-    onError: kLightHighEmphasisTextColor,
+    onError: kOnDarkHighEmphasisColor,
   );
 }
 
@@ -206,15 +206,15 @@ TextTheme _createBaseTextTheme() {
 
 TextTheme _createTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: kDarkHighEmphasisTextColor,
-    displayColor: kDarkHighEmphasisTextColor,
+    bodyColor: kOnLightHighEmphasisColor,
+    displayColor: kOnLightHighEmphasisColor,
   );
 }
 
 TextTheme _createPrimaryAndAccentTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: kLightHighEmphasisTextColor,
-    displayColor: kLightHighEmphasisTextColor,
+    bodyColor: kOnDarkHighEmphasisColor,
+    displayColor: kOnDarkHighEmphasisColor,
   );
 }
 
@@ -224,7 +224,7 @@ AppBarTheme _createAppBarTheme({@required TextTheme baseTextTheme}) {
     elevation: 0.0,
     backwardsCompatibility: false,
     backgroundColor: Colors.white,
-    foregroundColor: kDarkHighEmphasisTextColor,
+    foregroundColor: kOnLightHighEmphasisColor,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
@@ -249,7 +249,7 @@ BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
     backgroundColor: Colors.white,
     elevation: 0.0,
     selectedItemColor: kPrimaryColor,
-    unselectedItemColor: kDarkMediumEmphasisTextColor,
+    unselectedItemColor: kOnLightMediumEmphasisColor,
   );
 }
 
@@ -285,7 +285,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
         if (states.contains(MaterialState.disabled)) {
           return kNeutralColor5;
         }
-        return kLightHighEmphasisTextColor;
+        return kOnDarkHighEmphasisColor;
       }),
       backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
@@ -310,7 +310,7 @@ InputDecorationTheme _createInputDecorationTheme({
 }) {
   return InputDecorationTheme(
     hintStyle: baseTextTheme.bodyText1.copyWith(
-      color: kDarkMediumEmphasisTextColor,
+      color: kOnLightMediumEmphasisColor,
     ),
   );
 }

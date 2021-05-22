@@ -45,7 +45,7 @@ class StreakCounter extends StatelessWidget {
                   : FluentIcons.target_16_regular,
               color: isActive
                   ? cn.onSurface.accentYellowColor
-                  : cn.onSurface.lowEmphasisTextColor,
+                  : cn.onSurface.lowEmphasisColor,
               size: 32.0,
             ),
             const SizedBox(width: kSpacingPadding04),
@@ -54,7 +54,7 @@ class StreakCounter extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6.copyWith(
                     color: isActive
                         ? cn.onSurface.accentYellowColor
-                        : cn.onSurface.lowEmphasisTextColor,
+                        : cn.onSurface.lowEmphasisColor,
                   ),
             ),
             const SizedBox(width: kSpacingPadding16),

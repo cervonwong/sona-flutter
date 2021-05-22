@@ -39,7 +39,7 @@ class DeckListTitleBar extends StatelessWidget {
                   return Text(
                     'Decks',
                     style: Theme.of(context).textTheme.headline6.copyWith(
-                          color: cn.onBackground.highEmphasisTextColor,
+                          color: cn.onBackground.highEmphasisColor,
                         ),
                   );
                 },
@@ -50,7 +50,7 @@ class DeckListTitleBar extends StatelessWidget {
                   return Text(
                     '136 cards to review',
                     style: Theme.of(context).textTheme.bodyText2.copyWith(
-                          color: cn.onBackground.mediumEmphasisTextColor,
+                          color: cn.onBackground.mediumEmphasisColor,
                         ),
                   );
                 },
@@ -68,7 +68,7 @@ class DeckListTitleBar extends StatelessWidget {
                 builder: (_, cn, __) {
                   return Icon(
                     FluentIcons.filter_24_regular,
-                    color: cn.onBackground.mediumEmphasisTextColor,
+                    color: cn.onBackground.mediumEmphasisColor,
                   );
                 },
               ),

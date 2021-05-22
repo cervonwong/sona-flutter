@@ -232,7 +232,7 @@ class _CreateActionsMenuItem extends StatelessWidget {
         builder: (_, cn, __) {
           return Icon(
             icon,
-            color: cn.onSurface.lowEmphasisTextColor,
+            color: cn.onSurface.lowEmphasisColor,
           );
         },
       ),
@@ -241,7 +241,7 @@ class _CreateActionsMenuItem extends StatelessWidget {
           return Text(
             text,
             style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: cn.onSurface.highEmphasisTextColor,
+                  color: cn.onSurface.highEmphasisColor,
                 ),
           );
         },

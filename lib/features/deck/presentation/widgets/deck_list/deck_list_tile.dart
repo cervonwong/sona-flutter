@@ -141,7 +141,7 @@ class _DeckNameTitle extends StatelessWidget {
             softWrap: false,
             overflow: TextOverflow.fade,
             style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: cn.onSurface.highEmphasisTextColor,
+                  color: cn.onSurface.highEmphasisColor,
                 ),
           );
         },

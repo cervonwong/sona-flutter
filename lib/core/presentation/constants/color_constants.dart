@@ -94,25 +94,25 @@ const Color kNeutralColor3 = Color(0xFFEFF0F6);
 const Color kNeutralColor2 = Color(0xFFF7F7FC);
 const Color kNeutralColor1 = Color(0xFFFCFCFC);
 
-// Emphasis Opacity Values
+// Emphasis Level Values
 // Used to set the opacity of the colors of texts or icons at different
 // emphasis levels to express hierarchy between elements.
 
 // Dark text colors use kNeutralColor8 as a base.
-const double kDarkHighEmphasisOpacity = 0.90;
-const Color kDarkHighEmphasisTextColor = Color(0xE614142B); // E6 --> 90%.
-const double kDarkMediumEmphasisOpacity = 0.50;
-const Color kDarkMediumEmphasisTextColor = Color(0x8014142B); // 80 --> 50%.
-const double kDarkLowEmphasisOpacity = 0.20;
-const Color kDarkLowEmphasisTextColor = Color(0x3314142B); // 33 --> 20%.
+const double kOnLightHighEmphasisOpacity = 0.90;
+const Color kOnLightHighEmphasisColor = Color(0xE614142B); // E6 --> 90%.
+const double kOnLightMediumEmphasisOpacity = 0.50;
+const Color kOnLightMediumEmphasisColor = Color(0x8014142B); // 80 --> 50%.
+const double kOnLightLowEmphasisOpacity = 0.20;
+const Color kOnLightLowEmphasisColor = Color(0x3314142B); // 33 --> 20%.
 
 // Light text colors use pure white (#FFFFFF) as a base.
-const double kLightHighEmphasisOpacity = 1.00;
-const Color kLightHighEmphasisTextColor = Color(0xFFFFFFFF); // FF --> 100%.
-const double kLightMediumEmphasisOpacity = 0.70;
-const Color kLightMediumEmphasisTextColor = Color(0xB3FFFFFF); // B3 --> 70%.
-const double kLightLowEmphasisOpacity = 0.35;
-const Color kLightLowEmphasisTextColor = Color(0x59FFFFFF); // 59 --> 35%.
+const double kOnDarkHighEmphasisOpacity = 1.00;
+const Color kOnDarkHighEmphasisColor = Color(0xFFFFFFFF); // FF --> 100%.
+const double kOnDarkMediumEmphasisOpacity = 0.70;
+const Color kOnDarkMediumEmphasisColor = Color(0xB3FFFFFF); // B3 --> 70%.
+const double kOnDarkLowEmphasisOpacity = 0.35;
+const Color kOnDarkLowEmphasisColor = Color(0x59FFFFFF); // 59 --> 35%.
 
 // Splashes and Highlights
 // Overlaid on interactive components with a ripple effect (Ink).

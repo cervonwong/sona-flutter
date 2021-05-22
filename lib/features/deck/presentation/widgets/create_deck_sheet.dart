@@ -137,7 +137,7 @@ class _DeckNameTextField extends StatelessWidget {
             ],
             textInputAction: TextInputAction.done,
             style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: cn.onSurface.highEmphasisTextColor,
+                  color: cn.onSurface.highEmphasisColor,
                 ),
             decoration: InputDecoration(
               isCollapsed: true,

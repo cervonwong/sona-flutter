@@ -100,13 +100,13 @@ class _OnLightColorGroup implements _ColorGroup {
   Color get primaryHighlightColor => kPrimaryHighlightColor;
 
   @override
-  Color get highEmphasisTextColor => kDarkHighEmphasisTextColor;
+  Color get highEmphasisColor => kOnLightHighEmphasisColor;
 
   @override
-  Color get mediumEmphasisTextColor => kDarkMediumEmphasisTextColor;
+  Color get mediumEmphasisColor => kOnLightMediumEmphasisColor;
 
   @override
-  Color get lowEmphasisTextColor => kDarkLowEmphasisTextColor;
+  Color get lowEmphasisColor => kOnLightLowEmphasisColor;
 
   @override
   Color get accentRedColor => kAccentRedColor;
@@ -207,13 +207,13 @@ class _OnDarkColorGroup implements _ColorGroup {
   Color get primaryHighlightColor => throw UnimplementedError();
 
   @override
-  Color get highEmphasisTextColor => kLightHighEmphasisTextColor;
+  Color get highEmphasisColor => kOnDarkHighEmphasisColor;
 
   @override
-  Color get mediumEmphasisTextColor => kLightMediumEmphasisTextColor;
+  Color get mediumEmphasisColor => kOnDarkMediumEmphasisColor;
 
   @override
-  Color get lowEmphasisTextColor => kLightLowEmphasisTextColor;
+  Color get lowEmphasisColor => kOnDarkLowEmphasisColor;
 
   @override
   Color get accentRedColor => kAccentRedColor;
@@ -306,11 +306,11 @@ abstract class _ColorGroup {
 
   Color get primaryHighlightColor;
 
-  Color get highEmphasisTextColor;
+  Color get highEmphasisColor;
 
-  Color get mediumEmphasisTextColor;
+  Color get mediumEmphasisColor;
 
-  Color get lowEmphasisTextColor;
+  Color get lowEmphasisColor;
 
   Color get accentRedColor;
 
