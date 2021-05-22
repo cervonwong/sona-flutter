@@ -18,6 +18,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:sona_flutter/features/stats/streak/presentation/widgets/streak_counter.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -27,6 +28,12 @@ class HomeScreen extends StatelessWidget {
         title: Text(
           'Your Decks',
         ),
+        actions: [
+          StreakCounter(
+            streakCount: 0,
+            isActive: false,
+          ),
+        ],
       ),
       body: SafeArea(
         child: Container(),
