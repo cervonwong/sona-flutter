@@ -18,30 +18,32 @@
  */
 
 // Shape
-const double kSmallCornerRadius = 12.0;
-const double kMediumCornerRadius = 16.0;
-const double kLargeCornerRadius = 32.0;
+const double kCornerRadius08 = 8.0;
+const double kCornerRadius12 = 12.0;
+const double kCornerRadius16 = 16.0;
+const double kCornerRadius32 = 32.0;
+const double kCornerRadiusMax = 999.0;
 
 // Spacing Scale
 // Padding within the context of a component, for more refined spacing.
 // See: https://www.carbondesignsystem.com/guidelines/spacing/overview/#spacing-scale.
-const double kSpacingPadding1 = 2.0;
-const double kSpacingPadding2 = 4.0;
-const double kSpacingPadding3 = 8.0;
-const double kSpacingPadding4 = 12.0;
-const double kSpacingPadding5 = 16.0;
-const double kSpacingPadding6 = 24.0;
-const double kSpacingPadding7 = 32.0;
-const double kSpacingPadding8 = 40.0;
-const double kSpacingPadding9 = 48.0;
+const double kSpacingPadding02 = 2.0;
+const double kSpacingPadding04 = 4.0;
+const double kSpacingPadding08 = 8.0;
+const double kSpacingPadding12 = 12.0;
+const double kSpacingPadding16 = 16.0;
+const double kSpacingPadding24 = 24.0;
+const double kSpacingPadding32 = 32.0;
+const double kSpacingPadding40 = 40.0;
+const double kSpacingPadding48 = 48.0;
 
 // Layout Scale
 // Padding between components and other UI parts into a screen.
 // See: https://www.carbondesignsystem.com/guidelines/spacing/overview/#spacing-scale.
-const double kLayoutPadding1 = 16.0;
-const double kLayoutPadding2 = 24.0;
-const double kLayoutPadding3 = 32.0;
-const double kLayoutPadding4 = 48.0;
-const double kLayoutPadding5 = 64.0;
-const double kLayoutPadding6 = 96.0;
-const double kLayoutPadding7 = 160.0;
+const double kLayoutPadding016 = 16.0;
+const double kLayoutPadding024 = 24.0;
+const double kLayoutPadding032 = 32.0;
+const double kLayoutPadding048 = 48.0;
+const double kLayoutPadding064 = 64.0;
+const double kLayoutPadding096 = 96.0;
+const double kLayoutPadding160 = 160.0;

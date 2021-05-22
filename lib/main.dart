@@ -235,8 +235,8 @@ BottomSheetThemeData _createBottomSheetTheme() {
   return BottomSheetThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(kLargeCornerRadius),
-        topRight: Radius.circular(kLargeCornerRadius),
+        topLeft: Radius.circular(kCornerRadius32),
+        topRight: Radius.circular(kCornerRadius32),
       ),
     ),
     modalBackgroundColor: Colors.white,
@@ -248,7 +248,7 @@ DialogTheme _createDialogTheme() {
     backgroundColor: Colors.white,
     elevation: 0.0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kMediumCornerRadius),
+      borderRadius: BorderRadius.circular(kCornerRadius16),
     ),
   );
 }
@@ -267,7 +267,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
       elevation: MaterialStateProperty.all<double>(0.0),
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kSmallCornerRadius),
+          borderRadius: BorderRadius.circular(kCornerRadius12),
         ),
       ),
       visualDensity: VisualDensity(vertical: 2.0),
@@ -311,7 +311,7 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
       elevation: MaterialStateProperty.all<double>(0.0),
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kSmallCornerRadius),
+          borderRadius: BorderRadius.circular(kCornerRadius12),
         ),
       ),
       visualDensity: VisualDensity(vertical: 2.0),
@@ -333,7 +333,7 @@ SnackBarThemeData _createSnackBarTheme({@required TextTheme baseTextTheme}) {
     behavior: SnackBarBehavior.floating,
     elevation: 2.0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kSmallCornerRadius),
+      borderRadius: BorderRadius.circular(kCornerRadius12),
     ),
     backgroundColor: kSnackBarBackgroundColor,
     contentTextStyle: baseTextTheme.caption,
@@ -352,7 +352,7 @@ TooltipThemeData _createTooltipTheme() {
   return TooltipThemeData(
     decoration: BoxDecoration(
       color: kTooltipBackgroundColor,
-      borderRadius: BorderRadius.circular(kSmallCornerRadius),
+      borderRadius: BorderRadius.circular(kCornerRadius12),
     ),
   );
 }
