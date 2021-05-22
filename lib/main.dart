@@ -24,7 +24,7 @@ import 'core/presentation/change_notifiers/color_notifier.dart';
 import 'core/presentation/constants/color_constants.dart';
 import 'core/presentation/constants/widget_constants.dart';
 import 'injection_container.dart' as injection_container;
-import 'screens/old_home_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   injection_container.configureDependencies();
@@ -43,7 +43,7 @@ class SonaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sona',
       theme: _createThemeData(),
-      home: OldHomeScreen(),
+      home: HomeScreen(),
     );
   }
 }
@@ -75,7 +75,7 @@ ThemeData _createThemeData() {
     primaryTextTheme: _createPrimaryAndAccentTextTheme(),
     accentTextTheme: _createPrimaryAndAccentTextTheme(),
 
-    appBarTheme: _createAppBarTheme(),
+    appBarTheme: _createAppBarTheme(baseTextTheme: baseTextTheme),
     bottomSheetTheme: _createBottomSheetTheme(),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
@@ -123,27 +123,27 @@ TextTheme _createBaseTextTheme() {
   return TextTheme(
     headline1: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 102,
+      fontSize: 80,
       fontWeight: FontWeight.w600,
-      letterSpacing: -1.5,
+      letterSpacing: 0.0,
     ),
     headline2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 64,
-      fontWeight: FontWeight.w800,
-      letterSpacing: -0.5,
+      fontSize: 58,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.0,
     ),
     headline3: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 51,
+      fontSize: 46,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
     ),
     headline4: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 36,
+      fontSize: 34,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0.25,
+      letterSpacing: 0.0,
     ),
     headline5: TextStyle(
       fontFamily: 'Work Sans',
@@ -154,36 +154,36 @@ TextTheme _createBaseTextTheme() {
     headline6: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 21,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.0,
     ),
     subtitle1: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 0.15,
+      fontSize: 17,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.0,
     ),
     subtitle2: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 14,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 0.1,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.0,
     ),
     bodyText1: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 17,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.5,
+      letterSpacing: 0.0,
     ),
     bodyText2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 15,
+      fontSize: 14,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.25,
+      letterSpacing: 0.0,
     ),
     button: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 15,
+      fontSize: 14,
       fontWeight: FontWeight.w700,
       letterSpacing: 1.0,
     ),
@@ -191,13 +191,13 @@ TextTheme _createBaseTextTheme() {
       fontFamily: 'Work Sans',
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
+      letterSpacing: 0.0,
     ),
     overline: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 11,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 1.5,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.0,
     ),
   );
 }
@@ -216,10 +216,11 @@ TextTheme _createPrimaryAndAccentTextTheme() {
   );
 }
 
-AppBarTheme _createAppBarTheme() {
+AppBarTheme _createAppBarTheme({@required TextTheme baseTextTheme}) {
   return AppBarTheme(
-    centerTitle: true,
+    centerTitle: false,
     elevation: 0.0,
+    backgroundColor: Colors.white,
   );
 }
 
