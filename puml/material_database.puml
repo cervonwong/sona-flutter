@@ -158,17 +158,17 @@ object component_types {
 
 decks             }o-||      deck_icon_symbols
 decks             }o-||      deck_icon_colors
-deck_icon_symbols ||-|{ deck_icon_symbol_search_terms
+deck_icon_symbols ||-|{      deck_icon_symbol_search_terms
 decks             ||---o{    entries
-entries           ||---o{    cards
-entries           ||-o{      entries_tags : \t
-entries_tags      }|-||      tags : \t
+entries           ||---|{    cards
+entries           ||-o{      entries_tags
+entries_tags      }o-||      tags
 field_specs       }o----||   field_types
 field_data        ||----o|   text_field_data
 field_data        ||----o|   image_field_data
 field_data        }|----||   field_specs
 entries           ||----|{   field_data
-entries           }|---||    entry_types
+entries           }o---||    entry_types
 entry_types       ||----|{   field_specs
 entry_types       ||----|{   card_formats
 card_formats      ||---- "2" structures
@@ -176,8 +176,8 @@ structures        ||----|{   components
 components        }o---||    component_types
 components        ||----o|   text_components
 components        ||----o|   image_components
-text_components   }|---||    alignments
-text_components   }|---||    fill_colors
-text_components   }|---||    highlight_colors
+text_components   }o---||    alignments
+text_components   }o---||    fill_colors
+text_components   }o---||    highlight_colors
 
 @enduml
