@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:sona_flutter/features/stats/streak/presentation/widgets/streak_counter.dart';
+import '../features/stats/streak/presentation/widgets/streak_counter.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
