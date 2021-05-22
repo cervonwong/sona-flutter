@@ -78,7 +78,9 @@ ThemeData _createThemeData() {
 
     appBarTheme: _createAppBarTheme(baseTextTheme: baseTextTheme),
     bottomSheetTheme: _createBottomSheetTheme(),
-    bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
+    bottomNavigationBarTheme: _createBottomNavigationBarTheme(
+      baseTextTheme: baseTextTheme,
+    ),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
     elevatedButtonTheme: _createElevatedButtonTheme(),
@@ -244,12 +246,15 @@ BottomSheetThemeData _createBottomSheetTheme() {
   );
 }
 
-BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
-  return const BottomNavigationBarThemeData(
+BottomNavigationBarThemeData _createBottomNavigationBarTheme({
+  @required TextTheme baseTextTheme,
+}) {
+  return BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
     elevation: 0.0,
     selectedItemColor: kPrimaryColor,
     unselectedItemColor: kOnLightMediumEmphasisColor,
+    selectedLabelStyle: baseTextTheme.subtitle2,
   );
 }
 
