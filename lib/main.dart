@@ -78,6 +78,7 @@ ThemeData _createThemeData() {
 
     appBarTheme: _createAppBarTheme(baseTextTheme: baseTextTheme),
     bottomSheetTheme: _createBottomSheetTheme(),
+    bottomNavigationBarTheme: _createBottomNavigationBarTheme(),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
     elevatedButtonTheme: _createElevatedButtonTheme(),
@@ -240,6 +241,15 @@ BottomSheetThemeData _createBottomSheetTheme() {
       ),
     ),
     modalBackgroundColor: Colors.white,
+  );
+}
+
+BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
+  return const BottomNavigationBarThemeData(
+    backgroundColor: Colors.white,
+    elevation: 0.0,
+    selectedItemColor: kPrimaryColor,
+    unselectedItemColor: kDarkMediumEmphasisTextColor,
   );
 }
 
