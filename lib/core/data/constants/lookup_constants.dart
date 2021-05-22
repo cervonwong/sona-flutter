@@ -49,38 +49,66 @@ const String kAlignmentJustifyName = 'JUSTIFY';
 
 // Entity : TextComponentFillColor (TO BE CHANGED)
 // Table  : fill_colors
-const int kFillColorNeutralId = 1;
-const int kFillColorRedId = 2;
-const int kFillColorOrangeId = 3;
-const int kFillColorYellowId = 4;
-const int kFillColorBlueId = 5;
-const int kFillColorPurpleId = 6;
-const int kFillColorMagentaId = 7;
-const int kFillColorBrownId = 8;
+const int kFillColorDefaultId = 1;
+const int kFillColorGray4Id = 2;
+const int kFillColorGray3Id = 3;
+const int kFillColorGray2Id = 4;
+const int kFillColorGray1Id = 5;
+const int kFillColorRedId = 6;
+const int kFillColorOrangeId = 7;
+const int kFillColorYellowId = 8;
+const int kFillColorLimeId = 9;
+const int kFillColorGreenId = 10;
+const int kFillColorTealId = 11;
+const int kFillColorCyanId = 12;
+const int kFillColorSkyId = 13;
+const int kFillColorBlueId = 14;
+const int kFillColorPurpleId = 15;
+const int kFillColorPinkId = 16;
+const int kFillColorBrownId = 17;
 
-const String kFillColorNeutralName = 'NEUTRAL';
+const String kFillColorDefaultName = 'DEFAULT';
+const String kFillColorGray4Name = 'GRAY 4';
+const String kFillColorGray3Name = 'GRAY 3';
+const String kFillColorGray2Name = 'GRAY 2';
+const String kFillColorGray1Name = 'GRAY 1';
 const String kFillColorRedName = 'RED';
 const String kFillColorOrangeName = 'ORANGE';
 const String kFillColorYellowName = 'YELLOW';
+const String kFillColorLimeName = 'LIME';
+const String kFillColorGreenName = 'GREEN';
+const String kFillColorTealName = 'TEAL';
+const String kFillColorCyanName = 'CYAN';
+const String kFillColorSkyName = 'SKY';
 const String kFillColorBlueName = 'BLUE';
 const String kFillColorPurpleName = 'PURPLE';
-const String kFillColorMagentaName = 'MAGENTA';
+const String kFillColorPinkName = 'PINK';
 const String kFillColorBrownName = 'BROWN';
 
 // Entity : TextComponentHighlightColor
 // Table  : highlight_colors
 const int kHighlightColorNoneId = 1;
-const int kHighlightColorPinkId = 2;
+const int kHighlightColorRedId = 2;
 const int kHighlightColorOrangeId = 3;
 const int kHighlightColorYellowId = 4;
-const int kHighlightColorGreenId = 5;
-const int kHighlightColorBlueId = 6;
-const int kHighlightColorPurpleId = 7;
+const int kHighlightColorLimeId = 5;
+const int kHighlightColorGreenId = 6;
+const int kHighlightColorTealId = 7;
+const int kHighlightColorCyanId = 8;
+const int kHighlightColorSkyId = 9;
+const int kHighlightColorBlueId = 10;
+const int kHighlightColorPurpleId = 11;
+const int kHighlightColorPinkId = 12;
 
 const String kHighlightColorNoneName = 'NONE';
-const String kHighlightColorPinkName = 'PINK';
+const String kHighlightColorRedName = 'RED';
 const String kHighlightColorOrangeName = 'ORANGE';
 const String kHighlightColorYellowName = 'YELLOW';
+const String kHighlightColorLimeName = 'LIME';
 const String kHighlightColorGreenName = 'GREEN';
+const String kHighlightColorTealName = 'TEAL';
+const String kHighlightColorCyanName = 'CYAN';
+const String kHighlightColorSkyName = 'SKY';
 const String kHighlightColorBlueName = 'BLUE';
 const String kHighlightColorPurpleName = 'PURPLE';
+const String kHighlightColorPinkName = 'PINK';

@@ -123,8 +123,24 @@ void main() {
             fillColorModels,
             [
               FillColorModel(
-                id: kFillColorNeutralId,
-                name: kFillColorNeutralName,
+                id: kFillColorDefaultId,
+                name: kFillColorDefaultName,
+              ),
+              FillColorModel(
+                id: kFillColorGray4Id,
+                name: kFillColorGray4Name,
+              ),
+              FillColorModel(
+                id: kFillColorGray3Id,
+                name: kFillColorGray3Name,
+              ),
+              FillColorModel(
+                id: kFillColorGray2Id,
+                name: kFillColorGray2Name,
+              ),
+              FillColorModel(
+                id: kFillColorGray1Id,
+                name: kFillColorGray1Name,
               ),
               FillColorModel(
                 id: kFillColorRedId,
@@ -139,6 +155,26 @@ void main() {
                 name: kFillColorYellowName,
               ),
               FillColorModel(
+                id: kFillColorLimeId,
+                name: kFillColorLimeName,
+              ),
+              FillColorModel(
+                id: kFillColorGreenId,
+                name: kFillColorGreenName,
+              ),
+              FillColorModel(
+                id: kFillColorTealId,
+                name: kFillColorTealName,
+              ),
+              FillColorModel(
+                id: kFillColorCyanId,
+                name: kFillColorCyanName,
+              ),
+              FillColorModel(
+                id: kFillColorSkyId,
+                name: kFillColorSkyName,
+              ),
+              FillColorModel(
                 id: kFillColorBlueId,
                 name: kFillColorBlueName,
               ),
@@ -147,8 +183,8 @@ void main() {
                 name: kFillColorPurpleName,
               ),
               FillColorModel(
-                id: kFillColorMagentaId,
-                name: kFillColorMagentaName,
+                id: kFillColorPinkId,
+                name: kFillColorPinkName,
               ),
               FillColorModel(
                 id: kFillColorBrownId,
@@ -174,8 +210,8 @@ void main() {
                 name: kHighlightColorNoneName,
               ),
               HighlightColorModel(
-                id: kHighlightColorPinkId,
-                name: kHighlightColorPinkName,
+                id: kHighlightColorRedId,
+                name: kHighlightColorRedName,
               ),
               HighlightColorModel(
                 id: kHighlightColorOrangeId,
@@ -186,8 +222,24 @@ void main() {
                 name: kHighlightColorYellowName,
               ),
               HighlightColorModel(
+                id: kHighlightColorLimeId,
+                name: kHighlightColorLimeName,
+              ),
+              HighlightColorModel(
                 id: kHighlightColorGreenId,
                 name: kHighlightColorGreenName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorTealId,
+                name: kHighlightColorTealName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorCyanId,
+                name: kHighlightColorCyanName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorSkyId,
+                name: kHighlightColorSkyName,
               ),
               HighlightColorModel(
                 id: kHighlightColorBlueId,
@@ -196,6 +248,10 @@ void main() {
               HighlightColorModel(
                 id: kHighlightColorPurpleId,
                 name: kHighlightColorPurpleName,
+              ),
+              HighlightColorModel(
+                id: kHighlightColorPinkId,
+                name: kHighlightColorPinkName,
               ),
             ],
           );
