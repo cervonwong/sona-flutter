@@ -20,8 +20,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
+import '../core/presentation/change_notifiers/color_notifier.dart';
 import '../features/stats/streak/presentation/widgets/streak_counter.dart';
 
 class HomeScreen extends StatefulWidget {
