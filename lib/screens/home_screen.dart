@@ -19,6 +19,8 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
 import '../features/stats/streak/presentation/widgets/streak_counter.dart';
 
@@ -49,11 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
     ProgressDestinationAppBar(),
     ProfileDestinationAppBar(),
   ];
+  static const _fabs = [
+    DecksDestinationFab(),
+    SearchDestinationFab(),
+    null,
+    null,
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBars[_currentIndex],
+      floatingActionButton: _fabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           for (int i = 0; i < 4; i++)
@@ -75,6 +84,48 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SafeArea(
         child: Container(),
+      ),
+    );
+  }
+}
+
+class DecksDestinationFab extends StatelessWidget {
+  const DecksDestinationFab();
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        shadowColor: Theme.of(context).colorScheme.primary,
+      ),
+      child: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(FluentIcons.add_24_regular),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class SearchDestinationFab extends StatelessWidget {
+  const SearchDestinationFab();
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        shadowColor: Theme.of(context).colorScheme.primary,
+      ),
+      child: Consumer<ColorNotifier>(
+        builder: (_, cn, __) {
+          return FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(FluentIcons.arrow_up_24_regular),
+          );
+        },
       ),
     );
   }
