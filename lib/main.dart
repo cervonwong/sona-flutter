@@ -304,8 +304,6 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
 
 FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
   return FloatingActionButtonThemeData(
-    elevation: 2.0,
-    highlightElevation: 4.0,
     splashColor: kLightSplashColor,
   );
 }
