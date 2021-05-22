@@ -109,11 +109,11 @@ ColorScheme _createColorScheme() {
 
     // Surface
     surface: Colors.white,
-    onSurface: kOnDarkHighEmphasisColor,
+    onSurface: kOnLightHighEmphasisColor,
 
     // Background
     background: kNeutralColor2,
-    onBackground: kOnDarkHighEmphasisColor,
+    onBackground: kOnLightHighEmphasisColor,
 
     // Error
     error: kAccentRedColor,
