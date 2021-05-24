@@ -217,7 +217,7 @@ packages:
       name: fluentui_system_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.123"
+    version: "1.1.124"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -519,7 +519,7 @@ packages:
       name: sqlite3_flutter_libs
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.3"
   sqlparser:
     dependency: transitive
     description:
