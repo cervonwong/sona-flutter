@@ -99,7 +99,7 @@ class MainDrawer extends StatelessWidget {
                       return AboutListTile(
                         icon: Icon(
                           FluentIcons.info_24_regular,
-                          color: cn.onSurface.lowEmphasisColor,
+                          color: cn.onSurface.lowEmphasis,
                         ),
                         applicationName: 'Sona',
                         applicationVersion: 'v.DEV',
@@ -149,8 +149,8 @@ class _DrawerTile extends StatelessWidget {
             return Icon(
               selected ? selectedIcon : icon,
               color: selected
-                  ? cn.onPrimary.highEmphasisColor
-                  : cn.onSurface.lowEmphasisColor,
+                  ? cn.onPrimary.highEmphasis
+                  : cn.onSurface.lowEmphasis,
             );
           },
         ),
@@ -159,7 +159,7 @@ class _DrawerTile extends StatelessWidget {
             return Text(
               title,
               style: Theme.of(context).textTheme.bodyText1.copyWith(
-                    color: selected ? cn.onPrimary.highEmphasisColor : null,
+                    color: selected ? cn.onPrimary.highEmphasis : null,
                     fontWeight: selected ? FontWeight.w600 : null,
                   ),
             );

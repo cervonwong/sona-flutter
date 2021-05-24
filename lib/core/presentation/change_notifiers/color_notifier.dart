@@ -22,6 +22,8 @@ import 'package:flutter/material.dart';
 
 import '../constants/color_constants.dart';
 
+enum ColorTheme { light, dark }
+
 /// This maps color constants and gives context to them to be dynamic.
 class ColorNotifier extends ChangeNotifier {
   ColorTheme _theme;
@@ -86,300 +88,298 @@ class ColorNotifier extends ChangeNotifier {
 }
 
 abstract class _ColorGroup {
-  Color get splashColor;
+  Color get splashNeutral;
 
-  Color get highlightColor;
+  Color get splashPrimary;
 
-  Color get primarySplashColor;
+  Color get highlightNeutral;
 
-  Color get primaryHighlightColor;
+  Color get highlightPrimary;
 
-  Color get highEmphasisColor;
+  Color get highEmphasis;
 
-  Color get mediumEmphasisColor;
+  Color get mediumEmphasis;
 
-  Color get lowEmphasisColor;
+  Color get lowEmphasis;
 
-  Color get accentRedColor;
+  Color get accentRed;
 
-  Color get accentOrangeColor;
+  Color get accentOrange;
 
-  Color get accentYellowColor;
+  Color get accentYellow;
 
-  Color get accentLimeColor;
+  Color get accentLime;
 
-  Color get accentGreenColor;
+  Color get accentGreen;
 
-  Color get accentTealColor;
+  Color get accentTeal;
 
-  Color get accentCyanColor;
+  Color get accentCyan;
 
-  Color get accentSkyColor;
+  Color get accentSky;
 
-  Color get accentBlueColor;
+  Color get accentBlue;
 
-  Color get accentPurpleColor;
+  Color get accentPurple;
 
-  Color get accentPinkColor;
+  Color get accentPink;
 
-  Color get textFillBrownColor;
+  Color get textFillBrown;
 
-  Color get textFillGrayColor4;
+  Color get textFillGray4;
 
-  Color get textFillGrayColor3;
+  Color get textFillGray3;
 
-  Color get textFillGrayColor2;
+  Color get textFillGray2;
 
-  Color get textFillGrayColor1;
+  Color get textFillGray1;
 
-  Color get textHighlightRedColor;
+  Color get textHighlightRed;
 
-  Color get textHighlightOrangeColor;
+  Color get textHighlightOrange;
 
-  Color get textHighlightYellowColor;
+  Color get textHighlightYellow;
 
-  Color get textHighlightLimeColor;
+  Color get textHighlightLime;
 
-  Color get textHighlightGreenColor;
+  Color get textHighlightGreen;
 
-  Color get textHighlightTealColor;
+  Color get textHighlightTeal;
 
-  Color get textHighlightCyanColor;
+  Color get textHighlightCyan;
 
-  Color get textHighlightSkyColor;
+  Color get textHighlightSky;
 
-  Color get textHighlightBlueColor;
+  Color get textHighlightBlue;
 
-  Color get textHighlightPurpleColor;
+  Color get textHighlightPurple;
 
-  Color get textHighlightPinkColor;
+  Color get textHighlightPink;
 }
 
 /// Colors are generally darker to contrast against lighter colors.
 class _OnLightColorGroup implements _ColorGroup {
   @override
-  Color get splashColor => ColorConstants.darkSplash;
+  Color get splashNeutral => ColorConstants.splashNeutralOnLight;
 
   @override
-  Color get highlightColor => ColorConstants.darkHighlight;
+  Color get splashPrimary => ColorConstants.splashPrimary;
 
   @override
-  Color get primarySplashColor => ColorConstants.primarySplash;
+  Color get highlightNeutral => ColorConstants.highlightNeutralOnLight;
 
   @override
-  Color get primaryHighlightColor => ColorConstants.primaryHighlight;
+  Color get highlightPrimary => ColorConstants.highlightPrimary;
 
   @override
-  Color get highEmphasisColor => ColorConstants.onLightHighEmphasis;
+  Color get highEmphasis => ColorConstants.onLightHighEmphasis;
 
   @override
-  Color get mediumEmphasisColor => ColorConstants.onLightMediumEmphasis;
+  Color get mediumEmphasis => ColorConstants.onLightMediumEmphasis;
 
   @override
-  Color get lowEmphasisColor => ColorConstants.onLightLowEmphasis;
+  Color get lowEmphasis => ColorConstants.onLightLowEmphasis;
 
   @override
-  Color get accentRedColor => ColorConstants.accentRed;
+  Color get accentRed => ColorConstants.accentRed;
 
   @override
-  Color get accentOrangeColor => ColorConstants.accentOrange;
+  Color get accentOrange => ColorConstants.accentOrange;
 
   @override
-  Color get accentYellowColor => ColorConstants.accentYellow;
+  Color get accentYellow => ColorConstants.accentYellow;
 
   @override
-  Color get accentLimeColor => ColorConstants.accentLime;
+  Color get accentLime => ColorConstants.accentLime;
 
   @override
-  Color get accentGreenColor => ColorConstants.accentGreen;
+  Color get accentGreen => ColorConstants.accentGreen;
 
   @override
-  Color get accentTealColor => ColorConstants.accentTeal;
+  Color get accentTeal => ColorConstants.accentTeal;
 
   @override
-  Color get accentCyanColor => ColorConstants.accentCyan;
+  Color get accentCyan => ColorConstants.accentCyan;
 
   @override
-  Color get accentSkyColor => ColorConstants.accentSky;
+  Color get accentSky => ColorConstants.accentSky;
 
   @override
-  Color get accentBlueColor => ColorConstants.accentBlue;
+  Color get accentBlue => ColorConstants.accentBlue;
 
   @override
-  Color get accentPurpleColor => ColorConstants.accentPurple;
+  Color get accentPurple => ColorConstants.accentPurple;
 
   @override
-  Color get accentPinkColor => ColorConstants.accentPink;
+  Color get accentPink => ColorConstants.accentPink;
 
   @override
-  Color get textFillBrownColor => ColorConstants.textFillBrown;
+  Color get textFillBrown => ColorConstants.textFillBrown;
 
   @override
-  Color get textFillGrayColor4 => ColorConstants.textFillOnLightGray4;
+  Color get textFillGray4 => ColorConstants.textFillOnLightGray4;
 
   @override
-  Color get textFillGrayColor3 => ColorConstants.textFillOnLightGray3;
+  Color get textFillGray3 => ColorConstants.textFillOnLightGray3;
 
   @override
-  Color get textFillGrayColor2 => ColorConstants.textFillOnLightGray2;
+  Color get textFillGray2 => ColorConstants.textFillOnLightGray2;
 
   @override
-  Color get textFillGrayColor1 => ColorConstants.textFillOnLightGray1;
+  Color get textFillGray1 => ColorConstants.textFillOnLightGray1;
 
   @override
-  Color get textHighlightRedColor => ColorConstants.textHighlightOnLightRed;
+  Color get textHighlightRed => ColorConstants.textHighlightOnLightRed;
 
   @override
-  Color get textHighlightOrangeColor => ColorConstants.textHighlightOnLightOrange;
+  Color get textHighlightOrange => ColorConstants.textHighlightOnLightOrange;
 
   @override
-  Color get textHighlightYellowColor => ColorConstants.textHighlightOnLightYellow;
+  Color get textHighlightYellow => ColorConstants.textHighlightOnLightYellow;
 
   @override
-  Color get textHighlightLimeColor => ColorConstants.textHighlightOnLightLime;
+  Color get textHighlightLime => ColorConstants.textHighlightOnLightLime;
 
   @override
-  Color get textHighlightGreenColor => ColorConstants.textHighlightOnLightGreen;
+  Color get textHighlightGreen => ColorConstants.textHighlightOnLightGreen;
 
   @override
-  Color get textHighlightTealColor => ColorConstants.textHighlightOnLightTeal;
+  Color get textHighlightTeal => ColorConstants.textHighlightOnLightTeal;
 
   @override
-  Color get textHighlightCyanColor => ColorConstants.textHighlightOnLightCyan;
+  Color get textHighlightCyan => ColorConstants.textHighlightOnLightCyan;
 
   @override
-  Color get textHighlightSkyColor => ColorConstants.textHighlightOnLightSky;
+  Color get textHighlightSky => ColorConstants.textHighlightOnLightSky;
 
   @override
-  Color get textHighlightBlueColor => ColorConstants.textHighlightOnLightBlue;
+  Color get textHighlightBlue => ColorConstants.textHighlightOnLightBlue;
 
   @override
-  Color get textHighlightPurpleColor => ColorConstants.textHighlightOnLightPurple;
+  Color get textHighlightPurple => ColorConstants.textHighlightOnLightPurple;
 
   @override
-  Color get textHighlightPinkColor => ColorConstants.textHighlightOnLightPink;
+  Color get textHighlightPink => ColorConstants.textHighlightOnLightPink;
 }
 
 /// Colors are generally lighter to contrast against darker colors.
 class _OnDarkColorGroup implements _ColorGroup {
   @override
-  Color get splashColor => ColorConstants.lightSplash;
-
-  @override
-  Color get highlightColor => ColorConstants.lightHighlight;
+  Color get splashNeutral => ColorConstants.splashNeutralOnDark;
 
   @override
   // TODO: implement primarySplashColor
-  Color get primarySplashColor => throw UnimplementedError();
+  Color get splashPrimary => throw UnimplementedError();
+
+  @override
+  Color get highlightNeutral => ColorConstants.highlightNeutralOnDark;
 
   @override
   // TODO: implement primaryHighlightColor
-  Color get primaryHighlightColor => throw UnimplementedError();
+  Color get highlightPrimary => throw UnimplementedError();
 
   @override
-  Color get highEmphasisColor => ColorConstants.onDarkHighEmphasis;
+  Color get highEmphasis => ColorConstants.onDarkHighEmphasis;
 
   @override
-  Color get mediumEmphasisColor => ColorConstants.onDarkMediumEmphasis;
+  Color get mediumEmphasis => ColorConstants.onDarkMediumEmphasis;
 
   @override
-  Color get lowEmphasisColor => ColorConstants.onDarkLowEmphasis;
+  Color get lowEmphasis => ColorConstants.onDarkLowEmphasis;
 
   @override
-  Color get accentRedColor => ColorConstants.accentRed;
+  Color get accentRed => ColorConstants.accentRed;
 
   @override
-  Color get accentOrangeColor => ColorConstants.accentOrange;
+  Color get accentOrange => ColorConstants.accentOrange;
 
   @override
-  Color get accentYellowColor => ColorConstants.accentYellow;
+  Color get accentYellow => ColorConstants.accentYellow;
 
   @override
-  Color get accentLimeColor => ColorConstants.accentLime;
+  Color get accentLime => ColorConstants.accentLime;
 
   @override
-  Color get accentGreenColor => ColorConstants.accentGreen;
+  Color get accentGreen => ColorConstants.accentGreen;
 
   @override
-  Color get accentTealColor => ColorConstants.accentTeal;
+  Color get accentTeal => ColorConstants.accentTeal;
 
   @override
-  Color get accentCyanColor => ColorConstants.accentCyan;
+  Color get accentCyan => ColorConstants.accentCyan;
 
   @override
-  Color get accentSkyColor => ColorConstants.accentSky;
+  Color get accentSky => ColorConstants.accentSky;
 
   @override
-  Color get accentBlueColor => ColorConstants.accentBlue;
+  Color get accentBlue => ColorConstants.accentBlue;
 
   @override
-  Color get accentPurpleColor => ColorConstants.accentPurple;
+  Color get accentPurple => ColorConstants.accentPurple;
 
   @override
-  Color get accentPinkColor => ColorConstants.accentPink;
+  Color get accentPink => ColorConstants.accentPink;
 
   @override
-  Color get textFillBrownColor => ColorConstants.textFillBrown;
+  Color get textFillBrown => ColorConstants.textFillBrown;
 
   @override
-  Color get textFillGrayColor4 => ColorConstants.textFillOnDarkGray4;
+  Color get textFillGray4 => ColorConstants.textFillOnDarkGray4;
 
   @override
-  Color get textFillGrayColor3 => ColorConstants.textFillOnDarkGray3;
+  Color get textFillGray3 => ColorConstants.textFillOnDarkGray3;
 
   @override
-  Color get textFillGrayColor2 => ColorConstants.textFillOnDarkGray2;
+  Color get textFillGray2 => ColorConstants.textFillOnDarkGray2;
 
   @override
-  Color get textFillGrayColor1 => ColorConstants.textFillOnDarkGray1;
+  Color get textFillGray1 => ColorConstants.textFillOnDarkGray1;
 
   @override
-  Color get textHighlightRedColor => ColorConstants.textHighlightOnDarkRed;
+  Color get textHighlightRed => ColorConstants.textHighlightOnDarkRed;
 
   @override
-  Color get textHighlightOrangeColor => ColorConstants.textHighlightOnDarkOrange;
+  Color get textHighlightOrange => ColorConstants.textHighlightOnDarkOrange;
 
   @override
-  Color get textHighlightYellowColor => ColorConstants.textHighlightOnDarkYellow;
+  Color get textHighlightYellow => ColorConstants.textHighlightOnDarkYellow;
 
   @override
-  Color get textHighlightLimeColor => ColorConstants.textHighlightOnDarkLime;
+  Color get textHighlightLime => ColorConstants.textHighlightOnDarkLime;
 
   @override
-  Color get textHighlightGreenColor => ColorConstants.textHighlightOnDarkGreen;
+  Color get textHighlightGreen => ColorConstants.textHighlightOnDarkGreen;
 
   @override
-  Color get textHighlightTealColor => ColorConstants.textHighlightOnDarkTeal;
+  Color get textHighlightTeal => ColorConstants.textHighlightOnDarkTeal;
 
   @override
-  Color get textHighlightCyanColor => ColorConstants.textHighlightOnDarkCyan;
+  Color get textHighlightCyan => ColorConstants.textHighlightOnDarkCyan;
 
   @override
-  Color get textHighlightSkyColor => ColorConstants.textHighlightOnDarkSky;
+  Color get textHighlightSky => ColorConstants.textHighlightOnDarkSky;
 
   @override
-  Color get textHighlightBlueColor => ColorConstants.textHighlightOnDarkBlue;
+  Color get textHighlightBlue => ColorConstants.textHighlightOnDarkBlue;
 
   @override
-  Color get textHighlightPurpleColor => ColorConstants.textHighlightOnDarkPurple;
+  Color get textHighlightPurple => ColorConstants.textHighlightOnDarkPurple;
 
   @override
-  Color get textHighlightPinkColor => ColorConstants.textHighlightOnDarkPink;
+  Color get textHighlightPink => ColorConstants.textHighlightOnDarkPink;
 }
 
 abstract class _SpecificColorGroup {
-  Color get scrimColor;
+  Color get scrim;
 }
 
 class _LightSpecificColorGroup extends _SpecificColorGroup {
   @override
-  Color get scrimColor => ColorConstants.scrim;
+  Color get scrim => ColorConstants.scrim;
 }
 
 class _DarkSpecificColorGroup extends _SpecificColorGroup {
   @override
   // TODO: implement drawerScrimColor
-  Color get scrimColor => throw UnimplementedError();
+  Color get scrim => throw UnimplementedError();
 }
-
-enum ColorTheme { light, dark }

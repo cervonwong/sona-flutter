@@ -109,12 +109,13 @@ class ColorConstants {
   static const textHighlightOnDarkPink = Color(0x4DFD7CB5); // 4D -> 30%.
 
   // Others
-  static const darkSplash = Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
-  static const darkHighlight = Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
-  static const lightSplash = Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
-  static const lightHighlight = Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
-  static const primarySplash = Color(0x1F7B68EE); // kPrimaryColor.withOpacity(0.12);
-  static const primaryHighlight = Color(0x1F7B68EE); // kPrimaryColor.withOpacity(0.12);
+  static const splashNeutralOnLight = Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
+  static const splashNeutralOnDark = Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
+  static const splashPrimary = Color(0x1F7B68EE); // kPrimaryColor.withOpacity(0.12);
+
+  static const highlightNeutralOnLight = Color(0x0F14142B); // kNeutralColor8.withOpacity(0.06);
+  static const highlightNeutralOnDark = Color(0x3DFCFCFC); // kNeutralColor1.withOpacity(0.24);
+  static const highlightPrimary = Color(0x1F7B68EE); // kPrimaryColor.withOpacity(0.12);
 
   static const scrim = Color(0x800B0844); // 80 --> 50%.
   static const snackBarBackground = Color(0xE64E4B66); // kNeutralColor7.withOpacity(0.9).

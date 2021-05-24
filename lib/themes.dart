@@ -39,9 +39,9 @@ ThemeData createLightTheme() {
     backgroundColor: ColorConstants.neutral2,
     canvasColor: Colors.white,
     errorColor: ColorConstants.accentRed,
-    highlightColor: ColorConstants.primaryHighlight,
+    highlightColor: ColorConstants.highlightPrimary,
     scaffoldBackgroundColor: ColorConstants.neutral2,
-    splashColor: ColorConstants.primarySplash,
+    splashColor: ColorConstants.splashPrimary,
     shadowColor: ColorConstants.neutral8,
 
     // Themes
@@ -278,7 +278,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
 
 FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
   return const FloatingActionButtonThemeData(
-    splashColor: ColorConstants.lightSplash,
+    splashColor: ColorConstants.splashNeutralOnDark,
   );
 }
 

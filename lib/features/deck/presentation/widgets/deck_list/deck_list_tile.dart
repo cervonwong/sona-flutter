@@ -74,8 +74,8 @@ class DeckListTile extends StatelessWidget {
           return InkWell(
             onTap: () {},
             onLongPress: () {},
-            highlightColor: cn.onSurface.primaryHighlightColor,
-            splashColor: cn.onSurface.primarySplashColor,
+            highlightColor: cn.onSurface.highlightPrimary,
+            splashColor: cn.onSurface.splashPrimary,
             child: child,
           );
         },
@@ -115,11 +115,11 @@ class DeckListTile extends StatelessWidget {
   Color _calculateColor(BuildContext context) {
     // Naïve algorithm
     if (familiarCardPercentage >= 0.90) {
-      return Provider.of<ColorNotifier>(context).onSurface.accentGreenColor;
+      return Provider.of<ColorNotifier>(context).onSurface.accentGreen;
     } else if (familiarCardPercentage >= 0.70) {
-      return Provider.of<ColorNotifier>(context).onSurface.accentOrangeColor;
+      return Provider.of<ColorNotifier>(context).onSurface.accentOrange;
     } else {
-      return Provider.of<ColorNotifier>(context).onSurface.accentRedColor;
+      return Provider.of<ColorNotifier>(context).onSurface.accentRed;
     }
   }
 }
@@ -141,7 +141,7 @@ class _DeckNameTitle extends StatelessWidget {
             softWrap: false,
             overflow: TextOverflow.fade,
             style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: cn.onSurface.highEmphasisColor,
+                  color: cn.onSurface.highEmphasis,
                 ),
           );
         },
@@ -181,7 +181,7 @@ class _CompletedReviewCheckmark extends StatelessWidget {
       builder: (_, cn, __) {
         return Icon(
           FluentIcons.checkmark_circle_24_filled,
-          color: cn.onSurface.accentGreenColor,
+          color: cn.onSurface.accentGreen,
         );
       },
     );

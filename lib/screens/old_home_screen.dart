@@ -41,7 +41,7 @@ class OldHomeScreen extends StatelessWidget {
             appBar: _HomeAppBar(),
             drawer: MainDrawer(selected: SelectableDrawerDestination.home),
             floatingActionButton: _HomeFAB(),
-            drawerScrimColor: cn.specific.scrimColor,
+            drawerScrimColor: cn.specific.scrim,
             body: child,
           );
         },
@@ -84,8 +84,8 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Consumer<ColorNotifier>(
         builder: (_, cn, __) {
           return IconButton(
-            splashColor: cn.onPrimary.splashColor,
-            highlightColor: cn.onPrimary.highlightColor,
+            splashColor: cn.onPrimary.splashNeutral,
+            highlightColor: cn.onPrimary.highlightNeutral,
             icon: Icon(FluentIcons.list_24_regular),
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             onPressed: () => Scaffold.of(context).openDrawer(),
@@ -131,7 +131,7 @@ class _HomeFAB extends StatelessWidget {
 
   void _onPressed(BuildContext context, ColorNotifier cn) {
     showModalBottomSheet(
-      barrierColor: cn.specific.scrimColor,
+      barrierColor: cn.specific.scrim,
       context: context,
       builder: (_) => _CreateActionsMenuSheet(context: context),
     );
@@ -181,7 +181,7 @@ class _CreateActionsMenuSheet extends StatelessWidget {
     Navigator.of(context).pop();
 
     showModalBottomSheet(
-      barrierColor: cn.specific.scrimColor,
+      barrierColor: cn.specific.scrim,
       context: context,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
@@ -232,7 +232,7 @@ class _CreateActionsMenuItem extends StatelessWidget {
         builder: (_, cn, __) {
           return Icon(
             icon,
-            color: cn.onSurface.lowEmphasisColor,
+            color: cn.onSurface.lowEmphasis,
           );
         },
       ),
@@ -241,7 +241,7 @@ class _CreateActionsMenuItem extends StatelessWidget {
           return Text(
             text,
             style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: cn.onSurface.highEmphasisColor,
+                  color: cn.onSurface.highEmphasis,
                 ),
           );
         },

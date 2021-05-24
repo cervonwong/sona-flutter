@@ -36,10 +36,10 @@ void main() {
     'ColorNotifier when theme changes, '
     'should have different colors for onSurface',
     () {
-      final color1 = colorNotifier.onSurface.highlightColor;
+      final color1 = colorNotifier.onSurface.highlightNeutral;
 
       colorNotifier.theme = ColorTheme.dark;
-      final color2 = colorNotifier.onSurface.highlightColor;
+      final color2 = colorNotifier.onSurface.highlightNeutral;
 
       expect(color1, isNot(color2));
     },
@@ -49,12 +49,12 @@ void main() {
     'ColorNotifier when listened, '
     'should get different colors for onSurface when theme changes',
     () {
-      final color1 = colorNotifier.onSurface.highlightColor;
+      final color1 = colorNotifier.onSurface.highlightNeutral;
       Color color2;
 
       colorNotifier.addListener(
         () {
-          color2 = colorNotifier.onSurface.highlightColor;
+          color2 = colorNotifier.onSurface.highlightNeutral;
           expect(color2, isNot(color1));
         },
       );
