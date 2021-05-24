@@ -28,21 +28,21 @@ ThemeData createLightTheme() {
 
   return ThemeData(
     // Primary
-    primaryColor: kPrimaryColor,
-    primaryColorDark: kPrimaryDarkColor,
-    primaryColorLight: kPrimaryLightColor,
+    primaryColor: ColorConstants.primary,
+    primaryColorDark: ColorConstants.primaryDark,
+    primaryColorLight: ColorConstants.primaryLight,
 
     // Secondary
-    accentColor: kPrimaryColor,
+    accentColor: ColorConstants.primary,
 
     // Other colors
-    backgroundColor: kNeutralColor2,
+    backgroundColor: ColorConstants.neutral2,
     canvasColor: Colors.white,
-    errorColor: kAccentRedColor,
-    highlightColor: kPrimaryHighlightColor,
-    scaffoldBackgroundColor: kNeutralColor2,
-    splashColor: kPrimarySplashColor,
-    shadowColor: kNeutralColor8,
+    errorColor: ColorConstants.accentRed,
+    highlightColor: ColorConstants.primaryHighlight,
+    scaffoldBackgroundColor: ColorConstants.neutral2,
+    splashColor: ColorConstants.primarySplash,
+    shadowColor: ColorConstants.neutral8,
 
     // Themes
     colorScheme: _createColorScheme(),
@@ -74,26 +74,26 @@ ColorScheme _createColorScheme() {
     brightness: Brightness.light,
 
     // Primary
-    primary: kPrimaryColor,
-    primaryVariant: kPrimaryDarkColor,
-    onPrimary: kOnDarkHighEmphasisColor,
+    primary: ColorConstants.primary,
+    primaryVariant: ColorConstants.primaryDark,
+    onPrimary: ColorConstants.onDarkHighEmphasis,
 
     // Secondary
-    secondary: kPrimaryColor,
-    secondaryVariant: kPrimaryDarkColor,
-    onSecondary: kOnDarkHighEmphasisColor,
+    secondary: ColorConstants.primary,
+    secondaryVariant: ColorConstants.primaryDark,
+    onSecondary: ColorConstants.onDarkHighEmphasis,
 
     // Surface
     surface: Colors.white,
-    onSurface: kOnLightHighEmphasisColor,
+    onSurface: ColorConstants.onLightHighEmphasis,
 
     // Background
-    background: kNeutralColor2,
-    onBackground: kOnLightHighEmphasisColor,
+    background: ColorConstants.neutral2,
+    onBackground: ColorConstants.onLightHighEmphasis,
 
     // Error
-    error: kAccentRedColor,
-    onError: kOnDarkHighEmphasisColor,
+    error: ColorConstants.accentRed,
+    onError: ColorConstants.onDarkHighEmphasis,
   );
 }
 
@@ -182,15 +182,15 @@ TextTheme _createBaseTextTheme() {
 
 TextTheme _createTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: kOnLightHighEmphasisColor,
-    displayColor: kOnLightHighEmphasisColor,
+    bodyColor: ColorConstants.onLightHighEmphasis,
+    displayColor: ColorConstants.onLightHighEmphasis,
   );
 }
 
 TextTheme _createPrimaryAndAccentTextTheme() {
   return _createBaseTextTheme().apply(
-    bodyColor: kOnDarkHighEmphasisColor,
-    displayColor: kOnDarkHighEmphasisColor,
+    bodyColor: ColorConstants.onDarkHighEmphasis,
+    displayColor: ColorConstants.onDarkHighEmphasis,
   );
 }
 
@@ -200,7 +200,7 @@ AppBarTheme _createAppBarTheme({@required TextTheme baseTextTheme}) {
     elevation: 0.0,
     backwardsCompatibility: false,
     backgroundColor: Colors.white,
-    foregroundColor: kOnLightHighEmphasisColor,
+    foregroundColor: ColorConstants.onLightHighEmphasis,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
@@ -226,8 +226,8 @@ BottomNavigationBarThemeData _createBottomNavigationBarTheme({
   return BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
     elevation: 0.0,
-    selectedItemColor: kPrimaryColor,
-    unselectedItemColor: kOnLightMediumEmphasisColor,
+    selectedItemColor: ColorConstants.primary,
+    unselectedItemColor: ColorConstants.onLightMediumEmphasis,
     selectedLabelStyle: baseTextTheme.subtitle2,
   );
 }
@@ -244,7 +244,7 @@ DialogTheme _createDialogTheme() {
 
 DividerThemeData _createDividerTheme() {
   return const DividerThemeData(
-    color: kNeutralColor4,
+    color: ColorConstants.neutral4,
     space: 0.0,
     thickness: 1.0,
   );
@@ -262,15 +262,15 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
       visualDensity: const VisualDensity(vertical: 2.0),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
-          return kNeutralColor5;
+          return ColorConstants.neutral5;
         }
-        return kOnDarkHighEmphasisColor;
+        return ColorConstants.onDarkHighEmphasis;
       }),
       backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
-          return kNeutralColor3;
+          return ColorConstants.neutral3;
         }
-        return kPrimaryColor;
+        return ColorConstants.primary;
       }),
     ),
   );
@@ -278,7 +278,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
 
 FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
   return const FloatingActionButtonThemeData(
-    splashColor: kLightSplashColor,
+    splashColor: ColorConstants.lightSplash,
   );
 }
 
@@ -287,7 +287,7 @@ InputDecorationTheme _createInputDecorationTheme({
 }) {
   return InputDecorationTheme(
     hintStyle: baseTextTheme.bodyText1.copyWith(
-      color: kOnLightMediumEmphasisColor,
+      color: ColorConstants.onLightMediumEmphasis,
     ),
   );
 }
@@ -304,12 +304,12 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
       visualDensity: const VisualDensity(vertical: 2.0),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.disabled)) {
-          return kNeutralColor5;
+          return ColorConstants.neutral5;
         }
-        return kPrimaryColor;
+        return ColorConstants.primary;
       }),
       side: MaterialStateProperty.all<BorderSide>(
-        const BorderSide(color: kNeutralColor4),
+        const BorderSide(color: ColorConstants.neutral4),
       ),
     ),
   );
@@ -322,23 +322,23 @@ SnackBarThemeData _createSnackBarTheme({@required TextTheme baseTextTheme}) {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
     ),
-    backgroundColor: kSnackBarBackgroundColor,
+    backgroundColor: ColorConstants.snackBarBackground,
     contentTextStyle: baseTextTheme.caption,
   );
 }
 
 TextSelectionThemeData _createTextSelectionTheme() {
   return const TextSelectionThemeData(
-    cursorColor: kPrimaryColor,
-    selectionColor: kPrimaryLightColor,
-    selectionHandleColor: kPrimaryColor,
+    cursorColor: ColorConstants.primary,
+    selectionColor: ColorConstants.primaryLight,
+    selectionHandleColor: ColorConstants.primary,
   );
 }
 
 TooltipThemeData _createTooltipTheme() {
   return TooltipThemeData(
     decoration: BoxDecoration(
-      color: kTooltipBackgroundColor,
+      color: ColorConstants.tooltipBackground,
       borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
     ),
   );
