@@ -34,11 +34,10 @@ class AlignmentModel extends DataClass implements Insertable<AlignmentModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return AlignmentModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -93,7 +92,7 @@ class AlignmentModel extends DataClass implements Insertable<AlignmentModel> {
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is AlignmentModel &&
           other.id == this.id &&
@@ -228,17 +227,15 @@ class CardModel extends DataClass implements Insertable<CardModel> {
   factory CardModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return CardModel(
-      entryId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
-      position:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      starred:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}starred']),
-      hidden:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}hidden']),
+      entryId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      position: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      starred: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}starred']),
+      hidden: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}hidden']),
     );
   }
   @override
@@ -318,7 +315,7 @@ class CardModel extends DataClass implements Insertable<CardModel> {
   int get hashCode => $mrjf($mrjc(entryId.hashCode,
       $mrjc(position.hashCode, $mrjc(starred.hashCode, hidden.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is CardModel &&
           other.entryId == this.entryId &&
@@ -523,17 +520,16 @@ class CardFormatModel extends DataClass implements Insertable<CardFormatModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return CardFormatModel(
-      entryTypeId: intType
+      entryTypeId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
-      position:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      frontStructureId: intType.mapFromDatabaseResponse(
+      position: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      frontStructureId: const IntType().mapFromDatabaseResponse(
           data['${effectivePrefix}front_structure_id']),
-      backStructureId: intType
+      backStructureId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}back_structure_id']),
     );
   }
@@ -632,7 +628,7 @@ class CardFormatModel extends DataClass implements Insertable<CardFormatModel> {
           $mrjc(name.hashCode,
               $mrjc(frontStructureId.hashCode, backStructureId.hashCode)))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is CardFormatModel &&
           other.entryTypeId == this.entryTypeId &&
@@ -871,16 +867,15 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return ComponentModel(
-      structureId: intType
+      structureId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
-      position:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      componentTypeId: intType
+      position: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      componentTypeId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}component_type_id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -962,7 +957,7 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
       $mrjc(
           position.hashCode, $mrjc(componentTypeId.hashCode, name.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is ComponentModel &&
           other.structureId == this.structureId &&
@@ -1164,11 +1159,10 @@ class ComponentTypeModel extends DataClass
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return ComponentTypeModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -1223,7 +1217,7 @@ class ComponentTypeModel extends DataClass
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is ComponentTypeModel &&
           other.id == this.id &&
@@ -1362,19 +1356,17 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
   factory DeckModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
     return DeckModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      created: dateTimeType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      created: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}created']),
-      lastEdited: dateTimeType
+      lastEdited: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}last_edited']),
-      authorName: stringType
+      authorName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}author_name']),
-      description: stringType
+      description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
     );
   }
@@ -1484,7 +1476,7 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
               $mrjc(lastEdited.hashCode,
                   $mrjc(authorName.hashCode, description.hashCode))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is DeckModel &&
           other.id == this.id &&
@@ -1741,12 +1733,11 @@ class EntryModel extends DataClass implements Insertable<EntryModel> {
   factory EntryModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     return EntryModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      deckId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}deck_id']),
-      entryTypeId: intType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      deckId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}deck_id']),
+      entryTypeId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
     );
   }
@@ -1814,7 +1805,7 @@ class EntryModel extends DataClass implements Insertable<EntryModel> {
   int get hashCode =>
       $mrjf($mrjc(id.hashCode, $mrjc(deckId.hashCode, entryTypeId.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is EntryModel &&
           other.id == this.id &&
@@ -1972,11 +1963,11 @@ class EntryTagModel extends DataClass implements Insertable<EntryTagModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     return EntryTagModel(
-      entryId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
-      tagId: intType.mapFromDatabaseResponse(data['${effectivePrefix}tag_id']),
+      entryId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      tagId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}tag_id']),
     );
   }
   @override
@@ -2034,7 +2025,7 @@ class EntryTagModel extends DataClass implements Insertable<EntryTagModel> {
   @override
   int get hashCode => $mrjf($mrjc(entryId.hashCode, tagId.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is EntryTagModel &&
           other.entryId == this.entryId &&
@@ -2165,11 +2156,10 @@ class EntryTypeModel extends DataClass implements Insertable<EntryTypeModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return EntryTypeModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -2224,7 +2214,7 @@ class EntryTypeModel extends DataClass implements Insertable<EntryTypeModel> {
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is EntryTypeModel &&
           other.id == this.id &&
@@ -2351,11 +2341,10 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     return FieldDatumModel(
-      entryId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
-      fieldSpecId: intType
+      entryId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      fieldSpecId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
     );
   }
@@ -2415,7 +2404,7 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
   @override
   int get hashCode => $mrjf($mrjc(entryId.hashCode, fieldSpecId.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FieldDatumModel &&
           other.entryId == this.entryId &&
@@ -2556,15 +2545,14 @@ class FieldSpecModel extends DataClass implements Insertable<FieldSpecModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return FieldSpecModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      fieldTypeId: intType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      fieldTypeId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}field_type_id']),
-      entryTypeId: intType
+      entryTypeId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -2642,7 +2630,7 @@ class FieldSpecModel extends DataClass implements Insertable<FieldSpecModel> {
   int get hashCode => $mrjf($mrjc(id.hashCode,
       $mrjc(fieldTypeId.hashCode, $mrjc(entryTypeId.hashCode, name.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FieldSpecModel &&
           other.id == this.id &&
@@ -2838,11 +2826,10 @@ class FieldTypeModel extends DataClass implements Insertable<FieldTypeModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return FieldTypeModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -2897,7 +2884,7 @@ class FieldTypeModel extends DataClass implements Insertable<FieldTypeModel> {
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FieldTypeModel &&
           other.id == this.id &&
@@ -3027,11 +3014,10 @@ class FillColorModel extends DataClass implements Insertable<FillColorModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return FillColorModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -3086,7 +3072,7 @@ class FillColorModel extends DataClass implements Insertable<FillColorModel> {
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FillColorModel &&
           other.id == this.id &&
@@ -3217,11 +3203,10 @@ class HighlightColorModel extends DataClass
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return HighlightColorModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -3276,7 +3261,7 @@ class HighlightColorModel extends DataClass
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is HighlightColorModel &&
           other.id == this.id &&
@@ -3412,14 +3397,13 @@ class ImageFieldDatumModel extends DataClass
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     return ImageFieldDatumModel(
-      entryId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
-      fieldSpecId: intType
+      entryId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      fieldSpecId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
-      imageId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}image_id']),
+      imageId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}image_id']),
     );
   }
   @override
@@ -3490,7 +3474,7 @@ class ImageFieldDatumModel extends DataClass
   int get hashCode => $mrjf(
       $mrjc(entryId.hashCode, $mrjc(fieldSpecId.hashCode, imageId.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is ImageFieldDatumModel &&
           other.entryId == this.entryId &&
@@ -3662,9 +3646,8 @@ class StructureModel extends DataClass implements Insertable<StructureModel> {
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     return StructureModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
     );
   }
   @override
@@ -3709,7 +3692,7 @@ class StructureModel extends DataClass implements Insertable<StructureModel> {
   @override
   int get hashCode => $mrjf(id.hashCode);
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is StructureModel && other.id == this.id);
 }
@@ -3806,11 +3789,10 @@ class TagModel extends DataClass implements Insertable<TagModel> {
   factory TagModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return TagModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
@@ -3865,7 +3847,7 @@ class TagModel extends DataClass implements Insertable<TagModel> {
   @override
   int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is TagModel && other.id == this.id && other.name == this.name);
 }
@@ -4008,27 +3990,26 @@ class TextComponentModel extends DataClass
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final doubleType = db.typeSystem.forDartType<double>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return TextComponentModel(
-      structureId: intType
+      structureId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
-      position:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      data: stringType.mapFromDatabaseResponse(data['${effectivePrefix}data']),
-      size: doubleType.mapFromDatabaseResponse(data['${effectivePrefix}size']),
-      alignmentId: intType
+      position: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      data: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}data']),
+      size: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}size']),
+      alignmentId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}alignment_id']),
-      fillColorId: intType
+      fillColorId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}fill_color_id']),
-      highlightColorId: intType.mapFromDatabaseResponse(
+      highlightColorId: const IntType().mapFromDatabaseResponse(
           data['${effectivePrefix}highlight_color_id']),
-      bold: boolType.mapFromDatabaseResponse(data['${effectivePrefix}bold']),
-      italic:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}italic']),
-      underlined: boolType
+      bold: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bold']),
+      italic: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}italic']),
+      underlined: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}underlined']),
     );
   }
@@ -4189,7 +4170,7 @@ class TextComponentModel extends DataClass
                                   $mrjc(italic.hashCode,
                                       underlined.hashCode))))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is TextComponentModel &&
           other.structureId == this.structureId &&
@@ -4601,14 +4582,12 @@ class TextFieldDatumModel extends DataClass
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return TextFieldDatumModel(
-      entryId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
-      fieldSpecId: intType
+      entryId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+      fieldSpecId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
-      rawText: stringType
+      rawText: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}raw_text']),
     );
   }
@@ -4681,7 +4660,7 @@ class TextFieldDatumModel extends DataClass
   int get hashCode => $mrjf(
       $mrjc(entryId.hashCode, $mrjc(fieldSpecId.hashCode, rawText.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is TextFieldDatumModel &&
           other.entryId == this.entryId &&
