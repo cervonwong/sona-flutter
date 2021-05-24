@@ -48,7 +48,7 @@ class StreakCounter extends StatelessWidget {
                   : cn.onSurface.lowEmphasisColor,
               size: 32.0,
             ),
-            const SizedBox(width: kSpacingPadding04),
+            const SizedBox(width: WidgetConstants.spacingPadding04),
             Text(
               '$streakCount',
               style: Theme.of(context).textTheme.headline6.copyWith(
@@ -57,7 +57,7 @@ class StreakCounter extends StatelessWidget {
                         : cn.onSurface.lowEmphasisColor,
                   ),
             ),
-            const SizedBox(width: kSpacingPadding16),
+            const SizedBox(width: WidgetConstants.spacingPadding16),
           ],
         );
       },

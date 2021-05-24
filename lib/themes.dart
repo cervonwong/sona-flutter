@@ -212,8 +212,8 @@ BottomSheetThemeData _createBottomSheetTheme() {
   return const BottomSheetThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(kCornerRadius32),
-        topRight: Radius.circular(kCornerRadius32),
+        topLeft: Radius.circular(WidgetConstants.cornerRadius32),
+        topRight: Radius.circular(WidgetConstants.cornerRadius32),
       ),
     ),
     modalBackgroundColor: Colors.white,
@@ -237,7 +237,7 @@ DialogTheme _createDialogTheme() {
     backgroundColor: Colors.white,
     elevation: 0.0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kCornerRadius16),
+      borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius16),
     ),
   );
 }
@@ -256,7 +256,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme() {
       elevation: MaterialStateProperty.all<double>(0.0),
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kCornerRadius12),
+          borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
         ),
       ),
       visualDensity: const VisualDensity(vertical: 2.0),
@@ -298,7 +298,7 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
       elevation: MaterialStateProperty.all<double>(0.0),
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kCornerRadius12),
+          borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
         ),
       ),
       visualDensity: const VisualDensity(vertical: 2.0),
@@ -320,7 +320,7 @@ SnackBarThemeData _createSnackBarTheme({@required TextTheme baseTextTheme}) {
     behavior: SnackBarBehavior.floating,
     elevation: 2.0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kCornerRadius12),
+      borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
     ),
     backgroundColor: kSnackBarBackgroundColor,
     contentTextStyle: baseTextTheme.caption,
@@ -339,7 +339,7 @@ TooltipThemeData _createTooltipTheme() {
   return TooltipThemeData(
     decoration: BoxDecoration(
       color: kTooltipBackgroundColor,
-      borderRadius: BorderRadius.circular(kCornerRadius12),
+      borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
     ),
   );
 }

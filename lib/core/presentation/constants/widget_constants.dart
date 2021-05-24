@@ -17,33 +17,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Shape
-const double kCornerRadius08 = 8.0;
-const double kCornerRadius12 = 12.0;
-const double kCornerRadius16 = 16.0;
-const double kCornerRadius32 = 32.0;
-const double kCornerRadiusMax = 999.0;
+class WidgetConstants {
+  WidgetConstants._(); // Prevent instantiation with private constructor.
 
-// Spacing Scale
-// Padding within the context of a component, for more refined spacing.
-// See: https://www.carbondesignsystem.com/guidelines/spacing/overview/#spacing-scale.
-const double kSpacingPadding02 = 2.0;
-const double kSpacingPadding04 = 4.0;
-const double kSpacingPadding08 = 8.0;
-const double kSpacingPadding12 = 12.0;
-const double kSpacingPadding16 = 16.0;
-const double kSpacingPadding24 = 24.0;
-const double kSpacingPadding32 = 32.0;
-const double kSpacingPadding40 = 40.0;
-const double kSpacingPadding48 = 48.0;
+  // Corner Radii
+  static const cornerRadius08 = 8.0;
+  static const cornerRadius12 = 12.0;
+  static const cornerRadius16 = 16.0;
+  static const cornerRadius32 = 32.0;
+  static const cornerRadiusMax = 999.0;
 
-// Layout Scale
-// Padding between components and other UI parts into a screen.
-// See: https://www.carbondesignsystem.com/guidelines/spacing/overview/#spacing-scale.
-const double kLayoutPadding016 = 16.0;
-const double kLayoutPadding024 = 24.0;
-const double kLayoutPadding032 = 32.0;
-const double kLayoutPadding048 = 48.0;
-const double kLayoutPadding064 = 64.0;
-const double kLayoutPadding096 = 96.0;
-const double kLayoutPadding160 = 160.0;
+  // Spacing Scale
+  // Padding within the context of a component, for more refined spacing.
+  // See: https://www.carbondesignsystem.com/guidelines/spacing/overview/#spacing-scale.
+  static const spacingPadding02 = 2.0;
+  static const spacingPadding04 = 4.0;
+  static const spacingPadding08 = 8.0;
+  static const spacingPadding12 = 12.0;
+  static const spacingPadding16 = 16.0;
+  static const spacingPadding24 = 24.0;
+  static const spacingPadding32 = 32.0;
+  static const spacingPadding40 = 40.0;
+  static const spacingPadding48 = 48.0;
+
+  // Layout Scale
+  // Padding between components and other UI parts into a screen.
+  // See: https://www.carbondesignsystem.com/guidelines/spacing/overview/#spacing-scale.
+  static const layoutPadding016 = 16.0;
+  static const layoutPadding024 = 24.0;
+  static const layoutPadding032 = 32.0;
+  static const layoutPadding048 = 48.0;
+  static const layoutPadding064 = 64.0;
+  static const layoutPadding096 = 96.0;
+  static const layoutPadding160 = 160.0;
+}

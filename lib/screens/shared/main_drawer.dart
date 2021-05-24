@@ -35,7 +35,7 @@ class MainDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.horizontal(
-        right: Radius.circular(kCornerRadius32),
+        right: Radius.circular(WidgetConstants.cornerRadius32),
       ),
       child: Drawer(
         child: Padding(
@@ -44,7 +44,7 @@ class MainDrawer extends StatelessWidget {
             style: ListTileStyle.drawer,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.horizontal(
-                right: Radius.circular(kCornerRadius12),
+                right: Radius.circular(WidgetConstants.cornerRadius32),
               ),
             ),
             child: SafeArea(
@@ -138,7 +138,7 @@ class _DrawerTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: selected ? Theme.of(context).colorScheme.primary : null,
         borderRadius: BorderRadius.horizontal(
-          right: Radius.circular(kCornerRadius12),
+          right: Radius.circular(WidgetConstants.cornerRadius32),
         ),
       ),
       child: ListTile(
