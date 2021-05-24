@@ -85,6 +85,76 @@ class ColorNotifier extends ChangeNotifier {
         _theme = theme;
 }
 
+abstract class _ColorGroup {
+  Color get splashColor;
+
+  Color get highlightColor;
+
+  Color get primarySplashColor;
+
+  Color get primaryHighlightColor;
+
+  Color get highEmphasisColor;
+
+  Color get mediumEmphasisColor;
+
+  Color get lowEmphasisColor;
+
+  Color get accentRedColor;
+
+  Color get accentOrangeColor;
+
+  Color get accentYellowColor;
+
+  Color get accentLimeColor;
+
+  Color get accentGreenColor;
+
+  Color get accentTealColor;
+
+  Color get accentCyanColor;
+
+  Color get accentSkyColor;
+
+  Color get accentBlueColor;
+
+  Color get accentPurpleColor;
+
+  Color get accentPinkColor;
+
+  Color get textFillBrownColor;
+
+  Color get textFillGrayColor4;
+
+  Color get textFillGrayColor3;
+
+  Color get textFillGrayColor2;
+
+  Color get textFillGrayColor1;
+
+  Color get textHighlightRedColor;
+
+  Color get textHighlightOrangeColor;
+
+  Color get textHighlightYellowColor;
+
+  Color get textHighlightLimeColor;
+
+  Color get textHighlightGreenColor;
+
+  Color get textHighlightTealColor;
+
+  Color get textHighlightCyanColor;
+
+  Color get textHighlightSkyColor;
+
+  Color get textHighlightBlueColor;
+
+  Color get textHighlightPurpleColor;
+
+  Color get textHighlightPinkColor;
+}
+
 /// Colors are generally darker to contrast against lighter colors.
 class _OnLightColorGroup implements _ColorGroup {
   @override
@@ -297,74 +367,8 @@ class _OnDarkColorGroup implements _ColorGroup {
   Color get textHighlightPinkColor => ColorConstants.textHighlightOnDarkPink;
 }
 
-abstract class _ColorGroup {
-  Color get splashColor;
-
-  Color get highlightColor;
-
-  Color get primarySplashColor;
-
-  Color get primaryHighlightColor;
-
-  Color get highEmphasisColor;
-
-  Color get mediumEmphasisColor;
-
-  Color get lowEmphasisColor;
-
-  Color get accentRedColor;
-
-  Color get accentOrangeColor;
-
-  Color get accentYellowColor;
-
-  Color get accentLimeColor;
-
-  Color get accentGreenColor;
-
-  Color get accentTealColor;
-
-  Color get accentCyanColor;
-
-  Color get accentSkyColor;
-
-  Color get accentBlueColor;
-
-  Color get accentPurpleColor;
-
-  Color get accentPinkColor;
-
-  Color get textFillBrownColor;
-
-  Color get textFillGrayColor4;
-
-  Color get textFillGrayColor3;
-
-  Color get textFillGrayColor2;
-
-  Color get textFillGrayColor1;
-
-  Color get textHighlightRedColor;
-
-  Color get textHighlightOrangeColor;
-
-  Color get textHighlightYellowColor;
-
-  Color get textHighlightLimeColor;
-
-  Color get textHighlightGreenColor;
-
-  Color get textHighlightTealColor;
-
-  Color get textHighlightCyanColor;
-
-  Color get textHighlightSkyColor;
-
-  Color get textHighlightBlueColor;
-
-  Color get textHighlightPurpleColor;
-
-  Color get textHighlightPinkColor;
+abstract class _SpecificColorGroup {
+  Color get scrimColor;
 }
 
 class _LightSpecificColorGroup extends _SpecificColorGroup {
@@ -376,10 +380,6 @@ class _DarkSpecificColorGroup extends _SpecificColorGroup {
   @override
   // TODO: implement drawerScrimColor
   Color get scrimColor => throw UnimplementedError();
-}
-
-abstract class _SpecificColorGroup {
-  Color get scrimColor;
 }
 
 enum ColorTheme { light, dark }
