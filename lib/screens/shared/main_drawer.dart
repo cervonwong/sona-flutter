@@ -34,7 +34,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.horizontal(
+      borderRadius: const BorderRadius.horizontal(
         right: Radius.circular(WidgetConstants.cornerRadius32),
       ),
       child: Drawer(
@@ -42,7 +42,7 @@ class MainDrawer extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16.0),
           child: ListTileTheme(
             style: ListTileStyle.drawer,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.horizontal(
                 right: Radius.circular(WidgetConstants.cornerRadius32),
               ),
@@ -78,8 +78,8 @@ class MainDrawer extends StatelessWidget {
                     selectedIcon: FluentIcons.data_pie_24_filled,
                     onTap: () {},
                   ),
-                  Spacer(),
-                  Divider(indent: 16.0),
+                  const Spacer(),
+                  const Divider(indent: 16.0),
                   _DrawerTile(
                     selected: selected == SelectableDrawerDestination.settings,
                     title: 'Settings',
@@ -137,7 +137,7 @@ class _DrawerTile extends StatelessWidget {
     return Ink(
       decoration: BoxDecoration(
         color: selected ? Theme.of(context).colorScheme.primary : null,
-        borderRadius: BorderRadius.horizontal(
+        borderRadius: const BorderRadius.horizontal(
           right: Radius.circular(WidgetConstants.cornerRadius32),
         ),
       ),

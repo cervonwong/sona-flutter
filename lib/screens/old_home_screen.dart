@@ -52,9 +52,9 @@ class OldHomeScreen extends StatelessWidget {
               return ListView(
                 children: [
                   HomeHeader(),
-                  SizedBox(height: 32.0),
+                  const SizedBox(height: 32.0),
                   DeckListTitleBar(),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   if (state is DeckListLoaded)
                     ...(state).decks.map<DeckListTile>(
                           (deck) => DeckListTile(
@@ -65,7 +65,7 @@ class OldHomeScreen extends StatelessWidget {
                             unscheduledCardCount: 500,
                           ),
                         ),
-                  SizedBox(height: 100),
+                  const SizedBox(height: 100),
                 ],
               );
             },
@@ -80,13 +80,13 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Home'),
+      title: const Text('Home'),
       leading: Consumer<ColorNotifier>(
         builder: (_, cn, __) {
           return IconButton(
             splashColor: cn.onPrimary.splashNeutral,
             highlightColor: cn.onPrimary.highlightNeutral,
-            icon: Icon(FluentIcons.list_24_regular),
+            icon: const Icon(FluentIcons.list_24_regular),
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
@@ -96,7 +96,7 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class HomeHeader extends StatelessWidget {
@@ -122,7 +122,7 @@ class _HomeFAB extends StatelessWidget {
         builder: (_, cn, __) {
           return FloatingActionButton(
             onPressed: () => _onPressed(context, cn),
-            child: Icon(FluentIcons.add_24_regular),
+            child: const Icon(FluentIcons.add_24_regular),
           );
         },
       ),
@@ -148,7 +148,7 @@ class _CreateActionsMenuSheet extends StatelessWidget {
     return Consumer<ColorNotifier>(
       builder: (_, cn, __) {
         return Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 32.0,
             bottom: 16.0,
           ),

@@ -44,7 +44,7 @@ class DeckListTitleBar extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(width: 12.0),
+              const SizedBox(width: 12.0),
               Consumer<ColorNotifier>(
                 builder: (_, cn, __) {
                   return Text(
@@ -57,7 +57,7 @@ class DeckListTitleBar extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           SizedBox(
             height: 24.0,
             width: 24.0,

@@ -81,10 +81,10 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
                 return Container();
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton.icon(
-              icon: Icon(FluentIcons.add_24_regular),
-              label: Text('CREATE'),
+              icon: const Icon(FluentIcons.add_24_regular),
+              label: const Text('CREATE'),
               onPressed: _deckName.isEmpty
                   ? null
                   : () {
@@ -139,7 +139,7 @@ class _DeckNameTextField extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1.copyWith(
                   color: cn.onSurface.highEmphasis,
                 ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               isCollapsed: true,
               border: InputBorder.none,
               hintText: 'A cool deck name...',
@@ -156,14 +156,14 @@ class _DeckNameAlreadyExistsMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 16.0),
+        const SizedBox(height: 16.0),
         Row(
           children: [
             Icon(
               FluentIcons.emoji_surprise_24_regular,
               color: Theme.of(context).colorScheme.error,
             ),
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             Flexible(
               child: Text(
                 'There\'s already a deck with this name!',

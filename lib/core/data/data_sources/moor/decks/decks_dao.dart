@@ -70,8 +70,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
         name: name,
         created: systemTime.now(),
         lastEdited: systemTime.now(),
-        authorName: Value(kDefaultDeckAuthorName),
-        description: Value(kDefaultDeckDescription),
+        authorName: const Value(kDefaultDeckAuthorName),
+        description: const Value(kDefaultDeckDescription),
       ),
     );
     // Returns the deck from the database specified by its ID.

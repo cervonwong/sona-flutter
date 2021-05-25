@@ -126,7 +126,7 @@ void main() {
           );
           when(getAllDecks()).thenAnswer((_) async => [deck1, deck2, deck3]);
 
-          bloc.add(DeckCreated(name: 'Valid'));
+          bloc.add(const DeckCreated(name: 'Valid'));
           await expectLater(
             bloc.stream,
             emitsInOrder(
@@ -173,7 +173,7 @@ void main() {
             ),
           );
 
-          bloc.add(DeckCreated(name: ''));
+          bloc.add(const DeckCreated(name: ''));
           await expectLater(
             bloc.stream,
             emitsInOrder(
@@ -219,7 +219,7 @@ void main() {
             ),
           );
 
-          bloc.add(DeckCreated(name: 'Duplicate'));
+          bloc.add(const DeckCreated(name: 'Duplicate'));
           await expectLater(
             bloc.stream,
             emitsInOrder(
@@ -265,7 +265,7 @@ void main() {
             ),
           );
 
-          bloc.add(DeckCreated(name: 'Hey\nHo'));
+          bloc.add(const DeckCreated(name: 'Hey\nHo'));
           await expectLater(
             bloc.stream,
             emitsInOrder(

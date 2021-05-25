@@ -31,7 +31,7 @@ void main() {
   final mockComponent2 = MockComponent();
   final mockComponent3 = MockComponent();
 
-  final emptyStructure = CardFormatStructure.empty();
+  final emptyStructure = const CardFormatStructure.empty();
   final smallStructure = CardFormatStructure(components: [mockComponent1]);
   final mediumStructure = CardFormatStructure(components: [
     mockComponent1,
@@ -316,7 +316,7 @@ void main() {
     'CardFormatStructure when equating logically equal CardFormatStructures, '
     'should return true',
     () {
-      expect(emptyStructure, CardFormatStructure.empty());
+      expect(emptyStructure, const CardFormatStructure.empty());
       expect(
         mediumStructure,
         CardFormatStructure(components: [mockComponent1, mockComponent2]),

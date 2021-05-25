@@ -232,7 +232,7 @@ void main() {
             TextComponent(
               name: 'Illegal component name',
               data: 'Illegal component data',
-              style: TextComponentStyle(size: 0.10),
+              style: const TextComponentStyle(size: 0.10),
               // size >= 0.10 and size <= 10.0 is legal.
             );
           },
@@ -256,7 +256,7 @@ void main() {
             TextComponent(
               name: 'Illegal component name',
               data: 'Illegal component data',
-              style: TextComponentStyle(size: 10.0),
+              style: const TextComponentStyle(size: 10.0),
               // 0.10 <= size <= 10.0 is legal.
             );
           },
@@ -270,7 +270,7 @@ void main() {
     'TextComponent and TextComponentStyle copyWith, '
     'should return TextComponent with expected altered fields',
     () {
-      final style1 = TextComponentStyle(
+      final style1 = const TextComponentStyle(
         size: 5.0,
         alignment: TextComponentAlignment.justify,
         fillColor: TextComponentFillColor.blue,

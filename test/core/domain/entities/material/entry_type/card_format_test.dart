@@ -37,8 +37,8 @@ void main() {
 
           expect(cardFormat.id, 1);
           expect(cardFormat.name, 'Basic Front Format');
-          expect(cardFormat.front, CardFormatStructure.empty());
-          expect(cardFormat.back, CardFormatStructure.empty());
+          expect(cardFormat.front, const CardFormatStructure.empty());
+          expect(cardFormat.back, const CardFormatStructure.empty());
         },
       );
 

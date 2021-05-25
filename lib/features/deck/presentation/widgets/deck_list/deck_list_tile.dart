@@ -90,7 +90,7 @@ class DeckListTile extends StatelessWidget {
                 Row(
                   children: [
                     _DeckNameTitle(deckName: deckName),
-                    SizedBox(width: 24.0),
+                    const SizedBox(width: 24.0),
                     unreviewedCardCount == 0
                         ? _CompletedReviewCheckmark()
                         : _UnreviewedCardCounter(
@@ -99,7 +99,7 @@ class DeckListTile extends StatelessWidget {
                           ),
                   ],
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 _FamiliarityProgressBar(
                   familiarCardPercentage: familiarCardPercentage,
                   color: color,
@@ -204,7 +204,7 @@ class _FamiliarityProgressBar extends StatelessWidget {
       builder: (_, cn, __) {
         return LinearPercentIndicator(
           percent: familiarCardPercentage,
-          padding: EdgeInsets.symmetric(horizontal: 4.0),
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
           lineHeight: 8.0,
           progressColor: color,
           backgroundColor: color.withOpacity(0.2),
