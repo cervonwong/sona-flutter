@@ -15,29 +15,29 @@ title Relationships of tables in SQLite database for material models.\n
 footer Copyright (C) 2020 Cervon Wong
 
 object decks {
-	id                  : INTEGER           <<PK, gen>>
-	name                : TEXT              <<unique>>
-	created             : INTEGER(DATETIME) <<gen>>
-	last_edited         : INTEGER(DATETIME) <<gen>>
-	authorName          : TEXT              <<nullable>>
-	description         : TEXT              <<nullable>>
-	deck_icon_symbol_id : INTEGER           <<FK>>
-	deck_icon_color_id  : INTEGER           <<FK>>
+	id            : INTEGER           <<PK, gen>>
+	name          : TEXT              <<unique>>
+	created       : INTEGER(DATETIME) <<gen>>
+	last_edited   : INTEGER(DATETIME) <<gen>>
+	author_name   : TEXT              <<nullable>>
+	description   : TEXT              <<nullable>>
+	symbol_id     : INTEGER           <<FK>>
+	icon_color_id : INTEGER           <<FK>>
 }
 
-object deck_icon_symbols {
-	id : INTEGER <<PK>>
+object symbols {
+	id   : INTEGER <<PK>>
 	name : TEXT <<unique>>
 }
 
-object deck_icon_colors {
-	id : INTEGER <<PK>>
+object icon_colors {
+	id   : INTEGER <<PK>>
 	name : TEXT <<unique>>
 }
 
-object deck_icon_symbol_search_terms {
-	deck_icon_symbol_id : INTEGER <<FK, cPK>>
-	term                : TEXT <<cPK>>
+object symbol_search_terms {
+	symbol_id : INTEGER <<FK, cPK>>
+	term      : TEXT <<cPK>>
 }
 
 object entries {
@@ -156,9 +156,9 @@ object component_types {
 	name : TEXT    <<unique>>
 }
 
-decks             }o-||      deck_icon_symbols
-decks             }o-||      deck_icon_colors
-deck_icon_symbols ||-|{      deck_icon_symbol_search_terms
+decks             }o-||      symbols
+decks             }o-||      icon_colors
+symbols           ||-|{      symbol_search_terms
 decks             ||---o{    entries
 entries           ||---|{    cards
 entries           ||-o{      entries_tags
