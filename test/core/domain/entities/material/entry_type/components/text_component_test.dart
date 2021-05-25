@@ -22,249 +22,252 @@ import 'package:sona_flutter/core/domain/entities/material/entry_type/components
 import 'package:sona_flutter/core/domain/entities/material/entry_type/components/text_component.dart';
 
 void main() {
-  group('TextComponent when constructed', () {
-    test(
-      'should have type ComponentType.text',
-      () {
-        final textComponent = TextComponent(
-          name: 'A random component',
-          data: 'A slow brown fox',
-        );
+  group(
+    'TextComponent when constructed',
+    () {
+      test(
+        'should have type ComponentType.text',
+        () {
+          final textComponent = TextComponent(
+            name: 'A random component',
+            data: 'A slow brown fox',
+          );
 
-        expect(textComponent.type, ComponentType.text);
-      },
-    );
+          expect(textComponent.type, ComponentType.text);
+        },
+      );
 
-    test(
-      'without optional arguments, '
-      'should have expected default fields',
-      () {
-        final textComponent = TextComponent(
-          name: 'My Component',
-          data: 'The quick brown fox.',
-        );
+      test(
+        'without optional arguments, '
+        'should have expected default fields',
+        () {
+          final textComponent = TextComponent(
+            name: 'My Component',
+            data: 'The quick brown fox.',
+          );
 
-        expect(textComponent.name, 'My Component');
-        expect(textComponent.data, 'The quick brown fox.');
-        expect(textComponent.style.size, 1.0);
-        expect(
-          textComponent.style.alignment,
-          TextComponentAlignment.center,
-        );
-        expect(
-          textComponent.style.fillColor,
-          TextComponentFillColor.neutral,
-        );
-        expect(
-          textComponent.style.highlightColor,
-          TextComponentHighlightColor.none,
-        );
-        expect(textComponent.style.isBold, false);
-        expect(textComponent.style.isItalic, false);
-        expect(textComponent.style.isUnderlined, false);
-      },
-    );
+          expect(textComponent.name, 'My Component');
+          expect(textComponent.data, 'The quick brown fox.');
+          expect(textComponent.style.size, 1.0);
+          expect(
+            textComponent.style.alignment,
+            TextComponentAlignment.center,
+          );
+          expect(
+            textComponent.style.fillColor,
+            TextComponentFillColor.neutral,
+          );
+          expect(
+            textComponent.style.highlightColor,
+            TextComponentHighlightColor.none,
+          );
+          expect(textComponent.style.isBold, false);
+          expect(textComponent.style.isItalic, false);
+          expect(textComponent.style.isUnderlined, false);
+        },
+      );
 
-    test(
-      'with null arguments, '
-      'should fail asserts',
-      () {
-        expect(
-          () {
-            TextComponent(
-              name: null,
-              data: 'Null component data',
-            );
-          },
-          throwsAssertionError,
-        );
+      test(
+        'with null arguments, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              TextComponent(
+                name: null,
+                data: 'Null component data',
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: null,
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: null,
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: null,
-            );
-          },
-          throwsAssertionError,
-        );
-      },
-    );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: null,
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
 
-    test(
-      'with style constructed with null arguments, '
-      'should fail asserts',
-      () {
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(size: null),
-            );
-          },
-          throwsAssertionError,
-        );
+      test(
+        'with style constructed with null arguments, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(size: null),
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(alignment: null),
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(alignment: null),
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(fillColor: null),
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(fillColor: null),
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(highlightColor: null),
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(highlightColor: null),
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(isBold: null),
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(isBold: null),
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(isItalic: null),
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(isItalic: null),
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Null component name',
-              data: 'Null component data',
-              style: TextComponentStyle(isUnderlined: null),
-            );
-          },
-          throwsAssertionError,
-        );
-      },
-    );
+          expect(
+            () {
+              TextComponent(
+                name: 'Null component name',
+                data: 'Null component data',
+                style: TextComponentStyle(isUnderlined: null),
+              );
+            },
+            throwsAssertionError,
+          );
+        },
+      );
 
-    test(
-      'with illegal name, '
-      'should fail asserts',
-      () {
-        expect(
-          () {
-            TextComponent(
-              name: 'x' * 151, // name > 150 characters is illegal.
-              data: 'Illegal component data',
-            );
-          },
-          throwsAssertionError,
-        );
+      test(
+        'with illegal name, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              TextComponent(
+                name: 'x' * 151, // name > 150 characters is illegal.
+                data: 'Illegal component data',
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'x' * 150, // name <= 150 characters is legal.
-              data: 'Legal component data',
-            );
-          },
-          isNot(throwsAssertionError),
-        );
-      },
-    );
+          expect(
+            () {
+              TextComponent(
+                name: 'x' * 150, // name <= 150 characters is legal.
+                data: 'Legal component data',
+              );
+            },
+            isNot(throwsAssertionError),
+          );
+        },
+      );
 
-    test(
-      'with style with illegal size, '
-      'should fail asserts',
-      () {
-        expect(
-          () {
-            TextComponent(
-              name: 'Illegal component name',
-              data: 'Illegal component data',
-              style: TextComponentStyle(size: 0.09),
-              // size < 0.1 is illegal.
-            );
-          },
-          throwsAssertionError,
-        );
+      test(
+        'with style with illegal size, '
+        'should fail asserts',
+        () {
+          expect(
+            () {
+              TextComponent(
+                name: 'Illegal component name',
+                data: 'Illegal component data',
+                style: TextComponentStyle(size: 0.09),
+                // size < 0.1 is illegal.
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Illegal component name',
-              data: 'Illegal component data',
-              style: const TextComponentStyle(size: 0.10),
-              // size >= 0.10 and size <= 10.0 is legal.
-            );
-          },
-          isNot(throwsAssertionError),
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Illegal component name',
+                data: 'Illegal component data',
+                style: const TextComponentStyle(size: 0.10),
+                // size >= 0.10 and size <= 10.0 is legal.
+              );
+            },
+            isNot(throwsAssertionError),
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Illegal component name',
-              data: 'Illegal component data',
-              style: TextComponentStyle(size: 10.01),
-              // size > 10.0 is illegal.
-            );
-          },
-          throwsAssertionError,
-        );
+          expect(
+            () {
+              TextComponent(
+                name: 'Illegal component name',
+                data: 'Illegal component data',
+                style: TextComponentStyle(size: 10.01),
+                // size > 10.0 is illegal.
+              );
+            },
+            throwsAssertionError,
+          );
 
-        expect(
-          () {
-            TextComponent(
-              name: 'Illegal component name',
-              data: 'Illegal component data',
-              style: const TextComponentStyle(size: 10.0),
-              // 0.10 <= size <= 10.0 is legal.
-            );
-          },
-          isNot(throwsAssertionError),
-        );
-      },
-    );
-  });
+          expect(
+            () {
+              TextComponent(
+                name: 'Illegal component name',
+                data: 'Illegal component data',
+                style: const TextComponentStyle(size: 10.0),
+                // 0.10 <= size <= 10.0 is legal.
+              );
+            },
+            isNot(throwsAssertionError),
+          );
+        },
+      );
+    },
+  );
 
   test(
     'TextComponent and TextComponentStyle copyWith, '
