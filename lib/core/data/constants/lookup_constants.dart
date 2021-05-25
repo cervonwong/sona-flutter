@@ -17,98 +17,146 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Entity : EntryFieldType
-// Table  : field_types
-const int kFieldTypeTextId = 1;
-const int kFieldTypeImageId = 2;
+// These values will rarely change throughout the lifetime of the app.
+class LookupConstants {
+  LookupConstants._(); // Prevent instantiation with private constructor.
 
-const String kFieldTypeTextName = 'TEXT';
-const String kFieldTypeImageName = 'IMAGE';
+  // Entity : EntryFieldType
+  // Table  : field_types
+  static const fieldTypeTextId = 1;
+  static const fieldTypeImageId = 2;
+  static const fieldTypeTextName = 'TEXT';
+  static const fieldTypeImageName = 'IMAGE';
+  static const fieldTypeMap = {
+    fieldTypeTextId: fieldTypeTextName,
+    fieldTypeImageId: fieldTypeImageName
+  };
 
-// Entity : ComponentType
-// Table  : component_types
-const int kComponentTypeTextId = 1;
-const int kComponentTypeImageId = 2;
-const int kComponentTypeDividerId = 3;
+  // Entity : ComponentType
+  // Table  : component_types
+  static const componentTypeTextId = 1;
+  static const componentTypeImageId = 2;
+  static const componentTypeDividerId = 3;
+  static const componentTypeTextName = 'TEXT';
+  static const componentTypeImageName = 'IMAGE';
+  static const componentTypeDividerName = 'DIVIDER';
+  static const componentTypeMap = {
+    componentTypeTextId: componentTypeTextName,
+    componentTypeImageId: componentTypeImageName,
+    componentTypeDividerId: componentTypeDividerName,
+  };
 
-const String kComponentTypeTextName = 'TEXT';
-const String kComponentTypeImageName = 'IMAGE';
-const String kComponentTypeDividerName = 'DIVIDER';
+  // Entity : TextComponentAlignment
+  // Table  : alignments
+  static const alignmentCenterId = 1;
+  static const alignmentStartId = 2;
+  static const alignmentEndId = 3;
+  static const alignmentJustifyId = 4;
+  static const alignmentCenterName = 'CENTER';
+  static const alignmentStartName = 'START';
+  static const alignmentEndName = 'END';
+  static const alignmentJustifyName = 'JUSTIFY';
+  static const alignmentMap = {
+    alignmentCenterId: alignmentCenterName,
+    alignmentStartId: alignmentStartName,
+    alignmentEndId: alignmentEndName,
+    alignmentJustifyId: alignmentJustifyName,
+  };
 
-// Entity : TextComponentAlignment
-// Table  : alignments
-const int kAlignmentCenterId = 1;
-const int kAlignmentStartId = 2;
-const int kAlignmentEndId = 3;
-const int kAlignmentJustifyId = 4;
+  // Entity : TextComponentFillColor (TO BE CHANGED)
+  // Table  : fill_colors
+  static const fillColorDefaultId = 1;
+  static const fillColorGray4Id = 2;
+  static const fillColorGray3Id = 3;
+  static const fillColorGray2Id = 4;
+  static const fillColorGray1Id = 5;
+  static const fillColorRedId = 6;
+  static const fillColorOrangeId = 7;
+  static const fillColorYellowId = 8;
+  static const fillColorLimeId = 9;
+  static const fillColorGreenId = 10;
+  static const fillColorTealId = 11;
+  static const fillColorCyanId = 12;
+  static const fillColorSkyId = 13;
+  static const fillColorBlueId = 14;
+  static const fillColorPurpleId = 15;
+  static const fillColorPinkId = 16;
+  static const fillColorBrownId = 17;
+  static const fillColorDefaultName = 'DEFAULT';
+  static const fillColorGray4Name = 'GRAY 4';
+  static const fillColorGray3Name = 'GRAY 3';
+  static const fillColorGray2Name = 'GRAY 2';
+  static const fillColorGray1Name = 'GRAY 1';
+  static const fillColorRedName = 'RED';
+  static const fillColorOrangeName = 'ORANGE';
+  static const fillColorYellowName = 'YELLOW';
+  static const fillColorLimeName = 'LIME';
+  static const fillColorGreenName = 'GREEN';
+  static const fillColorTealName = 'TEAL';
+  static const fillColorCyanName = 'CYAN';
+  static const fillColorSkyName = 'SKY';
+  static const fillColorBlueName = 'BLUE';
+  static const fillColorPurpleName = 'PURPLE';
+  static const fillColorPinkName = 'PINK';
+  static const fillColorBrownName = 'BROWN';
+  static const fillColorMap = {
+    fillColorDefaultId: fillColorDefaultName,
+    fillColorGray4Id: fillColorGray4Name,
+    fillColorGray3Id: fillColorGray3Name,
+    fillColorGray2Id: fillColorGray2Name,
+    fillColorGray1Id: fillColorGray1Name,
+    fillColorRedId: fillColorRedName,
+    fillColorOrangeId: fillColorOrangeName,
+    fillColorYellowId: fillColorYellowName,
+    fillColorLimeId: fillColorLimeName,
+    fillColorGreenId: fillColorGreenName,
+    fillColorTealId: fillColorTealName,
+    fillColorCyanId: fillColorCyanName,
+    fillColorSkyId: fillColorSkyName,
+    fillColorBlueId: fillColorBlueName,
+    fillColorPurpleId: fillColorPurpleName,
+    fillColorPinkId: fillColorPinkName,
+    fillColorBrownId: fillColorBrownName,
+  };
 
-const String kAlignmentCenterName = 'CENTER';
-const String kAlignmentStartName = 'START';
-const String kAlignmentEndName = 'END';
-const String kAlignmentJustifyName = 'JUSTIFY';
-
-// Entity : TextComponentFillColor (TO BE CHANGED)
-// Table  : fill_colors
-const int kFillColorDefaultId = 1;
-const int kFillColorGray4Id = 2;
-const int kFillColorGray3Id = 3;
-const int kFillColorGray2Id = 4;
-const int kFillColorGray1Id = 5;
-const int kFillColorRedId = 6;
-const int kFillColorOrangeId = 7;
-const int kFillColorYellowId = 8;
-const int kFillColorLimeId = 9;
-const int kFillColorGreenId = 10;
-const int kFillColorTealId = 11;
-const int kFillColorCyanId = 12;
-const int kFillColorSkyId = 13;
-const int kFillColorBlueId = 14;
-const int kFillColorPurpleId = 15;
-const int kFillColorPinkId = 16;
-const int kFillColorBrownId = 17;
-
-const String kFillColorDefaultName = 'DEFAULT';
-const String kFillColorGray4Name = 'GRAY 4';
-const String kFillColorGray3Name = 'GRAY 3';
-const String kFillColorGray2Name = 'GRAY 2';
-const String kFillColorGray1Name = 'GRAY 1';
-const String kFillColorRedName = 'RED';
-const String kFillColorOrangeName = 'ORANGE';
-const String kFillColorYellowName = 'YELLOW';
-const String kFillColorLimeName = 'LIME';
-const String kFillColorGreenName = 'GREEN';
-const String kFillColorTealName = 'TEAL';
-const String kFillColorCyanName = 'CYAN';
-const String kFillColorSkyName = 'SKY';
-const String kFillColorBlueName = 'BLUE';
-const String kFillColorPurpleName = 'PURPLE';
-const String kFillColorPinkName = 'PINK';
-const String kFillColorBrownName = 'BROWN';
-
-// Entity : TextComponentHighlightColor
-// Table  : highlight_colors
-const int kHighlightColorNoneId = 1;
-const int kHighlightColorRedId = 2;
-const int kHighlightColorOrangeId = 3;
-const int kHighlightColorYellowId = 4;
-const int kHighlightColorLimeId = 5;
-const int kHighlightColorGreenId = 6;
-const int kHighlightColorTealId = 7;
-const int kHighlightColorCyanId = 8;
-const int kHighlightColorSkyId = 9;
-const int kHighlightColorBlueId = 10;
-const int kHighlightColorPurpleId = 11;
-const int kHighlightColorPinkId = 12;
-
-const String kHighlightColorNoneName = 'NONE';
-const String kHighlightColorRedName = 'RED';
-const String kHighlightColorOrangeName = 'ORANGE';
-const String kHighlightColorYellowName = 'YELLOW';
-const String kHighlightColorLimeName = 'LIME';
-const String kHighlightColorGreenName = 'GREEN';
-const String kHighlightColorTealName = 'TEAL';
-const String kHighlightColorCyanName = 'CYAN';
-const String kHighlightColorSkyName = 'SKY';
-const String kHighlightColorBlueName = 'BLUE';
-const String kHighlightColorPurpleName = 'PURPLE';
-const String kHighlightColorPinkName = 'PINK';
+  // Entity : TextComponentHighlightColor
+  // Table  : highlight_colors
+  static const highlightColorNoneId = 1;
+  static const highlightColorRedId = 2;
+  static const highlightColorOrangeId = 3;
+  static const highlightColorYellowId = 4;
+  static const highlightColorLimeId = 5;
+  static const highlightColorGreenId = 6;
+  static const highlightColorTealId = 7;
+  static const highlightColorCyanId = 8;
+  static const highlightColorSkyId = 9;
+  static const highlightColorBlueId = 10;
+  static const highlightColorPurpleId = 11;
+  static const highlightColorPinkId = 12;
+  static const highlightColorNoneName = 'NONE';
+  static const highlightColorRedName = 'RED';
+  static const highlightColorOrangeName = 'ORANGE';
+  static const highlightColorYellowName = 'YELLOW';
+  static const highlightColorLimeName = 'LIME';
+  static const highlightColorGreenName = 'GREEN';
+  static const highlightColorTealName = 'TEAL';
+  static const highlightColorCyanName = 'CYAN';
+  static const highlightColorSkyName = 'SKY';
+  static const highlightColorBlueName = 'BLUE';
+  static const highlightColorPurpleName = 'PURPLE';
+  static const highlightColorPinkName = 'PINK';
+  static const highlightColorMap = {
+    highlightColorNoneId: highlightColorNoneName,
+    highlightColorRedId: highlightColorRedName,
+    highlightColorOrangeId: highlightColorOrangeName,
+    highlightColorYellowId: highlightColorYellowName,
+    highlightColorLimeId: highlightColorLimeName,
+    highlightColorGreenId: highlightColorGreenName,
+    highlightColorTealId: highlightColorTealName,
+    highlightColorCyanId: highlightColorCyanName,
+    highlightColorSkyId: highlightColorSkyName,
+    highlightColorBlueId: highlightColorBlueName,
+    highlightColorPurpleId: highlightColorPurpleName,
+    highlightColorPinkId: highlightColorPinkName,
+  };
+}

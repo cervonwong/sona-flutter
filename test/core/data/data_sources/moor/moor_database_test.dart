@@ -50,8 +50,12 @@ void main() {
           expect(
             fieldTypeModels,
             [
-              FieldTypeModel(id: kFieldTypeTextId, name: kFieldTypeTextName),
-              FieldTypeModel(id: kFieldTypeImageId, name: kFieldTypeImageName),
+              FieldTypeModel(
+                  id: LookupConstants.fieldTypeTextId,
+                  name: LookupConstants.fieldTypeTextName),
+              FieldTypeModel(
+                  id: LookupConstants.fieldTypeImageId,
+                  name: LookupConstants.fieldTypeImageName),
             ],
           );
         },
@@ -67,16 +71,16 @@ void main() {
             componentTypeModels,
             [
               ComponentTypeModel(
-                id: kComponentTypeTextId,
-                name: kComponentTypeTextName,
+                id: LookupConstants.componentTypeTextId,
+                name: LookupConstants.componentTypeTextName,
               ),
               ComponentTypeModel(
-                id: kComponentTypeImageId,
-                name: kComponentTypeImageName,
+                id: LookupConstants.componentTypeImageId,
+                name: LookupConstants.componentTypeImageName,
               ),
               ComponentTypeModel(
-                id: kComponentTypeDividerId,
-                name: kComponentTypeDividerName,
+                id: LookupConstants.componentTypeDividerId,
+                name: LookupConstants.componentTypeDividerName,
               ),
             ],
           );
@@ -93,20 +97,20 @@ void main() {
             alignmentModels,
             [
               AlignmentModel(
-                id: kAlignmentCenterId,
-                name: kAlignmentCenterName,
+                id: LookupConstants.alignmentCenterId,
+                name: LookupConstants.alignmentCenterName,
               ),
               AlignmentModel(
-                id: kAlignmentStartId,
-                name: kAlignmentStartName,
+                id: LookupConstants.alignmentStartId,
+                name: LookupConstants.alignmentStartName,
               ),
               AlignmentModel(
-                id: kAlignmentEndId,
-                name: kAlignmentEndName,
+                id: LookupConstants.alignmentEndId,
+                name: LookupConstants.alignmentEndName,
               ),
               AlignmentModel(
-                id: kAlignmentJustifyId,
-                name: kAlignmentJustifyName,
+                id: LookupConstants.alignmentJustifyId,
+                name: LookupConstants.alignmentJustifyName,
               ),
             ],
           );
@@ -123,72 +127,72 @@ void main() {
             fillColorModels,
             [
               FillColorModel(
-                id: kFillColorDefaultId,
-                name: kFillColorDefaultName,
+                id: LookupConstants.fillColorDefaultId,
+                name: LookupConstants.fillColorDefaultName,
               ),
               FillColorModel(
-                id: kFillColorGray4Id,
-                name: kFillColorGray4Name,
+                id: LookupConstants.fillColorGray4Id,
+                name: LookupConstants.fillColorGray4Name,
               ),
               FillColorModel(
-                id: kFillColorGray3Id,
-                name: kFillColorGray3Name,
+                id: LookupConstants.fillColorGray3Id,
+                name: LookupConstants.fillColorGray3Name,
               ),
               FillColorModel(
-                id: kFillColorGray2Id,
-                name: kFillColorGray2Name,
+                id: LookupConstants.fillColorGray2Id,
+                name: LookupConstants.fillColorGray2Name,
               ),
               FillColorModel(
-                id: kFillColorGray1Id,
-                name: kFillColorGray1Name,
+                id: LookupConstants.fillColorGray1Id,
+                name: LookupConstants.fillColorGray1Name,
               ),
               FillColorModel(
-                id: kFillColorRedId,
-                name: kFillColorRedName,
+                id: LookupConstants.fillColorRedId,
+                name: LookupConstants.fillColorRedName,
               ),
               FillColorModel(
-                id: kFillColorOrangeId,
-                name: kFillColorOrangeName,
+                id: LookupConstants.fillColorOrangeId,
+                name: LookupConstants.fillColorOrangeName,
               ),
               FillColorModel(
-                id: kFillColorYellowId,
-                name: kFillColorYellowName,
+                id: LookupConstants.fillColorYellowId,
+                name: LookupConstants.fillColorYellowName,
               ),
               FillColorModel(
-                id: kFillColorLimeId,
-                name: kFillColorLimeName,
+                id: LookupConstants.fillColorLimeId,
+                name: LookupConstants.fillColorLimeName,
               ),
               FillColorModel(
-                id: kFillColorGreenId,
-                name: kFillColorGreenName,
+                id: LookupConstants.fillColorGreenId,
+                name: LookupConstants.fillColorGreenName,
               ),
               FillColorModel(
-                id: kFillColorTealId,
-                name: kFillColorTealName,
+                id: LookupConstants.fillColorTealId,
+                name: LookupConstants.fillColorTealName,
               ),
               FillColorModel(
-                id: kFillColorCyanId,
-                name: kFillColorCyanName,
+                id: LookupConstants.fillColorCyanId,
+                name: LookupConstants.fillColorCyanName,
               ),
               FillColorModel(
-                id: kFillColorSkyId,
-                name: kFillColorSkyName,
+                id: LookupConstants.fillColorSkyId,
+                name: LookupConstants.fillColorSkyName,
               ),
               FillColorModel(
-                id: kFillColorBlueId,
-                name: kFillColorBlueName,
+                id: LookupConstants.fillColorBlueId,
+                name: LookupConstants.fillColorBlueName,
               ),
               FillColorModel(
-                id: kFillColorPurpleId,
-                name: kFillColorPurpleName,
+                id: LookupConstants.fillColorPurpleId,
+                name: LookupConstants.fillColorPurpleName,
               ),
               FillColorModel(
-                id: kFillColorPinkId,
-                name: kFillColorPinkName,
+                id: LookupConstants.fillColorPinkId,
+                name: LookupConstants.fillColorPinkName,
               ),
               FillColorModel(
-                id: kFillColorBrownId,
-                name: kFillColorBrownName,
+                id: LookupConstants.fillColorBrownId,
+                name: LookupConstants.fillColorBrownName,
               ),
             ],
           );
@@ -206,52 +210,52 @@ void main() {
             highlightColorModels,
             [
               HighlightColorModel(
-                id: kHighlightColorNoneId,
-                name: kHighlightColorNoneName,
+                id: LookupConstants.highlightColorNoneId,
+                name: LookupConstants.highlightColorNoneName,
               ),
               HighlightColorModel(
-                id: kHighlightColorRedId,
-                name: kHighlightColorRedName,
+                id: LookupConstants.highlightColorRedId,
+                name: LookupConstants.highlightColorRedName,
               ),
               HighlightColorModel(
-                id: kHighlightColorOrangeId,
-                name: kHighlightColorOrangeName,
+                id: LookupConstants.highlightColorOrangeId,
+                name: LookupConstants.highlightColorOrangeName,
               ),
               HighlightColorModel(
-                id: kHighlightColorYellowId,
-                name: kHighlightColorYellowName,
+                id: LookupConstants.highlightColorYellowId,
+                name: LookupConstants.highlightColorYellowName,
               ),
               HighlightColorModel(
-                id: kHighlightColorLimeId,
-                name: kHighlightColorLimeName,
+                id: LookupConstants.highlightColorLimeId,
+                name: LookupConstants.highlightColorLimeName,
               ),
               HighlightColorModel(
-                id: kHighlightColorGreenId,
-                name: kHighlightColorGreenName,
+                id: LookupConstants.highlightColorGreenId,
+                name: LookupConstants.highlightColorGreenName,
               ),
               HighlightColorModel(
-                id: kHighlightColorTealId,
-                name: kHighlightColorTealName,
+                id: LookupConstants.highlightColorTealId,
+                name: LookupConstants.highlightColorTealName,
               ),
               HighlightColorModel(
-                id: kHighlightColorCyanId,
-                name: kHighlightColorCyanName,
+                id: LookupConstants.highlightColorCyanId,
+                name: LookupConstants.highlightColorCyanName,
               ),
               HighlightColorModel(
-                id: kHighlightColorSkyId,
-                name: kHighlightColorSkyName,
+                id: LookupConstants.highlightColorSkyId,
+                name: LookupConstants.highlightColorSkyName,
               ),
               HighlightColorModel(
-                id: kHighlightColorBlueId,
-                name: kHighlightColorBlueName,
+                id: LookupConstants.highlightColorBlueId,
+                name: LookupConstants.highlightColorBlueName,
               ),
               HighlightColorModel(
-                id: kHighlightColorPurpleId,
-                name: kHighlightColorPurpleName,
+                id: LookupConstants.highlightColorPurpleId,
+                name: LookupConstants.highlightColorPurpleName,
               ),
               HighlightColorModel(
-                id: kHighlightColorPinkId,
-                name: kHighlightColorPinkName,
+                id: LookupConstants.highlightColorPinkId,
+                name: LookupConstants.highlightColorPinkName,
               ),
             ],
           );

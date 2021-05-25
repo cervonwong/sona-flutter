@@ -72,186 +72,45 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeFieldTypes(Batch batch) {
     batch.insertAll(
       fieldTypes,
-      [
-        FieldTypeModel(id: kFieldTypeTextId, name: kFieldTypeTextName),
-        FieldTypeModel(id: kFieldTypeImageId, name: kFieldTypeImageName),
-      ],
+      LookupConstants.fieldTypeMap.entries
+          .map((entry) => FieldTypeModel(id: entry.key, name: entry.value))
+          .toList(),
     );
   }
 
   void _initializeComponentTypes(Batch batch) {
     batch.insertAll(
       componentTypes,
-      [
-        ComponentTypeModel(
-          id: kComponentTypeTextId,
-          name: kComponentTypeTextName,
-        ),
-        ComponentTypeModel(
-          id: kComponentTypeImageId,
-          name: kComponentTypeImageName,
-        ),
-        ComponentTypeModel(
-          id: kComponentTypeDividerId,
-          name: kComponentTypeDividerName,
-        ),
-      ],
+      LookupConstants.componentTypeMap.entries
+          .map((entry) => ComponentTypeModel(id: entry.key, name: entry.value))
+          .toList(),
     );
   }
 
   void _initializeAlignments(Batch batch) {
     batch.insertAll(
       alignments,
-      [
-        AlignmentModel(
-          id: kAlignmentCenterId,
-          name: kAlignmentCenterName,
-        ),
-        AlignmentModel(
-          id: kAlignmentStartId,
-          name: kAlignmentStartName,
-        ),
-        AlignmentModel(
-          id: kAlignmentEndId,
-          name: kAlignmentEndName,
-        ),
-        AlignmentModel(
-          id: kAlignmentJustifyId,
-          name: kAlignmentJustifyName,
-        ),
-      ],
+      LookupConstants.alignmentMap.entries
+          .map((entry) => AlignmentModel(id: entry.key, name: entry.value))
+          .toList(),
     );
   }
 
   void _initializeFillColors(Batch batch) {
     batch.insertAll(
       fillColors,
-      [
-        FillColorModel(
-          id: kFillColorDefaultId,
-          name: kFillColorDefaultName,
-        ),
-        FillColorModel(
-          id: kFillColorGray4Id,
-          name: kFillColorGray4Name,
-        ),
-        FillColorModel(
-          id: kFillColorGray3Id,
-          name: kFillColorGray3Name,
-        ),
-        FillColorModel(
-          id: kFillColorGray2Id,
-          name: kFillColorGray2Name,
-        ),
-        FillColorModel(
-          id: kFillColorGray1Id,
-          name: kFillColorGray1Name,
-        ),
-        FillColorModel(
-          id: kFillColorRedId,
-          name: kFillColorRedName,
-        ),
-        FillColorModel(
-          id: kFillColorOrangeId,
-          name: kFillColorOrangeName,
-        ),
-        FillColorModel(
-          id: kFillColorYellowId,
-          name: kFillColorYellowName,
-        ),
-        FillColorModel(
-          id: kFillColorLimeId,
-          name: kFillColorLimeName,
-        ),
-        FillColorModel(
-          id: kFillColorGreenId,
-          name: kFillColorGreenName,
-        ),
-        FillColorModel(
-          id: kFillColorTealId,
-          name: kFillColorTealName,
-        ),
-        FillColorModel(
-          id: kFillColorCyanId,
-          name: kFillColorCyanName,
-        ),
-        FillColorModel(
-          id: kFillColorSkyId,
-          name: kFillColorSkyName,
-        ),
-        FillColorModel(
-          id: kFillColorBlueId,
-          name: kFillColorBlueName,
-        ),
-        FillColorModel(
-          id: kFillColorPurpleId,
-          name: kFillColorPurpleName,
-        ),
-        FillColorModel(
-          id: kFillColorPinkId,
-          name: kFillColorPinkName,
-        ),
-        FillColorModel(
-          id: kFillColorBrownId,
-          name: kFillColorBrownName,
-        ),
-      ],
+      LookupConstants.fillColorMap.entries
+          .map((entry) => FillColorModel(id: entry.key, name: entry.value))
+          .toList(),
     );
   }
 
   void _initializeHighlightColors(Batch batch) {
     batch.insertAll(
       highlightColors,
-      [
-        HighlightColorModel(
-          id: kHighlightColorNoneId,
-          name: kHighlightColorNoneName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorRedId,
-          name: kHighlightColorRedName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorOrangeId,
-          name: kHighlightColorOrangeName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorYellowId,
-          name: kHighlightColorYellowName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorLimeId,
-          name: kHighlightColorLimeName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorGreenId,
-          name: kHighlightColorGreenName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorTealId,
-          name: kHighlightColorTealName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorCyanId,
-          name: kHighlightColorCyanName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorSkyId,
-          name: kHighlightColorSkyName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorBlueId,
-          name: kHighlightColorBlueName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorPurpleId,
-          name: kHighlightColorPurpleName,
-        ),
-        HighlightColorModel(
-          id: kHighlightColorPinkId,
-          name: kHighlightColorPinkName,
-        ),
-      ],
+      LookupConstants.highlightColorMap.entries
+          .map((entry) => HighlightColorModel(id: entry.key, name: entry.value))
+          .toList(),
     );
   }
 }
