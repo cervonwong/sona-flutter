@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -27,8 +25,8 @@ import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 
 // This is an integration test with MoorDatabase.
 void main() {
-  EntriesDao dao;
-  MoorDatabase db;
+  late EntriesDao dao;
+  late MoorDatabase db;
 
   setUp(() async {
     db = MoorDatabase.custom(VmDatabase.memory(
@@ -43,7 +41,7 @@ void main() {
     dao = EntriesDaoImpl(db: db);
   });
 
-  tearDown(() async => await db?.close());
+  tearDown(() async => await db.close());
 
   Future<List<EntryModel>> selectAll() async => db.select(db.entries).get();
 
@@ -54,7 +52,7 @@ void main() {
         'when passed legal arguments '
         '(called three times to create three entries)',
         () {
-          EntryModel entry1, entry2, entry3;
+          late EntryModel entry1, entry2, entry3;
           setUp(() async {
             entry1 = await dao.create(deckId: 1, entryTypeId: 1);
             entry2 = await dao.create(deckId: 2, entryTypeId: 1);
@@ -120,36 +118,6 @@ void main() {
           );
         },
       );
-
-      group(
-        'when passed null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'deckId is null',
-            () async {
-              expect(
-                () async {
-                  await dao.create(deckId: null, entryTypeId: 1);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'entryTypeId is null',
-            () async {
-              expect(
-                () async {
-                  await dao.create(deckId: 1, entryTypeId: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
     },
   );
 
@@ -174,19 +142,6 @@ void main() {
           final result = await dao.getSingle(id: 1);
 
           expect(result, isNull);
-        },
-      );
-
-      test(
-        'when passed null id, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.getSingle(id: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
     },
@@ -246,7 +201,7 @@ void main() {
       group(
         'when called with legal deckId',
         () {
-          EntryModel entry1, entry2, entry3, entry4;
+          late EntryModel entry1, entry2, entry3, entry4;
           setUp(() async {
             entry1 = await dao.create(deckId: 1, entryTypeId: 1);
             entry2 = await dao.create(deckId: 1, entryTypeId: 2);
@@ -321,19 +276,6 @@ void main() {
           );
         },
       );
-
-      test(
-        'when passed null newEntry, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.edit(newEntry: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
     },
   );
 
@@ -362,19 +304,6 @@ void main() {
       );
 
       test(
-        'when passed null id, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.remove(id: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
         'when no entries in the db has the same id as the passed id, '
         'should fail asserts',
         () async {
@@ -396,7 +325,7 @@ void main() {
         'when passed legal entryList, '
         'should delete expected records in the entries table',
         () {
-          EntryModel entry1, entry2, entry3;
+          late EntryModel entry1, entry2, entry3;
           setUp(() async {
             entry1 = await dao.create(deckId: 1, entryTypeId: 1);
             entry2 = await dao.create(deckId: 2, entryTypeId: 1);
@@ -466,36 +395,6 @@ void main() {
               } on ModelNotFoundException {}
 
               expect(await selectAll(), [entry1]);
-            },
-          );
-        },
-      );
-
-      group(
-        'when passed illegal entryList, '
-        'should fail asserts',
-        () {
-          test(
-            'entryList is null',
-            () async {
-              expect(
-                () async {
-                  await dao.removeAll(entryList: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'entryList contains null',
-            () async {
-              expect(
-                () async {
-                  await dao.removeAll(entryList: [null]);
-                },
-                throwsAssertionError,
-              );
             },
           );
         },

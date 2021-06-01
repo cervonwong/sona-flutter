@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
 import '../../../data_exceptions.dart';
@@ -29,33 +26,30 @@ import 'entries_table.dart';
 part 'entries_dao.g.dart';
 
 abstract class EntriesDao {
-  Future<EntryModel> create({@required int deckId, @required int entryTypeId});
+  Future<EntryModel> create({required int deckId, required int entryTypeId});
 
-  Future<EntryModel> getSingle({@required int id});
+  Future<EntryModel?> getSingle({required int id});
 
-  Future<List<EntryModel>> getAll({int deckId});
+  Future<List<EntryModel>> getAll({int? deckId});
 
-  Future<void> edit({@required EntryModel newEntry});
+  Future<void> edit({required EntryModel newEntry});
 
-  Future<void> remove({@required int id});
+  Future<void> remove({required int id});
 
-  Future<void> removeAll({@required List<EntryModel> entryList});
+  Future<void> removeAll({required List<EntryModel> entryList});
 }
 
 @UseDao(tables: [Entries])
 class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
     with _$EntriesDaoImplMixin
     implements EntriesDao {
-  EntriesDaoImpl({@required MoorDatabase db}) : super(db);
+  EntriesDaoImpl({required MoorDatabase db}) : super(db);
 
   @override
   Future<EntryModel> create({
-    @required int deckId,
-    @required int entryTypeId,
+    required int deckId,
+    required int entryTypeId,
   }) async {
-    assert(deckId != null);
-    assert(entryTypeId != null);
-
     final id = await into(entries).insert(
       EntriesCompanion.insert(
         deckId: deckId,
@@ -63,19 +57,17 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
       ),
     );
 
-    return getSingle(id: id);
+    return (select(entries)..where((entry) => entry.id.equals(id))).getSingle();
   }
 
   @override
-  Future<EntryModel> getSingle({@required int id}) {
-    assert(id != null);
-
+  Future<EntryModel?> getSingle({required int id}) {
     return (select(entries)..where((entry) => entry.id.equals(id)))
         .getSingleOrNull();
   }
 
   @override
-  Future<List<EntryModel>> getAll({int deckId}) async {
+  Future<List<EntryModel>> getAll({int? deckId}) async {
     final selectStatement = select(entries);
 
     if (deckId != null) {
@@ -86,8 +78,7 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<void> edit({@required EntryModel newEntry}) async {
-    assert(newEntry != null);
+  Future<void> edit({required EntryModel newEntry}) async {
     assert((await getSingle(id: newEntry.id)) != null);
 
     await (update(entries)..whereSamePrimaryKey(newEntry)).write(
@@ -99,9 +90,7 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<void> remove({@required int id}) async {
-    assert(id != null);
-
+  Future<void> remove({required int id}) async {
     final deletedCount = await (delete(entries)
           ..where(
             (entry) => entry.id.equals(id),
@@ -111,10 +100,7 @@ class EntriesDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<void> removeAll({@required List<EntryModel> entryList}) async {
-    assert(entryList != null);
-    assert(!entryList.contains(null));
-
+  Future<void> removeAll({required List<EntryModel> entryList}) async {
     // Checks that all entries in entryList exist.
     await transaction(
       () async {
