@@ -60,7 +60,6 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// inputs before passing them to this method.
   @override
   Future<DeckModel> create({required String name}) async {
-    assert(name != null);
     // Asserts that a deck with the same name in the db does not exist.
     assert((await getByName(name: name)) == null);
 
@@ -83,24 +82,17 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// Returns a `Future(null)` if there are no decks in the database with a
   /// matching ID.
   @override
-  Future<DeckModel?> getById({required int id}) {
-    assert(id != null);
-
-    return (select(decks)..where((deck) => deck.id.equals(id)))
-        .getSingleOrNull();
-  }
+  Future<DeckModel?> getById({required int id}) =>
+      (select(decks)..where((deck) => deck.id.equals(id))).getSingleOrNull();
 
   /// Returns the [DeckModel] of the deck in the database with a matching name.
   ///
   /// Returns a `Future(null)` if there are no decks in the database with a
   /// matching name.
   @override
-  Future<DeckModel?> getByName({required String name}) {
-    assert(name != null);
-
-    return (select(decks)..where((deck) => deck.name.equals(name)))
-        .getSingleOrNull();
-  }
+  Future<DeckModel?> getByName({required String name}) =>
+      (select(decks)..where((deck) => deck.name.equals(name)))
+          .getSingleOrNull();
 
   /// Returns the list of [DeckModel]s of all decks in the database.
   ///
@@ -131,7 +123,6 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// This method is not named `update` because of naming conflicts.
   @override
   Future<DeckModel> edit({required DeckModel newDeck}) async {
-    assert(newDeck != null);
     // Asserts that a deck with the same ID as the passed deck's ID exists.
     assert((await getById(id: newDeck.id)) != null);
     // Asserts that a deck with the same name as the passed deck's name and is
@@ -168,8 +159,6 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// This method is not named `delete` because of naming conflicts.
   @override
   Future<void> remove({required int id}) async {
-    assert(id != null);
-
     // Deletes the deck specified by its ID,
     // then gets the number of deleted decks.
     final deletedCount = await (delete(decks)
