@@ -1,25 +1,5 @@
-// @dart=2.9
-
-/*
- * Sona is a cross-platform educational app which helps you remember
- * facts easier, developed with Flutter.
- * Copyright (C) 2020, 2021 Cervon Wong
- *
- * Sona is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Sona is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'moor_database.dart';
 
@@ -206,8 +186,8 @@ class $AlignmentsTable extends Alignments
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   AlignmentModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return AlignmentModel.fromData(data, _db, prefix: effectivePrefix);
+    return AlignmentModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -496,8 +476,8 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   Set<GeneratedColumn> get $primaryKey => {entryId, position};
   @override
   CardModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return CardModel.fromData(data, _db, prefix: effectivePrefix);
+    return CardModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -845,8 +825,8 @@ class $CardFormatsTable extends CardFormats
   Set<GeneratedColumn> get $primaryKey => {entryTypeId, position};
   @override
   CardFormatModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return CardFormatModel.fromData(data, _db, prefix: effectivePrefix);
+    return CardFormatModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -1142,8 +1122,8 @@ class $ComponentsTable extends Components
   Set<GeneratedColumn> get $primaryKey => {structureId, position};
   @override
   ComponentModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ComponentModel.fromData(data, _db, prefix: effectivePrefix);
+    return ComponentModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -1331,8 +1311,8 @@ class $ComponentTypesTable extends ComponentTypes
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   ComponentTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ComponentTypeModel.fromData(data, _db, prefix: effectivePrefix);
+    return ComponentTypeModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -1716,8 +1696,8 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   DeckModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return DeckModel.fromData(data, _db, prefix: effectivePrefix);
+    return DeckModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -1947,8 +1927,8 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   EntryModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return EntryModel.fromData(data, _db, prefix: effectivePrefix);
+    return EntryModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -2140,8 +2120,8 @@ class $EntriesTagsTable extends EntriesTags
   Set<GeneratedColumn> get $primaryKey => {entryId, tagId};
   @override
   EntryTagModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return EntryTagModel.fromData(data, _db, prefix: effectivePrefix);
+    return EntryTagModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -2325,8 +2305,8 @@ class $EntryTypesTable extends EntryTypes
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   EntryTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return EntryTypeModel.fromData(data, _db, prefix: effectivePrefix);
+    return EntryTypeModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -2523,8 +2503,8 @@ class $FieldDataTable extends FieldData
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
   FieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return FieldDatumModel.fromData(data, _db, prefix: effectivePrefix);
+    return FieldDatumModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -2810,8 +2790,8 @@ class $FieldSpecsTable extends FieldSpecs
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   FieldSpecModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return FieldSpecModel.fromData(data, _db, prefix: effectivePrefix);
+    return FieldSpecModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -2998,8 +2978,8 @@ class $FieldTypesTable extends FieldTypes
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   FieldTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return FieldTypeModel.fromData(data, _db, prefix: effectivePrefix);
+    return FieldTypeModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3186,8 +3166,8 @@ class $FillColorsTable extends FillColors
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   FillColorModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return FillColorModel.fromData(data, _db, prefix: effectivePrefix);
+    return FillColorModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3376,8 +3356,8 @@ class $HighlightColorsTable extends HighlightColors
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   HighlightColorModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return HighlightColorModel.fromData(data, _db, prefix: effectivePrefix);
+    return HighlightColorModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3631,8 +3611,8 @@ class $ImageFieldDataTable extends ImageFieldData
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
   ImageFieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ImageFieldDatumModel.fromData(data, _db, prefix: effectivePrefix);
+    return ImageFieldDatumModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3774,8 +3754,8 @@ class $StructuresTable extends Structures
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   StructureModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return StructureModel.fromData(data, _db, prefix: effectivePrefix);
+    return StructureModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3955,8 +3935,8 @@ class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   TagModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return TagModel.fromData(data, _db, prefix: effectivePrefix);
+    return TagModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -4561,8 +4541,8 @@ class $TextComponentsTable extends TextComponents
   Set<GeneratedColumn> get $primaryKey => {structureId, position};
   @override
   TextComponentModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return TextComponentModel.fromData(data, _db, prefix: effectivePrefix);
+    return TextComponentModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -4817,8 +4797,8 @@ class $TextFieldDataTable extends TextFieldData
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
   TextFieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return TextFieldDatumModel.fromData(data, _db, prefix: effectivePrefix);
+    return TextFieldDatumModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
