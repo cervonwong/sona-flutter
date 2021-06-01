@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of 'moor_database.dart';
 
@@ -11,38 +10,35 @@ part of 'moor_database.dart';
 class AlignmentModel extends DataClass implements Insertable<AlignmentModel> {
   final int id;
   final String name;
-  AlignmentModel({@required this.id, @required this.name});
+  AlignmentModel({required this.id, required this.name});
   factory AlignmentModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return AlignmentModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   AlignmentsCompanion toCompanion(bool nullToAbsent) {
     return AlignmentsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory AlignmentModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return AlignmentModel(
       id: serializer.fromJson<int>(json['id']),
@@ -50,7 +46,7 @@ class AlignmentModel extends DataClass implements Insertable<AlignmentModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -58,7 +54,7 @@ class AlignmentModel extends DataClass implements Insertable<AlignmentModel> {
     };
   }
 
-  AlignmentModel copyWith({int id, String name}) => AlignmentModel(
+  AlignmentModel copyWith({int? id, String? name}) => AlignmentModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -90,11 +86,11 @@ class AlignmentsCompanion extends UpdateCompanion<AlignmentModel> {
   });
   AlignmentsCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<AlignmentModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -102,7 +98,7 @@ class AlignmentsCompanion extends UpdateCompanion<AlignmentModel> {
     });
   }
 
-  AlignmentsCompanion copyWith({Value<int> id, Value<String> name}) {
+  AlignmentsCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return AlignmentsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -134,12 +130,11 @@ class AlignmentsCompanion extends UpdateCompanion<AlignmentModel> {
 class $AlignmentsTable extends Alignments
     with TableInfo<$AlignmentsTable, AlignmentModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $AlignmentsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn(
       'id',
@@ -149,9 +144,8 @@ class $AlignmentsTable extends Alignments
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -171,11 +165,11 @@ class $AlignmentsTable extends Alignments
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -185,7 +179,7 @@ class $AlignmentsTable extends Alignments
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  AlignmentModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  AlignmentModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return AlignmentModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -202,60 +196,45 @@ class CardModel extends DataClass implements Insertable<CardModel> {
   final bool starred;
   final bool hidden;
   CardModel(
-      {@required this.entryId,
-      @required this.position,
-      @required this.starred,
-      @required this.hidden});
+      {required this.entryId,
+      required this.position,
+      required this.starred,
+      required this.hidden});
   factory CardModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return CardModel(
       entryId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       position: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}position'])!,
       starred: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}starred']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}starred'])!,
       hidden: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}hidden']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}hidden'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || entryId != null) {
-      map['entry_id'] = Variable<int>(entryId);
-    }
-    if (!nullToAbsent || position != null) {
-      map['position'] = Variable<int>(position);
-    }
-    if (!nullToAbsent || starred != null) {
-      map['starred'] = Variable<bool>(starred);
-    }
-    if (!nullToAbsent || hidden != null) {
-      map['hidden'] = Variable<bool>(hidden);
-    }
+    map['entry_id'] = Variable<int>(entryId);
+    map['position'] = Variable<int>(position);
+    map['starred'] = Variable<bool>(starred);
+    map['hidden'] = Variable<bool>(hidden);
     return map;
   }
 
   CardsCompanion toCompanion(bool nullToAbsent) {
     return CardsCompanion(
-      entryId: entryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryId),
-      position: position == null && nullToAbsent
-          ? const Value.absent()
-          : Value(position),
-      starred: starred == null && nullToAbsent
-          ? const Value.absent()
-          : Value(starred),
-      hidden:
-          hidden == null && nullToAbsent ? const Value.absent() : Value(hidden),
+      entryId: Value(entryId),
+      position: Value(position),
+      starred: Value(starred),
+      hidden: Value(hidden),
     );
   }
 
   factory CardModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return CardModel(
       entryId: serializer.fromJson<int>(json['entryId']),
@@ -265,7 +244,7 @@ class CardModel extends DataClass implements Insertable<CardModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'entryId': serializer.toJson<int>(entryId),
@@ -275,7 +254,8 @@ class CardModel extends DataClass implements Insertable<CardModel> {
     };
   }
 
-  CardModel copyWith({int entryId, int position, bool starred, bool hidden}) =>
+  CardModel copyWith(
+          {int? entryId, int? position, bool? starred, bool? hidden}) =>
       CardModel(
         entryId: entryId ?? this.entryId,
         position: position ?? this.position,
@@ -318,19 +298,19 @@ class CardsCompanion extends UpdateCompanion<CardModel> {
     this.hidden = const Value.absent(),
   });
   CardsCompanion.insert({
-    @required int entryId,
-    @required int position,
-    @required bool starred,
-    @required bool hidden,
+    required int entryId,
+    required int position,
+    required bool starred,
+    required bool hidden,
   })  : entryId = Value(entryId),
         position = Value(position),
         starred = Value(starred),
         hidden = Value(hidden);
   static Insertable<CardModel> custom({
-    Expression<int> entryId,
-    Expression<int> position,
-    Expression<bool> starred,
-    Expression<bool> hidden,
+    Expression<int>? entryId,
+    Expression<int>? position,
+    Expression<bool>? starred,
+    Expression<bool>? hidden,
   }) {
     return RawValuesInsertable({
       if (entryId != null) 'entry_id': entryId,
@@ -341,10 +321,10 @@ class CardsCompanion extends UpdateCompanion<CardModel> {
   }
 
   CardsCompanion copyWith(
-      {Value<int> entryId,
-      Value<int> position,
-      Value<bool> starred,
-      Value<bool> hidden}) {
+      {Value<int>? entryId,
+      Value<int>? position,
+      Value<bool>? starred,
+      Value<bool>? hidden}) {
     return CardsCompanion(
       entryId: entryId ?? this.entryId,
       position: position ?? this.position,
@@ -385,21 +365,19 @@ class CardsCompanion extends UpdateCompanion<CardModel> {
 
 class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $CardsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  GeneratedIntColumn _entryId;
   @override
-  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  late final GeneratedIntColumn entryId = _constructEntryId();
   GeneratedIntColumn _constructEntryId() {
     return GeneratedIntColumn('entry_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entries(id)');
   }
 
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  GeneratedIntColumn _position;
   @override
-  GeneratedIntColumn get position => _position ??= _constructPosition();
+  late final GeneratedIntColumn position = _constructPosition();
   GeneratedIntColumn _constructPosition() {
     return GeneratedIntColumn(
       'position',
@@ -409,9 +387,8 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   }
 
   final VerificationMeta _starredMeta = const VerificationMeta('starred');
-  GeneratedBoolColumn _starred;
   @override
-  GeneratedBoolColumn get starred => _starred ??= _constructStarred();
+  late final GeneratedBoolColumn starred = _constructStarred();
   GeneratedBoolColumn _constructStarred() {
     return GeneratedBoolColumn(
       'starred',
@@ -421,9 +398,8 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   }
 
   final VerificationMeta _hiddenMeta = const VerificationMeta('hidden');
-  GeneratedBoolColumn _hidden;
   @override
-  GeneratedBoolColumn get hidden => _hidden ??= _constructHidden();
+  late final GeneratedBoolColumn hidden = _constructHidden();
   GeneratedBoolColumn _constructHidden() {
     return GeneratedBoolColumn(
       'hidden',
@@ -447,25 +423,25 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
     final data = instance.toColumns(true);
     if (data.containsKey('entry_id')) {
       context.handle(_entryIdMeta,
-          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
     if (data.containsKey('position')) {
       context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('starred')) {
       context.handle(_starredMeta,
-          starred.isAcceptableOrUnknown(data['starred'], _starredMeta));
+          starred.isAcceptableOrUnknown(data['starred']!, _starredMeta));
     } else if (isInserting) {
       context.missing(_starredMeta);
     }
     if (data.containsKey('hidden')) {
       context.handle(_hiddenMeta,
-          hidden.isAcceptableOrUnknown(data['hidden'], _hiddenMeta));
+          hidden.isAcceptableOrUnknown(data['hidden']!, _hiddenMeta));
     } else if (isInserting) {
       context.missing(_hiddenMeta);
     }
@@ -475,7 +451,7 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, position};
   @override
-  CardModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  CardModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return CardModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -493,69 +469,51 @@ class CardFormatModel extends DataClass implements Insertable<CardFormatModel> {
   final int frontStructureId;
   final int backStructureId;
   CardFormatModel(
-      {@required this.entryTypeId,
-      @required this.position,
-      @required this.name,
-      @required this.frontStructureId,
-      @required this.backStructureId});
+      {required this.entryTypeId,
+      required this.position,
+      required this.name,
+      required this.frontStructureId,
+      required this.backStructureId});
   factory CardFormatModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return CardFormatModel(
       entryTypeId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id'])!,
       position: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}position'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       frontStructureId: const IntType().mapFromDatabaseResponse(
-          data['${effectivePrefix}front_structure_id']),
-      backStructureId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}back_structure_id']),
+          data['${effectivePrefix}front_structure_id'])!,
+      backStructureId: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}back_structure_id'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || entryTypeId != null) {
-      map['entry_type_id'] = Variable<int>(entryTypeId);
-    }
-    if (!nullToAbsent || position != null) {
-      map['position'] = Variable<int>(position);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
-    if (!nullToAbsent || frontStructureId != null) {
-      map['front_structure_id'] = Variable<int>(frontStructureId);
-    }
-    if (!nullToAbsent || backStructureId != null) {
-      map['back_structure_id'] = Variable<int>(backStructureId);
-    }
+    map['entry_type_id'] = Variable<int>(entryTypeId);
+    map['position'] = Variable<int>(position);
+    map['name'] = Variable<String>(name);
+    map['front_structure_id'] = Variable<int>(frontStructureId);
+    map['back_structure_id'] = Variable<int>(backStructureId);
     return map;
   }
 
   CardFormatsCompanion toCompanion(bool nullToAbsent) {
     return CardFormatsCompanion(
-      entryTypeId: entryTypeId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryTypeId),
-      position: position == null && nullToAbsent
-          ? const Value.absent()
-          : Value(position),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
-      frontStructureId: frontStructureId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(frontStructureId),
-      backStructureId: backStructureId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(backStructureId),
+      entryTypeId: Value(entryTypeId),
+      position: Value(position),
+      name: Value(name),
+      frontStructureId: Value(frontStructureId),
+      backStructureId: Value(backStructureId),
     );
   }
 
   factory CardFormatModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return CardFormatModel(
       entryTypeId: serializer.fromJson<int>(json['entryTypeId']),
@@ -566,7 +524,7 @@ class CardFormatModel extends DataClass implements Insertable<CardFormatModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'entryTypeId': serializer.toJson<int>(entryTypeId),
@@ -578,11 +536,11 @@ class CardFormatModel extends DataClass implements Insertable<CardFormatModel> {
   }
 
   CardFormatModel copyWith(
-          {int entryTypeId,
-          int position,
-          String name,
-          int frontStructureId,
-          int backStructureId}) =>
+          {int? entryTypeId,
+          int? position,
+          String? name,
+          int? frontStructureId,
+          int? backStructureId}) =>
       CardFormatModel(
         entryTypeId: entryTypeId ?? this.entryTypeId,
         position: position ?? this.position,
@@ -634,22 +592,22 @@ class CardFormatsCompanion extends UpdateCompanion<CardFormatModel> {
     this.backStructureId = const Value.absent(),
   });
   CardFormatsCompanion.insert({
-    @required int entryTypeId,
-    @required int position,
-    @required String name,
-    @required int frontStructureId,
-    @required int backStructureId,
+    required int entryTypeId,
+    required int position,
+    required String name,
+    required int frontStructureId,
+    required int backStructureId,
   })  : entryTypeId = Value(entryTypeId),
         position = Value(position),
         name = Value(name),
         frontStructureId = Value(frontStructureId),
         backStructureId = Value(backStructureId);
   static Insertable<CardFormatModel> custom({
-    Expression<int> entryTypeId,
-    Expression<int> position,
-    Expression<String> name,
-    Expression<int> frontStructureId,
-    Expression<int> backStructureId,
+    Expression<int>? entryTypeId,
+    Expression<int>? position,
+    Expression<String>? name,
+    Expression<int>? frontStructureId,
+    Expression<int>? backStructureId,
   }) {
     return RawValuesInsertable({
       if (entryTypeId != null) 'entry_type_id': entryTypeId,
@@ -661,11 +619,11 @@ class CardFormatsCompanion extends UpdateCompanion<CardFormatModel> {
   }
 
   CardFormatsCompanion copyWith(
-      {Value<int> entryTypeId,
-      Value<int> position,
-      Value<String> name,
-      Value<int> frontStructureId,
-      Value<int> backStructureId}) {
+      {Value<int>? entryTypeId,
+      Value<int>? position,
+      Value<String>? name,
+      Value<int>? frontStructureId,
+      Value<int>? backStructureId}) {
     return CardFormatsCompanion(
       entryTypeId: entryTypeId ?? this.entryTypeId,
       position: position ?? this.position,
@@ -712,32 +670,28 @@ class CardFormatsCompanion extends UpdateCompanion<CardFormatModel> {
 class $CardFormatsTable extends CardFormats
     with TableInfo<$CardFormatsTable, CardFormatModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $CardFormatsTable(this._db, [this._alias]);
   final VerificationMeta _entryTypeIdMeta =
       const VerificationMeta('entryTypeId');
-  GeneratedIntColumn _entryTypeId;
   @override
-  GeneratedIntColumn get entryTypeId =>
-      _entryTypeId ??= _constructEntryTypeId();
+  late final GeneratedIntColumn entryTypeId = _constructEntryTypeId();
   GeneratedIntColumn _constructEntryTypeId() {
     return GeneratedIntColumn('entry_type_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
   }
 
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  GeneratedIntColumn _position;
   @override
-  GeneratedIntColumn get position => _position ??= _constructPosition();
+  late final GeneratedIntColumn position = _constructPosition();
   GeneratedIntColumn _constructPosition() {
     return GeneratedIntColumn('position', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn(
       'name',
@@ -748,10 +702,8 @@ class $CardFormatsTable extends CardFormats
 
   final VerificationMeta _frontStructureIdMeta =
       const VerificationMeta('frontStructureId');
-  GeneratedIntColumn _frontStructureId;
   @override
-  GeneratedIntColumn get frontStructureId =>
-      _frontStructureId ??= _constructFrontStructureId();
+  late final GeneratedIntColumn frontStructureId = _constructFrontStructureId();
   GeneratedIntColumn _constructFrontStructureId() {
     return GeneratedIntColumn('front_structure_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES structures(id)');
@@ -759,10 +711,8 @@ class $CardFormatsTable extends CardFormats
 
   final VerificationMeta _backStructureIdMeta =
       const VerificationMeta('backStructureId');
-  GeneratedIntColumn _backStructureId;
   @override
-  GeneratedIntColumn get backStructureId =>
-      _backStructureId ??= _constructBackStructureId();
+  late final GeneratedIntColumn backStructureId = _constructBackStructureId();
   GeneratedIntColumn _constructBackStructureId() {
     return GeneratedIntColumn('back_structure_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES structures(id)');
@@ -786,19 +736,19 @@ class $CardFormatsTable extends CardFormats
       context.handle(
           _entryTypeIdMeta,
           entryTypeId.isAcceptableOrUnknown(
-              data['entry_type_id'], _entryTypeIdMeta));
+              data['entry_type_id']!, _entryTypeIdMeta));
     } else if (isInserting) {
       context.missing(_entryTypeIdMeta);
     }
     if (data.containsKey('position')) {
       context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -806,7 +756,7 @@ class $CardFormatsTable extends CardFormats
       context.handle(
           _frontStructureIdMeta,
           frontStructureId.isAcceptableOrUnknown(
-              data['front_structure_id'], _frontStructureIdMeta));
+              data['front_structure_id']!, _frontStructureIdMeta));
     } else if (isInserting) {
       context.missing(_frontStructureIdMeta);
     }
@@ -814,7 +764,7 @@ class $CardFormatsTable extends CardFormats
       context.handle(
           _backStructureIdMeta,
           backStructureId.isAcceptableOrUnknown(
-              data['back_structure_id'], _backStructureIdMeta));
+              data['back_structure_id']!, _backStructureIdMeta));
     } else if (isInserting) {
       context.missing(_backStructureIdMeta);
     }
@@ -824,7 +774,7 @@ class $CardFormatsTable extends CardFormats
   @override
   Set<GeneratedColumn> get $primaryKey => {entryTypeId, position};
   @override
-  CardFormatModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  CardFormatModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return CardFormatModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -841,60 +791,46 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
   final int componentTypeId;
   final String name;
   ComponentModel(
-      {@required this.structureId,
-      @required this.position,
-      @required this.componentTypeId,
-      @required this.name});
+      {required this.structureId,
+      required this.position,
+      required this.componentTypeId,
+      required this.name});
   factory ComponentModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return ComponentModel(
       structureId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}structure_id'])!,
       position: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      componentTypeId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}component_type_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}position'])!,
+      componentTypeId: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}component_type_id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || structureId != null) {
-      map['structure_id'] = Variable<int>(structureId);
-    }
-    if (!nullToAbsent || position != null) {
-      map['position'] = Variable<int>(position);
-    }
-    if (!nullToAbsent || componentTypeId != null) {
-      map['component_type_id'] = Variable<int>(componentTypeId);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['structure_id'] = Variable<int>(structureId);
+    map['position'] = Variable<int>(position);
+    map['component_type_id'] = Variable<int>(componentTypeId);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   ComponentsCompanion toCompanion(bool nullToAbsent) {
     return ComponentsCompanion(
-      structureId: structureId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(structureId),
-      position: position == null && nullToAbsent
-          ? const Value.absent()
-          : Value(position),
-      componentTypeId: componentTypeId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(componentTypeId),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      structureId: Value(structureId),
+      position: Value(position),
+      componentTypeId: Value(componentTypeId),
+      name: Value(name),
     );
   }
 
   factory ComponentModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return ComponentModel(
       structureId: serializer.fromJson<int>(json['structureId']),
@@ -904,7 +840,7 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'structureId': serializer.toJson<int>(structureId),
@@ -915,7 +851,10 @@ class ComponentModel extends DataClass implements Insertable<ComponentModel> {
   }
 
   ComponentModel copyWith(
-          {int structureId, int position, int componentTypeId, String name}) =>
+          {int? structureId,
+          int? position,
+          int? componentTypeId,
+          String? name}) =>
       ComponentModel(
         structureId: structureId ?? this.structureId,
         position: position ?? this.position,
@@ -960,19 +899,19 @@ class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
     this.name = const Value.absent(),
   });
   ComponentsCompanion.insert({
-    @required int structureId,
-    @required int position,
-    @required int componentTypeId,
-    @required String name,
+    required int structureId,
+    required int position,
+    required int componentTypeId,
+    required String name,
   })  : structureId = Value(structureId),
         position = Value(position),
         componentTypeId = Value(componentTypeId),
         name = Value(name);
   static Insertable<ComponentModel> custom({
-    Expression<int> structureId,
-    Expression<int> position,
-    Expression<int> componentTypeId,
-    Expression<String> name,
+    Expression<int>? structureId,
+    Expression<int>? position,
+    Expression<int>? componentTypeId,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (structureId != null) 'structure_id': structureId,
@@ -983,10 +922,10 @@ class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
   }
 
   ComponentsCompanion copyWith(
-      {Value<int> structureId,
-      Value<int> position,
-      Value<int> componentTypeId,
-      Value<String> name}) {
+      {Value<int>? structureId,
+      Value<int>? position,
+      Value<int>? componentTypeId,
+      Value<String>? name}) {
     return ComponentsCompanion(
       structureId: structureId ?? this.structureId,
       position: position ?? this.position,
@@ -1028,23 +967,20 @@ class ComponentsCompanion extends UpdateCompanion<ComponentModel> {
 class $ComponentsTable extends Components
     with TableInfo<$ComponentsTable, ComponentModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $ComponentsTable(this._db, [this._alias]);
   final VerificationMeta _structureIdMeta =
       const VerificationMeta('structureId');
-  GeneratedIntColumn _structureId;
   @override
-  GeneratedIntColumn get structureId =>
-      _structureId ??= _constructStructureId();
+  late final GeneratedIntColumn structureId = _constructStructureId();
   GeneratedIntColumn _constructStructureId() {
     return GeneratedIntColumn('structure_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES structures(id)');
   }
 
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  GeneratedIntColumn _position;
   @override
-  GeneratedIntColumn get position => _position ??= _constructPosition();
+  late final GeneratedIntColumn position = _constructPosition();
   GeneratedIntColumn _constructPosition() {
     return GeneratedIntColumn('position', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -1052,19 +988,16 @@ class $ComponentsTable extends Components
 
   final VerificationMeta _componentTypeIdMeta =
       const VerificationMeta('componentTypeId');
-  GeneratedIntColumn _componentTypeId;
   @override
-  GeneratedIntColumn get componentTypeId =>
-      _componentTypeId ??= _constructComponentTypeId();
+  late final GeneratedIntColumn componentTypeId = _constructComponentTypeId();
   GeneratedIntColumn _constructComponentTypeId() {
     return GeneratedIntColumn('component_type_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES component_types(id)');
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn(
       'name',
@@ -1091,13 +1024,13 @@ class $ComponentsTable extends Components
       context.handle(
           _structureIdMeta,
           structureId.isAcceptableOrUnknown(
-              data['structure_id'], _structureIdMeta));
+              data['structure_id']!, _structureIdMeta));
     } else if (isInserting) {
       context.missing(_structureIdMeta);
     }
     if (data.containsKey('position')) {
       context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
@@ -1105,13 +1038,13 @@ class $ComponentsTable extends Components
       context.handle(
           _componentTypeIdMeta,
           componentTypeId.isAcceptableOrUnknown(
-              data['component_type_id'], _componentTypeIdMeta));
+              data['component_type_id']!, _componentTypeIdMeta));
     } else if (isInserting) {
       context.missing(_componentTypeIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -1121,7 +1054,7 @@ class $ComponentsTable extends Components
   @override
   Set<GeneratedColumn> get $primaryKey => {structureId, position};
   @override
-  ComponentModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  ComponentModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return ComponentModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -1136,38 +1069,35 @@ class ComponentTypeModel extends DataClass
     implements Insertable<ComponentTypeModel> {
   final int id;
   final String name;
-  ComponentTypeModel({@required this.id, @required this.name});
+  ComponentTypeModel({required this.id, required this.name});
   factory ComponentTypeModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return ComponentTypeModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   ComponentTypesCompanion toCompanion(bool nullToAbsent) {
     return ComponentTypesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory ComponentTypeModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return ComponentTypeModel(
       id: serializer.fromJson<int>(json['id']),
@@ -1175,7 +1105,7 @@ class ComponentTypeModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -1183,7 +1113,7 @@ class ComponentTypeModel extends DataClass
     };
   }
 
-  ComponentTypeModel copyWith({int id, String name}) => ComponentTypeModel(
+  ComponentTypeModel copyWith({int? id, String? name}) => ComponentTypeModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -1215,11 +1145,11 @@ class ComponentTypesCompanion extends UpdateCompanion<ComponentTypeModel> {
   });
   ComponentTypesCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<ComponentTypeModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1227,7 +1157,7 @@ class ComponentTypesCompanion extends UpdateCompanion<ComponentTypeModel> {
     });
   }
 
-  ComponentTypesCompanion copyWith({Value<int> id, Value<String> name}) {
+  ComponentTypesCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return ComponentTypesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1259,12 +1189,11 @@ class ComponentTypesCompanion extends UpdateCompanion<ComponentTypeModel> {
 class $ComponentTypesTable extends ComponentTypes
     with TableInfo<$ComponentTypesTable, ComponentTypeModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $ComponentTypesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn(
       'id',
@@ -1274,9 +1203,8 @@ class $ComponentTypesTable extends ComponentTypes
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -1296,11 +1224,11 @@ class $ComponentTypesTable extends ComponentTypes
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -1310,7 +1238,7 @@ class $ComponentTypesTable extends ComponentTypes
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  ComponentTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  ComponentTypeModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return ComponentTypeModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -1326,26 +1254,27 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
   final String name;
   final DateTime created;
   final DateTime lastEdited;
-  final String authorName;
-  final String description;
+  final String? authorName;
+  final String? description;
   DeckModel(
-      {@required this.id,
-      @required this.name,
-      @required this.created,
-      @required this.lastEdited,
+      {required this.id,
+      required this.name,
+      required this.created,
+      required this.lastEdited,
       this.authorName,
       this.description});
   factory DeckModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return DeckModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       created: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}created']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}created'])!,
       lastEdited: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}last_edited']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}last_edited'])!,
       authorName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}author_name']),
       description: const StringType()
@@ -1355,37 +1284,25 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
-    if (!nullToAbsent || created != null) {
-      map['created'] = Variable<DateTime>(created);
-    }
-    if (!nullToAbsent || lastEdited != null) {
-      map['last_edited'] = Variable<DateTime>(lastEdited);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['created'] = Variable<DateTime>(created);
+    map['last_edited'] = Variable<DateTime>(lastEdited);
     if (!nullToAbsent || authorName != null) {
-      map['author_name'] = Variable<String>(authorName);
+      map['author_name'] = Variable<String?>(authorName);
     }
     if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+      map['description'] = Variable<String?>(description);
     }
     return map;
   }
 
   DecksCompanion toCompanion(bool nullToAbsent) {
     return DecksCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
-      created: created == null && nullToAbsent
-          ? const Value.absent()
-          : Value(created),
-      lastEdited: lastEdited == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastEdited),
+      id: Value(id),
+      name: Value(name),
+      created: Value(created),
+      lastEdited: Value(lastEdited),
       authorName: authorName == null && nullToAbsent
           ? const Value.absent()
           : Value(authorName),
@@ -1396,37 +1313,37 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
   }
 
   factory DeckModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return DeckModel(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       created: serializer.fromJson<DateTime>(json['created']),
       lastEdited: serializer.fromJson<DateTime>(json['lastEdited']),
-      authorName: serializer.fromJson<String>(json['authorName']),
-      description: serializer.fromJson<String>(json['description']),
+      authorName: serializer.fromJson<String?>(json['authorName']),
+      description: serializer.fromJson<String?>(json['description']),
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'created': serializer.toJson<DateTime>(created),
       'lastEdited': serializer.toJson<DateTime>(lastEdited),
-      'authorName': serializer.toJson<String>(authorName),
-      'description': serializer.toJson<String>(description),
+      'authorName': serializer.toJson<String?>(authorName),
+      'description': serializer.toJson<String?>(description),
     };
   }
 
   DeckModel copyWith(
-          {int id,
-          String name,
-          DateTime created,
-          DateTime lastEdited,
-          String authorName,
-          String description}) =>
+          {int? id,
+          String? name,
+          DateTime? created,
+          DateTime? lastEdited,
+          String? authorName,
+          String? description}) =>
       DeckModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -1474,8 +1391,8 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
   final Value<String> name;
   final Value<DateTime> created;
   final Value<DateTime> lastEdited;
-  final Value<String> authorName;
-  final Value<String> description;
+  final Value<String?> authorName;
+  final Value<String?> description;
   const DecksCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1486,21 +1403,21 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
   });
   DecksCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
-    @required DateTime created,
-    @required DateTime lastEdited,
+    required String name,
+    required DateTime created,
+    required DateTime lastEdited,
     this.authorName = const Value.absent(),
     this.description = const Value.absent(),
   })  : name = Value(name),
         created = Value(created),
         lastEdited = Value(lastEdited);
   static Insertable<DeckModel> custom({
-    Expression<int> id,
-    Expression<String> name,
-    Expression<DateTime> created,
-    Expression<DateTime> lastEdited,
-    Expression<String> authorName,
-    Expression<String> description,
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<DateTime>? created,
+    Expression<DateTime>? lastEdited,
+    Expression<String?>? authorName,
+    Expression<String?>? description,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1513,12 +1430,12 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
   }
 
   DecksCompanion copyWith(
-      {Value<int> id,
-      Value<String> name,
-      Value<DateTime> created,
-      Value<DateTime> lastEdited,
-      Value<String> authorName,
-      Value<String> description}) {
+      {Value<int>? id,
+      Value<String>? name,
+      Value<DateTime>? created,
+      Value<DateTime>? lastEdited,
+      Value<String?>? authorName,
+      Value<String?>? description}) {
     return DecksCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1545,10 +1462,10 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
       map['last_edited'] = Variable<DateTime>(lastEdited.value);
     }
     if (authorName.present) {
-      map['author_name'] = Variable<String>(authorName.value);
+      map['author_name'] = Variable<String?>(authorName.value);
     }
     if (description.present) {
-      map['description'] = Variable<String>(description.value);
+      map['description'] = Variable<String?>(description.value);
     }
     return map;
   }
@@ -1569,30 +1486,27 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
 
 class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DecksTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
   }
 
   final VerificationMeta _createdMeta = const VerificationMeta('created');
-  GeneratedDateTimeColumn _created;
   @override
-  GeneratedDateTimeColumn get created => _created ??= _constructCreated();
+  late final GeneratedDateTimeColumn created = _constructCreated();
   GeneratedDateTimeColumn _constructCreated() {
     return GeneratedDateTimeColumn(
       'created',
@@ -1602,10 +1516,8 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   }
 
   final VerificationMeta _lastEditedMeta = const VerificationMeta('lastEdited');
-  GeneratedDateTimeColumn _lastEdited;
   @override
-  GeneratedDateTimeColumn get lastEdited =>
-      _lastEdited ??= _constructLastEdited();
+  late final GeneratedDateTimeColumn lastEdited = _constructLastEdited();
   GeneratedDateTimeColumn _constructLastEdited() {
     return GeneratedDateTimeColumn(
       'last_edited',
@@ -1615,9 +1527,8 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   }
 
   final VerificationMeta _authorNameMeta = const VerificationMeta('authorName');
-  GeneratedTextColumn _authorName;
   @override
-  GeneratedTextColumn get authorName => _authorName ??= _constructAuthorName();
+  late final GeneratedTextColumn authorName = _constructAuthorName();
   GeneratedTextColumn _constructAuthorName() {
     return GeneratedTextColumn(
       'author_name',
@@ -1628,10 +1539,8 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
 
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  GeneratedTextColumn _description;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
+  late final GeneratedTextColumn description = _constructDescription();
   GeneratedTextColumn _constructDescription() {
     return GeneratedTextColumn(
       'description',
@@ -1655,17 +1564,17 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('created')) {
       context.handle(_createdMeta,
-          created.isAcceptableOrUnknown(data['created'], _createdMeta));
+          created.isAcceptableOrUnknown(data['created']!, _createdMeta));
     } else if (isInserting) {
       context.missing(_createdMeta);
     }
@@ -1673,7 +1582,7 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
       context.handle(
           _lastEditedMeta,
           lastEdited.isAcceptableOrUnknown(
-              data['last_edited'], _lastEditedMeta));
+              data['last_edited']!, _lastEditedMeta));
     } else if (isInserting) {
       context.missing(_lastEditedMeta);
     }
@@ -1681,13 +1590,13 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
       context.handle(
           _authorNameMeta,
           authorName.isAcceptableOrUnknown(
-              data['author_name'], _authorNameMeta));
+              data['author_name']!, _authorNameMeta));
     }
     if (data.containsKey('description')) {
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
-              data['description'], _descriptionMeta));
+              data['description']!, _descriptionMeta));
     }
     return context;
   }
@@ -1695,7 +1604,7 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DeckModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  DeckModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return DeckModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -1711,46 +1620,38 @@ class EntryModel extends DataClass implements Insertable<EntryModel> {
   final int deckId;
   final int entryTypeId;
   EntryModel(
-      {@required this.id, @required this.deckId, @required this.entryTypeId});
+      {required this.id, required this.deckId, required this.entryTypeId});
   factory EntryModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return EntryModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       deckId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}deck_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}deck_id'])!,
       entryTypeId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || deckId != null) {
-      map['deck_id'] = Variable<int>(deckId);
-    }
-    if (!nullToAbsent || entryTypeId != null) {
-      map['entry_type_id'] = Variable<int>(entryTypeId);
-    }
+    map['id'] = Variable<int>(id);
+    map['deck_id'] = Variable<int>(deckId);
+    map['entry_type_id'] = Variable<int>(entryTypeId);
     return map;
   }
 
   EntriesCompanion toCompanion(bool nullToAbsent) {
     return EntriesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      deckId:
-          deckId == null && nullToAbsent ? const Value.absent() : Value(deckId),
-      entryTypeId: entryTypeId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryTypeId),
+      id: Value(id),
+      deckId: Value(deckId),
+      entryTypeId: Value(entryTypeId),
     );
   }
 
   factory EntryModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return EntryModel(
       id: serializer.fromJson<int>(json['id']),
@@ -1759,7 +1660,7 @@ class EntryModel extends DataClass implements Insertable<EntryModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -1768,7 +1669,7 @@ class EntryModel extends DataClass implements Insertable<EntryModel> {
     };
   }
 
-  EntryModel copyWith({int id, int deckId, int entryTypeId}) => EntryModel(
+  EntryModel copyWith({int? id, int? deckId, int? entryTypeId}) => EntryModel(
         id: id ?? this.id,
         deckId: deckId ?? this.deckId,
         entryTypeId: entryTypeId ?? this.entryTypeId,
@@ -1806,14 +1707,14 @@ class EntriesCompanion extends UpdateCompanion<EntryModel> {
   });
   EntriesCompanion.insert({
     this.id = const Value.absent(),
-    @required int deckId,
-    @required int entryTypeId,
+    required int deckId,
+    required int entryTypeId,
   })  : deckId = Value(deckId),
         entryTypeId = Value(entryTypeId);
   static Insertable<EntryModel> custom({
-    Expression<int> id,
-    Expression<int> deckId,
-    Expression<int> entryTypeId,
+    Expression<int>? id,
+    Expression<int>? deckId,
+    Expression<int>? entryTypeId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1823,7 +1724,7 @@ class EntriesCompanion extends UpdateCompanion<EntryModel> {
   }
 
   EntriesCompanion copyWith(
-      {Value<int> id, Value<int> deckId, Value<int> entryTypeId}) {
+      {Value<int>? id, Value<int>? deckId, Value<int>? entryTypeId}) {
     return EntriesCompanion(
       id: id ?? this.id,
       deckId: deckId ?? this.deckId,
@@ -1859,21 +1760,19 @@ class EntriesCompanion extends UpdateCompanion<EntryModel> {
 
 class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $EntriesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
   final VerificationMeta _deckIdMeta = const VerificationMeta('deckId');
-  GeneratedIntColumn _deckId;
   @override
-  GeneratedIntColumn get deckId => _deckId ??= _constructDeckId();
+  late final GeneratedIntColumn deckId = _constructDeckId();
   GeneratedIntColumn _constructDeckId() {
     return GeneratedIntColumn('deck_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES decks(id)');
@@ -1881,10 +1780,8 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
 
   final VerificationMeta _entryTypeIdMeta =
       const VerificationMeta('entryTypeId');
-  GeneratedIntColumn _entryTypeId;
   @override
-  GeneratedIntColumn get entryTypeId =>
-      _entryTypeId ??= _constructEntryTypeId();
+  late final GeneratedIntColumn entryTypeId = _constructEntryTypeId();
   GeneratedIntColumn _constructEntryTypeId() {
     return GeneratedIntColumn('entry_type_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
@@ -1904,11 +1801,11 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('deck_id')) {
       context.handle(_deckIdMeta,
-          deckId.isAcceptableOrUnknown(data['deck_id'], _deckIdMeta));
+          deckId.isAcceptableOrUnknown(data['deck_id']!, _deckIdMeta));
     } else if (isInserting) {
       context.missing(_deckIdMeta);
     }
@@ -1916,7 +1813,7 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
       context.handle(
           _entryTypeIdMeta,
           entryTypeId.isAcceptableOrUnknown(
-              data['entry_type_id'], _entryTypeIdMeta));
+              data['entry_type_id']!, _entryTypeIdMeta));
     } else if (isInserting) {
       context.missing(_entryTypeIdMeta);
     }
@@ -1926,7 +1823,7 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  EntryModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  EntryModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return EntryModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -1940,42 +1837,35 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
 class EntryTagModel extends DataClass implements Insertable<EntryTagModel> {
   final int entryId;
   final int tagId;
-  EntryTagModel({@required this.entryId, @required this.tagId});
+  EntryTagModel({required this.entryId, required this.tagId});
   factory EntryTagModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return EntryTagModel(
       entryId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       tagId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}tag_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}tag_id'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || entryId != null) {
-      map['entry_id'] = Variable<int>(entryId);
-    }
-    if (!nullToAbsent || tagId != null) {
-      map['tag_id'] = Variable<int>(tagId);
-    }
+    map['entry_id'] = Variable<int>(entryId);
+    map['tag_id'] = Variable<int>(tagId);
     return map;
   }
 
   EntriesTagsCompanion toCompanion(bool nullToAbsent) {
     return EntriesTagsCompanion(
-      entryId: entryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryId),
-      tagId:
-          tagId == null && nullToAbsent ? const Value.absent() : Value(tagId),
+      entryId: Value(entryId),
+      tagId: Value(tagId),
     );
   }
 
   factory EntryTagModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return EntryTagModel(
       entryId: serializer.fromJson<int>(json['entryId']),
@@ -1983,7 +1873,7 @@ class EntryTagModel extends DataClass implements Insertable<EntryTagModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'entryId': serializer.toJson<int>(entryId),
@@ -1991,7 +1881,7 @@ class EntryTagModel extends DataClass implements Insertable<EntryTagModel> {
     };
   }
 
-  EntryTagModel copyWith({int entryId, int tagId}) => EntryTagModel(
+  EntryTagModel copyWith({int? entryId, int? tagId}) => EntryTagModel(
         entryId: entryId ?? this.entryId,
         tagId: tagId ?? this.tagId,
       );
@@ -2022,13 +1912,13 @@ class EntriesTagsCompanion extends UpdateCompanion<EntryTagModel> {
     this.tagId = const Value.absent(),
   });
   EntriesTagsCompanion.insert({
-    @required int entryId,
-    @required int tagId,
+    required int entryId,
+    required int tagId,
   })  : entryId = Value(entryId),
         tagId = Value(tagId);
   static Insertable<EntryTagModel> custom({
-    Expression<int> entryId,
-    Expression<int> tagId,
+    Expression<int>? entryId,
+    Expression<int>? tagId,
   }) {
     return RawValuesInsertable({
       if (entryId != null) 'entry_id': entryId,
@@ -2036,7 +1926,7 @@ class EntriesTagsCompanion extends UpdateCompanion<EntryTagModel> {
     });
   }
 
-  EntriesTagsCompanion copyWith({Value<int> entryId, Value<int> tagId}) {
+  EntriesTagsCompanion copyWith({Value<int>? entryId, Value<int>? tagId}) {
     return EntriesTagsCompanion(
       entryId: entryId ?? this.entryId,
       tagId: tagId ?? this.tagId,
@@ -2068,21 +1958,19 @@ class EntriesTagsCompanion extends UpdateCompanion<EntryTagModel> {
 class $EntriesTagsTable extends EntriesTags
     with TableInfo<$EntriesTagsTable, EntryTagModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $EntriesTagsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  GeneratedIntColumn _entryId;
   @override
-  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  late final GeneratedIntColumn entryId = _constructEntryId();
   GeneratedIntColumn _constructEntryId() {
     return GeneratedIntColumn('entry_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entries(id)');
   }
 
   final VerificationMeta _tagIdMeta = const VerificationMeta('tagId');
-  GeneratedIntColumn _tagId;
   @override
-  GeneratedIntColumn get tagId => _tagId ??= _constructTagId();
+  late final GeneratedIntColumn tagId = _constructTagId();
   GeneratedIntColumn _constructTagId() {
     return GeneratedIntColumn('tag_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES tags(id)');
@@ -2103,13 +1991,13 @@ class $EntriesTagsTable extends EntriesTags
     final data = instance.toColumns(true);
     if (data.containsKey('entry_id')) {
       context.handle(_entryIdMeta,
-          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
     if (data.containsKey('tag_id')) {
       context.handle(
-          _tagIdMeta, tagId.isAcceptableOrUnknown(data['tag_id'], _tagIdMeta));
+          _tagIdMeta, tagId.isAcceptableOrUnknown(data['tag_id']!, _tagIdMeta));
     } else if (isInserting) {
       context.missing(_tagIdMeta);
     }
@@ -2119,7 +2007,7 @@ class $EntriesTagsTable extends EntriesTags
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, tagId};
   @override
-  EntryTagModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  EntryTagModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return EntryTagModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -2133,38 +2021,35 @@ class $EntriesTagsTable extends EntriesTags
 class EntryTypeModel extends DataClass implements Insertable<EntryTypeModel> {
   final int id;
   final String name;
-  EntryTypeModel({@required this.id, @required this.name});
+  EntryTypeModel({required this.id, required this.name});
   factory EntryTypeModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return EntryTypeModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   EntryTypesCompanion toCompanion(bool nullToAbsent) {
     return EntryTypesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory EntryTypeModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return EntryTypeModel(
       id: serializer.fromJson<int>(json['id']),
@@ -2172,7 +2057,7 @@ class EntryTypeModel extends DataClass implements Insertable<EntryTypeModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -2180,7 +2065,7 @@ class EntryTypeModel extends DataClass implements Insertable<EntryTypeModel> {
     };
   }
 
-  EntryTypeModel copyWith({int id, String name}) => EntryTypeModel(
+  EntryTypeModel copyWith({int? id, String? name}) => EntryTypeModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -2212,11 +2097,11 @@ class EntryTypesCompanion extends UpdateCompanion<EntryTypeModel> {
   });
   EntryTypesCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<EntryTypeModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2224,7 +2109,7 @@ class EntryTypesCompanion extends UpdateCompanion<EntryTypeModel> {
     });
   }
 
-  EntryTypesCompanion copyWith({Value<int> id, Value<String> name}) {
+  EntryTypesCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return EntryTypesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -2256,21 +2141,19 @@ class EntryTypesCompanion extends UpdateCompanion<EntryTypeModel> {
 class $EntryTypesTable extends EntryTypes
     with TableInfo<$EntryTypesTable, EntryTypeModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $EntryTypesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -2290,11 +2173,11 @@ class $EntryTypesTable extends EntryTypes
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -2304,7 +2187,7 @@ class $EntryTypesTable extends EntryTypes
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  EntryTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  EntryTypeModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return EntryTypeModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -2318,43 +2201,35 @@ class $EntryTypesTable extends EntryTypes
 class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
   final int entryId;
   final int fieldSpecId;
-  FieldDatumModel({@required this.entryId, @required this.fieldSpecId});
+  FieldDatumModel({required this.entryId, required this.fieldSpecId});
   factory FieldDatumModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return FieldDatumModel(
       entryId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       fieldSpecId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || entryId != null) {
-      map['entry_id'] = Variable<int>(entryId);
-    }
-    if (!nullToAbsent || fieldSpecId != null) {
-      map['field_spec_id'] = Variable<int>(fieldSpecId);
-    }
+    map['entry_id'] = Variable<int>(entryId);
+    map['field_spec_id'] = Variable<int>(fieldSpecId);
     return map;
   }
 
   FieldDataCompanion toCompanion(bool nullToAbsent) {
     return FieldDataCompanion(
-      entryId: entryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryId),
-      fieldSpecId: fieldSpecId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(fieldSpecId),
+      entryId: Value(entryId),
+      fieldSpecId: Value(fieldSpecId),
     );
   }
 
   factory FieldDatumModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return FieldDatumModel(
       entryId: serializer.fromJson<int>(json['entryId']),
@@ -2362,7 +2237,7 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'entryId': serializer.toJson<int>(entryId),
@@ -2370,7 +2245,7 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
     };
   }
 
-  FieldDatumModel copyWith({int entryId, int fieldSpecId}) => FieldDatumModel(
+  FieldDatumModel copyWith({int? entryId, int? fieldSpecId}) => FieldDatumModel(
         entryId: entryId ?? this.entryId,
         fieldSpecId: fieldSpecId ?? this.fieldSpecId,
       );
@@ -2401,13 +2276,13 @@ class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
     this.fieldSpecId = const Value.absent(),
   });
   FieldDataCompanion.insert({
-    @required int entryId,
-    @required int fieldSpecId,
+    required int entryId,
+    required int fieldSpecId,
   })  : entryId = Value(entryId),
         fieldSpecId = Value(fieldSpecId);
   static Insertable<FieldDatumModel> custom({
-    Expression<int> entryId,
-    Expression<int> fieldSpecId,
+    Expression<int>? entryId,
+    Expression<int>? fieldSpecId,
   }) {
     return RawValuesInsertable({
       if (entryId != null) 'entry_id': entryId,
@@ -2415,7 +2290,7 @@ class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
     });
   }
 
-  FieldDataCompanion copyWith({Value<int> entryId, Value<int> fieldSpecId}) {
+  FieldDataCompanion copyWith({Value<int>? entryId, Value<int>? fieldSpecId}) {
     return FieldDataCompanion(
       entryId: entryId ?? this.entryId,
       fieldSpecId: fieldSpecId ?? this.fieldSpecId,
@@ -2447,12 +2322,11 @@ class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
 class $FieldDataTable extends FieldData
     with TableInfo<$FieldDataTable, FieldDatumModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $FieldDataTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  GeneratedIntColumn _entryId;
   @override
-  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  late final GeneratedIntColumn entryId = _constructEntryId();
   GeneratedIntColumn _constructEntryId() {
     return GeneratedIntColumn('entry_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entries(id)');
@@ -2460,10 +2334,8 @@ class $FieldDataTable extends FieldData
 
   final VerificationMeta _fieldSpecIdMeta =
       const VerificationMeta('fieldSpecId');
-  GeneratedIntColumn _fieldSpecId;
   @override
-  GeneratedIntColumn get fieldSpecId =>
-      _fieldSpecId ??= _constructFieldSpecId();
+  late final GeneratedIntColumn fieldSpecId = _constructFieldSpecId();
   GeneratedIntColumn _constructFieldSpecId() {
     return GeneratedIntColumn('field_spec_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES field_specs(id)');
@@ -2484,7 +2356,7 @@ class $FieldDataTable extends FieldData
     final data = instance.toColumns(true);
     if (data.containsKey('entry_id')) {
       context.handle(_entryIdMeta,
-          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
@@ -2492,7 +2364,7 @@ class $FieldDataTable extends FieldData
       context.handle(
           _fieldSpecIdMeta,
           fieldSpecId.isAcceptableOrUnknown(
-              data['field_spec_id'], _fieldSpecIdMeta));
+              data['field_spec_id']!, _fieldSpecIdMeta));
     } else if (isInserting) {
       context.missing(_fieldSpecIdMeta);
     }
@@ -2502,7 +2374,7 @@ class $FieldDataTable extends FieldData
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
-  FieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  FieldDatumModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return FieldDatumModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -2519,57 +2391,46 @@ class FieldSpecModel extends DataClass implements Insertable<FieldSpecModel> {
   final int entryTypeId;
   final String name;
   FieldSpecModel(
-      {@required this.id,
-      @required this.fieldTypeId,
-      @required this.entryTypeId,
-      @required this.name});
+      {required this.id,
+      required this.fieldTypeId,
+      required this.entryTypeId,
+      required this.name});
   factory FieldSpecModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return FieldSpecModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       fieldTypeId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}field_type_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_type_id'])!,
       entryTypeId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_type_id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || fieldTypeId != null) {
-      map['field_type_id'] = Variable<int>(fieldTypeId);
-    }
-    if (!nullToAbsent || entryTypeId != null) {
-      map['entry_type_id'] = Variable<int>(entryTypeId);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['field_type_id'] = Variable<int>(fieldTypeId);
+    map['entry_type_id'] = Variable<int>(entryTypeId);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   FieldSpecsCompanion toCompanion(bool nullToAbsent) {
     return FieldSpecsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      fieldTypeId: fieldTypeId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(fieldTypeId),
-      entryTypeId: entryTypeId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryTypeId),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      fieldTypeId: Value(fieldTypeId),
+      entryTypeId: Value(entryTypeId),
+      name: Value(name),
     );
   }
 
   factory FieldSpecModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return FieldSpecModel(
       id: serializer.fromJson<int>(json['id']),
@@ -2579,7 +2440,7 @@ class FieldSpecModel extends DataClass implements Insertable<FieldSpecModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -2590,7 +2451,7 @@ class FieldSpecModel extends DataClass implements Insertable<FieldSpecModel> {
   }
 
   FieldSpecModel copyWith(
-          {int id, int fieldTypeId, int entryTypeId, String name}) =>
+          {int? id, int? fieldTypeId, int? entryTypeId, String? name}) =>
       FieldSpecModel(
         id: id ?? this.id,
         fieldTypeId: fieldTypeId ?? this.fieldTypeId,
@@ -2634,17 +2495,17 @@ class FieldSpecsCompanion extends UpdateCompanion<FieldSpecModel> {
   });
   FieldSpecsCompanion.insert({
     this.id = const Value.absent(),
-    @required int fieldTypeId,
-    @required int entryTypeId,
-    @required String name,
+    required int fieldTypeId,
+    required int entryTypeId,
+    required String name,
   })  : fieldTypeId = Value(fieldTypeId),
         entryTypeId = Value(entryTypeId),
         name = Value(name);
   static Insertable<FieldSpecModel> custom({
-    Expression<int> id,
-    Expression<int> fieldTypeId,
-    Expression<int> entryTypeId,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<int>? fieldTypeId,
+    Expression<int>? entryTypeId,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2655,10 +2516,10 @@ class FieldSpecsCompanion extends UpdateCompanion<FieldSpecModel> {
   }
 
   FieldSpecsCompanion copyWith(
-      {Value<int> id,
-      Value<int> fieldTypeId,
-      Value<int> entryTypeId,
-      Value<String> name}) {
+      {Value<int>? id,
+      Value<int>? fieldTypeId,
+      Value<int>? entryTypeId,
+      Value<String>? name}) {
     return FieldSpecsCompanion(
       id: id ?? this.id,
       fieldTypeId: fieldTypeId ?? this.fieldTypeId,
@@ -2700,12 +2561,11 @@ class FieldSpecsCompanion extends UpdateCompanion<FieldSpecModel> {
 class $FieldSpecsTable extends FieldSpecs
     with TableInfo<$FieldSpecsTable, FieldSpecModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $FieldSpecsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
@@ -2713,10 +2573,8 @@ class $FieldSpecsTable extends FieldSpecs
 
   final VerificationMeta _fieldTypeIdMeta =
       const VerificationMeta('fieldTypeId');
-  GeneratedIntColumn _fieldTypeId;
   @override
-  GeneratedIntColumn get fieldTypeId =>
-      _fieldTypeId ??= _constructFieldTypeId();
+  late final GeneratedIntColumn fieldTypeId = _constructFieldTypeId();
   GeneratedIntColumn _constructFieldTypeId() {
     return GeneratedIntColumn('field_type_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES field_types(id)');
@@ -2724,19 +2582,16 @@ class $FieldSpecsTable extends FieldSpecs
 
   final VerificationMeta _entryTypeIdMeta =
       const VerificationMeta('entryTypeId');
-  GeneratedIntColumn _entryTypeId;
   @override
-  GeneratedIntColumn get entryTypeId =>
-      _entryTypeId ??= _constructEntryTypeId();
+  late final GeneratedIntColumn entryTypeId = _constructEntryTypeId();
   GeneratedIntColumn _constructEntryTypeId() {
     return GeneratedIntColumn('entry_type_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn(
       'name',
@@ -2759,13 +2614,13 @@ class $FieldSpecsTable extends FieldSpecs
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('field_type_id')) {
       context.handle(
           _fieldTypeIdMeta,
           fieldTypeId.isAcceptableOrUnknown(
-              data['field_type_id'], _fieldTypeIdMeta));
+              data['field_type_id']!, _fieldTypeIdMeta));
     } else if (isInserting) {
       context.missing(_fieldTypeIdMeta);
     }
@@ -2773,13 +2628,13 @@ class $FieldSpecsTable extends FieldSpecs
       context.handle(
           _entryTypeIdMeta,
           entryTypeId.isAcceptableOrUnknown(
-              data['entry_type_id'], _entryTypeIdMeta));
+              data['entry_type_id']!, _entryTypeIdMeta));
     } else if (isInserting) {
       context.missing(_entryTypeIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -2789,7 +2644,7 @@ class $FieldSpecsTable extends FieldSpecs
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  FieldSpecModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  FieldSpecModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return FieldSpecModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -2803,38 +2658,35 @@ class $FieldSpecsTable extends FieldSpecs
 class FieldTypeModel extends DataClass implements Insertable<FieldTypeModel> {
   final int id;
   final String name;
-  FieldTypeModel({@required this.id, @required this.name});
+  FieldTypeModel({required this.id, required this.name});
   factory FieldTypeModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return FieldTypeModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   FieldTypesCompanion toCompanion(bool nullToAbsent) {
     return FieldTypesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory FieldTypeModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return FieldTypeModel(
       id: serializer.fromJson<int>(json['id']),
@@ -2842,7 +2694,7 @@ class FieldTypeModel extends DataClass implements Insertable<FieldTypeModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -2850,7 +2702,7 @@ class FieldTypeModel extends DataClass implements Insertable<FieldTypeModel> {
     };
   }
 
-  FieldTypeModel copyWith({int id, String name}) => FieldTypeModel(
+  FieldTypeModel copyWith({int? id, String? name}) => FieldTypeModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -2882,11 +2734,11 @@ class FieldTypesCompanion extends UpdateCompanion<FieldTypeModel> {
   });
   FieldTypesCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<FieldTypeModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2894,7 +2746,7 @@ class FieldTypesCompanion extends UpdateCompanion<FieldTypeModel> {
     });
   }
 
-  FieldTypesCompanion copyWith({Value<int> id, Value<String> name}) {
+  FieldTypesCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return FieldTypesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -2926,12 +2778,11 @@ class FieldTypesCompanion extends UpdateCompanion<FieldTypeModel> {
 class $FieldTypesTable extends FieldTypes
     with TableInfo<$FieldTypesTable, FieldTypeModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $FieldTypesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn(
       'id',
@@ -2941,9 +2792,8 @@ class $FieldTypesTable extends FieldTypes
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -2963,11 +2813,11 @@ class $FieldTypesTable extends FieldTypes
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -2977,7 +2827,7 @@ class $FieldTypesTable extends FieldTypes
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  FieldTypeModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  FieldTypeModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return FieldTypeModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -2991,38 +2841,35 @@ class $FieldTypesTable extends FieldTypes
 class FillColorModel extends DataClass implements Insertable<FillColorModel> {
   final int id;
   final String name;
-  FillColorModel({@required this.id, @required this.name});
+  FillColorModel({required this.id, required this.name});
   factory FillColorModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return FillColorModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   FillColorsCompanion toCompanion(bool nullToAbsent) {
     return FillColorsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory FillColorModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return FillColorModel(
       id: serializer.fromJson<int>(json['id']),
@@ -3030,7 +2877,7 @@ class FillColorModel extends DataClass implements Insertable<FillColorModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -3038,7 +2885,7 @@ class FillColorModel extends DataClass implements Insertable<FillColorModel> {
     };
   }
 
-  FillColorModel copyWith({int id, String name}) => FillColorModel(
+  FillColorModel copyWith({int? id, String? name}) => FillColorModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -3070,11 +2917,11 @@ class FillColorsCompanion extends UpdateCompanion<FillColorModel> {
   });
   FillColorsCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<FillColorModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -3082,7 +2929,7 @@ class FillColorsCompanion extends UpdateCompanion<FillColorModel> {
     });
   }
 
-  FillColorsCompanion copyWith({Value<int> id, Value<String> name}) {
+  FillColorsCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return FillColorsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -3114,12 +2961,11 @@ class FillColorsCompanion extends UpdateCompanion<FillColorModel> {
 class $FillColorsTable extends FillColors
     with TableInfo<$FillColorsTable, FillColorModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $FillColorsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn(
       'id',
@@ -3129,9 +2975,8 @@ class $FillColorsTable extends FillColors
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -3151,11 +2996,11 @@ class $FillColorsTable extends FillColors
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -3165,7 +3010,7 @@ class $FillColorsTable extends FillColors
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  FillColorModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  FillColorModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return FillColorModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -3180,38 +3025,35 @@ class HighlightColorModel extends DataClass
     implements Insertable<HighlightColorModel> {
   final int id;
   final String name;
-  HighlightColorModel({@required this.id, @required this.name});
+  HighlightColorModel({required this.id, required this.name});
   factory HighlightColorModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return HighlightColorModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   HighlightColorsCompanion toCompanion(bool nullToAbsent) {
     return HighlightColorsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory HighlightColorModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return HighlightColorModel(
       id: serializer.fromJson<int>(json['id']),
@@ -3219,7 +3061,7 @@ class HighlightColorModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -3227,7 +3069,7 @@ class HighlightColorModel extends DataClass
     };
   }
 
-  HighlightColorModel copyWith({int id, String name}) => HighlightColorModel(
+  HighlightColorModel copyWith({int? id, String? name}) => HighlightColorModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -3259,11 +3101,11 @@ class HighlightColorsCompanion extends UpdateCompanion<HighlightColorModel> {
   });
   HighlightColorsCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<HighlightColorModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -3271,7 +3113,7 @@ class HighlightColorsCompanion extends UpdateCompanion<HighlightColorModel> {
     });
   }
 
-  HighlightColorsCompanion copyWith({Value<int> id, Value<String> name}) {
+  HighlightColorsCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return HighlightColorsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -3303,12 +3145,11 @@ class HighlightColorsCompanion extends UpdateCompanion<HighlightColorModel> {
 class $HighlightColorsTable extends HighlightColors
     with TableInfo<$HighlightColorsTable, HighlightColorModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $HighlightColorsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn(
       'id',
@@ -3318,9 +3159,8 @@ class $HighlightColorsTable extends HighlightColors
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -3341,11 +3181,11 @@ class $HighlightColorsTable extends HighlightColors
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -3355,7 +3195,7 @@ class $HighlightColorsTable extends HighlightColors
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  HighlightColorModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  HighlightColorModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return HighlightColorModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -3372,53 +3212,41 @@ class ImageFieldDatumModel extends DataClass
   final int fieldSpecId;
   final int imageId;
   ImageFieldDatumModel(
-      {@required this.entryId,
-      @required this.fieldSpecId,
-      @required this.imageId});
+      {required this.entryId,
+      required this.fieldSpecId,
+      required this.imageId});
   factory ImageFieldDatumModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return ImageFieldDatumModel(
       entryId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       fieldSpecId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id'])!,
       imageId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}image_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}image_id'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || entryId != null) {
-      map['entry_id'] = Variable<int>(entryId);
-    }
-    if (!nullToAbsent || fieldSpecId != null) {
-      map['field_spec_id'] = Variable<int>(fieldSpecId);
-    }
-    if (!nullToAbsent || imageId != null) {
-      map['image_id'] = Variable<int>(imageId);
-    }
+    map['entry_id'] = Variable<int>(entryId);
+    map['field_spec_id'] = Variable<int>(fieldSpecId);
+    map['image_id'] = Variable<int>(imageId);
     return map;
   }
 
   ImageFieldDataCompanion toCompanion(bool nullToAbsent) {
     return ImageFieldDataCompanion(
-      entryId: entryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryId),
-      fieldSpecId: fieldSpecId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(fieldSpecId),
-      imageId: imageId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(imageId),
+      entryId: Value(entryId),
+      fieldSpecId: Value(fieldSpecId),
+      imageId: Value(imageId),
     );
   }
 
   factory ImageFieldDatumModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return ImageFieldDatumModel(
       entryId: serializer.fromJson<int>(json['entryId']),
@@ -3427,7 +3255,7 @@ class ImageFieldDatumModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'entryId': serializer.toJson<int>(entryId),
@@ -3436,7 +3264,8 @@ class ImageFieldDatumModel extends DataClass
     };
   }
 
-  ImageFieldDatumModel copyWith({int entryId, int fieldSpecId, int imageId}) =>
+  ImageFieldDatumModel copyWith(
+          {int? entryId, int? fieldSpecId, int? imageId}) =>
       ImageFieldDatumModel(
         entryId: entryId ?? this.entryId,
         fieldSpecId: fieldSpecId ?? this.fieldSpecId,
@@ -3474,16 +3303,16 @@ class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
     this.imageId = const Value.absent(),
   });
   ImageFieldDataCompanion.insert({
-    @required int entryId,
-    @required int fieldSpecId,
-    @required int imageId,
+    required int entryId,
+    required int fieldSpecId,
+    required int imageId,
   })  : entryId = Value(entryId),
         fieldSpecId = Value(fieldSpecId),
         imageId = Value(imageId);
   static Insertable<ImageFieldDatumModel> custom({
-    Expression<int> entryId,
-    Expression<int> fieldSpecId,
-    Expression<int> imageId,
+    Expression<int>? entryId,
+    Expression<int>? fieldSpecId,
+    Expression<int>? imageId,
   }) {
     return RawValuesInsertable({
       if (entryId != null) 'entry_id': entryId,
@@ -3493,7 +3322,7 @@ class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
   }
 
   ImageFieldDataCompanion copyWith(
-      {Value<int> entryId, Value<int> fieldSpecId, Value<int> imageId}) {
+      {Value<int>? entryId, Value<int>? fieldSpecId, Value<int>? imageId}) {
     return ImageFieldDataCompanion(
       entryId: entryId ?? this.entryId,
       fieldSpecId: fieldSpecId ?? this.fieldSpecId,
@@ -3530,12 +3359,11 @@ class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
 class $ImageFieldDataTable extends ImageFieldData
     with TableInfo<$ImageFieldDataTable, ImageFieldDatumModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $ImageFieldDataTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  GeneratedIntColumn _entryId;
   @override
-  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  late final GeneratedIntColumn entryId = _constructEntryId();
   GeneratedIntColumn _constructEntryId() {
     return GeneratedIntColumn(
       'entry_id',
@@ -3546,10 +3374,8 @@ class $ImageFieldDataTable extends ImageFieldData
 
   final VerificationMeta _fieldSpecIdMeta =
       const VerificationMeta('fieldSpecId');
-  GeneratedIntColumn _fieldSpecId;
   @override
-  GeneratedIntColumn get fieldSpecId =>
-      _fieldSpecId ??= _constructFieldSpecId();
+  late final GeneratedIntColumn fieldSpecId = _constructFieldSpecId();
   GeneratedIntColumn _constructFieldSpecId() {
     return GeneratedIntColumn(
       'field_spec_id',
@@ -3559,9 +3385,8 @@ class $ImageFieldDataTable extends ImageFieldData
   }
 
   final VerificationMeta _imageIdMeta = const VerificationMeta('imageId');
-  GeneratedIntColumn _imageId;
   @override
-  GeneratedIntColumn get imageId => _imageId ??= _constructImageId();
+  late final GeneratedIntColumn imageId = _constructImageId();
   GeneratedIntColumn _constructImageId() {
     return GeneratedIntColumn(
       'image_id',
@@ -3586,7 +3411,7 @@ class $ImageFieldDataTable extends ImageFieldData
     final data = instance.toColumns(true);
     if (data.containsKey('entry_id')) {
       context.handle(_entryIdMeta,
-          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
@@ -3594,13 +3419,13 @@ class $ImageFieldDataTable extends ImageFieldData
       context.handle(
           _fieldSpecIdMeta,
           fieldSpecId.isAcceptableOrUnknown(
-              data['field_spec_id'], _fieldSpecIdMeta));
+              data['field_spec_id']!, _fieldSpecIdMeta));
     } else if (isInserting) {
       context.missing(_fieldSpecIdMeta);
     }
     if (data.containsKey('image_id')) {
       context.handle(_imageIdMeta,
-          imageId.isAcceptableOrUnknown(data['image_id'], _imageIdMeta));
+          imageId.isAcceptableOrUnknown(data['image_id']!, _imageIdMeta));
     } else if (isInserting) {
       context.missing(_imageIdMeta);
     }
@@ -3610,7 +3435,7 @@ class $ImageFieldDataTable extends ImageFieldData
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
-  ImageFieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  ImageFieldDatumModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return ImageFieldDatumModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -3623,46 +3448,45 @@ class $ImageFieldDataTable extends ImageFieldData
 
 class StructureModel extends DataClass implements Insertable<StructureModel> {
   final int id;
-  StructureModel({@required this.id});
+  StructureModel({required this.id});
   factory StructureModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return StructureModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     return map;
   }
 
   StructuresCompanion toCompanion(bool nullToAbsent) {
     return StructuresCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
     );
   }
 
   factory StructureModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return StructureModel(
       id: serializer.fromJson<int>(json['id']),
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
     };
   }
 
-  StructureModel copyWith({int id}) => StructureModel(
+  StructureModel copyWith({int? id}) => StructureModel(
         id: id ?? this.id,
       );
   @override
@@ -3688,14 +3512,14 @@ class StructuresCompanion extends UpdateCompanion<StructureModel> {
     this.id = const Value.absent(),
   });
   static Insertable<StructureModel> custom({
-    Expression<int> id,
+    Expression<int>? id,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
     });
   }
 
-  StructuresCompanion copyWith({Value<int> id}) {
+  StructuresCompanion copyWith({Value<int>? id}) {
     return StructuresCompanion(
       id: id ?? this.id,
     );
@@ -3720,12 +3544,11 @@ class StructuresCompanion extends UpdateCompanion<StructureModel> {
 class $StructuresTable extends Structures
     with TableInfo<$StructuresTable, StructureModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $StructuresTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
@@ -3745,7 +3568,7 @@ class $StructuresTable extends Structures
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     return context;
   }
@@ -3753,7 +3576,7 @@ class $StructuresTable extends Structures
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  StructureModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  StructureModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return StructureModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -3767,37 +3590,34 @@ class $StructuresTable extends Structures
 class TagModel extends DataClass implements Insertable<TagModel> {
   final int id;
   final String name;
-  TagModel({@required this.id, @required this.name});
+  TagModel({required this.id, required this.name});
   factory TagModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return TagModel(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   TagsCompanion toCompanion(bool nullToAbsent) {
     return TagsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
     );
   }
 
   factory TagModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return TagModel(
       id: serializer.fromJson<int>(json['id']),
@@ -3805,7 +3625,7 @@ class TagModel extends DataClass implements Insertable<TagModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
@@ -3813,7 +3633,7 @@ class TagModel extends DataClass implements Insertable<TagModel> {
     };
   }
 
-  TagModel copyWith({int id, String name}) => TagModel(
+  TagModel copyWith({int? id, String? name}) => TagModel(
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -3843,11 +3663,11 @@ class TagsCompanion extends UpdateCompanion<TagModel> {
   });
   TagsCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
+    required String name,
   }) : name = Value(name);
   static Insertable<TagModel> custom({
-    Expression<int> id,
-    Expression<String> name,
+    Expression<int>? id,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -3855,7 +3675,7 @@ class TagsCompanion extends UpdateCompanion<TagModel> {
     });
   }
 
-  TagsCompanion copyWith({Value<int> id, Value<String> name}) {
+  TagsCompanion copyWith({Value<int>? id, Value<String>? name}) {
     return TagsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -3886,21 +3706,19 @@ class TagsCompanion extends UpdateCompanion<TagModel> {
 
 class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $TagsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
+  late final GeneratedIntColumn id = _constructId();
   GeneratedIntColumn _constructId() {
     return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
+  late final GeneratedTextColumn name = _constructName();
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn('name', $tableName, false,
         $customConstraints: 'NOT NULL UNIQUE');
@@ -3920,11 +3738,11 @@ class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -3934,7 +3752,7 @@ class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  TagModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  TagModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return TagModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -3958,109 +3776,76 @@ class TextComponentModel extends DataClass
   final bool italic;
   final bool underlined;
   TextComponentModel(
-      {@required this.structureId,
-      @required this.position,
-      @required this.data,
-      @required this.size,
-      @required this.alignmentId,
-      @required this.fillColorId,
-      @required this.highlightColorId,
-      @required this.bold,
-      @required this.italic,
-      @required this.underlined});
+      {required this.structureId,
+      required this.position,
+      required this.data,
+      required this.size,
+      required this.alignmentId,
+      required this.fillColorId,
+      required this.highlightColorId,
+      required this.bold,
+      required this.italic,
+      required this.underlined});
   factory TextComponentModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return TextComponentModel(
       structureId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}structure_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}structure_id'])!,
       position: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}position'])!,
       data: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}data']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}data'])!,
       size: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}size']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}size'])!,
       alignmentId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}alignment_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}alignment_id'])!,
       fillColorId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}fill_color_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}fill_color_id'])!,
       highlightColorId: const IntType().mapFromDatabaseResponse(
-          data['${effectivePrefix}highlight_color_id']),
+          data['${effectivePrefix}highlight_color_id'])!,
       bold: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}bold']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}bold'])!,
       italic: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}italic']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}italic'])!,
       underlined: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}underlined']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}underlined'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || structureId != null) {
-      map['structure_id'] = Variable<int>(structureId);
-    }
-    if (!nullToAbsent || position != null) {
-      map['position'] = Variable<int>(position);
-    }
-    if (!nullToAbsent || data != null) {
-      map['data'] = Variable<String>(data);
-    }
-    if (!nullToAbsent || size != null) {
-      map['size'] = Variable<double>(size);
-    }
-    if (!nullToAbsent || alignmentId != null) {
-      map['alignment_id'] = Variable<int>(alignmentId);
-    }
-    if (!nullToAbsent || fillColorId != null) {
-      map['fill_color_id'] = Variable<int>(fillColorId);
-    }
-    if (!nullToAbsent || highlightColorId != null) {
-      map['highlight_color_id'] = Variable<int>(highlightColorId);
-    }
-    if (!nullToAbsent || bold != null) {
-      map['bold'] = Variable<bool>(bold);
-    }
-    if (!nullToAbsent || italic != null) {
-      map['italic'] = Variable<bool>(italic);
-    }
-    if (!nullToAbsent || underlined != null) {
-      map['underlined'] = Variable<bool>(underlined);
-    }
+    map['structure_id'] = Variable<int>(structureId);
+    map['position'] = Variable<int>(position);
+    map['data'] = Variable<String>(data);
+    map['size'] = Variable<double>(size);
+    map['alignment_id'] = Variable<int>(alignmentId);
+    map['fill_color_id'] = Variable<int>(fillColorId);
+    map['highlight_color_id'] = Variable<int>(highlightColorId);
+    map['bold'] = Variable<bool>(bold);
+    map['italic'] = Variable<bool>(italic);
+    map['underlined'] = Variable<bool>(underlined);
     return map;
   }
 
   TextComponentsCompanion toCompanion(bool nullToAbsent) {
     return TextComponentsCompanion(
-      structureId: structureId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(structureId),
-      position: position == null && nullToAbsent
-          ? const Value.absent()
-          : Value(position),
-      data: data == null && nullToAbsent ? const Value.absent() : Value(data),
-      size: size == null && nullToAbsent ? const Value.absent() : Value(size),
-      alignmentId: alignmentId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(alignmentId),
-      fillColorId: fillColorId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(fillColorId),
-      highlightColorId: highlightColorId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(highlightColorId),
-      bold: bold == null && nullToAbsent ? const Value.absent() : Value(bold),
-      italic:
-          italic == null && nullToAbsent ? const Value.absent() : Value(italic),
-      underlined: underlined == null && nullToAbsent
-          ? const Value.absent()
-          : Value(underlined),
+      structureId: Value(structureId),
+      position: Value(position),
+      data: Value(data),
+      size: Value(size),
+      alignmentId: Value(alignmentId),
+      fillColorId: Value(fillColorId),
+      highlightColorId: Value(highlightColorId),
+      bold: Value(bold),
+      italic: Value(italic),
+      underlined: Value(underlined),
     );
   }
 
   factory TextComponentModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return TextComponentModel(
       structureId: serializer.fromJson<int>(json['structureId']),
@@ -4076,7 +3861,7 @@ class TextComponentModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'structureId': serializer.toJson<int>(structureId),
@@ -4093,16 +3878,16 @@ class TextComponentModel extends DataClass
   }
 
   TextComponentModel copyWith(
-          {int structureId,
-          int position,
-          String data,
-          double size,
-          int alignmentId,
-          int fillColorId,
-          int highlightColorId,
-          bool bold,
-          bool italic,
-          bool underlined}) =>
+          {int? structureId,
+          int? position,
+          String? data,
+          double? size,
+          int? alignmentId,
+          int? fillColorId,
+          int? highlightColorId,
+          bool? bold,
+          bool? italic,
+          bool? underlined}) =>
       TextComponentModel(
         structureId: structureId ?? this.structureId,
         position: position ?? this.position,
@@ -4191,16 +3976,16 @@ class TextComponentsCompanion extends UpdateCompanion<TextComponentModel> {
     this.underlined = const Value.absent(),
   });
   TextComponentsCompanion.insert({
-    @required int structureId,
-    @required int position,
-    @required String data,
-    @required double size,
-    @required int alignmentId,
-    @required int fillColorId,
-    @required int highlightColorId,
-    @required bool bold,
-    @required bool italic,
-    @required bool underlined,
+    required int structureId,
+    required int position,
+    required String data,
+    required double size,
+    required int alignmentId,
+    required int fillColorId,
+    required int highlightColorId,
+    required bool bold,
+    required bool italic,
+    required bool underlined,
   })  : structureId = Value(structureId),
         position = Value(position),
         data = Value(data),
@@ -4212,16 +3997,16 @@ class TextComponentsCompanion extends UpdateCompanion<TextComponentModel> {
         italic = Value(italic),
         underlined = Value(underlined);
   static Insertable<TextComponentModel> custom({
-    Expression<int> structureId,
-    Expression<int> position,
-    Expression<String> data,
-    Expression<double> size,
-    Expression<int> alignmentId,
-    Expression<int> fillColorId,
-    Expression<int> highlightColorId,
-    Expression<bool> bold,
-    Expression<bool> italic,
-    Expression<bool> underlined,
+    Expression<int>? structureId,
+    Expression<int>? position,
+    Expression<String>? data,
+    Expression<double>? size,
+    Expression<int>? alignmentId,
+    Expression<int>? fillColorId,
+    Expression<int>? highlightColorId,
+    Expression<bool>? bold,
+    Expression<bool>? italic,
+    Expression<bool>? underlined,
   }) {
     return RawValuesInsertable({
       if (structureId != null) 'structure_id': structureId,
@@ -4238,16 +4023,16 @@ class TextComponentsCompanion extends UpdateCompanion<TextComponentModel> {
   }
 
   TextComponentsCompanion copyWith(
-      {Value<int> structureId,
-      Value<int> position,
-      Value<String> data,
-      Value<double> size,
-      Value<int> alignmentId,
-      Value<int> fillColorId,
-      Value<int> highlightColorId,
-      Value<bool> bold,
-      Value<bool> italic,
-      Value<bool> underlined}) {
+      {Value<int>? structureId,
+      Value<int>? position,
+      Value<String>? data,
+      Value<double>? size,
+      Value<int>? alignmentId,
+      Value<int>? fillColorId,
+      Value<int>? highlightColorId,
+      Value<bool>? bold,
+      Value<bool>? italic,
+      Value<bool>? underlined}) {
     return TextComponentsCompanion(
       structureId: structureId ?? this.structureId,
       position: position ?? this.position,
@@ -4319,14 +4104,12 @@ class TextComponentsCompanion extends UpdateCompanion<TextComponentModel> {
 class $TextComponentsTable extends TextComponents
     with TableInfo<$TextComponentsTable, TextComponentModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $TextComponentsTable(this._db, [this._alias]);
   final VerificationMeta _structureIdMeta =
       const VerificationMeta('structureId');
-  GeneratedIntColumn _structureId;
   @override
-  GeneratedIntColumn get structureId =>
-      _structureId ??= _constructStructureId();
+  late final GeneratedIntColumn structureId = _constructStructureId();
   GeneratedIntColumn _constructStructureId() {
     return GeneratedIntColumn(
       'structure_id',
@@ -4336,9 +4119,8 @@ class $TextComponentsTable extends TextComponents
   }
 
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  GeneratedIntColumn _position;
   @override
-  GeneratedIntColumn get position => _position ??= _constructPosition();
+  late final GeneratedIntColumn position = _constructPosition();
   GeneratedIntColumn _constructPosition() {
     return GeneratedIntColumn(
       'position',
@@ -4348,9 +4130,8 @@ class $TextComponentsTable extends TextComponents
   }
 
   final VerificationMeta _dataMeta = const VerificationMeta('data');
-  GeneratedTextColumn _data;
   @override
-  GeneratedTextColumn get data => _data ??= _constructData();
+  late final GeneratedTextColumn data = _constructData();
   GeneratedTextColumn _constructData() {
     return GeneratedTextColumn(
       'data',
@@ -4360,9 +4141,8 @@ class $TextComponentsTable extends TextComponents
   }
 
   final VerificationMeta _sizeMeta = const VerificationMeta('size');
-  GeneratedRealColumn _size;
   @override
-  GeneratedRealColumn get size => _size ??= _constructSize();
+  late final GeneratedRealColumn size = _constructSize();
   GeneratedRealColumn _constructSize() {
     return GeneratedRealColumn(
       'size',
@@ -4373,10 +4153,8 @@ class $TextComponentsTable extends TextComponents
 
   final VerificationMeta _alignmentIdMeta =
       const VerificationMeta('alignmentId');
-  GeneratedIntColumn _alignmentId;
   @override
-  GeneratedIntColumn get alignmentId =>
-      _alignmentId ??= _constructAlignmentId();
+  late final GeneratedIntColumn alignmentId = _constructAlignmentId();
   GeneratedIntColumn _constructAlignmentId() {
     return GeneratedIntColumn('alignment_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES alignments(id)');
@@ -4384,10 +4162,8 @@ class $TextComponentsTable extends TextComponents
 
   final VerificationMeta _fillColorIdMeta =
       const VerificationMeta('fillColorId');
-  GeneratedIntColumn _fillColorId;
   @override
-  GeneratedIntColumn get fillColorId =>
-      _fillColorId ??= _constructFillColorId();
+  late final GeneratedIntColumn fillColorId = _constructFillColorId();
   GeneratedIntColumn _constructFillColorId() {
     return GeneratedIntColumn('fill_color_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES fill_colors(id)');
@@ -4395,19 +4171,16 @@ class $TextComponentsTable extends TextComponents
 
   final VerificationMeta _highlightColorIdMeta =
       const VerificationMeta('highlightColorId');
-  GeneratedIntColumn _highlightColorId;
   @override
-  GeneratedIntColumn get highlightColorId =>
-      _highlightColorId ??= _constructHighlightColorId();
+  late final GeneratedIntColumn highlightColorId = _constructHighlightColorId();
   GeneratedIntColumn _constructHighlightColorId() {
     return GeneratedIntColumn('highlight_color_id', $tableName, false,
         $customConstraints: 'NOT NULL REFERENCES highlight_colors(id)');
   }
 
   final VerificationMeta _boldMeta = const VerificationMeta('bold');
-  GeneratedBoolColumn _bold;
   @override
-  GeneratedBoolColumn get bold => _bold ??= _constructBold();
+  late final GeneratedBoolColumn bold = _constructBold();
   GeneratedBoolColumn _constructBold() {
     return GeneratedBoolColumn(
       'bold',
@@ -4417,9 +4190,8 @@ class $TextComponentsTable extends TextComponents
   }
 
   final VerificationMeta _italicMeta = const VerificationMeta('italic');
-  GeneratedBoolColumn _italic;
   @override
-  GeneratedBoolColumn get italic => _italic ??= _constructItalic();
+  late final GeneratedBoolColumn italic = _constructItalic();
   GeneratedBoolColumn _constructItalic() {
     return GeneratedBoolColumn(
       'italic',
@@ -4429,9 +4201,8 @@ class $TextComponentsTable extends TextComponents
   }
 
   final VerificationMeta _underlinedMeta = const VerificationMeta('underlined');
-  GeneratedBoolColumn _underlined;
   @override
-  GeneratedBoolColumn get underlined => _underlined ??= _constructUnderlined();
+  late final GeneratedBoolColumn underlined = _constructUnderlined();
   GeneratedBoolColumn _constructUnderlined() {
     return GeneratedBoolColumn(
       'underlined',
@@ -4468,25 +4239,25 @@ class $TextComponentsTable extends TextComponents
       context.handle(
           _structureIdMeta,
           structureId.isAcceptableOrUnknown(
-              data['structure_id'], _structureIdMeta));
+              data['structure_id']!, _structureIdMeta));
     } else if (isInserting) {
       context.missing(_structureIdMeta);
     }
     if (data.containsKey('position')) {
       context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('data')) {
       context.handle(
-          _dataMeta, this.data.isAcceptableOrUnknown(data['data'], _dataMeta));
+          _dataMeta, this.data.isAcceptableOrUnknown(data['data']!, _dataMeta));
     } else if (isInserting) {
       context.missing(_dataMeta);
     }
     if (data.containsKey('size')) {
       context.handle(
-          _sizeMeta, size.isAcceptableOrUnknown(data['size'], _sizeMeta));
+          _sizeMeta, size.isAcceptableOrUnknown(data['size']!, _sizeMeta));
     } else if (isInserting) {
       context.missing(_sizeMeta);
     }
@@ -4494,7 +4265,7 @@ class $TextComponentsTable extends TextComponents
       context.handle(
           _alignmentIdMeta,
           alignmentId.isAcceptableOrUnknown(
-              data['alignment_id'], _alignmentIdMeta));
+              data['alignment_id']!, _alignmentIdMeta));
     } else if (isInserting) {
       context.missing(_alignmentIdMeta);
     }
@@ -4502,7 +4273,7 @@ class $TextComponentsTable extends TextComponents
       context.handle(
           _fillColorIdMeta,
           fillColorId.isAcceptableOrUnknown(
-              data['fill_color_id'], _fillColorIdMeta));
+              data['fill_color_id']!, _fillColorIdMeta));
     } else if (isInserting) {
       context.missing(_fillColorIdMeta);
     }
@@ -4510,19 +4281,19 @@ class $TextComponentsTable extends TextComponents
       context.handle(
           _highlightColorIdMeta,
           highlightColorId.isAcceptableOrUnknown(
-              data['highlight_color_id'], _highlightColorIdMeta));
+              data['highlight_color_id']!, _highlightColorIdMeta));
     } else if (isInserting) {
       context.missing(_highlightColorIdMeta);
     }
     if (data.containsKey('bold')) {
       context.handle(
-          _boldMeta, bold.isAcceptableOrUnknown(data['bold'], _boldMeta));
+          _boldMeta, bold.isAcceptableOrUnknown(data['bold']!, _boldMeta));
     } else if (isInserting) {
       context.missing(_boldMeta);
     }
     if (data.containsKey('italic')) {
       context.handle(_italicMeta,
-          italic.isAcceptableOrUnknown(data['italic'], _italicMeta));
+          italic.isAcceptableOrUnknown(data['italic']!, _italicMeta));
     } else if (isInserting) {
       context.missing(_italicMeta);
     }
@@ -4530,7 +4301,7 @@ class $TextComponentsTable extends TextComponents
       context.handle(
           _underlinedMeta,
           underlined.isAcceptableOrUnknown(
-              data['underlined'], _underlinedMeta));
+              data['underlined']!, _underlinedMeta));
     } else if (isInserting) {
       context.missing(_underlinedMeta);
     }
@@ -4540,7 +4311,7 @@ class $TextComponentsTable extends TextComponents
   @override
   Set<GeneratedColumn> get $primaryKey => {structureId, position};
   @override
-  TextComponentModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  TextComponentModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return TextComponentModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -4557,53 +4328,41 @@ class TextFieldDatumModel extends DataClass
   final int fieldSpecId;
   final String rawText;
   TextFieldDatumModel(
-      {@required this.entryId,
-      @required this.fieldSpecId,
-      @required this.rawText});
+      {required this.entryId,
+      required this.fieldSpecId,
+      required this.rawText});
   factory TextFieldDatumModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return TextFieldDatumModel(
       entryId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       fieldSpecId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}field_spec_id'])!,
       rawText: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}raw_text']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}raw_text'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || entryId != null) {
-      map['entry_id'] = Variable<int>(entryId);
-    }
-    if (!nullToAbsent || fieldSpecId != null) {
-      map['field_spec_id'] = Variable<int>(fieldSpecId);
-    }
-    if (!nullToAbsent || rawText != null) {
-      map['raw_text'] = Variable<String>(rawText);
-    }
+    map['entry_id'] = Variable<int>(entryId);
+    map['field_spec_id'] = Variable<int>(fieldSpecId);
+    map['raw_text'] = Variable<String>(rawText);
     return map;
   }
 
   TextFieldDataCompanion toCompanion(bool nullToAbsent) {
     return TextFieldDataCompanion(
-      entryId: entryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(entryId),
-      fieldSpecId: fieldSpecId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(fieldSpecId),
-      rawText: rawText == null && nullToAbsent
-          ? const Value.absent()
-          : Value(rawText),
+      entryId: Value(entryId),
+      fieldSpecId: Value(fieldSpecId),
+      rawText: Value(rawText),
     );
   }
 
   factory TextFieldDatumModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return TextFieldDatumModel(
       entryId: serializer.fromJson<int>(json['entryId']),
@@ -4612,7 +4371,7 @@ class TextFieldDatumModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'entryId': serializer.toJson<int>(entryId),
@@ -4622,7 +4381,7 @@ class TextFieldDatumModel extends DataClass
   }
 
   TextFieldDatumModel copyWith(
-          {int entryId, int fieldSpecId, String rawText}) =>
+          {int? entryId, int? fieldSpecId, String? rawText}) =>
       TextFieldDatumModel(
         entryId: entryId ?? this.entryId,
         fieldSpecId: fieldSpecId ?? this.fieldSpecId,
@@ -4660,16 +4419,16 @@ class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
     this.rawText = const Value.absent(),
   });
   TextFieldDataCompanion.insert({
-    @required int entryId,
-    @required int fieldSpecId,
-    @required String rawText,
+    required int entryId,
+    required int fieldSpecId,
+    required String rawText,
   })  : entryId = Value(entryId),
         fieldSpecId = Value(fieldSpecId),
         rawText = Value(rawText);
   static Insertable<TextFieldDatumModel> custom({
-    Expression<int> entryId,
-    Expression<int> fieldSpecId,
-    Expression<String> rawText,
+    Expression<int>? entryId,
+    Expression<int>? fieldSpecId,
+    Expression<String>? rawText,
   }) {
     return RawValuesInsertable({
       if (entryId != null) 'entry_id': entryId,
@@ -4679,7 +4438,7 @@ class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
   }
 
   TextFieldDataCompanion copyWith(
-      {Value<int> entryId, Value<int> fieldSpecId, Value<String> rawText}) {
+      {Value<int>? entryId, Value<int>? fieldSpecId, Value<String>? rawText}) {
     return TextFieldDataCompanion(
       entryId: entryId ?? this.entryId,
       fieldSpecId: fieldSpecId ?? this.fieldSpecId,
@@ -4716,12 +4475,11 @@ class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
 class $TextFieldDataTable extends TextFieldData
     with TableInfo<$TextFieldDataTable, TextFieldDatumModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $TextFieldDataTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  GeneratedIntColumn _entryId;
   @override
-  GeneratedIntColumn get entryId => _entryId ??= _constructEntryId();
+  late final GeneratedIntColumn entryId = _constructEntryId();
   GeneratedIntColumn _constructEntryId() {
     return GeneratedIntColumn(
       'entry_id',
@@ -4732,10 +4490,8 @@ class $TextFieldDataTable extends TextFieldData
 
   final VerificationMeta _fieldSpecIdMeta =
       const VerificationMeta('fieldSpecId');
-  GeneratedIntColumn _fieldSpecId;
   @override
-  GeneratedIntColumn get fieldSpecId =>
-      _fieldSpecId ??= _constructFieldSpecId();
+  late final GeneratedIntColumn fieldSpecId = _constructFieldSpecId();
   GeneratedIntColumn _constructFieldSpecId() {
     return GeneratedIntColumn(
       'field_spec_id',
@@ -4745,9 +4501,8 @@ class $TextFieldDataTable extends TextFieldData
   }
 
   final VerificationMeta _rawTextMeta = const VerificationMeta('rawText');
-  GeneratedTextColumn _rawText;
   @override
-  GeneratedTextColumn get rawText => _rawText ??= _constructRawText();
+  late final GeneratedTextColumn rawText = _constructRawText();
   GeneratedTextColumn _constructRawText() {
     return GeneratedTextColumn(
       'raw_text',
@@ -4772,7 +4527,7 @@ class $TextFieldDataTable extends TextFieldData
     final data = instance.toColumns(true);
     if (data.containsKey('entry_id')) {
       context.handle(_entryIdMeta,
-          entryId.isAcceptableOrUnknown(data['entry_id'], _entryIdMeta));
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
@@ -4780,13 +4535,13 @@ class $TextFieldDataTable extends TextFieldData
       context.handle(
           _fieldSpecIdMeta,
           fieldSpecId.isAcceptableOrUnknown(
-              data['field_spec_id'], _fieldSpecIdMeta));
+              data['field_spec_id']!, _fieldSpecIdMeta));
     } else if (isInserting) {
       context.missing(_fieldSpecIdMeta);
     }
     if (data.containsKey('raw_text')) {
       context.handle(_rawTextMeta,
-          rawText.isAcceptableOrUnknown(data['raw_text'], _rawTextMeta));
+          rawText.isAcceptableOrUnknown(data['raw_text']!, _rawTextMeta));
     } else if (isInserting) {
       context.missing(_rawTextMeta);
     }
@@ -4796,7 +4551,7 @@ class $TextFieldDataTable extends TextFieldData
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
-  TextFieldDatumModel map(Map<String, dynamic> data, {String tablePrefix}) {
+  TextFieldDatumModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     return TextFieldDatumModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
@@ -4809,49 +4564,26 @@ class $TextFieldDataTable extends TextFieldData
 
 abstract class _$MoorDatabase extends GeneratedDatabase {
   _$MoorDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  $AlignmentsTable _alignments;
-  $AlignmentsTable get alignments => _alignments ??= $AlignmentsTable(this);
-  $CardsTable _cards;
-  $CardsTable get cards => _cards ??= $CardsTable(this);
-  $CardFormatsTable _cardFormats;
-  $CardFormatsTable get cardFormats => _cardFormats ??= $CardFormatsTable(this);
-  $ComponentsTable _components;
-  $ComponentsTable get components => _components ??= $ComponentsTable(this);
-  $ComponentTypesTable _componentTypes;
-  $ComponentTypesTable get componentTypes =>
-      _componentTypes ??= $ComponentTypesTable(this);
-  $DecksTable _decks;
-  $DecksTable get decks => _decks ??= $DecksTable(this);
-  $EntriesTable _entries;
-  $EntriesTable get entries => _entries ??= $EntriesTable(this);
-  $EntriesTagsTable _entriesTags;
-  $EntriesTagsTable get entriesTags => _entriesTags ??= $EntriesTagsTable(this);
-  $EntryTypesTable _entryTypes;
-  $EntryTypesTable get entryTypes => _entryTypes ??= $EntryTypesTable(this);
-  $FieldDataTable _fieldData;
-  $FieldDataTable get fieldData => _fieldData ??= $FieldDataTable(this);
-  $FieldSpecsTable _fieldSpecs;
-  $FieldSpecsTable get fieldSpecs => _fieldSpecs ??= $FieldSpecsTable(this);
-  $FieldTypesTable _fieldTypes;
-  $FieldTypesTable get fieldTypes => _fieldTypes ??= $FieldTypesTable(this);
-  $FillColorsTable _fillColors;
-  $FillColorsTable get fillColors => _fillColors ??= $FillColorsTable(this);
-  $HighlightColorsTable _highlightColors;
-  $HighlightColorsTable get highlightColors =>
-      _highlightColors ??= $HighlightColorsTable(this);
-  $ImageFieldDataTable _imageFieldData;
-  $ImageFieldDataTable get imageFieldData =>
-      _imageFieldData ??= $ImageFieldDataTable(this);
-  $StructuresTable _structures;
-  $StructuresTable get structures => _structures ??= $StructuresTable(this);
-  $TagsTable _tags;
-  $TagsTable get tags => _tags ??= $TagsTable(this);
-  $TextComponentsTable _textComponents;
-  $TextComponentsTable get textComponents =>
-      _textComponents ??= $TextComponentsTable(this);
-  $TextFieldDataTable _textFieldData;
-  $TextFieldDataTable get textFieldData =>
-      _textFieldData ??= $TextFieldDataTable(this);
+  late final $AlignmentsTable alignments = $AlignmentsTable(this);
+  late final $CardsTable cards = $CardsTable(this);
+  late final $CardFormatsTable cardFormats = $CardFormatsTable(this);
+  late final $ComponentsTable components = $ComponentsTable(this);
+  late final $ComponentTypesTable componentTypes = $ComponentTypesTable(this);
+  late final $DecksTable decks = $DecksTable(this);
+  late final $EntriesTable entries = $EntriesTable(this);
+  late final $EntriesTagsTable entriesTags = $EntriesTagsTable(this);
+  late final $EntryTypesTable entryTypes = $EntryTypesTable(this);
+  late final $FieldDataTable fieldData = $FieldDataTable(this);
+  late final $FieldSpecsTable fieldSpecs = $FieldSpecsTable(this);
+  late final $FieldTypesTable fieldTypes = $FieldTypesTable(this);
+  late final $FillColorsTable fillColors = $FillColorsTable(this);
+  late final $HighlightColorsTable highlightColors =
+      $HighlightColorsTable(this);
+  late final $ImageFieldDataTable imageFieldData = $ImageFieldDataTable(this);
+  late final $StructuresTable structures = $StructuresTable(this);
+  late final $TagsTable tags = $TagsTable(this);
+  late final $TextComponentsTable textComponents = $TextComponentsTable(this);
+  late final $TextFieldDataTable textFieldData = $TextFieldDataTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
