@@ -28,4 +28,3 @@ abstract class ApplicationException implements Exception {
 
   ApplicationException(this.message);
 }
-
