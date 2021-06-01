@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -26,8 +24,8 @@ import 'package:sona_flutter/core/data/data_sources/moor/tags/tags_dao.dart';
 
 // This is an integration test with MoorDatabase.
 void main() {
-  TagsDao dao;
-  MoorDatabase db;
+  late TagsDao dao;
+  late MoorDatabase db;
 
   setUp(() {
     db = MoorDatabase.custom(VmDatabase.memory(
@@ -39,7 +37,7 @@ void main() {
   });
 
   tearDown(() async {
-    await db?.close();
+    await db.close();
   });
 
   Future<List<TagModel>> selectAll() async {
@@ -52,7 +50,7 @@ void main() {
       group(
         'when passed legal name (called twice to create two tags)',
         () {
-          TagModel tag1, tag2;
+          late TagModel tag1, tag2;
           setUp(() async {
             tag1 = await dao.create(name: 'C_ervon');
             tag2 = await dao.create(name: 'W_ong');
@@ -77,19 +75,6 @@ void main() {
               expect(tag1, TagModel(id: 1, name: 'C_ervon'));
               expect(tag2, TagModel(id: 2, name: 'W_ong'));
             },
-          );
-        },
-      );
-
-      test(
-        'when passed null name, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.create(name: null);
-            },
-            throwsAssertionError,
           );
         },
       );
@@ -131,19 +116,6 @@ void main() {
         () async {
           final tag = await dao.getById(id: 6);
           expect(tag, isNull);
-        },
-      );
-
-      test(
-        'when passed null id, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.getById(id: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
     },
@@ -225,39 +197,6 @@ void main() {
         },
       );
 
-      group(
-        'when passed null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'id is null',
-            () async {
-              expect(
-                () async {
-                  await dao.rename(id: null, newName: 'New name');
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'newName is null',
-            () async {
-              final id = (await dao.create(name: 'Random tag')).id;
-              expect(await selectAll(), [TagModel(id: 1, name: 'Random tag')]);
-
-              expect(
-                () async {
-                  await dao.rename(id: id, newName: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-
       test(
         'when no tags in the db has the same ID as the passed id, '
         'should fail asserts',
@@ -307,19 +246,6 @@ void main() {
               TagModel(id: 1, name: 'In front'),
               TagModel(id: 3, name: 'At the back'),
             ],
-          );
-        },
-      );
-
-      test(
-        'when passed null id, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.remove(id: null);
-            },
-            throwsAssertionError,
           );
         },
       );

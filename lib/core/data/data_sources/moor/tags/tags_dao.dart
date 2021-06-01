@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
 import '../moor_database.dart';
@@ -28,22 +25,22 @@ import 'tags_table.dart';
 part 'tags_dao.g.dart';
 
 abstract class TagsDao {
-  Future<TagModel> create({@required String name});
+  Future<TagModel> create({required String name});
 
-  Future<TagModel> getById({@required int id});
+  Future<TagModel?> getById({required int id});
 
   Future<List<TagModel>> getAll();
 
-  Future<void> rename({@required int id, @required String newName});
+  Future<void> rename({required int id, required String newName});
 
-  Future<void> remove({@required int id});
+  Future<void> remove({required int id});
 }
 
 @UseDao(tables: [Tags])
 class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     with _$TagsDaoImplMixin
     implements TagsDao {
-  TagsDaoImpl({@required MoorDatabase db}) : super(db);
+  TagsDaoImpl({required MoorDatabase db}) : super(db);
 
   /// Creates a record in the database for a tag with name [name], then returns
   /// its [TagModel].
@@ -53,8 +50,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// [InvalidDataException] or [SqliteException] may be thrown. You must check
   /// inputs before passing them to this method.
   @override
-  Future<TagModel> create({@required String name}) async {
-    assert(name != null);
+  Future<TagModel> create({required String name}) async {
     // Asserts that a tag with the same name in the database does not exist.
     assert((await (select(tags)
               ..where(
@@ -66,7 +62,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
     // Inserts a tag with the given name, then gets the auto-incremented ID.
     final id = await into(tags).insert(TagsCompanion.insert(name: name));
     // Returns the tag from the database specified by its ID.
-    return getById(id: id);
+    return (select(tags)..where((tag) => tag.id.equals(id))).getSingle();
   }
 
   /// Returns the [TagModel] of the tag in the database with a matching ID.
@@ -74,11 +70,8 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// Returns a `Future(null)` if there are no tags in the database with a
   /// matching ID.
   @override
-  Future<TagModel> getById({@required int id}) async {
-    assert(id != null);
-
-    return (select(tags)..where((tag) => tag.id.equals(id))).getSingleOrNull();
-  }
+  Future<TagModel?> getById({required int id}) async =>
+      (select(tags)..where((tag) => tag.id.equals(id))).getSingleOrNull();
 
   /// Returns the list of [TagModel]s of all tags in the database.
   ///
@@ -94,9 +87,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// [newName]. In production, [InvalidDataException] or [SqliteException] may
   /// be thrown. You must check inputs before passing them to this method.
   @override
-  Future<void> rename({@required int id, @required String newName}) async {
-    assert(id != null);
-    assert(newName != null);
+  Future<void> rename({required int id, required String newName}) async {
     // Asserts that a tag with the same id in the database exists.
     assert((await getById(id: id)) != null);
     // Asserts that a tag with the same name in the database does not exist.
@@ -120,9 +111,7 @@ class TagsDaoImpl extends DatabaseAccessor<MoorDatabase>
   ///
   /// This method is not named `delete` because of naming conflicts.
   @override
-  Future<void> remove({@required int id}) async {
-    assert(id != null);
-
+  Future<void> remove({required int id}) async {
     // Deletes the tag specified by its ID,
     // then gets the number of deleted tags.
     final deletedCount = await (delete(tags)
