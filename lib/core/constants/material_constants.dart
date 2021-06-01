@@ -31,8 +31,8 @@
 // Defaults
 
 // Deck
-const String kDefaultDeckAuthorName = null;
-const String kDefaultDeckDescription = null;
+const String? kDefaultDeckAuthorName = null;
+const String? kDefaultDeckDescription = null;
 
 // Card
 const bool kDefaultCardStarred = false;
