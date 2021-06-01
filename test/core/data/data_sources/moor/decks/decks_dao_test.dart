@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -31,9 +29,9 @@ class MockSystemTime extends Mock implements SystemTime {}
 
 // This is an integration test with MoorDatabase.
 void main() {
-  DecksDao dao;
-  SystemTime systemTime;
-  MoorDatabase db;
+  late DecksDao dao;
+  late SystemTime systemTime;
+  late MoorDatabase db;
 
   setUp(() {
     db = MoorDatabase.custom(VmDatabase.memory(
@@ -47,7 +45,7 @@ void main() {
   });
 
   tearDown(() async {
-    await db?.close();
+    await db.close();
   });
 
   Future<List<DeckModel>> selectAll() async {
@@ -60,7 +58,7 @@ void main() {
       group(
         'when passed legal name (called twice to create two decks)',
         () {
-          DeckModel deck1, deck2;
+          late DeckModel deck1, deck2;
           setUp(() async {
             deck1 = await dao.create(name: 'Leo');
             deck2 = await dao.create(name: 'Libra');
@@ -125,19 +123,6 @@ void main() {
       );
 
       test(
-        'when passed null name, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.create(name: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
         'when a deck in the db has the same name as the passed name, '
         'should fail asserts',
         () async {
@@ -186,19 +171,6 @@ void main() {
           expect(deck, isNull);
         },
       );
-
-      test(
-        'when passed null id, '
-        'should fail asserts',
-        () {
-          expect(
-            () async {
-              await dao.getById(id: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
     },
   );
 
@@ -232,19 +204,6 @@ void main() {
         () async {
           final deck = await dao.getByName(name: 'Does not exist');
           expect(deck, isNull);
-        },
-      );
-
-      test(
-        'when passed null id, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.getByName(name: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
     },
@@ -322,7 +281,7 @@ void main() {
           group(
             'when authorName and description are unchanged',
             () {
-              DeckModel editedDeck;
+              late DeckModel editedDeck;
               setUp(() async {
                 when(systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
@@ -374,7 +333,7 @@ void main() {
           group(
             'when authorName and description are changed',
             () {
-              DeckModel editedDeck;
+              late DeckModel editedDeck;
               setUp(() async {
                 when(systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
@@ -427,7 +386,7 @@ void main() {
           group(
             'when created or lastEdited are changed',
             () {
-              DeckModel editedDeck;
+              late DeckModel editedDeck;
               setUp(() async {
                 when(systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
@@ -483,7 +442,7 @@ void main() {
           group(
             'when name is unchanged',
             () {
-              DeckModel editedDeck;
+              late DeckModel editedDeck;
               setUp(() async {
                 when(systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
@@ -583,19 +542,6 @@ void main() {
           );
         },
       );
-
-      test(
-        'when passed null newDeck, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.edit(newDeck: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
     },
   );
 
@@ -622,19 +568,6 @@ void main() {
                 description: kDefaultDeckDescription,
               ),
             ],
-          );
-        },
-      );
-
-      test(
-        'when passed null id, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.remove(id: null);
-            },
-            throwsAssertionError,
           );
         },
       );

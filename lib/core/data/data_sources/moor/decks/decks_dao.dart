@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -29,17 +27,17 @@ import 'decks_table.dart';
 part 'decks_dao.g.dart';
 
 abstract class DecksDao {
-  Future<DeckModel> create({@required String name});
+  Future<DeckModel> create({required String name});
 
-  Future<DeckModel> getById({@required int id});
+  Future<DeckModel?> getById({required int id});
 
-  Future<DeckModel> getByName({@required String name});
+  Future<DeckModel?> getByName({required String name});
 
   Future<List<DeckModel>> getAll();
 
-  Future<DeckModel> edit({@required DeckModel newDeck});
+  Future<DeckModel> edit({required DeckModel newDeck});
 
-  Future<void> remove({@required int id});
+  Future<void> remove({required int id});
 }
 
 @UseDao(tables: [Decks])
@@ -49,8 +47,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   final SystemTime systemTime;
 
   DecksDaoImpl({
-    @required MoorDatabase db,
-    @required this.systemTime,
+    required MoorDatabase db,
+    required this.systemTime,
   }) : super(db);
 
   /// Creates a record in the database for a deck with name [name], then returns
@@ -61,7 +59,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// [InvalidDataException] or [SqliteException] may be thrown. You must check
   /// inputs before passing them to this method.
   @override
-  Future<DeckModel> create({@required String name}) async {
+  Future<DeckModel> create({required String name}) async {
     assert(name != null);
     // Asserts that a deck with the same name in the db does not exist.
     assert((await getByName(name: name)) == null);
@@ -77,7 +75,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
       ),
     );
     // Returns the deck from the database specified by its ID.
-    return getById(id: id);
+    return (select(decks)..where((deck) => deck.id.equals(id))).getSingle();
   }
 
   /// Returns the [DeckModel] of the deck in the database with a matching ID.
@@ -85,7 +83,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// Returns a `Future(null)` if there are no decks in the database with a
   /// matching ID.
   @override
-  Future<DeckModel> getById({@required int id}) {
+  Future<DeckModel?> getById({required int id}) {
     assert(id != null);
 
     return (select(decks)..where((deck) => deck.id.equals(id)))
@@ -97,7 +95,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// Returns a `Future(null)` if there are no decks in the database with a
   /// matching name.
   @override
-  Future<DeckModel> getByName({@required String name}) {
+  Future<DeckModel?> getByName({required String name}) {
     assert(name != null);
 
     return (select(decks)..where((deck) => deck.name.equals(name)))
@@ -132,7 +130,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   ///
   /// This method is not named `update` because of naming conflicts.
   @override
-  Future<DeckModel> edit({@required DeckModel newDeck}) async {
+  Future<DeckModel> edit({required DeckModel newDeck}) async {
     assert(newDeck != null);
     // Asserts that a deck with the same ID as the passed deck's ID exists.
     assert((await getById(id: newDeck.id)) != null);
@@ -157,7 +155,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
       ),
     );
     // Returns the updated deck from the database specified by its ID.
-    return getById(id: newDeck.id);
+    return (select(decks)..where((deck) => deck.id.equals(newDeck.id)))
+        .getSingle();
   }
 
   /// Deletes the deck specified by its ID [id].
@@ -168,7 +167,7 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   ///
   /// This method is not named `delete` because of naming conflicts.
   @override
-  Future<void> remove({@required int id}) async {
+  Future<void> remove({required int id}) async {
     assert(id != null);
 
     // Deletes the deck specified by its ID,
