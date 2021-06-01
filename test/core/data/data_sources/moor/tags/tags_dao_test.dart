@@ -24,9 +24,6 @@ import 'package:moor/ffi.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/tags/tags_dao.dart';
 
-// TODO(cervonwong): 21/12/2020 Update test messages and structure to match
-//  other tests (for e.g. decks_dao_test.dart).
-
 // This is an integration test with MoorDatabase.
 void main() {
   TagsDao dao;
@@ -52,14 +49,35 @@ void main() {
   group(
     'TagsDaoImpl create',
     () {
-      test(
-        'when passed legal name, '
-        'should return expected TagModel',
-        () async {
-          final tag = await dao.create(name: 'Tag name');
-          expect(await selectAll(), [TagModel(id: 1, name: 'Tag name')]);
+      group(
+        'when passed legal name (called twice to create two tags)',
+        () {
+          TagModel tag1, tag2;
+          setUp(() async {
+            tag1 = await dao.create(name: 'C_ervon');
+            tag2 = await dao.create(name: 'W_ong');
+          });
 
-          expect(tag, TagModel(id: 1, name: 'Tag name'));
+          test(
+            'should create expected records in tags table',
+            () async {
+              expect(
+                await selectAll(),
+                [
+                  TagModel(id: 1, name: 'C_ervon'),
+                  TagModel(id: 2, name: 'W_ong'),
+                ],
+              );
+            },
+          );
+
+          test(
+            'should return expected TagModels',
+            () async {
+              expect(tag1, TagModel(id: 1, name: 'C_ervon'));
+              expect(tag2, TagModel(id: 2, name: 'W_ong'));
+            },
+          );
         },
       );
 
@@ -81,7 +99,6 @@ void main() {
         'should fail asserts',
         () async {
           await dao.create(name: 'Tag name');
-          expect(await selectAll(), [TagModel(id: 1, name: 'Tag name')]);
 
           expect(
             () async {
@@ -102,7 +119,6 @@ void main() {
         'should return expected TagModel',
         () async {
           final id = (await dao.create(name: 'Random tag')).id;
-          expect(await selectAll(), [TagModel(id: id, name: 'Random tag')]);
 
           final tag = await dao.getById(id: id);
           expect(tag, TagModel(id: id, name: 'Random tag'));
@@ -113,7 +129,7 @@ void main() {
         'when no tags in the db has the same ID as the passed id, '
         'should return null',
         () async {
-          final tag = await dao.getById(id: -1);
+          final tag = await dao.getById(id: 6);
           expect(tag, isNull);
         },
       );
@@ -153,14 +169,6 @@ void main() {
           await dao.create(name: 'Tag 1');
           await dao.create(name: 'Tag 2');
           await dao.create(name: 'Tag 3');
-          expect(
-            await selectAll(),
-            [
-              TagModel(id: 1, name: 'Tag 1'),
-              TagModel(id: 2, name: 'Tag 2'),
-              TagModel(id: 3, name: 'Tag 3'),
-            ],
-          );
 
           final tags = await dao.getAll();
           expect(
@@ -183,11 +191,25 @@ void main() {
         'when passed legal arguments, '
         'should update expected records in decks table',
         () async {
-          final id = (await dao.create(name: 'Old name')).id;
-          expect(await selectAll(), [TagModel(id: 1, name: 'Old name')]);
+          final id1 = (await dao.create(name: 'Tag 1')).id;
+          final id2 = (await dao.create(name: 'Tag 2')).id;
+          expect(
+            await selectAll(),
+            [
+              TagModel(id: 1, name: 'Tag 1'),
+              TagModel(id: 2, name: 'Tag 2'),
+            ],
+          );
 
-          await dao.rename(id: id, newName: 'New name');
-          expect(await selectAll(), [TagModel(id: 1, name: 'New name')]);
+          await dao.rename(id: id1, newName: 'Tag one');
+          await dao.rename(id: id2, newName: 'Tag two');
+          expect(
+            await selectAll(),
+            [
+              TagModel(id: 1, name: 'Tag one'),
+              TagModel(id: 2, name: 'Tag two'),
+            ],
+          );
         },
       );
 
@@ -255,13 +277,6 @@ void main() {
         () async {
           final id = (await dao.create(name: 'Alpha')).id;
           await dao.create(name: 'Beta');
-          expect(
-            await selectAll(),
-            [
-              TagModel(id: 1, name: 'Alpha'),
-              TagModel(id: 2, name: 'Beta'),
-            ],
-          );
 
           expect(
             () async {
@@ -281,11 +296,18 @@ void main() {
         'when passed legal id, '
         'should update expected records in decks table',
         () async {
+          await dao.create(name: 'In front');
           final id = (await dao.create(name: 'Random tag')).id;
-          expect(await selectAll(), [TagModel(id: 1, name: 'Random tag')]);
+          await dao.create(name: 'At the back');
 
           await dao.remove(id: id);
-          expect(await selectAll(), <TagModel>[]);
+          expect(
+            await selectAll(),
+            [
+              TagModel(id: 1, name: 'In front'),
+              TagModel(id: 3, name: 'At the back'),
+            ],
+          );
         },
       );
 
@@ -308,7 +330,7 @@ void main() {
         () {
           expect(
             () async {
-              await dao.remove(id: -1);
+              await dao.remove(id: 9);
             },
             throwsAssertionError,
           );
