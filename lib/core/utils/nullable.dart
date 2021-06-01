@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -20,7 +18,7 @@
  */
 
 class Nullable<T> {
-  T value;
+  T? value;
 
   Nullable(this.value);
 }
