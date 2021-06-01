@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -28,8 +26,8 @@ import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 
 // This is an integration test with MoorDatabase.
 void main() {
-  CardsDao dao;
-  MoorDatabase db;
+  late CardsDao dao;
+  late MoorDatabase db;
 
   setUp(() async {
     db = MoorDatabase.custom(VmDatabase.memory(
@@ -45,7 +43,7 @@ void main() {
   });
 
   tearDown(() async {
-    await db?.close();
+    await db.close();
   });
 
   Future<List<CardModel>> selectAll() async {
@@ -58,7 +56,7 @@ void main() {
       group(
         'when passed legal arguments (called three times to create three cards)',
         () {
-          CardModel card1, card2, card3;
+          late CardModel card1, card2, card3;
           setUp(() async {
             card1 = await dao.create(entryId: 1, position: 1);
             card2 = await dao.create(entryId: 1, position: 2);
@@ -131,36 +129,6 @@ void main() {
         },
       );
 
-      group(
-        'when passed null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'entryId is null',
-            () async {
-              expect(
-                () async {
-                  await dao.create(entryId: null, position: 3);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'position is null',
-            () async {
-              expect(
-                () async {
-                  await dao.create(entryId: 1, position: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-
       test(
         'when a card in the db has the same PK as the passed PK arguments, '
         'should fail asserts',
@@ -204,42 +172,6 @@ void main() {
           );
 
           expect(result, isNull);
-        },
-      );
-
-      group(
-        'when passed null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'entryId is null',
-            () async {
-              expect(
-                () async {
-                  await dao.getSingle(
-                    entryId: null,
-                    position: 1,
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'position is null',
-            () async {
-              expect(
-                () async {
-                  await dao.getSingle(
-                    entryId: 1,
-                    position: null,
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
         },
       );
     },
@@ -412,19 +344,6 @@ void main() {
           );
         },
       );
-
-      test(
-        'when passed null newCard, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await dao.edit(newCard: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
     },
   );
 
@@ -453,36 +372,6 @@ void main() {
         },
       );
 
-      group(
-        'when passed null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'entryId is null',
-            () async {
-              expect(
-                () async {
-                  await dao.remove(entryId: null, position: 1);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'position is null',
-            () async {
-              expect(
-                () async {
-                  await dao.remove(entryId: 1, position: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-
       test(
         'when no cards in the db has the same PK as the passed PK arguments, '
         'should fail asserts',
@@ -505,7 +394,7 @@ void main() {
         'when passed legal cardList, '
         'should delete expected records in cards table',
         () {
-          CardModel card1, card2, card3, card4;
+          late CardModel card1, card2, card3, card4;
           setUp(() async {
             card1 = await dao.create(entryId: 1, position: 1);
             card2 = await dao.create(entryId: 2, position: 1);
@@ -575,36 +464,6 @@ void main() {
               } on ModelNotFoundException {}
 
               expect(await selectAll(), [card1]);
-            },
-          );
-        },
-      );
-
-      group(
-        'when passed illegal cardList, '
-        'should fail asserts',
-        () {
-          test(
-            'cardList is null',
-            () async {
-              expect(
-                () async {
-                  await dao.removeAll(cardList: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'cardList contains null',
-            () async {
-              expect(
-                () async {
-                  await dao.removeAll(cardList: [null]);
-                },
-                throwsAssertionError,
-              );
             },
           );
         },

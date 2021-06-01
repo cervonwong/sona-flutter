@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
 import 'package:moor/moor.dart';
 
 import '../../../../constants/material_constants.dart';
@@ -30,32 +27,30 @@ import 'cards_table.dart';
 part 'cards_dao.g.dart';
 
 abstract class CardsDao {
-  Future<CardModel> create({@required int entryId, @required int position});
+  Future<CardModel> create({required int entryId, required int position});
 
-  Future<CardModel> getSingle({@required int entryId, @required int position});
+  Future<CardModel?> getSingle({required int entryId, required int position});
 
-  Future<List<CardModel>> getAll({Set<int> entryIds});
+  Future<List<CardModel>> getAll({Set<int>? entryIds});
 
-  Future<void> edit({@required CardModel newCard});
+  Future<void> edit({required CardModel newCard});
 
-  Future<void> remove({@required int entryId, @required int position});
+  Future<void> remove({required int entryId, required int position});
 
-  Future<void> removeAll({@required List<CardModel> cardList});
+  Future<void> removeAll({required List<CardModel> cardList});
 }
 
 @UseDao(tables: [Cards])
 class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
     with _$CardsDaoImplMixin
     implements CardsDao {
-  CardsDaoImpl({@required MoorDatabase db}) : super(db);
+  CardsDaoImpl({required MoorDatabase db}) : super(db);
 
   @override
   Future<CardModel> create({
-    @required int entryId,
-    @required int position,
+    required int entryId,
+    required int position,
   }) async {
-    assert(entryId != null);
-    assert(position != null);
     assert((await getSingle(entryId: entryId, position: position)) == null);
 
     await into(cards).insert(
@@ -66,16 +61,19 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
         hidden: kDefaultCardHidden,
       ),
     );
-    return getSingle(entryId: entryId, position: position);
+    return (select(cards)
+          ..where(
+            (card) =>
+                card.entryId.equals(entryId) & card.position.equals(position),
+          ))
+        .getSingle();
   }
 
   @override
-  Future<CardModel> getSingle({
-    @required int entryId,
-    @required int position,
+  Future<CardModel?> getSingle({
+    required int entryId,
+    required int position,
   }) async {
-    assert(entryId != null);
-    assert(position != null);
 
     return (select(cards)
           ..where(
@@ -86,7 +84,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<List<CardModel>> getAll({Set<int> entryIds}) async {
+  Future<List<CardModel>> getAll({Set<int>? entryIds}) async {
     final selectStatement = select(cards);
 
     if (entryIds != null) {
@@ -97,8 +95,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<void> edit({@required CardModel newCard}) async {
-    assert(newCard != null);
+  Future<void> edit({required CardModel newCard}) async {
     assert((await getSingle(
           entryId: newCard.entryId,
           position: newCard.position,
@@ -116,10 +113,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<void> remove({@required int entryId, @required int position}) async {
-    assert(entryId != null);
-    assert(position != null);
-
+  Future<void> remove({required int entryId, required int position}) async {
     final deletedCount = await (delete(cards)
           ..where(
             (card) =>
@@ -130,10 +124,7 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
   }
 
   @override
-  Future<void> removeAll({@required List<CardModel> cardList}) async {
-    assert(cardList != null);
-    assert(!cardList.contains(null));
-
+  Future<void> removeAll({required List<CardModel> cardList}) async {
     // Checks that all cards in cardList exist.
     await transaction(
       () async {
