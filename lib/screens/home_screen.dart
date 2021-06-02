@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     FluentIcons.arrow_growth_24_filled,
     FluentIcons.person_24_filled,
   ];
-  static const _appBars = [
+  static const _appBars = <PreferredSizeWidget>[
     DecksDestinationAppBar(),
     SearchDestinationAppBar(),
     ProgressDestinationAppBar(),
