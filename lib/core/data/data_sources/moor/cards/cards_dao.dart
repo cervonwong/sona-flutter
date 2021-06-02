@@ -74,7 +74,6 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
     required int entryId,
     required int position,
   }) async {
-
     return (select(cards)
           ..where(
             (card) =>
