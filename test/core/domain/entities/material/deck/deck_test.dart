@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -65,65 +63,6 @@ void main() {
           expect(deck.lastEditedDateTime, DateTime(2020, 10, 30));
           expect(deck.authorName, 'Cervon Wong');
           expect(deck.description, 'A deck with all of its arguments set.');
-        },
-      );
-
-      test(
-        'with null for non-nullable arguments, '
-        'should fail asserts',
-        () {
-          final id = 3;
-          final name = 'Null deck';
-          final createdDateTime = DateTime(2020, 2, 2);
-          final lastEditedDateTime = DateTime(2020, 2, 3);
-
-          expect(
-            () {
-              Deck(
-                id: null,
-                name: name,
-                createdDateTime: createdDateTime,
-                lastEditedDateTime: lastEditedDateTime,
-              );
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              Deck(
-                id: id,
-                name: null,
-                createdDateTime: createdDateTime,
-                lastEditedDateTime: lastEditedDateTime,
-              );
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              Deck(
-                id: id,
-                name: name,
-                createdDateTime: null,
-                lastEditedDateTime: lastEditedDateTime,
-              );
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              Deck(
-                id: id,
-                name: name,
-                createdDateTime: createdDateTime,
-                lastEditedDateTime: null,
-              );
-            },
-            throwsAssertionError,
-          );
         },
       );
 

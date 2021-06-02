@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -30,28 +28,24 @@ class Deck extends Equatable {
   final String name;
   final DateTime createdDateTime;
   final DateTime lastEditedDateTime;
-  final String authorName; // Nullable
-  final String description; // Nullable
+  final String? authorName; // Nullable
+  final String? description; // Nullable
 
   Deck({
-    @required this.id,
-    @required this.name,
-    @required this.createdDateTime,
-    @required this.lastEditedDateTime,
+    required this.id,
+    required this.name,
+    required this.createdDateTime,
+    required this.lastEditedDateTime,
     this.authorName, // Default value is null.
     this.description, // Default value is null.
-  })  : assert(id != null),
-        assert(name != null),
-        assert(createdDateTime != null),
-        assert(lastEditedDateTime != null),
-        assert(createdDateTime.isBefore(lastEditedDateTime) ||
+  }) : assert(createdDateTime.isBefore(lastEditedDateTime) ||
             createdDateTime.isAtSameMomentAs(lastEditedDateTime));
 
   Deck copyWith({
-    String name,
-    DateTime lastEditedDateTime,
-    Nullable<String> authorName,
-    Nullable<String> description,
+    String? name,
+    DateTime? lastEditedDateTime,
+    Nullable<String>? authorName,
+    Nullable<String>? description,
   }) {
     return Deck(
       id: id,
@@ -64,7 +58,7 @@ class Deck extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         name,
         createdDateTime,
