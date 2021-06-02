@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -25,7 +23,7 @@ import 'package:sona_flutter/core/data/constants/lookup_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 
 void main() {
-  MoorDatabase db;
+  late MoorDatabase db;
 
   setUp(() {
     db = MoorDatabase.custom(VmDatabase.memory(
@@ -36,7 +34,7 @@ void main() {
   });
 
   tearDown(() async {
-    await db?.close();
+    await db.close();
   });
 
   group(
