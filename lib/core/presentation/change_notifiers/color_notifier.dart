@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -37,8 +35,6 @@ class ColorNotifier extends ChangeNotifier {
   ColorTheme get theme => _theme;
 
   set theme(ColorTheme newTheme) {
-    assert(newTheme != null);
-
     if (_theme == newTheme) return;
 
     _theme = newTheme;
@@ -84,9 +80,8 @@ class ColorNotifier extends ChangeNotifier {
   }
 
   ColorNotifier({
-    @required ColorTheme theme,
-  })  : assert(theme != null),
-        _theme = theme;
+    required ColorTheme theme,
+  }) : _theme = theme;
 }
 
 abstract class _ColorGroup {

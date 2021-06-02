@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -196,7 +194,7 @@ TextTheme _createPrimaryAndAccentTextTheme() {
   );
 }
 
-AppBarTheme _createAppBarTheme({@required TextTheme baseTextTheme}) {
+AppBarTheme _createAppBarTheme({required TextTheme baseTextTheme}) {
   return const AppBarTheme(
     centerTitle: false,
     elevation: 0.0,
@@ -223,7 +221,7 @@ BottomSheetThemeData _createBottomSheetTheme() {
 }
 
 BottomNavigationBarThemeData _createBottomNavigationBarTheme({
-  @required TextTheme baseTextTheme,
+  required TextTheme baseTextTheme,
 }) {
   return BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
@@ -285,10 +283,10 @@ FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
 }
 
 InputDecorationTheme _createInputDecorationTheme({
-  @required TextTheme baseTextTheme,
+  required TextTheme baseTextTheme,
 }) {
   return InputDecorationTheme(
-    hintStyle: baseTextTheme.bodyText1.copyWith(
+    hintStyle: baseTextTheme.bodyText1!.copyWith(
       color: ColorConstants.onLightMediumEmphasis,
     ),
   );
@@ -317,7 +315,7 @@ OutlinedButtonThemeData _createOutlinedButtonTheme() {
   );
 }
 
-SnackBarThemeData _createSnackBarTheme({@required TextTheme baseTextTheme}) {
+SnackBarThemeData _createSnackBarTheme({required TextTheme baseTextTheme}) {
   return SnackBarThemeData(
     behavior: SnackBarBehavior.floating,
     elevation: 2.0,
