@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -26,7 +24,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
 void main() {
-  ColorNotifier colorNotifier;
+  late ColorNotifier colorNotifier;
 
   setUp(
     () {
@@ -52,7 +50,7 @@ void main() {
     'should get different colors for onSurface when theme changes',
     () {
       final color1 = colorNotifier.onSurface.highlightNeutral;
-      Color color2;
+      Color? color2;
 
       colorNotifier.addListener(
         () {
@@ -82,7 +80,7 @@ void main() {
     'ColorNotifier when listened, '
     'should have themeMode change when theme changes accordingly',
     () {
-      ThemeMode themeMode;
+      ThemeMode? themeMode;
 
       colorNotifier.addListener(
         () {
@@ -94,37 +92,6 @@ void main() {
       colorNotifier.theme = ColorTheme.dark;
       // Expect that the closure inside of addListener is called.
       expect(themeMode, isNotNull);
-    },
-  );
-
-  group(
-    'ColorNotifier null tests',
-    () {
-      test(
-        'ColorNotifier when constructed with null theme, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              ColorNotifier(theme: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
-        'ColorNotifier when set theme to null, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              colorNotifier.theme = null;
-            },
-            throwsAssertionError,
-          );
-        },
-      );
     },
   );
 }
