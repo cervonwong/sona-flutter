@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -29,16 +27,14 @@ class Card extends Equatable {
   final bool isHidden;
 
   Card({
-    @required this.id,
+    required this.id,
     this.isStarred = false,
     this.isHidden = false,
-  })  : assert(id != null),
-        assert(isStarred != null),
-        assert(isHidden != null);
+  });
 
   Card copyWith({
-    bool isStarred,
-    bool isHidden,
+    bool? isStarred,
+    bool? isHidden,
   }) {
     return Card(
       id: id,
@@ -57,10 +53,9 @@ class CardId extends Equatable {
   final int position;
 
   CardId({
-    @required this.entryId,
-    @required this.position,
-  })  : assert(entryId != null),
-        assert(position != null);
+    required this.entryId,
+    required this.position,
+  });
 
   @override
   List<Object> get props => [entryId, position];

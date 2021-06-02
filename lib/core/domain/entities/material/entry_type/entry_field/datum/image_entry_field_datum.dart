@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -28,14 +26,14 @@ import 'entry_field_datum.dart';
 
 @immutable
 class ImageEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
-  final int imageId; // Nullable!
+  final int? imageId; // Nullable!
 
   ImageEntryFieldDatum({
-    @required this.imageId,
+    required this.imageId,
   }) : super(type: EntryFieldType.image);
 
   ImageEntryFieldDatum copyWith({
-    Nullable<int> imageId,
+    Nullable<int>? imageId,
   }) {
     return ImageEntryFieldDatum(
       imageId: imageId == null ? this.imageId : imageId.value,
@@ -43,5 +41,5 @@ class ImageEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
   }
 
   @override
-  List<Object> get props => [imageId];
+  List<Object?> get props => [imageId];
 }

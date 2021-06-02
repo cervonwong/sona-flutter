@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -55,90 +53,6 @@ void main() {
   group(
     'Entry when constructed',
     () {
-      group(
-        'with null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'id is null',
-            () {
-              expect(
-                () {
-                  Entry(id: null, tags: {}, fieldData: {});
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'tags is null',
-            () {
-              expect(
-                () {
-                  Entry(id: 100, tags: null, fieldData: {});
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'fieldData is null',
-            () {
-              expect(
-                () {
-                  Entry(id: 100, tags: {}, fieldData: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-
-      group(
-        'with arguments containing null, '
-        'should fail asserts',
-        () {
-          test(
-            'tags contains null',
-            () {
-              expect(
-                () {
-                  Entry(id: 100, tags: {null}, fieldData: {spec1: datum1});
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'fieldData contains null keys',
-            () {
-              expect(
-                () {
-                  Entry(id: 100, tags: {}, fieldData: {null: datum1});
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'fieldData contains null values',
-            () {
-              expect(
-                () {
-                  Entry(id: 100, tags: {}, fieldData: {spec1: null});
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-
       group(
         'with collection type arguments, '
         'should shallow copy them',

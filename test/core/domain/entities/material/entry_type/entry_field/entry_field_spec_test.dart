@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -24,65 +22,6 @@ import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_fiel
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
 
 void main() {
-  group(
-    'EntryFieldSpec when constructed',
-    () {
-      group(
-        'with null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'id is null',
-            () {
-              expect(
-                () {
-                  EntryFieldSpec(
-                    id: null,
-                    name: 'Not null name',
-                    type: EntryFieldType.text,
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'name is null',
-            () {
-              expect(
-                () {
-                  EntryFieldSpec(
-                    id: 1,
-                    name: null,
-                    type: EntryFieldType.text,
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'type is null',
-            () {
-              expect(
-                () {
-                  EntryFieldSpec(
-                    id: 2,
-                    name: 'Not null name',
-                    type: null,
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-    },
-  );
-
   test(
     'EntryFieldSpec copyWith, '
     'should return EntryFieldSpec with expected altered fields',

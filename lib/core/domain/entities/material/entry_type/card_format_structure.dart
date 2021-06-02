@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -32,10 +30,8 @@ class CardFormatStructure extends Equatable {
 
   const CardFormatStructure.empty() : _components = const [];
 
-  CardFormatStructure({@required List<Component> components})
-      : assert(components != null),
-        assert(!components.contains(null)),
-        _components = components.toList();
+  CardFormatStructure({required List<Component> components})
+      : _components = components.toList();
 
   /// Creates a [CardFormatStructure] with an inserted component.
   ///
@@ -45,10 +41,9 @@ class CardFormatStructure extends Equatable {
   /// If [index] is not specified, [component] is inserted to the end of
   /// [components].
   CardFormatStructure insert({
-    @required Component component,
-    int index,
+    required Component component,
+    int? index,
   }) {
-    assert(component != null);
     if (index != null) assert(index >= 0 && index <= _components.length);
 
     final newComponents = _components.toList()
@@ -58,11 +53,9 @@ class CardFormatStructure extends Equatable {
   }
 
   CardFormatStructure update({
-    @required Component component,
-    @required int index,
+    required Component component,
+    required int index,
   }) {
-    assert(component != null);
-    assert(index != null);
     assert(index >= 0 && index < _components.length);
 
     final newComponents = _components.toList()..[index] = component;
@@ -70,8 +63,7 @@ class CardFormatStructure extends Equatable {
     return CardFormatStructure(components: newComponents);
   }
 
-  CardFormatStructure remove({@required int index}) {
-    assert(index != null);
+  CardFormatStructure remove({required int index}) {
     assert(index >= 0 && index < _components.length);
 
     final newComponents = _components.toList()..removeAt(index);

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -28,13 +26,12 @@ class EntryTag extends Equatable {
   final String name;
 
   EntryTag({
-    @required this.id,
-    @required this.name,
-  })  : assert(id != null),
-        assert(name != null);
+    required this.id,
+    required this.name,
+  });
 
   EntryTag copyWith({
-    String name,
+    String? name,
   }) {
     return EntryTag(
       id: id,

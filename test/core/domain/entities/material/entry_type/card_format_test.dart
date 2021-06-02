@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -41,40 +39,6 @@ void main() {
           expect(cardFormat.name, 'Basic Front Format');
           expect(cardFormat.front, const CardFormatStructure.empty());
           expect(cardFormat.back, const CardFormatStructure.empty());
-        },
-      );
-
-      test(
-        'with null arguments, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              CardFormat(id: null, name: 'Null name');
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              CardFormat(id: 2, name: null);
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              CardFormat(id: 3, name: 'Null name', front: null);
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              CardFormat(id: 4, name: 'Null name', back: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
 

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -37,20 +35,15 @@ class Entry extends Equatable {
   Map<EntryFieldSpec, EntryFieldDatum> get fieldData => Map.of(_fieldData);
 
   Entry({
-    @required this.id,
-    @required Set<EntryTag> tags,
-    @required Map<EntryFieldSpec, EntryFieldDatum> fieldData,
-  })  : assert(id != null),
-        assert(tags != null),
-        assert(!tags.contains(null)),
-        assert(fieldData != null),
-        assert(fieldData.isNotEmpty),
-        assert(!fieldData.containsKey(null)),
-        assert(!fieldData.containsValue(null)),
+    required this.id,
+    required Set<EntryTag> tags,
+    required Map<EntryFieldSpec, EntryFieldDatum> fieldData,
+  })  : assert(fieldData.isNotEmpty),
         assert(_checkFieldDataType(fieldData)),
         _tags = tags.toSet(),
         _fieldData = Map.of(fieldData);
 
+  // TODO: 6/2/2021 Extract fieldData into a class to encapsulate checking logic.
   static bool _checkFieldDataType(
     Map<EntryFieldSpec, EntryFieldDatum> fieldData,
   ) {
@@ -63,8 +56,8 @@ class Entry extends Equatable {
   }
 
   Entry copyWith({
-    Set<EntryTag> tags,
-    Map<EntryFieldSpec, EntryFieldDatum> fieldData,
+    Set<EntryTag>? tags,
+    Map<EntryFieldSpec, EntryFieldDatum>? fieldData,
   }) {
     return Entry(
       id: id,

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -40,20 +38,16 @@ class CardFormat extends Equatable {
   final CardFormatStructure back;
 
   CardFormat({
-    @required this.id,
-    @required this.name,
+    required this.id,
+    required this.name,
     this.front = const CardFormatStructure.empty(),
     this.back = const CardFormatStructure.empty(),
-  })  : assert(id != null),
-        assert(name != null),
-        assert(front != null),
-        assert(back != null),
-        assert(name.length <= 150);
+  }) : assert(name.length <= 150);
 
   CardFormat copyWith({
-    String name,
-    CardFormatStructure front,
-    CardFormatStructure back,
+    String? name,
+    CardFormatStructure? front,
+    CardFormatStructure? back,
   }) {
     return CardFormat(
       id: id,

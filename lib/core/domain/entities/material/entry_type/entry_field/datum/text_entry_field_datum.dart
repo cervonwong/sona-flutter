@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -28,14 +26,14 @@ import 'entry_field_datum.dart';
 
 @immutable
 class TextEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
-  final String rawText; // Nullable!
+  final String? rawText; // Nullable!
 
   TextEntryFieldDatum({
-    @required this.rawText,
+    required this.rawText,
   }) : super(type: EntryFieldType.text);
 
   TextEntryFieldDatum copyWith({
-    Nullable<String> rawText,
+    Nullable<String>? rawText,
   }) {
     return TextEntryFieldDatum(
       rawText: rawText == null ? this.rawText : rawText.value,
@@ -43,5 +41,5 @@ class TextEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
   }
 
   @override
-  List<Object> get props => [rawText];
+  List<Object?> get props => [rawText];
 }

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -32,14 +30,14 @@ class MockCardFormat extends Mock implements CardFormat {}
 class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 
 void main() {
-  CardFormat cardFormat1;
-  CardFormat cardFormat2;
-  CardFormat cardFormat3;
-  EntryFieldSpec fieldSpec1;
-  EntryFieldSpec fieldSpec2;
-  EntryFieldSpec fieldSpec3;
+  late CardFormat cardFormat1;
+  late CardFormat cardFormat2;
+  late CardFormat cardFormat3;
+  late EntryFieldSpec fieldSpec1;
+  late EntryFieldSpec fieldSpec2;
+  late EntryFieldSpec fieldSpec3;
 
-  EntryType entryType;
+  late EntryType entryType;
 
   setUp(() {
     cardFormat1 = MockCardFormat();
@@ -76,120 +74,6 @@ void main() {
           expect(entryType.name, 'Entry Type Name');
           expect(entryType.cardFormats, [cardFormat1]);
           expect(entryType.fieldSpecs, [fieldSpec1]);
-        },
-      );
-
-      group(
-        'with null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'id is null',
-            () {
-              expect(
-                () {
-                  EntryType(
-                    id: null,
-                    name: 'Null EntryType',
-                    cardFormats: [cardFormat1],
-                    fieldSpecs: [fieldSpec1],
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'name is null',
-            () {
-              expect(
-                () {
-                  EntryType(
-                    id: 1,
-                    name: null,
-                    cardFormats: [cardFormat1],
-                    fieldSpecs: [fieldSpec1],
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'cardFormats is null',
-            () {
-              expect(
-                () {
-                  EntryType(
-                    id: 1,
-                    name: 'Null EntryType',
-                    cardFormats: null,
-                    fieldSpecs: [],
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'cardFormats is null',
-            () {
-              expect(
-                () {
-                  EntryType(
-                    id: 1,
-                    name: 'Null EntryType',
-                    cardFormats: [cardFormat1],
-                    fieldSpecs: null,
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-
-      group(
-        'with collection type arguments containing null, '
-        'should fail asserts',
-        () {
-          test(
-            'cardFormats contains null',
-            () {
-              expect(
-                () {
-                  EntryType(
-                    id: 1,
-                    name: 'Null EntryType',
-                    cardFormats: [null],
-                    fieldSpecs: [fieldSpec1],
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'fieldSpecs contains null',
-            () {
-              expect(
-                () {
-                  EntryType(
-                    id: 1,
-                    name: 'Null EntryType',
-                    cardFormats: [cardFormat1],
-                    fieldSpecs: [null],
-                  );
-                },
-                throwsAssertionError,
-              );
-            },
-          );
         },
       );
 
@@ -423,26 +307,6 @@ void main() {
         },
       );
 
-      test(
-        'when passed null cardFormat, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              entryType.insertCardFormat(cardFormat: null);
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              entryType.insertCardFormat(cardFormat: null, index: 0);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
       group(
         'when passed index out of bounds, '
         'should fail asserts',
@@ -523,19 +387,6 @@ void main() {
       );
 
       test(
-        'when passed null newCardFormat, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              entryType.updateCardFormat(newCardFormat: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
         'when passed newCardFormat '
         'which does not have the same id as any existing CardFormat, '
         'should fail asserts',
@@ -554,7 +405,7 @@ void main() {
   group(
     'EntryType removeCardFormat',
     () {
-      EntryType entryType2;
+      late EntryType entryType2;
 
       setUp(() {
         when(cardFormat1.id).thenReturn(1);
@@ -584,19 +435,6 @@ void main() {
           );
 
           expect(entryType4.cardFormats, [cardFormat1]);
-        },
-      );
-
-      test(
-        'when passed null cardFormat, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              entryType2.removeCardFormat(cardFormat: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
 
@@ -646,19 +484,6 @@ void main() {
               .insertFieldSpec(fieldSpec: fieldSpec3, index: 1);
 
           expect(entryType2.fieldSpecs, [fieldSpec1, fieldSpec3, fieldSpec2]);
-        },
-      );
-
-      test(
-        'when passed null fieldSpec, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              entryType.insertFieldSpec(fieldSpec: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
 
@@ -735,19 +560,6 @@ void main() {
       );
 
       test(
-        'when passed null newFieldSpec, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              entryType.updateFieldSpec(newFieldSpec: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
         'when passed newFieldSpec '
         'which does not have the same id as any existing EntryFieldSpec, '
         'should fail asserts',
@@ -766,7 +578,7 @@ void main() {
   group(
     'EntryType removeFieldSpec',
     () {
-      EntryType entryType2;
+      late EntryType entryType2;
 
       setUp(() {
         when(fieldSpec1.id).thenReturn(1);
@@ -792,19 +604,6 @@ void main() {
           final entryType4 = entryType2.removeFieldSpec(fieldSpec: fieldSpec3);
 
           expect(entryType4.fieldSpecs, [fieldSpec1]);
-        },
-      );
-
-      test(
-        'when passed null fieldSpec, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              entryType2.removeFieldSpec(fieldSpec: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
 

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -27,11 +25,9 @@ abstract class Component {
   final ComponentType type;
 
   Component({
-    @required this.name,
-    @required this.type,
-  })  : assert(name != null),
-        assert(name.length <= 150),
-        assert(type != null);
+    required this.name,
+    required this.type,
+  }) : assert(name.length <= 150);
 }
 
 enum ComponentType { text, image, divider }

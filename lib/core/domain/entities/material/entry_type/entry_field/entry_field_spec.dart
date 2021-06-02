@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -38,15 +36,13 @@ class EntryFieldSpec extends Equatable {
   final String name;
 
   EntryFieldSpec({
-    @required this.id,
-    @required this.type,
-    @required this.name,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(type != null);
+    required this.id,
+    required this.type,
+    required this.name,
+  });
 
   EntryFieldSpec copyWith({
-    String name,
+    String? name,
   }) {
     return EntryFieldSpec(
       id: id,

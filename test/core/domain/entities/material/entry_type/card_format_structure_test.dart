@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -150,19 +148,6 @@ void main() {
       );
 
       test(
-        'when passed null component, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              mediumStructure.insert(component: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
         'when passed illegal index, '
         'should fail asserts',
         () {
@@ -202,26 +187,6 @@ void main() {
             index: 1,
           );
           expect(structure2.components, [mockComponent1, mockComponent3]);
-        },
-      );
-
-      test(
-        'when passed null arguments, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              largeStructure.update(component: null, index: 0);
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              smallStructure.update(component: mockComponent3, index: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
 
@@ -269,19 +234,6 @@ void main() {
 
           final structure3 = structure2.remove(index: 0);
           expect(structure3.components, []);
-        },
-      );
-
-      test(
-        'when passed null index, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              largeStructure.remove(index: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
 

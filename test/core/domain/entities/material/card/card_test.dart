@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -44,33 +42,6 @@ void main() {
           expect(card.id, mockId1);
           expect(card.isStarred, false);
           expect(card.isHidden, false);
-        },
-      );
-
-      test(
-        'with null arguments, '
-        'should fail asserts',
-        () {
-          expect(
-            () {
-              Card(id: null);
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              Card(id: mockId1, isStarred: null);
-            },
-            throwsAssertionError,
-          );
-
-          expect(
-            () {
-              Card(id: mockId1, isHidden: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
     },
@@ -128,36 +99,6 @@ void main() {
           final card2 = Card(id: mockId2);
 
           expect(card1, isNot(card2));
-        },
-      );
-    },
-  );
-
-  group(
-    'CardId when constructed with null arguments, '
-    'should fail asserts',
-    () {
-      test(
-        'entryId is null',
-        () {
-          expect(
-            () {
-              CardId(entryId: null, position: 1);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
-
-      test(
-        'position is null',
-        () {
-          expect(
-            () {
-              CardId(entryId: 1, position: null);
-            },
-            throwsAssertionError,
-          );
         },
       );
     },

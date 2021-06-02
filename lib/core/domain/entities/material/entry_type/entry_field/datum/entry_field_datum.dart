@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -28,6 +26,6 @@ abstract class EntryFieldDatum {
   final EntryFieldType type;
 
   EntryFieldDatum({
-    @required this.type,
-  }) : assert(type != null);
+    required this.type,
+  });
 }

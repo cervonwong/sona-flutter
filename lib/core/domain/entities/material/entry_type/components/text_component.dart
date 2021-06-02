@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -30,18 +28,15 @@ class TextComponent extends Component with EquatableMixin {
   final TextComponentStyle style;
 
   TextComponent({
-    @required String name,
-    @required this.data,
+    required String name,
+    required this.data,
     this.style = const TextComponentStyle(),
-  })  : assert(name != null),
-        assert(data != null),
-        assert(style != null),
-        super(name: name, type: ComponentType.text);
+  }) : super(name: name, type: ComponentType.text);
 
   TextComponent copyWith({
-    String name,
-    String data,
-    TextComponentStyle style,
+    String? name,
+    String? data,
+    TextComponentStyle? style,
   }) {
     return TextComponent(
       name: name ?? this.name,
@@ -75,24 +70,17 @@ class TextComponentStyle extends Equatable {
     this.isBold = false,
     this.isItalic = false,
     this.isUnderlined = false,
-  })  : assert(size != null),
-        assert(alignment != null),
-        assert(fillColor != null),
-        assert(highlightColor != null),
-        assert(isBold != null),
-        assert(isItalic != null),
-        assert(isUnderlined != null),
-        assert(size >= 0.1),
+  })  : assert(size >= 0.1),
         assert(size <= 10.0);
 
   TextComponentStyle copyWith({
-    double size,
-    TextComponentAlignment alignment,
-    TextComponentFillColor fillColor,
-    TextComponentHighlightColor highlightColor,
-    bool isBold,
-    bool isItalic,
-    bool isUnderlined,
+    double? size,
+    TextComponentAlignment? alignment,
+    TextComponentFillColor? fillColor,
+    TextComponentHighlightColor? highlightColor,
+    bool? isBold,
+    bool? isItalic,
+    bool? isUnderlined,
   }) {
     return TextComponentStyle(
       size: size ?? this.size,

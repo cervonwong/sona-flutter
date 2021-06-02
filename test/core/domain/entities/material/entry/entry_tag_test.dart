@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -23,41 +21,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
 
 void main() {
-  group(
-    'EntryTag when constructed',
-    () {
-      group(
-        'with null arguments, '
-        'should fail asserts',
-        () {
-          test(
-            'id is null',
-            () {
-              expect(
-                () {
-                  EntryTag(id: null, name: 'Noun');
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-
-          test(
-            'name is null',
-            () {
-              expect(
-                () {
-                  EntryTag(id: 1, name: null);
-                },
-                throwsAssertionError,
-              );
-            },
-          );
-        },
-      );
-    },
-  );
-
   test(
     'EntryTag copyWith, '
     'should return EntryTag with expected altered fields',

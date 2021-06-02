@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -37,23 +35,18 @@ class EntryType extends Equatable {
   List<EntryFieldSpec> get fieldSpecs => _fieldSpecs.toList();
 
   EntryType({
-    @required this.id,
-    @required this.name,
-    @required List<CardFormat> cardFormats,
-    @required List<EntryFieldSpec> fieldSpecs,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(cardFormats != null),
-        assert(cardFormats.isNotEmpty),
-        assert(!cardFormats.contains(null)),
+    required this.id,
+    required this.name,
+    required List<CardFormat> cardFormats,
+    required List<EntryFieldSpec> fieldSpecs,
+  })  : assert(cardFormats.isNotEmpty),
         assert(_checkCardFormatsDuplicate(cardFormats)),
-        assert(fieldSpecs != null),
         assert(fieldSpecs.isNotEmpty),
-        assert(!fieldSpecs.contains(null)),
         assert(_checkFieldSpecsDuplicate(fieldSpecs)),
         _cardFormats = cardFormats.toList(),
         _fieldSpecs = fieldSpecs.toList();
 
+  // TODO: 6/2/2021 Extract to class, encapsulate checking logic.
   static bool _checkCardFormatsDuplicate(List<CardFormat> cardFormats) {
     for (var cardFormat in cardFormats) {
       if (cardFormats.where((cf) => cf.id == cardFormat.id).length > 1) {
@@ -75,7 +68,7 @@ class EntryType extends Equatable {
   }
 
   EntryType copyWith({
-    String name,
+    String? name,
   }) {
     return EntryType(
       id: id,
@@ -92,10 +85,9 @@ class EntryType extends Equatable {
   /// [cardFormats] of the created [EntryType] (index 3 in the list). If [index]
   /// is not specified, [cardFormat] is inserted to the end of [cardFormats].
   EntryType insertCardFormat({
-    @required CardFormat cardFormat,
-    int index,
+    required CardFormat cardFormat,
+    int? index,
   }) {
-    assert(cardFormat != null);
     if (index != null) assert(index >= 0 && index <= _cardFormats.length);
 
     // Checks that there does not exist a CardFormat with equal id. (Redundant!)
@@ -113,10 +105,8 @@ class EntryType extends Equatable {
   }
 
   EntryType updateCardFormat({
-    @required CardFormat newCardFormat,
+    required CardFormat newCardFormat,
   }) {
-    assert(newCardFormat != null);
-
     final index = _cardFormats.indexWhere(
       (cf) => cf.id == newCardFormat.id,
     );
@@ -133,10 +123,8 @@ class EntryType extends Equatable {
   }
 
   EntryType removeCardFormat({
-    @required CardFormat cardFormat,
+    required CardFormat cardFormat,
   }) {
-    assert(cardFormat != null);
-
     final index = _cardFormats.indexWhere(
       (cf) => cf.id == cardFormat.id,
     );
@@ -159,10 +147,9 @@ class EntryType extends Equatable {
   /// [fieldSpecs] of the created [EntryType] (index 3 in the list). If [index]
   /// is not specified, [fieldSpec] is inserted to the end of [fieldSpecs].
   EntryType insertFieldSpec({
-    @required EntryFieldSpec fieldSpec,
-    int index,
+    required EntryFieldSpec fieldSpec,
+    int? index,
   }) {
-    assert(fieldSpec != null);
     if (index != null) assert(index >= 0 && index <= _fieldSpecs.length);
 
     // Checks that there does not exist an EntryFieldSpec with equal id.
@@ -181,10 +168,8 @@ class EntryType extends Equatable {
   }
 
   EntryType updateFieldSpec({
-    @required EntryFieldSpec newFieldSpec,
+    required EntryFieldSpec newFieldSpec,
   }) {
-    assert(newFieldSpec != null);
-
     final index = _fieldSpecs.indexWhere(
       (fs) => fs.id == newFieldSpec.id,
     );
@@ -202,10 +187,8 @@ class EntryType extends Equatable {
   }
 
   EntryType removeFieldSpec({
-    @required EntryFieldSpec fieldSpec,
+    required EntryFieldSpec fieldSpec,
   }) {
-    assert(fieldSpec != null);
-
     final index = _fieldSpecs.indexWhere(
       (fs) => fs.id == fieldSpec.id,
     );
