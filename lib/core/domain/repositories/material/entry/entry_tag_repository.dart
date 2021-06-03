@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,18 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
-
 import '../../../entities/material/entry/entry_tag.dart';
 
 abstract class EntryTagRepository {
-  Future<EntryTag> create({@required String name});
+  Future<EntryTag> create({required String name});
 
-  Future<EntryTag> getById({@required int id});
+  Future<EntryTag?> getById({required int id});
 
   Future<List<EntryTag>> getAll();
 
-  Future<void> update({@required EntryTag tag});
+  Future<void> update({required EntryTag tag});
 
-  Future<void> delete({@required EntryTag tag});
+  Future<void> delete({required EntryTag tag});
 }

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -22,12 +20,7 @@
 import '../../../../domain/entities/material/entry/entry_tag.dart';
 import '../../../data_sources/moor/moor_database.dart';
 
-import 'package:meta/meta.dart';
-
 class EntryTagModelToEntityMapper {
-  EntryTag call({@required TagModel model}) {
-    if (model == null) return null;
-
-    return EntryTag(id: model.id, name: model.name);
-  }
+  EntryTag call({required TagModel model}) =>
+      EntryTag(id: model.id, name: model.name);
 }

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -32,23 +30,23 @@ class EntryTagRepositoryImpl implements EntryTagRepository {
   final EntryTagModelToEntityMapper _toEntity;
 
   EntryTagRepositoryImpl({
-    @required TagsDao dao,
-    @required EntryTagModelToEntityMapper toEntity,
+    required TagsDao dao,
+    required EntryTagModelToEntityMapper toEntity,
   })  : _dao = dao,
         _toEntity = toEntity;
 
   @override
-  Future<EntryTag> create({@required String name}) async {
+  Future<EntryTag> create({required String name}) async {
     final model = await _dao.create(name: name);
 
     return _toEntity(model: model);
   }
 
   @override
-  Future<EntryTag> getById({@required int id}) async {
+  Future<EntryTag?> getById({required int id}) async {
     final model = await _dao.getById(id: id);
 
-    return _toEntity(model: model);
+    return model == null ? null : _toEntity(model: model);
   }
 
   @override
@@ -59,12 +57,12 @@ class EntryTagRepositoryImpl implements EntryTagRepository {
   }
 
   @override
-  Future<void> update({@required EntryTag tag}) async {
+  Future<void> update({required EntryTag tag}) async {
     await _dao.rename(id: tag.id, newName: tag.name);
   }
 
   @override
-  Future<void> delete({@required EntryTag tag}) async {
+  Future<void> delete({required EntryTag tag}) async {
     await _dao.remove(id: tag.id);
   }
 }
