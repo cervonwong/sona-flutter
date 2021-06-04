@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -26,20 +24,10 @@ import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart'
 
 void main() {
   test(
-    'EntryTagModelToEntityMapper when passed null model, '
-    'should return null',
-    () {
-      final result = EntryTagModelToEntityMapper()(model: null);
-
-      expect(result, isNull);
-    },
-  );
-
-  test(
     'EntryTagModelToEntityMapper when passed legal TagModel, '
     'should return expected mapped EntryTag',
     () {
-      final tag = EntryTagModelToEntityMapper()(
+      final EntryTag? tag = EntryTagModelToEntityMapper()(
         model: TagModel(
           id: 1,
           name: 'Hello',
