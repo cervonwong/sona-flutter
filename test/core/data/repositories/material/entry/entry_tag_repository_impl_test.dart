@@ -20,7 +20,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/tags/tags_dao.dart';
 import 'package:sona_flutter/core/data/repositories/material/entry/entry_tag_model_to_entity_mapper.dart';
@@ -55,8 +55,7 @@ void main() {
       tag1 = MockEntryTag();
       tagModel1 = MockTagModel();
 
-      when(toEntity(model: argThat(equals(tagModel1), named: 'model')))
-          .thenReturn(tag1);
+      when(() => toEntity(model: tagModel1)).thenReturn(tag1);
     },
   );
 
@@ -67,7 +66,7 @@ void main() {
         'when passed legal arguments, '
         'should return expected EntryTag',
         () async {
-          when(dao.create(name: argThat(equals('Miaow'), named: 'name')))
+          when(() => dao.create(name: 'Miaow'))
               .thenAnswer((_) async => tagModel1);
 
           final tag = await repository.create(name: 'Miaow');
@@ -84,8 +83,7 @@ void main() {
         'when TagsDao.getById returns a TagModel, '
         'should return expected EntryTag',
         () async {
-          when(dao.getById(id: argThat(equals(20), named: 'id')))
-              .thenAnswer((_) async => tagModel1);
+          when(() => dao.getById(id: 20)).thenAnswer((_) async => tagModel1);
 
           final tag = await repository.getById(id: 20);
           expect(tag, tag1);
@@ -93,13 +91,11 @@ void main() {
       );
 
       test(
-        'when TagsDao.getById return null, '
+        'when TagsDao.getById returns null, '
         'should return null',
         () async {
-          when(dao.getById(id: argThat(equals(69), named: 'id')))
-              .thenAnswer((_) async => null);
-          when(toEntity(model: argThat(isNull, named: 'model')))
-              .thenReturn(null);
+          when(() => dao.getById(id: 69)).thenAnswer((_) async => null);
+          when(() => toEntity(model: null)).thenReturn(null);
 
           final tag = await repository.getById(id: 69);
           expect(tag, isNull);
@@ -115,9 +111,7 @@ void main() {
         'when TagsDao.getAll returns an empty List of TagModels, '
         'should return an empty List of EntryTags',
         () async {
-          when(dao.getAll()).thenAnswer(
-            (_) async => <TagModel>[],
-          );
+          when(() => dao.getAll()).thenAnswer((_) async => <TagModel>[]);
 
           final tags = await repository.getAll();
           expect(tags, <EntryTag>[]);
@@ -131,14 +125,11 @@ void main() {
           final tag2 = MockEntryTag(), tag3 = MockEntryTag();
           final tagModel2 = MockTagModel(), tagModel3 = MockTagModel();
 
-          when(toEntity(model: argThat(equals(tagModel2), named: 'model')))
-              .thenReturn(tag2);
-          when(toEntity(model: argThat(equals(tagModel3), named: 'model')))
-              .thenReturn(tag3);
+          when(() => toEntity(model: tagModel2)).thenReturn(tag2);
+          when(() => toEntity(model: tagModel3)).thenReturn(tag3);
 
-          when(dao.getAll()).thenAnswer(
-            (_) async => [tagModel1, tagModel2, tagModel3],
-          );
+          when(() => dao.getAll())
+              .thenAnswer((_) async => [tagModel1, tagModel2, tagModel3]);
 
           final tags = await repository.getAll();
           expect(tags, [tag1, tag2, tag3]);
@@ -154,16 +145,14 @@ void main() {
         'when passed legal arguments, '
         'should call TagsDao.rename with expected arguments',
         () async {
-          when(tag1.id).thenReturn(69);
-          when(tag1.name).thenReturn('Rawrr');
-          when(dao.rename(
-            id: argThat(equals(69), named: 'id'),
-            newName: argThat(equals('Rawrr'), named: 'newName'),
-          )).thenAnswer((_) async => tagModel1);
+          when(() => tag1.id).thenReturn(69);
+          when(() => tag1.name).thenReturn('Rawrr');
+          when(() => dao.rename(id: 69, newName: 'Rawrr'))
+              .thenAnswer((_) async => tagModel1);
 
           await repository.update(tag: tag1);
           // verify is only used for testing void and stubbed methods.
-          verify(dao.rename(id: 69, newName: 'Rawrr'));
+          verify(() => dao.rename(id: 69, newName: 'Rawrr'));
         },
       );
     },
@@ -176,13 +165,12 @@ void main() {
         'when passed legal arguments, '
         'should call TagsDao.remove with expected arguments',
         () async {
-          when(tag1.id).thenReturn(100);
-          when(dao.remove(id: argThat(equals(100), named: 'id')))
-              .thenAnswer((_) async => tagModel1);
+          when(() => tag1.id).thenReturn(100);
+          when(() => dao.remove(id: 100)).thenAnswer((_) async => tagModel1);
 
           await repository.delete(tag: tag1);
           // verify is only used for testing void and stubbed methods.
-          verify(dao.remove(id: 100));
+          verify(() => dao.remove(id: 100));
         },
       );
     },
