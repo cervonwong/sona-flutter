@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -65,32 +63,20 @@ class MockDeckEntityToModelMapper extends Mock
     implements DeckEntityToModelMapper {}
 
 void main() {
-  /*late*/ DecksDao decksDao;
-  /*late*/
-  EntriesDao entriesDao;
-  /*late*/
-  CardsDao cardsDao;
-  /*late*/
-  DeckRepository repository;
-  /*late*/
-  DeckModelToEntityMapper toEntity;
-  /*late*/
-  DeckEntityToModelMapper toModel;
+  late DecksDao decksDao;
+  late EntriesDao entriesDao;
+  late CardsDao cardsDao;
+  late DeckRepository repository;
+  late DeckModelToEntityMapper toEntity;
+  late DeckEntityToModelMapper toModel;
 
-  /*late*/
-  Deck deck1;
-  /*late*/
-  DeckModel deckModel1;
-  /*late*/
-  Entry entry1;
-  /*late*/
-  EntryModel entryModel1;
-  /*late*/
-  Card card1;
-  /*late*/
-  CardId cardId1;
-  /*late*/
-  CardModel cardModel1;
+  late Deck deck1;
+  late DeckModel deckModel1;
+  late Entry entry1;
+  late EntryModel entryModel1;
+  late Card card1;
+  late CardId cardId1;
+  late CardModel cardModel1;
 
   setUp(
     () {
@@ -160,7 +146,6 @@ void main() {
         'should return null',
         () async {
           when(() => decksDao.getById(id: 5)).thenAnswer((_) async => null);
-          when(() => toEntity(model: null)).thenReturn(null);
 
           final deck = await repository.getById(id: 5);
           expect(deck, isNull);
@@ -190,7 +175,6 @@ void main() {
         () async {
           when(() => decksDao.getByName(name: 'Peter'))
               .thenAnswer((_) async => null);
-          when(() => toEntity(model: null)).thenReturn(null);
 
           final deck = await repository.getByName(name: 'Peter');
           expect(deck, isNull);
@@ -288,19 +272,6 @@ void main() {
           );
         },
       );
-
-      test(
-        'when passed null entry, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await repository.getByEntry(entry: null);
-            },
-            throwsAssertionError,
-          );
-        },
-      );
     },
   );
 
@@ -386,19 +357,6 @@ void main() {
               await repository.getByCard(card: card1);
             },
             throwsA(isA<EntityNavigationException>()),
-          );
-        },
-      );
-
-      test(
-        'when passed null card, '
-        'should fail asserts',
-        () async {
-          expect(
-            () async {
-              await repository.getByCard(card: null);
-            },
-            throwsAssertionError,
           );
         },
       );

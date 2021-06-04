@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,15 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
-
 import '../../../../domain/entities/material/deck/deck.dart';
 import '../../../data_sources/moor/moor_database.dart';
 
 class DeckEntityToModelMapper {
-  DeckModel call({@required Deck deck}) {
-    if (deck == null) return null;
-
+  // TODO: 6/4/2021 Should the arg be renamed from `deck` to `entity`?
+  DeckModel call({required Deck deck}) {
     return DeckModel(
       id: deck.id,
       name: deck.name,

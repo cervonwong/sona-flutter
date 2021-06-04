@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -18,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-import 'package:meta/meta.dart';
 
 import '../../../../domain/domain_exceptions.dart';
 import '../../../../domain/entities/material/card/card.dart';
@@ -40,11 +36,11 @@ class DeckRepositoryImpl extends DeckRepository {
   final DeckEntityToModelMapper _toModel;
 
   DeckRepositoryImpl({
-    @required DecksDao decksDao,
-    @required EntriesDao entriesDao,
-    @required CardsDao cardsDao,
-    @required DeckModelToEntityMapper toEntity,
-    @required DeckEntityToModelMapper toModel,
+    required DecksDao decksDao,
+    required EntriesDao entriesDao,
+    required CardsDao cardsDao,
+    required DeckModelToEntityMapper toEntity,
+    required DeckEntityToModelMapper toModel,
   })  : _decksDao = decksDao,
         _entriesDao = entriesDao,
         _cardsDao = cardsDao,
@@ -52,24 +48,24 @@ class DeckRepositoryImpl extends DeckRepository {
         _toModel = toModel;
 
   @override
-  Future<Deck> create({@required String name}) async {
+  Future<Deck> create({required String name}) async {
     final model = await _decksDao.create(name: name);
 
     return _toEntity(model: model);
   }
 
   @override
-  Future<Deck> getById({@required int id}) async {
+  Future<Deck?> getById({required int id}) async {
     final model = await _decksDao.getById(id: id);
 
-    return _toEntity(model: model);
+    return model == null ? null : _toEntity(model: model);
   }
 
   @override
-  Future<Deck> getByName({@required String name}) async {
+  Future<Deck?> getByName({required String name}) async {
     final model = await _decksDao.getByName(name: name);
 
-    return _toEntity(model: model);
+    return model == null ? null : _toEntity(model: model);
   }
 
   @override
@@ -82,9 +78,7 @@ class DeckRepositoryImpl extends DeckRepository {
   // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO
   //  calls.
   @override
-  Future<Deck> getByEntry({@required Entry entry}) async {
-    assert(entry != null);
-
+  Future<Deck> getByEntry({required Entry entry}) async {
     final entryModel = await _entriesDao.getSingle(id: entry.id);
     if (entryModel == null) {
       throw EntityNotFoundException(
@@ -111,9 +105,7 @@ class DeckRepositoryImpl extends DeckRepository {
   // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO
   //  calls.
   @override
-  Future<Deck> getByCard({@required Card card}) async {
-    assert(card != null);
-
+  Future<Deck> getByCard({required Card card}) async {
     final cardModel = await _cardsDao.getSingle(
       entryId: card.id.entryId,
       position: card.id.position,
@@ -151,14 +143,14 @@ class DeckRepositoryImpl extends DeckRepository {
   }
 
   @override
-  Future<void> update({@required Deck deck}) async {
+  Future<void> update({required Deck deck}) async {
     await _decksDao.edit(newDeck: _toModel(deck: deck));
   }
 
   // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO
   //  calls.
   @override
-  Future<void> delete({@required Deck deck}) async {
+  Future<void> delete({required Deck deck}) async {
     // Delete deck in DecksDao.
     await _decksDao.remove(id: deck.id);
 

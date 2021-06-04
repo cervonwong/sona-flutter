@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -25,16 +23,6 @@ import 'package:sona_flutter/core/data/repositories/material/deck/deck_entity_to
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 
 void main() {
-  test(
-    'DeckEntityToModelMapper when passed null deck, '
-    'should return null',
-    () {
-      final result = DeckEntityToModelMapper()(deck: null);
-
-      expect(result, isNull);
-    },
-  );
-
   group(
     'DeckEntityToModelMapper when passed legal Deck, '
     'should return expected mapped DeckModel',
