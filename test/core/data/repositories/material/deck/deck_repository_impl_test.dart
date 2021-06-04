@@ -20,7 +20,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/cards/cards_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/entries/entries_dao.dart';
@@ -65,19 +65,31 @@ class MockDeckEntityToModelMapper extends Mock
     implements DeckEntityToModelMapper {}
 
 void main() {
-  DecksDao decksDao;
+  /*late*/ DecksDao decksDao;
+  /*late*/
   EntriesDao entriesDao;
+  /*late*/
   CardsDao cardsDao;
+  /*late*/
   DeckRepository repository;
+  /*late*/
   DeckModelToEntityMapper toEntity;
+  /*late*/
   DeckEntityToModelMapper toModel;
 
+  /*late*/
   Deck deck1;
+  /*late*/
   DeckModel deckModel1;
+  /*late*/
   Entry entry1;
+  /*late*/
   EntryModel entryModel1;
+  /*late*/
   Card card1;
+  /*late*/
   CardId cardId1;
+  /*late*/
   CardModel cardModel1;
 
   setUp(
@@ -98,10 +110,8 @@ void main() {
 
       deck1 = MockDeck();
       deckModel1 = MockDeckModel();
-      when(toEntity(model: argThat(equals(deckModel1), named: 'model')))
-          .thenReturn(deck1);
-      when(toModel(deck: argThat(equals(deck1), named: 'deck')))
-          .thenReturn(deckModel1);
+      when(() => toEntity(model: deckModel1)).thenReturn(deck1);
+      when(() => toModel(deck: deck1)).thenReturn(deckModel1);
 
       entry1 = MockEntry();
       entryModel1 = MockEntryModel();
@@ -109,7 +119,7 @@ void main() {
       card1 = MockCard();
       cardId1 = MockCardId();
       cardModel1 = MockCardModel();
-      when(card1.id).thenReturn(cardId1);
+      when(() => card1.id).thenReturn(cardId1);
     },
   );
 
@@ -120,7 +130,7 @@ void main() {
         'when passed legal arguments, '
         'should return expected Deck',
         () async {
-          when(decksDao.create(name: argThat(equals('Joseph'), named: 'name')))
+          when(() => decksDao.create(name: 'Joseph'))
               .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.create(name: 'Joseph');
@@ -137,7 +147,7 @@ void main() {
         'when DecksDao.getById returns a DeckModel, '
         'should return expected Deck',
         () async {
-          when(decksDao.getById(id: argThat(equals(5), named: 'id')))
+          when(() => decksDao.getById(id: 5))
               .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.getById(id: 5);
@@ -149,10 +159,8 @@ void main() {
         'when DecksDao.getById returns null, '
         'should return null',
         () async {
-          when(decksDao.getById(id: argThat(equals(5), named: 'id')))
-              .thenAnswer((_) async => null);
-          when(toEntity(model: argThat(isNull, named: 'model')))
-              .thenReturn(null);
+          when(() => decksDao.getById(id: 5)).thenAnswer((_) async => null);
+          when(() => toEntity(model: null)).thenReturn(null);
 
           final deck = await repository.getById(id: 5);
           expect(deck, isNull);
@@ -168,9 +176,8 @@ void main() {
         'when DecksDao.getByName returns a DeckModel, '
         'should return expected Deck',
         () async {
-          when(decksDao.getByName(
-            name: argThat(equals('Peter'), named: 'name'),
-          )).thenAnswer((_) async => deckModel1);
+          when(() => decksDao.getByName(name: 'Peter'))
+              .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.getByName(name: 'Peter');
           expect(deck, deck1);
@@ -181,11 +188,9 @@ void main() {
         'when DecksDao.getByName returns null, '
         'should return null',
         () async {
-          when(decksDao.getByName(
-            name: argThat(equals('Peter'), named: 'name'),
-          )).thenAnswer((_) async => null);
-          when(toEntity(model: argThat(isNull, named: 'model')))
-              .thenReturn(null);
+          when(() => decksDao.getByName(name: 'Peter'))
+              .thenAnswer((_) async => null);
+          when(() => toEntity(model: null)).thenReturn(null);
 
           final deck = await repository.getByName(name: 'Peter');
           expect(deck, isNull);
@@ -201,9 +206,7 @@ void main() {
         'when DecksDao.getAll returns an empty List of DeckModels, '
         'should return expected empty List of Decks',
         () async {
-          when(decksDao.getAll()).thenAnswer(
-            (_) async => <DeckModel>[],
-          );
+          when(() => decksDao.getAll()).thenAnswer((_) async => <DeckModel>[]);
 
           final decks = await repository.getAll();
           expect(decks, <Deck>[]);
@@ -217,14 +220,11 @@ void main() {
           final deck2 = MockDeck(), deck3 = MockDeck();
           final deckModel2 = MockDeckModel(), deckModel3 = MockDeckModel();
 
-          when(toEntity(model: argThat(equals(deckModel2), named: 'model')))
-              .thenReturn(deck2);
-          when(toEntity(model: argThat(equals(deckModel3), named: 'model')))
-              .thenReturn(deck3);
+          when(() => toEntity(model: deckModel2)).thenReturn(deck2);
+          when(() => toEntity(model: deckModel3)).thenReturn(deck3);
 
-          when(decksDao.getAll()).thenAnswer(
-            (_) async => [deckModel1, deckModel2, deckModel3],
-          );
+          when(() => decksDao.getAll())
+              .thenAnswer((_) async => [deckModel1, deckModel2, deckModel3]);
 
           final decks = await repository.getAll();
           expect(decks, [deck1, deck2, deck3]);
@@ -241,11 +241,11 @@ void main() {
         'return expected data classes, '
         'should return expected Deck which the passed Entry belongs to',
         () async {
-          when(entry1.id).thenReturn(69);
-          when(entryModel1.deckId).thenReturn(88);
-          when(entriesDao.getSingle(id: argThat(equals(69), named: 'id')))
+          when(() => entry1.id).thenReturn(69);
+          when(() => entryModel1.deckId).thenReturn(88);
+          when(() => entriesDao.getSingle(id: 69))
               .thenAnswer((_) async => entryModel1);
-          when(decksDao.getById(id: argThat(equals(88), named: 'id')))
+          when(() => decksDao.getById(id: 88))
               .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.getByEntry(entry: entry1);
@@ -257,8 +257,8 @@ void main() {
         'when EntriesDao.getSingle returns null (entry not found), '
         'should throw EntityNotFoundException',
         () async {
-          when(entry1.id).thenReturn(69);
-          when(entriesDao.getSingle(id: argThat(equals(69), named: 'id')))
+          when(() => entry1.id).thenReturn(69);
+          when(() => entriesDao.getSingle(id: 69))
               .thenAnswer((_) async => null);
 
           expect(
@@ -274,12 +274,11 @@ void main() {
         'when DecksDao.getById returns null (deck not found), '
         'should throw EntityNavigationException',
         () async {
-          when(entry1.id).thenReturn(69);
-          when(entryModel1.deckId).thenReturn(88);
-          when(entriesDao.getSingle(id: argThat(equals(69), named: 'id')))
+          when(() => entry1.id).thenReturn(69);
+          when(() => entryModel1.deckId).thenReturn(88);
+          when(() => entriesDao.getSingle(id: 69))
               .thenAnswer((_) async => entryModel1);
-          when(decksDao.getById(id: argThat(equals(88), named: 'id')))
-              .thenAnswer((_) async => null);
+          when(() => decksDao.getById(id: 88)).thenAnswer((_) async => null);
 
           expect(
             () async {
@@ -313,17 +312,15 @@ void main() {
         'return expected data classes, '
         'should return expected Deck which the passed Card belongs to',
         () async {
-          when(cardId1.entryId).thenReturn(100);
-          when(cardId1.position).thenReturn(234);
-          when(cardsDao.getSingle(
-            entryId: argThat(equals(100), named: 'entryId'),
-            position: argThat(equals(234), named: 'position'),
-          )).thenAnswer((_) async => cardModel1);
-          when(cardModel1.entryId).thenReturn(111);
-          when(entriesDao.getSingle(id: 111))
+          when(() => cardId1.entryId).thenReturn(100);
+          when(() => cardId1.position).thenReturn(234);
+          when(() => cardsDao.getSingle(entryId: 100, position: 234))
+              .thenAnswer((_) async => cardModel1);
+          when(() => cardModel1.entryId).thenReturn(111);
+          when(() => entriesDao.getSingle(id: 111))
               .thenAnswer((_) async => entryModel1);
-          when(entryModel1.deckId).thenReturn(69);
-          when(decksDao.getById(id: argThat(equals(69), named: 'id')))
+          when(() => entryModel1.deckId).thenReturn(69);
+          when(() => decksDao.getById(id: 69))
               .thenAnswer((_) async => deckModel1);
 
           final deck = await repository.getByCard(card: card1);
@@ -335,12 +332,10 @@ void main() {
         'when CardsDao.getSingle returns null (card not found), '
         'should throw EntityNotFoundException',
         () async {
-          when(cardId1.entryId).thenReturn(100);
-          when(cardId1.position).thenReturn(234);
-          when(cardsDao.getSingle(
-            entryId: argThat(equals(100), named: 'entryId'),
-            position: argThat(equals(234), named: 'position'),
-          )).thenAnswer((_) async => null);
+          when(() => cardId1.entryId).thenReturn(100);
+          when(() => cardId1.position).thenReturn(234);
+          when(() => cardsDao.getSingle(entryId: 100, position: 234))
+              .thenAnswer((_) async => null);
 
           expect(
             () async {
@@ -355,14 +350,13 @@ void main() {
         'when EntriesDao.getSingle returns null (entry not found), '
         'should throw EntityNavigationException',
         () async {
-          when(cardId1.entryId).thenReturn(100);
-          when(cardId1.position).thenReturn(234);
-          when(cardsDao.getSingle(
-            entryId: argThat(equals(100), named: 'entryId'),
-            position: argThat(equals(234), named: 'position'),
-          )).thenAnswer((_) async => cardModel1);
-          when(cardModel1.entryId).thenReturn(111);
-          when(entriesDao.getSingle(id: 111)).thenAnswer((_) async => null);
+          when(() => cardId1.entryId).thenReturn(100);
+          when(() => cardId1.position).thenReturn(234);
+          when(() => cardsDao.getSingle(entryId: 100, position: 234))
+              .thenAnswer((_) async => cardModel1);
+          when(() => cardModel1.entryId).thenReturn(111);
+          when(() => entriesDao.getSingle(id: 111))
+              .thenAnswer((_) async => null);
 
           expect(
             () async {
@@ -377,18 +371,15 @@ void main() {
         'when DecksDao.getById returns null (deck not found), '
         'should throw EntityNavigationException',
         () async {
-          when(cardId1.entryId).thenReturn(100);
-          when(cardId1.position).thenReturn(234);
-          when(cardsDao.getSingle(
-            entryId: argThat(equals(100), named: 'entryId'),
-            position: argThat(equals(234), named: 'position'),
-          )).thenAnswer((_) async => cardModel1);
-          when(cardModel1.entryId).thenReturn(111);
-          when(entriesDao.getSingle(id: 111))
+          when(() => cardId1.entryId).thenReturn(100);
+          when(() => cardId1.position).thenReturn(234);
+          when(() => cardsDao.getSingle(entryId: 100, position: 234))
+              .thenAnswer((_) async => cardModel1);
+          when(() => cardModel1.entryId).thenReturn(111);
+          when(() => entriesDao.getSingle(id: 111))
               .thenAnswer((_) async => entryModel1);
-          when(entryModel1.deckId).thenReturn(69);
-          when(decksDao.getById(id: argThat(equals(69), named: 'id')))
-              .thenAnswer((_) async => null);
+          when(() => entryModel1.deckId).thenReturn(69);
+          when(() => decksDao.getById(id: 69)).thenAnswer((_) async => null);
 
           expect(
             () async {
@@ -421,13 +412,12 @@ void main() {
         'when passed legal arguments, '
         'should call DecksDao.edit with expected arguments',
         () async {
-          when(decksDao.edit(
-            newDeck: argThat(equals(deckModel1), named: 'newDeck'),
-          )).thenAnswer((_) async => deckModel1);
+          when(() => decksDao.edit(newDeck: deckModel1))
+              .thenAnswer((_) async => deckModel1);
 
           await repository.update(deck: deck1);
           // verify is only used for testing void and stubbed methods.
-          verify(decksDao.edit(newDeck: deckModel1));
+          verify(() => decksDao.edit(newDeck: deckModel1));
         },
       );
     },
@@ -447,29 +437,23 @@ void main() {
           final cardModel3 = MockCardModel();
           final cardModel4 = MockCardModel();
 
-          when(deck1.id).thenReturn(123);
+          when(() => deck1.id).thenReturn(123);
 
-          when(entryModel1.id).thenReturn(10001);
-          when(entryModel2.id).thenReturn(10002);
-          when(
-            entriesDao.getAll(deckId: argThat(equals(123), named: 'deckId')),
-          ).thenAnswer((_) async => [entryModel1, entryModel2]);
+          when(() => entryModel1.id).thenReturn(10001);
+          when(() => entryModel2.id).thenReturn(10002);
+          when(() => entriesDao.getAll(deckId: 123))
+              .thenAnswer((_) async => [entryModel1, entryModel2]);
 
-          when(
-            cardsDao.getAll(
-              entryIds: argThat(equals({10001, 10002}), named: 'entryIds'),
-            ),
-          ).thenAnswer(
-            (_) async => [cardModel1, cardModel2, cardModel3, cardModel4],
-          );
+          when(() => cardsDao.getAll(entryIds: {10001, 10002})).thenAnswer(
+              (_) async => [cardModel1, cardModel2, cardModel3, cardModel4]);
 
           await repository.delete(deck: deck1);
           // verify is only used for testing void and stubbed methods.
-          verify(decksDao.remove(id: 123));
-          verify(entriesDao.removeAll(entryList: [entryModel1, entryModel2]));
-          verify(cardsDao.removeAll(
-            cardList: [cardModel1, cardModel2, cardModel3, cardModel4],
-          ));
+          verify(() => decksDao.remove(id: 123));
+          verify(() =>
+              entriesDao.removeAll(entryList: [entryModel1, entryModel2]));
+          verify(() => cardsDao.removeAll(
+              cardList: [cardModel1, cardModel2, cardModel3, cardModel4]));
         },
       );
     },
