@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -39,12 +37,12 @@ class MockEntryTagModelToEntityMapper extends Mock
     implements EntryTagModelToEntityMapper {}
 
 void main() {
-  TagsDao dao;
-  EntryTagRepository repository;
-  EntryTagModelToEntityMapper toEntity;
+  late TagsDao dao;
+  late EntryTagRepository repository;
+  late EntryTagModelToEntityMapper toEntity;
 
-  EntryTag tag1;
-  TagModel tagModel1;
+  late EntryTag tag1;
+  late TagModel tagModel1;
 
   setUp(
     () {
@@ -95,7 +93,6 @@ void main() {
         'should return null',
         () async {
           when(() => dao.getById(id: 69)).thenAnswer((_) async => null);
-          when(() => toEntity(model: null)).thenReturn(null);
 
           final tag = await repository.getById(id: 69);
           expect(tag, isNull);
