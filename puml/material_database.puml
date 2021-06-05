@@ -36,8 +36,8 @@ object icon_colors {
 }
 
 object symbol_search_terms {
-	symbol_id : INTEGER <<FK, cPK>>
-	term      : TEXT <<cPK>>
+	icon_symbol_id : INTEGER <<FK, cPK>>
+	term           : TEXT <<cPK>>
 }
 
 object entries {
