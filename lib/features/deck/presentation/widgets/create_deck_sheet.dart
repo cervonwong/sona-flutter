@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -34,7 +32,7 @@ typedef OnSuccess = void Function(String deckName);
 class CreateDeckSheet extends StatefulWidget {
   final OnSuccess onSuccess;
 
-  CreateDeckSheet({@required this.onSuccess});
+  CreateDeckSheet({required this.onSuccess});
 
   @override
   _CreateDeckSheetState createState() => _CreateDeckSheetState();
@@ -100,14 +98,14 @@ class _CreateDeckSheetState extends State<CreateDeckSheet> {
     );
   }
 
-  void _createDeck({@required BuildContext context}) {
+  void _createDeck({required BuildContext context}) {
     setState(() {
       _hasClickedCreated = true;
     });
     BlocProvider.of<DeckListBloc>(context).add(DeckCreated(name: _deckName));
   }
 
-  void _handleDeckCreationSuccess({@required BuildContext context}) {
+  void _handleDeckCreationSuccess({required BuildContext context}) {
     Navigator.of(context).pop();
     widget.onSuccess(_deckName);
   }
@@ -123,7 +121,7 @@ class _DeckNameTextField extends StatelessWidget {
   final TextEditingController _controller;
 
   _DeckNameTextField({
-    @required TextEditingController controller,
+    required TextEditingController controller,
   }) : _controller = controller;
 
   @override
@@ -139,7 +137,7 @@ class _DeckNameTextField extends StatelessWidget {
               FilteringTextInputFormatter.singleLineFormatter,
             ],
             textInputAction: TextInputAction.done,
-            style: Theme.of(context).textTheme.bodyText1.copyWith(
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: cn.onSurface.highEmphasis,
                 ),
             decoration: const InputDecoration(
@@ -171,7 +169,7 @@ class _DeckNameAlreadyExistsMessage extends StatelessWidget {
               child: Text(
                 'There\'s already a deck with this name!',
                 softWrap: true,
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       color: Theme.of(context).colorScheme.error,
                     ),
               ),

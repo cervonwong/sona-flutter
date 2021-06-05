@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -32,8 +30,8 @@ class StreakCounter extends StatelessWidget {
   final bool isActive;
 
   const StreakCounter({
-    @required this.streakCount,
-    @required this.isActive,
+    required this.streakCount,
+    required this.isActive,
   });
 
   @override
@@ -54,7 +52,7 @@ class StreakCounter extends StatelessWidget {
             const SizedBox(width: WidgetConstants.spacingPadding04),
             Text(
               '$streakCount',
-              style: Theme.of(context).textTheme.headline6.copyWith(
+              style: Theme.of(context).textTheme.headline6!.copyWith(
                     color: isActive
                         ? cn.onSurface.accentYellow
                         : cn.onSurface.lowEmphasis,

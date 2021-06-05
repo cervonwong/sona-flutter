@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -32,7 +30,7 @@ enum SelectableDrawerDestination { home, browse, progress, settings }
 class MainDrawer extends StatelessWidget {
   final SelectableDrawerDestination selected;
 
-  MainDrawer({@required this.selected});
+  MainDrawer({required this.selected});
 
   @override
   Widget build(BuildContext context) {
@@ -128,11 +126,11 @@ class _DrawerTile extends StatelessWidget {
   final GestureTapCallback onTap;
 
   _DrawerTile({
-    @required this.selected,
-    @required this.title,
-    @required this.icon,
-    @required this.selectedIcon,
-    @required this.onTap,
+    required this.selected,
+    required this.title,
+    required this.icon,
+    required this.selectedIcon,
+    required this.onTap,
   });
 
   @override
@@ -161,7 +159,7 @@ class _DrawerTile extends StatelessWidget {
           builder: (_, cn, __) {
             return Text(
               title,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: selected ? cn.onPrimary.highEmphasis : null,
                     fontWeight: selected ? FontWeight.w600 : null,
                   ),

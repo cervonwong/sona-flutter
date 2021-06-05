@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -41,7 +39,7 @@ class DeckListTitleBar extends StatelessWidget {
                 builder: (_, cn, __) {
                   return Text(
                     'Decks',
-                    style: Theme.of(context).textTheme.headline6.copyWith(
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
                           color: cn.onBackground.highEmphasis,
                         ),
                   );
@@ -52,7 +50,7 @@ class DeckListTitleBar extends StatelessWidget {
                 builder: (_, cn, __) {
                   return Text(
                     '136 cards to review',
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           color: cn.onBackground.mediumEmphasis,
                         ),
                   );

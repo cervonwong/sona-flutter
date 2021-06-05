@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -144,7 +142,7 @@ class _HomeFAB extends StatelessWidget {
 class _CreateActionsMenuSheet extends StatelessWidget {
   final BuildContext context;
 
-  _CreateActionsMenuSheet({@required this.context});
+  _CreateActionsMenuSheet({required this.context});
 
   @override
   Widget build(BuildContext innerContext) {
@@ -178,8 +176,8 @@ class _CreateActionsMenuSheet extends StatelessWidget {
   }
 
   void _handleCreateNewDeck({
-    @required BuildContext context,
-    @required ColorNotifier cn,
+    required BuildContext context,
+    required ColorNotifier cn,
   }) {
     Navigator.of(context).pop();
 
@@ -204,8 +202,8 @@ class _CreateActionsMenuSheet extends StatelessWidget {
   void _handleCreateNewEntry() {}
 
   void _showDeckCreationSuccessSnackBar({
-    @required BuildContext context,
-    @required String deckName,
+    required BuildContext context,
+    required String deckName,
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -223,9 +221,9 @@ class _CreateActionsMenuItem extends StatelessWidget {
   final GestureTapCallback onTap;
 
   const _CreateActionsMenuItem({
-    @required this.icon,
-    @required this.text,
-    @required this.onTap,
+    required this.icon,
+    required this.text,
+    required this.onTap,
   });
 
   @override
@@ -243,7 +241,7 @@ class _CreateActionsMenuItem extends StatelessWidget {
         builder: (_, cn, __) {
           return Text(
             text,
-            style: Theme.of(context).textTheme.bodyText1.copyWith(
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: cn.onSurface.highEmphasis,
                 ),
           );

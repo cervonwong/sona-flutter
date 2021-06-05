@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -42,21 +40,16 @@ class DeckListTile extends StatelessWidget {
   final double familiarCardPercentage;
 
   DeckListTile({
-    @required this.deckName,
-    @required this.totalCardCount,
-    @required this.dueCardCount,
-    @required this.reviewedCardCount,
-    @required this.unscheduledCardCount,
-  })  : assert(deckName != null),
-        assert(totalCardCount != null),
-        assert(totalCardCount >= dueCardCount),
-        assert(dueCardCount != null),
+    required this.deckName,
+    required this.totalCardCount,
+    required this.dueCardCount,
+    required this.reviewedCardCount,
+    required this.unscheduledCardCount,
+  })  : assert(totalCardCount >= dueCardCount),
         assert(dueCardCount >= 0),
         assert(dueCardCount <= totalCardCount),
-        assert(reviewedCardCount != null),
         assert(reviewedCardCount >= 0),
         assert(reviewedCardCount <= dueCardCount),
-        assert(unscheduledCardCount != null),
         assert(unscheduledCardCount >= 0),
         assert(unscheduledCardCount <= totalCardCount),
         scheduledCardCount = totalCardCount - unscheduledCardCount,
@@ -131,7 +124,7 @@ class _DeckNameTitle extends StatelessWidget {
   final String deckName;
 
   const _DeckNameTitle({
-    @required this.deckName,
+    required this.deckName,
   });
 
   @override
@@ -143,7 +136,7 @@ class _DeckNameTitle extends StatelessWidget {
             deckName,
             softWrap: false,
             overflow: TextOverflow.fade,
-            style: Theme.of(context).textTheme.bodyText1.copyWith(
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: cn.onSurface.highEmphasis,
                 ),
           );
@@ -158,8 +151,8 @@ class _UnreviewedCardCounter extends StatelessWidget {
   final Color color;
 
   const _UnreviewedCardCounter({
-    @required this.unreviewedCardCount,
-    @required this.color,
+    required this.unreviewedCardCount,
+    required this.color,
   });
 
   @override
@@ -168,7 +161,7 @@ class _UnreviewedCardCounter extends StatelessWidget {
       builder: (_, cn, __) {
         return Text(
           '$unreviewedCardCount',
-          style: Theme.of(context).textTheme.subtitle1.copyWith(
+          style: Theme.of(context).textTheme.subtitle1!.copyWith(
                 color: color,
               ),
         );
@@ -196,8 +189,8 @@ class _FamiliarityProgressBar extends StatelessWidget {
   final Color color;
 
   _FamiliarityProgressBar({
-    @required this.familiarCardPercentage,
-    @required this.color,
+    required this.familiarCardPercentage,
+    required this.color,
   });
 
   @override
