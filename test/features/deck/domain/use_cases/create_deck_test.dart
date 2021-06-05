@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -31,11 +29,9 @@ class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 class MockDeck extends Mock implements Deck {}
 
 void main() {
-  /*late*/ DeckRepository repository;
-  /*late*/
-  CreateDeck createDeck;
-  /*late*/
-  Deck deck1;
+  late DeckRepository repository;
+  late CreateDeck createDeck;
+  late Deck deck1;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
