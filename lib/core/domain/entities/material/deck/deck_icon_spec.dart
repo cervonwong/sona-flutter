@@ -27,7 +27,7 @@ class DeckIconSpec extends Equatable {
 
   DeckIconSpec({required this.color, required this.symbol});
 
-  DeckIconSpec.preset()
+  const DeckIconSpec.preset()
       : color = DeckIconColor.sky,
         symbol = DeckIconSymbol.deck;
 
