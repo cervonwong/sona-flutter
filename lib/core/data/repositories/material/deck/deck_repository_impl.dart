@@ -144,7 +144,7 @@ class DeckRepositoryImpl extends DeckRepository {
 
   @override
   Future<void> update({required Deck deck}) async {
-    await _decksDao.edit(newDeck: _toModel(deck: deck));
+    await _decksDao.edit(newDeck: _toModel(entity: deck));
   }
 
   // TODO(cervonwong): 08/01/2021 Use database transactions for multiple DAO

@@ -32,7 +32,7 @@ void main() {
         'passed deck has null fields',
         () {
           final model = DeckEntityToModelMapper()(
-            deck: Deck(
+            entity: Deck(
               id: 1,
               name: 'Name',
               createdDateTime: DateTime(2020),
@@ -60,7 +60,7 @@ void main() {
         'passed deck does not have null fields',
         () {
           final model = DeckEntityToModelMapper()(
-            deck: Deck(
+            entity: Deck(
               id: 1,
               name: 'Name',
               createdDateTime: DateTime(2020),

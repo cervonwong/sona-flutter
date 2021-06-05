@@ -98,7 +98,7 @@ void main() {
       deck1 = MockDeck();
       deckModel1 = MockDeckModel();
       when(() => toEntity(model: deckModel1)).thenReturn(deck1);
-      when(() => toModel(deck: deck1)).thenReturn(deckModel1);
+      when(() => toModel(entity: deck1)).thenReturn(deckModel1);
 
       entry1 = MockEntry();
       entryModel1 = MockEntryModel();

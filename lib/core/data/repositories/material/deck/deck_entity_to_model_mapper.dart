@@ -21,15 +21,14 @@ import '../../../../domain/entities/material/deck/deck.dart';
 import '../../../data_sources/moor/moor_database.dart';
 
 class DeckEntityToModelMapper {
-  // TODO: 6/4/2021 Should the arg be renamed from `deck` to `entity`?
-  DeckModel call({required Deck deck}) {
+  DeckModel call({required Deck entity}) {
     return DeckModel(
-      id: deck.id,
-      name: deck.name,
-      created: deck.createdDateTime,
-      lastEdited: deck.lastEditedDateTime,
-      authorName: deck.authorName,
-      description: deck.description,
+      id: entity.id,
+      name: entity.name,
+      created: entity.createdDateTime,
+      lastEdited: entity.lastEditedDateTime,
+      authorName: entity.authorName,
+      description: entity.description,
     );
   }
 }
