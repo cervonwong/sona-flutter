@@ -26,44 +26,32 @@ import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/get_all_decks.dart';
 
-// TODO: 6/5/2021 Mock Deck
 class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
+
+class MockDeck extends Mock implements Deck {}
 
 void main() {
   /*late*/ DeckRepository repository;
-  /*late*/ GetAllDecks getAllDecks;
+  /*late*/
+  GetAllDecks getAllDecks;
+  /*late*/
+  Deck deck1, deck2;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
     getAllDecks = GetAllDecks(repository: repository);
+    deck1 = MockDeck();
+    deck2 = MockDeck();
   });
 
   test(
     'GetAllDecks when called, '
     'should return expected List of Decks',
     () async {
-      final expectedDecks = [
-        Deck(
-          id: 1,
-          name: 'Yass',
-          createdDateTime: DateTime(2020),
-          lastEditedDateTime: DateTime(2020),
-          authorName: 'Noooo!',
-          description: 'Nevermind...',
-        ),
-        Deck(
-          id: 2,
-          name: 'Yeah!',
-          createdDateTime: DateTime(2020),
-          lastEditedDateTime: DateTime(2020),
-          authorName: 'Nope.',
-          description: 'Sigh...',
-        ),
-      ];
-      when(() => repository.getAll()).thenAnswer((_) async => expectedDecks);
+      when(() => repository.getAll()).thenAnswer((_) async => [deck1, deck2]);
 
       final decks = await getAllDecks();
-      expect(decks, expectedDecks);
+      expect(decks, [deck1, deck2]);
     },
   );
 }

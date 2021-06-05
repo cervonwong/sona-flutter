@@ -28,32 +28,30 @@ import 'package:sona_flutter/features/deck/domain/use_cases/delete_deck.dart';
 
 class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 
+class MockDeck extends Mock implements Deck {}
+
 void main() {
   /*late*/ DeckRepository repository;
-  /*late*/ DeleteDeck deleteDeck;
+  /*late*/
+  DeleteDeck deleteDeck;
+  /*late*/
+  Deck deck1;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
     deleteDeck = DeleteDeck(repository: repository);
+    deck1 = MockDeck();
   });
 
   test(
     'DeleteDeck when passed legal arguments, '
     'should call DeckRepository.delete with expected arguments',
     () async {
-      final deck = Deck(
-        id: 1,
-        name: 'Yass',
-        createdDateTime: DateTime(2020),
-        lastEditedDateTime: DateTime(2020),
-        authorName: 'Noooo!',
-        description: 'Nevermind...',
-      );
-      when(() => repository.delete(deck: deck)).thenAnswer((_) async {});
+      when(() => repository.delete(deck: deck1)).thenAnswer((_) async {});
 
-      await deleteDeck(deck: deck);
+      await deleteDeck(deck: deck1);
       // verify is only used for testing void and stubbed methods.
-      verify(() => repository.delete(deck: deck));
+      verify(() => repository.delete(deck: deck1));
     },
   );
 }
