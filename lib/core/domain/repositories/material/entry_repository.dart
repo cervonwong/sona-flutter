@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,8 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
-
 import '../../entities/material/card/card.dart';
 import '../../entities/material/entry/entry.dart';
 import '../../entities/material/entry_type/entry_type.dart';
@@ -33,21 +29,21 @@ abstract class EntryRepository {
 
   // NAVIGABLE ACCESSOR
 
-  Future<Entry> getByCard({@required Card card});
+  Future<Entry> getByCard({required Card card});
 
-  Future<List<Entry>> getByEntryType({@required EntryType entryType});
+  Future<List<Entry>> getByEntryType({required EntryType entryType});
 
   // CRUD
 
   // TODO(cervonwong): 12/11/2020 Add filter (stackable), sort, and sorting direction parameters.
   Future<Entry> get({
     int offset = 0,
-    @required int size,
+    required int size,
   });
 
   Future<Entry> create();
 
-  Future<void> update({@required Entry entry});
+  Future<void> update({required Entry entry});
 
-  Future<void> delete({@required Entry entry});
+  Future<void> delete({required Entry entry});
 }

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,8 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
-
 import '../../entities/material/card/card.dart';
 
 // You can neither create nor delete Cards. Treat Cards as a composition of an
@@ -38,7 +34,7 @@ abstract class CardRepository {
   // TODO: 6/5/2021 Also add filter by deck, entry, etc.
   Future<List<Card>> get({
     int offset = 0,
-    @required int size,
+    required int size,
   });
 
   Future<void> update(Card card);
