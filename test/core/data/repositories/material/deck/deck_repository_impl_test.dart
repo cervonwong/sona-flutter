@@ -406,6 +406,14 @@ void main() {
           when(() => cardsDao.getAll(entryIds: {10001, 10002})).thenAnswer(
               (_) async => [cardModel1, cardModel2, cardModel3, cardModel4]);
 
+          when(() => decksDao.remove(id: 123)).thenAnswer((_) async {});
+          when(() => entriesDao.removeAll(
+                entryList: [entryModel1, entryModel2],
+              )).thenAnswer((_) async {});
+          when(() => cardsDao.removeAll(
+                cardList: [cardModel1, cardModel2, cardModel3, cardModel4],
+              )).thenAnswer((_) async {});
+
           await repository.delete(deck: deck1);
           // verify is only used for testing void and stubbed methods.
           verify(() => decksDao.remove(id: 123));

@@ -47,6 +47,12 @@ void main() {
     fieldSpec1 = MockEntryFieldSpec();
     fieldSpec2 = MockEntryFieldSpec();
     fieldSpec3 = MockEntryFieldSpec();
+    when(() => cardFormat1.id).thenReturn(1);
+    when(() => cardFormat2.id).thenReturn(2);
+    when(() => cardFormat3.id).thenReturn(3);
+    when(() => fieldSpec1.id).thenReturn(1);
+    when(() => fieldSpec2.id).thenReturn(2);
+    when(() => fieldSpec3.id).thenReturn(3);
 
     entryType = EntryType(
       id: 666,
