@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/entry_type/card_format.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_spec.dart';
@@ -148,8 +148,8 @@ void main() {
           final cardFormat100 = MockCardFormat();
           final cardFormat101 = MockCardFormat();
 
-          when(cardFormat100.id).thenReturn(100);
-          when(cardFormat101.id).thenReturn(100);
+          when(() => cardFormat100.id).thenReturn(100);
+          when(() => cardFormat101.id).thenReturn(100);
 
           expect(
             () {
@@ -173,8 +173,8 @@ void main() {
           final fieldSpec100 = MockEntryFieldSpec();
           final fieldSpec101 = MockEntryFieldSpec();
 
-          when(fieldSpec100.id).thenReturn(100);
-          when(fieldSpec101.id).thenReturn(100);
+          when(() => fieldSpec100.id).thenReturn(100);
+          when(() => fieldSpec101.id).thenReturn(100);
 
           expect(
             () {
@@ -267,9 +267,9 @@ void main() {
     'EntryType insertCardFormat',
     () {
       setUp(() {
-        when(cardFormat1.id).thenReturn(1);
-        when(cardFormat2.id).thenReturn(2);
-        when(cardFormat3.id).thenReturn(3);
+        when(() => cardFormat1.id).thenReturn(1);
+        when(() => cardFormat2.id).thenReturn(2);
+        when(() => cardFormat3.id).thenReturn(3);
       });
 
       test(
@@ -364,9 +364,9 @@ void main() {
     'EntryType updateCardFormat',
     () {
       setUp(() {
-        when(cardFormat1.id).thenReturn(1);
-        when(cardFormat2.id).thenReturn(1);
-        when(cardFormat3.id).thenReturn(2);
+        when(() => cardFormat1.id).thenReturn(1);
+        when(() => cardFormat2.id).thenReturn(1);
+        when(() => cardFormat3.id).thenReturn(2);
       });
 
       test(
@@ -409,9 +409,9 @@ void main() {
       late EntryType entryType2;
 
       setUp(() {
-        when(cardFormat1.id).thenReturn(1);
-        when(cardFormat2.id).thenReturn(1);
-        when(cardFormat3.id).thenReturn(2);
+        when(() => cardFormat1.id).thenReturn(1);
+        when(() => cardFormat2.id).thenReturn(1);
+        when(() => cardFormat3.id).thenReturn(2);
 
         entryType2 = EntryType(
           id: 999,
@@ -459,9 +459,9 @@ void main() {
     'EntryType insertFieldSpec',
     () {
       setUp(() {
-        when(fieldSpec1.id).thenReturn(1);
-        when(fieldSpec2.id).thenReturn(2);
-        when(fieldSpec3.id).thenReturn(3);
+        when(() => fieldSpec1.id).thenReturn(1);
+        when(() => fieldSpec2.id).thenReturn(2);
+        when(() => fieldSpec3.id).thenReturn(3);
       });
 
       test(
@@ -537,9 +537,9 @@ void main() {
     'EntryType updateFieldSpec',
     () {
       setUp(() {
-        when(fieldSpec1.id).thenReturn(1);
-        when(fieldSpec2.id).thenReturn(1);
-        when(fieldSpec3.id).thenReturn(2);
+        when(() => fieldSpec1.id).thenReturn(1);
+        when(() => fieldSpec2.id).thenReturn(1);
+        when(() => fieldSpec3.id).thenReturn(2);
       });
 
       test(
@@ -582,9 +582,9 @@ void main() {
       late EntryType entryType2;
 
       setUp(() {
-        when(fieldSpec1.id).thenReturn(1);
-        when(fieldSpec2.id).thenReturn(1);
-        when(fieldSpec3.id).thenReturn(2);
+        when(() => fieldSpec1.id).thenReturn(1);
+        when(() => fieldSpec2.id).thenReturn(1);
+        when(() => fieldSpec3.id).thenReturn(2);
 
         entryType2 = EntryType(
           id: 999,

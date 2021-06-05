@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
@@ -45,10 +45,10 @@ void main() {
   final datum2 = MockEntryFieldDatum();
 
   setUp(() {
-    when(spec1.type).thenReturn(EntryFieldType.text);
-    when(spec2.type).thenReturn(EntryFieldType.image);
-    when(datum1.type).thenReturn(EntryFieldType.text);
-    when(datum2.type).thenReturn(EntryFieldType.image);
+    when(() => spec1.type).thenReturn(EntryFieldType.text);
+    when(() => spec2.type).thenReturn(EntryFieldType.image);
+    when(() => datum1.type).thenReturn(EntryFieldType.text);
+    when(() => datum2.type).thenReturn(EntryFieldType.image);
   });
 
   group(

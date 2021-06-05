@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:moor/ffi.dart';
 
 import 'package:sona_flutter/core/constants/material_constants.dart';
@@ -41,7 +41,7 @@ void main() {
       logStatements: false,
     ));
     systemTime = MockSystemTime();
-    when(systemTime.now()).thenReturn(DateTime(2020));
+    when(() => systemTime.now()).thenReturn(DateTime(2020));
     dao = DecksDaoImpl(db: db, systemTime: systemTime);
   });
 
@@ -228,13 +228,13 @@ void main() {
         'should return the expected DeckModels '
         'with the most recently created at the start of the list',
         () async {
-          when(systemTime.now()).thenReturn(DateTime(1999));
+          when(() => systemTime.now()).thenReturn(DateTime(1999));
           await dao.create(name: 'Aries');
 
-          when(systemTime.now()).thenReturn(DateTime(2000));
+          when(() => systemTime.now()).thenReturn(DateTime(2000));
           await dao.create(name: 'Taurus');
 
-          when(systemTime.now()).thenReturn(DateTime(2001));
+          when(() => systemTime.now()).thenReturn(DateTime(2001));
           await dao.create(name: 'Gemini');
 
           final decks = await dao.getAll();
@@ -284,10 +284,10 @@ void main() {
             () {
               late DeckModel editedDeck;
               setUp(() async {
-                when(systemTime.now()).thenReturn(DateTime(1990));
+                when(() => systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
 
-                when(systemTime.now()).thenReturn(DateTime(2000));
+                when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
                   newDeck: deck.copyWith(name: 'Aquarius'),
                 );
@@ -336,10 +336,10 @@ void main() {
             () {
               late DeckModel editedDeck;
               setUp(() async {
-                when(systemTime.now()).thenReturn(DateTime(1990));
+                when(() => systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
 
-                when(systemTime.now()).thenReturn(DateTime(2000));
+                when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
                   newDeck: deck.copyWith(
                     name: 'Aquarius',
@@ -389,10 +389,10 @@ void main() {
             () {
               late DeckModel editedDeck;
               setUp(() async {
-                when(systemTime.now()).thenReturn(DateTime(1990));
+                when(() => systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
 
-                when(systemTime.now()).thenReturn(DateTime(2000));
+                when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
                   newDeck: deck.copyWith(
                     name: 'Aquarius',
@@ -445,10 +445,10 @@ void main() {
             () {
               late DeckModel editedDeck;
               setUp(() async {
-                when(systemTime.now()).thenReturn(DateTime(1990));
+                when(() => systemTime.now()).thenReturn(DateTime(1990));
                 final deck = await dao.create(name: 'Capricorn');
 
-                when(systemTime.now()).thenReturn(DateTime(2000));
+                when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
                   newDeck: deck.copyWith(
                     authorName: 'You',

@@ -18,7 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/entry_type/card_format.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/card_format_structure.dart';
