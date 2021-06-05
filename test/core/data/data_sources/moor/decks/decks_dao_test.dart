@@ -21,7 +21,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moor/ffi.dart';
 
-import 'package:sona_flutter/core/constants/material_constants.dart';
+import 'package:sona_flutter/core/constants/model_default_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/utils/system_time.dart';
@@ -76,16 +76,16 @@ void main() {
                     name: 'Leo',
                     created: DateTime(2020),
                     lastEdited: DateTime(2020),
-                    authorName: kDefaultDeckAuthorName,
-                    description: kDefaultDeckDescription,
+                    authorName: ModelDefaultConstants.deckAuthorName,
+                    description: ModelDefaultConstants.deckDescription,
                   ),
                   DeckModel(
                     id: 2,
                     name: 'Libra',
                     created: DateTime(2020),
                     lastEdited: DateTime(2020),
-                    authorName: kDefaultDeckAuthorName,
-                    description: kDefaultDeckDescription,
+                    authorName: ModelDefaultConstants.deckAuthorName,
+                    description: ModelDefaultConstants.deckDescription,
                   ),
                 ],
               );
@@ -102,8 +102,8 @@ void main() {
                   name: 'Leo',
                   created: DateTime(2020),
                   lastEdited: DateTime(2020),
-                  authorName: kDefaultDeckAuthorName,
-                  description: kDefaultDeckDescription,
+                  authorName: ModelDefaultConstants.deckAuthorName,
+                  description: ModelDefaultConstants.deckDescription,
                 ),
               );
 
@@ -114,8 +114,8 @@ void main() {
                   name: 'Libra',
                   created: DateTime(2020),
                   lastEdited: DateTime(2020),
-                  authorName: kDefaultDeckAuthorName,
-                  description: kDefaultDeckDescription,
+                  authorName: ModelDefaultConstants.deckAuthorName,
+                  description: ModelDefaultConstants.deckDescription,
                 ),
               );
             },
@@ -157,8 +157,8 @@ void main() {
               name: 'Virgo',
               created: DateTime(2020),
               lastEdited: DateTime(2020),
-              authorName: kDefaultDeckAuthorName,
-              description: kDefaultDeckDescription,
+              authorName: ModelDefaultConstants.deckAuthorName,
+              description: ModelDefaultConstants.deckDescription,
             ),
           );
         },
@@ -192,8 +192,8 @@ void main() {
               name: 'Cancer',
               created: DateTime(2020),
               lastEdited: DateTime(2020),
-              authorName: kDefaultDeckAuthorName,
-              description: kDefaultDeckDescription,
+              authorName: ModelDefaultConstants.deckAuthorName,
+              description: ModelDefaultConstants.deckDescription,
             ),
           );
         },
@@ -246,24 +246,24 @@ void main() {
                 name: 'Gemini',
                 created: DateTime(2001),
                 lastEdited: DateTime(2001),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
+                authorName: ModelDefaultConstants.deckAuthorName,
+                description: ModelDefaultConstants.deckDescription,
               ),
               DeckModel(
                 id: 2,
                 name: 'Taurus',
                 created: DateTime(2000),
                 lastEdited: DateTime(2000),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
+                authorName: ModelDefaultConstants.deckAuthorName,
+                description: ModelDefaultConstants.deckDescription,
               ),
               DeckModel(
                 id: 1,
                 name: 'Aries',
                 created: DateTime(1999),
                 lastEdited: DateTime(1999),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
+                authorName: ModelDefaultConstants.deckAuthorName,
+                description: ModelDefaultConstants.deckDescription,
               ),
             ],
           );
@@ -304,8 +304,8 @@ void main() {
                         name: 'Aquarius',
                         created: DateTime(1990),
                         lastEdited: DateTime(2000),
-                        authorName: kDefaultDeckAuthorName,
-                        description: kDefaultDeckDescription,
+                        authorName: ModelDefaultConstants.deckAuthorName,
+                        description: ModelDefaultConstants.deckDescription,
                       ),
                     ],
                   );
@@ -322,8 +322,8 @@ void main() {
                       name: 'Aquarius',
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
-                      authorName: kDefaultDeckAuthorName,
-                      description: kDefaultDeckDescription,
+                      authorName: ModelDefaultConstants.deckAuthorName,
+                      description: ModelDefaultConstants.deckDescription,
                     ),
                   );
                 },
@@ -413,8 +413,8 @@ void main() {
                         name: 'Aquarius',
                         created: DateTime(1990),
                         lastEdited: DateTime(2000),
-                        authorName: kDefaultDeckAuthorName,
-                        description: kDefaultDeckDescription,
+                        authorName: ModelDefaultConstants.deckAuthorName,
+                        description: ModelDefaultConstants.deckDescription,
                       ),
                     ],
                   );
@@ -431,8 +431,8 @@ void main() {
                       name: 'Aquarius',
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
-                      authorName: kDefaultDeckAuthorName,
-                      description: kDefaultDeckDescription,
+                      authorName: ModelDefaultConstants.deckAuthorName,
+                      description: ModelDefaultConstants.deckDescription,
                     ),
                   );
                 },
@@ -468,7 +468,7 @@ void main() {
                         created: DateTime(1990),
                         lastEdited: DateTime(2000),
                         authorName: 'You',
-                        description: kDefaultDeckDescription,
+                        description: ModelDefaultConstants.deckDescription,
                       ),
                     ],
                   );
@@ -486,7 +486,7 @@ void main() {
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
                       authorName: 'You',
-                      description: kDefaultDeckDescription,
+                      description: ModelDefaultConstants.deckDescription,
                     ),
                   );
                 },
@@ -565,8 +565,8 @@ void main() {
                 name: 'Banana',
                 created: DateTime(2020),
                 lastEdited: DateTime(2020),
-                authorName: kDefaultDeckAuthorName,
-                description: kDefaultDeckDescription,
+                authorName: ModelDefaultConstants.deckAuthorName,
+                description: ModelDefaultConstants.deckDescription,
               ),
             ],
           );

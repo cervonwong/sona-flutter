@@ -17,23 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// CONSTRAINTS
-// Currently, constraints are only set for Deck as a test.
+class ModelDefaultConstants {
+  ModelDefaultConstants._(); // Prevent instantiation with private constructor.
 
-// Deck
-// const int kMinDeckNameLength = 5;
-// const int kMaxDeckNameLength = 150;
-// const int kMinDeckAuthorNameLength = 1;
-// const int kMaxDeckAuthorNameLength = 50;
-// const int kMinDeckDescriptionLength = 10;
-// const int kMaxDeckDescriptionLength = 255;
+  // Deck
+  static const String? deckAuthorName = null;
+  static const String? deckDescription = null;
 
-// Defaults
-
-// Deck
-const String? kDefaultDeckAuthorName = null;
-const String? kDefaultDeckDescription = null;
-
-// Card
-const bool kDefaultCardStarred = false;
-const bool kDefaultCardHidden = false;
+  // Card
+  static const bool cardStarred = false;
+  static const bool cardHidden = false;
+}

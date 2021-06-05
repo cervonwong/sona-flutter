@@ -20,7 +20,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moor/ffi.dart';
 
-import 'package:sona_flutter/core/constants/material_constants.dart';
+import 'package:sona_flutter/core/constants/model_default_constants.dart';
 import 'package:sona_flutter/core/data/data_exceptions.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/cards/cards_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
@@ -73,20 +73,20 @@ void main() {
                   CardModel(
                     entryId: 1,
                     position: 1,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
+                    starred: ModelDefaultConstants.cardStarred,
+                    hidden: ModelDefaultConstants.cardHidden,
                   ),
                   CardModel(
                     entryId: 1,
                     position: 2,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
+                    starred: ModelDefaultConstants.cardStarred,
+                    hidden: ModelDefaultConstants.cardHidden,
                   ),
                   CardModel(
                     entryId: 2,
                     position: 1,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
+                    starred: ModelDefaultConstants.cardStarred,
+                    hidden: ModelDefaultConstants.cardHidden,
                   ),
                 ],
               );
@@ -101,8 +101,8 @@ void main() {
                 CardModel(
                   entryId: 1,
                   position: 1,
-                  starred: kDefaultCardStarred,
-                  hidden: kDefaultCardHidden,
+                  starred: ModelDefaultConstants.cardStarred,
+                  hidden: ModelDefaultConstants.cardHidden,
                 ),
               );
 
@@ -111,8 +111,8 @@ void main() {
                 CardModel(
                   entryId: 1,
                   position: 2,
-                  starred: kDefaultCardStarred,
-                  hidden: kDefaultCardHidden,
+                  starred: ModelDefaultConstants.cardStarred,
+                  hidden: ModelDefaultConstants.cardHidden,
                 ),
               );
 
@@ -121,8 +121,8 @@ void main() {
                 CardModel(
                   entryId: 2,
                   position: 1,
-                  starred: kDefaultCardStarred,
-                  hidden: kDefaultCardHidden,
+                  starred: ModelDefaultConstants.cardStarred,
+                  hidden: ModelDefaultConstants.cardHidden,
                 ),
               );
             },
@@ -210,20 +210,20 @@ void main() {
                   CardModel(
                     entryId: 2,
                     position: 2,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
+                    starred: ModelDefaultConstants.cardStarred,
+                    hidden: ModelDefaultConstants.cardHidden,
                   ),
                   CardModel(
                     entryId: 3,
                     position: 3,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
+                    starred: ModelDefaultConstants.cardStarred,
+                    hidden: ModelDefaultConstants.cardHidden,
                   ),
                   CardModel(
                     entryId: 1,
                     position: 1,
-                    starred: kDefaultCardStarred,
-                    hidden: kDefaultCardHidden,
+                    starred: ModelDefaultConstants.cardStarred,
+                    hidden: ModelDefaultConstants.cardHidden,
                   ),
                 ],
               );
@@ -365,8 +365,8 @@ void main() {
               CardModel(
                 entryId: 2,
                 position: 1,
-                starred: kDefaultCardStarred,
-                hidden: kDefaultCardHidden,
+                starred: ModelDefaultConstants.cardStarred,
+                hidden: ModelDefaultConstants.cardHidden,
               ),
             ],
           );

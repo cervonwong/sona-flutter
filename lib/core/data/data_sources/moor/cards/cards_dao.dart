@@ -19,7 +19,7 @@
 
 import 'package:moor/moor.dart';
 
-import '../../../../constants/material_constants.dart';
+import '../../../../constants/model_default_constants.dart';
 import '../../../data_exceptions.dart';
 import '../moor_database.dart';
 import 'cards_table.dart';
@@ -57,8 +57,8 @@ class CardsDaoImpl extends DatabaseAccessor<MoorDatabase>
       CardsCompanion.insert(
         entryId: entryId,
         position: position,
-        starred: kDefaultCardStarred,
-        hidden: kDefaultCardHidden,
+        starred: ModelDefaultConstants.cardStarred,
+        hidden: ModelDefaultConstants.cardHidden,
       ),
     );
     return (select(cards)
