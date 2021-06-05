@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -41,14 +39,14 @@ class MockValidateDeckName extends Mock implements ValidateDeckName {}
 class MockDeck extends Mock implements Deck {}
 
 void main() {
-  /*late*/ CreateDeck createDeck;
-  /*late*/ GetAllDecks getAllDecks;
-  /*late*/ DeleteDeck deleteDeck;
-  /*late*/ ValidateDeckName validateDeckName;
+  late CreateDeck createDeck;
+  late GetAllDecks getAllDecks;
+  late DeleteDeck deleteDeck;
+  late ValidateDeckName validateDeckName;
 
-  /*late*/ Deck deck1, deck2, deck3;
+  late Deck deck1, deck2, deck3;
 
-  /*late*/ DeckListBloc bloc;
+  late DeckListBloc bloc;
 
   setUp(() {
     createDeck = MockCreateDeck();
