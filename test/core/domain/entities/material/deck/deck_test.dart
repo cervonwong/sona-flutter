@@ -31,10 +31,11 @@ void main() {
         'should have expected default fields',
         () {
           final deck = Deck(
-              id: 1,
-              name: 'My deck',
-              createdDateTime: DateTime(2020, 1, 1),
-              lastEditedDateTime: DateTime(2020, 10, 29));
+            id: 1,
+            name: 'My deck',
+            createdDateTime: DateTime(2020, 1, 1),
+            lastEditedDateTime: DateTime(2020, 10, 29),
+          );
 
           expect(deck.id, 1);
           expect(deck.name, 'My deck');
