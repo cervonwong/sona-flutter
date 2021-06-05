@@ -20,7 +20,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
@@ -32,8 +32,8 @@ class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 class MockDeck extends Mock implements Deck {}
 
 void main() {
-  DeckRepository repository;
-  ValidateDeckName validateDeckName;
+  /*late*/ DeckRepository repository;
+  /*late*/ ValidateDeckName validateDeckName;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
@@ -44,9 +44,8 @@ void main() {
     'ValidateDeckName when called with name which no deck in the db has, '
     'should return DeckNameValidationResult.valid',
     () async {
-      when(repository.getByName(
-        name: argThat(equals('Valid'), named: 'name'),
-      )).thenAnswer((_) async => null);
+      when(() => repository.getByName(name: 'Valid'))
+          .thenAnswer((_) async => null);
 
       final result = await validateDeckName(name: 'Valid');
       expect(result, DeckNameValidationResult.valid);
@@ -75,9 +74,8 @@ void main() {
     'ValidateDeckName when called with name which a deck in the db has, '
     'should return DeckNameValidationResult.nameAlreadyExists',
     () async {
-      when(repository.getByName(
-        name: argThat(equals('Duplicate'), named: 'name'),
-      )).thenAnswer((_) async => MockDeck());
+      when(() => repository.getByName(name: 'Duplicate'))
+          .thenAnswer((_) async => MockDeck());
 
       final result = await validateDeckName(name: 'Duplicate');
       expect(result, DeckNameValidationResult.nameAlreadyExists);

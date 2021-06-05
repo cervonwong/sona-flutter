@@ -20,17 +20,18 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/create_deck.dart';
 
+// TODO: 6/5/2021 Mock Deck
 class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 
 void main() {
-  DeckRepository repository;
-  CreateDeck createDeck;
+  /*late*/ DeckRepository repository;
+  /*late*/ CreateDeck createDeck;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
@@ -41,8 +42,7 @@ void main() {
     'CreateDeck when passed legal arguments, '
     'should return expected Deck',
     () async {
-      when(repository.create(name: argThat(equals('Yass'), named: 'name')))
-          .thenAnswer(
+      when(() => repository.create(name: 'Yass')).thenAnswer(
         (_) async {
           return Deck(
             id: 1,

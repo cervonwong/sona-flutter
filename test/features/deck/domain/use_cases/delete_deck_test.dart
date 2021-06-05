@@ -20,7 +20,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
@@ -29,8 +29,8 @@ import 'package:sona_flutter/features/deck/domain/use_cases/delete_deck.dart';
 class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 
 void main() {
-  DeckRepository repository;
-  DeleteDeck deleteDeck;
+  /*late*/ DeckRepository repository;
+  /*late*/ DeleteDeck deleteDeck;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
@@ -49,14 +49,11 @@ void main() {
         authorName: 'Noooo!',
         description: 'Nevermind...',
       );
-      when(repository.delete(deck: argThat(equals(deck), named: 'deck')))
-          .thenAnswer(
-        (_) async {},
-      );
+      when(() => repository.delete(deck: deck)).thenAnswer((_) async {});
 
       await deleteDeck(deck: deck);
       // verify is only used for testing void and stubbed methods.
-      verify(repository.delete(deck: deck));
+      verify(() => repository.delete(deck: deck));
     },
   );
 }
