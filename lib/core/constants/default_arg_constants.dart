@@ -22,15 +22,15 @@ import '../domain/entities/material/deck/deck_icon_spec.dart';
 class DefaultArgConstants {
   DefaultArgConstants._(); // Prevent instantiation with private constructor.
 
-  // Deck / DeckModel
+  // Deck / decks table
   static const String? deckAuthorName = null;
   static const String? deckDescription = null;
 
-  // DeckIconSpec / DeckModel
+  // DeckIconSpec / decks table
   static const DeckIconColor deckIconSpecColor = DeckIconColor.sky;
   static const DeckIconSymbol deckIconSpecSymbol = DeckIconSymbol.deck;
 
-  // Card / CardModel
+  // Card / cards table
   static const bool cardStarred = false;
   static const bool cardHidden = false;
 }
