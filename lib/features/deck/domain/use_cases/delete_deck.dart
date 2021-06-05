@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,16 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
-
 import '../../../../core/domain/entities/material/deck/deck.dart';
 import '../../../../core/domain/repositories/material/deck/deck_repository.dart';
 
 class DeleteDeck {
   final DeckRepository _repository;
 
-  DeleteDeck({@required DeckRepository repository}) : _repository = repository;
+  DeleteDeck({required DeckRepository repository}) : _repository = repository;
 
-  Future<void> call({@required Deck deck}) async =>
+  Future<void> call({required Deck deck}) async =>
       _repository.delete(deck: deck);
 }

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -19,20 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:meta/meta.dart';
-
 import '../../../../core/domain/repositories/material/deck/deck_repository.dart';
 
 class ValidateDeckName {
   final DeckRepository _repository;
 
   ValidateDeckName({
-    @required DeckRepository repository,
+    required DeckRepository repository,
   }) : _repository = repository;
 
-  Future<DeckNameValidationResult> call({@required String name}) async {
-    assert(name != null);
-
+  Future<DeckNameValidationResult> call({required String name}) async {
     if (name.isEmpty) {
       return DeckNameValidationResult.nameIsEmpty;
     }
