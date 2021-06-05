@@ -28,6 +28,7 @@ class Card extends Equatable {
 
   Card({
     required this.id,
+    // TODO: 6/5/2021 Make all properties required.
     this.isStarred = false,
     this.isHidden = false,
   });
