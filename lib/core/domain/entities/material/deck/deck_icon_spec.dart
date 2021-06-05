@@ -19,6 +19,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+
 import '../../../../constants/default_arg_constants.dart';
 
 @immutable
