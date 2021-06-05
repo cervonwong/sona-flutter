@@ -18,6 +18,7 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/datum/text_entry_field_datum.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
 import 'package:sona_flutter/core/utils/nullable.dart';

@@ -18,8 +18,8 @@
  */
 
 import '../../entities/material/card/card.dart';
-import '../../entities/material/entry_type/entry_type.dart';
 import '../../entities/material/entry/entry.dart';
+import '../../entities/material/entry_type/entry_type.dart';
 
 abstract class EntryTypeRepository {
   // COUNT

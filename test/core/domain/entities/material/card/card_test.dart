@@ -19,6 +19,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 
 // ignore: must_be_immutable
