@@ -15,17 +15,17 @@ title Relationships of tables in SQLite database for material models.\n
 footer Copyright (C) 2020 Cervon Wong
 
 object decks {
-	id            : INTEGER           <<PK, gen>>
-	name          : TEXT              <<unique>>
-	created       : INTEGER(DATETIME) <<gen>>
-	last_edited   : INTEGER(DATETIME) <<gen>>
-	author_name   : TEXT              <<nullable>>
-	description   : TEXT              <<nullable>>
-	symbol_id     : INTEGER           <<FK>>
-	icon_color_id : INTEGER           <<FK>>
+	id             : INTEGER           <<PK, gen>>
+	name           : TEXT              <<unique>>
+	created        : INTEGER(DATETIME) <<gen>>
+	last_edited    : INTEGER(DATETIME) <<gen>>
+	author_name    : TEXT              <<nullable>>
+	description    : TEXT              <<nullable>>
+	icon_symbol_id : INTEGER           <<FK>>
+	icon_color_id  : INTEGER           <<FK>>
 }
 
-object symbols {
+object icon_symbols {
 	id   : INTEGER <<PK>>
 	name : TEXT <<unique>>
 }
@@ -156,9 +156,9 @@ object component_types {
 	name : TEXT    <<unique>>
 }
 
-decks             }o-||      symbols
+decks             }o-||      icon_symbols
 decks             }o-||      icon_colors
-symbols           ||-|{      symbol_search_terms
+icon_symbols      ||-|{      symbol_search_terms
 decks             ||---o{    entries
 entries           ||---|{    cards
 entries           ||-o{      entries_tags
