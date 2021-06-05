@@ -19,6 +19,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import '../../../../constants/default_arg_constants.dart';
 
 @immutable
 class DeckIconSpec extends Equatable {
@@ -28,8 +29,8 @@ class DeckIconSpec extends Equatable {
   DeckIconSpec({required this.color, required this.symbol});
 
   const DeckIconSpec.preset()
-      : color = DeckIconColor.sky,
-        symbol = DeckIconSymbol.deck;
+      : color = DefaultArgConstants.deckIconSpecColor,
+        symbol = DefaultArgConstants.deckIconSpecSymbol;
 
   DeckIconSpec copyWith({DeckIconColor? color, DeckIconSymbol? symbol}) {
     return DeckIconSpec(

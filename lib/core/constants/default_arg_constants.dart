@@ -17,14 +17,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '../domain/entities/material/deck/deck_icon_spec.dart';
+
 class DefaultArgConstants {
   DefaultArgConstants._(); // Prevent instantiation with private constructor.
 
-  // Deck
+  // Deck / DeckModel
   static const String? deckAuthorName = null;
   static const String? deckDescription = null;
 
-  // Card
+  // DeckIconSpec / DeckModel
+  static const DeckIconColor deckIconSpecColor = DeckIconColor.sky;
+  static const DeckIconSymbol deckIconSpecSymbol = DeckIconSymbol.deck;
+
+  // Card / CardModel
   static const bool cardStarred = false;
   static const bool cardHidden = false;
 }
