@@ -19,25 +19,14 @@
 
 import 'package:moor/moor.dart';
 
-@DataClassName('DeckModel')
-class Decks extends Table {
-  IntColumn get id => integer().autoIncrement()(); // PK
-
-  TextColumn get name => text().customConstraint('NOT NULL UNIQUE')();
-
-  DateTimeColumn get created => dateTime()();
-
-  DateTimeColumn get lastEdited => dateTime()();
-
-  TextColumn get authorName => text().nullable()();
-
-  TextColumn get description => text().nullable()();
-
+@DataClassName('SymbolSearchTermModel')
+class SymbolSearchTerms extends Table {
   IntColumn get iconSymbolId => integer().customConstraint(
         'NOT NULL REFERENCES icon_symbols(id)',
       )();
 
-  IntColumn get iconColorId => integer().customConstraint(
-        'NOT NULL REFERENCES icon_colors(id)',
-      )();
+  TextColumn get term => text()();
+
+  @override
+  Set<Column> get primaryKey => {iconSymbolId, term};
 }

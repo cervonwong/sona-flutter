@@ -31,8 +31,11 @@ import 'field_specs/field_specs_table.dart';
 import 'field_types/field_types_table.dart';
 import 'fill_colors/fill_colors_table.dart';
 import 'highlight_colors/highlight_colors_table.dart';
+import 'icon_colors/icon_colors_table.dart';
+import 'icon_symbols/icon_symbols_table.dart';
 import 'image_field_data/image_field_data_table.dart';
 import 'structures/structures_table.dart';
+import 'symbol_search_terms/symbol_search_terms_table.dart';
 import 'tags/tags_table.dart';
 import 'text_components/text_components_table.dart';
 import 'text_field_data/text_field_data_table.dart';
@@ -51,8 +54,11 @@ export 'field_specs/field_specs_table.dart';
 export 'field_types/field_types_table.dart';
 export 'fill_colors/fill_colors_table.dart';
 export 'highlight_colors/highlight_colors_table.dart';
+export 'icon_colors/icon_colors_table.dart';
+export 'icon_symbols/icon_symbols_table.dart';
 export 'image_field_data/image_field_data_table.dart';
 export 'structures/structures_table.dart';
+export 'symbol_search_terms/symbol_search_terms_table.dart';
 export 'tags/tags_table.dart';
 export 'text_components/text_components_table.dart';
 export 'text_field_data/text_field_data_table.dart';
@@ -72,8 +78,11 @@ const List<Type> kTables = [
   FieldTypes,
   FillColors,
   HighlightColors,
+  IconColors,
+  IconSymbols,
   ImageFieldData,
   Structures,
+  SymbolSearchTerms,
   Tags,
   TextComponents,
   TextFieldData,

@@ -1256,13 +1256,17 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
   final DateTime lastEdited;
   final String? authorName;
   final String? description;
+  final int iconSymbolId;
+  final int iconColorId;
   DeckModel(
       {required this.id,
       required this.name,
       required this.created,
       required this.lastEdited,
       this.authorName,
-      this.description});
+      this.description,
+      required this.iconSymbolId,
+      required this.iconColorId});
   factory DeckModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -1279,6 +1283,10 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
           .mapFromDatabaseResponse(data['${effectivePrefix}author_name']),
       description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
+      iconSymbolId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}icon_symbol_id'])!,
+      iconColorId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}icon_color_id'])!,
     );
   }
   @override
@@ -1294,6 +1302,8 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String?>(description);
     }
+    map['icon_symbol_id'] = Variable<int>(iconSymbolId);
+    map['icon_color_id'] = Variable<int>(iconColorId);
     return map;
   }
 
@@ -1309,6 +1319,8 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
+      iconSymbolId: Value(iconSymbolId),
+      iconColorId: Value(iconColorId),
     );
   }
 
@@ -1322,6 +1334,8 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
       lastEdited: serializer.fromJson<DateTime>(json['lastEdited']),
       authorName: serializer.fromJson<String?>(json['authorName']),
       description: serializer.fromJson<String?>(json['description']),
+      iconSymbolId: serializer.fromJson<int>(json['iconSymbolId']),
+      iconColorId: serializer.fromJson<int>(json['iconColorId']),
     );
   }
   @override
@@ -1334,6 +1348,8 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
       'lastEdited': serializer.toJson<DateTime>(lastEdited),
       'authorName': serializer.toJson<String?>(authorName),
       'description': serializer.toJson<String?>(description),
+      'iconSymbolId': serializer.toJson<int>(iconSymbolId),
+      'iconColorId': serializer.toJson<int>(iconColorId),
     };
   }
 
@@ -1343,7 +1359,9 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
           DateTime? created,
           DateTime? lastEdited,
           String? authorName,
-          String? description}) =>
+          String? description,
+          int? iconSymbolId,
+          int? iconColorId}) =>
       DeckModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -1351,6 +1369,8 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
         lastEdited: lastEdited ?? this.lastEdited,
         authorName: authorName ?? this.authorName,
         description: description ?? this.description,
+        iconSymbolId: iconSymbolId ?? this.iconSymbolId,
+        iconColorId: iconColorId ?? this.iconColorId,
       );
   @override
   String toString() {
@@ -1360,7 +1380,9 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
           ..write('created: $created, ')
           ..write('lastEdited: $lastEdited, ')
           ..write('authorName: $authorName, ')
-          ..write('description: $description')
+          ..write('description: $description, ')
+          ..write('iconSymbolId: $iconSymbolId, ')
+          ..write('iconColorId: $iconColorId')
           ..write(')'))
         .toString();
   }
@@ -1372,8 +1394,14 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
           name.hashCode,
           $mrjc(
               created.hashCode,
-              $mrjc(lastEdited.hashCode,
-                  $mrjc(authorName.hashCode, description.hashCode))))));
+              $mrjc(
+                  lastEdited.hashCode,
+                  $mrjc(
+                      authorName.hashCode,
+                      $mrjc(
+                          description.hashCode,
+                          $mrjc(iconSymbolId.hashCode,
+                              iconColorId.hashCode))))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1383,7 +1411,9 @@ class DeckModel extends DataClass implements Insertable<DeckModel> {
           other.created == this.created &&
           other.lastEdited == this.lastEdited &&
           other.authorName == this.authorName &&
-          other.description == this.description);
+          other.description == this.description &&
+          other.iconSymbolId == this.iconSymbolId &&
+          other.iconColorId == this.iconColorId);
 }
 
 class DecksCompanion extends UpdateCompanion<DeckModel> {
@@ -1393,6 +1423,8 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
   final Value<DateTime> lastEdited;
   final Value<String?> authorName;
   final Value<String?> description;
+  final Value<int> iconSymbolId;
+  final Value<int> iconColorId;
   const DecksCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1400,6 +1432,8 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
     this.lastEdited = const Value.absent(),
     this.authorName = const Value.absent(),
     this.description = const Value.absent(),
+    this.iconSymbolId = const Value.absent(),
+    this.iconColorId = const Value.absent(),
   });
   DecksCompanion.insert({
     this.id = const Value.absent(),
@@ -1408,9 +1442,13 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
     required DateTime lastEdited,
     this.authorName = const Value.absent(),
     this.description = const Value.absent(),
+    required int iconSymbolId,
+    required int iconColorId,
   })  : name = Value(name),
         created = Value(created),
-        lastEdited = Value(lastEdited);
+        lastEdited = Value(lastEdited),
+        iconSymbolId = Value(iconSymbolId),
+        iconColorId = Value(iconColorId);
   static Insertable<DeckModel> custom({
     Expression<int>? id,
     Expression<String>? name,
@@ -1418,6 +1456,8 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
     Expression<DateTime>? lastEdited,
     Expression<String?>? authorName,
     Expression<String?>? description,
+    Expression<int>? iconSymbolId,
+    Expression<int>? iconColorId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1426,6 +1466,8 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
       if (lastEdited != null) 'last_edited': lastEdited,
       if (authorName != null) 'author_name': authorName,
       if (description != null) 'description': description,
+      if (iconSymbolId != null) 'icon_symbol_id': iconSymbolId,
+      if (iconColorId != null) 'icon_color_id': iconColorId,
     });
   }
 
@@ -1435,7 +1477,9 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
       Value<DateTime>? created,
       Value<DateTime>? lastEdited,
       Value<String?>? authorName,
-      Value<String?>? description}) {
+      Value<String?>? description,
+      Value<int>? iconSymbolId,
+      Value<int>? iconColorId}) {
     return DecksCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1443,6 +1487,8 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
       lastEdited: lastEdited ?? this.lastEdited,
       authorName: authorName ?? this.authorName,
       description: description ?? this.description,
+      iconSymbolId: iconSymbolId ?? this.iconSymbolId,
+      iconColorId: iconColorId ?? this.iconColorId,
     );
   }
 
@@ -1467,6 +1513,12 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
     if (description.present) {
       map['description'] = Variable<String?>(description.value);
     }
+    if (iconSymbolId.present) {
+      map['icon_symbol_id'] = Variable<int>(iconSymbolId.value);
+    }
+    if (iconColorId.present) {
+      map['icon_color_id'] = Variable<int>(iconColorId.value);
+    }
     return map;
   }
 
@@ -1478,7 +1530,9 @@ class DecksCompanion extends UpdateCompanion<DeckModel> {
           ..write('created: $created, ')
           ..write('lastEdited: $lastEdited, ')
           ..write('authorName: $authorName, ')
-          ..write('description: $description')
+          ..write('description: $description, ')
+          ..write('iconSymbolId: $iconSymbolId, ')
+          ..write('iconColorId: $iconColorId')
           ..write(')'))
         .toString();
   }
@@ -1549,9 +1603,35 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
     );
   }
 
+  final VerificationMeta _iconSymbolIdMeta =
+      const VerificationMeta('iconSymbolId');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, name, created, lastEdited, authorName, description];
+  late final GeneratedIntColumn iconSymbolId = _constructIconSymbolId();
+  GeneratedIntColumn _constructIconSymbolId() {
+    return GeneratedIntColumn('icon_symbol_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES icon_symbols(id)');
+  }
+
+  final VerificationMeta _iconColorIdMeta =
+      const VerificationMeta('iconColorId');
+  @override
+  late final GeneratedIntColumn iconColorId = _constructIconColorId();
+  GeneratedIntColumn _constructIconColorId() {
+    return GeneratedIntColumn('icon_color_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES icon_colors(id)');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        name,
+        created,
+        lastEdited,
+        authorName,
+        description,
+        iconSymbolId,
+        iconColorId
+      ];
   @override
   $DecksTable get asDslTable => this;
   @override
@@ -1597,6 +1677,22 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
           _descriptionMeta,
           description.isAcceptableOrUnknown(
               data['description']!, _descriptionMeta));
+    }
+    if (data.containsKey('icon_symbol_id')) {
+      context.handle(
+          _iconSymbolIdMeta,
+          iconSymbolId.isAcceptableOrUnknown(
+              data['icon_symbol_id']!, _iconSymbolIdMeta));
+    } else if (isInserting) {
+      context.missing(_iconSymbolIdMeta);
+    }
+    if (data.containsKey('icon_color_id')) {
+      context.handle(
+          _iconColorIdMeta,
+          iconColorId.isAcceptableOrUnknown(
+              data['icon_color_id']!, _iconColorIdMeta));
+    } else if (isInserting) {
+      context.missing(_iconColorIdMeta);
     }
     return context;
   }
@@ -3206,6 +3302,372 @@ class $HighlightColorsTable extends HighlightColors
   }
 }
 
+class IconColorModel extends DataClass implements Insertable<IconColorModel> {
+  final int id;
+  final String name;
+  IconColorModel({required this.id, required this.name});
+  factory IconColorModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return IconColorModel(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  IconColorsCompanion toCompanion(bool nullToAbsent) {
+    return IconColorsCompanion(
+      id: Value(id),
+      name: Value(name),
+    );
+  }
+
+  factory IconColorModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return IconColorModel(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  IconColorModel copyWith({int? id, String? name}) => IconColorModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('IconColorModel(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is IconColorModel &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class IconColorsCompanion extends UpdateCompanion<IconColorModel> {
+  final Value<int> id;
+  final Value<String> name;
+  const IconColorsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  IconColorsCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+  }) : name = Value(name);
+  static Insertable<IconColorModel> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  IconColorsCompanion copyWith({Value<int>? id, Value<String>? name}) {
+    return IconColorsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('IconColorsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $IconColorsTable extends IconColors
+    with TableInfo<$IconColorsTable, IconColorModel> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $IconColorsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedIntColumn id = _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedTextColumn name = _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn('name', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  $IconColorsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'icon_colors';
+  @override
+  final String actualTableName = 'icon_colors';
+  @override
+  VerificationContext validateIntegrity(Insertable<IconColorModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  IconColorModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return IconColorModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $IconColorsTable createAlias(String alias) {
+    return $IconColorsTable(_db, alias);
+  }
+}
+
+class IconSymbolModel extends DataClass implements Insertable<IconSymbolModel> {
+  final int id;
+  final String name;
+  IconSymbolModel({required this.id, required this.name});
+  factory IconSymbolModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return IconSymbolModel(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  IconSymbolsCompanion toCompanion(bool nullToAbsent) {
+    return IconSymbolsCompanion(
+      id: Value(id),
+      name: Value(name),
+    );
+  }
+
+  factory IconSymbolModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return IconSymbolModel(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  IconSymbolModel copyWith({int? id, String? name}) => IconSymbolModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('IconSymbolModel(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, name.hashCode));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is IconSymbolModel &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class IconSymbolsCompanion extends UpdateCompanion<IconSymbolModel> {
+  final Value<int> id;
+  final Value<String> name;
+  const IconSymbolsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  IconSymbolsCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+  }) : name = Value(name);
+  static Insertable<IconSymbolModel> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  IconSymbolsCompanion copyWith({Value<int>? id, Value<String>? name}) {
+    return IconSymbolsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('IconSymbolsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $IconSymbolsTable extends IconSymbols
+    with TableInfo<$IconSymbolsTable, IconSymbolModel> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $IconSymbolsTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedIntColumn id = _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedTextColumn name = _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn('name', $tableName, false,
+        $customConstraints: 'NOT NULL UNIQUE');
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  $IconSymbolsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'icon_symbols';
+  @override
+  final String actualTableName = 'icon_symbols';
+  @override
+  VerificationContext validateIntegrity(Insertable<IconSymbolModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  IconSymbolModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return IconSymbolModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $IconSymbolsTable createAlias(String alias) {
+    return $IconSymbolsTable(_db, alias);
+  }
+}
+
 class ImageFieldDatumModel extends DataClass
     implements Insertable<ImageFieldDatumModel> {
   final int entryId;
@@ -3584,6 +4046,201 @@ class $StructuresTable extends Structures
   @override
   $StructuresTable createAlias(String alias) {
     return $StructuresTable(_db, alias);
+  }
+}
+
+class SymbolSearchTermModel extends DataClass
+    implements Insertable<SymbolSearchTermModel> {
+  final int iconSymbolId;
+  final String term;
+  SymbolSearchTermModel({required this.iconSymbolId, required this.term});
+  factory SymbolSearchTermModel.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return SymbolSearchTermModel(
+      iconSymbolId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}icon_symbol_id'])!,
+      term: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}term'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['icon_symbol_id'] = Variable<int>(iconSymbolId);
+    map['term'] = Variable<String>(term);
+    return map;
+  }
+
+  SymbolSearchTermsCompanion toCompanion(bool nullToAbsent) {
+    return SymbolSearchTermsCompanion(
+      iconSymbolId: Value(iconSymbolId),
+      term: Value(term),
+    );
+  }
+
+  factory SymbolSearchTermModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return SymbolSearchTermModel(
+      iconSymbolId: serializer.fromJson<int>(json['iconSymbolId']),
+      term: serializer.fromJson<String>(json['term']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'iconSymbolId': serializer.toJson<int>(iconSymbolId),
+      'term': serializer.toJson<String>(term),
+    };
+  }
+
+  SymbolSearchTermModel copyWith({int? iconSymbolId, String? term}) =>
+      SymbolSearchTermModel(
+        iconSymbolId: iconSymbolId ?? this.iconSymbolId,
+        term: term ?? this.term,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('SymbolSearchTermModel(')
+          ..write('iconSymbolId: $iconSymbolId, ')
+          ..write('term: $term')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(iconSymbolId.hashCode, term.hashCode));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SymbolSearchTermModel &&
+          other.iconSymbolId == this.iconSymbolId &&
+          other.term == this.term);
+}
+
+class SymbolSearchTermsCompanion
+    extends UpdateCompanion<SymbolSearchTermModel> {
+  final Value<int> iconSymbolId;
+  final Value<String> term;
+  const SymbolSearchTermsCompanion({
+    this.iconSymbolId = const Value.absent(),
+    this.term = const Value.absent(),
+  });
+  SymbolSearchTermsCompanion.insert({
+    required int iconSymbolId,
+    required String term,
+  })  : iconSymbolId = Value(iconSymbolId),
+        term = Value(term);
+  static Insertable<SymbolSearchTermModel> custom({
+    Expression<int>? iconSymbolId,
+    Expression<String>? term,
+  }) {
+    return RawValuesInsertable({
+      if (iconSymbolId != null) 'icon_symbol_id': iconSymbolId,
+      if (term != null) 'term': term,
+    });
+  }
+
+  SymbolSearchTermsCompanion copyWith(
+      {Value<int>? iconSymbolId, Value<String>? term}) {
+    return SymbolSearchTermsCompanion(
+      iconSymbolId: iconSymbolId ?? this.iconSymbolId,
+      term: term ?? this.term,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (iconSymbolId.present) {
+      map['icon_symbol_id'] = Variable<int>(iconSymbolId.value);
+    }
+    if (term.present) {
+      map['term'] = Variable<String>(term.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SymbolSearchTermsCompanion(')
+          ..write('iconSymbolId: $iconSymbolId, ')
+          ..write('term: $term')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SymbolSearchTermsTable extends SymbolSearchTerms
+    with TableInfo<$SymbolSearchTermsTable, SymbolSearchTermModel> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $SymbolSearchTermsTable(this._db, [this._alias]);
+  final VerificationMeta _iconSymbolIdMeta =
+      const VerificationMeta('iconSymbolId');
+  @override
+  late final GeneratedIntColumn iconSymbolId = _constructIconSymbolId();
+  GeneratedIntColumn _constructIconSymbolId() {
+    return GeneratedIntColumn('icon_symbol_id', $tableName, false,
+        $customConstraints: 'NOT NULL REFERENCES icon_symbols(id)');
+  }
+
+  final VerificationMeta _termMeta = const VerificationMeta('term');
+  @override
+  late final GeneratedTextColumn term = _constructTerm();
+  GeneratedTextColumn _constructTerm() {
+    return GeneratedTextColumn(
+      'term',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [iconSymbolId, term];
+  @override
+  $SymbolSearchTermsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'symbol_search_terms';
+  @override
+  final String actualTableName = 'symbol_search_terms';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<SymbolSearchTermModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('icon_symbol_id')) {
+      context.handle(
+          _iconSymbolIdMeta,
+          iconSymbolId.isAcceptableOrUnknown(
+              data['icon_symbol_id']!, _iconSymbolIdMeta));
+    } else if (isInserting) {
+      context.missing(_iconSymbolIdMeta);
+    }
+    if (data.containsKey('term')) {
+      context.handle(
+          _termMeta, term.isAcceptableOrUnknown(data['term']!, _termMeta));
+    } else if (isInserting) {
+      context.missing(_termMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {iconSymbolId, term};
+  @override
+  SymbolSearchTermModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return SymbolSearchTermModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $SymbolSearchTermsTable createAlias(String alias) {
+    return $SymbolSearchTermsTable(_db, alias);
   }
 }
 
@@ -4579,8 +5236,12 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   late final $FillColorsTable fillColors = $FillColorsTable(this);
   late final $HighlightColorsTable highlightColors =
       $HighlightColorsTable(this);
+  late final $IconColorsTable iconColors = $IconColorsTable(this);
+  late final $IconSymbolsTable iconSymbols = $IconSymbolsTable(this);
   late final $ImageFieldDataTable imageFieldData = $ImageFieldDataTable(this);
   late final $StructuresTable structures = $StructuresTable(this);
+  late final $SymbolSearchTermsTable symbolSearchTerms =
+      $SymbolSearchTermsTable(this);
   late final $TagsTable tags = $TagsTable(this);
   late final $TextComponentsTable textComponents = $TextComponentsTable(this);
   late final $TextFieldDataTable textFieldData = $TextFieldDataTable(this);
@@ -4602,8 +5263,11 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         fieldTypes,
         fillColors,
         highlightColors,
+        iconColors,
+        iconSymbols,
         imageFieldData,
         structures,
+        symbolSearchTerms,
         tags,
         textComponents,
         textFieldData
