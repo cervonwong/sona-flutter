@@ -29,7 +29,7 @@ void main() {
         'with named `preset` constructor, '
         'should have symbol `deck` and color `sky`',
         () {
-          final deckIconSpec = DeckIconSpec.preset();
+          final deckIconSpec = const DeckIconSpec.preset();
 
           expect(deckIconSpec.color, DeckIconColor.sky);
           expect(deckIconSpec.symbol, DeckIconSymbol.deck);
