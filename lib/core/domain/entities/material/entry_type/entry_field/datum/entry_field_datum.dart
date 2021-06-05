@@ -21,6 +21,9 @@ import 'package:meta/meta.dart';
 
 import '../entry_field_type.dart';
 
+// TODO: 6/5/2021 Rename all `datum` to `data`, and handle renaming fieldData in
+//  Entry, and rename database tables. OR use some other word other than data
+//  because it is an awkward plural noun? Perhaps can use `input`
 @immutable
 abstract class EntryFieldDatum {
   final EntryFieldType type;
