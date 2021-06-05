@@ -17,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -25,7 +24,7 @@ import 'package:sona_flutter/core/domain/entities/material/entry_type/card_forma
 import 'package:sona_flutter/core/domain/entities/material/entry_type/components/component.dart';
 
 // ignore: must_be_immutable
-class MockComponent extends Mock with EquatableMixin implements Component {}
+class MockComponent extends Mock implements Component {}
 
 void main() {
   final mockComponent1 = MockComponent();
@@ -139,7 +138,7 @@ void main() {
 
           final structure3 = mediumStructure.insert(
             component: mockComponent3,
-            index: 1,
+            index: 2,
           );
           expect(
             structure3.components,
