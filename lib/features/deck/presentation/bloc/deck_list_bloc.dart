@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -23,7 +21,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../core/domain/entities/material/deck/deck.dart';
 import '../../../../core/exceptions/exceptions.dart';
@@ -43,13 +40,13 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
   final ValidateDeckName _validateDeckName;
 
   // Updated when decks are updated or renamed
-  List<Deck> _decks;
+  late List<Deck> _decks;
 
   DeckListBloc({
-    @required CreateDeck createDeck,
-    @required GetAllDecks getAllDecks,
-    @required DeleteDeck deleteDeck,
-    @required ValidateDeckName validateDeckName,
+    required CreateDeck createDeck,
+    required GetAllDecks getAllDecks,
+    required DeleteDeck deleteDeck,
+    required ValidateDeckName validateDeckName,
   })  : _createDeck = createDeck,
         _getAllDecks = getAllDecks,
         _deleteDeck = deleteDeck,

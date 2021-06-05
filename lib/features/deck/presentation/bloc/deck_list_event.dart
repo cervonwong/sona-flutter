@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -39,7 +37,7 @@ class DeckListInitialized extends DeckListEvent {}
 class DeckCreated extends DeckListEvent {
   final String name;
 
-  const DeckCreated({@required this.name});
+  const DeckCreated({required this.name});
 
   @override
   List<Object> get props => [name];
@@ -49,7 +47,7 @@ class DeckCreated extends DeckListEvent {
 class DeckDeleted extends DeckListEvent {
   final Deck deck;
 
-  const DeckDeleted({@required this.deck});
+  const DeckDeleted({required this.deck});
 
   @override
   List<Object> get props => [deck];

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 /*
  * Sona is a cross-platform educational app which helps you remember
  * facts easier, developed with Flutter.
@@ -38,7 +36,7 @@ class DeckListLoading extends DeckListState {}
 class DeckListLoaded extends DeckListState {
   final List<Deck> decks;
 
-  const DeckListLoaded({@required this.decks});
+  const DeckListLoaded({required this.decks});
 
   @override
   List<Object> get props => [decks];
@@ -54,7 +52,7 @@ abstract class DeckListLoadFailed extends DeckListState {}
 class DeckListLoadFailedWithException extends DeckListLoadFailed {
   final ApplicationException exception;
 
-  DeckListLoadFailedWithException({@required this.exception});
+  DeckListLoadFailedWithException({required this.exception});
 
   @override
   List<Object> get props => [exception];
