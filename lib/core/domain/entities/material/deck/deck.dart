@@ -21,6 +21,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../utils/nullable.dart';
+import 'deck_icon_spec.dart';
 
 @immutable
 class Deck extends Equatable {
@@ -30,14 +31,17 @@ class Deck extends Equatable {
   final DateTime lastEditedDateTime;
   final String? authorName; // Nullable
   final String? description; // Nullable
+  final DeckIconSpec iconSpec;
 
   Deck({
     required this.id,
     required this.name,
     required this.createdDateTime,
     required this.lastEditedDateTime,
+    // TODO: 6/5/2021 Make all properties required.
     this.authorName, // Default value is null.
     this.description, // Default value is null.
+    required this.iconSpec,
   }) : assert(createdDateTime.isBefore(lastEditedDateTime) ||
             createdDateTime.isAtSameMomentAs(lastEditedDateTime));
 
@@ -46,6 +50,7 @@ class Deck extends Equatable {
     DateTime? lastEditedDateTime,
     Nullable<String>? authorName,
     Nullable<String>? description,
+    DeckIconSpec? iconSpec,
   }) {
     return Deck(
       id: id,
@@ -54,6 +59,7 @@ class Deck extends Equatable {
       lastEditedDateTime: lastEditedDateTime ?? this.lastEditedDateTime,
       authorName: authorName == null ? this.authorName : authorName.value,
       description: description == null ? this.description : description.value,
+      iconSpec: iconSpec ?? this.iconSpec,
     );
   }
 
@@ -65,5 +71,6 @@ class Deck extends Equatable {
         lastEditedDateTime,
         authorName,
         description,
+        iconSpec,
       ];
 }

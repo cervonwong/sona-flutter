@@ -18,11 +18,18 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
+import 'package:sona_flutter/core/domain/entities/material/deck/deck_icon_spec.dart';
 import 'package:sona_flutter/core/utils/nullable.dart';
 
+class MockDeckIconSpec extends Mock implements DeckIconSpec {}
+
 void main() {
+  final iconSpec1 = MockDeckIconSpec();
+  final iconSpec2 = MockDeckIconSpec();
+
   group(
     'Deck when constructed',
     () {
@@ -35,6 +42,7 @@ void main() {
             name: 'My deck',
             createdDateTime: DateTime(2020, 1, 1),
             lastEditedDateTime: DateTime(2020, 10, 29),
+            iconSpec: iconSpec1,
           );
 
           expect(deck.id, 1);
@@ -43,6 +51,7 @@ void main() {
           expect(deck.lastEditedDateTime, DateTime(2020, 10, 29));
           expect(deck.authorName, null);
           expect(deck.description, null);
+          expect(deck.iconSpec, iconSpec1);
         },
       );
 
@@ -57,6 +66,7 @@ void main() {
             lastEditedDateTime: DateTime(2020, 10, 30),
             authorName: 'Cervon Wong',
             description: 'A deck with all of its arguments set.',
+            iconSpec: iconSpec2,
           );
 
           expect(deck.id, 2);
@@ -65,6 +75,7 @@ void main() {
           expect(deck.lastEditedDateTime, DateTime(2020, 10, 30));
           expect(deck.authorName, 'Cervon Wong');
           expect(deck.description, 'A deck with all of its arguments set.');
+          expect(deck.iconSpec, iconSpec2);
         },
       );
 
@@ -79,6 +90,7 @@ void main() {
                 name: 'Time Traveller Deck',
                 createdDateTime: DateTime(2000, 12, 5),
                 lastEditedDateTime: DateTime(1999, 9, 13),
+                iconSpec: iconSpec1,
               );
             },
             throwsAssertionError,
@@ -91,6 +103,7 @@ void main() {
                 name: 'Time Traveller Deck',
                 createdDateTime: DateTime(2000, 12, 5),
                 lastEditedDateTime: DateTime(2000, 12, 5),
+                iconSpec: iconSpec1,
               );
             },
             isNot(throwsAssertionError),
@@ -111,6 +124,7 @@ void main() {
         lastEditedDateTime: DateTime(2000, 1, 1),
         authorName: 'Random Author',
         description: 'A random deck.',
+        iconSpec: iconSpec1,
       );
       expect(deck1.id, 8);
       expect(deck1.name, 'Random Deck');
@@ -118,10 +132,12 @@ void main() {
       expect(deck1.lastEditedDateTime, DateTime(2000, 1, 1));
       expect(deck1.authorName, 'Random Author');
       expect(deck1.description, 'A random deck.');
+      expect(deck1.iconSpec, iconSpec1);
 
       final deck2 = deck1.copyWith(
         name: 'New Deck',
         lastEditedDateTime: DateTime(2000, 1, 2),
+        iconSpec: iconSpec2,
       );
       expect(deck2.id, 8);
       expect(deck2.name, 'New Deck');
@@ -129,6 +145,7 @@ void main() {
       expect(deck2.lastEditedDateTime, DateTime(2000, 1, 2));
       expect(deck2.authorName, 'Random Author');
       expect(deck2.description, 'A random deck.');
+      expect(deck2.iconSpec, iconSpec2);
 
       final deck3 = deck2.copyWith(
         authorName: Nullable<String>('New Author'),
@@ -140,6 +157,7 @@ void main() {
       expect(deck3.lastEditedDateTime, DateTime(2000, 1, 2));
       expect(deck3.authorName, 'New Author');
       expect(deck3.description, 'This is a new deck.');
+      expect(deck3.iconSpec, iconSpec2);
 
       final deck4 = deck3.copyWith(
         authorName: Nullable<String>(null),
@@ -151,6 +169,7 @@ void main() {
       expect(deck4.lastEditedDateTime, DateTime(2000, 1, 2));
       expect(deck4.authorName, null);
       expect(deck4.description, null);
+      expect(deck4.iconSpec, iconSpec2);
     },
   );
 
@@ -166,6 +185,7 @@ void main() {
             name: 'Equal Deck',
             createdDateTime: DateTime(2020, 10, 30),
             lastEditedDateTime: DateTime(2020, 10, 30),
+            iconSpec: iconSpec2,
           );
 
           expect(deck1, deck1.copyWith());
@@ -189,6 +209,7 @@ void main() {
             lastEditedDateTime: lastEditedDateTime,
             authorName: authorName,
             description: description,
+            iconSpec: iconSpec2,
           );
 
           final deck2 = Deck(
@@ -198,9 +219,21 @@ void main() {
             lastEditedDateTime: lastEditedDateTime,
             authorName: authorName,
             description: null,
+            iconSpec: iconSpec2,
+          );
+
+          final deck3 = Deck(
+            id: 1,
+            name: name,
+            createdDateTime: createdDateTime,
+            lastEditedDateTime: lastEditedDateTime,
+            authorName: authorName,
+            description: description,
+            iconSpec: iconSpec1,
           );
 
           expect(deck1, isNot(deck2));
+          expect(deck1, isNot(deck3));
         },
       );
     },
