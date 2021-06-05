@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class ModelDefaultConstants {
-  ModelDefaultConstants._(); // Prevent instantiation with private constructor.
+class DefaultArgConstants {
+  DefaultArgConstants._(); // Prevent instantiation with private constructor.
 
   // Deck
   static const String? deckAuthorName = null;

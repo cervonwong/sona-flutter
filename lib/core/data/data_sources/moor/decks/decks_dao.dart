@@ -19,7 +19,7 @@
 
 import 'package:moor/moor.dart';
 
-import '../../../../constants/model_default_constants.dart';
+import '../../../../constants/default_arg_constants.dart';
 import '../../../../utils/system_time.dart';
 import '../moor_database.dart';
 import 'decks_table.dart';
@@ -69,8 +69,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
         name: name,
         created: systemTime.now(),
         lastEdited: systemTime.now(),
-        authorName: const Value(ModelDefaultConstants.deckAuthorName),
-        description: const Value(ModelDefaultConstants.deckDescription),
+        authorName: const Value(DefaultArgConstants.deckAuthorName),
+        description: const Value(DefaultArgConstants.deckDescription),
       ),
     );
     // Returns the deck from the database specified by its ID.
