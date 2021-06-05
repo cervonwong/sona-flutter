@@ -23,6 +23,7 @@ import 'package:meta/meta.dart';
 
 import '../../entities/material/card/card.dart';
 import '../../entities/material/entry/entry.dart';
+import '../../entities/material/entry_type/entry_type.dart';
 
 abstract class EntryRepository {
   // COUNT
@@ -33,6 +34,8 @@ abstract class EntryRepository {
   // NAVIGABLE ACCESSOR
 
   Future<Entry> getByCard({@required Card card});
+
+  Future<List<Entry>> getByEntryType({@required EntryType entryType});
 
   // CRUD
 

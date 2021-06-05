@@ -35,6 +35,7 @@ abstract class CardRepository {
   // CRUD
 
   // TODO(cervonwong): 12/11/2020 Add filter (stackable), sort, and sorting direction parameters.
+  // TODO: 6/5/2021 Also add filter by deck, entry, etc.
   Future<List<Card>> get({
     int offset = 0,
     @required int size,

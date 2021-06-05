@@ -19,8 +19,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import '../../entities/material/entry/entry.dart';
+import 'package:meta/meta.dart';
+import '../../entities/material/card/card.dart';
 import '../../entities/material/entry_type/entry_type.dart';
+import '../../entities/material/entry/entry.dart';
 
 abstract class EntryTypeRepository {
   // COUNT
@@ -29,9 +31,9 @@ abstract class EntryTypeRepository {
 
   // NAVIGABLE ACCESSORS
 
-  Future<EntryType> getByCard();
+  Future<EntryType> getByCard({@required Card card});
 
-  Future<List<Entry>> getEntries(EntryType entryType);
+  Future<EntryType> getByEntry({@required Entry entry});
 
   // CRUD
 
@@ -41,9 +43,9 @@ abstract class EntryTypeRepository {
 
   // TODO(cervonwong): 13/11/2020 This will require communication with Card and
   //  Entry data sources to prevent invalid states.
-  Future<void> update(EntryType entryType);
+  Future<void> update({@required EntryType entryType});
 
   // TODO(cervonwong): 13/11/2020 This will require communication with Card and
   //  Entry data sources to prevent invalid states.
-  Future<void> delete(EntryType entryType);
+  Future<void> delete({@required EntryType entryType});
 }
