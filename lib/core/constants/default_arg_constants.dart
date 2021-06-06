@@ -27,6 +27,13 @@ class DefaultArgConstants {
   static const String? deckDescription = null;
 
   // DeckIconSpec / decks table
+  static const DeckIconSpec deckIconSpec = DeckIconSpec(
+    color: deckIconSpecColor,
+    symbol: deckIconSpecSymbol,
+  );
+
+  // TODO: 6/6/2021 Check in the future if deckIconSpecColor and
+  //  deckIconSpecSymbol are still being used.
   static const DeckIconColor deckIconSpecColor = DeckIconColor.sky;
   static const DeckIconSymbol deckIconSpecSymbol = DeckIconSymbol.deck;
 

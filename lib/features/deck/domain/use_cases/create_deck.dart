@@ -17,7 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '../../../../core/constants/default_arg_constants.dart';
 import '../../../../core/domain/entities/material/deck/deck.dart';
+import '../../../../core/domain/entities/material/deck/deck_icon_spec.dart';
 import '../../../../core/domain/repositories/material/deck/deck_repository.dart';
 
 class CreateDeck {
@@ -25,6 +27,17 @@ class CreateDeck {
 
   CreateDeck({required DeckRepository repository}) : _repository = repository;
 
-  Future<Deck> call({required String name}) async =>
-      _repository.create(name: name);
+  Future<Deck> call({
+    required String name,
+    String? authorName = DefaultArgConstants.deckAuthorName,
+    String? description = DefaultArgConstants.deckDescription,
+    DeckIconSpec iconSpec = DefaultArgConstants.deckIconSpec,
+  }) async {
+    return _repository.create(
+      name: name,
+      authorName: authorName,
+      description: description,
+      iconSpec: iconSpec,
+    );
+  }
 }
