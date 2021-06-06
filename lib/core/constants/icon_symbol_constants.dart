@@ -57,8 +57,7 @@ class IconSymbolConstants {
   // TODO: 6/6/2021 Does this way of structuring data cause slower conversion in
   //  DeckModelToEntityMapper? Does it matter considering the small number of
   //  Decks usually? Is there a faster / better method?
-  // TODO: 6/6/2021 Rename to values.
-  static const metadata = [
+  static const values = [
     IconSymbolMetadata(
       id: deckId,
       version: 1,

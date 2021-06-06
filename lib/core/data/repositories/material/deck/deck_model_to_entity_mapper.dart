@@ -46,7 +46,7 @@ class DeckModelToEntityMapper {
   }
 
   DeckIconSymbol _mapToSymbol({required int id}) {
-    return IconSymbolConstants.metadata
+    return IconSymbolConstants.values
         .firstWhere((metadata) => metadata.id == id)
         .symbol;
   }
