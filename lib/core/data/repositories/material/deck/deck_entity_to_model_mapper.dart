@@ -32,18 +32,18 @@ class DeckEntityToModelMapper {
       lastEdited: entity.lastEditedDateTime,
       authorName: entity.authorName,
       description: entity.description,
-      iconSymbolId: _mapToIconSymbolId(symbol: entity.iconSpec.symbol),
-      iconColorId: _mapToIconColorId(color: entity.iconSpec.color),
+      iconSymbolId: mapToIconSymbolId(symbol: entity.iconSpec.symbol),
+      iconColorId: mapToIconColorId(color: entity.iconSpec.color),
     );
   }
 
-  int _mapToIconSymbolId({required DeckIconSymbol symbol}) {
+  int mapToIconSymbolId({required DeckIconSymbol symbol}) {
     return IconSymbolConstants.values
         .firstWhere((metadata) => metadata.symbol == symbol)
         .id;
   }
 
-  int _mapToIconColorId({required DeckIconColor color}) {
+  int mapToIconColorId({required DeckIconColor color}) {
     return LookupAndMapperConstants.iconColorMapping.entries
         .firstWhere((entry) => entry.value == color)
         .key;
