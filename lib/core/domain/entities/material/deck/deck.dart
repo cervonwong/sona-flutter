@@ -38,9 +38,9 @@ class Deck extends Equatable {
     required this.name,
     required this.createdDateTime,
     required this.lastEditedDateTime,
-    // TODO: 6/5/2021 Make all properties required.
-    this.authorName, // Default value is null.
-    this.description, // Default value is null.
+    required this.authorName, // Default value is null from use case POV.
+    required this.description, // Default value is null from use case POV.
+    // Also see `DefaultArgConstants` for other similar default constants.
     required this.iconSpec,
   }) : assert(createdDateTime.isBefore(lastEditedDateTime) ||
             createdDateTime.isAtSameMomentAs(lastEditedDateTime));

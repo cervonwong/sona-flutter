@@ -34,28 +34,6 @@ void main() {
     'Deck when constructed',
     () {
       test(
-        'without optional arguments, '
-        'should have expected default fields',
-        () {
-          final deck = Deck(
-            id: 1,
-            name: 'My deck',
-            createdDateTime: DateTime(2020, 1, 1),
-            lastEditedDateTime: DateTime(2020, 10, 29),
-            iconSpec: iconSpec1,
-          );
-
-          expect(deck.id, 1);
-          expect(deck.name, 'My deck');
-          expect(deck.createdDateTime, DateTime(2020, 1, 1));
-          expect(deck.lastEditedDateTime, DateTime(2020, 10, 29));
-          expect(deck.authorName, null);
-          expect(deck.description, null);
-          expect(deck.iconSpec, iconSpec1);
-        },
-      );
-
-      test(
         'with all arguments, '
         'should have expected fields',
         () {
@@ -90,6 +68,8 @@ void main() {
                 name: 'Time Traveller Deck',
                 createdDateTime: DateTime(2000, 12, 5),
                 lastEditedDateTime: DateTime(1999, 9, 13),
+                authorName: 'null',
+                description: 'authorName is not actually null',
                 iconSpec: iconSpec1,
               );
             },
@@ -103,6 +83,8 @@ void main() {
                 name: 'Time Traveller Deck',
                 createdDateTime: DateTime(2000, 12, 5),
                 lastEditedDateTime: DateTime(2000, 12, 5),
+                authorName: 'null',
+                description: 'authorName is not actually null',
                 iconSpec: iconSpec1,
               );
             },
@@ -185,6 +167,8 @@ void main() {
             name: 'Equal Deck',
             createdDateTime: DateTime(2020, 10, 30),
             lastEditedDateTime: DateTime(2020, 10, 30),
+            authorName: null,
+            description: 'authorName is actually null',
             iconSpec: iconSpec2,
           );
 
