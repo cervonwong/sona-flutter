@@ -21,7 +21,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moor/ffi.dart';
 
-import 'package:sona_flutter/core/constants/default_arg_constants.dart';
+import 'package:sona_flutter/core/constants/icon_symbol_constants.dart';
+import 'package:sona_flutter/core/constants/lookup_and_mapper_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/utils/system_time.dart';
@@ -61,8 +62,20 @@ void main() {
         () {
           late DeckModel deck1, deck2;
           setUp(() async {
-            deck1 = await dao.create(name: 'Leo');
-            deck2 = await dao.create(name: 'Libra');
+            deck1 = await dao.create(
+              name: 'Leo',
+              authorName: 'Leon',
+              description: null,
+              iconSymbolId: IconSymbolConstants.deckId,
+              iconColorId: LookupAndMapperConstants.iconColorOrangeId,
+            );
+            deck2 = await dao.create(
+              name: 'Libra',
+              authorName: 'Librason',
+              description: 'As opposed to Libradottir',
+              iconSymbolId: IconSymbolConstants.deckId,
+              iconColorId: LookupAndMapperConstants.iconColorOrangeId,
+            );
           });
 
           test(
@@ -76,16 +89,20 @@ void main() {
                     name: 'Leo',
                     created: DateTime(2020),
                     lastEdited: DateTime(2020),
-                    authorName: DefaultArgConstants.deckAuthorName,
-                    description: DefaultArgConstants.deckDescription,
+                    authorName: 'Leon',
+                    description: null,
+                    iconSymbolId: IconSymbolConstants.deckId,
+                    iconColorId: LookupAndMapperConstants.iconColorOrangeId,
                   ),
                   DeckModel(
                     id: 2,
                     name: 'Libra',
                     created: DateTime(2020),
                     lastEdited: DateTime(2020),
-                    authorName: DefaultArgConstants.deckAuthorName,
-                    description: DefaultArgConstants.deckDescription,
+                    authorName: 'Librason',
+                    description: 'As opposed to Libradottir',
+                    iconSymbolId: IconSymbolConstants.deckId,
+                    iconColorId: LookupAndMapperConstants.iconColorOrangeId,
                   ),
                 ],
               );
@@ -102,8 +119,10 @@ void main() {
                   name: 'Leo',
                   created: DateTime(2020),
                   lastEdited: DateTime(2020),
-                  authorName: DefaultArgConstants.deckAuthorName,
-                  description: DefaultArgConstants.deckDescription,
+                  authorName: 'Leon',
+                  description: null,
+                  iconSymbolId: IconSymbolConstants.deckId,
+                  iconColorId: LookupAndMapperConstants.iconColorOrangeId,
                 ),
               );
 
@@ -114,8 +133,10 @@ void main() {
                   name: 'Libra',
                   created: DateTime(2020),
                   lastEdited: DateTime(2020),
-                  authorName: DefaultArgConstants.deckAuthorName,
-                  description: DefaultArgConstants.deckDescription,
+                  authorName: 'Librason',
+                  description: 'As opposed to Libradottir',
+                  iconSymbolId: IconSymbolConstants.deckId,
+                  iconColorId: LookupAndMapperConstants.iconColorOrangeId,
                 ),
               );
             },
@@ -127,11 +148,23 @@ void main() {
         'when a deck in the db has the same name as the passed name, '
         'should fail asserts',
         () async {
-          await dao.create(name: 'Cancer');
+          await dao.create(
+            name: 'Cancer',
+            authorName: 'gnoW novreC',
+            description: null,
+            iconSymbolId: IconSymbolConstants.flaskId,
+            iconColorId: LookupAndMapperConstants.iconColorPinkId,
+          );
 
           expect(
             () async {
-              await dao.create(name: 'Cancer');
+              await dao.create(
+                name: 'Cancer',
+                authorName: 'novreC',
+                description: 'gnoW',
+                iconSymbolId: IconSymbolConstants.bookId,
+                iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+              );
             },
             throwsAssertionError,
           );
@@ -147,7 +180,14 @@ void main() {
         'when passed legal id, '
         'should return expected DeckModel',
         () async {
-          final id = (await dao.create(name: 'Virgo')).id;
+          final id = (await dao.create(
+            name: 'Virgo',
+            authorName: null,
+            description: null,
+            iconSymbolId: IconSymbolConstants.bookId,
+            iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+          ))
+              .id;
 
           final deck = await dao.getById(id: id);
           expect(
@@ -157,8 +197,10 @@ void main() {
               name: 'Virgo',
               created: DateTime(2020),
               lastEdited: DateTime(2020),
-              authorName: DefaultArgConstants.deckAuthorName,
-              description: DefaultArgConstants.deckDescription,
+              authorName: null,
+              description: null,
+              iconSymbolId: IconSymbolConstants.bookId,
+              iconColorId: LookupAndMapperConstants.iconColorPurpleId,
             ),
           );
         },
@@ -182,7 +224,13 @@ void main() {
         'when passed legal name, '
         'should return expected DeckModel',
         () async {
-          await dao.create(name: 'Cancer');
+          await dao.create(
+            name: 'Cancer',
+            authorName: null,
+            description: null,
+            iconSymbolId: IconSymbolConstants.bookId,
+            iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+          );
 
           final deck = await dao.getByName(name: 'Cancer');
           expect(
@@ -192,8 +240,10 @@ void main() {
               name: 'Cancer',
               created: DateTime(2020),
               lastEdited: DateTime(2020),
-              authorName: DefaultArgConstants.deckAuthorName,
-              description: DefaultArgConstants.deckDescription,
+              authorName: null,
+              description: null,
+              iconSymbolId: IconSymbolConstants.bookId,
+              iconColorId: LookupAndMapperConstants.iconColorPurpleId,
             ),
           );
         },
@@ -229,13 +279,31 @@ void main() {
         'with the most recently created at the start of the list',
         () async {
           when(() => systemTime.now()).thenReturn(DateTime(1999));
-          await dao.create(name: 'Aries');
+          await dao.create(
+            name: 'Aries',
+            authorName: null,
+            description: null,
+            iconSymbolId: IconSymbolConstants.bookId,
+            iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+          );
 
           when(() => systemTime.now()).thenReturn(DateTime(2000));
-          await dao.create(name: 'Taurus');
+          await dao.create(
+            name: 'Taurus',
+            authorName: null,
+            description: null,
+            iconSymbolId: IconSymbolConstants.bookId,
+            iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+          );
 
           when(() => systemTime.now()).thenReturn(DateTime(2001));
-          await dao.create(name: 'Gemini');
+          await dao.create(
+            name: 'Gemini',
+            authorName: null,
+            description: null,
+            iconSymbolId: IconSymbolConstants.bookId,
+            iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+          );
 
           final decks = await dao.getAll();
           expect(
@@ -246,24 +314,30 @@ void main() {
                 name: 'Gemini',
                 created: DateTime(2001),
                 lastEdited: DateTime(2001),
-                authorName: DefaultArgConstants.deckAuthorName,
-                description: DefaultArgConstants.deckDescription,
+                authorName: null,
+                description: null,
+                iconSymbolId: IconSymbolConstants.bookId,
+                iconColorId: LookupAndMapperConstants.iconColorPurpleId,
               ),
               DeckModel(
                 id: 2,
                 name: 'Taurus',
                 created: DateTime(2000),
                 lastEdited: DateTime(2000),
-                authorName: DefaultArgConstants.deckAuthorName,
-                description: DefaultArgConstants.deckDescription,
+                authorName: null,
+                description: null,
+                iconSymbolId: IconSymbolConstants.bookId,
+                iconColorId: LookupAndMapperConstants.iconColorPurpleId,
               ),
               DeckModel(
                 id: 1,
                 name: 'Aries',
                 created: DateTime(1999),
                 lastEdited: DateTime(1999),
-                authorName: DefaultArgConstants.deckAuthorName,
-                description: DefaultArgConstants.deckDescription,
+                authorName: null,
+                description: null,
+                iconSymbolId: IconSymbolConstants.bookId,
+                iconColorId: LookupAndMapperConstants.iconColorPurpleId,
               ),
             ],
           );
@@ -285,11 +359,20 @@ void main() {
               late DeckModel editedDeck;
               setUp(() async {
                 when(() => systemTime.now()).thenReturn(DateTime(1990));
-                final deck = await dao.create(name: 'Capricorn');
+                final deck = await dao.create(
+                  name: 'Capricorn',
+                  authorName: null,
+                  description: null,
+                  iconSymbolId: IconSymbolConstants.bookId,
+                  iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+                );
 
                 when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
-                  newDeck: deck.copyWith(name: 'Aquarius'),
+                  newDeck: deck.copyWith(
+                    name: 'Aquarius',
+                    iconSymbolId: IconSymbolConstants.flaskId,
+                  ),
                 );
               });
 
@@ -304,8 +387,10 @@ void main() {
                         name: 'Aquarius',
                         created: DateTime(1990),
                         lastEdited: DateTime(2000),
-                        authorName: DefaultArgConstants.deckAuthorName,
-                        description: DefaultArgConstants.deckDescription,
+                        authorName: null,
+                        description: null,
+                        iconSymbolId: IconSymbolConstants.flaskId,
+                        iconColorId: LookupAndMapperConstants.iconColorPurpleId,
                       ),
                     ],
                   );
@@ -322,8 +407,10 @@ void main() {
                       name: 'Aquarius',
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
-                      authorName: DefaultArgConstants.deckAuthorName,
-                      description: DefaultArgConstants.deckDescription,
+                      authorName: null,
+                      description: null,
+                      iconSymbolId: IconSymbolConstants.flaskId,
+                      iconColorId: LookupAndMapperConstants.iconColorPurpleId,
                     ),
                   );
                 },
@@ -337,14 +424,28 @@ void main() {
               late DeckModel editedDeck;
               setUp(() async {
                 when(() => systemTime.now()).thenReturn(DateTime(1990));
-                final deck = await dao.create(name: 'Capricorn');
+                final deck = await dao.create(
+                  name: 'Capricorn',
+                  authorName: 'Me',
+                  description: null,
+                  iconSymbolId: IconSymbolConstants.flaskId,
+                  iconColorId: LookupAndMapperConstants.iconColorPurpleId,
+                );
 
                 when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
-                  newDeck: deck.copyWith(
+                  // Default implementation of copyWith in DeckModel generated
+                  // by moor does not supporting setting a nullable value from
+                  // non-null to null.
+                  newDeck: DeckModel(
+                    id: deck.id,
                     name: 'Aquarius',
-                    authorName: 'Me',
+                    created: deck.created,
+                    lastEdited: deck.lastEdited,
+                    authorName: null,
                     description: 'This is a string.',
+                    iconSymbolId: IconSymbolConstants.flaskId,
+                    iconColorId: LookupAndMapperConstants.iconColorBlueId,
                   ),
                 );
               });
@@ -358,8 +459,10 @@ void main() {
                       name: 'Aquarius',
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
-                      authorName: 'Me',
+                      authorName: null,
                       description: 'This is a string.',
+                      iconSymbolId: IconSymbolConstants.flaskId,
+                      iconColorId: LookupAndMapperConstants.iconColorBlueId,
                     ),
                   ]);
                 },
@@ -375,8 +478,10 @@ void main() {
                       name: 'Aquarius',
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
-                      authorName: 'Me',
+                      authorName: null,
                       description: 'This is a string.',
+                      iconSymbolId: IconSymbolConstants.flaskId,
+                      iconColorId: LookupAndMapperConstants.iconColorBlueId,
                     ),
                   );
                 },
@@ -390,7 +495,13 @@ void main() {
               late DeckModel editedDeck;
               setUp(() async {
                 when(() => systemTime.now()).thenReturn(DateTime(1990));
-                final deck = await dao.create(name: 'Capricorn');
+                final deck = await dao.create(
+                  name: 'Capricorn',
+                  authorName: null,
+                  description: 'This is a string.',
+                  iconSymbolId: IconSymbolConstants.flaskId,
+                  iconColorId: LookupAndMapperConstants.iconColorBlueId,
+                );
 
                 when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
@@ -403,7 +514,8 @@ void main() {
               });
 
               test(
-                'should update expected record in decks table',
+                'should update expected record in decks table '
+                'without created or lastEdited changed',
                 () async {
                   expect(
                     await selectAll(),
@@ -413,8 +525,10 @@ void main() {
                         name: 'Aquarius',
                         created: DateTime(1990),
                         lastEdited: DateTime(2000),
-                        authorName: DefaultArgConstants.deckAuthorName,
-                        description: DefaultArgConstants.deckDescription,
+                        authorName: null,
+                        description: 'This is a string.',
+                        iconSymbolId: IconSymbolConstants.flaskId,
+                        iconColorId: LookupAndMapperConstants.iconColorBlueId,
                       ),
                     ],
                   );
@@ -422,7 +536,8 @@ void main() {
               );
 
               test(
-                'should return edited DeckModel',
+                'should return edited DeckModel '
+                'without created or lastEdited changed',
                 () {
                   expect(
                     editedDeck,
@@ -431,8 +546,10 @@ void main() {
                       name: 'Aquarius',
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
-                      authorName: DefaultArgConstants.deckAuthorName,
-                      description: DefaultArgConstants.deckDescription,
+                      authorName: null,
+                      description: 'This is a string.',
+                      iconSymbolId: IconSymbolConstants.flaskId,
+                      iconColorId: LookupAndMapperConstants.iconColorBlueId,
                     ),
                   );
                 },
@@ -446,7 +563,13 @@ void main() {
               late DeckModel editedDeck;
               setUp(() async {
                 when(() => systemTime.now()).thenReturn(DateTime(1990));
-                final deck = await dao.create(name: 'Capricorn');
+                final deck = await dao.create(
+                  name: 'Capricorn',
+                  authorName: null,
+                  description: 'This is a string.',
+                  iconSymbolId: IconSymbolConstants.flaskId,
+                  iconColorId: LookupAndMapperConstants.iconColorBlueId,
+                );
 
                 when(() => systemTime.now()).thenReturn(DateTime(2000));
                 editedDeck = await dao.edit(
@@ -468,7 +591,9 @@ void main() {
                         created: DateTime(1990),
                         lastEdited: DateTime(2000),
                         authorName: 'You',
-                        description: DefaultArgConstants.deckDescription,
+                        description: 'This is a string.',
+                        iconSymbolId: IconSymbolConstants.flaskId,
+                        iconColorId: LookupAndMapperConstants.iconColorBlueId,
                       ),
                     ],
                   );
@@ -486,7 +611,9 @@ void main() {
                       created: DateTime(1990),
                       lastEdited: DateTime(2000),
                       authorName: 'You',
-                      description: DefaultArgConstants.deckDescription,
+                      description: 'This is a string.',
+                      iconSymbolId: IconSymbolConstants.flaskId,
+                      iconColorId: LookupAndMapperConstants.iconColorBlueId,
                     ),
                   );
                 },
@@ -510,6 +637,8 @@ void main() {
                   lastEdited: DateTime(2000),
                   authorName: 'Me',
                   description: 'This is a string.',
+                  iconSymbolId: IconSymbolConstants.flaskId,
+                  iconColorId: LookupAndMapperConstants.iconColorBlueId,
                 ),
               );
             },
@@ -523,8 +652,20 @@ void main() {
         'as the passed newDeck\'s name, '
         'should fail asserts',
         () async {
-          await dao.create(name: 'Scorpio');
-          await dao.create(name: 'Pisces');
+          await dao.create(
+            name: 'Scorpio',
+            authorName: 'Me',
+            description: 'This is a string.',
+            iconSymbolId: IconSymbolConstants.flaskId,
+            iconColorId: LookupAndMapperConstants.iconColorBlueId,
+          );
+          await dao.create(
+            name: 'Pisces',
+            authorName: 'Me',
+            description: 'This is a string.',
+            iconSymbolId: IconSymbolConstants.flaskId,
+            iconColorId: LookupAndMapperConstants.iconColorBlueId,
+          );
 
           expect(
             () async {
@@ -536,6 +677,8 @@ void main() {
                   lastEdited: DateTime(2000),
                   authorName: 'Me',
                   description: 'This is a string.',
+                  iconSymbolId: IconSymbolConstants.flaskId,
+                  iconColorId: LookupAndMapperConstants.iconColorBlueId,
                 ),
               );
             },
@@ -553,8 +696,20 @@ void main() {
         'when passed legal id, '
         'should delete expected record in decks table',
         () async {
-          await dao.create(name: 'Apple');
-          await dao.create(name: 'Banana');
+          await dao.create(
+            name: 'Apple',
+            authorName: 'Me',
+            description: 'This is a string.',
+            iconSymbolId: IconSymbolConstants.flaskId,
+            iconColorId: LookupAndMapperConstants.iconColorBlueId,
+          );
+          await dao.create(
+            name: 'Banana',
+            authorName: 'Me',
+            description: 'This is a string.',
+            iconSymbolId: IconSymbolConstants.flaskId,
+            iconColorId: LookupAndMapperConstants.iconColorBlueId,
+          );
           await dao.remove(id: 1);
 
           expect(
@@ -565,8 +720,10 @@ void main() {
                 name: 'Banana',
                 created: DateTime(2020),
                 lastEdited: DateTime(2020),
-                authorName: DefaultArgConstants.deckAuthorName,
-                description: DefaultArgConstants.deckDescription,
+                authorName: 'Me',
+                description: 'This is a string.',
+                iconSymbolId: IconSymbolConstants.flaskId,
+                iconColorId: LookupAndMapperConstants.iconColorBlueId,
               ),
             ],
           );
@@ -579,7 +736,7 @@ void main() {
         () async {
           expect(
             () async {
-              await dao.remove(id: -1);
+              await dao.remove(id: 9);
             },
             throwsAssertionError,
           );

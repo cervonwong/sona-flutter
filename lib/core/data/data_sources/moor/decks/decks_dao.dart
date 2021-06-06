@@ -19,7 +19,6 @@
 
 import 'package:moor/moor.dart';
 
-import '../../../../constants/default_arg_constants.dart';
 import '../../../../utils/system_time.dart';
 import '../moor_database.dart';
 import 'decks_table.dart';
@@ -27,7 +26,13 @@ import 'decks_table.dart';
 part 'decks_dao.g.dart';
 
 abstract class DecksDao {
-  Future<DeckModel> create({required String name});
+  Future<DeckModel> create({
+    required String name,
+    required String? authorName,
+    required String? description,
+    required int iconSymbolId,
+    required int iconColorId,
+  });
 
   Future<DeckModel?> getById({required int id});
 
@@ -63,7 +68,13 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   //  take in input from the presentation layer and determine if default values
   //  are needed.
   @override
-  Future<DeckModel> create({required String name}) async {
+  Future<DeckModel> create({
+    required String name,
+    required String? authorName,
+    required String? description,
+    required int iconSymbolId,
+    required int iconColorId,
+  }) async {
     // Asserts that a deck with the same name in the db does not exist.
     assert((await getByName(name: name)) == null);
 
@@ -73,8 +84,10 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
         name: name,
         created: systemTime.now(),
         lastEdited: systemTime.now(),
-        authorName: const Value(DefaultArgConstants.deckAuthorName),
-        description: const Value(DefaultArgConstants.deckDescription),
+        authorName: Value(authorName),
+        description: Value(description),
+        iconSymbolId: iconSymbolId,
+        iconColorId: iconColorId,
       ),
     );
     // Returns the deck from the database specified by its ID.
@@ -147,6 +160,8 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
         lastEdited: Value(systemTime.now()),
         authorName: Value(newDeck.authorName),
         description: Value(newDeck.description),
+        iconSymbolId: Value(newDeck.iconSymbolId),
+        iconColorId: Value(newDeck.iconColorId),
       ),
     );
     // Returns the updated deck from the database specified by its ID.
