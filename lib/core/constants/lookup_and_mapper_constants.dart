@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '../domain/entities/material/deck/deck_icon_spec.dart';
 import '../domain/entities/material/entry_type/components/component.dart';
 import '../domain/entities/material/entry_type/components/text_component.dart';
 import '../domain/entities/material/entry_type/entry_field/entry_field_type.dart';
@@ -177,5 +178,56 @@ class LookupAndMapperConstants {
     highlightColorBlueId: highlightColorBlueName,
     highlightColorPurpleId: highlightColorPurpleName,
     highlightColorPinkId: highlightColorPinkName,
+  };
+
+  // Entity : DeckIconColor (enum)
+  // Table  : icon_colors
+  static const iconColorRedId = 1;
+  static const iconColorOrangeId = 2;
+  static const iconColorYellowId = 3;
+  static const iconColorLimeId = 4;
+  static const iconColorGreenId = 5;
+  static const iconColorTealId = 6;
+  static const iconColorCyanId = 7;
+  static const iconColorSkyId = 8;
+  static const iconColorBlueId = 9;
+  static const iconColorPurpleId = 10;
+  static const iconColorPinkId = 11;
+  static const iconColorRedName = 'RED';
+  static const iconColorOrangeName = 'ORANGE';
+  static const iconColorYellowName = 'YELLOW';
+  static const iconColorLimeName = 'LIME';
+  static const iconColorGreenName = 'GREEN';
+  static const iconColorTealName = 'TEAL';
+  static const iconColorCyanName = 'CYAN';
+  static const iconColorSkyName = 'SKY';
+  static const iconColorBlueName = 'BLUE';
+  static const iconColorPurpleName = 'PURPLE';
+  static const iconColorPinkName = 'PINK';
+  static const iconColorLookup = {
+    iconColorRedId: iconColorRedName,
+    iconColorOrangeId: iconColorOrangeName,
+    iconColorYellowId: iconColorYellowName,
+    iconColorLimeId: iconColorLimeName,
+    iconColorGreenId: iconColorGreenName,
+    iconColorTealId: iconColorTealName,
+    iconColorCyanId: iconColorCyanName,
+    iconColorSkyId: iconColorSkyName,
+    iconColorBlueId: iconColorBlueName,
+    iconColorPurpleId: iconColorPurpleName,
+    iconColorPinkId: iconColorPinkName,
+  };
+  static const iconColorMapping = {
+    iconColorRedId: DeckIconColor.red,
+    iconColorOrangeId: DeckIconColor.orange,
+    iconColorYellowId: DeckIconColor.yellow,
+    iconColorLimeId: DeckIconColor.lime,
+    iconColorGreenId: DeckIconColor.green,
+    iconColorTealId: DeckIconColor.teal,
+    iconColorCyanId: DeckIconColor.cyan,
+    iconColorSkyId: DeckIconColor.sky,
+    iconColorBlueId: DeckIconColor.blue,
+    iconColorPurpleId: DeckIconColor.purple,
+    iconColorPinkId: DeckIconColor.pink,
   };
 }
