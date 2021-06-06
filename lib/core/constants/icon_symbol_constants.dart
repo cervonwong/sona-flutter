@@ -26,6 +26,7 @@ import '../domain/entities/material/deck/deck_icon_spec.dart';
 @immutable
 class IconSymbolMetadata {
   final int id;
+  final String name;
   final int version;
   final DeckIconSymbol symbol;
   final IconData iconData;
@@ -33,6 +34,7 @@ class IconSymbolMetadata {
 
   const IconSymbolMetadata({
     required this.id,
+    required this.name,
     required this.version,
     required this.symbol,
     required this.iconData,
@@ -60,6 +62,7 @@ class IconSymbolConstants {
   static const values = [
     IconSymbolMetadata(
       id: deckId,
+      name: 'DECK',
       version: 1,
       symbol: DeckIconSymbol.deck,
       iconData: FluentIcons.style_guide_24_regular,
@@ -71,6 +74,7 @@ class IconSymbolConstants {
     ),
     IconSymbolMetadata(
       id: bookId,
+      name: 'BOOK',
       version: 1,
       symbol: DeckIconSymbol.book,
       iconData: FluentIcons.book_24_regular,
@@ -85,6 +89,7 @@ class IconSymbolConstants {
     ),
     IconSymbolMetadata(
       id: flaskId,
+      name: 'FLASK',
       version: 1,
       symbol: DeckIconSymbol.flask,
       iconData: FluentIcons.beaker_24_regular,
