@@ -19,9 +19,12 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:sona_flutter/core/constants/icon_symbol_constants.dart';
+import 'package:sona_flutter/core/constants/lookup_and_mapper_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 import 'package:sona_flutter/core/data/repositories/material/deck/deck_entity_to_model_mapper.dart';
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
+import 'package:sona_flutter/core/domain/entities/material/deck/deck_icon_spec.dart';
 
 void main() {
   group(
@@ -39,6 +42,10 @@ void main() {
               lastEditedDateTime: DateTime(2020),
               authorName: null,
               description: null,
+              iconSpec: DeckIconSpec(
+                color: DeckIconColor.purple,
+                symbol: DeckIconSymbol.deck,
+              ),
             ),
           );
 
@@ -51,6 +58,8 @@ void main() {
               lastEdited: DateTime(2020),
               authorName: null,
               description: null,
+              iconSymbolId: IconSymbolConstants.deckId,
+              iconColorId: LookupAndMapperConstants.iconColorPurpleId,
             ),
           );
         },
@@ -67,6 +76,10 @@ void main() {
               lastEditedDateTime: DateTime(2020),
               authorName: 'C3rv0N w0ng',
               description: 'made this.',
+              iconSpec: DeckIconSpec(
+                color: DeckIconColor.blue,
+                symbol: DeckIconSymbol.book,
+              ),
             ),
           );
 
@@ -79,6 +92,8 @@ void main() {
               lastEdited: DateTime(2020),
               authorName: 'C3rv0N w0ng',
               description: 'made this.',
+              iconSymbolId: IconSymbolConstants.bookId,
+              iconColorId: LookupAndMapperConstants.iconColorBlueId,
             ),
           );
         },

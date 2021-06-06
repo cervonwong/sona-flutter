@@ -17,7 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '../../../../constants/icon_symbol_constants.dart';
+import '../../../../constants/lookup_and_mapper_constants.dart';
 import '../../../../domain/entities/material/deck/deck.dart';
+import '../../../../domain/entities/material/deck/deck_icon_spec.dart';
 import '../../../data_sources/moor/moor_database.dart';
 
 class DeckEntityToModelMapper {
@@ -29,6 +32,20 @@ class DeckEntityToModelMapper {
       lastEdited: entity.lastEditedDateTime,
       authorName: entity.authorName,
       description: entity.description,
+      iconSymbolId: _mapToIconSymbolId(symbol: entity.iconSpec.symbol),
+      iconColorId: _mapToIconColorId(color: entity.iconSpec.color),
     );
+  }
+
+  int _mapToIconSymbolId({required DeckIconSymbol symbol}) {
+    return IconSymbolConstants.metadata
+        .firstWhere((metadata) => metadata.symbol == symbol)
+        .id;
+  }
+
+  int _mapToIconColorId({required DeckIconColor color}) {
+    return LookupAndMapperConstants.iconColorMapping.entries
+        .firstWhere((entry) => entry.value == color)
+        .key;
   }
 }
