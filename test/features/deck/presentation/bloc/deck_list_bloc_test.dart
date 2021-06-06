@@ -35,7 +35,6 @@ class MockDeleteDeck extends Mock implements DeleteDeck {}
 
 class MockValidateDeckName extends Mock implements ValidateDeckName {}
 
-// ignore: must_be_immutable
 class MockDeck extends Mock implements Deck {}
 
 void main() {

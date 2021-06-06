@@ -22,7 +22,6 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 
-// ignore: must_be_immutable
 class MockCardId extends Mock implements CardId {}
 
 void main() {

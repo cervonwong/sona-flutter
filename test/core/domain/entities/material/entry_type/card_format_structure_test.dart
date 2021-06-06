@@ -23,7 +23,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/card_format_structure.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/components/component.dart';
 
-// ignore: must_be_immutable
 class MockComponent extends Mock implements Component {}
 
 void main() {

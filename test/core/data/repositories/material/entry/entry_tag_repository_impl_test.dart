@@ -27,7 +27,6 @@ import 'package:sona_flutter/core/data/repositories/material/entry/entry_tag_rep
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
 import 'package:sona_flutter/core/domain/repositories/material/entry/entry_tag_repository.dart';
 
-// ignore: must_be_immutable
 class MockEntryTag extends Mock implements EntryTag {}
 
 class MockTagModel extends Mock implements TagModel {}

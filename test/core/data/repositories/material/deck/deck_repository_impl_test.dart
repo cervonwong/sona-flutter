@@ -33,20 +33,16 @@ import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 
-// ignore: must_be_immutable
 class MockDeck extends Mock implements Deck {}
 
 class MockDeckModel extends Mock implements DeckModel {}
 
-// ignore: must_be_immutable
 class MockEntry extends Mock implements Entry {}
 
 class MockEntryModel extends Mock implements EntryModel {}
 
-// ignore: must_be_immutable
 class MockCard extends Mock implements Card {}
 
-// ignore: must_be_immutable
 class MockCardId extends Mock implements CardId {}
 
 class MockCardModel extends Mock implements CardModel {}

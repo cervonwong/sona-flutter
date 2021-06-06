@@ -26,13 +26,10 @@ import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_fiel
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_spec.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
 
-// ignore: must_be_immutable
 class MockEntryTag extends Mock implements EntryTag {}
 
-// ignore: must_be_immutable
 class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 
-// ignore: must_be_immutable
 class MockEntryFieldDatum extends Mock implements EntryFieldDatum {}
 
 void main() {
