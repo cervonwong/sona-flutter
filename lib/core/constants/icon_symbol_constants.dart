@@ -40,6 +40,8 @@ class IconSymbolMetadata {
   });
 }
 
+// Not defined with rest of constants in LookupAndMapperConstants because of
+// higher structure complexity.
 class IconSymbolConstants {
   IconSymbolConstants._(); // Prevent instantiation with private constructor.
 
@@ -47,12 +49,17 @@ class IconSymbolConstants {
   // Also increment the version of any `IconSymbolMetadata`s which has changed.
   static const currentVersion = 1;
 
+  // IDs are defined as variables for testing (eliminates magic id numbers)
+  static const deckId = 1;
+  static const bookId = 2;
+  static const flaskId = 3;
+
   // TODO: 6/6/2021 Does this way of structuring data cause slower conversion in
   //  DeckModelToEntityMapper? Does it matter considering the small number of
   //  Decks usually? Is there a faster / better method?
   static const metadata = [
     IconSymbolMetadata(
-      id: 1,
+      id: deckId,
       version: 1,
       symbol: DeckIconSymbol.deck,
       iconData: FluentIcons.style_guide_24_regular,
@@ -63,7 +70,7 @@ class IconSymbolConstants {
       ],
     ),
     IconSymbolMetadata(
-      id: 2,
+      id: bookId,
       version: 1,
       symbol: DeckIconSymbol.book,
       iconData: FluentIcons.book_24_regular,
@@ -77,7 +84,7 @@ class IconSymbolConstants {
       ],
     ),
     IconSymbolMetadata(
-      id: 3,
+      id: flaskId,
       version: 1,
       symbol: DeckIconSymbol.flask,
       iconData: FluentIcons.beaker_24_regular,
