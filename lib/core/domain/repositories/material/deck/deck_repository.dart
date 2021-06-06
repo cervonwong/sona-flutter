@@ -19,10 +19,16 @@
 
 import '../../../entities/material/card/card.dart';
 import '../../../entities/material/deck/deck.dart';
+import '../../../entities/material/deck/deck_icon_spec.dart';
 import '../../../entities/material/entry/entry.dart';
 
 abstract class DeckRepository {
-  Future<Deck> create({required String name});
+  Future<Deck> create({
+    required String name,
+    required String? authorName,
+    required String? description,
+    required DeckIconSpec iconSpec,
+  });
 
   Future<Deck?> getById({required int id});
 

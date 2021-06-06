@@ -20,6 +20,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import 'package:sona_flutter/core/constants/icon_symbol_constants.dart';
+import 'package:sona_flutter/core/constants/lookup_and_mapper_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/cards/cards_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/decks/decks_dao.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/entries/entries_dao.dart';
@@ -30,6 +32,7 @@ import 'package:sona_flutter/core/data/repositories/material/deck/deck_repositor
 import 'package:sona_flutter/core/domain/domain_exceptions.dart';
 import 'package:sona_flutter/core/domain/entities/material/card/card.dart';
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
+import 'package:sona_flutter/core/domain/entities/material/deck/deck_icon_spec.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
 
@@ -113,10 +116,28 @@ void main() {
         'when passed legal arguments, '
         'should return expected Deck',
         () async {
-          when(() => decksDao.create(name: 'Joseph'))
-              .thenAnswer((_) async => deckModel1);
+          when(() => toModel.mapToIconColorId(color: DeckIconColor.blue))
+              .thenReturn(LookupAndMapperConstants.iconColorBlueId);
+          when(() => toModel.mapToIconSymbolId(symbol: DeckIconSymbol.flask))
+              .thenReturn(IconSymbolConstants.flaskId);
 
-          final deck = await repository.create(name: 'Joseph');
+          when(() => decksDao.create(
+                name: 'Joseph',
+                authorName: null,
+                description: 'This is a string.',
+                iconSymbolId: IconSymbolConstants.flaskId,
+                iconColorId: LookupAndMapperConstants.iconColorBlueId,
+              )).thenAnswer((_) async => deckModel1);
+
+          final deck = await repository.create(
+            name: 'Joseph',
+            authorName: null,
+            description: 'This is a string.',
+            iconSpec: DeckIconSpec(
+              color: DeckIconColor.blue,
+              symbol: DeckIconSymbol.flask,
+            ),
+          );
           expect(deck, deck1);
         },
       );

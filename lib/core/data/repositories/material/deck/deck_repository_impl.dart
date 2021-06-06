@@ -20,6 +20,7 @@
 import '../../../../domain/domain_exceptions.dart';
 import '../../../../domain/entities/material/card/card.dart';
 import '../../../../domain/entities/material/deck/deck.dart';
+import '../../../../domain/entities/material/deck/deck_icon_spec.dart';
 import '../../../../domain/entities/material/entry/entry.dart';
 import '../../../../domain/repositories/material/deck/deck_repository.dart';
 import '../../../data_sources/moor/cards/cards_dao.dart';
@@ -48,8 +49,19 @@ class DeckRepositoryImpl extends DeckRepository {
         _toModel = toModel;
 
   @override
-  Future<Deck> create({required String name}) async {
-    final model = await _decksDao.create(name: name);
+  Future<Deck> create({
+    required String name,
+    required String? authorName,
+    required String? description,
+    required DeckIconSpec iconSpec,
+  }) async {
+    final model = await _decksDao.create(
+      name: name,
+      authorName: authorName,
+      description: description,
+      iconSymbolId: _toModel.mapToIconSymbolId(symbol: iconSpec.symbol),
+      iconColorId: _toModel.mapToIconColorId(color: iconSpec.color),
+    );
 
     return _toEntity(model: model);
   }
