@@ -26,21 +26,10 @@ void main() {
     'DeckIconSpec when constructed',
     () {
       test(
-        'with named `preset` constructor, '
-        'should have symbol `deck` and color `sky`',
-        () {
-          final deckIconSpec = const DeckIconSpec.preset();
-
-          expect(deckIconSpec.color, DeckIconColor.sky);
-          expect(deckIconSpec.symbol, DeckIconSymbol.deck);
-        },
-      );
-
-      test(
         'with unnamed constructor, '
         'should have expected fields',
         () {
-          final deckIconSpec = DeckIconSpec(
+          final deckIconSpec = const DeckIconSpec(
             color: DeckIconColor.blue,
             symbol: DeckIconSymbol.book,
           );
@@ -56,7 +45,7 @@ void main() {
     'DeckIconSpec copyWith, '
     'should return DeckIconSpec with expected altered fields',
     () {
-      final deckIconSpec = DeckIconSpec(
+      final deckIconSpec = const DeckIconSpec(
         color: DeckIconColor.blue,
         symbol: DeckIconSymbol.book,
       );
@@ -81,7 +70,7 @@ void main() {
         'structurally equal DeckIconSpecs, '
         'should return true',
         () {
-          final spec1 = DeckIconSpec(
+          final spec1 = const DeckIconSpec(
             color: DeckIconColor.blue,
             symbol: DeckIconSymbol.flask,
           );
@@ -94,7 +83,7 @@ void main() {
         'structurally unequal DeckIconSpecs, '
         'should return false',
         () {
-          final spec1 = DeckIconSpec(
+          final spec1 = const DeckIconSpec(
             color: DeckIconColor.blue,
             symbol: DeckIconSymbol.flask,
           );

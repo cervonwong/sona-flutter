@@ -20,18 +20,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../constants/default_arg_constants.dart';
-
 @immutable
 class DeckIconSpec extends Equatable {
   final DeckIconColor color;
   final DeckIconSymbol symbol;
 
-  DeckIconSpec({required this.color, required this.symbol});
-
-  const DeckIconSpec.preset()
-      : color = DefaultArgConstants.deckIconSpecColor,
-        symbol = DefaultArgConstants.deckIconSpecSymbol;
+  const DeckIconSpec({
+    required this.color, // Default is DeckIconColor.sky from use case POV.
+    required this.symbol, // Default is DeckIconSymbol.deck from use case POV.
+    // Also see `DefaultArgConstants` for other similar default constants.
+  });
 
   DeckIconSpec copyWith({DeckIconColor? color, DeckIconSymbol? symbol}) {
     return DeckIconSpec(
