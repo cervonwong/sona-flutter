@@ -24,6 +24,7 @@ import 'package:moor/moor.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
+import '../../../constants/icon_symbol_constants.dart';
 import '../../../constants/lookup_and_mapper_constants.dart';
 import 'moor_tables.dart';
 
@@ -63,6 +64,9 @@ class MoorDatabase extends _$MoorDatabase {
             _initializeAlignments(batch);
             _initializeFillColors(batch);
             _initializeHighlightColors(batch);
+            _initializeIconColors(batch);
+            _initializeIconSymbols(batch);
+            // TODO: 6/6/2021 _initializeSymbolSearchTerms.
           },
         );
       },
@@ -110,6 +114,27 @@ class MoorDatabase extends _$MoorDatabase {
       highlightColors,
       LookupAndMapperConstants.highlightColorLookup.entries
           .map((entry) => HighlightColorModel(id: entry.key, name: entry.value))
+          .toList(),
+    );
+  }
+
+  void _initializeIconColors(Batch batch) {
+    batch.insertAll(
+      iconColors,
+      LookupAndMapperConstants.iconColorLookup.entries
+          .map((entry) => IconColorModel(id: entry.key, name: entry.value))
+          .toList(),
+    );
+  }
+
+  void _initializeIconSymbols(Batch batch) {
+    batch.insertAll(
+      iconSymbols,
+      IconSymbolConstants.values
+          .map((metadata) => IconSymbolModel(
+                id: metadata.id,
+                name: metadata.name,
+              ))
           .toList(),
     );
   }
