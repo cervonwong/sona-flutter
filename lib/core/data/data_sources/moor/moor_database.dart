@@ -24,7 +24,7 @@ import 'package:moor/moor.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
-import '../../constants/lookup_constants.dart';
+import '../../../constants/lookup_and_mapper_constants.dart';
 import 'moor_tables.dart';
 
 part 'moor_database.g.dart';
@@ -72,7 +72,7 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeFieldTypes(Batch batch) {
     batch.insertAll(
       fieldTypes,
-      LookupConstants.fieldTypeMap.entries
+      LookupAndMapperConstants.fieldTypeLookup.entries
           .map((entry) => FieldTypeModel(id: entry.key, name: entry.value))
           .toList(),
     );
@@ -81,7 +81,7 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeComponentTypes(Batch batch) {
     batch.insertAll(
       componentTypes,
-      LookupConstants.componentTypeMap.entries
+      LookupAndMapperConstants.componentTypeLookup.entries
           .map((entry) => ComponentTypeModel(id: entry.key, name: entry.value))
           .toList(),
     );
@@ -90,7 +90,7 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeAlignments(Batch batch) {
     batch.insertAll(
       alignments,
-      LookupConstants.alignmentMap.entries
+      LookupAndMapperConstants.alignmentLookup.entries
           .map((entry) => AlignmentModel(id: entry.key, name: entry.value))
           .toList(),
     );
@@ -99,7 +99,7 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeFillColors(Batch batch) {
     batch.insertAll(
       fillColors,
-      LookupConstants.fillColorMap.entries
+      LookupAndMapperConstants.fillColorLookup.entries
           .map((entry) => FillColorModel(id: entry.key, name: entry.value))
           .toList(),
     );
@@ -108,7 +108,7 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeHighlightColors(Batch batch) {
     batch.insertAll(
       highlightColors,
-      LookupConstants.highlightColorMap.entries
+      LookupAndMapperConstants.highlightColorLookup.entries
           .map((entry) => HighlightColorModel(id: entry.key, name: entry.value))
           .toList(),
     );

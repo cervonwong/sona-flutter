@@ -17,22 +17,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// These values will rarely change throughout the lifetime of the app.
-class LookupConstants {
-  LookupConstants._(); // Prevent instantiation with private constructor.
+import '../domain/entities/material/entry_type/components/component.dart';
+import '../domain/entities/material/entry_type/components/text_component.dart';
+import '../domain/entities/material/entry_type/entry_field/entry_field_type.dart';
 
-  // Entity : EntryFieldType
+// These values will rarely change throughout the lifetime of the app.
+class LookupAndMapperConstants {
+  LookupAndMapperConstants._(); // Prevent instantiation with private constructor.
+
+  // Entity : EntryFieldType (enum)
   // Table  : field_types
   static const fieldTypeTextId = 1;
   static const fieldTypeImageId = 2;
   static const fieldTypeTextName = 'TEXT';
   static const fieldTypeImageName = 'IMAGE';
-  static const fieldTypeMap = {
+  static const fieldTypeLookup = {
     fieldTypeTextId: fieldTypeTextName,
     fieldTypeImageId: fieldTypeImageName
   };
+  static const fieldTypeMapping = {
+    fieldTypeTextId: EntryFieldType.text,
+    fieldTypeImageId: EntryFieldType.image,
+  };
 
-  // Entity : ComponentType
+  // Entity : ComponentType (enum)
   // Table  : component_types
   static const componentTypeTextId = 1;
   static const componentTypeImageId = 2;
@@ -40,10 +48,15 @@ class LookupConstants {
   static const componentTypeTextName = 'TEXT';
   static const componentTypeImageName = 'IMAGE';
   static const componentTypeDividerName = 'DIVIDER';
-  static const componentTypeMap = {
+  static const componentTypeLookup = {
     componentTypeTextId: componentTypeTextName,
     componentTypeImageId: componentTypeImageName,
     componentTypeDividerId: componentTypeDividerName,
+  };
+  static const componentTypeMapping = {
+    componentTypeTextId: ComponentType.text,
+    componentTypeImageId: ComponentType.image,
+    componentTypeDividerId: ComponentType.divider,
   };
 
   // Entity : TextComponentAlignment
@@ -56,14 +69,20 @@ class LookupConstants {
   static const alignmentStartName = 'START';
   static const alignmentEndName = 'END';
   static const alignmentJustifyName = 'JUSTIFY';
-  static const alignmentMap = {
+  static const alignmentLookup = {
     alignmentCenterId: alignmentCenterName,
     alignmentStartId: alignmentStartName,
     alignmentEndId: alignmentEndName,
     alignmentJustifyId: alignmentJustifyName,
   };
+  static const alignmentMapping = {
+    alignmentCenterId: TextComponentAlignment.center,
+    alignmentStartId: TextComponentAlignment.start,
+    alignmentEndId: TextComponentAlignment.end,
+    alignmentJustifyId: TextComponentAlignment.justify,
+  };
 
-  // Entity : TextComponentFillColor (TO BE CHANGED)
+  // Entity : TextComponentFillColor
   // Table  : fill_colors
   static const fillColorDefaultId = 1;
   static const fillColorGray4Id = 2;
@@ -99,7 +118,7 @@ class LookupConstants {
   static const fillColorPurpleName = 'PURPLE';
   static const fillColorPinkName = 'PINK';
   static const fillColorBrownName = 'BROWN';
-  static const fillColorMap = {
+  static const fillColorLookup = {
     fillColorDefaultId: fillColorDefaultName,
     fillColorGray4Id: fillColorGray4Name,
     fillColorGray3Id: fillColorGray3Name,
@@ -145,7 +164,7 @@ class LookupConstants {
   static const highlightColorBlueName = 'BLUE';
   static const highlightColorPurpleName = 'PURPLE';
   static const highlightColorPinkName = 'PINK';
-  static const highlightColorMap = {
+  static const highlightColorLookup = {
     highlightColorNoneId: highlightColorNoneName,
     highlightColorRedId: highlightColorRedName,
     highlightColorOrangeId: highlightColorOrangeName,

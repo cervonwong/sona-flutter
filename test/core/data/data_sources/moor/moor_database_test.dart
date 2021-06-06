@@ -20,7 +20,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moor/ffi.dart';
 
-import 'package:sona_flutter/core/data/constants/lookup_constants.dart';
+import 'package:sona_flutter/core/constants/lookup_and_mapper_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
 
 void main() {
@@ -52,11 +52,11 @@ void main() {
             fieldTypeModels,
             [
               FieldTypeModel(
-                  id: LookupConstants.fieldTypeTextId,
-                  name: LookupConstants.fieldTypeTextName),
+                  id: LookupAndMapperConstants.fieldTypeTextId,
+                  name: LookupAndMapperConstants.fieldTypeTextName),
               FieldTypeModel(
-                  id: LookupConstants.fieldTypeImageId,
-                  name: LookupConstants.fieldTypeImageName),
+                  id: LookupAndMapperConstants.fieldTypeImageId,
+                  name: LookupAndMapperConstants.fieldTypeImageName),
             ],
           );
         },
@@ -72,16 +72,16 @@ void main() {
             componentTypeModels,
             [
               ComponentTypeModel(
-                id: LookupConstants.componentTypeTextId,
-                name: LookupConstants.componentTypeTextName,
+                id: LookupAndMapperConstants.componentTypeTextId,
+                name: LookupAndMapperConstants.componentTypeTextName,
               ),
               ComponentTypeModel(
-                id: LookupConstants.componentTypeImageId,
-                name: LookupConstants.componentTypeImageName,
+                id: LookupAndMapperConstants.componentTypeImageId,
+                name: LookupAndMapperConstants.componentTypeImageName,
               ),
               ComponentTypeModel(
-                id: LookupConstants.componentTypeDividerId,
-                name: LookupConstants.componentTypeDividerName,
+                id: LookupAndMapperConstants.componentTypeDividerId,
+                name: LookupAndMapperConstants.componentTypeDividerName,
               ),
             ],
           );
@@ -98,20 +98,20 @@ void main() {
             alignmentModels,
             [
               AlignmentModel(
-                id: LookupConstants.alignmentCenterId,
-                name: LookupConstants.alignmentCenterName,
+                id: LookupAndMapperConstants.alignmentCenterId,
+                name: LookupAndMapperConstants.alignmentCenterName,
               ),
               AlignmentModel(
-                id: LookupConstants.alignmentStartId,
-                name: LookupConstants.alignmentStartName,
+                id: LookupAndMapperConstants.alignmentStartId,
+                name: LookupAndMapperConstants.alignmentStartName,
               ),
               AlignmentModel(
-                id: LookupConstants.alignmentEndId,
-                name: LookupConstants.alignmentEndName,
+                id: LookupAndMapperConstants.alignmentEndId,
+                name: LookupAndMapperConstants.alignmentEndName,
               ),
               AlignmentModel(
-                id: LookupConstants.alignmentJustifyId,
-                name: LookupConstants.alignmentJustifyName,
+                id: LookupAndMapperConstants.alignmentJustifyId,
+                name: LookupAndMapperConstants.alignmentJustifyName,
               ),
             ],
           );
@@ -128,72 +128,72 @@ void main() {
             fillColorModels,
             [
               FillColorModel(
-                id: LookupConstants.fillColorDefaultId,
-                name: LookupConstants.fillColorDefaultName,
+                id: LookupAndMapperConstants.fillColorDefaultId,
+                name: LookupAndMapperConstants.fillColorDefaultName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorGray4Id,
-                name: LookupConstants.fillColorGray4Name,
+                id: LookupAndMapperConstants.fillColorGray4Id,
+                name: LookupAndMapperConstants.fillColorGray4Name,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorGray3Id,
-                name: LookupConstants.fillColorGray3Name,
+                id: LookupAndMapperConstants.fillColorGray3Id,
+                name: LookupAndMapperConstants.fillColorGray3Name,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorGray2Id,
-                name: LookupConstants.fillColorGray2Name,
+                id: LookupAndMapperConstants.fillColorGray2Id,
+                name: LookupAndMapperConstants.fillColorGray2Name,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorGray1Id,
-                name: LookupConstants.fillColorGray1Name,
+                id: LookupAndMapperConstants.fillColorGray1Id,
+                name: LookupAndMapperConstants.fillColorGray1Name,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorRedId,
-                name: LookupConstants.fillColorRedName,
+                id: LookupAndMapperConstants.fillColorRedId,
+                name: LookupAndMapperConstants.fillColorRedName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorOrangeId,
-                name: LookupConstants.fillColorOrangeName,
+                id: LookupAndMapperConstants.fillColorOrangeId,
+                name: LookupAndMapperConstants.fillColorOrangeName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorYellowId,
-                name: LookupConstants.fillColorYellowName,
+                id: LookupAndMapperConstants.fillColorYellowId,
+                name: LookupAndMapperConstants.fillColorYellowName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorLimeId,
-                name: LookupConstants.fillColorLimeName,
+                id: LookupAndMapperConstants.fillColorLimeId,
+                name: LookupAndMapperConstants.fillColorLimeName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorGreenId,
-                name: LookupConstants.fillColorGreenName,
+                id: LookupAndMapperConstants.fillColorGreenId,
+                name: LookupAndMapperConstants.fillColorGreenName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorTealId,
-                name: LookupConstants.fillColorTealName,
+                id: LookupAndMapperConstants.fillColorTealId,
+                name: LookupAndMapperConstants.fillColorTealName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorCyanId,
-                name: LookupConstants.fillColorCyanName,
+                id: LookupAndMapperConstants.fillColorCyanId,
+                name: LookupAndMapperConstants.fillColorCyanName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorSkyId,
-                name: LookupConstants.fillColorSkyName,
+                id: LookupAndMapperConstants.fillColorSkyId,
+                name: LookupAndMapperConstants.fillColorSkyName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorBlueId,
-                name: LookupConstants.fillColorBlueName,
+                id: LookupAndMapperConstants.fillColorBlueId,
+                name: LookupAndMapperConstants.fillColorBlueName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorPurpleId,
-                name: LookupConstants.fillColorPurpleName,
+                id: LookupAndMapperConstants.fillColorPurpleId,
+                name: LookupAndMapperConstants.fillColorPurpleName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorPinkId,
-                name: LookupConstants.fillColorPinkName,
+                id: LookupAndMapperConstants.fillColorPinkId,
+                name: LookupAndMapperConstants.fillColorPinkName,
               ),
               FillColorModel(
-                id: LookupConstants.fillColorBrownId,
-                name: LookupConstants.fillColorBrownName,
+                id: LookupAndMapperConstants.fillColorBrownId,
+                name: LookupAndMapperConstants.fillColorBrownName,
               ),
             ],
           );
@@ -211,52 +211,52 @@ void main() {
             highlightColorModels,
             [
               HighlightColorModel(
-                id: LookupConstants.highlightColorNoneId,
-                name: LookupConstants.highlightColorNoneName,
+                id: LookupAndMapperConstants.highlightColorNoneId,
+                name: LookupAndMapperConstants.highlightColorNoneName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorRedId,
-                name: LookupConstants.highlightColorRedName,
+                id: LookupAndMapperConstants.highlightColorRedId,
+                name: LookupAndMapperConstants.highlightColorRedName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorOrangeId,
-                name: LookupConstants.highlightColorOrangeName,
+                id: LookupAndMapperConstants.highlightColorOrangeId,
+                name: LookupAndMapperConstants.highlightColorOrangeName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorYellowId,
-                name: LookupConstants.highlightColorYellowName,
+                id: LookupAndMapperConstants.highlightColorYellowId,
+                name: LookupAndMapperConstants.highlightColorYellowName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorLimeId,
-                name: LookupConstants.highlightColorLimeName,
+                id: LookupAndMapperConstants.highlightColorLimeId,
+                name: LookupAndMapperConstants.highlightColorLimeName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorGreenId,
-                name: LookupConstants.highlightColorGreenName,
+                id: LookupAndMapperConstants.highlightColorGreenId,
+                name: LookupAndMapperConstants.highlightColorGreenName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorTealId,
-                name: LookupConstants.highlightColorTealName,
+                id: LookupAndMapperConstants.highlightColorTealId,
+                name: LookupAndMapperConstants.highlightColorTealName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorCyanId,
-                name: LookupConstants.highlightColorCyanName,
+                id: LookupAndMapperConstants.highlightColorCyanId,
+                name: LookupAndMapperConstants.highlightColorCyanName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorSkyId,
-                name: LookupConstants.highlightColorSkyName,
+                id: LookupAndMapperConstants.highlightColorSkyId,
+                name: LookupAndMapperConstants.highlightColorSkyName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorBlueId,
-                name: LookupConstants.highlightColorBlueName,
+                id: LookupAndMapperConstants.highlightColorBlueId,
+                name: LookupAndMapperConstants.highlightColorBlueName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorPurpleId,
-                name: LookupConstants.highlightColorPurpleName,
+                id: LookupAndMapperConstants.highlightColorPurpleId,
+                name: LookupAndMapperConstants.highlightColorPurpleName,
               ),
               HighlightColorModel(
-                id: LookupConstants.highlightColorPinkId,
-                name: LookupConstants.highlightColorPinkName,
+                id: LookupAndMapperConstants.highlightColorPinkId,
+                name: LookupAndMapperConstants.highlightColorPinkName,
               ),
             ],
           );
