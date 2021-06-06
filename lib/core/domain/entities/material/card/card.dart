@@ -28,9 +28,9 @@ class Card extends Equatable {
 
   Card({
     required this.id,
-    // TODO: 6/5/2021 Make all properties required.
-    this.isStarred = false,
-    this.isHidden = false,
+    required this.isStarred, // Default is false from use case POV.
+    required this.isHidden, // Default is false from use case POV.
+    // Also see `DefaultArgConstants` for other similar default constants.
   });
 
   Card copyWith({

@@ -29,25 +29,6 @@ void main() {
   CardId mockId1 = MockCardId();
   CardId mockId2 = MockCardId();
 
-  group(
-    'Card when constructed',
-    () {
-      test(
-        'without optional arguments, '
-        'should have expected default fields',
-        () {
-          final card = Card(
-            id: mockId1,
-          );
-
-          expect(card.id, mockId1);
-          expect(card.isStarred, false);
-          expect(card.isHidden, false);
-        },
-      );
-    },
-  );
-
   test(
     'Card copyWith, '
     'should return Card with expected altered fields',
@@ -80,7 +61,7 @@ void main() {
         'logically equal Cards, '
         'should return true',
         () {
-          final card1 = Card(id: mockId1);
+          final card1 = Card(id: mockId1, isStarred: false, isHidden: false);
           final card2 = card1.copyWith(isStarred: true);
           final card3 = card1.copyWith(isHidden: true);
           final card4 = card1.copyWith(isStarred: true, isHidden: true);
@@ -96,8 +77,8 @@ void main() {
         'logically unequal Cards, '
         'should return false',
         () {
-          final card1 = Card(id: mockId1);
-          final card2 = Card(id: mockId2);
+          final card1 = Card(id: mockId1, isStarred: false, isHidden: false);
+          final card2 = Card(id: mockId2, isStarred: false, isHidden: false);
 
           expect(card1, isNot(card2));
         },
