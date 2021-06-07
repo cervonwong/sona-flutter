@@ -24,6 +24,16 @@ import '../../../../domain/entities/material/deck/deck_icon_spec.dart';
 import '../../../data_sources/moor/moor_database.dart';
 
 class DeckModelToEntityMapper {
+  // `IconSymbolConstants.value` is a large list which changes frequently. In
+  // order to make predictable tests, a mocked instance of `IconSymbolConstants`
+  // can be passed into classes which use it. By default, _iconSymbolConstants
+  // is `const IconSymbolConstants()`.
+  final IconSymbolConstants _iconSymbolConstants;
+
+  DeckModelToEntityMapper({
+    IconSymbolConstants iconSymbolConstants = const IconSymbolConstants(),
+  }) : _iconSymbolConstants = iconSymbolConstants;
+
   Deck call({required DeckModel model}) {
     return Deck(
       id: model.id,
@@ -46,7 +56,7 @@ class DeckModelToEntityMapper {
   }
 
   DeckIconSymbol _mapToSymbol({required int id}) {
-    return IconSymbolConstants.values
+    return _iconSymbolConstants.values
         .firstWhere((metadata) => metadata.id == id)
         .symbol;
   }
