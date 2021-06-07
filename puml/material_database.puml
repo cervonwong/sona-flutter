@@ -12,7 +12,7 @@ skinparam linetype ortho
 skinparam shadowing false
 
 header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
-title Relationships of tables in SQLite database for material models.\n
+title Relationships of tables in SQLite database for Sona.\n
 footer Copyright (C) 2020 Cervon Wong
 
 object settings <<standalone>> {
