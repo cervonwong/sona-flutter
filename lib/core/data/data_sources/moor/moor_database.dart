@@ -40,6 +40,10 @@ LazyDatabase _openConnection() {
 
 @UseMoor(tables: kTables)
 class MoorDatabase extends _$MoorDatabase {
+  // `IconSymbolConstants.value` is a large list which changes frequently. In
+  // order to make predictable tests, a mocked instance of `IconSymbolConstants`
+  // can be passed into classes which use it. By default, _iconSymbolConstants
+  // is `const IconSymbolConstants()`.
   final IconSymbolConstants _iconSymbolConstants;
 
   MoorDatabase()
