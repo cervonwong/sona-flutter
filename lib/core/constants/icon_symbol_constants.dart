@@ -44,12 +44,13 @@ class IconSymbolMetadata {
 
 // Not defined with rest of constants in LookupAndMapperConstants because of
 // higher structure complexity.
+@immutable
 class IconSymbolConstants {
-  IconSymbolConstants._(); // Prevent instantiation with private constructor.
+  const IconSymbolConstants();
 
   // Increment this value whenever changes are made to `values`.
   // Also increment the version of any `IconSymbolMetadata`s which has changed.
-  static const currentVersion = 1;
+  final int currentVersion = 1;
 
   // IDs are defined as variables for testing (eliminates magic id numbers)
   static const deckId = 1;
@@ -59,7 +60,7 @@ class IconSymbolConstants {
   // TODO: 6/6/2021 Does this way of structuring data cause slower conversion in
   //  DeckModelToEntityMapper? Does it matter considering the small number of
   //  Decks usually? Is there a faster / better method?
-  static const values = [
+  final List<IconSymbolMetadata> values = const [
     IconSymbolMetadata(
       id: deckId,
       name: 'DECK',
