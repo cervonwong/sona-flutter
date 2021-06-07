@@ -34,6 +34,7 @@ import 'highlight_colors/highlight_colors_table.dart';
 import 'icon_colors/icon_colors_table.dart';
 import 'icon_symbols/icon_symbols_table.dart';
 import 'image_field_data/image_field_data_table.dart';
+import 'settings/settings_table.dart';
 import 'structures/structures_table.dart';
 import 'symbol_search_terms/symbol_search_terms_table.dart';
 import 'tags/tags_table.dart';
@@ -57,6 +58,7 @@ export 'highlight_colors/highlight_colors_table.dart';
 export 'icon_colors/icon_colors_table.dart';
 export 'icon_symbols/icon_symbols_table.dart';
 export 'image_field_data/image_field_data_table.dart';
+export 'settings/settings_table.dart';
 export 'structures/structures_table.dart';
 export 'symbol_search_terms/symbol_search_terms_table.dart';
 export 'tags/tags_table.dart';
@@ -81,6 +83,7 @@ const List<Type> kTables = [
   IconColors,
   IconSymbols,
   ImageFieldData,
+  Settings,
   Structures,
   SymbolSearchTerms,
   Tags,

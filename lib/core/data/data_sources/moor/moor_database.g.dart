@@ -3908,6 +3908,160 @@ class $ImageFieldDataTable extends ImageFieldData
   }
 }
 
+class Setting extends DataClass implements Insertable<Setting> {
+  final int iconSymbolsVersion;
+  Setting({required this.iconSymbolsVersion});
+  factory Setting.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return Setting(
+      iconSymbolsVersion: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}icon_symbols_version'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['icon_symbols_version'] = Variable<int>(iconSymbolsVersion);
+    return map;
+  }
+
+  SettingsCompanion toCompanion(bool nullToAbsent) {
+    return SettingsCompanion(
+      iconSymbolsVersion: Value(iconSymbolsVersion),
+    );
+  }
+
+  factory Setting.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return Setting(
+      iconSymbolsVersion: serializer.fromJson<int>(json['iconSymbolsVersion']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'iconSymbolsVersion': serializer.toJson<int>(iconSymbolsVersion),
+    };
+  }
+
+  Setting copyWith({int? iconSymbolsVersion}) => Setting(
+        iconSymbolsVersion: iconSymbolsVersion ?? this.iconSymbolsVersion,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('Setting(')
+          ..write('iconSymbolsVersion: $iconSymbolsVersion')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf(iconSymbolsVersion.hashCode);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Setting && other.iconSymbolsVersion == this.iconSymbolsVersion);
+}
+
+class SettingsCompanion extends UpdateCompanion<Setting> {
+  final Value<int> iconSymbolsVersion;
+  const SettingsCompanion({
+    this.iconSymbolsVersion = const Value.absent(),
+  });
+  SettingsCompanion.insert({
+    required int iconSymbolsVersion,
+  }) : iconSymbolsVersion = Value(iconSymbolsVersion);
+  static Insertable<Setting> custom({
+    Expression<int>? iconSymbolsVersion,
+  }) {
+    return RawValuesInsertable({
+      if (iconSymbolsVersion != null)
+        'icon_symbols_version': iconSymbolsVersion,
+    });
+  }
+
+  SettingsCompanion copyWith({Value<int>? iconSymbolsVersion}) {
+    return SettingsCompanion(
+      iconSymbolsVersion: iconSymbolsVersion ?? this.iconSymbolsVersion,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (iconSymbolsVersion.present) {
+      map['icon_symbols_version'] = Variable<int>(iconSymbolsVersion.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SettingsCompanion(')
+          ..write('iconSymbolsVersion: $iconSymbolsVersion')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SettingsTable extends Settings with TableInfo<$SettingsTable, Setting> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $SettingsTable(this._db, [this._alias]);
+  final VerificationMeta _iconSymbolsVersionMeta =
+      const VerificationMeta('iconSymbolsVersion');
+  @override
+  late final GeneratedIntColumn iconSymbolsVersion =
+      _constructIconSymbolsVersion();
+  GeneratedIntColumn _constructIconSymbolsVersion() {
+    return GeneratedIntColumn(
+      'icon_symbols_version',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [iconSymbolsVersion];
+  @override
+  $SettingsTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'settings';
+  @override
+  final String actualTableName = 'settings';
+  @override
+  VerificationContext validateIntegrity(Insertable<Setting> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('icon_symbols_version')) {
+      context.handle(
+          _iconSymbolsVersionMeta,
+          iconSymbolsVersion.isAcceptableOrUnknown(
+              data['icon_symbols_version']!, _iconSymbolsVersionMeta));
+    } else if (isInserting) {
+      context.missing(_iconSymbolsVersionMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  @override
+  Setting map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Setting.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $SettingsTable createAlias(String alias) {
+    return $SettingsTable(_db, alias);
+  }
+}
+
 class StructureModel extends DataClass implements Insertable<StructureModel> {
   final int id;
   StructureModel({required this.id});
@@ -5239,6 +5393,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   late final $IconColorsTable iconColors = $IconColorsTable(this);
   late final $IconSymbolsTable iconSymbols = $IconSymbolsTable(this);
   late final $ImageFieldDataTable imageFieldData = $ImageFieldDataTable(this);
+  late final $SettingsTable settings = $SettingsTable(this);
   late final $StructuresTable structures = $StructuresTable(this);
   late final $SymbolSearchTermsTable symbolSearchTerms =
       $SymbolSearchTermsTable(this);
@@ -5266,6 +5421,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         iconColors,
         iconSymbols,
         imageFieldData,
+        settings,
         structures,
         symbolSearchTerms,
         tags,
