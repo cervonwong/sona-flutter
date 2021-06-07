@@ -46,6 +46,11 @@ class MoorDatabase extends _$MoorDatabase {
   // is `const IconSymbolConstants()`.
   final IconSymbolConstants _iconSymbolConstants;
 
+  // Constants used in method in this class `_initializeSettings`.
+  // As min version is 1, setting initial version as 0, forces initialization of
+  // icon_symbols and symbol_search_terms tables.
+  static const initialIconSymbolsVersion = 0;
+
   MoorDatabase()
       : this._internal(
           executor: _openConnection(),
@@ -89,6 +94,7 @@ class MoorDatabase extends _$MoorDatabase {
             _initializeIconColors(batch);
             _initializeIconSymbols(batch);
             // TODO: 6/6/2021 _initializeSymbolSearchTerms.
+            _initializeSettings(batch);
           },
         );
       },
@@ -158,6 +164,13 @@ class MoorDatabase extends _$MoorDatabase {
                 name: metadata.name,
               ))
           .toList(),
+    );
+  }
+
+  void _initializeSettings(Batch batch) {
+    batch.insert(
+      settings,
+      SettingsData(iconSymbolsVersion: initialIconSymbolsVersion),
     );
   }
 }

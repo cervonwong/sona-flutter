@@ -322,6 +322,23 @@ void main() {
           );
         },
       );
+
+      test(
+        'settings table, '
+        'should have initial settings in one record',
+        () async {
+          final settings = await db.select(db.settings).get();
+
+          expect(
+            settings,
+            [
+              SettingsData(
+                iconSymbolsVersion: MoorDatabase.initialIconSymbolsVersion,
+              ),
+            ],
+          );
+        },
+      );
     },
   );
 }
