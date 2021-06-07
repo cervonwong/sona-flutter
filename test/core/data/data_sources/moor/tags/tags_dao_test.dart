@@ -29,11 +29,13 @@ void main() {
   late MoorDatabase db;
 
   setUp(() {
-    db = MoorDatabase.custom(VmDatabase.memory(
-      // Change the logStatement argument to true to print each SQL query for
-      // debugging if needed. This is set to false to not pollute test logs.
-      logStatements: false,
-    ));
+    db = MoorDatabase.test(
+      executor: VmDatabase.memory(
+        // Change the logStatement argument to true to print each SQL query for
+        // debugging if needed. This is set to false to not pollute test logs.
+        logStatements: false,
+      ),
+    );
     dao = TagsDaoImpl(db: db);
   });
 

@@ -40,9 +40,27 @@ LazyDatabase _openConnection() {
 
 @UseMoor(tables: kTables)
 class MoorDatabase extends _$MoorDatabase {
-  MoorDatabase() : super(_openConnection());
+  final IconSymbolConstants _iconSymbolConstants;
 
-  MoorDatabase.custom(QueryExecutor e) : super(e);
+  MoorDatabase()
+      : this._internal(
+          executor: _openConnection(),
+          iconSymbolConstants: const IconSymbolConstants(),
+        );
+
+  MoorDatabase.test({
+    required QueryExecutor executor,
+    IconSymbolConstants iconSymbolConstants = const IconSymbolConstants(),
+  }) : this._internal(
+          executor: executor,
+          iconSymbolConstants: iconSymbolConstants,
+        );
+
+  MoorDatabase._internal({
+    required QueryExecutor executor,
+    required IconSymbolConstants iconSymbolConstants,
+  })  : _iconSymbolConstants = iconSymbolConstants,
+        super(executor);
 
   // Update this each time the database structure (tables) have been changed
   // after this app has been released.
@@ -130,7 +148,7 @@ class MoorDatabase extends _$MoorDatabase {
   void _initializeIconSymbols(Batch batch) {
     batch.insertAll(
       iconSymbols,
-      IconSymbolConstants.values
+      _iconSymbolConstants.values
           .map((metadata) => IconSymbolModel(
                 id: metadata.id,
                 name: metadata.name,

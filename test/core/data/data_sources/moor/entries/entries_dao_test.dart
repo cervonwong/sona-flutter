@@ -30,11 +30,13 @@ void main() {
   late MoorDatabase db;
 
   setUp(() async {
-    db = MoorDatabase.custom(VmDatabase.memory(
-      // Change the logStatement argument to true to print each SQL query for
-      // debugging if needed. This is set to false to not pollute test logs.
-      logStatements: false,
-    ));
+    db = MoorDatabase.test(
+      executor: VmDatabase.memory(
+        // Change the logStatement argument to true to print each SQL query for
+        // debugging if needed. This is set to false to not pollute test logs.
+        logStatements: false,
+      ),
+    );
     // Disables foreign key constraints while testing. Tests for foreign key
     // constraints are in foreign_constraints_test.dart.
     await db.customStatement('PRAGMA foreign_keys = OFF');
