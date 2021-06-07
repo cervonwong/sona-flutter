@@ -3908,13 +3908,13 @@ class $ImageFieldDataTable extends ImageFieldData
   }
 }
 
-class Setting extends DataClass implements Insertable<Setting> {
+class SettingsData extends DataClass implements Insertable<SettingsData> {
   final int iconSymbolsVersion;
-  Setting({required this.iconSymbolsVersion});
-  factory Setting.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+  SettingsData({required this.iconSymbolsVersion});
+  factory SettingsData.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return Setting(
+    return SettingsData(
       iconSymbolsVersion: const IntType().mapFromDatabaseResponse(
           data['${effectivePrefix}icon_symbols_version'])!,
     );
@@ -3932,10 +3932,10 @@ class Setting extends DataClass implements Insertable<Setting> {
     );
   }
 
-  factory Setting.fromJson(Map<String, dynamic> json,
+  factory SettingsData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return Setting(
+    return SettingsData(
       iconSymbolsVersion: serializer.fromJson<int>(json['iconSymbolsVersion']),
     );
   }
@@ -3947,12 +3947,12 @@ class Setting extends DataClass implements Insertable<Setting> {
     };
   }
 
-  Setting copyWith({int? iconSymbolsVersion}) => Setting(
+  SettingsData copyWith({int? iconSymbolsVersion}) => SettingsData(
         iconSymbolsVersion: iconSymbolsVersion ?? this.iconSymbolsVersion,
       );
   @override
   String toString() {
-    return (StringBuffer('Setting(')
+    return (StringBuffer('SettingsData(')
           ..write('iconSymbolsVersion: $iconSymbolsVersion')
           ..write(')'))
         .toString();
@@ -3963,10 +3963,11 @@ class Setting extends DataClass implements Insertable<Setting> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Setting && other.iconSymbolsVersion == this.iconSymbolsVersion);
+      (other is SettingsData &&
+          other.iconSymbolsVersion == this.iconSymbolsVersion);
 }
 
-class SettingsCompanion extends UpdateCompanion<Setting> {
+class SettingsCompanion extends UpdateCompanion<SettingsData> {
   final Value<int> iconSymbolsVersion;
   const SettingsCompanion({
     this.iconSymbolsVersion = const Value.absent(),
@@ -3974,7 +3975,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
   SettingsCompanion.insert({
     required int iconSymbolsVersion,
   }) : iconSymbolsVersion = Value(iconSymbolsVersion);
-  static Insertable<Setting> custom({
+  static Insertable<SettingsData> custom({
     Expression<int>? iconSymbolsVersion,
   }) {
     return RawValuesInsertable({
@@ -4007,7 +4008,8 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
   }
 }
 
-class $SettingsTable extends Settings with TableInfo<$SettingsTable, Setting> {
+class $SettingsTable extends Settings
+    with TableInfo<$SettingsTable, SettingsData> {
   final GeneratedDatabase _db;
   final String? _alias;
   $SettingsTable(this._db, [this._alias]);
@@ -4033,7 +4035,7 @@ class $SettingsTable extends Settings with TableInfo<$SettingsTable, Setting> {
   @override
   final String actualTableName = 'settings';
   @override
-  VerificationContext validateIntegrity(Insertable<Setting> instance,
+  VerificationContext validateIntegrity(Insertable<SettingsData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -4051,8 +4053,8 @@ class $SettingsTable extends Settings with TableInfo<$SettingsTable, Setting> {
   @override
   Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
   @override
-  Setting map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Setting.fromData(data, _db,
+  SettingsData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return SettingsData.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 

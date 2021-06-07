@@ -19,8 +19,8 @@
 
 import 'package:moor/moor.dart';
 
-// No @DataClassName override for now.
 // No PK. Standalone table. Single-row table.
+@DataClassName('SettingsData') // Note that name does not end with `Model`.
 class Settings extends Table {
   IntColumn get iconSymbolsVersion => integer()();
 }
