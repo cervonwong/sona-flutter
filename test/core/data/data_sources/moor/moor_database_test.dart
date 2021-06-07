@@ -264,6 +264,64 @@ void main() {
           );
         },
       );
+
+      test(
+        'icon_colors table, '
+        'should have expected records',
+        () async {
+          final iconColorModels = await db.select(db.iconColors).get();
+
+          expect(
+            iconColorModels,
+            [
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorRedId,
+                name: LookupAndMapperConstants.iconColorRedName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorOrangeId,
+                name: LookupAndMapperConstants.iconColorOrangeName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorYellowId,
+                name: LookupAndMapperConstants.iconColorYellowName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorLimeId,
+                name: LookupAndMapperConstants.iconColorLimeName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorGreenId,
+                name: LookupAndMapperConstants.iconColorGreenName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorTealId,
+                name: LookupAndMapperConstants.iconColorTealName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorCyanId,
+                name: LookupAndMapperConstants.iconColorCyanName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorSkyId,
+                name: LookupAndMapperConstants.iconColorSkyName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorBlueId,
+                name: LookupAndMapperConstants.iconColorBlueName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorPurpleId,
+                name: LookupAndMapperConstants.iconColorPurpleName,
+              ),
+              IconColorModel(
+                id: LookupAndMapperConstants.iconColorPinkId,
+                name: LookupAndMapperConstants.iconColorPinkName,
+              ),
+            ],
+          );
+        },
+      );
     },
   );
 }
