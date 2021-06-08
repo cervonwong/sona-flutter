@@ -46,7 +46,7 @@ void main() {
     () {
       test(
         'field_types table, '
-        'should have expected records',
+        'should have initialized records',
         () async {
           final fieldTypeModels = await db.select(db.fieldTypes).get();
 
@@ -66,7 +66,7 @@ void main() {
 
       test(
         'component_types table, '
-        'should have expected records',
+        'should have initialized records',
         () async {
           final componentTypeModels = await db.select(db.componentTypes).get();
 
@@ -92,7 +92,7 @@ void main() {
 
       test(
         'alignments table, '
-        'should have expected records',
+        'should have initialized records',
         () async {
           final alignmentModels = await db.select(db.alignments).get();
 
@@ -122,7 +122,7 @@ void main() {
 
       test(
         'fill_colors table, '
-        'should have expected records',
+        'should have initialized records',
         () async {
           final fillColorModels = await db.select(db.fillColors).get();
 
@@ -204,7 +204,7 @@ void main() {
 
       test(
         'highlight_colors table, '
-        'should have expected records',
+        'should have initialized records',
         () async {
           final highlightColorModels =
               await db.select(db.highlightColors).get();
@@ -267,7 +267,7 @@ void main() {
 
       test(
         'icon_colors table, '
-        'should have expected records',
+        'should have initialized records',
         () async {
           final iconColorModels = await db.select(db.iconColors).get();
 
