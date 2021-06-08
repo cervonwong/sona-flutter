@@ -60,5 +60,6 @@ enum DeckIconSymbol {
   deck,
   book,
   flask,
+  leafTwo,
   // TODO: 6/5/2021 Fill up.
 }
