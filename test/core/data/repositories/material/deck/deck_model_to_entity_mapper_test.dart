@@ -56,7 +56,7 @@ void main() {
               lastEditedDateTime: DateTime(2020),
               authorName: null,
               description: null,
-              iconSpec: DeckIconSpec(
+              iconSpec: const DeckIconSpec(
                 color: DeckIconColor.blue,
                 symbol: DeckIconSymbol.book,
               ),
@@ -90,7 +90,7 @@ void main() {
               lastEditedDateTime: DateTime(2020),
               authorName: 'C3rv0N w0ng',
               description: 'made this.',
-              iconSpec: DeckIconSpec(
+              iconSpec: const DeckIconSpec(
                 color: DeckIconColor.orange,
                 symbol: DeckIconSymbol.flask,
               ),

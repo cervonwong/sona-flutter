@@ -133,7 +133,7 @@ void main() {
             name: 'Joseph',
             authorName: null,
             description: 'This is a string.',
-            iconSpec: DeckIconSpec(
+            iconSpec: const DeckIconSpec(
               color: DeckIconColor.blue,
               symbol: DeckIconSymbol.flask,
             ),
