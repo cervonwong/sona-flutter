@@ -56,6 +56,8 @@ enum DeckIconColor {
   pink,
 }
 
+// TODO: 8/6/2021 Should this be shifted? Else defining new symbols need to be
+//  updated in two places.
 enum DeckIconSymbol {
   deck,
   book,
