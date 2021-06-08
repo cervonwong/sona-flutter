@@ -17,22 +17,34 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:moor/ffi.dart';
 
+import 'package:sona_flutter/core/constants/icon_symbol_constants.dart';
 import 'package:sona_flutter/core/constants/lookup_and_mapper_constants.dart';
 import 'package:sona_flutter/core/data/data_sources/moor/moor_database.dart';
+import 'package:sona_flutter/core/domain/entities/material/deck/deck_icon_spec.dart';
+
+class MockIconSymbolConstants extends Mock implements IconSymbolConstants {}
 
 void main() {
+  late IconSymbolConstants iconSymbolConstants;
   late MoorDatabase db;
 
   setUp(() {
+    iconSymbolConstants = MockIconSymbolConstants();
+    when(() => iconSymbolConstants.currentVersion).thenReturn(1);
+    when(() => iconSymbolConstants.values).thenReturn([]);
+
     db = MoorDatabase.test(
       executor: VmDatabase.memory(
         // Change the logStatement argument to true to print each SQL query for
         // debugging if needed. This is set to false to not pollute test logs.
         logStatements: false,
       ),
+      iconSymbolConstants: iconSymbolConstants,
     );
   });
 
@@ -324,6 +336,31 @@ void main() {
       );
 
       test(
+        'icon_symbols table, '
+        'should have initialized records',
+        () async {
+          when(() => iconSymbolConstants.values).thenReturn(
+            _iconSymbolsValuesV1,
+          );
+          db = MoorDatabase.test(
+            executor: VmDatabase.memory(logStatements: false),
+            iconSymbolConstants: iconSymbolConstants,
+          );
+
+          final fieldTypeModels = await db.select(db.iconSymbols).get();
+
+          expect(
+            fieldTypeModels,
+            [
+              IconSymbolModel(id: 1, name: 'DECK'),
+              IconSymbolModel(id: 2, name: 'BOOK'),
+              IconSymbolModel(id: 3, name: 'FLASK'),
+            ],
+          );
+        },
+      );
+
+      test(
         'settings table, '
         'should have initial settings in one record',
         () async {
@@ -342,3 +379,49 @@ void main() {
     },
   );
 }
+
+const _iconSymbolsValuesV1 = [
+  IconSymbolMetadata(
+    id: 1,
+    name: 'DECK',
+    version: 1,
+    symbol: DeckIconSymbol.deck,
+    iconData: FluentIcons.style_guide_24_regular,
+    searchTerms: [
+      'deck',
+      'style',
+      'style guide',
+    ],
+  ),
+  IconSymbolMetadata(
+    id: 2,
+    name: 'BOOK',
+    version: 1,
+    symbol: DeckIconSymbol.book,
+    iconData: FluentIcons.book_24_regular,
+    searchTerms: [
+      'book',
+      'diary',
+      'documentation',
+      'journal',
+      'library',
+      'read',
+    ],
+  ),
+  IconSymbolMetadata(
+    id: 3,
+    name: 'FLASK',
+    version: 1,
+    symbol: DeckIconSymbol.flask,
+    iconData: FluentIcons.beaker_24_regular,
+    searchTerms: [
+      'biology',
+      'beaker',
+      'chemistry',
+      'experimental',
+      'flask',
+      'labs',
+      'science',
+    ],
+  ),
+];
