@@ -339,9 +339,15 @@ void main() {
         'icon_symbols table, '
         'should have initialized records',
         () async {
+          // Default iconSymbolConstants mock in `setUp` above returns an
+          // empty list. Update mocking to return some values for this test.
           when(() => iconSymbolConstants.values).thenReturn(
             _iconSymbolsValuesV1,
           );
+
+          await db.close(); // Close the default db defined in `setUp` above.
+          // Create own db to pass in the iconSymbolConstants with updated
+          // mocking.
           db = MoorDatabase.test(
             executor: VmDatabase.memory(logStatements: false),
             iconSymbolConstants: iconSymbolConstants,
