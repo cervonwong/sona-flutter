@@ -23,7 +23,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 import '../domain/entities/material/deck/deck_icon_spec.dart';
 
-// TODO: 8/6/2021 Add field `isActive` to handle symbol deletion.
 @immutable
 class IconSymbolMetadata {
   final int id;
