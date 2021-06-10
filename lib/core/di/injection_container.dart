@@ -19,16 +19,16 @@
 
 import 'package:get_it/get_it.dart';
 
-import 'core/data/data_sources/moor/cards/cards_dao.dart';
-import 'core/data/data_sources/moor/decks/decks_dao.dart';
-import 'core/data/data_sources/moor/entries/entries_dao.dart';
-import 'core/data/data_sources/moor/moor_database.dart';
-import 'core/data/repositories/material/deck/deck_entity_to_model_mapper.dart';
-import 'core/data/repositories/material/deck/deck_model_to_entity_mapper.dart';
-import 'core/data/repositories/material/deck/deck_repository_impl.dart';
-import 'core/domain/repositories/material/deck/deck_repository.dart';
-import 'core/utils/system_time.dart';
-import 'features/deck/deck_injection_container.dart' as deck;
+import '../../features/deck/di/deck_injection_container.dart' as deck;
+import '../data/data_sources/moor/cards/cards_dao.dart';
+import '../data/data_sources/moor/decks/decks_dao.dart';
+import '../data/data_sources/moor/entries/entries_dao.dart';
+import '../data/data_sources/moor/moor_database.dart';
+import '../data/repositories/material/deck/deck_entity_to_model_mapper.dart';
+import '../data/repositories/material/deck/deck_model_to_entity_mapper.dart';
+import '../data/repositories/material/deck/deck_repository_impl.dart';
+import '../domain/repositories/material/deck/deck_repository.dart';
+import '../utils/system_time.dart';
 
 void configureDependencies() {
   final getIt = GetIt.instance;

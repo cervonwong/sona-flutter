@@ -20,8 +20,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'core/presentation/constants/color_constants.dart';
-import 'core/presentation/constants/widget_constants.dart';
+import '../constants/color_constants.dart';
+import '../constants/widget_constants.dart';
 
 ThemeData createLightTheme() {
   final baseTextTheme = _createBaseTextTheme();
