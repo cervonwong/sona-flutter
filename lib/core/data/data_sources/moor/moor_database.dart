@@ -93,7 +93,7 @@ class MoorDatabase extends _$MoorDatabase {
             _initializeHighlightColors(batch);
             _initializeIconColors(batch);
             _initializeIconSymbols(batch);
-            // TODO: 6/6/2021 _initializeSymbolSearchTerms.
+            _initializeSymbolSearchTerms(batch);
             _initializeSettings(batch);
           },
         );
@@ -165,6 +165,22 @@ class MoorDatabase extends _$MoorDatabase {
               ))
           .toList(),
     );
+  }
+
+  void _initializeSymbolSearchTerms(Batch batch) {
+    // For the symbol_search_terms table, things get a little more complicated
+    // to initialize. A simple `.map` won't work. (At least idk how to do it.)
+    var symbolSearchTermModels = <SymbolSearchTermModel>[];
+
+    for (var metadata in _iconSymbolConstants.values) {
+      for (var term in metadata.searchTerms) {
+        symbolSearchTermModels.add(
+          SymbolSearchTermModel(iconSymbolId: metadata.id, term: term),
+        );
+      }
+    }
+
+    batch.insertAll(symbolSearchTerms, symbolSearchTermModels);
   }
 
   void _initializeSettings(Batch batch) {

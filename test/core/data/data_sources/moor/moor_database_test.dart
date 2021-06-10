@@ -367,6 +367,51 @@ void main() {
       );
 
       test(
+        'symbol_search_terms table, '
+        'should have initialized records',
+        () async {
+          // Default iconSymbolConstants mock in `setUp` above returns an
+          // empty list. Update mocking to return some values for this test.
+          when(() => iconSymbolConstants.values).thenReturn(
+            _iconSymbolsValuesV1,
+          );
+
+          await db.close(); // Close the default db defined in `setUp` above.
+          // Create own db to pass in the iconSymbolConstants with updated
+          // mocking.
+          db = MoorDatabase.test(
+            executor: VmDatabase.memory(logStatements: false),
+            iconSymbolConstants: iconSymbolConstants,
+          );
+
+          final symbolSearchTermModels =
+              await db.select(db.symbolSearchTerms).get();
+
+          expect(
+            symbolSearchTermModels,
+            [
+              SymbolSearchTermModel(iconSymbolId: 1, term: 'deck'),
+              SymbolSearchTermModel(iconSymbolId: 1, term: 'style'),
+              SymbolSearchTermModel(iconSymbolId: 1, term: 'style guide'),
+              SymbolSearchTermModel(iconSymbolId: 2, term: 'book'),
+              SymbolSearchTermModel(iconSymbolId: 2, term: 'diary'),
+              SymbolSearchTermModel(iconSymbolId: 2, term: 'documentation'),
+              SymbolSearchTermModel(iconSymbolId: 2, term: 'journal'),
+              SymbolSearchTermModel(iconSymbolId: 2, term: 'library'),
+              SymbolSearchTermModel(iconSymbolId: 2, term: 'read'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'biology'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'beaker'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'chemistry'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'experimental'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'flask'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'labs'),
+              SymbolSearchTermModel(iconSymbolId: 3, term: 'science'),
+            ],
+          );
+        },
+      );
+
+      test(
         'settings table, '
         'should have initial settings in one record',
         () async {
