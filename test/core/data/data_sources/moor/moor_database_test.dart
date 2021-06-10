@@ -384,6 +384,40 @@ void main() {
       );
     },
   );
+
+  // TODO: 6/10/2021 See https://github.com/simolus3/moor/discussions/1255.
+  //  Decided to switch over to using schemaVersion. So integration tests need
+  //  to be moved over to another file specifically for testing migrations, and
+  //  can only be tested when there is a reason to do migrations, such as during
+  //  production phase.
+  group(
+    'MoorDatabase when IconSymbolConstants is revised, '
+    'should update tables accordingly',
+    () {
+      test(
+        'icon_symbols table when the name of a symbol changes, '
+        'should update name of expected record',
+        () async {
+          // Default iconSymbolConstants mock in `setUp` above returns an
+          // empty list. Update mocking to return some values for this test.
+          when(() => iconSymbolConstants.values).thenReturn(
+            _iconSymbolsValuesV1,
+          );
+
+          await db.close(); // Close the default db defined in `setUp` above.
+          // Create own db to pass in the iconSymbolConstants with updated
+          // mocking.
+          db = MoorDatabase.test(
+            executor: VmDatabase.memory(logStatements: false),
+            iconSymbolConstants: iconSymbolConstants,
+          );
+
+          await db.close(); // Close the db when updating iconSymbolConstants.
+        },
+      );
+    },
+    skip: true,
+  );
 }
 
 const _iconSymbolsValuesV1 = [
@@ -430,4 +464,116 @@ const _iconSymbolsValuesV1 = [
       'science',
     ],
   ),
+];
+
+// Name of symbol 'BOOK' changed to 'LIVRE'.
+// ignore: unused_element
+const _iconSymbolsValuesV2 = [
+  IconSymbolMetadata(
+    id: 1,
+    name: 'DECK',
+    version: 1,
+    symbol: DeckIconSymbol.deck,
+    iconData: FluentIcons.style_guide_24_regular,
+    searchTerms: [
+      'deck',
+      'style',
+      'style guide',
+    ],
+  ),
+  IconSymbolMetadata(
+    id: 2,
+    name: 'LIVRE',
+    // Changed from 'BOOK'.
+    version: 2,
+    // Incremented.
+    symbol: DeckIconSymbol.book,
+    iconData: FluentIcons.book_24_regular,
+    searchTerms: [
+      'book',
+      'diary',
+      'documentation',
+      'journal',
+      'library',
+      'read',
+    ],
+  ),
+  IconSymbolMetadata(
+    id: 3,
+    name: 'FLASK',
+    version: 1,
+    symbol: DeckIconSymbol.flask,
+    iconData: FluentIcons.beaker_24_regular,
+    searchTerms: [
+      'biology',
+      'beaker',
+      'chemistry',
+      'experimental',
+      'flask',
+      'labs',
+      'science',
+    ],
+  ),
+];
+
+// Added symbol 'LEAF TWO'.
+// ignore: unused_element
+const _iconSymbolsValuesV3 = [
+  IconSymbolMetadata(
+    id: 1,
+    name: 'DECK',
+    version: 1,
+    symbol: DeckIconSymbol.deck,
+    iconData: FluentIcons.style_guide_24_regular,
+    searchTerms: [
+      'deck',
+      'style',
+      'style guide',
+    ],
+  ),
+  IconSymbolMetadata(
+    id: 2,
+    name: 'LIVRE',
+    version: 2,
+    symbol: DeckIconSymbol.book,
+    iconData: FluentIcons.book_24_regular,
+    searchTerms: [
+      'book',
+      'diary',
+      'documentation',
+      'journal',
+      'library',
+      'read',
+    ],
+  ),
+  IconSymbolMetadata(
+    id: 3,
+    name: 'FLASK',
+    version: 1,
+    symbol: DeckIconSymbol.flask,
+    iconData: FluentIcons.beaker_24_regular,
+    searchTerms: [
+      'biology',
+      'beaker',
+      'chemistry',
+      'experimental',
+      'flask',
+      'labs',
+      'science',
+    ],
+  ),
+  IconSymbolMetadata(
+      // Added.
+      id: 4,
+      name: 'LEAF TWO',
+      version: 3,
+      symbol: DeckIconSymbol.leafTwo,
+      iconData: FluentIcons.leaf_two_24_regular,
+      searchTerms: [
+        'biology'
+            'leaf',
+        'leaves',
+        'nature',
+        'plants',
+      ]),
 ];
