@@ -353,10 +353,10 @@ void main() {
             iconSymbolConstants: iconSymbolConstants,
           );
 
-          final fieldTypeModels = await db.select(db.iconSymbols).get();
+          final iconSymbolModels = await db.select(db.iconSymbols).get();
 
           expect(
-            fieldTypeModels,
+            iconSymbolModels,
             [
               IconSymbolModel(id: 1, name: 'DECK'),
               IconSymbolModel(id: 2, name: 'BOOK'),
