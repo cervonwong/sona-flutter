@@ -12,7 +12,7 @@ skinparam shadowing false
 
 header This diagram is part of a visualisation of the code written for Sona.\n View the project at github.com/cervonwong/sona-flutter.
 title Dependencies between UI layers of the app.\n
-footer Copyright (C) 2020 Cervon Wong
+footer Copyright (C) 2020, 2021 Cervon Wong
 
 object "Screens"          as screens
 object "Shared widgets"   as shared

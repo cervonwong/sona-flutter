@@ -63,10 +63,6 @@ class DecksDaoImpl extends DatabaseAccessor<MoorDatabase>
   /// a deck with the same name in the database. In production,
   /// [InvalidDataException] or [SqliteException] may be thrown. You must check
   /// inputs before passing them to this method.
-  // TODO: 6/6/2021 Do not have default argument! Make authorName, description,
-  //  iconSymbolId, and iconColorId required! It depends on the USE CASE (?) to
-  //  take in input from the presentation layer and determine if default values
-  //  are needed.
   @override
   Future<DeckModel> create({
     required String name,
