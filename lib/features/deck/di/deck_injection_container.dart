@@ -21,7 +21,7 @@ import 'package:get_it/get_it.dart';
 
 import '../domain/use_cases/create_deck.dart';
 import '../domain/use_cases/delete_deck.dart';
-import '../domain/use_cases/get_all_decks.dart';
+import '../domain/use_cases/get_deck_list.dart';
 import '../domain/use_cases/validate_deck_name.dart';
 import '../presentation/bloc/deck_list_bloc.dart';
 
@@ -30,7 +30,7 @@ void configureDependencies(GetIt getIt) {
   getIt.registerFactory(() {
     return DeckListBloc(
       createDeck: getIt(),
-      getAllDecks: getIt(),
+      getDeckList: getIt(),
       deleteDeck: getIt(),
       validateDeckName: getIt(),
     );
@@ -38,7 +38,7 @@ void configureDependencies(GetIt getIt) {
 
   // Domain > Use cases
   getIt.registerLazySingleton(() => CreateDeck(repository: getIt()));
-  getIt.registerLazySingleton(() => GetAllDecks(repository: getIt()));
+  getIt.registerLazySingleton(() => GetDeckList(repository: getIt()));
   getIt.registerLazySingleton(() => DeleteDeck(repository: getIt()));
   getIt.registerLazySingleton(() => ValidateDeckName(repository: getIt()));
 }

@@ -24,10 +24,10 @@ import '../../../../core/domain/repositories/material/deck/deck_repository.dart'
 //  aggregates Deck, some calculated dueCardCount etc, DeckIconSpec.
 //  DeckListInfoRequest not needed.
 
-class GetAllDecks {
+class GetDeckList {
   final DeckRepository _repository;
 
-  GetAllDecks({required DeckRepository repository}) : _repository = repository;
+  GetDeckList({required DeckRepository repository}) : _repository = repository;
 
   Future<List<Deck>> call() async => _repository.getAll();
 }

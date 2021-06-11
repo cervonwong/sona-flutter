@@ -22,7 +22,7 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/core/domain/repositories/material/deck/deck_repository.dart';
-import 'package:sona_flutter/features/deck/domain/use_cases/get_all_decks.dart';
+import 'package:sona_flutter/features/deck/domain/use_cases/get_deck_list.dart';
 
 class MockDeckRepositoryImpl extends Mock implements DeckRepository {}
 
@@ -30,23 +30,23 @@ class MockDeck extends Mock implements Deck {}
 
 void main() {
   late DeckRepository repository;
-  late GetAllDecks getAllDecks;
+  late GetDeckList getDeckList;
   late Deck deck1, deck2;
 
   setUp(() {
     repository = MockDeckRepositoryImpl();
-    getAllDecks = GetAllDecks(repository: repository);
+    getDeckList = GetDeckList(repository: repository);
     deck1 = MockDeck();
     deck2 = MockDeck();
   });
 
   test(
-    'GetAllDecks when called, '
+    'GetDeckList when called, '
     'should return expected List of Decks',
     () async {
       when(() => repository.getAll()).thenAnswer((_) async => [deck1, deck2]);
 
-      final decks = await getAllDecks();
+      final decks = await getDeckList();
       expect(decks, [deck1, deck2]);
     },
   );

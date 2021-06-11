@@ -23,13 +23,13 @@ import 'package:mocktail/mocktail.dart';
 import 'package:sona_flutter/core/domain/entities/material/deck/deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/create_deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/delete_deck.dart';
-import 'package:sona_flutter/features/deck/domain/use_cases/get_all_decks.dart';
+import 'package:sona_flutter/features/deck/domain/use_cases/get_deck_list.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.dart';
 import 'package:sona_flutter/features/deck/presentation/bloc/deck_list_bloc.dart';
 
 class MockCreateDeck extends Mock implements CreateDeck {}
 
-class MockGetAllDecks extends Mock implements GetAllDecks {}
+class MockGetDeckList extends Mock implements GetDeckList {}
 
 class MockDeleteDeck extends Mock implements DeleteDeck {}
 
@@ -39,7 +39,7 @@ class MockDeck extends Mock implements Deck {}
 
 void main() {
   late CreateDeck createDeck;
-  late GetAllDecks getAllDecks;
+  late GetDeckList getDeckList;
   late DeleteDeck deleteDeck;
   late ValidateDeckName validateDeckName;
 
@@ -49,7 +49,7 @@ void main() {
 
   setUp(() {
     createDeck = MockCreateDeck();
-    getAllDecks = MockGetAllDecks();
+    getDeckList = MockGetDeckList();
     deleteDeck = MockDeleteDeck();
     validateDeckName = MockValidateDeckName();
     deck1 = MockDeck();
@@ -57,7 +57,7 @@ void main() {
     deck3 = MockDeck();
     bloc = DeckListBloc(
       createDeck: createDeck,
-      getAllDecks: getAllDecks,
+      getDeckList: getDeckList,
       deleteDeck: deleteDeck,
       validateDeckName: validateDeckName,
     );
@@ -77,7 +77,7 @@ void main() {
     'DeckListBloc when added DeckInitialized, '
     'should emit expected state with list of decks',
     () async {
-      when(() => getAllDecks()).thenAnswer((_) async => [deck1, deck2, deck3]);
+      when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2, deck3]);
 
       bloc.add(DeckListInitialized());
 
@@ -91,7 +91,7 @@ void main() {
         ),
       );
 
-      verify(() => getAllDecks()).called(1);
+      verify(() => getDeckList()).called(1);
     },
   );
 
@@ -106,7 +106,7 @@ void main() {
           when(() => validateDeckName(name: 'Valid'))
               .thenAnswer((_) async => DeckNameValidationResult.valid);
 
-          when(() => getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -122,7 +122,7 @@ void main() {
           when(() => createDeck(name: 'Valid')).thenAnswer(
             (_) async => deck3,
           );
-          when(() => getAllDecks())
+          when(() => getDeckList())
               .thenAnswer((_) async => [deck1, deck2, deck3]);
 
           bloc.add(const DeckCreated(name: 'Valid'));
@@ -138,15 +138,15 @@ void main() {
 
           verifyInOrder(
             [
-              () => getAllDecks(),
+              () => getDeckList(),
               () => validateDeckName(name: 'Valid'),
               () => createDeck(name: 'Valid'),
-              () => getAllDecks(),
+              () => getDeckList(),
             ],
           );
           verifyNoMoreInteractions(createDeck);
           verifyNoMoreInteractions(validateDeckName);
-          verifyNoMoreInteractions(getAllDecks);
+          verifyNoMoreInteractions(getDeckList);
         },
       );
 
@@ -158,7 +158,7 @@ void main() {
           when(() => validateDeckName(name: ''))
               .thenAnswer((_) async => DeckNameValidationResult.nameIsEmpty);
 
-          when(() => getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -184,7 +184,7 @@ void main() {
 
           verifyInOrder(
             [
-              () => getAllDecks(),
+              () => getDeckList(),
               () => validateDeckName(name: ''),
             ],
           );
@@ -202,7 +202,7 @@ void main() {
             (_) async => DeckNameValidationResult.nameAlreadyExists,
           );
 
-          when(() => getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -228,7 +228,7 @@ void main() {
 
           verifyInOrder(
             [
-              () => getAllDecks(),
+              () => getDeckList(),
               () => validateDeckName(name: 'Duplicate'),
             ],
           );
@@ -246,7 +246,7 @@ void main() {
             (_) async => DeckNameValidationResult.nameIsMultiline,
           );
 
-          when(() => getAllDecks()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -272,7 +272,7 @@ void main() {
 
           verifyInOrder(
             [
-              () => getAllDecks(),
+              () => getDeckList(),
               () => validateDeckName(name: 'Hey\nHo'),
             ],
           );
@@ -287,7 +287,7 @@ void main() {
     'DeckBloc when added DeckInitialized then DeckDeleted, '
     'should emit expected state with list of decks with deleted deck',
     () async {
-      when(() => getAllDecks()).thenAnswer((_) async => [deck1, deck2, deck3]);
+      when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2, deck3]);
       when(() => deleteDeck(deck: deck2)).thenAnswer(
         (_) async {},
       );
@@ -308,11 +308,11 @@ void main() {
 
       verifyInOrder(
         [
-          () => getAllDecks(),
+          () => getDeckList(),
           () => deleteDeck(deck: deck2),
         ],
       );
-      verifyNoMoreInteractions(getAllDecks);
+      verifyNoMoreInteractions(getDeckList);
       verifyNoMoreInteractions(deleteDeck);
     },
   );

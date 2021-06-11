@@ -26,7 +26,7 @@ import '../../../../core/domain/entities/material/deck/deck.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../domain/use_cases/create_deck.dart';
 import '../../domain/use_cases/delete_deck.dart';
-import '../../domain/use_cases/get_all_decks.dart';
+import '../../domain/use_cases/get_deck_list.dart';
 import '../../domain/use_cases/validate_deck_name.dart';
 
 part 'deck_list_event.dart';
@@ -35,7 +35,7 @@ part 'deck_list_state.dart';
 
 class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
   final CreateDeck _createDeck;
-  final GetAllDecks _getAllDecks;
+  final GetDeckList _getDeckList;
   final DeleteDeck _deleteDeck;
   final ValidateDeckName _validateDeckName;
 
@@ -44,11 +44,11 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
 
   DeckListBloc({
     required CreateDeck createDeck,
-    required GetAllDecks getAllDecks,
+    required GetDeckList getDeckList,
     required DeleteDeck deleteDeck,
     required ValidateDeckName validateDeckName,
   })  : _createDeck = createDeck,
-        _getAllDecks = getAllDecks,
+        _getDeckList = getDeckList,
         _deleteDeck = deleteDeck,
         _validateDeckName = validateDeckName,
         super(DeckListInitial());
@@ -71,7 +71,7 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
   }
 
   Stream<DeckListState> _mapDeckListInitializedToState() async* {
-    _decks = await _getAllDecks();
+    _decks = await _getDeckList();
     yield DeckListLoaded(decks: _decks);
   }
 
@@ -80,7 +80,7 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
     switch (validationResult) {
       case DeckNameValidationResult.valid:
         await _createDeck(name: event.name);
-        _decks = await _getAllDecks();
+        _decks = await _getDeckList();
         yield DeckListLoaded(decks: _decks);
         break;
       case DeckNameValidationResult.nameIsEmpty:
