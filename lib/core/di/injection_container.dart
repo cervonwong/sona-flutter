@@ -28,6 +28,7 @@ import '../data/repositories/material/deck/deck_entity_to_model_mapper.dart';
 import '../data/repositories/material/deck/deck_model_to_entity_mapper.dart';
 import '../data/repositories/material/deck/deck_repository_impl.dart';
 import '../domain/repositories/material/deck/deck_repository.dart';
+import '../presentation/change_notifiers/color_notifier.dart';
 import '../utils/system_time.dart';
 
 void configureDependencies() {
@@ -61,4 +62,7 @@ void configureDependencies() {
   getIt.registerLazySingleton(() => DeckEntityToModelMapper());
 
   getIt.registerLazySingleton(() => MoorDatabase());
+
+  // Core > Presentation > Change Notifiers
+  getIt.registerLazySingleton(() => ColorNotifier(theme: ColorTheme.light));
 }

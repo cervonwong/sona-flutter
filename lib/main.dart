@@ -19,6 +19,7 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import 'core/di/injection_container.dart' as injection_container;
@@ -29,8 +30,8 @@ import 'screens/home_screen.dart';
 void main() {
   injection_container.configureDependencies();
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => ColorNotifier(theme: ColorTheme.light),
+    ChangeNotifierProvider<ColorNotifier>(
+      create: (_) => GetIt.instance(),
       child: SonaApp(),
     ),
   );
