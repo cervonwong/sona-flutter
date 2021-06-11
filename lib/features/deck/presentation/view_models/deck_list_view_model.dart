@@ -61,16 +61,16 @@ class DeckListViewModelItem extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    name,
-    hasEntries,
-    subtitle,
-    dueText,
-    iconData,
-    iconColor,
-    hasCompletedRevision,
-    progressPercent,
-  ];
+        id,
+        name,
+        hasEntries,
+        subtitle,
+        dueText,
+        iconData,
+        iconColor,
+        hasCompletedRevision,
+        progressPercent,
+      ];
 }
 
 enum DeckListViewModelItemIconColor {
@@ -86,4 +86,3 @@ enum DeckListViewModelItemIconColor {
   purple,
   pink,
 }
-
