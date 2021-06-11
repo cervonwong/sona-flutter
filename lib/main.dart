@@ -30,7 +30,7 @@ void main() {
   injection_container.configureDependencies();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => ColorNotifier(theme: ColorTheme.light),
+      create: (_) => ColorNotifier(theme: ColorTheme.light),
       child: SonaApp(),
     ),
   );
