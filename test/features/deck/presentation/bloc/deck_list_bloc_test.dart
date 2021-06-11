@@ -26,6 +26,8 @@ import 'package:sona_flutter/features/deck/domain/use_cases/delete_deck.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/get_deck_list.dart';
 import 'package:sona_flutter/features/deck/domain/use_cases/validate_deck_name.dart';
 import 'package:sona_flutter/features/deck/presentation/bloc/deck_list_bloc.dart';
+import 'package:sona_flutter/features/deck/presentation/bloc/to_deck_list_view_model_mapper.dart';
+import 'package:sona_flutter/features/deck/presentation/view_models/deck_list_view_model.dart';
 
 class MockCreateDeck extends Mock implements CreateDeck {}
 
@@ -35,15 +37,22 @@ class MockDeleteDeck extends Mock implements DeleteDeck {}
 
 class MockValidateDeckName extends Mock implements ValidateDeckName {}
 
+class MockToDeckListViewModelMapper extends Mock
+    implements ToDeckListViewModelMapper {}
+
 class MockDeck extends Mock implements Deck {}
+
+class MockDeckListViewModel extends Mock implements DeckListViewModel {}
 
 void main() {
   late CreateDeck createDeck;
   late GetDeckList getDeckList;
   late DeleteDeck deleteDeck;
   late ValidateDeckName validateDeckName;
+  late ToDeckListViewModelMapper toDeckListViewModel;
 
   late Deck deck1, deck2, deck3;
+  late DeckListViewModel deckListViewModel1, deckListViewModel2;
 
   late DeckListBloc bloc;
 
@@ -52,14 +61,18 @@ void main() {
     getDeckList = MockGetDeckList();
     deleteDeck = MockDeleteDeck();
     validateDeckName = MockValidateDeckName();
+    toDeckListViewModel = MockToDeckListViewModelMapper();
     deck1 = MockDeck();
     deck2 = MockDeck();
     deck3 = MockDeck();
+    deckListViewModel1 = MockDeckListViewModel();
+    deckListViewModel2 = MockDeckListViewModel();
     bloc = DeckListBloc(
       createDeck: createDeck,
       getDeckList: getDeckList,
       deleteDeck: deleteDeck,
       validateDeckName: validateDeckName,
+      toDeckListViewModel: toDeckListViewModel,
     );
   });
 
@@ -78,6 +91,8 @@ void main() {
     'should emit expected state with list of decks',
     () async {
       when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2, deck3]);
+      when(() => toDeckListViewModel(decks: [deck1, deck2, deck3]))
+          .thenReturn(deckListViewModel1);
 
       bloc.add(DeckListInitialized());
 
@@ -86,7 +101,7 @@ void main() {
         emitsInOrder(
           [
             DeckListLoading(),
-            DeckListLoaded(decks: [deck1, deck2, deck3]),
+            DeckListLoaded(deckListViewModel: deckListViewModel1),
           ],
         ),
       );
@@ -107,6 +122,8 @@ void main() {
               .thenAnswer((_) async => DeckNameValidationResult.valid);
 
           when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => toDeckListViewModel(decks: [deck1, deck2]))
+              .thenReturn(deckListViewModel1);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -114,7 +131,7 @@ void main() {
             emitsInOrder(
               [
                 DeckListLoading(),
-                DeckListLoaded(decks: [deck1, deck2]),
+                DeckListLoaded(deckListViewModel: deckListViewModel1),
               ],
             ),
           );
@@ -124,6 +141,8 @@ void main() {
           );
           when(() => getDeckList())
               .thenAnswer((_) async => [deck1, deck2, deck3]);
+          when(() => toDeckListViewModel(decks: [deck1, deck2, deck3]))
+              .thenReturn(deckListViewModel2);
 
           bloc.add(const DeckCreated(name: 'Valid'));
           await expectLater(
@@ -131,7 +150,7 @@ void main() {
             emitsInOrder(
               [
                 DeckListLoading(),
-                DeckListLoaded(decks: [deck1, deck2, deck3]),
+                DeckListLoaded(deckListViewModel: deckListViewModel2),
               ],
             ),
           );
@@ -159,6 +178,8 @@ void main() {
               .thenAnswer((_) async => DeckNameValidationResult.nameIsEmpty);
 
           when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => toDeckListViewModel(decks: [deck1, deck2]))
+              .thenReturn(deckListViewModel1);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -166,7 +187,7 @@ void main() {
             emitsInOrder(
               [
                 DeckListLoading(),
-                DeckListLoaded(decks: [deck1, deck2]),
+                DeckListLoaded(deckListViewModel: deckListViewModel1),
               ],
             ),
           );
@@ -203,6 +224,8 @@ void main() {
           );
 
           when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => toDeckListViewModel(decks: [deck1, deck2]))
+              .thenReturn(deckListViewModel1);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -210,7 +233,7 @@ void main() {
             emitsInOrder(
               [
                 DeckListLoading(),
-                DeckListLoaded(decks: [deck1, deck2]),
+                DeckListLoaded(deckListViewModel: deckListViewModel1),
               ],
             ),
           );
@@ -247,6 +270,8 @@ void main() {
           );
 
           when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2]);
+          when(() => toDeckListViewModel(decks: [deck1, deck2]))
+              .thenReturn(deckListViewModel1);
 
           bloc.add(DeckListInitialized());
           await expectLater(
@@ -254,7 +279,7 @@ void main() {
             emitsInOrder(
               [
                 DeckListLoading(),
-                DeckListLoaded(decks: [deck1, deck2]),
+                DeckListLoaded(deckListViewModel: deckListViewModel1),
               ],
             ),
           );
@@ -288,6 +313,11 @@ void main() {
     'should emit expected state with list of decks with deleted deck',
     () async {
       when(() => getDeckList()).thenAnswer((_) async => [deck1, deck2, deck3]);
+      when(() => toDeckListViewModel(decks: [deck1, deck2, deck3]))
+          .thenReturn(deckListViewModel1);
+      when(() => toDeckListViewModel(decks: [deck1, deck3]))
+          .thenReturn(deckListViewModel2);
+
       when(() => deleteDeck(deck: deck2)).thenAnswer(
         (_) async {},
       );
@@ -299,9 +329,9 @@ void main() {
         emitsInOrder(
           [
             DeckListLoading(),
-            DeckListLoaded(decks: [deck1, deck2, deck3]),
+            DeckListLoaded(deckListViewModel: deckListViewModel1),
             DeckListLoading(),
-            DeckListLoaded(decks: [deck1, deck3]),
+            DeckListLoaded(deckListViewModel: deckListViewModel2),
           ],
         ),
       );
