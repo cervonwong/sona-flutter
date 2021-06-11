@@ -60,6 +60,9 @@ class IconSymbolConstants {
   // TODO: 6/6/2021 Does this way of structuring data cause slower conversion in
   //  DeckModelToEntityMapper? Does it matter considering the small number of
   //  Decks usually? Is there a faster / better method?
+  // TODO: 6/11/2021 This has dependencies on domain entities and ui stuff:
+  //  fluentui_system_icons, and database, mappers, and BLoC depend on this,
+  //  can this be split better for Clean Architecture?
   final List<IconSymbolMetadata> values = const [
     IconSymbolMetadata(
       id: deckId,
