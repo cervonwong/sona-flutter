@@ -57,7 +57,7 @@ class OldHomeScreen extends StatelessWidget {
                   DeckListTitleBar(),
                   const SizedBox(height: 8.0),
                   if (state is DeckListLoaded)
-                    ...(state).decks.map<DeckListTile>(
+                    ...(state).deckListViewModel.items.map<DeckListTile>(
                           (deck) => DeckListTile(
                             deckName: deck.name,
                             totalCardCount: 1000,

@@ -34,12 +34,12 @@ class DeckListLoading extends DeckListState {}
 
 /// The state when the BLoC has successfully loaded the list of decks.
 class DeckListLoaded extends DeckListState {
-  final List<Deck> decks;
+  final DeckListViewModel deckListViewModel;
 
-  const DeckListLoaded({required this.decks});
+  const DeckListLoaded({required this.deckListViewModel});
 
   @override
-  List<Object> get props => [decks];
+  List<Object> get props => [deckListViewModel];
 
   @override
   bool get stringify => true;
