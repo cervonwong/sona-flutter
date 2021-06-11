@@ -2294,15 +2294,15 @@ class $EntryTypesTable extends EntryTypes
   }
 }
 
-class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
+class FieldInputModel extends DataClass implements Insertable<FieldInputModel> {
   final int entryId;
   final int fieldSpecId;
-  FieldDatumModel({required this.entryId, required this.fieldSpecId});
-  factory FieldDatumModel.fromData(
+  FieldInputModel({required this.entryId, required this.fieldSpecId});
+  factory FieldInputModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return FieldDatumModel(
+    return FieldInputModel(
       entryId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       fieldSpecId: const IntType()
@@ -2317,17 +2317,17 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
     return map;
   }
 
-  FieldDataCompanion toCompanion(bool nullToAbsent) {
-    return FieldDataCompanion(
+  FieldInputsCompanion toCompanion(bool nullToAbsent) {
+    return FieldInputsCompanion(
       entryId: Value(entryId),
       fieldSpecId: Value(fieldSpecId),
     );
   }
 
-  factory FieldDatumModel.fromJson(Map<String, dynamic> json,
+  factory FieldInputModel.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return FieldDatumModel(
+    return FieldInputModel(
       entryId: serializer.fromJson<int>(json['entryId']),
       fieldSpecId: serializer.fromJson<int>(json['fieldSpecId']),
     );
@@ -2341,13 +2341,13 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
     };
   }
 
-  FieldDatumModel copyWith({int? entryId, int? fieldSpecId}) => FieldDatumModel(
+  FieldInputModel copyWith({int? entryId, int? fieldSpecId}) => FieldInputModel(
         entryId: entryId ?? this.entryId,
         fieldSpecId: fieldSpecId ?? this.fieldSpecId,
       );
   @override
   String toString() {
-    return (StringBuffer('FieldDatumModel(')
+    return (StringBuffer('FieldInputModel(')
           ..write('entryId: $entryId, ')
           ..write('fieldSpecId: $fieldSpecId')
           ..write(')'))
@@ -2359,24 +2359,24 @@ class FieldDatumModel extends DataClass implements Insertable<FieldDatumModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is FieldDatumModel &&
+      (other is FieldInputModel &&
           other.entryId == this.entryId &&
           other.fieldSpecId == this.fieldSpecId);
 }
 
-class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
+class FieldInputsCompanion extends UpdateCompanion<FieldInputModel> {
   final Value<int> entryId;
   final Value<int> fieldSpecId;
-  const FieldDataCompanion({
+  const FieldInputsCompanion({
     this.entryId = const Value.absent(),
     this.fieldSpecId = const Value.absent(),
   });
-  FieldDataCompanion.insert({
+  FieldInputsCompanion.insert({
     required int entryId,
     required int fieldSpecId,
   })  : entryId = Value(entryId),
         fieldSpecId = Value(fieldSpecId);
-  static Insertable<FieldDatumModel> custom({
+  static Insertable<FieldInputModel> custom({
     Expression<int>? entryId,
     Expression<int>? fieldSpecId,
   }) {
@@ -2386,8 +2386,9 @@ class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
     });
   }
 
-  FieldDataCompanion copyWith({Value<int>? entryId, Value<int>? fieldSpecId}) {
-    return FieldDataCompanion(
+  FieldInputsCompanion copyWith(
+      {Value<int>? entryId, Value<int>? fieldSpecId}) {
+    return FieldInputsCompanion(
       entryId: entryId ?? this.entryId,
       fieldSpecId: fieldSpecId ?? this.fieldSpecId,
     );
@@ -2407,7 +2408,7 @@ class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
 
   @override
   String toString() {
-    return (StringBuffer('FieldDataCompanion(')
+    return (StringBuffer('FieldInputsCompanion(')
           ..write('entryId: $entryId, ')
           ..write('fieldSpecId: $fieldSpecId')
           ..write(')'))
@@ -2415,11 +2416,11 @@ class FieldDataCompanion extends UpdateCompanion<FieldDatumModel> {
   }
 }
 
-class $FieldDataTable extends FieldData
-    with TableInfo<$FieldDataTable, FieldDatumModel> {
+class $FieldInputsTable extends FieldInputs
+    with TableInfo<$FieldInputsTable, FieldInputModel> {
   final GeneratedDatabase _db;
   final String? _alias;
-  $FieldDataTable(this._db, [this._alias]);
+  $FieldInputsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
   @override
   late final GeneratedIntColumn entryId = _constructEntryId();
@@ -2440,13 +2441,13 @@ class $FieldDataTable extends FieldData
   @override
   List<GeneratedColumn> get $columns => [entryId, fieldSpecId];
   @override
-  $FieldDataTable get asDslTable => this;
+  $FieldInputsTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'field_data';
+  String get $tableName => _alias ?? 'field_inputs';
   @override
-  final String actualTableName = 'field_data';
+  final String actualTableName = 'field_inputs';
   @override
-  VerificationContext validateIntegrity(Insertable<FieldDatumModel> instance,
+  VerificationContext validateIntegrity(Insertable<FieldInputModel> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -2470,14 +2471,14 @@ class $FieldDataTable extends FieldData
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
-  FieldDatumModel map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return FieldDatumModel.fromData(data, _db,
+  FieldInputModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return FieldInputModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $FieldDataTable createAlias(String alias) {
-    return $FieldDataTable(_db, alias);
+  $FieldInputsTable createAlias(String alias) {
+    return $FieldInputsTable(_db, alias);
   }
 }
 
@@ -3668,20 +3669,20 @@ class $IconSymbolsTable extends IconSymbols
   }
 }
 
-class ImageFieldDatumModel extends DataClass
-    implements Insertable<ImageFieldDatumModel> {
+class ImageFieldInputModel extends DataClass
+    implements Insertable<ImageFieldInputModel> {
   final int entryId;
   final int fieldSpecId;
   final int imageId;
-  ImageFieldDatumModel(
+  ImageFieldInputModel(
       {required this.entryId,
       required this.fieldSpecId,
       required this.imageId});
-  factory ImageFieldDatumModel.fromData(
+  factory ImageFieldInputModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return ImageFieldDatumModel(
+    return ImageFieldInputModel(
       entryId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       fieldSpecId: const IntType()
@@ -3699,18 +3700,18 @@ class ImageFieldDatumModel extends DataClass
     return map;
   }
 
-  ImageFieldDataCompanion toCompanion(bool nullToAbsent) {
-    return ImageFieldDataCompanion(
+  ImageFieldInputsCompanion toCompanion(bool nullToAbsent) {
+    return ImageFieldInputsCompanion(
       entryId: Value(entryId),
       fieldSpecId: Value(fieldSpecId),
       imageId: Value(imageId),
     );
   }
 
-  factory ImageFieldDatumModel.fromJson(Map<String, dynamic> json,
+  factory ImageFieldInputModel.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return ImageFieldDatumModel(
+    return ImageFieldInputModel(
       entryId: serializer.fromJson<int>(json['entryId']),
       fieldSpecId: serializer.fromJson<int>(json['fieldSpecId']),
       imageId: serializer.fromJson<int>(json['imageId']),
@@ -3726,16 +3727,16 @@ class ImageFieldDatumModel extends DataClass
     };
   }
 
-  ImageFieldDatumModel copyWith(
+  ImageFieldInputModel copyWith(
           {int? entryId, int? fieldSpecId, int? imageId}) =>
-      ImageFieldDatumModel(
+      ImageFieldInputModel(
         entryId: entryId ?? this.entryId,
         fieldSpecId: fieldSpecId ?? this.fieldSpecId,
         imageId: imageId ?? this.imageId,
       );
   @override
   String toString() {
-    return (StringBuffer('ImageFieldDatumModel(')
+    return (StringBuffer('ImageFieldInputModel(')
           ..write('entryId: $entryId, ')
           ..write('fieldSpecId: $fieldSpecId, ')
           ..write('imageId: $imageId')
@@ -3749,29 +3750,29 @@ class ImageFieldDatumModel extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ImageFieldDatumModel &&
+      (other is ImageFieldInputModel &&
           other.entryId == this.entryId &&
           other.fieldSpecId == this.fieldSpecId &&
           other.imageId == this.imageId);
 }
 
-class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
+class ImageFieldInputsCompanion extends UpdateCompanion<ImageFieldInputModel> {
   final Value<int> entryId;
   final Value<int> fieldSpecId;
   final Value<int> imageId;
-  const ImageFieldDataCompanion({
+  const ImageFieldInputsCompanion({
     this.entryId = const Value.absent(),
     this.fieldSpecId = const Value.absent(),
     this.imageId = const Value.absent(),
   });
-  ImageFieldDataCompanion.insert({
+  ImageFieldInputsCompanion.insert({
     required int entryId,
     required int fieldSpecId,
     required int imageId,
   })  : entryId = Value(entryId),
         fieldSpecId = Value(fieldSpecId),
         imageId = Value(imageId);
-  static Insertable<ImageFieldDatumModel> custom({
+  static Insertable<ImageFieldInputModel> custom({
     Expression<int>? entryId,
     Expression<int>? fieldSpecId,
     Expression<int>? imageId,
@@ -3783,9 +3784,9 @@ class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
     });
   }
 
-  ImageFieldDataCompanion copyWith(
+  ImageFieldInputsCompanion copyWith(
       {Value<int>? entryId, Value<int>? fieldSpecId, Value<int>? imageId}) {
-    return ImageFieldDataCompanion(
+    return ImageFieldInputsCompanion(
       entryId: entryId ?? this.entryId,
       fieldSpecId: fieldSpecId ?? this.fieldSpecId,
       imageId: imageId ?? this.imageId,
@@ -3809,7 +3810,7 @@ class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
 
   @override
   String toString() {
-    return (StringBuffer('ImageFieldDataCompanion(')
+    return (StringBuffer('ImageFieldInputsCompanion(')
           ..write('entryId: $entryId, ')
           ..write('fieldSpecId: $fieldSpecId, ')
           ..write('imageId: $imageId')
@@ -3818,11 +3819,11 @@ class ImageFieldDataCompanion extends UpdateCompanion<ImageFieldDatumModel> {
   }
 }
 
-class $ImageFieldDataTable extends ImageFieldData
-    with TableInfo<$ImageFieldDataTable, ImageFieldDatumModel> {
+class $ImageFieldInputsTable extends ImageFieldInputs
+    with TableInfo<$ImageFieldInputsTable, ImageFieldInputModel> {
   final GeneratedDatabase _db;
   final String? _alias;
-  $ImageFieldDataTable(this._db, [this._alias]);
+  $ImageFieldInputsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
   @override
   late final GeneratedIntColumn entryId = _constructEntryId();
@@ -3860,14 +3861,14 @@ class $ImageFieldDataTable extends ImageFieldData
   @override
   List<GeneratedColumn> get $columns => [entryId, fieldSpecId, imageId];
   @override
-  $ImageFieldDataTable get asDslTable => this;
+  $ImageFieldInputsTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'image_field_data';
+  String get $tableName => _alias ?? 'image_field_inputs';
   @override
-  final String actualTableName = 'image_field_data';
+  final String actualTableName = 'image_field_inputs';
   @override
   VerificationContext validateIntegrity(
-      Insertable<ImageFieldDatumModel> instance,
+      Insertable<ImageFieldInputModel> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -3897,14 +3898,14 @@ class $ImageFieldDataTable extends ImageFieldData
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
-  ImageFieldDatumModel map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return ImageFieldDatumModel.fromData(data, _db,
+  ImageFieldInputModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return ImageFieldInputModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $ImageFieldDataTable createAlias(String alias) {
-    return $ImageFieldDataTable(_db, alias);
+  $ImageFieldInputsTable createAlias(String alias) {
+    return $ImageFieldInputsTable(_db, alias);
   }
 }
 
@@ -5135,20 +5136,20 @@ class $TextComponentsTable extends TextComponents
   }
 }
 
-class TextFieldDatumModel extends DataClass
-    implements Insertable<TextFieldDatumModel> {
+class TextFieldInputModel extends DataClass
+    implements Insertable<TextFieldInputModel> {
   final int entryId;
   final int fieldSpecId;
   final String rawText;
-  TextFieldDatumModel(
+  TextFieldInputModel(
       {required this.entryId,
       required this.fieldSpecId,
       required this.rawText});
-  factory TextFieldDatumModel.fromData(
+  factory TextFieldInputModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return TextFieldDatumModel(
+    return TextFieldInputModel(
       entryId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}entry_id'])!,
       fieldSpecId: const IntType()
@@ -5166,18 +5167,18 @@ class TextFieldDatumModel extends DataClass
     return map;
   }
 
-  TextFieldDataCompanion toCompanion(bool nullToAbsent) {
-    return TextFieldDataCompanion(
+  TextFieldInputsCompanion toCompanion(bool nullToAbsent) {
+    return TextFieldInputsCompanion(
       entryId: Value(entryId),
       fieldSpecId: Value(fieldSpecId),
       rawText: Value(rawText),
     );
   }
 
-  factory TextFieldDatumModel.fromJson(Map<String, dynamic> json,
+  factory TextFieldInputModel.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return TextFieldDatumModel(
+    return TextFieldInputModel(
       entryId: serializer.fromJson<int>(json['entryId']),
       fieldSpecId: serializer.fromJson<int>(json['fieldSpecId']),
       rawText: serializer.fromJson<String>(json['rawText']),
@@ -5193,16 +5194,16 @@ class TextFieldDatumModel extends DataClass
     };
   }
 
-  TextFieldDatumModel copyWith(
+  TextFieldInputModel copyWith(
           {int? entryId, int? fieldSpecId, String? rawText}) =>
-      TextFieldDatumModel(
+      TextFieldInputModel(
         entryId: entryId ?? this.entryId,
         fieldSpecId: fieldSpecId ?? this.fieldSpecId,
         rawText: rawText ?? this.rawText,
       );
   @override
   String toString() {
-    return (StringBuffer('TextFieldDatumModel(')
+    return (StringBuffer('TextFieldInputModel(')
           ..write('entryId: $entryId, ')
           ..write('fieldSpecId: $fieldSpecId, ')
           ..write('rawText: $rawText')
@@ -5216,29 +5217,29 @@ class TextFieldDatumModel extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is TextFieldDatumModel &&
+      (other is TextFieldInputModel &&
           other.entryId == this.entryId &&
           other.fieldSpecId == this.fieldSpecId &&
           other.rawText == this.rawText);
 }
 
-class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
+class TextFieldInputsCompanion extends UpdateCompanion<TextFieldInputModel> {
   final Value<int> entryId;
   final Value<int> fieldSpecId;
   final Value<String> rawText;
-  const TextFieldDataCompanion({
+  const TextFieldInputsCompanion({
     this.entryId = const Value.absent(),
     this.fieldSpecId = const Value.absent(),
     this.rawText = const Value.absent(),
   });
-  TextFieldDataCompanion.insert({
+  TextFieldInputsCompanion.insert({
     required int entryId,
     required int fieldSpecId,
     required String rawText,
   })  : entryId = Value(entryId),
         fieldSpecId = Value(fieldSpecId),
         rawText = Value(rawText);
-  static Insertable<TextFieldDatumModel> custom({
+  static Insertable<TextFieldInputModel> custom({
     Expression<int>? entryId,
     Expression<int>? fieldSpecId,
     Expression<String>? rawText,
@@ -5250,9 +5251,9 @@ class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
     });
   }
 
-  TextFieldDataCompanion copyWith(
+  TextFieldInputsCompanion copyWith(
       {Value<int>? entryId, Value<int>? fieldSpecId, Value<String>? rawText}) {
-    return TextFieldDataCompanion(
+    return TextFieldInputsCompanion(
       entryId: entryId ?? this.entryId,
       fieldSpecId: fieldSpecId ?? this.fieldSpecId,
       rawText: rawText ?? this.rawText,
@@ -5276,7 +5277,7 @@ class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
 
   @override
   String toString() {
-    return (StringBuffer('TextFieldDataCompanion(')
+    return (StringBuffer('TextFieldInputsCompanion(')
           ..write('entryId: $entryId, ')
           ..write('fieldSpecId: $fieldSpecId, ')
           ..write('rawText: $rawText')
@@ -5285,11 +5286,11 @@ class TextFieldDataCompanion extends UpdateCompanion<TextFieldDatumModel> {
   }
 }
 
-class $TextFieldDataTable extends TextFieldData
-    with TableInfo<$TextFieldDataTable, TextFieldDatumModel> {
+class $TextFieldInputsTable extends TextFieldInputs
+    with TableInfo<$TextFieldInputsTable, TextFieldInputModel> {
   final GeneratedDatabase _db;
   final String? _alias;
-  $TextFieldDataTable(this._db, [this._alias]);
+  $TextFieldInputsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
   @override
   late final GeneratedIntColumn entryId = _constructEntryId();
@@ -5327,14 +5328,14 @@ class $TextFieldDataTable extends TextFieldData
   @override
   List<GeneratedColumn> get $columns => [entryId, fieldSpecId, rawText];
   @override
-  $TextFieldDataTable get asDslTable => this;
+  $TextFieldInputsTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'text_field_data';
+  String get $tableName => _alias ?? 'text_field_inputs';
   @override
-  final String actualTableName = 'text_field_data';
+  final String actualTableName = 'text_field_inputs';
   @override
   VerificationContext validateIntegrity(
-      Insertable<TextFieldDatumModel> instance,
+      Insertable<TextFieldInputModel> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -5364,14 +5365,14 @@ class $TextFieldDataTable extends TextFieldData
   @override
   Set<GeneratedColumn> get $primaryKey => {entryId, fieldSpecId};
   @override
-  TextFieldDatumModel map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return TextFieldDatumModel.fromData(data, _db,
+  TextFieldInputModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return TextFieldInputModel.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $TextFieldDataTable createAlias(String alias) {
-    return $TextFieldDataTable(_db, alias);
+  $TextFieldInputsTable createAlias(String alias) {
+    return $TextFieldInputsTable(_db, alias);
   }
 }
 
@@ -5386,7 +5387,7 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
   late final $EntriesTable entries = $EntriesTable(this);
   late final $EntriesTagsTable entriesTags = $EntriesTagsTable(this);
   late final $EntryTypesTable entryTypes = $EntryTypesTable(this);
-  late final $FieldDataTable fieldData = $FieldDataTable(this);
+  late final $FieldInputsTable fieldInputs = $FieldInputsTable(this);
   late final $FieldSpecsTable fieldSpecs = $FieldSpecsTable(this);
   late final $FieldTypesTable fieldTypes = $FieldTypesTable(this);
   late final $FillColorsTable fillColors = $FillColorsTable(this);
@@ -5394,14 +5395,16 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
       $HighlightColorsTable(this);
   late final $IconColorsTable iconColors = $IconColorsTable(this);
   late final $IconSymbolsTable iconSymbols = $IconSymbolsTable(this);
-  late final $ImageFieldDataTable imageFieldData = $ImageFieldDataTable(this);
+  late final $ImageFieldInputsTable imageFieldInputs =
+      $ImageFieldInputsTable(this);
   late final $SettingsTable settings = $SettingsTable(this);
   late final $StructuresTable structures = $StructuresTable(this);
   late final $SymbolSearchTermsTable symbolSearchTerms =
       $SymbolSearchTermsTable(this);
   late final $TagsTable tags = $TagsTable(this);
   late final $TextComponentsTable textComponents = $TextComponentsTable(this);
-  late final $TextFieldDataTable textFieldData = $TextFieldDataTable(this);
+  late final $TextFieldInputsTable textFieldInputs =
+      $TextFieldInputsTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -5415,19 +5418,19 @@ abstract class _$MoorDatabase extends GeneratedDatabase {
         entries,
         entriesTags,
         entryTypes,
-        fieldData,
+        fieldInputs,
         fieldSpecs,
         fieldTypes,
         fillColors,
         highlightColors,
         iconColors,
         iconSymbols,
-        imageFieldData,
+        imageFieldInputs,
         settings,
         structures,
         symbolSearchTerms,
         tags,
         textComponents,
-        textFieldData
+        textFieldInputs
       ];
 }

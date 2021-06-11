@@ -19,8 +19,8 @@
 
 import 'package:moor/moor.dart';
 
-@DataClassName('ImageFieldDatumModel')
-class ImageFieldData extends Table {
+@DataClassName('ImageFieldInputModel')
+class ImageFieldInputs extends Table {
   IntColumn get entryId => integer()();
 
   IntColumn get fieldSpecId => integer()();
@@ -34,7 +34,7 @@ class ImageFieldData extends Table {
         // Creates a composite foreign key constraint.
         // See https://sqlite.org/foreignkeys.html#fk_composite.
         'FOREIGN KEY(entry_id, field_spec_id) '
-            'REFERENCES field_data(entry_id, field_spec_id)',
+            'REFERENCES field_inputs(entry_id, field_spec_id)',
       ];
 
   @override

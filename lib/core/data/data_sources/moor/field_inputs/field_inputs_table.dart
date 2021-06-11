@@ -19,8 +19,8 @@
 
 import 'package:moor/moor.dart';
 
-@DataClassName('FieldDatumModel')
-class FieldData extends Table {
+@DataClassName('FieldInputModel')
+class FieldInputs extends Table {
   IntColumn get entryId => integer().customConstraint(
         'NOT NULL REFERENCES entries(id)',
       )();

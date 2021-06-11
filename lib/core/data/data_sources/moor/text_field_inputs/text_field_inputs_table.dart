@@ -19,8 +19,8 @@
 
 import 'package:moor/moor.dart';
 
-@DataClassName('TextFieldDatumModel')
-class TextFieldData extends Table {
+@DataClassName('TextFieldInputModel')
+class TextFieldInputs extends Table {
   IntColumn get entryId => integer()();
 
   IntColumn get fieldSpecId => integer()();
@@ -32,7 +32,7 @@ class TextFieldData extends Table {
         // Creates a composite foreign key constraint.
         // See https://sqlite.org/foreignkeys.html#fk_composite.
         'FOREIGN KEY(entry_id, field_spec_id) '
-            'REFERENCES field_data(entry_id, field_spec_id)',
+            'REFERENCES field_inputs(entry_id, field_spec_id)',
       ];
 
   @override
