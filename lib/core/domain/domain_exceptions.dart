@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// TODO: 6/11/2021 Implement this for repositories.
+
 import '../exceptions/exceptions.dart';
 
 /// Exception thrown by repositories failing to retrieve the entity to be
