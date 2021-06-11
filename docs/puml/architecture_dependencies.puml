@@ -19,8 +19,11 @@ package Features <<Node>> {
 		object "Widgets" as w {
 			*See diagram on UI layer dependencies
 		}
+		object "View Model" as vm {
+		    Dumb model
+		}
 		object "State Management" as s {
-			BLoC, ChangeNotifier...
+			BLoC, ChangeNotifier, Entity<->VM mapper...
 		}
 	}
 	
@@ -59,9 +62,10 @@ package Core <<Node>> {
 }
 
 w  ....>  s
-w  ....>  e
+w  ....>  vm
 s  ....>  u
 s  ....>  e
+s  ....>  vm
 u  ....>  e
 u  ....>  ir
 ir ....>  e
