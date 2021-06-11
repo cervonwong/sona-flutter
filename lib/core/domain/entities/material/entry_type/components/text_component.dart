@@ -29,7 +29,7 @@ class TextComponent extends Component with EquatableMixin {
 
   TextComponent({
     required String name,
-    required this.data,
+    required this.data, // TODO: 6/11/2021 Rename this in the future...
     this.style = const TextComponentStyle(),
   }) : super(name: name, type: ComponentType.text);
 
