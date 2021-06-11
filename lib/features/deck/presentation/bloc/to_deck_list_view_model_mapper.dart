@@ -29,7 +29,7 @@ class ToDeckListViewModelMapper {
     IconSymbolConstants iconSymbolConstants = const IconSymbolConstants(),
   }) : _iconSymbolConstants = iconSymbolConstants;
 
-  DeckListViewModel call(List<Deck> decks) {
+  DeckListViewModel call({required List<Deck> decks}) {
     return DeckListViewModel(
       items: decks
           .map(

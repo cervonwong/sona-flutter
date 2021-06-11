@@ -77,7 +77,9 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
 
   Stream<DeckListState> _mapDeckListInitializedToState() async* {
     _decks = await _getDeckList();
-    yield DeckListLoaded(deckListViewModel: _toDeckListViewModel(_decks));
+    yield DeckListLoaded(
+      deckListViewModel: _toDeckListViewModel(decks: _decks),
+    );
   }
 
   Stream<DeckListState> _mapDeckCreatedToState(DeckCreated event) async* {
@@ -87,7 +89,7 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
         await _createDeck(name: event.name);
         _decks = await _getDeckList();
         yield DeckListLoaded(
-          deckListViewModel: _toDeckListViewModel(_decks),
+          deckListViewModel: _toDeckListViewModel(decks: _decks),
         );
         break;
       case DeckNameValidationResult.nameIsEmpty:
@@ -105,6 +107,8 @@ class DeckListBloc extends Bloc<DeckListEvent, DeckListState> {
   Stream<DeckListState> _mapDeckDeletedToState(DeckDeleted event) async* {
     await _deleteDeck(deck: event.deck);
     _decks.remove(event.deck);
-    yield DeckListLoaded(deckListViewModel: _toDeckListViewModel(_decks));
+    yield DeckListLoaded(
+      deckListViewModel: _toDeckListViewModel(decks: _decks),
+    );
   }
 }
