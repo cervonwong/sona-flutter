@@ -20,6 +20,10 @@
 import '../../../../core/domain/entities/material/deck/deck.dart';
 import '../../../../core/domain/repositories/material/deck/deck_repository.dart';
 
+// TODO: 6/11/2021 Rename to GetDeckListInfo, have GetDeckListInfoResponse which
+//  aggregates Deck, some calculated dueCardCount etc, DeckIconSpec.
+//  DeckListInfoRequest not needed.
+
 class GetAllDecks {
   final DeckRepository _repository;
 
