@@ -82,21 +82,21 @@ class MoorDatabase extends _$MoorDatabase {
       beforeOpen: (details) async {
         await customStatement('PRAGMA foreign_keys = ON');
 
-        if (!details.wasCreated) return;
-
-        await batch(
-          (batch) {
-            _initializeFieldTypes(batch);
-            _initializeComponentTypes(batch);
-            _initializeAlignments(batch);
-            _initializeFillColors(batch);
-            _initializeHighlightColors(batch);
-            _initializeIconColors(batch);
-            _initializeIconSymbols(batch);
-            _initializeSymbolSearchTerms(batch);
-            _initializeSettings(batch);
-          },
-        );
+        if (details.wasCreated) {
+          await batch(
+            (batch) {
+              _initializeFieldTypes(batch);
+              _initializeComponentTypes(batch);
+              _initializeAlignments(batch);
+              _initializeFillColors(batch);
+              _initializeHighlightColors(batch);
+              _initializeIconColors(batch);
+              _initializeIconSymbols(batch);
+              _initializeSymbolSearchTerms(batch);
+              _initializeSettings(batch);
+            },
+          );
+        }
       },
     );
   }
