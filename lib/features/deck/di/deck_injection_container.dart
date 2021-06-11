@@ -24,15 +24,19 @@ import '../domain/use_cases/delete_deck.dart';
 import '../domain/use_cases/get_deck_list.dart';
 import '../domain/use_cases/validate_deck_name.dart';
 import '../presentation/bloc/deck_list_bloc.dart';
+import '../presentation/bloc/to_deck_list_view_model_mapper.dart';
 
 void configureDependencies(GetIt getIt) {
   // Presentation > Bloc
+  getIt.registerLazySingleton(() => ToDeckListViewModelMapper());
+
   getIt.registerFactory(() {
     return DeckListBloc(
       createDeck: getIt(),
       getDeckList: getIt(),
       deleteDeck: getIt(),
       validateDeckName: getIt(),
+      toDeckListViewModel: getIt(),
     );
   });
 
