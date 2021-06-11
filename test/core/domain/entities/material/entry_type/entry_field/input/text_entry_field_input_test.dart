@@ -19,88 +19,88 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/datum/text_entry_field_datum.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/input/text_entry_field_input.dart';
 import 'package:sona_flutter/core/utils/nullable.dart';
 
 void main() {
   group(
-    'TextEntryFieldDatum when constructed',
+    'TextEntryFieldInput when constructed',
     () {
       test(
         'should have type EntryFieldType.text',
         () {
-          final datum = TextEntryFieldDatum(rawText: 'rawText');
+          final input = TextEntryFieldInput(rawText: 'rawText');
 
-          expect(datum.type, EntryFieldType.text);
+          expect(input.type, EntryFieldType.text);
         },
       );
 
       test(
         'should accept null for rawText',
         () {
-          final datum = TextEntryFieldDatum(rawText: null);
+          final input = TextEntryFieldInput(rawText: null);
 
-          expect(datum.rawText, null);
+          expect(input.rawText, null);
         },
       );
     },
   );
 
   group(
-    'TextEntryFieldDatum copyWith, '
-    'should return TextEntryFieldDatum with expected altered fields',
+    'TextEntryFieldInput copyWith, '
+    'should return TextEntryFieldInput with expected altered fields',
     () {
       test(
         'rawText becomes non-null',
         () {
-          final datum1 = TextEntryFieldDatum(rawText: null);
+          final input1 = TextEntryFieldInput(rawText: null);
 
-          expect(datum1.rawText, null);
+          expect(input1.rawText, null);
 
-          final datum2 = datum1.copyWith(rawText: Nullable('something'));
+          final input2 = input1.copyWith(rawText: Nullable('something'));
 
-          expect(datum2.rawText, 'something');
+          expect(input2.rawText, 'something');
         },
       );
 
       test(
         'rawText becomes null',
         () {
-          final datum1 = TextEntryFieldDatum(rawText: 'anything');
+          final input1 = TextEntryFieldInput(rawText: 'anything');
 
-          expect(datum1.rawText, 'anything');
+          expect(input1.rawText, 'anything');
 
-          final datum2 = datum1.copyWith(rawText: Nullable(null));
+          final input2 = input1.copyWith(rawText: Nullable(null));
 
-          expect(datum2.rawText, null);
+          expect(input2.rawText, null);
         },
       );
     },
   );
 
   group(
-    'TextEntryFieldDatum when equating',
+    'TextEntryFieldInput when equating',
     () {
       test(
-        'logically equal TextEntryFieldData, '
+        'logically equal TextEntryFieldInputs, '
         'should return true',
         () {
-          final datum = TextEntryFieldDatum(rawText: 'Hello World');
+          final input = TextEntryFieldInput(rawText: 'Hello World');
 
-          expect(datum, datum.copyWith());
+          expect(input, input.copyWith());
         },
       );
 
       test(
-        'logically unequal TextEntryFieldData, '
+        'logically unequal TextEntryFieldInputs, '
         'should return false',
         () {
-          final datum = TextEntryFieldDatum(rawText: 'Hello World');
+          final input = TextEntryFieldInput(rawText: 'Hello World');
 
           expect(
-            datum,
-            isNot(datum.copyWith(rawText: Nullable('Goodbye world'))),
+            input,
+            isNot(input.copyWith(rawText: Nullable('Goodbye world'))),
           );
         },
       );

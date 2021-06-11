@@ -17,29 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../../utils/nullable.dart';
 import '../entry_field_type.dart';
-import 'entry_field_datum.dart';
 
 @immutable
-class TextEntryFieldDatum extends EntryFieldDatum with EquatableMixin {
-  final String? rawText; // Nullable!
+abstract class EntryFieldInput {
+  final EntryFieldType type;
 
-  TextEntryFieldDatum({
-    required this.rawText,
-  }) : super(type: EntryFieldType.text);
-
-  TextEntryFieldDatum copyWith({
-    Nullable<String>? rawText,
-  }) {
-    return TextEntryFieldDatum(
-      rawText: rawText == null ? this.rawText : rawText.value,
-    );
-  }
-
-  @override
-  List<Object?> get props => [rawText];
+  EntryFieldInput({
+    required this.type,
+  });
 }

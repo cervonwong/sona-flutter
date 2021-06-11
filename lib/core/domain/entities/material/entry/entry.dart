@@ -20,34 +20,34 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../entry_type/entry_field/datum/entry_field_datum.dart';
 import '../entry_type/entry_field/entry_field_spec.dart';
+import '../entry_type/entry_field/input/entry_field_input.dart';
 import 'entry_tag.dart';
 
 @immutable
 class Entry extends Equatable {
   final int id;
   final Set<EntryTag> _tags;
-  final Map<EntryFieldSpec, EntryFieldDatum> _fieldData;
+  final Map<EntryFieldSpec, EntryFieldInput> _fieldInputs;
 
   Set<EntryTag> get tags => _tags.toSet();
 
-  Map<EntryFieldSpec, EntryFieldDatum> get fieldData => Map.of(_fieldData);
+  Map<EntryFieldSpec, EntryFieldInput> get fieldInputs => Map.of(_fieldInputs);
 
   Entry({
     required this.id,
     required Set<EntryTag> tags,
-    required Map<EntryFieldSpec, EntryFieldDatum> fieldData,
-  })  : assert(fieldData.isNotEmpty),
-        assert(_checkFieldDataType(fieldData)),
+    required Map<EntryFieldSpec, EntryFieldInput> fieldInputs,
+  })  : assert(fieldInputs.isNotEmpty),
+        assert(_checkFieldInputsType(fieldInputs)),
         _tags = tags.toSet(),
-        _fieldData = Map.of(fieldData);
+        _fieldInputs = Map.of(fieldInputs);
 
-  // TODO: 6/2/2021 Extract fieldData into a class to encapsulate checking logic.
-  static bool _checkFieldDataType(
-    Map<EntryFieldSpec, EntryFieldDatum> fieldData,
+  // TODO: 6/2/2021 Extract fieldInputs into a class to encapsulate checking logic.
+  static bool _checkFieldInputsType(
+    Map<EntryFieldSpec, EntryFieldInput> fieldInputs,
   ) {
-    for (var mapEntry in fieldData.entries) {
+    for (var mapEntry in fieldInputs.entries) {
       if (mapEntry.key.type != mapEntry.value.type) {
         return false;
       }
@@ -57,12 +57,12 @@ class Entry extends Equatable {
 
   Entry copyWith({
     Set<EntryTag>? tags,
-    Map<EntryFieldSpec, EntryFieldDatum>? fieldData,
+    Map<EntryFieldSpec, EntryFieldInput>? fieldInputs,
   }) {
     return Entry(
       id: id,
       tags: tags ?? _tags,
-      fieldData: fieldData ?? _fieldData,
+      fieldInputs: fieldInputs ?? _fieldInputs,
     );
   }
 

@@ -17,18 +17,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../../utils/nullable.dart';
 import '../entry_field_type.dart';
+import 'entry_field_input.dart';
 
-// TODO: 6/5/2021 Rename all `datum` to `data`, and handle renaming fieldData in
-//  Entry, and rename database tables. OR use some other word other than data
-//  because it is an awkward plural noun? Perhaps can use `input`
 @immutable
-abstract class EntryFieldDatum {
-  final EntryFieldType type;
+class ImageEntryFieldInput extends EntryFieldInput with EquatableMixin {
+  final int? imageId; // Nullable!
 
-  EntryFieldDatum({
-    required this.type,
-  });
+  ImageEntryFieldInput({
+    required this.imageId,
+  }) : super(type: EntryFieldType.image);
+
+  ImageEntryFieldInput copyWith({
+    Nullable<int>? imageId,
+  }) {
+    return ImageEntryFieldInput(
+      imageId: imageId == null ? this.imageId : imageId.value,
+    );
+  }
+
+  @override
+  List<Object?> get props => [imageId];
 }

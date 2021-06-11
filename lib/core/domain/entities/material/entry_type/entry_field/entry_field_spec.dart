@@ -26,7 +26,7 @@ import 'entry_field_type.dart';
 ///
 /// This class does not contain field data of an Entry. [id] ensures that when
 /// a field is renamed, the data is preserved and migrated. [type] is not
-/// included in [copyWith] as the [EntryFieldDatum] classes is not interoperable
+/// included in [copyWith] as the [EntryFieldInput] classes is not interoperable
 /// with each other. Create a new field if a field with a different type is
 /// required.
 @immutable

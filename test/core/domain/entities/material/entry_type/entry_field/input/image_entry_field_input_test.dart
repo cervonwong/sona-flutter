@@ -19,88 +19,88 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/datum/image_entry_field_datum.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/input/image_entry_field_input.dart';
 import 'package:sona_flutter/core/utils/nullable.dart';
 
 void main() {
   group(
-    'ImageEntryFieldDatum when constructed',
+    'ImageEntryFieldInput when constructed',
     () {
       test(
         'should have type EntryFieldType.image',
         () {
-          final datum = ImageEntryFieldDatum(imageId: 1);
+          final input = ImageEntryFieldInput(imageId: 1);
 
-          expect(datum.type, EntryFieldType.image);
+          expect(input.type, EntryFieldType.image);
         },
       );
 
       test(
         'should accept null for imageId',
         () {
-          final datum = ImageEntryFieldDatum(imageId: null);
+          final input = ImageEntryFieldInput(imageId: null);
 
-          expect(datum.imageId, null);
+          expect(input.imageId, null);
         },
       );
     },
   );
 
   group(
-    'ImageEntryFieldDatum copyWith, '
-    'should return ImageEntryFieldDatum with expected altered fields',
+    'ImageEntryFieldInput copyWith, '
+    'should return ImageEntryFieldInput with expected altered fields',
     () {
       test(
         'imageId becomes non-null',
         () {
-          final datum1 = ImageEntryFieldDatum(imageId: null);
+          final input1 = ImageEntryFieldInput(imageId: null);
 
-          expect(datum1.imageId, null);
+          expect(input1.imageId, null);
 
-          final datum2 = datum1.copyWith(imageId: Nullable(888));
+          final input2 = input1.copyWith(imageId: Nullable(888));
 
-          expect(datum2.imageId, 888);
+          expect(input2.imageId, 888);
         },
       );
 
       test(
         'imageId becomes null',
         () {
-          final datum1 = ImageEntryFieldDatum(imageId: 123);
+          final input1 = ImageEntryFieldInput(imageId: 123);
 
-          expect(datum1.imageId, 123);
+          expect(input1.imageId, 123);
 
-          final datum2 = datum1.copyWith(imageId: Nullable(null));
+          final input2 = input1.copyWith(imageId: Nullable(null));
 
-          expect(datum2.imageId, null);
+          expect(input2.imageId, null);
         },
       );
     },
   );
 
   group(
-    'ImageEntryFieldDatum when equating',
+    'ImageEntryFieldInput when equating',
     () {
       test(
-        'logically equal ImageEntryFieldData, '
+        'logically equal ImageEntryFieldInputs, '
         'should return true',
         () {
-          final datum = ImageEntryFieldDatum(imageId: 1234);
+          final input = ImageEntryFieldInput(imageId: 1234);
 
-          expect(datum, datum.copyWith());
+          expect(input, input.copyWith());
         },
       );
 
       test(
-        'logically unequal ImageEntryFieldData, '
+        'logically unequal ImageEntryFieldInputs, '
         'should return false',
         () {
-          final datum = ImageEntryFieldDatum(imageId: 2);
+          final input = ImageEntryFieldInput(imageId: 2);
 
           expect(
-            datum,
-            isNot(datum.copyWith(imageId: Nullable(3))),
+            input,
+            isNot(input.copyWith(imageId: Nullable(3))),
           );
         },
       );

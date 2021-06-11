@@ -22,15 +22,15 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:sona_flutter/core/domain/entities/material/entry/entry.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry/entry_tag.dart';
-import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/datum/entry_field_datum.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_spec.dart';
 import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/entry_field_type.dart';
+import 'package:sona_flutter/core/domain/entities/material/entry_type/entry_field/input/entry_field_input.dart';
 
 class MockEntryTag extends Mock implements EntryTag {}
 
 class MockEntryFieldSpec extends Mock implements EntryFieldSpec {}
 
-class MockEntryFieldDatum extends Mock implements EntryFieldDatum {}
+class MockEntryFieldInput extends Mock implements EntryFieldInput {}
 
 void main() {
   final tag1 = MockEntryTag();
@@ -38,14 +38,14 @@ void main() {
 
   final spec1 = MockEntryFieldSpec();
   final spec2 = MockEntryFieldSpec();
-  final datum1 = MockEntryFieldDatum();
-  final datum2 = MockEntryFieldDatum();
+  final input1 = MockEntryFieldInput();
+  final input2 = MockEntryFieldInput();
 
   setUp(() {
     when(() => spec1.type).thenReturn(EntryFieldType.text);
     when(() => spec2.type).thenReturn(EntryFieldType.image);
-    when(() => datum1.type).thenReturn(EntryFieldType.text);
-    when(() => datum2.type).thenReturn(EntryFieldType.image);
+    when(() => input1.type).thenReturn(EntryFieldType.text);
+    when(() => input2.type).thenReturn(EntryFieldType.image);
   });
 
   group(
@@ -63,7 +63,7 @@ void main() {
               final entry = Entry(
                 id: 999,
                 tags: tags,
-                fieldData: {spec1: datum1},
+                fieldInputs: {spec1: input1},
               );
 
               tags.add(tag2);
@@ -73,22 +73,22 @@ void main() {
           );
 
           test(
-            'fieldData is passed',
+            'fieldInputs is passed',
             () {
-              final fieldData = {spec1: datum1};
+              final fieldInputs = {spec1: input1};
 
-              final entry = Entry(id: 999, tags: {}, fieldData: fieldData);
+              final entry = Entry(id: 999, tags: {}, fieldInputs: fieldInputs);
 
-              fieldData[spec2] = datum2;
+              fieldInputs[spec2] = input2;
 
-              expect(entry.fieldData, {spec1: datum1});
+              expect(entry.fieldInputs, {spec1: input1});
             },
           );
         },
       );
 
       test(
-        'with fieldData with entries with key and value with different types, '
+        'with fieldInputs with entries with key and value with different types, '
         'should fail asserts',
         () {
           expect(
@@ -96,7 +96,7 @@ void main() {
               Entry(
                 id: 2,
                 tags: {},
-                fieldData: {spec1: datum2},
+                fieldInputs: {spec1: input2},
               );
             },
             throwsAssertionError,
@@ -116,7 +116,7 @@ void main() {
           final entry = Entry(
             id: 2,
             tags: {tag1},
-            fieldData: {spec1: datum1},
+            fieldInputs: {spec1: input1},
           );
           expect(entry.tags, {tag1});
 
@@ -127,18 +127,18 @@ void main() {
       );
 
       test(
-        'fieldData getter',
+        'fieldInputs getter',
         () {
           final entry = Entry(
             id: 2,
             tags: {},
-            fieldData: {spec1: datum1},
+            fieldInputs: {spec1: input1},
           );
-          expect(entry.fieldData, {spec1: datum1});
+          expect(entry.fieldInputs, {spec1: input1});
 
-          final fieldData = entry.fieldData..clear();
-          expect(fieldData, <EntryFieldSpec, EntryFieldDatum>{});
-          expect(entry.fieldData, {spec1: datum1});
+          final fieldInputs = entry.fieldInputs..clear();
+          expect(fieldInputs, <EntryFieldSpec, EntryFieldInput>{});
+          expect(entry.fieldInputs, {spec1: input1});
         },
       );
     },
@@ -151,21 +151,21 @@ void main() {
       final entry = Entry(
         id: 7,
         tags: {tag1},
-        fieldData: {spec1: datum1},
+        fieldInputs: {spec1: input1},
       );
 
       expect(entry.id, 7);
       expect(entry.tags, {tag1});
-      expect(entry.fieldData, {spec1: datum1});
+      expect(entry.fieldInputs, {spec1: input1});
 
       final newEntry = entry.copyWith(
         tags: {tag2},
-        fieldData: {spec2: datum2},
+        fieldInputs: {spec2: input2},
       );
 
       expect(newEntry.id, 7);
       expect(newEntry.tags, {tag2});
-      expect(newEntry.fieldData, {spec2: datum2});
+      expect(newEntry.fieldInputs, {spec2: input2});
     },
   );
 
@@ -176,9 +176,9 @@ void main() {
         'logically equal Entries, '
         'should return true',
         () {
-          final entry1 = Entry(id: 1, tags: {}, fieldData: {spec1: datum1});
+          final entry1 = Entry(id: 1, tags: {}, fieldInputs: {spec1: input1});
           final entry2 = entry1.copyWith(tags: {tag1, tag2});
-          final entry3 = entry1.copyWith(fieldData: {spec2: datum2});
+          final entry3 = entry1.copyWith(fieldInputs: {spec2: input2});
 
           expect(entry1, entry2);
           expect(entry1, entry3);
@@ -193,12 +193,12 @@ void main() {
           final entry1 = Entry(
             id: 9999,
             tags: {},
-            fieldData: {spec1: datum1},
+            fieldInputs: {spec1: input1},
           );
           final entry2 = Entry(
             id: 9998,
             tags: {},
-            fieldData: {spec1: datum1},
+            fieldInputs: {spec1: input1},
           );
 
           expect(entry1, isNot(entry2));
