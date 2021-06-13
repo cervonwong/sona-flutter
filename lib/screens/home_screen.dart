@@ -132,6 +132,20 @@ class SearchDestinationFab extends StatelessWidget {
   }
 }
 
+class AppBarBottomBorder extends StatelessWidget
+    implements PreferredSizeWidget {
+  const AppBarBottomBorder();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Divider();
+  }
+
+  @override
+  Size get preferredSize =>
+      const Size.fromHeight(1.0); //// TODO: 6/13/2021 Magic number.
+}
+
 class DecksDestinationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const DecksDestinationAppBar();
@@ -143,6 +157,7 @@ class DecksDestinationAppBar extends StatelessWidget
       actions: [
         const StreakCounter(streakCount: 0, isActive: false),
       ],
+      bottom: const AppBarBottomBorder(),
     );
   }
 
@@ -158,6 +173,7 @@ class SearchDestinationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Search'),
+      bottom: const AppBarBottomBorder(),
     );
   }
 
@@ -173,6 +189,7 @@ class ProgressDestinationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Progress'),
+      bottom: const AppBarBottomBorder(),
     );
   }
 
@@ -188,6 +205,7 @@ class ProfileDestinationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Profile'),
+      bottom: const AppBarBottomBorder(),
     );
   }
 
