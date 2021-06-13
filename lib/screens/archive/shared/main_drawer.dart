@@ -22,8 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/presentation/change_notifiers/color_notifier.dart';
-import '../../core/presentation/constants/widget_constants.dart';
+import '../../../core/presentation/change_notifiers/color_notifier.dart';
+import '../../../core/presentation/constants/widget_constants.dart';
 
 enum SelectableDrawerDestination { home, browse, progress, settings }
 
