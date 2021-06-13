@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/presentation/change_notifiers/color_notifier.dart';
 import '../../core/presentation/constants/widget_constants.dart';
+import '../../features/deck/presentation/widgets/deck_list_empty_state_pane.dart';
 import 'bottom_navigation_destinations/home_destination.dart';
 import 'bottom_navigation_destinations/profile_destination.dart';
 import 'bottom_navigation_destinations/progress_destination.dart';
@@ -49,6 +50,12 @@ class _InitialScreenState extends State<InitialScreen> {
     null,
     null,
   ];
+  static final _bodies = <Widget>[
+    const DeckListEmptyStatePane(),
+    const Placeholder(),
+    const Placeholder(),
+    const Placeholder(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +74,7 @@ class _InitialScreenState extends State<InitialScreen> {
         },
       ),
       body: SafeArea(
-        child: Container(),
+        child: _bodies[_currentIndex],
       ),
     );
   }
