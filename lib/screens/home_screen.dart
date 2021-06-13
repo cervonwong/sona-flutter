@@ -142,8 +142,8 @@ class AppBarBottomBorder extends StatelessWidget
   }
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(1.0); //// TODO: 6/13/2021 Magic number.
+  // TODO: 6/13/2021 Magic number.
+  Size get preferredSize => const Size.fromHeight(1.0);
 }
 
 class DecksDestinationAppBar extends StatelessWidget
