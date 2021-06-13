@@ -85,6 +85,8 @@ class ColorNotifier extends ChangeNotifier {
 }
 
 abstract class _ColorGroup {
+  Color get shadowPrimary;
+
   Color get splashNeutral;
 
   Color get splashPrimary;
@@ -160,6 +162,9 @@ abstract class _ColorGroup {
 
 /// Colors are generally darker to contrast against lighter colors.
 class _OnLightColorGroup implements _ColorGroup {
+  @override
+  Color get shadowPrimary => ColorConstants.shadowPrimaryOnLight;
+
   @override
   Color get splashNeutral => ColorConstants.splashNeutralOnLight;
 
@@ -271,6 +276,10 @@ class _OnLightColorGroup implements _ColorGroup {
 
 /// Colors are generally lighter to contrast against darker colors.
 class _OnDarkColorGroup implements _ColorGroup {
+  @override
+  // TODO: implement shadowPrimary
+  Color get shadowPrimary => throw UnimplementedError();
+
   @override
   Color get splashNeutral => ColorConstants.splashNeutralOnDark;
 

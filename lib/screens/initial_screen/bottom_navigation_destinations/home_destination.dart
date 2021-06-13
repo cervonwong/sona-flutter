@@ -65,10 +65,15 @@ class HomeDestinationFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        shadowColor: Theme.of(context).colorScheme.primary,
-      ),
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            shadowColor: cn.onBackground.shadowPrimary,
+          ),
+          child: child!,
+        );
+      },
       child: Consumer<ColorNotifier>(
         builder: (_, cn, __) {
           return FloatingActionButton(

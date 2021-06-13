@@ -128,4 +128,7 @@ class ColorConstants {
       Color(0xE64E4B66); // kNeutralColor7.withOpacity(0.9).
   static const tooltipBackground =
       Color(0xCC4E4B66); // kNeutralColor7.withOpacity(0.8).
+
+  static const shadowPrimaryOnLight =
+      Color(0x807B68EE); // primary.copyWith(0.50);
 }
