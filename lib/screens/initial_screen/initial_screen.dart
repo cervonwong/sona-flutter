@@ -20,6 +20,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
 import 'bottom_navigation_destinations/home_destination.dart';
 import 'bottom_navigation_destinations/profile_destination.dart';
@@ -94,18 +96,33 @@ class StyledBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        for (int i = 0; i < 4; i++)
-          BottomNavigationBarItem(
-            icon: Icon(
-              currentIndex == i ? _selectedIconData[i] : _unselectedIconData[i],
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, child) {
+        return Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: cn.onSurface.borderRegular,
+              width: 1.0, // TODO: 6/13/2021 Magic number.
             ),
-            label: _itemLabels[i],
           ),
-      ],
-      currentIndex: currentIndex,
-      onTap: onTap,
+          child: child,
+        );
+      },
+      child: BottomNavigationBar(
+        items: [
+          for (int i = 0; i < 4; i++)
+            BottomNavigationBarItem(
+              icon: Icon(
+                currentIndex == i
+                    ? _selectedIconData[i]
+                    : _unselectedIconData[i],
+              ),
+              label: _itemLabels[i],
+            ),
+        ],
+        currentIndex: currentIndex,
+        onTap: onTap,
+      ),
     );
   }
 }
