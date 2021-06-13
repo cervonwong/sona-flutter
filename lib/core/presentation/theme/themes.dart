@@ -57,7 +57,7 @@ ThemeData createLightTheme() {
     ),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
-    elevatedButtonTheme: elevatedButtonThemeData,
+    elevatedButtonTheme: lightThemeElevatedButtonThemeData,
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
     inputDecorationTheme: _createInputDecorationTheme(
       baseTextTheme: baseTextTheme,
@@ -250,7 +250,7 @@ DividerThemeData _createDividerTheme() {
   );
 }
 
-final elevatedButtonThemeData = ElevatedButtonThemeData(
+final lightThemeElevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: MaterialStateProperty.all<double>(0.0),
     shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -274,7 +274,7 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
   ),
 );
 
-final fullyRoundedElevatedButtonThemeData = ElevatedButtonThemeData(
+final lightThemeFullyRoundedElevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: MaterialStateProperty.all<double>(0.0),
     shape: MaterialStateProperty.all<OutlinedBorder>(
