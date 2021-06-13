@@ -22,8 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:provider/provider.dart';
 
-import '../core/presentation/change_notifiers/color_notifier.dart';
-import '../features/stats/streak/presentation/widgets/streak_counter.dart';
+import '../../core/presentation/change_notifiers/color_notifier.dart';
+import '../../features/stats/streak/presentation/widgets/streak_counter.dart';
 
 class InitialScreen extends StatefulWidget {
   @override
