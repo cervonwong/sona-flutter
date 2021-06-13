@@ -33,7 +33,7 @@ class HomeDestinationAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Your Decks'),
+      title: const Text('Good morning'),
       actions: [
         const StreakCounter(streakCount: 0, isActive: false),
       ],
