@@ -19,6 +19,8 @@
 
 part of 'deck_list_bloc.dart';
 
+// TODO: 6/13/2021 Rename all to imperative verbs?
+
 abstract class DeckListEvent extends Equatable {
   const DeckListEvent();
 
