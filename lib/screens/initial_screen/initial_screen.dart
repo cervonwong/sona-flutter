@@ -33,27 +33,27 @@ class InitialScreen extends StatefulWidget {
 class _InitialScreenState extends State<InitialScreen> {
   int _currentIndex = 0;
 
-  static const _itemLabels = ['Decks', 'Search', 'Progress', 'Profile'];
+  static const _itemLabels = ['Home', 'Search', 'Progress', 'Profile'];
   static const _unselectedIconData = [
-    FluentIcons.style_guide_24_regular,
+    FluentIcons.home_24_regular,
     FluentIcons.search_24_regular,
     FluentIcons.arrow_growth_24_regular,
     FluentIcons.person_24_regular,
   ];
   static const _selectedIconData = [
-    FluentIcons.style_guide_24_filled,
+    FluentIcons.home_24_filled,
     FluentIcons.search_24_filled,
     FluentIcons.arrow_growth_24_filled,
     FluentIcons.person_24_filled,
   ];
   static const _appBars = <PreferredSizeWidget>[
-    DecksDestinationAppBar(),
+    HomeDestinationAppBar(),
     SearchDestinationAppBar(),
     ProgressDestinationAppBar(),
     ProfileDestinationAppBar(),
   ];
   static const _fabs = [
-    DecksDestinationFab(),
+    HomeDestinationFab(),
     SearchDestinationFab(),
     null,
     null,
@@ -90,8 +90,8 @@ class _InitialScreenState extends State<InitialScreen> {
   }
 }
 
-class DecksDestinationFab extends StatelessWidget {
-  const DecksDestinationFab();
+class HomeDestinationFab extends StatelessWidget {
+  const HomeDestinationFab();
 
   @override
   Widget build(BuildContext context) {
@@ -146,9 +146,9 @@ class AppBarBottomBorder extends StatelessWidget
   Size get preferredSize => const Size.fromHeight(1.0);
 }
 
-class DecksDestinationAppBar extends StatelessWidget
+class HomeDestinationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const DecksDestinationAppBar();
+  const HomeDestinationAppBar();
 
   @override
   Widget build(BuildContext context) {
