@@ -58,7 +58,7 @@ class HomeDestinationFab extends StatelessWidget {
         builder: (_, cn, __) {
           return FloatingActionButton(
             onPressed: () {},
-            child: const Icon(FluentIcons.add_24_regular),
+            child: const Icon(FluentIcons.document_add_24_regular),
           );
         },
       ),
