@@ -252,7 +252,9 @@ DividerThemeData _createDividerTheme() {
 
 final lightThemeElevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
-    elevation: MaterialStateProperty.all<double>(0.0),
+    shadowColor: MaterialStateProperty.all<Color>(
+      ColorConstants.shadowPrimaryOnLight,
+    ),
     shape: MaterialStateProperty.all<OutlinedBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
@@ -276,7 +278,9 @@ final lightThemeElevatedButtonThemeData = ElevatedButtonThemeData(
 
 final lightThemeFullyRoundedElevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
-    elevation: MaterialStateProperty.all<double>(0.0),
+    shadowColor: MaterialStateProperty.all<Color>(
+      ColorConstants.shadowPrimaryOnLight,
+    ),
     shape: MaterialStateProperty.all<OutlinedBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(WidgetConstants.cornerRadiusMax),
