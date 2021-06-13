@@ -152,6 +152,10 @@ abstract class _ColorGroup {
   Color get textHighlightPurple;
 
   Color get textHighlightPink;
+
+  Color get borderRegular;
+
+  Color get borderLight;
 }
 
 /// Colors are generally darker to contrast against lighter colors.
@@ -257,6 +261,12 @@ class _OnLightColorGroup implements _ColorGroup {
 
   @override
   Color get textHighlightPink => ColorConstants.textHighlightOnLightPink;
+
+  @override
+  Color get borderRegular => ColorConstants.neutral4;
+
+  @override
+  Color get borderLight => ColorConstants.neutral3;
 }
 
 /// Colors are generally lighter to contrast against darker colors.
@@ -364,6 +374,14 @@ class _OnDarkColorGroup implements _ColorGroup {
 
   @override
   Color get textHighlightPink => ColorConstants.textHighlightOnDarkPink;
+
+  @override
+  // TODO: implement borderRegular
+  Color get borderRegular => throw UnimplementedError();
+
+  @override
+  // TODO: implement borderLight
+  Color get borderLight => throw UnimplementedError();
 }
 
 abstract class _SpecificColorGroup {
