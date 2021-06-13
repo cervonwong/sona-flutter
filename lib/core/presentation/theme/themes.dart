@@ -274,6 +274,30 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
   ),
 );
 
+final fullyRoundedElevatedButtonThemeData = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    elevation: MaterialStateProperty.all<double>(0.0),
+    shape: MaterialStateProperty.all<OutlinedBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(WidgetConstants.cornerRadiusMax),
+      ),
+    ),
+    visualDensity: const VisualDensity(vertical: 2.0),
+    foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+      if (states.contains(MaterialState.disabled)) {
+        return ColorConstants.neutral5;
+      }
+      return ColorConstants.onDarkHighEmphasis;
+    }),
+    backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+      if (states.contains(MaterialState.disabled)) {
+        return ColorConstants.neutral3;
+      }
+      return ColorConstants.primary;
+    }),
+  ),
+);
+
 FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
   return const FloatingActionButtonThemeData(
     splashColor: ColorConstants.splashNeutralOnDark,
