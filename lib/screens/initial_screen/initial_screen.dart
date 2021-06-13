@@ -21,8 +21,9 @@ import 'package:flutter/material.dart';
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:sona_flutter/core/presentation/change_notifiers/color_notifier.dart';
 
+import '../../core/presentation/change_notifiers/color_notifier.dart';
+import '../../core/presentation/constants/widget_constants.dart';
 import 'bottom_navigation_destinations/home_destination.dart';
 import 'bottom_navigation_destinations/profile_destination.dart';
 import 'bottom_navigation_destinations/progress_destination.dart';
@@ -102,7 +103,7 @@ class StyledBottomNavigationBar extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               color: cn.onSurface.borderRegular,
-              width: 1.0, // TODO: 6/13/2021 Magic number.
+              width: WidgetConstants.borderThickness,
             ),
           ),
           child: child,

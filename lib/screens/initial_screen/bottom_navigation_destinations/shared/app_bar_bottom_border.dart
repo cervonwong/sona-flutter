@@ -19,6 +19,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/constants/widget_constants.dart';
+
 class AppBarBottomBorder extends StatelessWidget
     implements PreferredSizeWidget {
   const AppBarBottomBorder();
@@ -29,6 +31,7 @@ class AppBarBottomBorder extends StatelessWidget
   }
 
   @override
-  // TODO: 6/13/2021 Magic number.
-  Size get preferredSize => const Size.fromHeight(1.0);
+  Size get preferredSize => const Size.fromHeight(
+        WidgetConstants.borderThickness,
+      );
 }

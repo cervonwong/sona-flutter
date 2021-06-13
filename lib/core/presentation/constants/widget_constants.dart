@@ -50,4 +50,7 @@ class WidgetConstants {
   static const layoutPadding064 = 64.0;
   static const layoutPadding096 = 96.0;
   static const layoutPadding160 = 160.0;
+
+  // Misc.
+  static const borderThickness = 1.0;
 }

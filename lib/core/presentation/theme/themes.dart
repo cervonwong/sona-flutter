@@ -246,7 +246,7 @@ DividerThemeData _createDividerTheme() {
   return const DividerThemeData(
     color: ColorConstants.neutral4,
     space: 0.0,
-    thickness: 1.0,
+    thickness: WidgetConstants.borderThickness,
   );
 }
 
