@@ -25,12 +25,12 @@ import 'package:provider/provider.dart';
 import '../core/presentation/change_notifiers/color_notifier.dart';
 import '../features/stats/streak/presentation/widgets/streak_counter.dart';
 
-class HomeScreen extends StatefulWidget {
+class InitialScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _InitialScreenState createState() => _InitialScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _InitialScreenState extends State<InitialScreen> {
   int _currentIndex = 0;
 
   static const _itemLabels = ['Decks', 'Search', 'Progress', 'Profile'];

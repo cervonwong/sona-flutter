@@ -25,7 +25,7 @@ import 'package:provider/provider.dart';
 import 'core/di/injection_container.dart' as injection_container;
 import 'core/presentation/change_notifiers/color_notifier.dart';
 import 'core/presentation/theme/themes.dart' as themes;
-import 'screens/home_screen.dart';
+import 'screens/initial_screen.dart';
 
 void main() {
   injection_container.configureDependencies();
@@ -44,7 +44,7 @@ class SonaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sona',
       theme: themes.createLightTheme(),
-      home: HomeScreen(),
+      home: InitialScreen(),
     );
   }
 }
