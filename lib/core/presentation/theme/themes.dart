@@ -42,7 +42,7 @@ ThemeData createLightTheme() {
     highlightColor: ColorConstants.highlightPrimary,
     scaffoldBackgroundColor: ColorConstants.neutral2,
     splashColor: ColorConstants.splashPrimary,
-    shadowColor: ColorConstants.neutral8,
+    shadowColor: ColorConstants.neutral4,
 
     // Themes
     colorScheme: _createColorScheme(),
