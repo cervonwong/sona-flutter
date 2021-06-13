@@ -20,10 +20,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:provider/provider.dart';
 
-import '../../core/presentation/change_notifiers/color_notifier.dart';
-import '../../features/stats/streak/presentation/widgets/streak_counter.dart';
+import 'bottom_navigation_destinations/home_destination.dart';
+import 'bottom_navigation_destinations/profile_destination.dart';
+import 'bottom_navigation_destinations/progress_destination.dart';
+import 'bottom_navigation_destinations/search_destination.dart';
 
 class InitialScreen extends StatefulWidget {
   @override
@@ -88,127 +89,4 @@ class _InitialScreenState extends State<InitialScreen> {
       ),
     );
   }
-}
-
-class HomeDestinationFab extends StatelessWidget {
-  const HomeDestinationFab();
-
-  @override
-  Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        shadowColor: Theme.of(context).colorScheme.primary,
-      ),
-      child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
-          return FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(FluentIcons.add_24_regular),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class SearchDestinationFab extends StatelessWidget {
-  const SearchDestinationFab();
-
-  @override
-  Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        shadowColor: Theme.of(context).colorScheme.primary,
-      ),
-      child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
-          return FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(FluentIcons.arrow_up_24_regular),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class AppBarBottomBorder extends StatelessWidget
-    implements PreferredSizeWidget {
-  const AppBarBottomBorder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Divider();
-  }
-
-  @override
-  // TODO: 6/13/2021 Magic number.
-  Size get preferredSize => const Size.fromHeight(1.0);
-}
-
-class HomeDestinationAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const HomeDestinationAppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('Your Decks'),
-      actions: [
-        const StreakCounter(streakCount: 0, isActive: false),
-      ],
-      bottom: const AppBarBottomBorder(),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class SearchDestinationAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const SearchDestinationAppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('Search'),
-      bottom: const AppBarBottomBorder(),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class ProgressDestinationAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const ProgressDestinationAppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('Progress'),
-      bottom: const AppBarBottomBorder(),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class ProfileDestinationAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const ProfileDestinationAppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('Profile'),
-      bottom: const AppBarBottomBorder(),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
