@@ -34,6 +34,9 @@ class HomeDestinationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Good morning'),
+      leading: const DrawerIconButton(),
+      titleSpacing: 0.0,
+      // Makes title is closer to leading.
       actions: [
         const StreakCounter(streakCount: 0, isActive: false),
       ],
@@ -43,6 +46,18 @@ class HomeDestinationAppBar extends StatelessWidget
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class DrawerIconButton extends StatelessWidget {
+  const DrawerIconButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(FluentIcons.list_24_regular),
+      onPressed: () => Scaffold.of(context).openDrawer(),
+    );
+  }
 }
 
 class HomeDestinationFab extends StatelessWidget {

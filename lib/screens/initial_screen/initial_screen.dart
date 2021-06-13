@@ -55,6 +55,7 @@ class _InitialScreenState extends State<InitialScreen> {
     return Scaffold(
       appBar: _appBars[_currentIndex],
       floatingActionButton: _fabs[_currentIndex],
+      drawer: _currentIndex == 0 ? const Drawer() : null,
       bottomNavigationBar: StyledBottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
