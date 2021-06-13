@@ -57,7 +57,7 @@ ThemeData createLightTheme() {
     ),
     dialogTheme: _createDialogTheme(),
     dividerTheme: _createDividerTheme(),
-    elevatedButtonTheme: _createElevatedButtonTheme(),
+    elevatedButtonTheme: elevatedButtonThemeData,
     floatingActionButtonTheme: _createFloatingActionButtonTheme(),
     inputDecorationTheme: _createInputDecorationTheme(
       baseTextTheme: baseTextTheme,
@@ -250,31 +250,29 @@ DividerThemeData _createDividerTheme() {
   );
 }
 
-ElevatedButtonThemeData _createElevatedButtonTheme() {
-  return ElevatedButtonThemeData(
-    style: ButtonStyle(
-      elevation: MaterialStateProperty.all<double>(0.0),
-      shape: MaterialStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
-        ),
+final elevatedButtonThemeData = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    elevation: MaterialStateProperty.all<double>(0.0),
+    shape: MaterialStateProperty.all<OutlinedBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(WidgetConstants.cornerRadius12),
       ),
-      visualDensity: const VisualDensity(vertical: 2.0),
-      foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return ColorConstants.neutral5;
-        }
-        return ColorConstants.onDarkHighEmphasis;
-      }),
-      backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return ColorConstants.neutral3;
-        }
-        return ColorConstants.primary;
-      }),
     ),
-  );
-}
+    visualDensity: const VisualDensity(vertical: 2.0),
+    foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+      if (states.contains(MaterialState.disabled)) {
+        return ColorConstants.neutral5;
+      }
+      return ColorConstants.onDarkHighEmphasis;
+    }),
+    backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+      if (states.contains(MaterialState.disabled)) {
+        return ColorConstants.neutral3;
+      }
+      return ColorConstants.primary;
+    }),
+  ),
+);
 
 FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
   return const FloatingActionButtonThemeData(
