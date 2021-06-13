@@ -34,19 +34,6 @@ class InitialScreen extends StatefulWidget {
 class _InitialScreenState extends State<InitialScreen> {
   int _currentIndex = 0;
 
-  static const _itemLabels = ['Home', 'Search', 'Progress', 'Profile'];
-  static const _unselectedIconData = [
-    FluentIcons.home_24_regular,
-    FluentIcons.search_24_regular,
-    FluentIcons.arrow_growth_24_regular,
-    FluentIcons.person_24_regular,
-  ];
-  static const _selectedIconData = [
-    FluentIcons.home_24_filled,
-    FluentIcons.search_24_filled,
-    FluentIcons.arrow_growth_24_filled,
-    FluentIcons.person_24_filled,
-  ];
   static const _appBars = <PreferredSizeWidget>[
     HomeDestinationAppBar(),
     SearchDestinationAppBar(),
@@ -65,28 +52,60 @@ class _InitialScreenState extends State<InitialScreen> {
     return Scaffold(
       appBar: _appBars[_currentIndex],
       floatingActionButton: _fabs[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          for (int i = 0; i < 4; i++)
-            BottomNavigationBarItem(
-              icon: Icon(
-                _currentIndex == i
-                    ? _selectedIconData[i]
-                    : _unselectedIconData[i],
-              ),
-              label: _itemLabels[i],
-            ),
-        ],
+      bottomNavigationBar: StyledBottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          setState(
+            () {
+              _currentIndex = index;
+            },
+          );
         },
       ),
       body: SafeArea(
         child: Container(),
       ),
+    );
+  }
+}
+
+class StyledBottomNavigationBar extends StatelessWidget {
+  final ValueChanged<int> onTap;
+  final int currentIndex;
+
+  static const _itemLabels = ['Home', 'Search', 'Progress', 'Profile'];
+  static const _unselectedIconData = [
+    FluentIcons.home_24_regular,
+    FluentIcons.search_24_regular,
+    FluentIcons.arrow_growth_24_regular,
+    FluentIcons.person_24_regular,
+  ];
+  static const _selectedIconData = [
+    FluentIcons.home_24_filled,
+    FluentIcons.search_24_filled,
+    FluentIcons.arrow_growth_24_filled,
+    FluentIcons.person_24_filled,
+  ];
+
+  const StyledBottomNavigationBar({
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: [
+        for (int i = 0; i < 4; i++)
+          BottomNavigationBarItem(
+            icon: Icon(
+              currentIndex == i ? _selectedIconData[i] : _unselectedIconData[i],
+            ),
+            label: _itemLabels[i],
+          ),
+      ],
+      currentIndex: currentIndex,
+      onTap: onTap,
     );
   }
 }
