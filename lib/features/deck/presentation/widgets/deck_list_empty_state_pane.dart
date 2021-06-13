@@ -70,7 +70,7 @@ class DeckListEmptyStatePane extends StatelessWidget {
           Theme(
             data: Theme.of(context).copyWith(
               elevatedButtonTheme:
-                  lightThemeFullyRoundedElevatedButtonThemeData,
+                  lightThemeRadiusMaxElevatedButtonThemeData,
             ),
             child: ElevatedButton.icon(
               icon: const Icon(FluentIcons.add_24_regular),
