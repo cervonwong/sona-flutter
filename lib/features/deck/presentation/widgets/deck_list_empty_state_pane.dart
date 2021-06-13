@@ -75,7 +75,7 @@ class DeckListEmptyStatePane extends StatelessWidget {
             child: ElevatedButton.icon(
               icon: const Icon(FluentIcons.add_24_regular),
               label: const Text('NEW DECK'),
-              onPressed: () {},
+              onPressed: () {}, // TODO: 6/13/2021 Link to BLoC.
             ),
           )
         ],
