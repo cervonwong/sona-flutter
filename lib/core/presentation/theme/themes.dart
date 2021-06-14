@@ -140,7 +140,7 @@ TextTheme _createBaseTextTheme() {
     headline6: TextStyle(
       fontFamily: 'Work Sans',
       // Figma: 21.
-      fontSize: 23.5,
+      fontSize: 23.2,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
       fontFeatures: [FontFeature.stylisticSet(1)],
@@ -148,7 +148,7 @@ TextTheme _createBaseTextTheme() {
     subtitle1: TextStyle(
       fontFamily: 'Work Sans',
       // Figma: 17.
-      fontSize: 19,
+      fontSize: 18,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
       fontFeatures: [FontFeature.stylisticSet(1)],
@@ -156,7 +156,7 @@ TextTheme _createBaseTextTheme() {
     subtitle2: TextStyle(
       fontFamily: 'Work Sans',
       // Figma: 14.
-      fontSize: 15.5,
+      fontSize: 15.2,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
       fontFeatures: [FontFeature.stylisticSet(1)],
@@ -164,7 +164,7 @@ TextTheme _createBaseTextTheme() {
     bodyText1: TextStyle(
       fontFamily: 'Work Sans',
       // Figma: 17.
-      fontSize: 19,
+      fontSize: 18,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
       fontFeatures: [FontFeature.stylisticSet(1)],
@@ -172,7 +172,7 @@ TextTheme _createBaseTextTheme() {
     bodyText2: TextStyle(
       fontFamily: 'Work Sans',
       // Figma: 14.
-      fontSize: 15.5,
+      fontSize: 15.2,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
       fontFeatures: [FontFeature.stylisticSet(1)],
