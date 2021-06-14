@@ -30,7 +30,7 @@ import '../bloc/deck_list_bloc.dart';
 import '../view_models/deck_list_view_model.dart';
 
 class DeckListPane extends StatelessWidget {
-  const DeckListPane({Key? key}) : super(key: key);
+  const DeckListPane();
 
   @override
   Widget build(BuildContext context) {
@@ -41,21 +41,8 @@ class DeckListPane extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            const _DeckListTopBar(),
-            BlocBuilder<DeckListBloc, DeckListState>(
-              buildWhen: (_, state) => state is DeckListLoaded,
-              builder: (context, state) {
-                return state is DeckListLoaded
-                    ? Column(
-                        children: [
-                          ...state.deckListViewModel.items.map(
-                            (item) => _DeckListItem(viewModel: item),
-                          ),
-                        ],
-                      )
-                    : Container();
-              },
-            ),
+            const _TopBar(),
+            const _ItemList(),
           ],
         ),
       ),
@@ -63,8 +50,30 @@ class DeckListPane extends StatelessWidget {
   }
 }
 
-class _DeckListTopBar extends StatelessWidget {
-  const _DeckListTopBar();
+class _ItemList extends StatelessWidget {
+  const _ItemList();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DeckListBloc, DeckListState>(
+      buildWhen: (_, state) => state is DeckListLoaded,
+      builder: (context, state) {
+        return state is DeckListLoaded
+            ? Column(
+                children: [
+                  ...state.deckListViewModel.items.map(
+                    (viewModel) => _Item(viewModel: viewModel),
+                  ),
+                ],
+              )
+            : Container();
+      },
+    );
+  }
+}
+
+class _TopBar extends StatelessWidget {
+  const _TopBar();
 
   @override
   Widget build(BuildContext context) {
@@ -79,33 +88,10 @@ class _DeckListTopBar extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Consumer<ColorNotifier>(
-              builder: (_, cn, __) {
-                return Text(
-                  'My Decks',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: cn.onSurface.highEmphasis,
-                      ),
-                );
-              },
-            ),
+            const _TopBarTitle(),
             const Spacer(),
-            IconButton(
-              icon: const Icon(FluentIcons.add_24_regular),
-              color: Theme.of(context).colorScheme.primary,
-              splashRadius: 24.0,
-              onPressed: () {
-                print('test');
-              },
-            ),
-            IconButton(
-              icon: const Icon(FluentIcons.more_vertical_24_regular),
-              color: Theme.of(context).colorScheme.primary,
-              splashRadius: 24.0,
-              onPressed: () {
-                print('test');
-              },
-            ),
+            const _TopBarAddIcon(),
+            const _TopBarOverflowIcon(),
           ],
         ),
       ),
@@ -113,10 +99,60 @@ class _DeckListTopBar extends StatelessWidget {
   }
 }
 
-class _DeckListItem extends StatelessWidget {
+class _TopBarTitle extends StatelessWidget {
+  const _TopBarTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return Text(
+          'My Decks',
+          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                color: cn.onSurface.highEmphasis,
+              ),
+        );
+      },
+    );
+  }
+}
+
+class _TopBarAddIcon extends StatelessWidget {
+  const _TopBarAddIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(FluentIcons.add_24_regular),
+      color: Theme.of(context).colorScheme.primary,
+      splashRadius: 24.0,
+      onPressed: () {
+        print('test');
+      },
+    );
+  }
+}
+
+class _TopBarOverflowIcon extends StatelessWidget {
+  const _TopBarOverflowIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(FluentIcons.more_vertical_24_regular),
+      color: Theme.of(context).colorScheme.primary,
+      splashRadius: 24.0,
+      onPressed: () {
+        print('test');
+      },
+    );
+  }
+}
+
+class _Item extends StatelessWidget {
   final DeckListItemViewModel viewModel;
 
-  const _DeckListItem({required this.viewModel});
+  const _Item({required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +174,7 @@ class _DeckListItem extends StatelessWidget {
           elevation: 0.0,
           child: Row(
             children: [
-              _DeckIcon(
+              DeckIcon(
                 iconColorViewModel: viewModel.iconColor,
                 iconData: viewModel.iconData,
               ),
@@ -151,35 +187,23 @@ class _DeckListItem extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              viewModel.name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: cn.onSurface.highEmphasis,
-                                  ),
+                            _ItemDeckName(
+                              colorNotifier: cn,
+                              name: viewModel.name,
                             ),
                             const Spacer(),
-                            Text(
-                              viewModel.dueText,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2!
-                                  .copyWith(
-                                    color: cn.onSurface.accentOrange,
-                                  ),
+                            _ItemDueText(
+                              colorNotifier: cn,
+                              dueText: viewModel.dueText,
                             ),
                           ],
                         ),
                         const SizedBox(
                           height: WidgetConstants.spacingPadding02,
                         ),
-                        Text(
-                          viewModel.subtitle,
-                          style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: cn.onSurface.mediumEmphasis,
-                              ),
+                        _ItemSubtitle(
+                          colorNotifier: cn,
+                          subtitle: viewModel.subtitle,
                         ),
                       ],
                     ),
@@ -194,11 +218,62 @@ class _DeckListItem extends StatelessWidget {
   }
 }
 
-class _DeckIcon extends StatelessWidget {
+class _ItemSubtitle extends StatelessWidget {
+  final ColorNotifier colorNotifier;
+  final String subtitle;
+
+  const _ItemSubtitle({required this.colorNotifier, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      subtitle,
+      style: Theme.of(context).textTheme.caption!.copyWith(
+            color: colorNotifier.onSurface.mediumEmphasis,
+          ),
+    );
+  }
+}
+
+class _ItemDeckName extends StatelessWidget {
+  final ColorNotifier colorNotifier;
+  final String name;
+
+  const _ItemDeckName({required this.colorNotifier, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      name,
+      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+            color: colorNotifier.onSurface.highEmphasis,
+          ),
+    );
+  }
+}
+
+class _ItemDueText extends StatelessWidget {
+  final ColorNotifier colorNotifier;
+  final String dueText;
+
+  const _ItemDueText({required this.colorNotifier, required this.dueText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      dueText,
+      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+            color: colorNotifier.onSurface.accentOrange,
+          ),
+    );
+  }
+}
+
+class DeckIcon extends StatelessWidget {
   final DeckListItemIconColorViewModel iconColorViewModel;
   final IconData iconData;
 
-  _DeckIcon({
+  DeckIcon({
     required this.iconColorViewModel,
     required this.iconData,
   });
