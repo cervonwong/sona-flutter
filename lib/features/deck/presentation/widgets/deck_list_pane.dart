@@ -196,100 +196,67 @@ class DeckListItem extends StatelessWidget {
 
 class DeckIcon extends StatelessWidget {
   final DeckListItemIconColorViewModel iconColorViewModel;
-  late final Color iconColor;
   final IconData iconData;
 
   DeckIcon({
     required this.iconColorViewModel,
     required this.iconData,
-  }) {
-    switch (iconColorViewModel) {
-      case DeckListItemIconColorViewModel.red:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentRed;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentRed;
-        });
-        break;
-      case DeckListItemIconColorViewModel.orange:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentOrange;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentOrange;
-        });
-        break;
-      case DeckListItemIconColorViewModel.yellow:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentYellow;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentYellow;
-        });
-        break;
-      case DeckListItemIconColorViewModel.lime:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentLime;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentLime;
-        });
-        break;
-      case DeckListItemIconColorViewModel.green:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentGreen;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentGreen;
-        });
-        break;
-      case DeckListItemIconColorViewModel.teal:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentTeal;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentTeal;
-        });
-        break;
-      case DeckListItemIconColorViewModel.cyan:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentCyan;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentCyan;
-        });
-        break;
-      case DeckListItemIconColorViewModel.sky:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentSky;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentSky;
-        });
-        break;
-      case DeckListItemIconColorViewModel.blue:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentBlue;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentBlue;
-        });
-        break;
-      case DeckListItemIconColorViewModel.purple:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentPurple;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentPurple;
-        });
-        break;
-      case DeckListItemIconColorViewModel.pink:
-        iconColor = GetIt.instance<ColorNotifier>().onSurface.accentPink;
-        GetIt.instance<ColorNotifier>().addListener(() {
-          iconColor = GetIt.instance<ColorNotifier>().onSurface.accentPink;
-        });
-        break;
-    }
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40.0,
-      width: 40.0,
-      decoration: ShapeDecoration(
-        shape: const CircleBorder(),
-        color: iconColor,
-      ),
-      child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
-          return Icon(
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        late final Color color;
+        switch (iconColorViewModel) {
+          case DeckListItemIconColorViewModel.red:
+            color = cn.onSurface.accentRed;
+            break;
+          case DeckListItemIconColorViewModel.orange:
+            color = cn.onSurface.accentOrange;
+            break;
+          case DeckListItemIconColorViewModel.yellow:
+            color = cn.onSurface.accentYellow;
+            break;
+          case DeckListItemIconColorViewModel.lime:
+            color = cn.onSurface.accentLime;
+            break;
+          case DeckListItemIconColorViewModel.green:
+            color = cn.onSurface.accentGreen;
+            break;
+          case DeckListItemIconColorViewModel.teal:
+            color = cn.onSurface.accentTeal;
+            break;
+          case DeckListItemIconColorViewModel.cyan:
+            color = cn.onSurface.accentCyan;
+            break;
+          case DeckListItemIconColorViewModel.sky:
+            color = cn.onSurface.accentSky;
+            break;
+          case DeckListItemIconColorViewModel.blue:
+            color = cn.onSurface.accentBlue;
+            break;
+          case DeckListItemIconColorViewModel.purple:
+            color = cn.onSurface.accentPurple;
+            break;
+          case DeckListItemIconColorViewModel.pink:
+            color = cn.onSurface.accentPink;
+            break;
+        }
+
+        return Container(
+          height: 40.0,
+          width: 40.0,
+          decoration: ShapeDecoration(
+            shape: const CircleBorder(),
+            color: color,
+          ),
+          child: Icon(
             FluentIcons.collections_24_regular,
             color: cn.onAccent.highEmphasis,
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
