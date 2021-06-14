@@ -20,6 +20,7 @@
 import 'package:flutter/material.dart';
 
 import 'shared/app_bar_bottom_border.dart';
+import 'shared/drawer_icon_button.dart';
 
 class ProfileDestinationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -29,6 +30,7 @@ class ProfileDestinationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Profile'),
+      leading: const DrawerIconButton(),
       bottom: const AppBarBottomBorder(),
     );
   }

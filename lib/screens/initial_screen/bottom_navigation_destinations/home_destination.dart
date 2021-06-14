@@ -25,6 +25,7 @@ import 'package:provider/provider.dart';
 import '../../../core/presentation/change_notifiers/color_notifier.dart';
 import '../../../features/stats/streak/presentation/widgets/streak_counter.dart';
 import 'shared/app_bar_bottom_border.dart';
+import 'shared/drawer_icon_button.dart';
 
 class HomeDestinationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -44,19 +45,6 @@ class HomeDestinationAppBar extends StatelessWidget
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class DrawerIconButton extends StatelessWidget {
-  const DrawerIconButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(FluentIcons.list_24_filled),
-      splashRadius: 24.0,
-      onPressed: () => Scaffold.of(context).openDrawer(),
-    );
-  }
 }
 
 class HomeDestinationFab extends StatelessWidget {

@@ -19,22 +19,17 @@
 
 import 'package:flutter/material.dart';
 
-import 'shared/app_bar_bottom_border.dart';
-import 'shared/drawer_icon_button.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
-class ProgressDestinationAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const ProgressDestinationAppBar();
+class DrawerIconButton extends StatelessWidget {
+  const DrawerIconButton();
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('Progress'),
-      leading: const DrawerIconButton(),
-      bottom: const AppBarBottomBorder(),
+    return IconButton(
+      icon: const Icon(FluentIcons.list_24_filled),
+      splashRadius: 24.0,
+      onPressed: () => Scaffold.of(context).openDrawer(),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

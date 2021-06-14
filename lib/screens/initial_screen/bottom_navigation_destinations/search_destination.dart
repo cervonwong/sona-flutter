@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/presentation/change_notifiers/color_notifier.dart';
 import 'shared/app_bar_bottom_border.dart';
+import 'shared/drawer_icon_button.dart';
 
 class SearchDestinationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -33,6 +34,7 @@ class SearchDestinationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Search'),
+      leading: const DrawerIconButton(),
       bottom: const AppBarBottomBorder(),
     );
   }
