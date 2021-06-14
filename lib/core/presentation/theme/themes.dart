@@ -125,55 +125,55 @@ TextTheme _createBaseTextTheme() {
     ),
     headline5: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 25,
+      fontSize: 26.5, // Figma: 25.
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
     ),
     headline6: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 21,
+      fontSize: 23.5, // Figma: 21.
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
     ),
     subtitle1: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 17,
+      fontSize: 19, // Figma: 17.
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
     ),
     subtitle2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 14,
+      fontSize: 15.5, // Figma: 14.
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
     ),
     bodyText1: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 17,
+      fontSize: 19, // Figma: 17.
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
     ),
     bodyText2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 14,
+      fontSize: 15.5, // Figma: 14.
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
     ),
     button: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 14,
+      fontSize: 15, // Figma: 14.
       fontWeight: FontWeight.w700,
       letterSpacing: 1.0,
     ),
     caption: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 12,
+      fontSize: 13, // Figma: 12
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
     ),
     overline: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 11,
+      fontSize: 12, // Figma: 11.\
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
     ),
