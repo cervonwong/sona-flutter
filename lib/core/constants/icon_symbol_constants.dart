@@ -69,7 +69,7 @@ class IconSymbolConstants {
       name: 'DECK',
       version: 1,
       symbol: DeckIconSymbol.deck,
-      iconData: FluentIcons.style_guide_24_regular,
+      iconData: FluentIcons.collections_24_regular,
       searchTerms: [
         'deck',
         'style',
