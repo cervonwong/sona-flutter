@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -98,84 +100,106 @@ ColorScheme _createColorScheme() {
 }
 
 TextTheme _createBaseTextTheme() {
-  return const TextTheme(
+  return TextTheme(
     headline1: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 80,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     headline2: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 58,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     headline3: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 46,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     headline4: TextStyle(
       fontFamily: 'Work Sans',
       fontSize: 34,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     headline5: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 26.5, // Figma: 25.
+      // Figma: 25.
+      fontSize: 26.5,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     headline6: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 23.5, // Figma: 21.
+      // Figma: 21.
+      fontSize: 23.5,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     subtitle1: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 19, // Figma: 17.
+      // Figma: 17.
+      fontSize: 19,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     subtitle2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 15.5, // Figma: 14.
+      // Figma: 14.
+      fontSize: 15.5,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     bodyText1: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 19, // Figma: 17.
+      // Figma: 17.
+      fontSize: 19,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     bodyText2: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 15.5, // Figma: 14.
+      // Figma: 14.
+      fontSize: 15.5,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     button: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 15, // Figma: 14.
+      // Figma: 14.
+      fontSize: 15,
       fontWeight: FontWeight.w700,
       letterSpacing: 1.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     caption: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 13, // Figma: 12
+      // Figma: 12.
+      fontSize: 13,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     overline: TextStyle(
       fontFamily: 'Work Sans',
-      fontSize: 12, // Figma: 11.\
+      // Figma: 11.
+      fontSize: 12,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.0,
+      fontFeatures: [FontFeature.stylisticSet(1)],
     ),
   );
 }
