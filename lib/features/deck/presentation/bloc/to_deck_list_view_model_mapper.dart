@@ -34,7 +34,7 @@ class ToDeckListViewModelMapper {
       items: decks
           .map(
             // TODO: 6/11/2021 Change these hard coded values in future.
-            (deck) => DeckListViewModelItem(
+            (deck) => DeckListItemViewModel(
               id: deck.id,
               name: deck.name,
               hasEntries: true,
@@ -45,7 +45,7 @@ class ToDeckListViewModelMapper {
                       (metadata) => metadata.symbol == deck.iconSpec.symbol)
                   .iconData,
               iconColor:
-                  _mapToDeckListViewModelItemIconColor(deck.iconSpec.color),
+                  _mapToDeckListItemIconColorViewModel(deck.iconSpec.color),
               hasCompletedRevision: false,
               progressPercent: 0.80,
             ),
@@ -59,32 +59,32 @@ class ToDeckListViewModelMapper {
   //  DeckListLoaded state if theme changes? Anyways, I decided to create
   //  another enum which is exactly the same as DeckIconColor, but it is part of
   //  the ViewModel and not part of Entity.
-  DeckListViewModelItemIconColor _mapToDeckListViewModelItemIconColor(
+  DeckListItemIconColorViewModel _mapToDeckListItemIconColorViewModel(
     DeckIconColor deckIconColor,
   ) {
     switch (deckIconColor) {
       case DeckIconColor.red:
-        return DeckListViewModelItemIconColor.red;
+        return DeckListItemIconColorViewModel.red;
       case DeckIconColor.orange:
-        return DeckListViewModelItemIconColor.orange;
+        return DeckListItemIconColorViewModel.orange;
       case DeckIconColor.yellow:
-        return DeckListViewModelItemIconColor.yellow;
+        return DeckListItemIconColorViewModel.yellow;
       case DeckIconColor.lime:
-        return DeckListViewModelItemIconColor.lime;
+        return DeckListItemIconColorViewModel.lime;
       case DeckIconColor.green:
-        return DeckListViewModelItemIconColor.green;
+        return DeckListItemIconColorViewModel.green;
       case DeckIconColor.teal:
-        return DeckListViewModelItemIconColor.teal;
+        return DeckListItemIconColorViewModel.teal;
       case DeckIconColor.cyan:
-        return DeckListViewModelItemIconColor.cyan;
+        return DeckListItemIconColorViewModel.cyan;
       case DeckIconColor.sky:
-        return DeckListViewModelItemIconColor.sky;
+        return DeckListItemIconColorViewModel.sky;
       case DeckIconColor.blue:
-        return DeckListViewModelItemIconColor.blue;
+        return DeckListItemIconColorViewModel.blue;
       case DeckIconColor.purple:
-        return DeckListViewModelItemIconColor.purple;
+        return DeckListItemIconColorViewModel.purple;
       case DeckIconColor.pink:
-        return DeckListViewModelItemIconColor.pink;
+        return DeckListItemIconColorViewModel.pink;
     }
   }
 }

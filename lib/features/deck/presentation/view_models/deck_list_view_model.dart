@@ -24,11 +24,11 @@ import 'package:meta/meta.dart';
 
 @immutable
 class DeckListViewModel extends Equatable {
-  final List<DeckListViewModelItem> _items;
+  final List<DeckListItemViewModel> _items;
 
-  List<DeckListViewModelItem> get items => _items.toList();
+  List<DeckListItemViewModel> get items => _items.toList();
 
-  DeckListViewModel({required List<DeckListViewModelItem> items})
+  DeckListViewModel({required List<DeckListItemViewModel> items})
       : _items = items.toList();
 
   @override
@@ -36,18 +36,18 @@ class DeckListViewModel extends Equatable {
 }
 
 @immutable
-class DeckListViewModelItem extends Equatable {
+class DeckListItemViewModel extends Equatable {
   final int id;
   final String name;
   final bool hasEntries;
   final String subtitle;
   final String dueText;
   final IconData iconData;
-  final DeckListViewModelItemIconColor iconColor;
+  final DeckListItemIconColorViewModel iconColor;
   final bool? hasCompletedRevision;
   final double? progressPercent;
 
-  DeckListViewModelItem({
+  DeckListItemViewModel({
     required this.id,
     required this.name,
     required this.hasEntries,
@@ -73,7 +73,7 @@ class DeckListViewModelItem extends Equatable {
       ];
 }
 
-enum DeckListViewModelItemIconColor {
+enum DeckListItemIconColorViewModel {
   red,
   orange,
   yellow,
