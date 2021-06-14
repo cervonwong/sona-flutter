@@ -35,8 +35,6 @@ class HomeDestinationAppBar extends StatelessWidget
     return AppBar(
       title: const Text('Good morning'),
       leading: const DrawerIconButton(),
-      // Makes title is closer to leading.
-      titleSpacing: 0.0,
       actions: [
         const StreakCounter(streakCount: 0, isActive: false),
       ],
