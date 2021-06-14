@@ -41,7 +41,7 @@ class DeckListPane extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            const DeckListTopBar(),
+            const _DeckListTopBar(),
             BlocBuilder<DeckListBloc, DeckListState>(
               buildWhen: (_, state) => state is DeckListLoaded,
               builder: (context, state) {
@@ -49,7 +49,7 @@ class DeckListPane extends StatelessWidget {
                     ? Column(
                         children: [
                           ...state.deckListViewModel.items.map(
-                            (item) => DeckListItem(viewModel: item),
+                            (item) => _DeckListItem(viewModel: item),
                           ),
                         ],
                       )
@@ -63,8 +63,8 @@ class DeckListPane extends StatelessWidget {
   }
 }
 
-class DeckListTopBar extends StatelessWidget {
-  const DeckListTopBar();
+class _DeckListTopBar extends StatelessWidget {
+  const _DeckListTopBar();
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +113,10 @@ class DeckListTopBar extends StatelessWidget {
   }
 }
 
-class DeckListItem extends StatelessWidget {
+class _DeckListItem extends StatelessWidget {
   final DeckListItemViewModel viewModel;
 
-  const DeckListItem({required this.viewModel});
+  const _DeckListItem({required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class DeckListItem extends StatelessWidget {
           elevation: 0.0,
           child: Row(
             children: [
-              DeckIcon(
+              _DeckIcon(
                 iconColorViewModel: viewModel.iconColor,
                 iconData: viewModel.iconData,
               ),
@@ -194,11 +194,11 @@ class DeckListItem extends StatelessWidget {
   }
 }
 
-class DeckIcon extends StatelessWidget {
+class _DeckIcon extends StatelessWidget {
   final DeckListItemIconColorViewModel iconColorViewModel;
   final IconData iconData;
 
-  DeckIcon({
+  _DeckIcon({
     required this.iconColorViewModel,
     required this.iconData,
   });
