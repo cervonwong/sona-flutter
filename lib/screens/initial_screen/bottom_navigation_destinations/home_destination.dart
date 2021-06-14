@@ -54,7 +54,8 @@ class DrawerIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(FluentIcons.list_24_regular),
+      icon: const Icon(FluentIcons.list_24_filled),
+      splashRadius: 24.0,
       onPressed: () => Scaffold.of(context).openDrawer(),
     );
   }
