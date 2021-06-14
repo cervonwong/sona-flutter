@@ -35,50 +35,85 @@ class DeckListEmptyStatePane extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Consumer<ColorNotifier>(
-            builder: (_, cn, __) {
-              return Icon(
-                FluentIcons.collections_24_filled,
-                size: 120.0,
-                color: cn.onBackground.lowEmphasis,
-              );
-            },
-          ),
+          const _Icon(),
           const SizedBox(height: WidgetConstants.spacingPadding16),
-          Consumer<ColorNotifier>(
-            builder: (_, cn, __) {
-              return Text(
-                'You have no decks',
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: cn.onBackground.highEmphasis,
-                    ),
-              );
-            },
-          ),
+          const _Title(),
           const SizedBox(height: WidgetConstants.spacingPadding08),
-          Consumer<ColorNotifier>(
-            builder: (_, cn, __) {
-              return Text(
-                'Create a new deck and it will show up here.',
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      color: cn.onBackground.mediumEmphasis,
-                    ),
-              );
-            },
-          ),
+          const _Body(),
           const SizedBox(height: WidgetConstants.spacingPadding16),
-          Theme(
-            data: Theme.of(context).copyWith(
-              elevatedButtonTheme:
-                  lightThemeRadiusMaxElevatedButtonThemeData,
-            ),
-            child: ElevatedButton.icon(
-              icon: const Icon(FluentIcons.add_24_regular),
-              label: const Text('NEW DECK'),
-              onPressed: () {}, // TODO: 6/13/2021 Link to BLoC.
-            ),
-          )
+          const _CTA(),
         ],
+      ),
+    );
+  }
+}
+
+class _Icon extends StatelessWidget {
+  const _Icon();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return Icon(
+          FluentIcons.collections_24_filled,
+          size: 120.0,
+          color: cn.onBackground.lowEmphasis,
+        );
+      },
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  const _Title();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return Text(
+          'You have no decks',
+          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                color: cn.onBackground.highEmphasis,
+              ),
+        );
+      },
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, cn, __) {
+        return Text(
+          'Create a new deck and it will show up here.',
+          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                color: cn.onBackground.mediumEmphasis,
+              ),
+        );
+      },
+    );
+  }
+}
+
+class _CTA extends StatelessWidget {
+  const _CTA();
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        elevatedButtonTheme: lightThemeRadiusMaxElevatedButtonThemeData,
+      ),
+      child: ElevatedButton.icon(
+        icon: const Icon(FluentIcons.add_24_regular),
+        label: const Text('NEW DECK'),
+        onPressed: () {}, // TODO: 6/13/2021 Link to BLoC.
       ),
     );
   }
