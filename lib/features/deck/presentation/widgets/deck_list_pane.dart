@@ -64,6 +64,10 @@ class _ItemList extends StatelessWidget {
                   ...state.deckListViewModel.items.map(
                     (viewModel) => _Item(viewModel: viewModel),
                   ),
+                  Container(
+                    height: WidgetConstants.spacingPadding08,
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
                 ],
               )
             : Container();
@@ -156,61 +160,72 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: WidgetConstants.spacingPadding08,
+      ),
       color: Theme.of(context).colorScheme.surface,
-      child: Consumer<ColorNotifier>(
-        builder: (_, colorNotifier, child) {
-          return InkWell(
-            onTap: () {},
-            onLongPress: () {},
-            highlightColor: colorNotifier.onSurface.highlightPrimary,
-            splashColor: colorNotifier.onSurface.splashPrimary,
-            child: child,
-          );
-        },
-        child: Card(
-          color: Colors.transparent,
-          margin: const EdgeInsets.all(WidgetConstants.spacingPadding16),
-          elevation: 0.0,
-          child: Row(
-            children: [
-              DeckIcon(
-                iconColorViewModel: viewModel.iconColor,
-                iconData: viewModel.iconData,
+      child: Material(
+        color: Theme.of(context).colorScheme.surface,
+        child: Consumer<ColorNotifier>(
+          builder: (_, colorNotifier, child) {
+            return InkWell(
+              onTap: () {},
+              highlightColor: colorNotifier.onSurface.highlightPrimary,
+              splashColor: colorNotifier.onSurface.splashPrimary,
+              borderRadius: BorderRadius.circular(
+                WidgetConstants.cornerRadius08,
               ),
-              const SizedBox(width: WidgetConstants.spacingPadding16),
-              Consumer<ColorNotifier>(
-                builder: (_, colorNotifier, __) {
-                  return Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            _ItemDeckName(
-                              colorNotifier: colorNotifier,
-                              name: viewModel.name,
-                            ),
-                            const Spacer(),
-                            _ItemDueText(
-                              colorNotifier: colorNotifier,
-                              dueText: viewModel.dueText,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: WidgetConstants.spacingPadding02,
-                        ),
-                        _ItemSubtitle(
-                          colorNotifier: colorNotifier,
-                          subtitle: viewModel.subtitle,
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
+              child: child,
+            );
+          },
+          child: Card(
+            color: Colors.transparent,
+            margin: const EdgeInsets.symmetric(
+              vertical: WidgetConstants.spacingPadding16,
+              horizontal: WidgetConstants.spacingPadding08,
+            ),
+            elevation: 0.0,
+            child: Row(
+              children: [
+                DeckIcon(
+                  iconColorViewModel: viewModel.iconColor,
+                  iconData: viewModel.iconData,
+                ),
+                const SizedBox(width: WidgetConstants.spacingPadding16),
+                Consumer<ColorNotifier>(
+                  builder: (_, colorNotifier, __) {
+                    return Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              _ItemDeckName(
+                                colorNotifier: colorNotifier,
+                                name: viewModel.name,
+                              ),
+                              const Spacer(),
+                              _ItemDueText(
+                                colorNotifier: colorNotifier,
+                                dueText: viewModel.dueText,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: WidgetConstants.spacingPadding02,
+                          ),
+                          _ItemSubtitle(
+                            colorNotifier: colorNotifier,
+                            subtitle: viewModel.subtitle,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
