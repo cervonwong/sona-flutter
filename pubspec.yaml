@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   equatable: ^2.0.2
-  fluentui_system_icons: ^1.1.127
+  fluentui_system_icons: ^1.1.129
   flutter:
     sdk: flutter
   flutter_bloc: ^7.0.1
