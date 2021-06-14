@@ -55,6 +55,8 @@ class ColorNotifier extends ChangeNotifier {
 
   _ColorGroup get onPrimary => _onDark;
 
+  _ColorGroup get onAccent => _onDark;
+
   _ColorGroup get onSurface {
     switch (_theme) {
       case ColorTheme.light:
