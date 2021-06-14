@@ -37,12 +37,12 @@ class OldHomeScreen extends StatelessWidget {
     return BlocProvider<DeckListBloc>(
       create: (_) => GetIt.instance()..add(DeckListInitialized()),
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, child) {
+        builder: (_, colorNotifier, child) {
           return Scaffold(
             appBar: _HomeAppBar(),
             drawer: MainDrawer(selected: SelectableDrawerDestination.home),
             floatingActionButton: _HomeFAB(),
-            drawerScrimColor: cn.specific.scrim,
+            drawerScrimColor: colorNotifier.specific.scrim,
             body: child,
           );
         },
@@ -83,10 +83,10 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: const Text('Home'),
       leading: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return IconButton(
-            splashColor: cn.onPrimary.splashNeutral,
-            highlightColor: cn.onPrimary.highlightNeutral,
+            splashColor: colorNotifier.onPrimary.splashNeutral,
+            highlightColor: colorNotifier.onPrimary.highlightNeutral,
             icon: const Icon(FluentIcons.list_24_regular),
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             onPressed: () => Scaffold.of(context).openDrawer(),
@@ -120,9 +120,9 @@ class _HomeFAB extends StatelessWidget {
         shadowColor: Theme.of(context).colorScheme.primary,
       ),
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return FloatingActionButton(
-            onPressed: () => _onPressed(context, cn),
+            onPressed: () => _onPressed(context, colorNotifier),
             child: const Icon(FluentIcons.add_24_regular),
           );
         },
@@ -130,9 +130,9 @@ class _HomeFAB extends StatelessWidget {
     );
   }
 
-  void _onPressed(BuildContext context, ColorNotifier cn) {
+  void _onPressed(BuildContext context, ColorNotifier colorNotifier) {
     showModalBottomSheet(
-      barrierColor: cn.specific.scrim,
+      barrierColor: colorNotifier.specific.scrim,
       context: context,
       builder: (_) => _CreateActionsMenuSheet(context: context),
     );
@@ -147,7 +147,7 @@ class _CreateActionsMenuSheet extends StatelessWidget {
   @override
   Widget build(BuildContext innerContext) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Padding(
           padding: const EdgeInsets.only(
             top: 32.0,
@@ -165,7 +165,10 @@ class _CreateActionsMenuSheet extends StatelessWidget {
                 icon: FluentIcons.book_add_24_regular,
                 text: 'Create new deck',
                 onTap: () {
-                  _handleCreateNewDeck(context: context, cn: cn);
+                  _handleCreateNewDeck(
+                    context: context,
+                    colorNotifier: colorNotifier,
+                  );
                 },
               ),
             ],
@@ -177,12 +180,12 @@ class _CreateActionsMenuSheet extends StatelessWidget {
 
   void _handleCreateNewDeck({
     required BuildContext context,
-    required ColorNotifier cn,
+    required ColorNotifier colorNotifier,
   }) {
     Navigator.of(context).pop();
 
     showModalBottomSheet(
-      barrierColor: cn.specific.scrim,
+      barrierColor: colorNotifier.specific.scrim,
       context: context,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
@@ -230,19 +233,19 @@ class _CreateActionsMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return Icon(
             icon,
-            color: cn.onSurface.lowEmphasis,
+            color: colorNotifier.onSurface.lowEmphasis,
           );
         },
       ),
       title: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return Text(
             text,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: cn.onSurface.highEmphasis,
+                  color: colorNotifier.onSurface.highEmphasis,
                 ),
           );
         },

@@ -105,11 +105,11 @@ class _TopBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Text(
           'My Decks',
           style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                color: cn.onSurface.highEmphasis,
+                color: colorNotifier.onSurface.highEmphasis,
               ),
         );
       },
@@ -159,12 +159,12 @@ class _Item extends StatelessWidget {
     return Material(
       color: Theme.of(context).colorScheme.surface,
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, child) {
+        builder: (_, colorNotifier, child) {
           return InkWell(
             onTap: () {},
             onLongPress: () {},
-            highlightColor: cn.onSurface.highlightPrimary,
-            splashColor: cn.onSurface.splashPrimary,
+            highlightColor: colorNotifier.onSurface.highlightPrimary,
+            splashColor: colorNotifier.onSurface.splashPrimary,
             child: child,
           );
         },
@@ -180,7 +180,7 @@ class _Item extends StatelessWidget {
               ),
               const SizedBox(width: WidgetConstants.spacingPadding16),
               Consumer<ColorNotifier>(
-                builder: (_, cn, __) {
+                builder: (_, colorNotifier, __) {
                   return Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,12 +188,12 @@ class _Item extends StatelessWidget {
                         Row(
                           children: [
                             _ItemDeckName(
-                              colorNotifier: cn,
+                              colorNotifier: colorNotifier,
                               name: viewModel.name,
                             ),
                             const Spacer(),
                             _ItemDueText(
-                              colorNotifier: cn,
+                              colorNotifier: colorNotifier,
                               dueText: viewModel.dueText,
                             ),
                           ],
@@ -202,7 +202,7 @@ class _Item extends StatelessWidget {
                           height: WidgetConstants.spacingPadding02,
                         ),
                         _ItemSubtitle(
-                          colorNotifier: cn,
+                          colorNotifier: colorNotifier,
                           subtitle: viewModel.subtitle,
                         ),
                       ],
@@ -281,41 +281,41 @@ class DeckIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         late final Color color;
         switch (iconColorViewModel) {
           case DeckListItemIconColorViewModel.red:
-            color = cn.onSurface.accentRed;
+            color = colorNotifier.onSurface.accentRed;
             break;
           case DeckListItemIconColorViewModel.orange:
-            color = cn.onSurface.accentOrange;
+            color = colorNotifier.onSurface.accentOrange;
             break;
           case DeckListItemIconColorViewModel.yellow:
-            color = cn.onSurface.accentYellow;
+            color = colorNotifier.onSurface.accentYellow;
             break;
           case DeckListItemIconColorViewModel.lime:
-            color = cn.onSurface.accentLime;
+            color = colorNotifier.onSurface.accentLime;
             break;
           case DeckListItemIconColorViewModel.green:
-            color = cn.onSurface.accentGreen;
+            color = colorNotifier.onSurface.accentGreen;
             break;
           case DeckListItemIconColorViewModel.teal:
-            color = cn.onSurface.accentTeal;
+            color = colorNotifier.onSurface.accentTeal;
             break;
           case DeckListItemIconColorViewModel.cyan:
-            color = cn.onSurface.accentCyan;
+            color = colorNotifier.onSurface.accentCyan;
             break;
           case DeckListItemIconColorViewModel.sky:
-            color = cn.onSurface.accentSky;
+            color = colorNotifier.onSurface.accentSky;
             break;
           case DeckListItemIconColorViewModel.blue:
-            color = cn.onSurface.accentBlue;
+            color = colorNotifier.onSurface.accentBlue;
             break;
           case DeckListItemIconColorViewModel.purple:
-            color = cn.onSurface.accentPurple;
+            color = colorNotifier.onSurface.accentPurple;
             break;
           case DeckListItemIconColorViewModel.pink:
-            color = cn.onSurface.accentPink;
+            color = colorNotifier.onSurface.accentPink;
             break;
         }
 
@@ -328,7 +328,7 @@ class DeckIcon extends StatelessWidget {
           ),
           child: Icon(
             FluentIcons.collections_24_regular,
-            color: cn.onAccent.highEmphasis,
+            color: colorNotifier.onAccent.highEmphasis,
           ),
         );
       },

@@ -49,16 +49,16 @@ class SearchDestinationFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, child) {
+      builder: (_, colorNotifier, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            shadowColor: cn.onBackground.shadowPrimary,
+            shadowColor: colorNotifier.onBackground.shadowPrimary,
           ),
           child: child!,
         );
       },
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return FloatingActionButton(
             onPressed: () {},
             child: const Icon(FluentIcons.arrow_up_24_regular),

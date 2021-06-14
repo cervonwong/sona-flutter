@@ -36,22 +36,22 @@ class DeckListTitleBar extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Consumer<ColorNotifier>(
-                builder: (_, cn, __) {
+                builder: (_, colorNotifier, __) {
                   return Text(
                     'Decks',
                     style: Theme.of(context).textTheme.headline6!.copyWith(
-                          color: cn.onBackground.highEmphasis,
+                          color: colorNotifier.onBackground.highEmphasis,
                         ),
                   );
                 },
               ),
               const SizedBox(width: 12.0),
               Consumer<ColorNotifier>(
-                builder: (_, cn, __) {
+                builder: (_, colorNotifier, __) {
                   return Text(
                     '136 cards to review',
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          color: cn.onBackground.mediumEmphasis,
+                          color: colorNotifier.onBackground.mediumEmphasis,
                         ),
                   );
                 },
@@ -66,10 +66,10 @@ class DeckListTitleBar extends StatelessWidget {
               splashRadius: 24.0,
               padding: const EdgeInsets.all(0.0),
               icon: Consumer<ColorNotifier>(
-                builder: (_, cn, __) {
+                builder: (_, colorNotifier, __) {
                   return Icon(
                     FluentIcons.filter_24_regular,
-                    color: cn.onBackground.mediumEmphasis,
+                    color: colorNotifier.onBackground.mediumEmphasis,
                   );
                 },
               ),

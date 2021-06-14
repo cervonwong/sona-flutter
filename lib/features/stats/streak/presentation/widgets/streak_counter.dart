@@ -37,7 +37,7 @@ class StreakCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Row(
           children: [
             Icon(
@@ -45,8 +45,8 @@ class StreakCounter extends StatelessWidget {
                   ? FluentIcons.target_arrow_16_regular
                   : FluentIcons.target_16_regular,
               color: isActive
-                  ? cn.onSurface.accentYellow
-                  : cn.onSurface.lowEmphasis,
+                  ? colorNotifier.onSurface.accentYellow
+                  : colorNotifier.onSurface.lowEmphasis,
               size: 32.0,
             ),
             const SizedBox(width: WidgetConstants.spacingPadding04),
@@ -54,8 +54,8 @@ class StreakCounter extends StatelessWidget {
               '$streakCount',
               style: Theme.of(context).textTheme.headline6!.copyWith(
                     color: isActive
-                        ? cn.onSurface.accentYellow
-                        : cn.onSurface.lowEmphasis,
+                        ? colorNotifier.onSurface.accentYellow
+                        : colorNotifier.onSurface.lowEmphasis,
                   ),
             ),
             const SizedBox(width: WidgetConstants.spacingPadding16),

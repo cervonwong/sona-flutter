@@ -54,11 +54,11 @@ class _Icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Icon(
           FluentIcons.collections_24_filled,
           size: 120.0,
-          color: cn.onBackground.lowEmphasis,
+          color: colorNotifier.onBackground.lowEmphasis,
         );
       },
     );
@@ -71,11 +71,11 @@ class _Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Text(
           'You have no decks',
           style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                color: cn.onBackground.highEmphasis,
+                color: colorNotifier.onBackground.highEmphasis,
               ),
         );
       },
@@ -89,11 +89,11 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Text(
           'Create a new deck and it will show up here.',
           style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                color: cn.onBackground.mediumEmphasis,
+                color: colorNotifier.onBackground.mediumEmphasis,
               ),
         );
       },

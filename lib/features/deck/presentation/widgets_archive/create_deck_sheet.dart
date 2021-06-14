@@ -128,7 +128,7 @@ class _DeckNameTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return TextField(
             controller: _controller,
             autofocus: true,
@@ -138,7 +138,7 @@ class _DeckNameTextField extends StatelessWidget {
             ],
             textInputAction: TextInputAction.done,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: cn.onSurface.highEmphasis,
+                  color: colorNotifier.onSurface.highEmphasis,
                 ),
             decoration: const InputDecoration(
               isCollapsed: true,

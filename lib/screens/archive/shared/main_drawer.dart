@@ -96,11 +96,11 @@ class MainDrawer extends StatelessWidget {
                     onTap: () {},
                   ),
                   Consumer<ColorNotifier>(
-                    builder: (_, cn, __) {
+                    builder: (_, colorNotifier, __) {
                       return AboutListTile(
                         icon: Icon(
                           FluentIcons.info_24_regular,
-                          color: cn.onSurface.lowEmphasis,
+                          color: colorNotifier.onSurface.lowEmphasis,
                         ),
                         applicationName: 'Sona',
                         applicationVersion: 'v.DEV',
@@ -146,21 +146,22 @@ class _DrawerTile extends StatelessWidget {
         dense: true,
         selected: selected,
         leading: Consumer<ColorNotifier>(
-          builder: (_, cn, __) {
+          builder: (_, colorNotifier, __) {
             return Icon(
               selected ? selectedIcon : icon,
               color: selected
-                  ? cn.onPrimary.highEmphasis
-                  : cn.onSurface.lowEmphasis,
+                  ? colorNotifier.onPrimary.highEmphasis
+                  : colorNotifier.onSurface.lowEmphasis,
             );
           },
         ),
         title: Consumer<ColorNotifier>(
-          builder: (_, cn, __) {
+          builder: (_, colorNotifier, __) {
             return Text(
               title,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: selected ? cn.onPrimary.highEmphasis : null,
+                    color:
+                        selected ? colorNotifier.onPrimary.highEmphasis : null,
                     fontWeight: selected ? FontWeight.w600 : null,
                   ),
             );

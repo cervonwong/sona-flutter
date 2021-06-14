@@ -66,12 +66,12 @@ class DeckListTile extends StatelessWidget {
       key: Key(deckName),
       color: Theme.of(context).colorScheme.surface,
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, child) {
+        builder: (_, colorNotifier, child) {
           return InkWell(
             onTap: () {},
             onLongPress: () {},
-            highlightColor: cn.onSurface.highlightPrimary,
-            splashColor: cn.onSurface.splashPrimary,
+            highlightColor: colorNotifier.onSurface.highlightPrimary,
+            splashColor: colorNotifier.onSurface.splashPrimary,
             child: child,
           );
         },
@@ -131,13 +131,13 @@ class _DeckNameTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Consumer<ColorNotifier>(
-        builder: (_, cn, __) {
+        builder: (_, colorNotifier, __) {
           return Text(
             deckName,
             softWrap: false,
             overflow: TextOverflow.fade,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: cn.onSurface.highEmphasis,
+                  color: colorNotifier.onSurface.highEmphasis,
                 ),
           );
         },
@@ -158,7 +158,7 @@ class _UnreviewedCardCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Text(
           '$unreviewedCardCount',
           style: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -174,10 +174,10 @@ class _CompletedReviewCheckmark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return Icon(
           FluentIcons.checkmark_circle_24_filled,
-          color: cn.onSurface.accentGreen,
+          color: colorNotifier.onSurface.accentGreen,
         );
       },
     );
@@ -197,7 +197,7 @@ class _FamiliarityProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     print(familiarCardPercentage);
     return Consumer<ColorNotifier>(
-      builder: (_, cn, __) {
+      builder: (_, colorNotifier, __) {
         return LinearPercentIndicator(
           percent: familiarCardPercentage,
           padding: const EdgeInsets.symmetric(horizontal: 4.0),

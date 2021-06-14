@@ -106,11 +106,11 @@ class StyledBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
-      builder: (_, cn, child) {
+      builder: (_, colorNotifier, child) {
         return Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: cn.onSurface.borderRegular,
+              color: colorNotifier.onSurface.borderRegular,
               width: WidgetConstants.borderThickness,
             ),
           ),
