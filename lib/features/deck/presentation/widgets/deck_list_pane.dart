@@ -342,7 +342,7 @@ class DeckIcon extends StatelessWidget {
             color: color,
           ),
           child: Icon(
-            FluentIcons.collections_24_regular,
+            iconData,
             color: colorNotifier.onAccent.highEmphasis,
           ),
         );
