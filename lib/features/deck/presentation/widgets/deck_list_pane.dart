@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/presentation/change_notifiers/color_notifier.dart';
@@ -200,6 +201,8 @@ class _Item extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
                             children: [
                               _ItemDeckName(
                                 colorNotifier: colorNotifier,
@@ -212,12 +215,25 @@ class _Item extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: WidgetConstants.spacingPadding02,
+                          SizedBox(
+                            height: viewModel.hasEntries
+                                ? WidgetConstants.spacingPadding08
+                                : WidgetConstants.spacingPadding02,
                           ),
-                          _ItemSubtitle(
-                            colorNotifier: colorNotifier,
-                            subtitle: viewModel.subtitle,
+                          viewModel.hasEntries
+                              ? _ItemProgressBar(
+                                  progressPercent: viewModel.progressPercent!,
+                                  hasCompletedRevision:
+                                      viewModel.hasCompletedRevision!,
+                                )
+                              : _ItemSubtitle(
+                                  colorNotifier: colorNotifier,
+                                  subtitle: viewModel.subtitle,
+                                ),
+                          SizedBox(
+                            height: viewModel.hasEntries
+                                ? WidgetConstants.spacingPadding04
+                                : null,
                           ),
                         ],
                       ),
@@ -229,6 +245,35 @@ class _Item extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ItemProgressBar extends StatelessWidget {
+  final double progressPercent;
+  final bool hasCompletedRevision;
+
+  const _ItemProgressBar({
+    required this.progressPercent,
+    required this.hasCompletedRevision,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ColorNotifier>(
+      builder: (_, colorNotifier, __) {
+        final color = hasCompletedRevision
+            ? colorNotifier.onSurface.accentYellow
+            : colorNotifier.onSurface.accentOrange;
+
+        return LinearPercentIndicator(
+          percent: progressPercent,
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          lineHeight: 6.0,
+          progressColor: color,
+          backgroundColor: color.withOpacity(0.2),
+        );
+      },
     );
   }
 }
