@@ -44,6 +44,13 @@ class DeckListPane extends StatelessWidget {
           children: [
             const _TopBar(),
             const _ItemList(),
+            Consumer<ColorNotifier>(
+              builder: (_, colorNotifier, __) {
+                return Divider(
+                  color: colorNotifier.onSurface.borderLight,
+                );
+              },
+            ),
           ],
         ),
       ),
