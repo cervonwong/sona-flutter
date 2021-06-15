@@ -180,9 +180,9 @@ TextTheme _createBaseTextTheme() {
     button: TextStyle(
       fontFamily: 'Work Sans',
       // Figma: 14.
-      fontSize: 15,
+      fontSize: 16,
       fontWeight: FontWeight.w700,
-      letterSpacing: 1.0,
+      letterSpacing: 0.8,
       fontFeatures: [FontFeature.stylisticSet(1)],
     ),
     caption: TextStyle(
