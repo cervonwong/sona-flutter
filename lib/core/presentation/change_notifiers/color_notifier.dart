@@ -182,7 +182,9 @@ class OnColors {
   final Color borderRegular;
   final Color borderLight;
 
-  const OnColors({
+  // Private constructor to prevent instantiation of invalid color groups
+  // outside this file.
+  const OnColors._({
     required this.shadowPrimary,
     required this.splashNeutral,
     required this.splashPrimary,
@@ -268,7 +270,7 @@ class OnColors {
   }
 }
 
-const _onLightColors = OnColors(
+const _onLightColors = OnColors._(
   shadowPrimary: ColorConstants.shadowPrimaryOnLight,
   splashNeutral: ColorConstants.splashNeutralOnLight,
   splashPrimary: ColorConstants.splashPrimary,
@@ -308,7 +310,7 @@ const _onLightColors = OnColors(
   borderLight: ColorConstants.neutral3,
 );
 
-const _onDarkColors = OnColors(
+const _onDarkColors = OnColors._(
   shadowPrimary: Colors.red,
   // TODO: implement shadowPrimary
   splashNeutral: ColorConstants.splashNeutralOnDark,
@@ -356,15 +358,17 @@ const _onDarkColors = OnColors(
 class ThematicColors {
   final Color scrim;
 
-  const ThematicColors({
+  // Private constructor to prevent instantiation of invalid color groups
+  // outside this file.
+  const ThematicColors._({
     required this.scrim,
   });
 }
 
-const _lightThemeColors = ThematicColors(
+const _lightThemeColors = ThematicColors._(
   scrim: ColorConstants.scrim,
 );
 
-const _darkThemeColors = ThematicColors(
+const _darkThemeColors = ThematicColors._(
   scrim: Colors.red, // TODO: implement scrim
 );
