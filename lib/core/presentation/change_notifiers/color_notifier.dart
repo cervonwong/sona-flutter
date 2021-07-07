@@ -96,7 +96,54 @@ class ColorNotifier extends ChangeNotifier {
 }
 
 @immutable
+class OnColorId {
+  final String name;
+
+  // Private constructor to prevent instantiation of invalid IDs outside this
+  // file.
+  const OnColorId._({required this.name});
+}
+
+@immutable
 class OnColors {
+  static const shadowPrimaryId = OnColorId._(name: 'shadowPrimary');
+  static const splashNeutralId = OnColorId._(name: 'splashNeutral');
+  static const splashPrimaryId = OnColorId._(name: 'splashPrimary');
+  static const highlightNeutralId = OnColorId._(name: 'highlightNeutral');
+  static const highlightPrimaryId = OnColorId._(name: 'highlightPrimary');
+  static const highEmphasisId = OnColorId._(name: 'highEmphasis');
+  static const mediumEmphasisId = OnColorId._(name: 'mediumEmphasis');
+  static const lowEmphasisId = OnColorId._(name: 'lowEmphasis');
+  static const accentRedId = OnColorId._(name: 'accentRed');
+  static const accentOrangeId = OnColorId._(name: 'accentOrange');
+  static const accentYellowId = OnColorId._(name: 'accentYellow');
+  static const accentLimeId = OnColorId._(name: 'accentLime');
+  static const accentGreenId = OnColorId._(name: 'accentGreen');
+  static const accentTealId = OnColorId._(name: 'accentTeal');
+  static const accentCyanId = OnColorId._(name: 'accentCyan');
+  static const accentSkyId = OnColorId._(name: 'accentSky');
+  static const accentBlueId = OnColorId._(name: 'accentBlue');
+  static const accentPurpleId = OnColorId._(name: 'accentPurple');
+  static const accentPinkId = OnColorId._(name: 'accentPink');
+  static const textFillBrownId = OnColorId._(name: 'textFillBrown');
+  static const textFillGray4Id = OnColorId._(name: 'textFillGray4');
+  static const textFillGray3Id = OnColorId._(name: 'textFillGray3');
+  static const textFillGray2Id = OnColorId._(name: 'textFillGray2');
+  static const textFillGray1Id = OnColorId._(name: 'textFillGray1');
+  static const textHighlightRedId = OnColorId._(name: 'textHighlightRed');
+  static const textHighlightOrangeId = OnColorId._(name: 'textHighlightOrange');
+  static const textHighlightYellowId = OnColorId._(name: 'textHighlightYellow');
+  static const textHighlightLimeId = OnColorId._(name: 'textHighlightLime');
+  static const textHighlightGreenId = OnColorId._(name: 'textHighlightGreen');
+  static const textHighlightTealId = OnColorId._(name: 'textHighlightTeal');
+  static const textHighlightCyanId = OnColorId._(name: 'textHighlightCyan');
+  static const textHighlightSkyId = OnColorId._(name: 'textHighlightSky');
+  static const textHighlightBlueId = OnColorId._(name: 'textHighlightBlue');
+  static const textHighlightPurpleId = OnColorId._(name: 'textHighlightPurple');
+  static const textHighlightPinkId = OnColorId._(name: 'textHighlightPink');
+  static const borderRegularId = OnColorId._(name: 'borderRegular');
+  static const borderLightId = OnColorId._(name: 'borderLight');
+
   final Color shadowPrimary;
   final Color splashNeutral;
   final Color splashPrimary;
@@ -174,6 +221,51 @@ class OnColors {
     required this.borderRegular,
     required this.borderLight,
   });
+
+  Color get({required OnColorId id}) {
+    final idToVariable = {
+      shadowPrimaryId: shadowPrimary,
+      splashNeutralId: splashNeutral,
+      splashPrimaryId: splashPrimary,
+      highlightNeutralId: highlightNeutral,
+      highlightPrimaryId: highlightPrimary,
+      highEmphasisId: highEmphasis,
+      mediumEmphasisId: mediumEmphasis,
+      lowEmphasisId: lowEmphasis,
+      accentRedId: accentRed,
+      accentOrangeId: accentOrange,
+      accentYellowId: accentYellow,
+      accentLimeId: accentLime,
+      accentGreenId: accentGreen,
+      accentTealId: accentTeal,
+      accentCyanId: accentCyan,
+      accentSkyId: accentSky,
+      accentBlueId: accentBlue,
+      accentPurpleId: accentPurple,
+      accentPinkId: accentPink,
+      textFillBrownId: textFillBrown,
+      textFillGray4Id: textFillGray4,
+      textFillGray3Id: textFillGray3,
+      textFillGray2Id: textFillGray2,
+      textFillGray1Id: textFillGray1,
+      textHighlightRedId: textHighlightRed,
+      textHighlightOrangeId: textHighlightOrange,
+      textHighlightYellowId: textHighlightYellow,
+      textHighlightLimeId: textHighlightLime,
+      textHighlightGreenId: textHighlightGreen,
+      textHighlightTealId: textHighlightTeal,
+      textHighlightCyanId: textHighlightCyan,
+      textHighlightSkyId: textHighlightSky,
+      textHighlightBlueId: textHighlightBlue,
+      textHighlightPurpleId: textHighlightPurple,
+      textHighlightPinkId: textHighlightPink,
+      borderRegularId: borderRegular,
+      borderLightId: borderLight,
+    };
+
+    assert(idToVariable.containsKey(id));
+    return idToVariable[id]!;
+  }
 }
 
 const _onLightColors = OnColors(

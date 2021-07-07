@@ -145,4 +145,58 @@ void main() {
       );
     },
   );
+
+  group(
+    'OnColorId tests',
+    () {
+      test(
+        'ColorNotifier, '
+        'should return corresponding color from OnColorId for OnColors',
+        () {
+          final id = OnColors.accentBlueId;
+          expect(
+            colorNotifier.onBackground.get(id: id),
+            colorNotifier.onBackground.accentBlue,
+          );
+        },
+      );
+
+      test(
+        'ColorNotifier when theme changes, '
+        'should get different colors for highlightNeutral '
+        'when getting from OnColorId',
+        () {
+          final id = OnColors.highlightNeutralId;
+          final color1 = colorNotifier.onSurface.get(id: id);
+
+          colorNotifier.theme = ColorTheme.dark;
+          final color2 = colorNotifier.onSurface.get(id: id);
+
+          expect(color1, isNot(color2));
+        },
+      );
+
+      test(
+        'ColorNotifier when listened, '
+        'should get different colors for highlightNeutral'
+        'when theme changes and getting from OnColorId',
+        () {
+          final id = OnColors.highlightNeutralId;
+          final color1 = colorNotifier.onSurface.get(id: id);
+          Color? color2;
+
+          colorNotifier.addListener(
+            () {
+              color2 = colorNotifier.onSurface.get(id: id);
+              expect(color2, isNot(color1));
+            },
+          );
+
+          colorNotifier.theme = ColorTheme.dark;
+          // Expect that the closure inside of addListener is called.
+          expect(color2, isNotNull);
+        },
+      );
+    },
+  );
 }
