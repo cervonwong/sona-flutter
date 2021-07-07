@@ -24,6 +24,20 @@ import '../constants/color_constants.dart';
 enum ColorTheme { light, dark }
 
 /// This maps color constants and gives context to them to be dynamic.
+///
+/// "On colors" are colors that depend on the color that is under them. "On
+/// colors" can be on "primary", "accent", "surface", or "background". If the
+/// surface color changes from being a light color in light mode to a dark color
+/// in dark mode, accessing "on colors" will return a color with appropriate
+/// contrast. Note that getting colors which are on "light" or "dark" is
+/// impossible. Some colors such as the accent colors have the same value no
+/// matter which surface it is on.
+///
+/// "Thematic colors" are colors that depend on the theme only, and do not
+/// depend on what color is under it. This might be because there the color is
+/// usually not drawn on top of another color. For example,
+/// `ThemeData.backgroundColor`, which only depends on the theme. "Thematic
+/// colors" may have different values for different themes.
 class ColorNotifier extends ChangeNotifier {
   ColorTheme _theme;
 
