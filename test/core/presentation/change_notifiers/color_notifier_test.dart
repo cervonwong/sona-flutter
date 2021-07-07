@@ -36,7 +36,7 @@ void main() {
 
   test(
     'ColorNotifier when theme changes, '
-    'should have different colors for onSurface',
+    'should have different colors for onSurface.highlightNeutral',
     () {
       final color1 = colorNotifier.onSurface.highlightNeutral;
 
@@ -49,7 +49,8 @@ void main() {
 
   test(
     'ColorNotifier when listened, '
-    'should get different colors for onSurface when theme changes',
+    'should get different colors for onSurface.highlightNeutral '
+    'when theme changes',
     () {
       final color1 = colorNotifier.onSurface.highlightNeutral;
       Color? color2;
@@ -57,6 +58,26 @@ void main() {
       colorNotifier.addListener(
         () {
           color2 = colorNotifier.onSurface.highlightNeutral;
+          expect(color2, isNot(color1));
+        },
+      );
+
+      colorNotifier.theme = ColorTheme.dark;
+      // Expect that the closure inside of addListener is called.
+      expect(color2, isNotNull);
+    },
+  );
+
+  test(
+    'ColorNotifier when listened, '
+    'should get different colors for thematic.scrim when theme changes',
+    () {
+      final color1 = colorNotifier.thematic.scrim;
+      Color? color2;
+
+      colorNotifier.addListener(
+        () {
+          color2 = colorNotifier.thematic.scrim;
           expect(color2, isNot(color1));
         },
       );
