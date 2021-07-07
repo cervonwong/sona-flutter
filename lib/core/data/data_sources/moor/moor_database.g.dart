@@ -133,32 +133,21 @@ class $AlignmentsTable extends Alignments
   final String? _alias;
   $AlignmentsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $AlignmentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'alignments';
   @override
-  String get $tableName => _alias ?? 'alignments';
-  @override
-  final String actualTableName = 'alignments';
+  String get actualTableName => 'alignments';
   @override
   VerificationContext validateIntegrity(Insertable<AlignmentModel> instance,
       {bool isInserting = false}) {
@@ -368,54 +357,33 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, CardModel> {
   final String? _alias;
   $CardsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  @override
-  late final GeneratedIntColumn entryId = _constructEntryId();
-  GeneratedIntColumn _constructEntryId() {
-    return GeneratedIntColumn('entry_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES entries(id)');
-  }
-
+  late final GeneratedColumn<int?> entryId = GeneratedColumn<int?>(
+      'entry_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES entries(id)');
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  @override
-  late final GeneratedIntColumn position = _constructPosition();
-  GeneratedIntColumn _constructPosition() {
-    return GeneratedIntColumn(
-      'position',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> position = GeneratedColumn<int?>(
+      'position', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _starredMeta = const VerificationMeta('starred');
-  @override
-  late final GeneratedBoolColumn starred = _constructStarred();
-  GeneratedBoolColumn _constructStarred() {
-    return GeneratedBoolColumn(
-      'starred',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<bool?> starred = GeneratedColumn<bool?>(
+      'starred', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (starred IN (0, 1))');
   final VerificationMeta _hiddenMeta = const VerificationMeta('hidden');
-  @override
-  late final GeneratedBoolColumn hidden = _constructHidden();
-  GeneratedBoolColumn _constructHidden() {
-    return GeneratedBoolColumn(
-      'hidden',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<bool?> hidden = GeneratedColumn<bool?>(
+      'hidden', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (hidden IN (0, 1))');
   @override
   List<GeneratedColumn> get $columns => [entryId, position, starred, hidden];
   @override
-  $CardsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'cards';
   @override
-  String get $tableName => _alias ?? 'cards';
-  @override
-  final String actualTableName = 'cards';
+  String get actualTableName => 'cards';
   @override
   VerificationContext validateIntegrity(Insertable<CardModel> instance,
       {bool isInserting = false}) {
@@ -674,59 +642,42 @@ class $CardFormatsTable extends CardFormats
   $CardFormatsTable(this._db, [this._alias]);
   final VerificationMeta _entryTypeIdMeta =
       const VerificationMeta('entryTypeId');
-  @override
-  late final GeneratedIntColumn entryTypeId = _constructEntryTypeId();
-  GeneratedIntColumn _constructEntryTypeId() {
-    return GeneratedIntColumn('entry_type_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
-  }
-
+  late final GeneratedColumn<int?> entryTypeId = GeneratedColumn<int?>(
+      'entry_type_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  @override
-  late final GeneratedIntColumn position = _constructPosition();
-  GeneratedIntColumn _constructPosition() {
-    return GeneratedIntColumn('position', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<int?> position = GeneratedColumn<int?>(
+      'position', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _frontStructureIdMeta =
       const VerificationMeta('frontStructureId');
-  @override
-  late final GeneratedIntColumn frontStructureId = _constructFrontStructureId();
-  GeneratedIntColumn _constructFrontStructureId() {
-    return GeneratedIntColumn('front_structure_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES structures(id)');
-  }
-
+  late final GeneratedColumn<int?> frontStructureId = GeneratedColumn<int?>(
+      'front_structure_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES structures(id)');
   final VerificationMeta _backStructureIdMeta =
       const VerificationMeta('backStructureId');
-  @override
-  late final GeneratedIntColumn backStructureId = _constructBackStructureId();
-  GeneratedIntColumn _constructBackStructureId() {
-    return GeneratedIntColumn('back_structure_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES structures(id)');
-  }
-
+  late final GeneratedColumn<int?> backStructureId = GeneratedColumn<int?>(
+      'back_structure_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES structures(id)');
   @override
   List<GeneratedColumn> get $columns =>
       [entryTypeId, position, name, frontStructureId, backStructureId];
   @override
-  $CardFormatsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'card_formats';
   @override
-  String get $tableName => _alias ?? 'card_formats';
-  @override
-  final String actualTableName = 'card_formats';
+  String get actualTableName => 'card_formats';
   @override
   VerificationContext validateIntegrity(Insertable<CardFormatModel> instance,
       {bool isInserting = false}) {
@@ -971,50 +922,35 @@ class $ComponentsTable extends Components
   $ComponentsTable(this._db, [this._alias]);
   final VerificationMeta _structureIdMeta =
       const VerificationMeta('structureId');
-  @override
-  late final GeneratedIntColumn structureId = _constructStructureId();
-  GeneratedIntColumn _constructStructureId() {
-    return GeneratedIntColumn('structure_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES structures(id)');
-  }
-
+  late final GeneratedColumn<int?> structureId = GeneratedColumn<int?>(
+      'structure_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES structures(id)');
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  @override
-  late final GeneratedIntColumn position = _constructPosition();
-  GeneratedIntColumn _constructPosition() {
-    return GeneratedIntColumn('position', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<int?> position = GeneratedColumn<int?>(
+      'position', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   final VerificationMeta _componentTypeIdMeta =
       const VerificationMeta('componentTypeId');
-  @override
-  late final GeneratedIntColumn componentTypeId = _constructComponentTypeId();
-  GeneratedIntColumn _constructComponentTypeId() {
-    return GeneratedIntColumn('component_type_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES component_types(id)');
-  }
-
+  late final GeneratedColumn<int?> componentTypeId = GeneratedColumn<int?>(
+      'component_type_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES component_types(id)');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [structureId, position, componentTypeId, name];
   @override
-  $ComponentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'components';
   @override
-  String get $tableName => _alias ?? 'components';
-  @override
-  final String actualTableName = 'components';
+  String get actualTableName => 'components';
   @override
   VerificationContext validateIntegrity(Insertable<ComponentModel> instance,
       {bool isInserting = false}) {
@@ -1192,32 +1128,21 @@ class $ComponentTypesTable extends ComponentTypes
   final String? _alias;
   $ComponentTypesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $ComponentTypesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'component_types';
   @override
-  String get $tableName => _alias ?? 'component_types';
-  @override
-  final String actualTableName = 'component_types';
+  String get actualTableName => 'component_types';
   @override
   VerificationContext validateIntegrity(Insertable<ComponentTypeModel> instance,
       {bool isInserting = false}) {
@@ -1543,84 +1468,48 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
   final String? _alias;
   $DecksTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   final VerificationMeta _createdMeta = const VerificationMeta('created');
-  @override
-  late final GeneratedDateTimeColumn created = _constructCreated();
-  GeneratedDateTimeColumn _constructCreated() {
-    return GeneratedDateTimeColumn(
-      'created',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<DateTime?> created = GeneratedColumn<DateTime?>(
+      'created', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _lastEditedMeta = const VerificationMeta('lastEdited');
-  @override
-  late final GeneratedDateTimeColumn lastEdited = _constructLastEdited();
-  GeneratedDateTimeColumn _constructLastEdited() {
-    return GeneratedDateTimeColumn(
-      'last_edited',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<DateTime?> lastEdited = GeneratedColumn<DateTime?>(
+      'last_edited', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _authorNameMeta = const VerificationMeta('authorName');
-  @override
-  late final GeneratedTextColumn authorName = _constructAuthorName();
-  GeneratedTextColumn _constructAuthorName() {
-    return GeneratedTextColumn(
-      'author_name',
-      $tableName,
-      true,
-    );
-  }
-
+  late final GeneratedColumn<String?> authorName = GeneratedColumn<String?>(
+      'author_name', aliasedName, true,
+      typeName: 'TEXT', requiredDuringInsert: false);
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  @override
-  late final GeneratedTextColumn description = _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      true,
-    );
-  }
-
+  late final GeneratedColumn<String?> description = GeneratedColumn<String?>(
+      'description', aliasedName, true,
+      typeName: 'TEXT', requiredDuringInsert: false);
   final VerificationMeta _iconSymbolIdMeta =
       const VerificationMeta('iconSymbolId');
-  @override
-  late final GeneratedIntColumn iconSymbolId = _constructIconSymbolId();
-  GeneratedIntColumn _constructIconSymbolId() {
-    return GeneratedIntColumn('icon_symbol_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES icon_symbols(id)');
-  }
-
+  late final GeneratedColumn<int?> iconSymbolId = GeneratedColumn<int?>(
+      'icon_symbol_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES icon_symbols(id)');
   final VerificationMeta _iconColorIdMeta =
       const VerificationMeta('iconColorId');
-  @override
-  late final GeneratedIntColumn iconColorId = _constructIconColorId();
-  GeneratedIntColumn _constructIconColorId() {
-    return GeneratedIntColumn('icon_color_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES icon_colors(id)');
-  }
-
+  late final GeneratedColumn<int?> iconColorId = GeneratedColumn<int?>(
+      'icon_color_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES icon_colors(id)');
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -1633,11 +1522,9 @@ class $DecksTable extends Decks with TableInfo<$DecksTable, DeckModel> {
         iconColorId
       ];
   @override
-  $DecksTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'decks';
   @override
-  String get $tableName => _alias ?? 'decks';
-  @override
-  final String actualTableName = 'decks';
+  String get actualTableName => 'decks';
   @override
   VerificationContext validateIntegrity(Insertable<DeckModel> instance,
       {bool isInserting = false}) {
@@ -1859,38 +1746,30 @@ class $EntriesTable extends Entries with TableInfo<$EntriesTable, EntryModel> {
   final String? _alias;
   $EntriesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _deckIdMeta = const VerificationMeta('deckId');
-  @override
-  late final GeneratedIntColumn deckId = _constructDeckId();
-  GeneratedIntColumn _constructDeckId() {
-    return GeneratedIntColumn('deck_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES decks(id)');
-  }
-
+  late final GeneratedColumn<int?> deckId = GeneratedColumn<int?>(
+      'deck_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES decks(id)');
   final VerificationMeta _entryTypeIdMeta =
       const VerificationMeta('entryTypeId');
-  @override
-  late final GeneratedIntColumn entryTypeId = _constructEntryTypeId();
-  GeneratedIntColumn _constructEntryTypeId() {
-    return GeneratedIntColumn('entry_type_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
-  }
-
+  late final GeneratedColumn<int?> entryTypeId = GeneratedColumn<int?>(
+      'entry_type_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
   @override
   List<GeneratedColumn> get $columns => [id, deckId, entryTypeId];
   @override
-  $EntriesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'entries';
   @override
-  String get $tableName => _alias ?? 'entries';
-  @override
-  final String actualTableName = 'entries';
+  String get actualTableName => 'entries';
   @override
   VerificationContext validateIntegrity(Insertable<EntryModel> instance,
       {bool isInserting = false}) {
@@ -2057,29 +1936,23 @@ class $EntriesTagsTable extends EntriesTags
   final String? _alias;
   $EntriesTagsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  @override
-  late final GeneratedIntColumn entryId = _constructEntryId();
-  GeneratedIntColumn _constructEntryId() {
-    return GeneratedIntColumn('entry_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES entries(id)');
-  }
-
+  late final GeneratedColumn<int?> entryId = GeneratedColumn<int?>(
+      'entry_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES entries(id)');
   final VerificationMeta _tagIdMeta = const VerificationMeta('tagId');
-  @override
-  late final GeneratedIntColumn tagId = _constructTagId();
-  GeneratedIntColumn _constructTagId() {
-    return GeneratedIntColumn('tag_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES tags(id)');
-  }
-
+  late final GeneratedColumn<int?> tagId = GeneratedColumn<int?>(
+      'tag_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES tags(id)');
   @override
   List<GeneratedColumn> get $columns => [entryId, tagId];
   @override
-  $EntriesTagsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'entries_tags';
   @override
-  String get $tableName => _alias ?? 'entries_tags';
-  @override
-  final String actualTableName = 'entries_tags';
+  String get actualTableName => 'entries_tags';
   @override
   VerificationContext validateIntegrity(Insertable<EntryTagModel> instance,
       {bool isInserting = false}) {
@@ -2240,29 +2113,23 @@ class $EntryTypesTable extends EntryTypes
   final String? _alias;
   $EntryTypesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $EntryTypesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'entry_types';
   @override
-  String get $tableName => _alias ?? 'entry_types';
-  @override
-  final String actualTableName = 'entry_types';
+  String get actualTableName => 'entry_types';
   @override
   VerificationContext validateIntegrity(Insertable<EntryTypeModel> instance,
       {bool isInserting = false}) {
@@ -2422,30 +2289,24 @@ class $FieldInputsTable extends FieldInputs
   final String? _alias;
   $FieldInputsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  @override
-  late final GeneratedIntColumn entryId = _constructEntryId();
-  GeneratedIntColumn _constructEntryId() {
-    return GeneratedIntColumn('entry_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES entries(id)');
-  }
-
+  late final GeneratedColumn<int?> entryId = GeneratedColumn<int?>(
+      'entry_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES entries(id)');
   final VerificationMeta _fieldSpecIdMeta =
       const VerificationMeta('fieldSpecId');
-  @override
-  late final GeneratedIntColumn fieldSpecId = _constructFieldSpecId();
-  GeneratedIntColumn _constructFieldSpecId() {
-    return GeneratedIntColumn('field_spec_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES field_specs(id)');
-  }
-
+  late final GeneratedColumn<int?> fieldSpecId = GeneratedColumn<int?>(
+      'field_spec_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES field_specs(id)');
   @override
   List<GeneratedColumn> get $columns => [entryId, fieldSpecId];
   @override
-  $FieldInputsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'field_inputs';
   @override
-  String get $tableName => _alias ?? 'field_inputs';
-  @override
-  final String actualTableName = 'field_inputs';
+  String get actualTableName => 'field_inputs';
   @override
   VerificationContext validateIntegrity(Insertable<FieldInputModel> instance,
       {bool isInserting = false}) {
@@ -2661,50 +2522,35 @@ class $FieldSpecsTable extends FieldSpecs
   final String? _alias;
   $FieldSpecsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _fieldTypeIdMeta =
       const VerificationMeta('fieldTypeId');
-  @override
-  late final GeneratedIntColumn fieldTypeId = _constructFieldTypeId();
-  GeneratedIntColumn _constructFieldTypeId() {
-    return GeneratedIntColumn('field_type_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES field_types(id)');
-  }
-
+  late final GeneratedColumn<int?> fieldTypeId = GeneratedColumn<int?>(
+      'field_type_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES field_types(id)');
   final VerificationMeta _entryTypeIdMeta =
       const VerificationMeta('entryTypeId');
-  @override
-  late final GeneratedIntColumn entryTypeId = _constructEntryTypeId();
-  GeneratedIntColumn _constructEntryTypeId() {
-    return GeneratedIntColumn('entry_type_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
-  }
-
+  late final GeneratedColumn<int?> entryTypeId = GeneratedColumn<int?>(
+      'entry_type_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES entry_types(id)');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, fieldTypeId, entryTypeId, name];
   @override
-  $FieldSpecsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'field_specs';
   @override
-  String get $tableName => _alias ?? 'field_specs';
-  @override
-  final String actualTableName = 'field_specs';
+  String get actualTableName => 'field_specs';
   @override
   VerificationContext validateIntegrity(Insertable<FieldSpecModel> instance,
       {bool isInserting = false}) {
@@ -2878,32 +2724,21 @@ class $FieldTypesTable extends FieldTypes
   final String? _alias;
   $FieldTypesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $FieldTypesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'field_types';
   @override
-  String get $tableName => _alias ?? 'field_types';
-  @override
-  final String actualTableName = 'field_types';
+  String get actualTableName => 'field_types';
   @override
   VerificationContext validateIntegrity(Insertable<FieldTypeModel> instance,
       {bool isInserting = false}) {
@@ -3061,32 +2896,21 @@ class $FillColorsTable extends FillColors
   final String? _alias;
   $FillColorsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $FillColorsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'fill_colors';
   @override
-  String get $tableName => _alias ?? 'fill_colors';
-  @override
-  final String actualTableName = 'fill_colors';
+  String get actualTableName => 'fill_colors';
   @override
   VerificationContext validateIntegrity(Insertable<FillColorModel> instance,
       {bool isInserting = false}) {
@@ -3245,32 +3069,21 @@ class $HighlightColorsTable extends HighlightColors
   final String? _alias;
   $HighlightColorsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $HighlightColorsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'highlight_colors';
   @override
-  String get $tableName => _alias ?? 'highlight_colors';
-  @override
-  final String actualTableName = 'highlight_colors';
+  String get actualTableName => 'highlight_colors';
   @override
   VerificationContext validateIntegrity(
       Insertable<HighlightColorModel> instance,
@@ -3429,32 +3242,21 @@ class $IconColorsTable extends IconColors
   final String? _alias;
   $IconColorsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $IconColorsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'icon_colors';
   @override
-  String get $tableName => _alias ?? 'icon_colors';
-  @override
-  final String actualTableName = 'icon_colors';
+  String get actualTableName => 'icon_colors';
   @override
   VerificationContext validateIntegrity(Insertable<IconColorModel> instance,
       {bool isInserting = false}) {
@@ -3612,32 +3414,21 @@ class $IconSymbolsTable extends IconSymbols
   final String? _alias;
   $IconSymbolsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $IconSymbolsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'icon_symbols';
   @override
-  String get $tableName => _alias ?? 'icon_symbols';
-  @override
-  final String actualTableName = 'icon_symbols';
+  String get actualTableName => 'icon_symbols';
   @override
   VerificationContext validateIntegrity(Insertable<IconSymbolModel> instance,
       {bool isInserting = false}) {
@@ -3825,47 +3616,24 @@ class $ImageFieldInputsTable extends ImageFieldInputs
   final String? _alias;
   $ImageFieldInputsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  @override
-  late final GeneratedIntColumn entryId = _constructEntryId();
-  GeneratedIntColumn _constructEntryId() {
-    return GeneratedIntColumn(
-      'entry_id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> entryId = GeneratedColumn<int?>(
+      'entry_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _fieldSpecIdMeta =
       const VerificationMeta('fieldSpecId');
-  @override
-  late final GeneratedIntColumn fieldSpecId = _constructFieldSpecId();
-  GeneratedIntColumn _constructFieldSpecId() {
-    return GeneratedIntColumn(
-      'field_spec_id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> fieldSpecId = GeneratedColumn<int?>(
+      'field_spec_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _imageIdMeta = const VerificationMeta('imageId');
-  @override
-  late final GeneratedIntColumn imageId = _constructImageId();
-  GeneratedIntColumn _constructImageId() {
-    return GeneratedIntColumn(
-      'image_id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> imageId = GeneratedColumn<int?>(
+      'image_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [entryId, fieldSpecId, imageId];
   @override
-  $ImageFieldInputsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'image_field_inputs';
   @override
-  String get $tableName => _alias ?? 'image_field_inputs';
-  @override
-  final String actualTableName = 'image_field_inputs';
+  String get actualTableName => 'image_field_inputs';
   @override
   VerificationContext validateIntegrity(
       Insertable<ImageFieldInputModel> instance,
@@ -4016,25 +3784,15 @@ class $SettingsTable extends Settings
   $SettingsTable(this._db, [this._alias]);
   final VerificationMeta _iconSymbolsVersionMeta =
       const VerificationMeta('iconSymbolsVersion');
-  @override
-  late final GeneratedIntColumn iconSymbolsVersion =
-      _constructIconSymbolsVersion();
-  GeneratedIntColumn _constructIconSymbolsVersion() {
-    return GeneratedIntColumn(
-      'icon_symbols_version',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> iconSymbolsVersion = GeneratedColumn<int?>(
+      'icon_symbols_version', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [iconSymbolsVersion];
   @override
-  $SettingsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'settings';
   @override
-  String get $tableName => _alias ?? 'settings';
-  @override
-  final String actualTableName = 'settings';
+  String get actualTableName => 'settings';
   @override
   VerificationContext validateIntegrity(Insertable<SettingsData> instance,
       {bool isInserting = false}) {
@@ -4166,21 +3924,17 @@ class $StructuresTable extends Structures
   final String? _alias;
   $StructuresTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   @override
   List<GeneratedColumn> get $columns => [id];
   @override
-  $StructuresTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'structures';
   @override
-  String get $tableName => _alias ?? 'structures';
-  @override
-  final String actualTableName = 'structures';
+  String get actualTableName => 'structures';
   @override
   VerificationContext validateIntegrity(Insertable<StructureModel> instance,
       {bool isInserting = false}) {
@@ -4338,32 +4092,21 @@ class $SymbolSearchTermsTable extends SymbolSearchTerms
   $SymbolSearchTermsTable(this._db, [this._alias]);
   final VerificationMeta _iconSymbolIdMeta =
       const VerificationMeta('iconSymbolId');
-  @override
-  late final GeneratedIntColumn iconSymbolId = _constructIconSymbolId();
-  GeneratedIntColumn _constructIconSymbolId() {
-    return GeneratedIntColumn('icon_symbol_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES icon_symbols(id)');
-  }
-
+  late final GeneratedColumn<int?> iconSymbolId = GeneratedColumn<int?>(
+      'icon_symbol_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES icon_symbols(id)');
   final VerificationMeta _termMeta = const VerificationMeta('term');
-  @override
-  late final GeneratedTextColumn term = _constructTerm();
-  GeneratedTextColumn _constructTerm() {
-    return GeneratedTextColumn(
-      'term',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<String?> term = GeneratedColumn<String?>(
+      'term', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [iconSymbolId, term];
   @override
-  $SymbolSearchTermsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'symbol_search_terms';
   @override
-  String get $tableName => _alias ?? 'symbol_search_terms';
-  @override
-  final String actualTableName = 'symbol_search_terms';
+  String get actualTableName => 'symbol_search_terms';
   @override
   VerificationContext validateIntegrity(
       Insertable<SymbolSearchTermModel> instance,
@@ -4523,29 +4266,23 @@ class $TagsTable extends Tags with TableInfo<$TagsTable, TagModel> {
   final String? _alias;
   $TagsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedIntColumn id = _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedTextColumn name = _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn('name', $tableName, false,
-        $customConstraints: 'NOT NULL UNIQUE');
-  }
-
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override
-  $TagsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'tags';
   @override
-  String get $tableName => _alias ?? 'tags';
-  @override
-  final String actualTableName = 'tags';
+  String get actualTableName => 'tags';
   @override
   VerificationContext validateIntegrity(Insertable<TagModel> instance,
       {bool isInserting = false}) {
@@ -4922,109 +4659,60 @@ class $TextComponentsTable extends TextComponents
   $TextComponentsTable(this._db, [this._alias]);
   final VerificationMeta _structureIdMeta =
       const VerificationMeta('structureId');
-  @override
-  late final GeneratedIntColumn structureId = _constructStructureId();
-  GeneratedIntColumn _constructStructureId() {
-    return GeneratedIntColumn(
-      'structure_id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> structureId = GeneratedColumn<int?>(
+      'structure_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  @override
-  late final GeneratedIntColumn position = _constructPosition();
-  GeneratedIntColumn _constructPosition() {
-    return GeneratedIntColumn(
-      'position',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> position = GeneratedColumn<int?>(
+      'position', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _dataMeta = const VerificationMeta('data');
-  @override
-  late final GeneratedTextColumn data = _constructData();
-  GeneratedTextColumn _constructData() {
-    return GeneratedTextColumn(
-      'data',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<String?> data = GeneratedColumn<String?>(
+      'data', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _sizeMeta = const VerificationMeta('size');
-  @override
-  late final GeneratedRealColumn size = _constructSize();
-  GeneratedRealColumn _constructSize() {
-    return GeneratedRealColumn(
-      'size',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<double?> size = GeneratedColumn<double?>(
+      'size', aliasedName, false,
+      typeName: 'REAL', requiredDuringInsert: true);
   final VerificationMeta _alignmentIdMeta =
       const VerificationMeta('alignmentId');
-  @override
-  late final GeneratedIntColumn alignmentId = _constructAlignmentId();
-  GeneratedIntColumn _constructAlignmentId() {
-    return GeneratedIntColumn('alignment_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES alignments(id)');
-  }
-
+  late final GeneratedColumn<int?> alignmentId = GeneratedColumn<int?>(
+      'alignment_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES alignments(id)');
   final VerificationMeta _fillColorIdMeta =
       const VerificationMeta('fillColorId');
-  @override
-  late final GeneratedIntColumn fillColorId = _constructFillColorId();
-  GeneratedIntColumn _constructFillColorId() {
-    return GeneratedIntColumn('fill_color_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES fill_colors(id)');
-  }
-
+  late final GeneratedColumn<int?> fillColorId = GeneratedColumn<int?>(
+      'fill_color_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES fill_colors(id)');
   final VerificationMeta _highlightColorIdMeta =
       const VerificationMeta('highlightColorId');
-  @override
-  late final GeneratedIntColumn highlightColorId = _constructHighlightColorId();
-  GeneratedIntColumn _constructHighlightColorId() {
-    return GeneratedIntColumn('highlight_color_id', $tableName, false,
-        $customConstraints: 'NOT NULL REFERENCES highlight_colors(id)');
-  }
-
+  late final GeneratedColumn<int?> highlightColorId = GeneratedColumn<int?>(
+      'highlight_color_id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL REFERENCES highlight_colors(id)');
   final VerificationMeta _boldMeta = const VerificationMeta('bold');
-  @override
-  late final GeneratedBoolColumn bold = _constructBold();
-  GeneratedBoolColumn _constructBold() {
-    return GeneratedBoolColumn(
-      'bold',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<bool?> bold = GeneratedColumn<bool?>(
+      'bold', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (bold IN (0, 1))');
   final VerificationMeta _italicMeta = const VerificationMeta('italic');
-  @override
-  late final GeneratedBoolColumn italic = _constructItalic();
-  GeneratedBoolColumn _constructItalic() {
-    return GeneratedBoolColumn(
-      'italic',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<bool?> italic = GeneratedColumn<bool?>(
+      'italic', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (italic IN (0, 1))');
   final VerificationMeta _underlinedMeta = const VerificationMeta('underlined');
-  @override
-  late final GeneratedBoolColumn underlined = _constructUnderlined();
-  GeneratedBoolColumn _constructUnderlined() {
-    return GeneratedBoolColumn(
-      'underlined',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<bool?> underlined = GeneratedColumn<bool?>(
+      'underlined', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (underlined IN (0, 1))');
   @override
   List<GeneratedColumn> get $columns => [
         structureId,
@@ -5039,11 +4727,9 @@ class $TextComponentsTable extends TextComponents
         underlined
       ];
   @override
-  $TextComponentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'text_components';
   @override
-  String get $tableName => _alias ?? 'text_components';
-  @override
-  final String actualTableName = 'text_components';
+  String get actualTableName => 'text_components';
   @override
   VerificationContext validateIntegrity(Insertable<TextComponentModel> instance,
       {bool isInserting = false}) {
@@ -5292,47 +4978,24 @@ class $TextFieldInputsTable extends TextFieldInputs
   final String? _alias;
   $TextFieldInputsTable(this._db, [this._alias]);
   final VerificationMeta _entryIdMeta = const VerificationMeta('entryId');
-  @override
-  late final GeneratedIntColumn entryId = _constructEntryId();
-  GeneratedIntColumn _constructEntryId() {
-    return GeneratedIntColumn(
-      'entry_id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> entryId = GeneratedColumn<int?>(
+      'entry_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _fieldSpecIdMeta =
       const VerificationMeta('fieldSpecId');
-  @override
-  late final GeneratedIntColumn fieldSpecId = _constructFieldSpecId();
-  GeneratedIntColumn _constructFieldSpecId() {
-    return GeneratedIntColumn(
-      'field_spec_id',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<int?> fieldSpecId = GeneratedColumn<int?>(
+      'field_spec_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _rawTextMeta = const VerificationMeta('rawText');
-  @override
-  late final GeneratedTextColumn rawText = _constructRawText();
-  GeneratedTextColumn _constructRawText() {
-    return GeneratedTextColumn(
-      'raw_text',
-      $tableName,
-      false,
-    );
-  }
-
+  late final GeneratedColumn<String?> rawText = GeneratedColumn<String?>(
+      'raw_text', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [entryId, fieldSpecId, rawText];
   @override
-  $TextFieldInputsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'text_field_inputs';
   @override
-  String get $tableName => _alias ?? 'text_field_inputs';
-  @override
-  final String actualTableName = 'text_field_inputs';
+  String get actualTableName => 'text_field_inputs';
   @override
   VerificationContext validateIntegrity(
       Insertable<TextFieldInputModel> instance,
