@@ -29,16 +29,16 @@ class ColorNotifier extends ChangeNotifier {
 
   ColorTheme get theme => _theme;
 
-  ColorNotifier({
-    required ColorTheme theme,
-  }) : _theme = theme;
-
   set theme(ColorTheme newTheme) {
     if (_theme == newTheme) return;
 
     _theme = newTheme;
     notifyListeners();
   }
+
+  ColorNotifier({
+    required ColorTheme theme,
+  }) : _theme = theme;
 
   // Referenced in MaterialApp's themeMode argument.
   ThemeMode get themeMode {
