@@ -34,87 +34,115 @@ void main() {
     },
   );
 
-  test(
-    'ColorNotifier when theme changes, '
-    'should have different colors for onSurface.highlightNeutral',
+  group(
+    'On colors tests',
     () {
-      final color1 = colorNotifier.onSurface.highlightNeutral;
-
-      colorNotifier.theme = ColorTheme.dark;
-      final color2 = colorNotifier.onSurface.highlightNeutral;
-
-      expect(color1, isNot(color2));
-    },
-  );
-
-  test(
-    'ColorNotifier when listened, '
-    'should get different colors for onSurface.highlightNeutral '
-    'when theme changes',
-    () {
-      final color1 = colorNotifier.onSurface.highlightNeutral;
-      Color? color2;
-
-      colorNotifier.addListener(
+      test(
+        'ColorNotifier when theme changes, '
+        'should get different colors for onSurface.highlightNeutral',
         () {
-          color2 = colorNotifier.onSurface.highlightNeutral;
-          expect(color2, isNot(color1));
+          final color1 = colorNotifier.onSurface.highlightNeutral;
+
+          colorNotifier.theme = ColorTheme.dark;
+          final color2 = colorNotifier.onSurface.highlightNeutral;
+
+          expect(color1, isNot(color2));
         },
       );
 
-      colorNotifier.theme = ColorTheme.dark;
-      // Expect that the closure inside of addListener is called.
-      expect(color2, isNotNull);
+      test(
+        'ColorNotifier when listened, '
+        'should get different colors for onSurface.highlightNeutral '
+        'when theme changes',
+        () {
+          final color1 = colorNotifier.onSurface.highlightNeutral;
+          Color? color2;
+
+          colorNotifier.addListener(
+            () {
+              color2 = colorNotifier.onSurface.highlightNeutral;
+              expect(color2, isNot(color1));
+            },
+          );
+
+          colorNotifier.theme = ColorTheme.dark;
+          // Expect that the closure inside of addListener is called.
+          expect(color2, isNotNull);
+        },
+      );
     },
   );
 
-  test(
-    'ColorNotifier when listened, '
-    'should get different colors for thematic.scrim when theme changes',
+  group(
+    'Thematic color tests',
     () {
-      final color1 = colorNotifier.thematic.scrim;
-      Color? color2;
-
-      colorNotifier.addListener(
+      test(
+        'ColorNotifier when theme changes, '
+        'should get different colors for thematic.scrim',
         () {
-          color2 = colorNotifier.thematic.scrim;
-          expect(color2, isNot(color1));
+          final color1 = colorNotifier.thematic.scrim;
+
+          colorNotifier.theme = ColorTheme.dark;
+          final color2 = colorNotifier.thematic.scrim;
+
+          expect(color1, isNot(color2));
         },
       );
 
-      colorNotifier.theme = ColorTheme.dark;
-      // Expect that the closure inside of addListener is called.
-      expect(color2, isNotNull);
-    },
-  );
-
-  test(
-    'ColorNotifier when theme changes, '
-    'should have themeMode change accordingly',
-    () {
-      expect(colorNotifier.themeMode, ThemeMode.light);
-
-      colorNotifier.theme = ColorTheme.dark;
-      expect(colorNotifier.themeMode, ThemeMode.dark);
-    },
-  );
-
-  test(
-    'ColorNotifier when listened, '
-    'should have themeMode change when theme changes accordingly',
-    () {
-      ThemeMode? themeMode;
-
-      colorNotifier.addListener(
+      test(
+        'ColorNotifier when listened, '
+        'should get different colors for thematic.scrim when theme changes',
         () {
-          themeMode = colorNotifier.themeMode;
-          expect(themeMode, ThemeMode.dark);
+          final color1 = colorNotifier.thematic.scrim;
+          Color? color2;
+
+          colorNotifier.addListener(
+            () {
+              color2 = colorNotifier.thematic.scrim;
+              expect(color2, isNot(color1));
+            },
+          );
+
+          colorNotifier.theme = ColorTheme.dark;
+          // Expect that the closure inside of addListener is called.
+          expect(color2, isNotNull);
+        },
+      );
+    },
+  );
+
+  group(
+    'themeMode tests',
+    () {
+      test(
+        'ColorNotifier when theme changes, '
+        'should have themeMode change accordingly',
+        () {
+          expect(colorNotifier.themeMode, ThemeMode.light);
+
+          colorNotifier.theme = ColorTheme.dark;
+          expect(colorNotifier.themeMode, ThemeMode.dark);
         },
       );
 
-      colorNotifier.theme = ColorTheme.dark;
-      // Expect that the closure inside of addListener is called.
-      expect(themeMode, isNotNull);
+      test(
+        'ColorNotifier when listened, '
+        'should have themeMode change when theme changes accordingly',
+        () {
+          ThemeMode? themeMode;
+
+          colorNotifier.addListener(
+            () {
+              themeMode = colorNotifier.themeMode;
+              expect(themeMode, ThemeMode.dark);
+            },
+          );
+
+          colorNotifier.theme = ColorTheme.dark;
+          // Expect that the closure inside of addListener is called.
+          expect(themeMode, isNotNull);
+        },
+      );
     },
   );
 }
