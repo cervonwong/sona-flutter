@@ -22,6 +22,8 @@ import 'package:flutter/widgets.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../core/presentation/change_notifiers/color_notifier.dart';
+
 @immutable
 class DeckListViewModel extends Equatable {
   final List<DeckListItemViewModel> _items;
@@ -43,7 +45,7 @@ class DeckListItemViewModel extends Equatable {
   final String subtitle;
   final String dueText;
   final IconData iconData;
-  final DeckListItemIconColorViewModel iconColor;
+  final OnColorId colorId;
   final bool? hasCompletedRevision;
   final double? progressPercent;
 
@@ -54,7 +56,7 @@ class DeckListItemViewModel extends Equatable {
     required this.subtitle,
     required this.dueText,
     required this.iconData,
-    required this.iconColor,
+    required this.colorId,
     required this.hasCompletedRevision,
     required this.progressPercent,
   });
@@ -67,22 +69,8 @@ class DeckListItemViewModel extends Equatable {
         subtitle,
         dueText,
         iconData,
-        iconColor,
+        colorId,
         hasCompletedRevision,
         progressPercent,
       ];
-}
-
-enum DeckListItemIconColorViewModel {
-  red,
-  orange,
-  yellow,
-  lime,
-  green,
-  teal,
-  cyan,
-  sky,
-  blue,
-  purple,
-  pink,
 }

@@ -197,7 +197,7 @@ class _Item extends StatelessWidget {
             child: Row(
               children: [
                 DeckIcon(
-                  iconColorViewModel: viewModel.iconColor,
+                  colorId: viewModel.colorId,
                   iconData: viewModel.iconData,
                 ),
                 const SizedBox(width: WidgetConstants.spacingPadding16),
@@ -337,11 +337,11 @@ class _ItemDueText extends StatelessWidget {
 }
 
 class DeckIcon extends StatelessWidget {
-  final DeckListItemIconColorViewModel iconColorViewModel;
+  final OnColorId colorId;
   final IconData iconData;
 
   DeckIcon({
-    required this.iconColorViewModel,
+    required this.colorId,
     required this.iconData,
   });
 
@@ -349,49 +349,12 @@ class DeckIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ColorNotifier>(
       builder: (_, colorNotifier, __) {
-        late final Color color;
-        switch (iconColorViewModel) {
-          case DeckListItemIconColorViewModel.red:
-            color = colorNotifier.onSurface.accentRed;
-            break;
-          case DeckListItemIconColorViewModel.orange:
-            color = colorNotifier.onSurface.accentOrange;
-            break;
-          case DeckListItemIconColorViewModel.yellow:
-            color = colorNotifier.onSurface.accentYellow;
-            break;
-          case DeckListItemIconColorViewModel.lime:
-            color = colorNotifier.onSurface.accentLime;
-            break;
-          case DeckListItemIconColorViewModel.green:
-            color = colorNotifier.onSurface.accentGreen;
-            break;
-          case DeckListItemIconColorViewModel.teal:
-            color = colorNotifier.onSurface.accentTeal;
-            break;
-          case DeckListItemIconColorViewModel.cyan:
-            color = colorNotifier.onSurface.accentCyan;
-            break;
-          case DeckListItemIconColorViewModel.sky:
-            color = colorNotifier.onSurface.accentSky;
-            break;
-          case DeckListItemIconColorViewModel.blue:
-            color = colorNotifier.onSurface.accentBlue;
-            break;
-          case DeckListItemIconColorViewModel.purple:
-            color = colorNotifier.onSurface.accentPurple;
-            break;
-          case DeckListItemIconColorViewModel.pink:
-            color = colorNotifier.onSurface.accentPink;
-            break;
-        }
-
         return Container(
           height: 40.0,
           width: 40.0,
           decoration: ShapeDecoration(
             shape: const CircleBorder(),
-            color: color,
+            color: colorNotifier.onSurface.get(id: colorId),
           ),
           child: Icon(
             iconData,

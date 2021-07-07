@@ -20,6 +20,7 @@
 import '../../../../core/constants/icon_symbol_constants.dart';
 import '../../../../core/domain/entities/material/deck/deck.dart';
 import '../../../../core/domain/entities/material/deck/deck_icon_spec.dart';
+import '../../../../core/presentation/change_notifiers/color_notifier.dart';
 import '../view_models/deck_list_view_model.dart';
 
 class ToDeckListViewModelMapper {
@@ -44,8 +45,7 @@ class ToDeckListViewModelMapper {
                   .firstWhere(
                       (metadata) => metadata.symbol == deck.iconSpec.symbol)
                   .iconData,
-              iconColor:
-                  _mapToDeckListItemIconColorViewModel(deck.iconSpec.color),
+              colorId: _mapToOnColorId(deck.iconSpec.color),
               hasCompletedRevision: false,
               progressPercent: 0.80,
             ),
@@ -54,37 +54,32 @@ class ToDeckListViewModelMapper {
     );
   }
 
-  // TODO: 6/11/2021 I could not figure out how to use a ColorNotifier singleton
-  //  instance to listen to, and get a Color out. Do I need to send another
-  //  DeckListLoaded state if theme changes? Anyways, I decided to create
-  //  another enum which is exactly the same as DeckIconColor, but it is part of
-  //  the ViewModel and not part of Entity.
-  DeckListItemIconColorViewModel _mapToDeckListItemIconColorViewModel(
+  OnColorId _mapToOnColorId(
     DeckIconColor deckIconColor,
   ) {
     switch (deckIconColor) {
       case DeckIconColor.red:
-        return DeckListItemIconColorViewModel.red;
+        return OnColors.accentRedId;
       case DeckIconColor.orange:
-        return DeckListItemIconColorViewModel.orange;
+        return OnColors.accentOrangeId;
       case DeckIconColor.yellow:
-        return DeckListItemIconColorViewModel.yellow;
+        return OnColors.accentYellowId;
       case DeckIconColor.lime:
-        return DeckListItemIconColorViewModel.lime;
+        return OnColors.accentLimeId;
       case DeckIconColor.green:
-        return DeckListItemIconColorViewModel.green;
+        return OnColors.accentGreenId;
       case DeckIconColor.teal:
-        return DeckListItemIconColorViewModel.teal;
+        return OnColors.accentTealId;
       case DeckIconColor.cyan:
-        return DeckListItemIconColorViewModel.cyan;
+        return OnColors.accentCyanId;
       case DeckIconColor.sky:
-        return DeckListItemIconColorViewModel.sky;
+        return OnColors.accentSkyId;
       case DeckIconColor.blue:
-        return DeckListItemIconColorViewModel.blue;
+        return OnColors.accentBlueId;
       case DeckIconColor.purple:
-        return DeckListItemIconColorViewModel.purple;
+        return OnColors.accentPurpleId;
       case DeckIconColor.pink:
-        return DeckListItemIconColorViewModel.pink;
+        return OnColors.accentPinkId;
     }
   }
 }
