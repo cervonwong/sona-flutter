@@ -42,7 +42,7 @@ class OldHomeScreen extends StatelessWidget {
             appBar: _HomeAppBar(),
             drawer: MainDrawer(selected: SelectableDrawerDestination.home),
             floatingActionButton: _HomeFAB(),
-            drawerScrimColor: colorNotifier.specific.scrim,
+            drawerScrimColor: colorNotifier.thematic.scrim,
             body: child,
           );
         },
@@ -132,7 +132,7 @@ class _HomeFAB extends StatelessWidget {
 
   void _onPressed(BuildContext context, ColorNotifier colorNotifier) {
     showModalBottomSheet(
-      barrierColor: colorNotifier.specific.scrim,
+      barrierColor: colorNotifier.thematic.scrim,
       context: context,
       builder: (_) => _CreateActionsMenuSheet(context: context),
     );
@@ -185,7 +185,7 @@ class _CreateActionsMenuSheet extends StatelessWidget {
     Navigator.of(context).pop();
 
     showModalBottomSheet(
-      barrierColor: colorNotifier.specific.scrim,
+      barrierColor: colorNotifier.thematic.scrim,
       context: context,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(

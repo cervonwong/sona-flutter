@@ -26,12 +26,12 @@ enum ColorTheme { light, dark }
 /// This maps color constants and gives context to them to be dynamic.
 class ColorNotifier extends ChangeNotifier {
   ColorTheme _theme;
-  static final _onLight = _OnLightColorGroup();
-  static final _onDark = _OnDarkColorGroup();
-  static final _specificLight = _LightSpecificColorGroup();
-  static final _specificDark = _DarkSpecificColorGroup();
 
   ColorTheme get theme => _theme;
+
+  ColorNotifier({
+    required ColorTheme theme,
+  }) : _theme = theme;
 
   set theme(ColorTheme newTheme) {
     if (_theme == newTheme) return;
@@ -52,359 +52,213 @@ class ColorNotifier extends ChangeNotifier {
     }
   }
 
-  _ColorGroup get onPrimary => _onDark;
+  OnColors get onPrimary => _onDarkColors;
 
-  _ColorGroup get onAccent => _onDark;
+  OnColors get onAccent => _onDarkColors;
 
-  _ColorGroup get onSurface {
+  OnColors get onSurface {
     switch (_theme) {
       case ColorTheme.light:
-        return _onLight;
+        return _onLightColors;
       case ColorTheme.dark:
-        return _onDark;
+        return _onDarkColors;
       default:
         throw UnimplementedError();
     }
   }
 
-  _ColorGroup get onBackground => onSurface; // They have similar brightnesses.
+  OnColors get onBackground => onSurface;
 
-  _SpecificColorGroup get specific {
+  ThematicColors get thematic {
     switch (_theme) {
       case ColorTheme.light:
-        return _specificLight;
+        return _lightThemeColors;
       case ColorTheme.dark:
-        return _specificDark;
+        return _darkThemeColors;
       default:
         throw UnimplementedError();
     }
   }
-
-  ColorNotifier({
-    required ColorTheme theme,
-  }) : _theme = theme;
 }
 
-abstract class _ColorGroup {
-  Color get shadowPrimary;
+@immutable
+class OnColors {
+  final Color shadowPrimary;
+  final Color splashNeutral;
+  final Color splashPrimary;
+  final Color highlightNeutral;
+  final Color highlightPrimary;
+  final Color highEmphasis;
+  final Color mediumEmphasis;
+  final Color lowEmphasis;
+  final Color accentRed;
+  final Color accentOrange;
+  final Color accentYellow;
+  final Color accentLime;
+  final Color accentGreen;
+  final Color accentTeal;
+  final Color accentCyan;
+  final Color accentSky;
+  final Color accentBlue;
+  final Color accentPurple;
+  final Color accentPink;
+  final Color textFillBrown;
+  final Color textFillGray4;
+  final Color textFillGray3;
+  final Color textFillGray2;
+  final Color textFillGray1;
+  final Color textHighlightRed;
+  final Color textHighlightOrange;
+  final Color textHighlightYellow;
+  final Color textHighlightLime;
+  final Color textHighlightGreen;
+  final Color textHighlightTeal;
+  final Color textHighlightCyan;
+  final Color textHighlightSky;
+  final Color textHighlightBlue;
+  final Color textHighlightPurple;
+  final Color textHighlightPink;
+  final Color borderRegular;
+  final Color borderLight;
 
-  Color get splashNeutral;
-
-  Color get splashPrimary;
-
-  Color get highlightNeutral;
-
-  Color get highlightPrimary;
-
-  Color get highEmphasis;
-
-  Color get mediumEmphasis;
-
-  Color get lowEmphasis;
-
-  Color get accentRed;
-
-  Color get accentOrange;
-
-  Color get accentYellow;
-
-  Color get accentLime;
-
-  Color get accentGreen;
-
-  Color get accentTeal;
-
-  Color get accentCyan;
-
-  Color get accentSky;
-
-  Color get accentBlue;
-
-  Color get accentPurple;
-
-  Color get accentPink;
-
-  Color get textFillBrown;
-
-  Color get textFillGray4;
-
-  Color get textFillGray3;
-
-  Color get textFillGray2;
-
-  Color get textFillGray1;
-
-  Color get textHighlightRed;
-
-  Color get textHighlightOrange;
-
-  Color get textHighlightYellow;
-
-  Color get textHighlightLime;
-
-  Color get textHighlightGreen;
-
-  Color get textHighlightTeal;
-
-  Color get textHighlightCyan;
-
-  Color get textHighlightSky;
-
-  Color get textHighlightBlue;
-
-  Color get textHighlightPurple;
-
-  Color get textHighlightPink;
-
-  Color get borderRegular;
-
-  Color get borderLight;
+  const OnColors({
+    required this.shadowPrimary,
+    required this.splashNeutral,
+    required this.splashPrimary,
+    required this.highlightNeutral,
+    required this.highlightPrimary,
+    required this.highEmphasis,
+    required this.mediumEmphasis,
+    required this.lowEmphasis,
+    required this.accentRed,
+    required this.accentOrange,
+    required this.accentYellow,
+    required this.accentLime,
+    required this.accentGreen,
+    required this.accentTeal,
+    required this.accentCyan,
+    required this.accentSky,
+    required this.accentBlue,
+    required this.accentPurple,
+    required this.accentPink,
+    required this.textFillBrown,
+    required this.textFillGray4,
+    required this.textFillGray3,
+    required this.textFillGray2,
+    required this.textFillGray1,
+    required this.textHighlightRed,
+    required this.textHighlightOrange,
+    required this.textHighlightYellow,
+    required this.textHighlightLime,
+    required this.textHighlightGreen,
+    required this.textHighlightTeal,
+    required this.textHighlightCyan,
+    required this.textHighlightSky,
+    required this.textHighlightBlue,
+    required this.textHighlightPurple,
+    required this.textHighlightPink,
+    required this.borderRegular,
+    required this.borderLight,
+  });
 }
 
-/// Colors are generally darker to contrast against lighter colors.
-class _OnLightColorGroup implements _ColorGroup {
-  @override
-  Color get shadowPrimary => ColorConstants.shadowPrimaryOnLight;
+const _onLightColors = OnColors(
+  shadowPrimary: ColorConstants.shadowPrimaryOnLight,
+  splashNeutral: ColorConstants.splashNeutralOnLight,
+  splashPrimary: ColorConstants.splashPrimary,
+  highlightNeutral: ColorConstants.highlightNeutralOnLight,
+  highlightPrimary: ColorConstants.highlightPrimary,
+  highEmphasis: ColorConstants.onLightHighEmphasis,
+  mediumEmphasis: ColorConstants.onLightMediumEmphasis,
+  lowEmphasis: ColorConstants.onLightLowEmphasis,
+  accentRed: ColorConstants.accentRed,
+  accentOrange: ColorConstants.accentOrange,
+  accentYellow: ColorConstants.accentYellow,
+  accentLime: ColorConstants.accentLime,
+  accentGreen: ColorConstants.accentGreen,
+  accentTeal: ColorConstants.accentTeal,
+  accentCyan: ColorConstants.accentCyan,
+  accentSky: ColorConstants.accentSky,
+  accentBlue: ColorConstants.accentBlue,
+  accentPurple: ColorConstants.accentPurple,
+  accentPink: ColorConstants.accentPink,
+  textFillBrown: ColorConstants.textFillBrown,
+  textFillGray4: ColorConstants.textFillOnLightGray4,
+  textFillGray3: ColorConstants.textFillOnLightGray3,
+  textFillGray2: ColorConstants.textFillOnLightGray2,
+  textFillGray1: ColorConstants.textFillOnLightGray1,
+  textHighlightRed: ColorConstants.textHighlightOnLightRed,
+  textHighlightOrange: ColorConstants.textHighlightOnLightOrange,
+  textHighlightYellow: ColorConstants.textHighlightOnLightYellow,
+  textHighlightLime: ColorConstants.textHighlightOnLightLime,
+  textHighlightGreen: ColorConstants.textHighlightOnLightGreen,
+  textHighlightTeal: ColorConstants.textHighlightOnLightTeal,
+  textHighlightCyan: ColorConstants.textHighlightOnLightCyan,
+  textHighlightSky: ColorConstants.textHighlightOnLightSky,
+  textHighlightBlue: ColorConstants.textHighlightOnLightBlue,
+  textHighlightPurple: ColorConstants.textHighlightOnLightPurple,
+  textHighlightPink: ColorConstants.textHighlightOnLightPink,
+  borderRegular: ColorConstants.neutral4,
+  borderLight: ColorConstants.neutral3,
+);
 
-  @override
-  Color get splashNeutral => ColorConstants.splashNeutralOnLight;
-
-  @override
-  Color get splashPrimary => ColorConstants.splashPrimary;
-
-  @override
-  Color get highlightNeutral => ColorConstants.highlightNeutralOnLight;
-
-  @override
-  Color get highlightPrimary => ColorConstants.highlightPrimary;
-
-  @override
-  Color get highEmphasis => ColorConstants.onLightHighEmphasis;
-
-  @override
-  Color get mediumEmphasis => ColorConstants.onLightMediumEmphasis;
-
-  @override
-  Color get lowEmphasis => ColorConstants.onLightLowEmphasis;
-
-  @override
-  Color get accentRed => ColorConstants.accentRed;
-
-  @override
-  Color get accentOrange => ColorConstants.accentOrange;
-
-  @override
-  Color get accentYellow => ColorConstants.accentYellow;
-
-  @override
-  Color get accentLime => ColorConstants.accentLime;
-
-  @override
-  Color get accentGreen => ColorConstants.accentGreen;
-
-  @override
-  Color get accentTeal => ColorConstants.accentTeal;
-
-  @override
-  Color get accentCyan => ColorConstants.accentCyan;
-
-  @override
-  Color get accentSky => ColorConstants.accentSky;
-
-  @override
-  Color get accentBlue => ColorConstants.accentBlue;
-
-  @override
-  Color get accentPurple => ColorConstants.accentPurple;
-
-  @override
-  Color get accentPink => ColorConstants.accentPink;
-
-  @override
-  Color get textFillBrown => ColorConstants.textFillBrown;
-
-  @override
-  Color get textFillGray4 => ColorConstants.textFillOnLightGray4;
-
-  @override
-  Color get textFillGray3 => ColorConstants.textFillOnLightGray3;
-
-  @override
-  Color get textFillGray2 => ColorConstants.textFillOnLightGray2;
-
-  @override
-  Color get textFillGray1 => ColorConstants.textFillOnLightGray1;
-
-  @override
-  Color get textHighlightRed => ColorConstants.textHighlightOnLightRed;
-
-  @override
-  Color get textHighlightOrange => ColorConstants.textHighlightOnLightOrange;
-
-  @override
-  Color get textHighlightYellow => ColorConstants.textHighlightOnLightYellow;
-
-  @override
-  Color get textHighlightLime => ColorConstants.textHighlightOnLightLime;
-
-  @override
-  Color get textHighlightGreen => ColorConstants.textHighlightOnLightGreen;
-
-  @override
-  Color get textHighlightTeal => ColorConstants.textHighlightOnLightTeal;
-
-  @override
-  Color get textHighlightCyan => ColorConstants.textHighlightOnLightCyan;
-
-  @override
-  Color get textHighlightSky => ColorConstants.textHighlightOnLightSky;
-
-  @override
-  Color get textHighlightBlue => ColorConstants.textHighlightOnLightBlue;
-
-  @override
-  Color get textHighlightPurple => ColorConstants.textHighlightOnLightPurple;
-
-  @override
-  Color get textHighlightPink => ColorConstants.textHighlightOnLightPink;
-
-  @override
-  Color get borderRegular => ColorConstants.neutral4;
-
-  @override
-  Color get borderLight => ColorConstants.neutral3;
-}
-
-/// Colors are generally lighter to contrast against darker colors.
-class _OnDarkColorGroup implements _ColorGroup {
-  @override
+const _onDarkColors = OnColors(
+  shadowPrimary: Colors.red,
   // TODO: implement shadowPrimary
-  Color get shadowPrimary => throw UnimplementedError();
-
-  @override
-  Color get splashNeutral => ColorConstants.splashNeutralOnDark;
-
-  @override
-  // TODO: implement primarySplashColor
-  Color get splashPrimary => throw UnimplementedError();
-
-  @override
-  Color get highlightNeutral => ColorConstants.highlightNeutralOnDark;
-
-  @override
-  // TODO: implement primaryHighlightColor
-  Color get highlightPrimary => throw UnimplementedError();
-
-  @override
-  Color get highEmphasis => ColorConstants.onDarkHighEmphasis;
-
-  @override
-  Color get mediumEmphasis => ColorConstants.onDarkMediumEmphasis;
-
-  @override
-  Color get lowEmphasis => ColorConstants.onDarkLowEmphasis;
-
-  @override
-  Color get accentRed => ColorConstants.accentRed;
-
-  @override
-  Color get accentOrange => ColorConstants.accentOrange;
-
-  @override
-  Color get accentYellow => ColorConstants.accentYellow;
-
-  @override
-  Color get accentLime => ColorConstants.accentLime;
-
-  @override
-  Color get accentGreen => ColorConstants.accentGreen;
-
-  @override
-  Color get accentTeal => ColorConstants.accentTeal;
-
-  @override
-  Color get accentCyan => ColorConstants.accentCyan;
-
-  @override
-  Color get accentSky => ColorConstants.accentSky;
-
-  @override
-  Color get accentBlue => ColorConstants.accentBlue;
-
-  @override
-  Color get accentPurple => ColorConstants.accentPurple;
-
-  @override
-  Color get accentPink => ColorConstants.accentPink;
-
-  @override
-  Color get textFillBrown => ColorConstants.textFillBrown;
-
-  @override
-  Color get textFillGray4 => ColorConstants.textFillOnDarkGray4;
-
-  @override
-  Color get textFillGray3 => ColorConstants.textFillOnDarkGray3;
-
-  @override
-  Color get textFillGray2 => ColorConstants.textFillOnDarkGray2;
-
-  @override
-  Color get textFillGray1 => ColorConstants.textFillOnDarkGray1;
-
-  @override
-  Color get textHighlightRed => ColorConstants.textHighlightOnDarkRed;
-
-  @override
-  Color get textHighlightOrange => ColorConstants.textHighlightOnDarkOrange;
-
-  @override
-  Color get textHighlightYellow => ColorConstants.textHighlightOnDarkYellow;
-
-  @override
-  Color get textHighlightLime => ColorConstants.textHighlightOnDarkLime;
-
-  @override
-  Color get textHighlightGreen => ColorConstants.textHighlightOnDarkGreen;
-
-  @override
-  Color get textHighlightTeal => ColorConstants.textHighlightOnDarkTeal;
-
-  @override
-  Color get textHighlightCyan => ColorConstants.textHighlightOnDarkCyan;
-
-  @override
-  Color get textHighlightSky => ColorConstants.textHighlightOnDarkSky;
-
-  @override
-  Color get textHighlightBlue => ColorConstants.textHighlightOnDarkBlue;
-
-  @override
-  Color get textHighlightPurple => ColorConstants.textHighlightOnDarkPurple;
-
-  @override
-  Color get textHighlightPink => ColorConstants.textHighlightOnDarkPink;
-
-  @override
+  splashNeutral: ColorConstants.splashNeutralOnDark,
+  splashPrimary: Colors.red,
+  // TODO: implement splashPrimary
+  highlightNeutral: ColorConstants.highlightNeutralOnDark,
+  highlightPrimary: Colors.red,
+  // TODO: implement highlightPrimary
+  highEmphasis: ColorConstants.onDarkHighEmphasis,
+  mediumEmphasis: ColorConstants.onDarkMediumEmphasis,
+  lowEmphasis: ColorConstants.onDarkLowEmphasis,
+  accentRed: ColorConstants.accentRed,
+  accentOrange: ColorConstants.accentOrange,
+  accentYellow: ColorConstants.accentYellow,
+  accentLime: ColorConstants.accentLime,
+  accentGreen: ColorConstants.accentGreen,
+  accentTeal: ColorConstants.accentTeal,
+  accentCyan: ColorConstants.accentCyan,
+  accentSky: ColorConstants.accentSky,
+  accentBlue: ColorConstants.accentBlue,
+  accentPurple: ColorConstants.accentPurple,
+  accentPink: ColorConstants.accentPink,
+  textFillBrown: ColorConstants.textFillBrown,
+  textFillGray4: ColorConstants.textFillOnDarkGray4,
+  textFillGray3: ColorConstants.textFillOnDarkGray3,
+  textFillGray2: ColorConstants.textFillOnDarkGray2,
+  textFillGray1: ColorConstants.textFillOnDarkGray1,
+  textHighlightRed: ColorConstants.textHighlightOnDarkRed,
+  textHighlightOrange: ColorConstants.textHighlightOnDarkOrange,
+  textHighlightYellow: ColorConstants.textHighlightOnDarkYellow,
+  textHighlightLime: ColorConstants.textHighlightOnDarkLime,
+  textHighlightGreen: ColorConstants.textHighlightOnDarkGreen,
+  textHighlightTeal: ColorConstants.textHighlightOnDarkTeal,
+  textHighlightCyan: ColorConstants.textHighlightOnDarkCyan,
+  textHighlightSky: ColorConstants.textHighlightOnDarkSky,
+  textHighlightBlue: ColorConstants.textHighlightOnDarkBlue,
+  textHighlightPurple: ColorConstants.textHighlightOnDarkPurple,
+  textHighlightPink: ColorConstants.textHighlightOnDarkPink,
+  borderRegular: Colors.red,
   // TODO: implement borderRegular
-  Color get borderRegular => throw UnimplementedError();
+  borderLight: Colors.red, // TODO: implement borderLight
+);
 
-  @override
-  // TODO: implement borderLight
-  Color get borderLight => throw UnimplementedError();
+@immutable
+class ThematicColors {
+  final Color scrim;
+
+  const ThematicColors({
+    required this.scrim,
+  });
 }
 
-abstract class _SpecificColorGroup {
-  Color get scrim;
-}
+const _lightThemeColors = ThematicColors(
+  scrim: ColorConstants.scrim,
+);
 
-class _LightSpecificColorGroup extends _SpecificColorGroup {
-  @override
-  Color get scrim => ColorConstants.scrim;
-}
-
-class _DarkSpecificColorGroup extends _SpecificColorGroup {
-  @override
-  // TODO: implement drawerScrimColor
-  Color get scrim => throw UnimplementedError();
-}
+const _darkThemeColors = ThematicColors(
+  scrim: Colors.red, // TODO: implement scrim
+);
