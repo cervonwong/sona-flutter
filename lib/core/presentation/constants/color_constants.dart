@@ -72,41 +72,41 @@ class ColorConstants {
   // User is able to select from these colors (in addition to accent colors)
   // when choosing a text color when creating the style of a card format.
   static const textFillBrown = Color(0xFFB17E22);
-  static const textFillOnLightGray4 = Color(0xB314142B); // B3 -> 70%.
-  static const textFillOnLightGray3 = Color(0x8014142B); // 80 -> 50%.
-  static const textFillOnLightGray2 = Color(0x4D14142B); // 4D -> 30%.
-  static const textFillOnLightGray1 = Color(0x1A14142B); // 1A -> 10%.
-  static const textFillOnDarkGray4 = Color(0xCCFFFFFF); // CC -> 80%.
-  static const textFillOnDarkGray3 = Color(0x99FFFFFF); // 99 -> 60%.
-  static const textFillOnDarkGray2 = Color(0x66FFFFFF); // 66 -> 40%.
-  static const textFillOnDarkGray1 = Color(0x33FFFFFF); // 33 -> 20%.
+  static const textFill_OnLight_Gray4 = Color(0xB314142B); // B3 -> 70%.
+  static const textFill_OnLight_Gray3 = Color(0x8014142B); // 80 -> 50%.
+  static const textFill_OnLight_Gray2 = Color(0x4D14142B); // 4D -> 30%.
+  static const textFill_OnLight_Gray1 = Color(0x1A14142B); // 1A -> 10%.
+  static const textFill_OnDark_Gray4 = Color(0xCCFFFFFF); // CC -> 80%.
+  static const textFill_OnDark_Gray3 = Color(0x99FFFFFF); // 99 -> 60%.
+  static const textFill_OnDark_Gray2 = Color(0x66FFFFFF); // 66 -> 40%.
+  static const textFill_OnDark_Gray1 = Color(0x33FFFFFF); // 33 -> 20%.
 
   // Text Highlight Colors
   // User is able to select from these colors when choosing a text highlight
   // color when creating the style of a card format.
-  static const textHighlightOnLightRed = Color(0x33FC575E); // 33 -> 20%.
-  static const textHighlightOnLightOrange = Color(0x33FF9600); // 33 -> 20%.
-  static const textHighlightOnLightYellow = Color(0x33FFC800); // 33 -> 20%.
-  static const textHighlightOnLightLime = Color(0x335ED605); // 33 -> 20%.
-  static const textHighlightOnLightGreen = Color(0x3327AE60); // 33 -> 20%.
-  static const textHighlightOnLightTeal = Color(0x3300B899); // 33 -> 20%.
-  static const textHighlightOnLightCyan = Color(0x3344DDCC); // 33 -> 20%.
-  static const textHighlightOnLightSky = Color(0x3349BEF9); // 33 -> 20%.
-  static const textHighlightOnLightBlue = Color(0x335577FF); // 33 -> 20%.
-  static const textHighlightOnLightPurple = Color(0x33CE82FF); // 33 -> 20%.
-  static const textHighlightOnLightPink = Color(0x33FD7CB5); // 33 -> 20%.
+  static const textHighlight_OnLight_Red = Color(0x33FC575E); // 33 -> 20%.
+  static const textHighlight_OnLight_Orange = Color(0x33FF9600); // 33 -> 20%.
+  static const textHighlight_OnLight_Yellow = Color(0x33FFC800); // 33 -> 20%.
+  static const textHighlight_OnLight_Lime = Color(0x335ED605); // 33 -> 20%.
+  static const textHighlight_OnLight_Green = Color(0x3327AE60); // 33 -> 20%.
+  static const textHighlight_OnLight_Teal = Color(0x3300B899); // 33 -> 20%.
+  static const textHighlight_OnLight_Cyan = Color(0x3344DDCC); // 33 -> 20%.
+  static const textHighlight_OnLight_Sky = Color(0x3349BEF9); // 33 -> 20%.
+  static const textHighlight_OnLight_Blue = Color(0x335577FF); // 33 -> 20%.
+  static const textHighlight_OnLight_Purple = Color(0x33CE82FF); // 33 -> 20%.
+  static const textHighlight_OnLight_Pink = Color(0x33FD7CB5); // 33 -> 20%.
 
-  static const textHighlightOnDarkRed = Color(0x4DFC575E); // 4D -> 30%.
-  static const textHighlightOnDarkOrange = Color(0x4DFF9600); // 4D -> 30%.
-  static const textHighlightOnDarkYellow = Color(0x4DFFC800); // 4D -> 30%.
-  static const textHighlightOnDarkLime = Color(0x4D5ED605); // 4D -> 30%.
-  static const textHighlightOnDarkGreen = Color(0x4D27AE60); // 4D -> 30%.
-  static const textHighlightOnDarkTeal = Color(0x4D00B899); // 4D -> 30%.
-  static const textHighlightOnDarkCyan = Color(0x4D44DDCC); // 4D -> 30%.
-  static const textHighlightOnDarkSky = Color(0x4D49BEF9); // 4D -> 30%.
-  static const textHighlightOnDarkBlue = Color(0x4D5577FF); // 4D -> 30%.
-  static const textHighlightOnDarkPurple = Color(0x4DCE82FF); // 4D -> 30%.
-  static const textHighlightOnDarkPink = Color(0x4DFD7CB5); // 4D -> 30%.
+  static const textHighlight_OnDark_Red = Color(0x4DFC575E); // 4D -> 30%.
+  static const textHighlight_OnDark_Orange = Color(0x4DFF9600); // 4D -> 30%.
+  static const textHighlight_OnDark_Yellow = Color(0x4DFFC800); // 4D -> 30%.
+  static const textHighlight_OnDark_Lime = Color(0x4D5ED605); // 4D -> 30%.
+  static const textHighlight_OnDark_Green = Color(0x4D27AE60); // 4D -> 30%.
+  static const textHighlight_OnDark_Teal = Color(0x4D00B899); // 4D -> 30%.
+  static const textHighlight_OnDark_Cyan = Color(0x4D44DDCC); // 4D -> 30%.
+  static const textHighlight_OnDark_Sky = Color(0x4D49BEF9); // 4D -> 30%.
+  static const textHighlight_OnDark_Blue = Color(0x4D5577FF); // 4D -> 30%.
+  static const textHighlight_OnDark_Purple = Color(0x4DCE82FF); // 4D -> 30%.
+  static const textHighlight_OnDark_Pink = Color(0x4DFD7CB5); // 4D -> 30%.
 
   // Others
   static const splashNeutralOnLight =
